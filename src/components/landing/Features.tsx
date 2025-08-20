@@ -69,7 +69,7 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="relative rounded-none -pr-2  ">
+    <div className="relative rounded-none border-t border-dashed  -pr-2  ">
       <div className="w-full md:mx-0">
         <div className="grid grid-cols-1 relative md:grid-rows-2 md:grid-cols-3 border-b-[1.2px]">
           {features.map((feature, index) => (
