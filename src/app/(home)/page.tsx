@@ -1,22 +1,11 @@
-'use client'
+"use client";
 
-import Link from "next/link";
+import Hero from "@/components/landing/Hero";
 
 export default function HomePage() {
-
   return (
-    <main className="flex flex-1 flex-col justify-center text-center w-full">
-      <p className="text-fd-muted-foreground">
-        You can open{' '}
-        <Link
-          href="/docs"
-          className="text-fd-foreground font-semibold underline"
-        >
-          /docs
-        </Link>{' '}
-        and see the documentation.
-      </p>
-
+    <main className="flex flex-1 min-h-screen flex-col  text-center w-full">
+      <Hero />
     </main>
   );
 }

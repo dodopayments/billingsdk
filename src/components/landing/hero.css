@@ -1,0 +1,157 @@
+/* Hero component styles */
+
+/* Blue gradient glow in the center */
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 30%, rgba(59, 130, 246, 0.1) 60%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ellipse base styles */
+.ellipse {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1;
+  fill: none;
+  transform-origin: 228px 228px;
+}
+
+/* Individual ellipse styles with different rotations and animations */
+.e-1 {
+  transform: rotate(0deg);
+  stroke: rgba(59, 130, 246, 1);
+  animation: ellipse-rotate 20s linear infinite;
+}
+
+.e-2 {
+  transform: rotate(30deg);
+  stroke: rgba(59, 130, 246, 0.9);
+  animation: ellipse-rotate 18s linear infinite;
+}
+
+.e-3 {
+  transform: rotate(60deg);
+  stroke: rgba(59, 130, 246, 0.8);
+  animation: ellipse-rotate 22s linear infinite;
+}
+
+.e-4 {
+  transform: rotate(90deg);
+  stroke: rgba(59, 130, 246, 0.7);
+  animation: ellipse-rotate 16s linear infinite;
+}
+
+.e-5 {
+  transform: rotate(120deg);
+  stroke: rgba(59, 130, 246, 0.6);
+  animation: ellipse-rotate 24s linear infinite;
+}
+
+.e-6 {
+  transform: rotate(150deg);
+  stroke: rgba(59, 130, 246, 0.5);
+  animation: ellipse-rotate 14s linear infinite;
+}
+
+.e-7 {
+  transform: rotate(180deg);
+  stroke: rgba(59, 130, 246, 0.4);
+  animation: ellipse-rotate 26s linear infinite;
+}
+
+.e-8 {
+  transform: rotate(210deg);
+  stroke: rgba(59, 130, 246, 0.35);
+  animation: ellipse-rotate 12s linear infinite;
+}
+
+.e-9 {
+  transform: rotate(240deg);
+  stroke: rgba(59, 130, 246, 0.3);
+  animation: ellipse-rotate 28s linear infinite;
+}
+
+.e-10 {
+  transform: rotate(270deg);
+  stroke: rgba(59, 130, 246, 0.25);
+  animation: ellipse-rotate 10s linear infinite;
+}
+
+.e-11 {
+  transform: rotate(300deg);
+  stroke: rgba(59, 130, 246, 0.2);
+  animation: ellipse-rotate 30s linear infinite;
+}
+
+.e-12 {
+  transform: rotate(330deg);
+  stroke: rgba(59, 130, 246, 0.15);
+  animation: ellipse-rotate 8s linear infinite;
+}
+
+/* Center content positioning */
+.hero__center {
+  z-index: 2;
+}
+
+/* Animation keyframes */
+@keyframes ellipse-rotate {
+  from {
+    transform: rotate(var(--start-rotation, 0deg));
+  }
+  to {
+    transform: rotate(calc(var(--start-rotation, 0deg) + 360deg));
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(180deg);
+  }
+}
+
+/* Animation utility classes */
+.animate-spin-slow {
+  animation: spin 80s linear infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
