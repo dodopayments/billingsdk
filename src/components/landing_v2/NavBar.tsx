@@ -1,33 +1,68 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Github } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const NavBar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed max-w-[1920px] mx-auto top-0 left-0 right-0 z-50 p-8">
-      <div className="flex items-center justify-between">
+    <nav
+      className={cn(
+        "fixed top-0  max-w-[1920px] w-full left-0 right-0 z-50 p-4 flex justify-center",
+        isScrolled ? "py-0" : ""
+      )}
+    >
+      <div
+        className={cn(
+          `flex items-center w-full justify-between px-6 py-3  transition-all duration-300 ${
+            isScrolled
+              ? "bg-white/10 backdrop-blur-md border border-white/20 rounded-b-lg"
+              : ""
+          }`
+        )}
+      >
         {/* Logo */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 mr-8">
           <Image
             src="/logo/logo-dodo.svg"
             alt="Billing SDK"
-            width={26}
-            height={26}
+            width={24}
+            height={24}
           />
-          <span className="text-xl font-display">/</span>
-          <span className="text-2xl pb-1 font-heading font-semibold">
+          <span className="text-lg font-display">/</span>
+          <span className="text-lg font-heading font-semibold">
             Billing SDK
           </span>
         </div>
 
         {/* Join Beta Button */}
-        <Button
-          className="bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm"
-          asChild
-        >
-          <Link href="/docs">Get Started</Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="sm" asChild>
+            <Link
+              href="https://github.com/dodopayments/billingsdk"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button size="sm" asChild>
+            <Link href="/docs">Get Started</Link>
+          </Button>
+        </div>
       </div>
     </nav>
   );

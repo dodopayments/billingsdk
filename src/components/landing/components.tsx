@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { PreviewComponents } from "@/components/preview/preview-components";
@@ -11,9 +12,9 @@ import { CancelSubscriptionCard } from "@/registry/billingsdk/cancel-subscriptio
 
 export function ComponentsSection() {
     return (
-        <div className="border-t border-card md:px-8 py-24 my-12 relative overflow-hidden w-full">
+        <div className="md:px-8 py-12 relative overflow-hidden w-full">
             <div className="text-center">
-                <h2 className="text-3xl sm:text-3xl md:text-4xl font-medium text-zinc-800 dark:text-zinc-300">
+                <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary">
                     Try our components
                 </h2>
                 <p className="text-sm mt-4 text-muted-foreground max-w-2xl mx-auto tracking-tight">
@@ -46,7 +47,7 @@ function ComponentsShowcase() {
 
         const interval = setInterval(() => {
             handleTransition();
-        }, 6000); // Rotate every 6 seconds
+        }, 5000); // Rotate every 6 seconds
 
         return () => clearInterval(interval);
     }, [active, isAutoRotating, isHovered, components]);
