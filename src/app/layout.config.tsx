@@ -10,21 +10,17 @@ import Image from "next/image";
  */
 export const baseOptions: BaseLayoutProps = {
   nav: {
+    transparentMode: "top",
     title: (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         <Image
           src="/logo/logo-dodo.svg"
           alt="Billing SDK"
-          width={28}
-          height={28}
+          width={26}
+          height={26}
         />
-        <span className="text-xl ">/</span>
-        <Image
-          src="/logo/Logo.svg"
-          alt="Billing SDK"
-          width={120}
-          height={120}
-        />
+        <span className="text-xl font-display">/</span>
+        <span className="text-2xl pb-1 font-heading">Billing SDK</span>
       </div>
     ),
   },

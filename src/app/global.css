@@ -6,6 +6,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-body: var(--font-inter);
+  --font-heading: var(--font-darker-grotesque);
+  --font-display: var(--font-instrument-sans);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -45,7 +48,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: oklch(16.89% .002 286.18);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -139,4 +142,11 @@ pre[class*="language-"] {
 
 pre[class*="language-"]::-webkit-scrollbar {
   display: none !important;
+}
+
+/* Handwritten font style */
+.handwritten {
+  font-family: var(--font-kalam), 'Comic Sans MS', cursive;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
