@@ -279,7 +279,7 @@ const buttonVariants = cva("w-full hover:cursor-pointer transition-all duration-
   },
 });
 
-interface PricingTableTwoProps extends VariantProps<typeof sectionVariants> {
+export interface PricingTableTwoProps extends VariantProps<typeof sectionVariants> {
   className?: string;
   plans: Plan[];
   title?: string;

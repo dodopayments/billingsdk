@@ -1,8 +1,8 @@
 "use client"
 
-import { Banner } from "@/components/billingsdk/banner"
 import { useState } from "react"
 import { Button } from "./ui/button"
+import { Banner } from "@/registry/billingsdk/banner"
 
 export default function FreeTrialBannerDemoThree() {
     const [showBanner, setShowBanner] = useState(false)

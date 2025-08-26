@@ -18,7 +18,7 @@ export interface Usage {
     limit: number
 }
 
-interface UsageMeterProps {
+export interface UsageMeterProps {
     usage: Usage[]
     className?: string
     variant?: "linear" | "circle"

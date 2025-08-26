@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 import { CancelSubscriptionDialog, type CancelSubscriptionDialogProps } from "@/components/billingsdk/cancel-subscription-dialog"
 import { UpdatePlanDialog, type UpdatePlanDialogProps } from "@/components/billingsdk/update-plan-dialog"
 
-interface SubscriptionManagementProps {
+export interface SubscriptionManagementProps {
     className?: string
     currentPlan: CurrentPlan
     cancelSubscription: CancelSubscriptionDialogProps
