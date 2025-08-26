@@ -24,7 +24,7 @@ export const Logo = () => {
 
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollYProgress, scrollY } = useScroll();
+  const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (current) =>
     setIsScrolled(current >= 20)
   );
