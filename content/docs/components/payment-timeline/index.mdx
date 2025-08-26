@@ -1,0 +1,166 @@
+---
+title: Payment Timeline Card
+description: A comprehensive payment timeline component that displays payment history with status indicators, transaction details, and interactive actions for billing management.
+---
+
+The Payment Timeline Card provides a chronological view of payment transactions with clear status indicators, payment details, and actionable buttons for receipts and transaction details.
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-timeline-card">
+      <PaymentTimelineCardDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/payment-timeline-card-demo.tsx"'>src/components/payment-timeline-card-demo.tsx</include>
+
+  </Tab>
+</Tabs>
+
+### Related
+
+- See also: [Invoice History](/docs/components/invoice-history)
+- See also: [Manage Subscription](/docs/components/manage-subscription)
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/payment-timeline-card.json
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/payment-timeline-card.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/payment-timeline-card.json
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentTimelineCard, type PaymentTimelineItem } from "@/components/billingsdk/payment-timeline-card";
+```
+
+### Basic Example
+
+```tsx
+const payments: PaymentTimelineItem[] = [
+  {
+    id: 'pay_001',
+    date: 'Dec 1, 2024',
+    amount: '$49.00',
+    description: 'Pro Plan - Monthly Subscription',
+    status: 'completed',
+    paymentMethod: 'Visa •••• 4242',
+    transactionId: 'txn_1ABC123',
+    receiptUrl: 'https://example.com/receipts/pay_001.pdf',
+    type: 'payment'
+  },
+  // ... more payments
+];
+
+<PaymentTimelineCard
+  payments={payments}
+  onDownloadReceipt={(paymentId) => {
+    // Handle receipt download
+    console.log('Download receipt for:', paymentId);
+  }}
+  onViewDetails={(paymentId) => {
+    // Handle view details action
+    console.log('View details for:', paymentId);
+  }}
+/>
+```
+
+### Limited Display
+
+```tsx
+<PaymentTimelineCard
+  title="Recent Payments"
+  description="Your last 3 payment transactions."
+  payments={payments}
+  maxItems={3}
+  showTransactionId={true}
+  onDownloadReceipt={handleDownloadReceipt}
+  onViewDetails={handleViewDetails}
+/>
+```
+
+### Minimal Version
+
+```tsx
+<PaymentTimelineCard
+  title="Payment Summary"
+  payments={payments}
+  showPaymentMethod={false}
+  showTransactionId={false}
+  className="max-w-lg"
+/>
+```
+
+## API Reference
+
+### PaymentTimelineCard Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `payments` | `PaymentTimelineItem[]` | Required | Array of payment timeline items to display |
+| `title` | `string` | `"Payment Timeline"` | Title displayed in the card header |
+| `description` | `string` | `"Track your payment history..."` | Description text below the title |
+| `className` | `string` | `undefined` | Additional CSS classes for the card |
+| `onDownloadReceipt` | `(paymentId: string) => void` | `undefined` | Callback when receipt download is clicked |
+| `onViewDetails` | `(paymentId: string) => void` | `undefined` | Callback when view details is clicked |
+| `showPaymentMethod` | `boolean` | `true` | Whether to show payment method information |
+| `showTransactionId` | `boolean` | `false` | Whether to show transaction ID |
+| `maxItems` | `number` | `undefined` | Maximum number of items to display |
+
+### PaymentTimelineItem Interface
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `id` | `string` | ✅ | Unique identifier for the payment |
+| `date` | `string` | ✅ | Display date for the payment |
+| `amount` | `string` | ✅ | Formatted amount string (e.g., "$49.00") |
+| `description` | `string` | ✅ | Description of the payment transaction |
+| `status` | `"completed" \| "failed" \| "pending" \| "refunded" \| "cancelled"` | ✅ | Payment status |
+| `paymentMethod` | `string` | ❌ | Payment method used (e.g., "Visa •••• 4242") |
+| `transactionId` | `string` | ❌ | Transaction identifier |
+| `receiptUrl` | `string` | ❌ | URL to receipt or download trigger |
+| `type` | `"payment" \| "refund" \| "chargeback" \| "adjustment"` | ❌ | Type of transaction |
+
+## Features
+
+### Status Indicators
+- **Completed**: Green check circle with success badge
+- **Failed**: Red X circle with destructive badge  
+- **Pending**: Yellow clock with warning badge
+- **Refunded**: Blue alert circle with info badge
+- **Cancelled**: Gray X circle with secondary badge
+
+### Transaction Types
+- **Payment**: Dollar sign icon (green)
+- **Refund**: Alert circle icon (blue)
+- **Chargeback**: X circle icon (red)
+- **Adjustment**: Calendar icon (purple)
+
+### Interactive Features
+- **Receipt Downloads**: Button to download or view receipts
+- **Transaction Details**: Button to view full transaction details
+- **Hover Interactions**: Buttons appear on hover for clean interface
+- **Responsive Design**: Adapts to mobile and desktop layouts
+
+### Customization Options
+- **Flexible Display**: Control visibility of payment methods and transaction IDs
+- **Item Limits**: Show only recent payments with `maxItems` prop
+- **Custom Styling**: Apply custom classes and themes
+- **Empty State**: Graceful handling when no payments exist
+
+The Payment Timeline Card is perfect for billing dashboards, user account pages, and subscription management interfaces where payment history visibility is crucial.

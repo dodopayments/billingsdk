@@ -9,12 +9,14 @@ import { UsageMeter } from "@/components/billingsdk/usage-meter";
 import { SubscriptionManagementDemo } from "@/components/subscription-management-demo";
 import { UpdatePlanCardDemo } from "@/components/update-plan-card-demo";
 import { CancelSubscriptionCard } from "@/registry/billingsdk/cancel-subscription-card";
+import PaymentTimelineCardDemo from "@/components/payment-timeline-card-demo";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AiOutlineDollar } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BsBell } from "react-icons/bs";
 import { BiBarChartAlt2, BiArrowToTop } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
+import { HiOutlineCreditCard } from "react-icons/hi2";
 import { motion } from "framer-motion";
 
 export function ComponentsSection() {
@@ -43,6 +45,7 @@ function ComponentsShowcase() {
     const components = [
         { id: "pricing", label: "Pricing", icon: AiOutlineDollar },
         { id: "subscription", label: "Subscription Management", icon: FiSettings },
+        { id: "payments", label: "Payment Timeline", icon: HiOutlineCreditCard },
         { id: "banner", label: "Banner Notifications", icon: BsBell },
         { id: "usage", label: "Usage Meters", icon: BiBarChartAlt2 },
         { id: "updates", label: "Plan Updates", icon: BiArrowToTop },
@@ -232,6 +235,14 @@ function ComponentsShowcase() {
                                 <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
                                     <div className="mt-4">
                                         <SubscriptionManagementDemo />
+                                    </div>
+                                </PreviewComponents>
+                            </TabsContent>
+
+                            <TabsContent value="payments" className="mt-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                    <div className="mt-4">
+                                        <PaymentTimelineCardDemo />
                                     </div>
                                 </PreviewComponents>
                             </TabsContent>
