@@ -65,7 +65,7 @@ export function InvoiceHistory({
             {(title || description) && (
                 <CardHeader className="space-y-1">
                     {title && (
-                        <CardTitle className="text-base font-medium leading-tight truncate flex items-center gap-2 sm:gap-3 text-lg sm:text-xl">
+                        <CardTitle className="text-lg font-medium leading-tight truncate flex items-center gap-2 sm:gap-3 sm:text-xl">
                             <ReceiptText className="h-4 w-4 text-primary" />
                             {title}
                         </CardTitle>
