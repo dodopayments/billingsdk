@@ -2,6 +2,9 @@
 title: Usage Meter Circle
 description: Displays usage progress in a circular meter with an animated ring, status badges, and size variants.
 ---
+You can change the progress color of the usage meter to `default` or `usage`.
+
+## Default Usage Meter Circle
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
   <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
@@ -36,21 +39,49 @@ description: Displays usage progress in a circular meter with an animated ring, 
   </Tab>
 </Tabs>
 
+## Custom Usage Meter Circle
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="usage-meter-circle">
+      <CustomUsageMeterCircleDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/custom-usage-meter-circle-demo.tsx"'>src/components/custom-usage-meter-circle-demo.tsx</include>
+
+  </Tab>
+</Tabs>
+
 ## Usage
 
 ```tsx
 import { UsageMeter } from "@/components/billingsdk/usage-meter";
 ```
 ```tsx
+// Default Usage Meter Circle
 <UsageMeter
   usage={75}
   limit={100}
   title="Usage"
   description="You have used 75% of your limit"
-  progressColor="usage"
   variant="circle"
   size="md"
   className="mx-auto"
+  progressColor="default" // default, usage
+/>
+
+// Custom Usage Meter Circle
+<UsageMeter
+  usage={75}
+  limit={100}
+  title="Usage"
+  description="You have used 75% of your limit"
+  variant="circle"
+  size="md"
+  className="mx-auto"
+  progressColor="usage" // default, usage
 />
 ```
 

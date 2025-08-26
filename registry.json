@@ -33,7 +33,8 @@
                 "https://billingsdk.com/r/subscription-management.json",
                 "https://billingsdk.com/r/usage-meter-linear.json",
                 "https://billingsdk.com/r/usage-meter-circle.json",
-                "https://billingsdk.com/r/banner.json"
+                "https://billingsdk.com/r/banner.json",
+                "https://billingsdk.com/r/invoice-history.json"
             ]
         },
         {
@@ -47,6 +48,34 @@
                     "type": "registry:component",
                     "target": "components/billingsdk/hello-world.tsx"
                 }
+            ]
+        },
+        {
+            "name": "invoice-history",
+            "type": "registry:block",
+            "title": "Invoice History",
+            "description": "A read-only invoice history table",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/invoice-history.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/invoice-history.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/invoice-history-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/invoice-history-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "card",
+                "button",
+                "table",
+                "badge",
+                "utils"
             ]
         },
         {

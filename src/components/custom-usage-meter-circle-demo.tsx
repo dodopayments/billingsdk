@@ -2,7 +2,7 @@
 
 import { UsageMeter } from "@/components/billingsdk/usage-meter";
 
-export default function UsageMeterCircleDemo() {
+export default function CustomUsageMeterCircleDemo() {
 
   return (
     <div className="flex flex-col gap-4 mx-auto w-full">
@@ -28,7 +28,8 @@ export default function UsageMeterCircleDemo() {
         description="Your usage of the LLM models"
         variant="circle"
         size="md"
-        className="mx-auto" />
+        className="mx-auto" 
+        progressColor="usage"/>
     </div>
 
   );
