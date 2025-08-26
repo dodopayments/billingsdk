@@ -4,28 +4,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { type Plan } from "@/lib/billingsdk-config";
+
 import { cn } from "@/lib/utils";
 import { Circle } from "lucide-react";
+import { getCancelCardContainerClass , type CancelSubscriptionCardProps } from "./cancel-subscription-card-utils"
 
-export interface CancelSubscriptionCardProps {
-    title: string;
-    description: string;
-    plan: Plan;
-    leftPanelImageUrl?: string;
-    warningTitle?: string;
-    warningText?: string;
-    keepButtonText?: string;
-    continueButtonText?: string;
-    finalTitle?: string;
-    finalSubtitle?: string;
-    finalWarningText?: string;
-    goBackButtonText?: string;
-    confirmButtonText?: string;
-    onCancel: (planId: string) => Promise<void> | void;
-    onKeepSubscription?: (planId: string) => Promise<void> | void;
-    className?: string;
-}
+
 
 export function CancelSubscriptionCard({
     title,
@@ -86,7 +70,7 @@ export function CancelSubscriptionCard({
     };
 
     return (
-        <Card className={cn("sm:max-w-[1000px] flex flex-col md:flex-row p-0 overflow-hidden w-full", leftPanelImageUrl ? "" : "sm:max-w-[500px]", className)}>
+        <Card className={getCancelCardContainerClass(leftPanelImageUrl, className)}>
             {leftPanelImageUrl && (
                 <div className="w-full md:w-1/2 min-h-[500px] relative hidden md:block overflow-hidden">
                     <img src={leftPanelImageUrl} alt="Cancel Subscription" className="absolute inset-0 w-full h-full object-cover" />
