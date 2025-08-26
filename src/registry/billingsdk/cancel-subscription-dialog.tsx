@@ -10,32 +10,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { type Plan } from "@/lib/billingsdk-config";
+
 import { cn } from "@/lib/utils";
 import { X, Circle } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 import { getThemeStyles } from "@/lib/themes";
+import { 
+    type CancelSubscriptionDialogProps,
+    getDialogContainerClass,
+    formatDialogPlanPrice 
+} from "./cancel-subscriptiondialog"
 
-export interface CancelSubscriptionDialogProps {
-    title: string;
-    description: string;
-    plan: Plan;
-    triggerButtonText?: string;
-    leftPanelImageUrl?: string;
-    warningTitle?: string;
-    warningText?: string;
-    keepButtonText?: string;
-    continueButtonText?: string;
-    finalTitle?: string;
-    finalSubtitle?: string;
-    finalWarningText?: string;
-    goBackButtonText?: string;
-    confirmButtonText?: string;
-    onCancel: (planId: string) => Promise<void> | void;
-    onKeepSubscription?: (planId: string) => Promise<void> | void;
-    onDialogClose?: () => void;
-    className?: string;
-}
 
 export function CancelSubscriptionDialog({
     title,
@@ -136,7 +121,7 @@ export function CancelSubscriptionDialog({
             <DialogTrigger asChild>
                 <Button variant="outline">{triggerButtonText || "Cancel Subscription"}</Button>
             </DialogTrigger>
-            <DialogContent className={cn("sm:max-w-[1000px] flex flex-col md:flex-row p-0 overflow-hidden text-foreground w-[95%] md:w-[100%]", leftPanelImageUrl ? "" : "sm:max-w-[500px]", className)} style={themeStyles}>
+            <DialogContent className={getDialogContainerClass(leftPanelImageUrl, className)} style={themeStyles}>
                 <DialogTitle className="sr-only">{title}</DialogTitle>
                 <DialogClose
                     className="absolute right-4 top-4 z-10 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -172,11 +157,7 @@ export function CancelSubscriptionDialog({
                                     <span className="text-sm text-muted-foreground">Current subscription</span>
                                 </div>
                                 <Badge variant="secondary">
-                                    {
-                                        parseFloat(plan.monthlyPrice) >= 0 ?
-                                            `${plan.currency}${plan.monthlyPrice}/monthly` :
-                                            `${plan.monthlyPrice}/monthly`
-                                    }
+                                   {formatDialogPlanPrice(plan.monthlyPrice, plan.currency)}
                                 </Badge>
                             </div>
                             <div className="flex flex-col gap-2">
