@@ -87,6 +87,21 @@ The banner component supports animated gradient backgrounds with custom colors. 
 
 </Tabs>
 
+## Destructive Banner
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="banner">
+      <BannerDestructiveDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/banner-destructive-demo.tsx"'>src/components/banner-destructive-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
 
 
 ## Usage
@@ -143,6 +158,17 @@ import { Banner } from "@/components/billingsdk/banner";
 />
 ```
 
+```tsx
+// Destructive Banner
+<Banner
+  title="⚠️ Payment Failed - Subscription Suspended"
+  description="Your subscription will be canceled in 3 days if payment is not updated"
+  buttonText="Update Payment"
+  buttonLink="https://example.com/billing"
+  variant="destructive" // destructive
+/>
+```
+
 ## Props
 
 | Prop | Type | Required | Description |
@@ -153,7 +179,7 @@ import { Banner } from "@/components/billingsdk/banner";
 | `buttonText` | `string` | ❌ | The text of the button |
 | `buttonIcon` | `React.ReactNode` | ❌ | The icon of the button |
 | `buttonLink` | `string` | ❌ | The link of the button |
-| `variant` | `"default" \| "minimal" \| "popup"` | ✅ | The variant of the banner |
+| `variant` | `"default" \| "minimal" \| "popup" \| "destructive"` | ✅ | The variant of the banner |
 | `autoDismiss` | `number` | ❌ | The time in milliseconds to auto dismiss the banner |
 | `onDismiss` | `() => void` | ❌ | The function to call when the banner is dismissed |
 | `gradientColors` | `string[]` | ❌ | Array of color strings for animated gradient background |

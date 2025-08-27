@@ -11,6 +11,7 @@
     "---Subscription Management---",
     "components/manage-subscription/index",
     "components/invoice-history/index",
+    "components/usage-table/index",
     "---Update Plan---",
     "components/update-plan/update-plan-card",
     "components/update-plan/update-plan-dialog",

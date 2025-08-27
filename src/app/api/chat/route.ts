@@ -6,6 +6,7 @@ export const runtime = 'edge';
 
 
 
+
 const openai = createOpenAICompatible({
   name: 'inkeep',
   apiKey: process.env.INKEEP_API_KEY,
