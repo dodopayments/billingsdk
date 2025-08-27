@@ -14,11 +14,13 @@ Thank you for your interest in contributing. This document explains how to set u
    - **npm**: `npm ci` (or `npm install`)
    - **pnpm**: `pnpm install`
    - **yarn**: `yarn`
-3. Start the dev server:
+3. Copy .env.example to .env and fill the values `cp .env.example .env`
+
+4. Start the dev server:
    - **npm**: `npm run dev`
    - **pnpm**: `pnpm dev`
    - **yarn**: `yarn dev`
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure (High Level)
 
