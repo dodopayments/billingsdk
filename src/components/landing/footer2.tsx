@@ -11,8 +11,8 @@ export function Footer2() {
           {/* Top Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
             <div className="lg:col-span-1">
-              <div className="flex items-center mb-4">
-                <div className="flex items-center justify-center">
+              <div className="flex items-center mb-4 justify-center lg:justify-start">
+                <div className="flex items-center  ">
                   <img
                     src="/logo/Logo.svg"
                     alt="BillingSDK Logo"
@@ -20,11 +20,11 @@ export function Footer2() {
                   />
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-4 text-center lg:text-left">
                 Open-source React components for modern billing and subscription
                 management.
               </p>
-              <div className="flex">
+              <div className="flex justify-center lg:justify-start">
                 <Button variant="ghost" size="sm" asChild>
                   <Link
                     href="https://github.com/dodopayments/billingsdk"
@@ -59,9 +59,11 @@ export function Footer2() {
               </div>
             </div>
 
-            <div>
-              <h4 className="font-semibold text-foreground mb-4">Components</h4>
-              <ul className="space-y-3 text-sm">
+            <div className="">
+              <h4 className="font-semibold text-foreground mb-4 text-center lg:text-left">
+                Components
+              </h4>
+              <ul className="space-y-3 text-sm text-center lg:text-left">
                 <li>
                   <Link
                     href="/docs/components/pricing-table/pricing-table-one"
@@ -98,8 +100,10 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Resources</h4>
-              <ul className="space-y-3 text-sm">
+              <h4 className="font-semibold text-foreground mb-4 text-center lg:text-left">
+                Resources
+              </h4>
+              <ul className="space-y-3 text-sm text-center lg:text-left">
                 <li>
                   <Link
                     href="/docs"
@@ -136,8 +140,10 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Community</h4>
-              <ul className="space-y-3 text-sm">
+              <h4 className="font-semibold text-foreground mb-4 text-center lg:text-left">
+                Community
+              </h4>
+              <ul className="space-y-3 text-sm text-center lg:text-left">
                 <li>
                   <Link
                     href="https://github.com/dodopayments/billingsdk/issues"
