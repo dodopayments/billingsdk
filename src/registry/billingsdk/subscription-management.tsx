@@ -8,7 +8,16 @@ import { Calendar, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CancelSubscriptionDialog } from "@/components/billingsdk/cancel-subscription-dialog"
 import { UpdatePlanDialog } from "@/components/billingsdk/update-plan-dialog"
-import { SubscriptionManagementProps } from "@/registry/billingsdk/subscription-management-utils"
+import { CurrentPlan } from "@/lib/billingsdk-config"
+import { type CancelSubscriptionDialogProps } from "@/components/billingsdk/cancel-subscription-dialog"
+import { type UpdatePlanDialogProps } from "@/components/billingsdk/update-plan-dialog"
+
+export interface SubscriptionManagementProps {
+    className?: string
+    currentPlan: CurrentPlan
+    cancelSubscription: CancelSubscriptionDialogProps
+    updatePlan: UpdatePlanDialogProps
+}
 
 
 export function SubscriptionManagement({ className, currentPlan, cancelSubscription, updatePlan }: SubscriptionManagementProps) {
