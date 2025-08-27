@@ -3,7 +3,7 @@
 import { Check, Minus, Zap } from "lucide-react";
 import { useState } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 import { type Plan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
