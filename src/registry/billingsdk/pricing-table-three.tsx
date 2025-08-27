@@ -5,25 +5,163 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
-
+import { type Plan } from "@/lib/billingsdk-config"
 import { useState } from "react"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
+import { cva, type VariantProps } from "class-variance-authority"
 import { AnimatePresence, motion } from "motion/react"
-import {
-  sectionVariants,
-  toggleContainerVariants,
-  labelPaddingVariants,
-  cardTitleVariants,
-  cardDescriptionVariants,
-  priceTextVariants,
-  featureIconVariants,
-  footerWrapperVariants,
-  footerTextVariants,
-  type PricingTableProps,
-  calculateDiscount
-} from "./pricing-table-three-utils"
+
+const sectionVariants = cva("mt-10 max-w-7xl mx-auto", {
+  variants: {
+    variant: {
+      small: "mt-6",
+      medium: "mt-8",
+      large: "mt-10",
+    },
+  },
+  defaultVariants: {
+    variant: "small",
+  },
+})
+
+const toggleContainerVariants = cva(
+  "bg-muted flex h-11 w-fit shrink-0 items-center rounded-md p-1 text-lg",
+  {
+    variants: {
+      variant: {
+        small: "h-9 text-base",
+        medium: "h-10 text-lg",
+        large: "h-11 text-lg",
+      },
+    },
+    defaultVariants: {
+      variant: "large",
+    },
+  }
+)
+
+const labelPaddingVariants = cva("px-7", {
+  variants: {
+    variant: {
+      small: "px-5",
+      medium: "px-6",
+      large: "px-7",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+const cardTitleVariants = cva("text-xl", {
+  variants: {
+    variant: {
+      small: "text-lg",
+      medium: "text-xl",
+      large: "text-xl",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+const cardDescriptionVariants = cva("text-sm", {
+  variants: {
+    variant: {
+      small: "text-xs",
+      medium: "text-sm",
+      large: "text-sm",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+const priceTextVariants = cva("text-4xl font-medium", {
+  variants: {
+    variant: {
+      small: "text-3xl",
+      medium: "text-4xl",
+      large: "text-4xl",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+const featureIconVariants = cva("w-4 h-4", {
+  variants: {
+    variant: {
+      small: "w-3 h-3",
+      medium: "w-4 h-4",
+      large: "w-4 h-4",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+const footerWrapperVariants = cva(
+  "flex items-center justify-between bg-muted/50 p-6 border-t border-border",
+  {
+    variants: {
+      variant: {
+        small: "p-4",
+        medium: "p-5",
+        large: "p-6",
+      },
+    },
+    defaultVariants: {
+      variant: "large",
+    },
+  }
+)
+
+const footerTextVariants = cva("text-lg font-medium text-card-foreground text-left w-full my-auto", {
+  variants: {
+    variant: {
+      small: "text-base",
+      medium: "text-lg",
+      large: "text-lg",
+    },
+  },
+  defaultVariants: {
+    variant: "large",
+  },
+})
+
+export interface PricingTableProps extends VariantProps<typeof sectionVariants> {
+  className?: string
+  plans: Plan[]
+  onPlanSelect?: (planId: string) => void
+  showFooter?: boolean
+  footerText?: string
+  footerButtonText?: string
+  onFooterButtonClick?: () => void
+}
+
+function calculateDiscount(monthlyPrice: string, yearlyPrice: string): number {
+    const monthly = parseFloat(monthlyPrice);
+    const yearly = parseFloat(yearlyPrice);
+
+    if (
+      monthlyPrice.toLowerCase() === "custom" ||
+      yearlyPrice.toLowerCase() === "custom" ||
+      isNaN(monthly) ||
+      isNaN(yearly) ||
+      monthly === 0
+    ) {
+      return 0;
+    }
+
+    const discount = ((monthly * 12 - yearly) / (monthly * 12)) * 100;
+    return Math.round(discount);
+  }
 
 
 export function PricingTableThree({ className, plans, onPlanSelect, showFooter, footerText, footerButtonText, onFooterButtonClick, variant }: PricingTableProps) {
