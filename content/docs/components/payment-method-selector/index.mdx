@@ -1,0 +1,105 @@
+---
+title: Payment Method Selector
+description: Interactive selector for Cards, Digital Wallets, UPI (India), and BNPL services with inline forms and smooth motion.
+---
+
+## Preview
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-method-selector">
+      <PaymentMethodSelectorDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/payment-method-selector-demo.tsx"'>src/components/payment-method-selector-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/payment-method-selector.json
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/payment-method-selector.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/payment-method-selector.json
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import PaymentMethodSelector from "@/components/billingsdk/payment-method-selector"
+```
+
+```tsx
+<PaymentMethodSelector
+  onProceed={(method, data) => {
+    console.log("Selected method:", method)
+    console.log("Form data:", data)
+  }}
+/>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onProceed` | `(method: PaymentMethod, data: FormData) => void` | Fired on “Proceed with Payment”. Receives selected method and collected form data. |
+| `className` | `string` | Optional class names for the root container. |
+
+### Types
+
+```ts
+type PaymentMethod = "cards" | "digital-wallets" | "upi" | "bnpl-services"
+
+type FormData = {
+  // Cards
+  cardNumber?: string
+  expiryDate?: string
+  cvv?: string
+  cardholderName?: string
+  // Wallets
+  email?: string
+  phone?: string
+  // UPI
+  upiId?: string
+  // BNPL
+  income?: string
+}
+```
+
+## Payment Methods
+
+- **Cards**
+  - Form: card number, expiry, CVV, name
+  - Notes: secure card payments with fraud protection
+- **Digital Wallets** (Apple Pay, Google Pay, Cash App, Venmo)
+  - Form: email, phone
+  - Notes: quick checkout, biometric auth
+- **UPI (India)** (PhonePe, Google Pay, Paytm, BHIM)
+  - Form: UPI ID
+  - Notes: real‑time bank transfers
+- **BNPL Services** (Klarna, Affirm, Afterpay, Sezzle)
+  - Form: email, phone, income (optional)
+  - Notes: split payments, flexible terms
+
+## Theming
+
+Styled with `shadcn/ui`. Customize via CSS variables or switch themes in the preview header. See [Theming](/docs/theming).
+
+## Example
+
+<include cwd lang="tsx" meta='title="src/components/payment-method-selector-demo.tsx"'>src/components/payment-method-selector-demo.tsx</include>

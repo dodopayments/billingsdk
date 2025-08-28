@@ -18,6 +18,7 @@ import BannerDemo from '@/components/banner-demo';
 import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
 import BannerDemoThree from '@/components/banner-demo-three';
+import { PaymentMethodSelectorDemo } from '@/components/payment-method-selector-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -42,5 +43,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     BannerDemoTwo,
     BannerDemoThree,
     BannerGradientDemo,
+    PaymentMethodSelectorDemo,
   };
 }
