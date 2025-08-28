@@ -15,7 +15,9 @@
     "https://billingsdk.com/r/subscription-management.json",
     "https://billingsdk.com/r/usage-meter-linear.json",
     "https://billingsdk.com/r/usage-meter-circle.json",
-    "https://billingsdk.com/r/banner.json"
+    "https://billingsdk.com/r/banner.json",
+    "https://billingsdk.com/r/invoice-history.json",
+    "https://billingsdk.com/r/usage-table.json"
   ],
   "files": []
 }

@@ -15,7 +15,7 @@ import { FiSettings } from "react-icons/fi";
 import { BsBell } from "react-icons/bs";
 import { BiBarChartAlt2, BiArrowToTop } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function ComponentsSection() {
     return (

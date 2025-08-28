@@ -8,8 +8,9 @@ import { X } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 
-interface BannerProps {
-  variant?: "default" | "minimal" | "popup"
+
+export interface BannerProps {
+  variant?: "default" | "minimal" | "popup" | "destructive"
   title: string
   description?: string
   buttonText?: string
@@ -74,6 +75,22 @@ export function Banner({
           title:"text-sm font-medium text-popover-foreground leading-snug",
           description:"text-xs text-muted-foreground",
           actions: "flex items-center gap-2 self-end sm:self-auto flex-shrink-0 pr-8",
+        }
+      case "destructive":
+        return {
+          container: hasGradient
+            ? "sticky top-0 z-50 w-full border-b border-destructive/20 backdrop-blur supports-[backdrop-filter]:bg-destructive/10"
+            : "sticky top-0 z-50 w-full border-b bg-destructive text-destructive-foreground shadow-sm backdrop-blur",
+          wrapper:
+            "relative container mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
+          content: "flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full",
+          title: hasGradient
+            ? "text-sm font-medium text-destructive leading-tight"
+            : "text-sm font-medium text-destructive-foreground leading-tight",
+          description: hasGradient
+            ? "text-xs text-destructive/80"
+            : "text-xs text-destructive-foreground/80",
+          actions: "flex items-center gap-2 self-end sm:self-auto pr-8",
         }
       default:
         return {

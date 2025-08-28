@@ -2,7 +2,7 @@
 
 import { Check, Zap } from "lucide-react";
 import { useState, useId } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { Badge } from "@/components/ui/badge";
@@ -180,7 +180,7 @@ const buttonVariants = cva(
   }
 );
 
-interface PricingTableOneProps extends VariantProps<typeof sectionVariants> {
+export interface PricingTableOneProps extends VariantProps<typeof sectionVariants> {
   className?: string;
   plans: Plan[];
   title?: string;
