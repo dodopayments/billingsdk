@@ -8,8 +8,6 @@
     "components/pricing-table/pricing-table-one",
     "components/pricing-table/pricing-table-two",
     "components/pricing-table/pricing-table-three",
-    "---Payment Processing---",
-    "components/payment-method-selector/index",
     "---Subscription Management---",
     "components/manage-subscription/index",
     "---Update Plan---",
@@ -23,6 +21,8 @@
     "components/usage-meter/usage-meter-linear",
     "---Banner---",
     "components/banner/index",
+    "---Payment Processing---",
+    "components/payment-method-selector/index",
     "---Configuration---",
     "interfaces",
     "theming"
