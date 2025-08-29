@@ -149,3 +149,26 @@ pre[class*="language-"]::-webkit-scrollbar {
   font-weight: 400;
   letter-spacing: 0.5px;
 }
+
+
+@layer utilities {
+  /* Light glass: 1px white/10 border, 10px blur, rgba(255,255,255,.05) bg, 20px radius, inset shadow */
+  .glass {
+    @apply border border-white/10 rounded-[20px] backdrop-blur-[10px] bg-white/5;
+    box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Darker glass used for inner wrappers: same border/blur/radius with rgba(0,0,0,.3) bg */
+  .glass-dark {
+    @apply border border-white/10 rounded-[20px] backdrop-blur-[10px] bg-black/30;
+    box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Subtle hover darkening without scale/zoom */
+  .glass-hover {
+    @apply transition-colors duration-300;
+  }
+  .glass-hover:hover {
+    background-color: rgb(255 255 255 / 0.02);
+  }
+}

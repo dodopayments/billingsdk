@@ -8,6 +8,7 @@
     "components/pricing-table/pricing-table-one",
     "components/pricing-table/pricing-table-two",
     "components/pricing-table/pricing-table-three",
+    "components/pricing-table/pricing-table-four",
     "---Subscription Management---",
     "components/manage-subscription/index",
     "components/invoice-history/index",
