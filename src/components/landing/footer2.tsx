@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Github, Heart } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
+import Image from "next/image";
 
 export function Footer2() {
     return (
@@ -13,7 +14,7 @@ export function Footer2() {
                         <div className="lg:col-span-1">
                             <div className="flex items-center mb-4">
                                 <div className="flex items-center justify-center">
-                                    <img src="/logo/Logo.svg" alt="BillingSDK Logo" className="h-8 w-40" />
+                                    <Image src="/logo/Logo.svg" alt="BillingSDK Logo" width={160} height={32} className="h-8 w-40" />
                                 </div>
                             </div>
                             <p className="text-sm text-muted-foreground mb-4">
@@ -27,7 +28,7 @@ export function Footer2() {
                                 </Button>
                                 <Button variant="ghost" size="sm" asChild>
                                     <Link href="https://dodopayments.com/" target="_blank" rel="noopener noreferrer">
-                                        <img src="/logo/logo-dodo.svg" alt="Dodo Payments" className="h-4 w-4" />
+                                        <Image src="/logo/logo-dodo.svg" alt="Dodo Payments" width={16} height={16} className="h-4 w-4" />
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="sm" asChild>
