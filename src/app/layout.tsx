@@ -22,17 +22,17 @@ const kalam = Kalam({
 
 export const metadata: Metadata = {
   title: {
-    default: "Billing SDK - Modern Billing & Monetization Components",
-    template: "%s | Billing SDK"
+    default: "BillingSDK - Production-Ready Billing Components for React",
+    template: "%s | BillingSDK"
   },
-  description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
+  description: "Copy-paste billing components for React. Ship pricing tables, subscription management, and usage meters 10x faster. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
   keywords: [
     "billing components",
     "subscription management",
     "pricing tables",
     "usage meters",
     "React components",
-    "nextjs components",
+    "nextjs components", 
     "TypeScript",
     "Tailwind CSS",
     "shadcn/ui",
@@ -40,7 +40,10 @@ export const metadata: Metadata = {
     "subscription UI",
     "pricing UI",
     "billing SDK",
-    "payment components"
+    "payment components",
+    "copy paste components",
+    "open source",
+    "production ready"
   ],
   metadataBase: new URL("https://billingsdk.com"),
   alternates: {
@@ -50,24 +53,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: new URL("https://billingsdk.com"),
-    title: "Billing SDK - Modern Billing & Monetization Components",
-    description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
-    siteName: "Billing SDK",
+    title: "BillingSDK - Production-Ready Billing Components for React",
+    description: "Copy-paste billing components for React. Ship pricing tables, subscription management, and usage meters 10x faster. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
+    siteName: "BillingSDK",
     images: [
       {
         url: "/landing/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Billing SDK - Modern Billing & Monetization Components",
+        alt: "BillingSDK - Production-Ready Billing Components for React",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Billing SDK - Modern Billing & Subscription Components",
-    description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS.",
-    images: ["/logo/logo-dodo.svg"],
-    creator: "@billingsdk",
+    title: "BillingSDK - Production-Ready Billing Components",
+    description: "Copy-paste billing components for React. Ship pricing tables, subscription management, and usage meters 10x faster.",
+    images: ["/landing/og-image.png"],
+    creator: "@dodopayments",
   },
   robots: {
     index: true,
@@ -80,7 +83,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
 };
 
 export default function Layout({ children }: { children: ReactNode }) {

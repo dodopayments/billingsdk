@@ -102,7 +102,7 @@ npm install
 npm run dev
 ```
 
-3. Open `http://localhost:3000`
+3. Open `https://billingsdk.com`
 
 ### Installation in Your Project
 

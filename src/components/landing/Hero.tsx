@@ -6,129 +6,158 @@ import { CustomCodeBlock } from "@/components/code";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Cover } from "../ui/cover";
-const Hero = () => {
-  const feature = {
-    title: "Plan Upgrades in Seconds",
-    description: "Beautiful plan upgrade interface - copy, paste, done!",
-    code: `
-  import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card"
-  import { plans } from "@/lib/billingsdk-config"
+import { analytics } from "@/lib/analytics";
+import { Sparkles, ArrowRight, Play } from "lucide-react";
 
-  export default function App() {
-    return (
-      <UpdatePlanCard
-        currentPlan={plans[0]}
-        plans={plans}
-        onPlanChange={(planId) => console.log('Upgraded to:', planId)}
-      />
-    ) 
-  }`,
-    language: "tsx",
-  };
+const Hero = () => {
+  const codeSnippet = `npm install @billingsdk/components
+
+import { PricingTable } from "@billingsdk/components"
+
+export default function App() {
+  return (
+    <PricingTable
+      plans={plans}
+      onPlanSelect={(planId) => console.log(planId)}
+    />
+  )
+}`;
 
   return (
-    <div className="bg-[url('/landing/hero-bg.webp')] rounded-lg bg-cover bg-center">
-      {/* Content */}
-      <motion.div
-        className="relative z-10 pt-[calc(70vh/3)] px-6"
-        initial="hidden"
-        animate="visible"
-      >
-        <div className="max-w-7xl mx-auto w-full">
-          {/* Main Hero Section */}
-          <div className="text-center mb-8 sm:mb-12 md:mb-16 relative">
-            <motion.h1
-              className="text-3xl sm:text-4xl w-fit mx-auto md:text-5xl lg:text-7xl font-medium font-display text-white mb-3 leading-tight relative"
+    <div className="relative overflow-hidden bg-background">
+      {/* Background with gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-muted/5 to-accent/10"></div>
+      <div className="bg-[url('/landing/hero-bg.webp')] rounded-xl bg-cover bg-center relative">
+        {/* Gradient overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/80 rounded-xl"></div>
+        
+        {/* Floating elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-accent/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-20 w-24 h-24 bg-muted/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        
+        {/* Content */}
+        <motion.div
+          className="relative z-10 py-24 md:py-32 px-6 md:px-8"
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="max-w-7xl mx-auto w-full">
+            {/* Badge */}
+            <motion.div
+              className="flex justify-center mb-8"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.5 }}
             >
-              Ship Billing UIs <Cover className="text-primary">10x</Cover>{" "}
-              Faster
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium backdrop-blur-sm">
+                <Sparkles className="w-4 h-4" />
+                Open Source • MIT Licensed
+              </div>
+            </motion.div>
 
-              {/* Fully Open Source annotation inside h1 */}
-              <motion.div
-                className="hidden lg:block absolute top-[100px] -right-[145px]"
+            {/* Main Hero Section */}
+            <div className="text-center mb-12 relative">
+              <motion.h1
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display text-white mb-6 leading-tight relative"
                 variants={{
-                  hidden: { opacity: 0, y: -20 },
+                  hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                Ship Billing UIs{" "}
+                <Cover className="text-primary bg-gradient-to-r from-primary to-blue-400">
+                  10x
+                </Cover>{" "}
+                Faster
+                
+                {/* Decorative elements */}
+                <motion.div
+                  className="absolute -top-4 -right-4 text-yellow-400"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Sparkles className="w-8 h-8" />
+                </motion.div>
+              </motion.h1>
+
+              <motion.p
+                className="text-neutral-200 text-lg sm:text-xl md:text-2xl max-w-4xl mx-auto tracking-tight mb-10 leading-relaxed"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+              >
+                Copy-paste production-ready billing components. Stop building subscription UIs from scratch—ship faster with{" "}
+                <span className="text-primary font-semibold">accessible</span>,{" "}
+                <span className="text-blue-400 font-semibold">customizable</span> React components.
+              </motion.p>
+
+              {/* Enhanced CTAs */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto group"
+                  asChild
+                >
+                  <Link href="https://billingsdk.com/docs" target="_blank" rel="noopener noreferrer" onClick={analytics.trackGetStartedClick} className="flex items-center gap-2">
+                    Get Started
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-border bg-card/50 backdrop-blur-sm text-foreground hover:bg-card/80 hover:border-primary/50 font-semibold px-8 py-3 text-lg transition-all duration-300 w-full sm:w-auto group"
+                  asChild
+                >
+                  <Link href="https://billingsdk.com/docs/components" target="_blank" rel="noopener noreferrer" onClick={analytics.trackBrowseComponentsClick} className="flex items-center gap-2">
+                    <Play className="w-5 h-5" />
+                    Live Demo
+                  </Link>
+                </Button>
+              </motion.div>
+
+              {/* Trust indicators */}
+              <motion.div
+                className="flex flex-wrap justify-center items-center gap-6 text-muted-foreground text-sm mb-12"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
                 }}
                 transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
               >
-                <div className="relative">
-                  <div className="handwritten text-white text-lg transform rotate-12 whitespace-nowrap">
-                    Fully Open Source
-                  </div>
-                  <svg
-                    className="absolute -top-8 right-1/2 transform translate-x-1/2 -rotate-12 text-white"
-                    width="40"
-                    height="30"
-                    viewBox="0 0 40 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M38 28C32 22 28 18 22 15C16 12 12 10 5 5"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                    <path
-                      d="M8 10L5 5L10 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>MIT Licensed</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>TypeScript</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>shadcn/ui Compatible</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span>500+ Developers</span>
                 </div>
               </motion.div>
-            </motion.h1>
+            </div>
 
-            <motion.p
-              className="text-neutral-300/80 text-sm sm:text-lg max-w-2xl mx-auto tracking-tighter"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
-            >
-              Stop reinventing the wheel. Use production-ready, accessible
-              billing components, from pricing cards to subscription dashboards,
-              built for React and ShadCN.
-            </motion.p>
-
-            {/* Email Signup */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center my-8 max-w-md mx-auto"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            >
-              <Button
-                className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
-                asChild
-              >
-                <Link href="/docs">Get Started</Link>
-              </Button>
-              <Button
-                variant="secondary"
-                className="bg-secondary text-secondary-foreground ring-secondary before:from-secondary-foreground/20 after:from-secondary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
-              >
-                <Link href="/docs/components">
-                  Browse Components
-                </Link>
-              </Button>
-            </motion.div>
-
-          </div>
-
-          {/* Demo Section */}
+          {/* Code Preview */}
           <motion.div
             className="flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12 relative"
             variants={{
@@ -137,9 +166,8 @@ const Hero = () => {
             }}
             transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
           >
-            {/* Search Card */}
             <motion.div
-              className="shadow-lg border-x border-t border-border mx-4 sm:mx-6 md:mx-8 mt-4 h-64 sm:h-72 lg:h-80  w-full max-w-2xl relative"
+              className="shadow-lg border-x border-t border-border mx-4 sm:mx-6 md:mx-8 mt-4 h-64 sm:h-72 lg:h-80 w-full max-w-2xl relative"
               variants={{
                 hidden: { opacity: 0, scale: 0.95 },
                 visible: { opacity: 1, scale: 1 },
@@ -147,62 +175,25 @@ const Hero = () => {
               transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
             >
               {/* Window chrome */}
-              <div className="py-2 px-4 border-b border-border bg-transparent border-l-foreground relative">
+              <div className="py-2 px-4 border-b border-border bg-background/5 backdrop-blur relative">
                 <div className="flex items-center gap-1">
-                  <div className="size-2 outline rounded-full outline-border"></div>
-                  <div className="size-2 outline rounded-full outline-accent"></div>
+                  <div className="size-2 outline rounded-full outline-border bg-red-500/60"></div>
+                  <div className="size-2 outline rounded-full outline-border bg-yellow-500/60"></div>
+                  <div className="size-2 outline rounded-full outline-border bg-green-500/60"></div>
                 </div>
-
-                {/* Easy to Use Components annotation inside window chrome */}
-                <motion.div
-                  className="hidden lg:block absolute -top-[30px] -left-[150px]"
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                  transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
-                >
-                  <div className="relative">
-                    <div className="handwritten text-white text-lg transform -rotate-12 whitespace-nowrap">
-                      Easy to Use Components
-                    </div>
-                    <svg
-                      className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 rotate-12 text-white"
-                      width="40"
-                      height="30"
-                      viewBox="0 0 40 30"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2 2C8 8 12 12 18 15C24 18 28 20 35 25"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        fill="none"
-                      />
-                      <path
-                        d="M32 20L35 25L30 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        fill="none"
-                      />
-                    </svg>
-                  </div>
-                </motion.div>
               </div>
 
               {/* Code block */}
               <CustomCodeBlock
-                code={feature.code}
-                language={feature.language}
+                code={codeSnippet}
+                language="tsx"
                 maxHeight="400px"
               />
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
+      </div>
     </div>
   );
 };
