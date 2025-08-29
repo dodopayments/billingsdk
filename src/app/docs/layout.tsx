@@ -2,7 +2,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { baseOptions } from '@/app/layout.config';
 import { source } from '@/lib/source';
-import { GithubIcon, FileTextIcon } from 'lucide-react';
+import { FaGithub, FaRegFileAlt  } from "react-icons/fa";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -16,11 +16,11 @@ export default function Layout({ children }: { children: ReactNode }) {
         text: 'llms-full.txt',
         url: '/llms-full.txt',
         active: 'none',
-        icon: <FileTextIcon />,
+        icon: <FaRegFileAlt />,
       },
       {
         type: 'icon',
-        icon: <GithubIcon />,
+        icon: <FaGithub />,
         text: 'GitHub',
         url: 'https://github.com/dodopayments/billingsdk',
       },

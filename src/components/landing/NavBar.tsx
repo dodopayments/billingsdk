@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
+import { FaGithub } from "react-icons/fa";
 
 export const Logo = () => {
   return (
@@ -55,7 +55,7 @@ const NavBar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
               </Link>
             </Button>
             <Button
