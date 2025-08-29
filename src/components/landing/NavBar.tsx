@@ -64,7 +64,7 @@ const NavBar = () => {
             </Link>
           </Button>
           <Button size="sm" className='bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer' asChild>
-            <Link href="/docs">Get Started</Link>
+            <Link href="https://billingsdk.com/docs" target="_blank" rel="noopener noreferrer">Get Started</Link>
           </Button>
           </div>
         </div>

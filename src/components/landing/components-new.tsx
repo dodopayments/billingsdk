@@ -16,52 +16,32 @@ import { BsBell } from "react-icons/bs";
 import { BiBarChartAlt2, BiArrowToTop } from "react-icons/bi";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
-import { analytics } from "@/lib/analytics";
+import { ArrowRight } from "lucide-react";
 
 export function ComponentsSection() {
     return (
-        <section className="py-24 md:py-32 max-w-7xl mx-auto relative px-6 md:px-8">
-            {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-muted/5 to-accent/5 rounded-3xl"></div>
-            
-            <div className="relative">
-                <div className="text-center mb-16">
-                    <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
-                    >
-                        <Play className="w-4 h-4" />
-                        Interactive Components
-                    </motion.div>
-                    
-                    <motion.h2 
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-foreground mb-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        viewport={{ once: true }}
-                    >
-                        See components in{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                            action
-                        </span>
-                    </motion.h2>
-                    <motion.p 
-                        className="text-muted-foreground max-w-3xl mx-auto text-xl leading-relaxed"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                        viewport={{ once: true }}
-                    >
-                        Experience our most popular billing components with live, interactive previews. Click through each demo to see them in action.
-                    </motion.p>
-                </div>
-                <ComponentsShowcase />
+        <section className="py-16 md:py-24 max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+                <motion.h2 
+                    className="text-3xl md:text-4xl font-display font-medium text-foreground mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                >
+                    See components in action
+                </motion.h2>
+                <motion.p 
+                    className="text-muted-foreground max-w-2xl mx-auto text-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}
+                >
+                    Interactive previews of our most popular billing components. Click to explore each one.
+                </motion.p>
             </div>
+            <ComponentsShowcase />
         </section>
     );
 }
@@ -69,6 +49,7 @@ export function ComponentsSection() {
 function ComponentsShowcase() {
     const [active, setActive] = useState("pricing");
     const [isAutoRotating, setIsAutoRotating] = useState(true);
+    const [isHovered, setIsHovered] = useState(false);
     const [borderPosition, setBorderPosition] = useState({ left: 0, top: 0, width: 0, height: 2 });
     const tabsListRef = useRef<HTMLDivElement>(null);
 
@@ -78,35 +59,35 @@ function ComponentsShowcase() {
             id: "pricing", 
             label: "Pricing Tables", 
             icon: AiOutlineDollar,
-            href: "https://billingsdk.com/docs/components/pricing-table/pricing-table-one",
+            href: "/docs/components/pricing-table",
             description: "Beautiful, responsive pricing tables with multiple variants"
         },
         { 
             id: "subscription", 
             label: "Subscription Management", 
             icon: FiSettings,
-            href: "https://billingsdk.com/docs/components/manage-subscription",
+            href: "/docs/components/manage-subscription",
             description: "Complete subscription management dashboard"
         },
         { 
             id: "banner", 
             label: "Banner Notifications", 
             icon: BsBell,
-            href: "https://billingsdk.com/docs/components/banner",
+            href: "/docs/components/banner",
             description: "Eye-catching promotional and notification banners"
         },
         { 
             id: "usage", 
             label: "Usage Meters", 
             icon: BiBarChartAlt2,
-            href: "https://billingsdk.com/docs/components/usage-meter/usage-meter-linear",
+            href: "/docs/components/usage-meter",
             description: "Track and display usage metrics with progress indicators"
         },
         { 
             id: "updates", 
             label: "Plan Updates", 
             icon: BiArrowToTop,
-            href: "https://billingsdk.com/docs/components/update-plan/update-plan-card",
+            href: "/docs/components/update-plan",
             description: "Smooth plan upgrade and downgrade interfaces"
         },
     ];
@@ -141,14 +122,14 @@ function ComponentsShowcase() {
     }, [active]);
 
     useEffect(() => {
-        if (!isAutoRotating) return;
+        if (!isAutoRotating || isHovered) return;
 
         const interval = setInterval(() => {
             handleTransition();
         }, 6000);
 
         return () => clearInterval(interval);
-    }, [active, isAutoRotating]);
+    }, [active, isAutoRotating, isHovered]);
 
     const handleTransition = (targetComponent?: string) => {
         const currentIndex = components.findIndex(comp => comp.id === active);
@@ -222,26 +203,19 @@ function ComponentsShowcase() {
                     </TabsList>
 
                     {/* Component Preview */}
-                    <div className="border border-border/50 bg-gradient-to-br from-background to-muted/20 rounded-2xl shadow-2xl shadow-primary/5 w-full overflow-hidden">
+                    <div
+                        className="border border-border bg-background rounded-lg shadow-sm w-full"
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
                         {/* Preview Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-border/50 bg-gradient-to-r from-background to-muted/30">
+                        <div className="flex items-center justify-between p-4 border-b border-border">
                             <div>
-                                <h3 className="font-bold text-foreground text-lg">{activeComponent?.label}</h3>
-                                <p className="text-sm text-muted-foreground mt-1">{activeComponent?.description}</p>
+                                <h3 className="font-semibold text-foreground">{activeComponent?.label}</h3>
+                                <p className="text-sm text-muted-foreground">{activeComponent?.description}</p>
                             </div>
-                            <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 shadow-sm"
-                                asChild
-                            >
-                                <Link 
-                                    href={activeComponent?.href || "#"} 
-                                    className="flex items-center gap-2"
-                                    onClick={() => analytics.trackViewComponentClick(activeComponent?.label || 'unknown')}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                            <Button variant="outline" size="sm" asChild>
+                                <Link href={activeComponent?.href || "#"} className="flex items-center gap-2">
                                     View component
                                     <ArrowRight className="h-3 w-3" />
                                 </Link>

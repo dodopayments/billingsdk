@@ -20,7 +20,7 @@ Thank you for your interest in contributing. This document explains how to set u
    - **npm**: `npm run dev`
    - **pnpm**: `pnpm dev`
    - **yarn**: `yarn dev`
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. Open [https://billingsdk.com](https://billingsdk.com) in your browser.
 
 ## Project Structure (High Level)
 
@@ -41,7 +41,7 @@ Thank you for your interest in contributing. This document explains how to set u
    - Run: `npx shadcn@latest build`
    - Output: generated files appear under `public/r/*.json`
 4. Consume in another project:
-   - `npx shadcn@latest add http://localhost:3000/r/<component>.json`
+   - `npx shadcn@latest add https://billingsdk.com/r/<component>.json`
 
 ## Development Guidelines
 

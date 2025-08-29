@@ -42,22 +42,22 @@ export function Footer2() {
                             <h4 className="font-semibold text-foreground mb-4">Components</h4>
                             <ul className="space-y-3 text-sm">
                                 <li>
-                                    <Link href="/docs/components/pricing-table/pricing-table-one" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/components/pricing-table/pricing-table-one" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Pricing Tables
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/components/usage-meter/usage-meter-linear" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/components/usage-meter/usage-meter-linear" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Usage Meters
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/components/manage-subscription" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/components/manage-subscription" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Subscription Management
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/components/banner" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/components/banner" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Banners
                                     </Link>
                                 </li>
@@ -68,22 +68,22 @@ export function Footer2() {
                             <h4 className="font-semibold text-foreground mb-4">Resources</h4>
                             <ul className="space-y-3 text-sm">
                                 <li>
-                                    <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Documentation
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/quick-start" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/quick-start" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Quick Start
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/theming" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/theming" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Theming Guide
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/interfaces" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/interfaces" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Interfaces
                                     </Link>
                                 </li>
@@ -104,7 +104,7 @@ export function Footer2() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/docs/contribution-open-source" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    <Link href="https://billingsdk.com/docs/contribution-open-source" className="text-muted-foreground hover:text-foreground transition-colors">
                                         Contributing
                                     </Link>
                                 </li>
