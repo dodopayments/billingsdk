@@ -1,0 +1,181 @@
+---
+title: Payment Method Manager UPI
+description: The Payment Method Manager UPI component provides a PCI-compliant UI for managing UPI payment methods for India. Uses redirect-to-gateway approach for secure add/edit operations with VPA validation.
+---
+
+import PaymentMethodManagerUPIDemo from "@/registry/billingsdk/demo/payment-method-manager-upi-demo-wrapper";
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-method-manager-upi">
+      <PaymentMethodManagerUPIDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    ```tsx title="src/registry/billingsdk/demo/payment-method-manager-upi-demo.tsx"
+    'use client'
+
+    import { useState } from 'react';
+    import { PaymentMethodManagerUPI, type PaymentMethodUPI } from '@/registry/billingsdk/payment-method-manager-upi';
+
+    export function PaymentMethodManagerUPIDemo() {
+        const [upiMethods, setUpiMethods] = useState<PaymentMethodUPI[]>([
+            { id: 'upi1', vpa: 'user@upi', bank: 'HDFC', isDefault: true },
+            { id: 'upi2', vpa: 'another@upi', bank: 'ICICI', isDefault: false },
+        ]);
+
+        const handleAdd = (method: PaymentMethodUPI) => {
+            setUpiMethods([...upiMethods, method]);
+        };
+
+        const handleEdit = (updated: PaymentMethodUPI) => {
+            setUpiMethods(upiMethods.map(m => m.id === updated.id ? updated : m));
+        };
+
+        const handleRemove = (id: string) => {
+            setUpiMethods(upiMethods.filter(m => m.id !== id));
+        };
+
+        const handleSetDefault = (id: string) => {
+            setUpiMethods(upiMethods.map(m => ({ ...m, isDefault: m.id === id })));
+        };
+
+        return (
+            <div className="flex flex-1 flex-col justify-center text-center">
+                <PaymentMethodManagerUPI
+                    className="max-w-4xl mx-auto"
+                    paymentMethods={upiMethods}
+                    onAdd={handleAdd}
+                    onEdit={handleEdit}
+                    onRemove={handleRemove}
+                    onSetDefault={handleSetDefault}
+                />
+            </div>
+        );
+    }
+    ```
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/payment-method-manager-upi.json
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/payment-method-manager-upi.json
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest add https://billingsdk.com/r/payment-method-manager-upi.json
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentMethodManagerUPI, type PaymentMethodUPI } from "@/registry/billingsdk/payment-method-manager-upi";
+```
+
+```tsx
+const [upiMethods, setUpiMethods] = useState<PaymentMethodUPI[]>([
+  { id: "upi1", vpa: "user@upi", bank: "HDFC", isDefault: true },
+  { id: "upi2", vpa: "another@upi", bank: "ICICI", isDefault: false },
+]);
+```
+
+```tsx
+<PaymentMethodManagerUPI
+  className="max-w-4xl mx-auto"
+  paymentMethods={upiMethods}
+  onAdd={(method) => setUpiMethods([...upiMethods, method])}
+  onEdit={(updated) => setUpiMethods(upiMethods.map(m => m.id === updated.id ? updated : m))}
+  onRemove={(id) => setUpiMethods(upiMethods.filter(m => m.id !== id))}
+  onSetDefault={(id) => setUpiMethods(upiMethods.map(m => ({ ...m, isDefault: m.id === id })))}
+  onRedirect={(type, methodId) => {
+    // Redirect to UPI gateway (e.g., Razorpay, PayU)
+    console.log("Redirecting to UPI gateway:", { type, methodId });
+  }}
+/>
+```
+
+## Props
+
+| Prop             | Type                                   | Required | Description                                 |
+| ---------------- | -------------------------------------- | -------- | ------------------------------------------- |
+| `className`      | `string`                               | ❌        | Additional CSS classes for styling          |
+| `paymentMethods` | `PaymentMethodUPI[]`                   | ✅        | Array of UPI payment methods to display     |
+| `onAdd`          | `(method: PaymentMethodUPI) => void`   | ❌        | Callback when a new UPI method is added     |
+| `onEdit`         | `(method: PaymentMethodUPI) => void`   | ❌        | Callback when a UPI method is edited        |
+| `onRemove`       | `(id: string) => void`                 | ❌        | Callback when a UPI method is removed       |
+| `onSetDefault`   | `(id: string) => void`                 | ❌        | Callback to set a UPI method as default     |
+| `onRedirect`     | `(type: 'add' \| 'edit', methodId?: string) => void` | ✅ | Callback to redirect to UPI gateway for PCI-compliant add/edit operations |
+
+## PaymentMethodUPI Interface
+
+```tsx
+interface PaymentMethodUPI {
+  id: string;
+  vpa: string;
+  bank?: string;
+  isDefault: boolean;
+}
+```
+
+## Theming
+
+The Payment Method Manager UPI component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+
+## Example
+
+```tsx title="src/registry/billingsdk/demo/payment-method-manager-upi-demo.tsx"
+'use client'
+
+import { useState } from 'react';
+import { PaymentMethodManagerUPI, type PaymentMethodUPI } from '@/registry/billingsdk/payment-method-manager-upi';
+
+export function PaymentMethodManagerUPIDemo() {
+    const [upiMethods, setUpiMethods] = useState<PaymentMethodUPI[]>([
+        { id: 'upi1', vpa: 'user@upi', bank: 'HDFC', isDefault: true },
+        { id: 'upi2', vpa: 'another@upi', bank: 'ICICI', isDefault: false },
+    ]);
+
+    const handleAdd = (method: PaymentMethodUPI) => {
+        setUpiMethods([...upiMethods, method]);
+    };
+
+    const handleEdit = (updated: PaymentMethodUPI) => {
+        setUpiMethods(upiMethods.map(m => m.id === updated.id ? updated : m));
+    };
+
+    const handleRemove = (id: string) => {
+        setUpiMethods(upiMethods.filter(m => m.id !== id));
+    };
+
+    const handleSetDefault = (id: string) => {
+        setUpiMethods(upiMethods.map(m => ({ ...m, isDefault: m.id === id })));
+    };
+
+    return (
+        <div className="flex flex-1 flex-col justify-center text-center">
+            <PaymentMethodManagerUPI
+                className="max-w-4xl mx-auto"
+                paymentMethods={upiMethods}
+                onAdd={handleAdd}
+                onEdit={handleEdit}
+                onRemove={handleRemove}
+                onSetDefault={handleSetDefault}
+            />
+        </div>
+    );
+}
+```

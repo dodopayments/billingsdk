@@ -1,0 +1,8 @@
+{
+  "name": "payment-method-manager-upi",
+  "type": "registry:block",
+  "files": [
+    "src/registry/billingsdk/payment-method-manager-upi.tsx",
+    "src/registry/billingsdk/demo/payment-method-manager-upi-demo.tsx"
+  ]
+}
