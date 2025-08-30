@@ -3,6 +3,9 @@ import { RootProvider } from "fumadocs-ui/provider";
 import { ThemeProvider } from "@/contexts/theme-context";
 import { Darker_Grotesque, Inter, Kalam } from "next/font/google";
 import type { ReactNode } from "react";
+import Script from "next/script";
+import { GA_MEASUREMENT_ID } from "@/lib/gtag";
+import { GALoader } from "@/app/ga-listener";
 import type { Metadata } from "next";
 
 const DarkerGrotesque = Darker_Grotesque({
@@ -97,6 +100,22 @@ export default function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="light dark" />
+        {GA_MEASUREMENT_ID ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body className="flex flex-col min-h-screen font-body">
         <ThemeProvider>
@@ -106,7 +125,10 @@ export default function Layout({ children }: { children: ReactNode }) {
             defaultTheme: 'dark',
             storageKey: 'fumadocs-theme',
           }}
-        >{children}</RootProvider>
+        >
+          {children}
+          {GA_MEASUREMENT_ID ? <GALoader /> : null}
+        </RootProvider>
         </ThemeProvider>
       </body>
     </html>
