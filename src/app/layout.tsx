@@ -3,9 +3,7 @@ import { RootProvider } from "fumadocs-ui/provider";
 import { ThemeProvider } from "@/contexts/theme-context";
 import { Darker_Grotesque, Inter, Kalam } from "next/font/google";
 import type { ReactNode } from "react";
-import Script from "next/script";
-import { GA_MEASUREMENT_ID } from "@/lib/gtag";
-import { GALoader } from "@/app/ga-listener";
+
 import type { Metadata } from "next";
 
 const DarkerGrotesque = Darker_Grotesque({
@@ -26,9 +24,10 @@ const kalam = Kalam({
 export const metadata: Metadata = {
   title: {
     default: "Billing SDK - Modern Billing & Monetization Components",
-    template: "%s | Billing SDK"
+    template: "%s | Billing SDK",
   },
-  description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
+  description:
+    "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
   keywords: [
     "billing components",
     "subscription management",
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     "subscription UI",
     "pricing UI",
     "billing SDK",
-    "payment components"
+    "payment components",
   ],
   metadataBase: new URL("https://billingsdk.com"),
   alternates: {
@@ -54,7 +53,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: new URL("https://billingsdk.com"),
     title: "Billing SDK - Modern Billing & Monetization Components",
-    description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
+    description:
+      "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
     siteName: "Billing SDK",
     images: [
       {
@@ -68,7 +68,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Billing SDK - Modern Billing & Subscription Components",
-    description: "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS.",
+    description:
+      "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS.",
     images: ["/logo/logo-dodo.svg"],
     creator: "@billingsdk",
   },
@@ -83,7 +84,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -97,38 +97,24 @@ export default function Layout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/logo/logo-dodo.svg" />
         <link rel="apple-touch-icon" href="/logo/logo-dodo.svg" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="light dark" />
-        {GA_MEASUREMENT_ID ? (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
-              `}
-            </Script>
-          </>
-        ) : null}
       </head>
       <body className="flex flex-col min-h-screen font-body">
         <ThemeProvider>
           <RootProvider
-          theme={{
-            enabled: false, // Disable theme switching
-            defaultTheme: 'dark',
-            storageKey: 'fumadocs-theme',
-          }}
-        >
-          {children}
-          {GA_MEASUREMENT_ID ? <GALoader /> : null}
-        </RootProvider>
+            theme={{
+              enabled: false, // Disable theme switching
+              defaultTheme: "dark",
+              storageKey: "fumadocs-theme",
+            }}
+          >
+            {children}
+          </RootProvider>
         </ThemeProvider>
       </body>
     </html>
