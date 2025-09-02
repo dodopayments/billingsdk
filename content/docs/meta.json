@@ -3,6 +3,7 @@
     "---Getting Started---",
     "index",
     "quick-start",
+    "cli",
     "contribution-open-source", 
     "---Pricing Tables---",
     "components/pricing-table/pricing-table-one",
@@ -23,6 +24,8 @@
     "components/usage-meter/usage-meter-linear",
     "---Banner---",
     "components/banner/index",
+    "---Payment Processing---",
+    "components/payment-method-selector/index",
     "---Configuration---",
     "interfaces",
     "theming"

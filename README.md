@@ -1,8 +1,28 @@
 # Billing SDK
-[![GitHub stars](https://img.shields.io/github/stars/dodopayments/billingsdk?style=social)](https://github.com/dodopayments/billingsdk/stargazers)
-[![Discord](https://img.shields.io/badge/chat-on%20discord-7289DA.svg)](https://discord.gg/bYqAp4ayYh)
-[![Twitter Follow](https://img.shields.io/twitter/follow/dodopayments?label=Follow&style=social)](https://twitter.com/dodopayments)
-![License](https://img.shields.io/github/license/dodopayments/billingsdk)
+
+<p align="center">
+  <img
+    src="https://github.com//dodopayments/billingsdk/blob/main/.github/images/billingsdk-cover.webp?raw=true"
+    alt="Billing SDK Cover"
+    width="900"
+    height="320"
+    style="max-width: 100%; height: auto; border-radius: 0.5rem;"
+    loading="lazy"
+  />
+</p>
+
+<p align="center">
+  <a href="https://github.com/dodopayments/billingsdk/stargazers">
+    <img src="https://img.shields.io/github/stars/dodopayments/billingsdk?style=social" alt="GitHub stars" />
+  </a>
+  <a href="https://discord.gg/bYqAp4ayYh">
+    <img src="https://img.shields.io/discord/1305511580854779984?label=Join%20Discord&logo=discord" alt="Join Discord" />
+  </a>
+  <a href="https://twitter.com/dodopayments">
+    <img src="https://img.shields.io/twitter/follow/dodopayments?label=Follow&style=social" alt="Twitter Follow" />
+  </a>
+  <img src="https://img.shields.io/github/license/dodopayments/billingsdk" alt="License" />
+</p>
 
 
 Modern, type-safe billing and subscription management components for React, built with TypeScript and Tailwind CSS. Designed to work seamlessly alongside shadcn/ui.
@@ -31,7 +51,7 @@ Billing SDK provides production-ready UI building blocks for pricing, usage, and
 - **Multiple themes**: Classic, Minimal, and custom theme tokens
 - **Responsive by default**: Optimized for mobile, tablet, and desktop
 - **TypeScript-first**: Strongly typed props for safe composition
-- **Easy integration**: One-command install via shadcn/ui registry
+- **Easy integration**: One-command install via CLI or shadcn/ui registry
 
 ## Components
 
@@ -105,6 +125,20 @@ npm run dev
 3. Open `https://billingsdk.com`
 
 ### Installation in Your Project
+
+#### Using CLI (Recommended)
+
+For complete project setup with framework integration:
+
+```bash
+# Initialize billing to a new project
+npx @billingsdk/cli init
+
+# Add individual components
+npx @billingsdk/cli add pricing-table-one
+```
+
+#### Manual Installation
 
 Add Billing SDK components to your existing shadcn/ui project:
 

@@ -23,6 +23,7 @@ import CustomUsageMeterCircleDemo from '@/components/custom-usage-meter-circle-d
 import CustomUsageMeterLinearDemo from '@/components/custom-usage-meter-linear-demo';
 import InvoiceHistoryDemo from '@/components/invoice-history-demo';
 import UsageTableDemo from '@/components/usage-table-demo';
+import { PaymentMethodSelectorDemo } from '@/components/payment-method-selector-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -52,5 +53,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     BannerDestructiveDemo,
     InvoiceHistoryDemo,
     UsageTableDemo,
+    PaymentMethodSelectorDemo,
+
   };
 }

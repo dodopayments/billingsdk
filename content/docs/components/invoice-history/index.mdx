@@ -17,21 +17,44 @@ description: Read-only table for displaying past invoices and receipts with stat
 
 ## Installation
 
-<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
-  <Tab value="npx">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/invoice-history.json
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/invoice-history.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/invoice-history.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/invoice-history.json
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/invoice-history.json
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/invoice-history.json
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add invoice-history
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add invoice-history
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add invoice-history
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 

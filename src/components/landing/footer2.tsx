@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Github, Heart } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
+import { FaGithub, FaHeart } from "react-icons/fa";
 import Image from "next/image";
 
 export function Footer2() {
@@ -23,12 +23,13 @@ export function Footer2() {
                             <div className="flex">
                                 <Button variant="ghost" size="sm" asChild>
                                     <Link href="https://github.com/dodopayments/billingsdk" target="_blank" rel="noopener noreferrer">
-                                        <Github className="h-4 w-4" />
+                                        <FaGithub className="h-4 w-4" />
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="sm" asChild>
                                     <Link href="https://dodopayments.com/" target="_blank" rel="noopener noreferrer">
                                         <Image src="/logo/logo-dodo.svg" alt="Dodo Payments" width={16} height={16} className="h-4 w-4" />
+
                                     </Link>
                                 </Button>
                                 <Button variant="ghost" size="sm" asChild>
@@ -124,7 +125,7 @@ export function Footer2() {
                             <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
                                 <p className="text-sm text-muted-foreground">
                                     © {new Date().getFullYear()} BillingSDK. Made with{" "}
-                                    <Heart className="inline h-3 w-3 text-red-500 fill-current" />{" "}
+                                    <FaHeart className="inline h-3 w-3 text-red-500 fill-current" />{" "}
                                     by developers at Dodo Payments, for developers.
                                 </p>
                             </div>

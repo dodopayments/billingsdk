@@ -18,21 +18,44 @@ description: The Update Plan Card component provides a compact, card-based inter
 
 ## Installation
 
-<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
-  <Tab value="npx">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/update-plan-card.json
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add update-plan-card
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add update-plan-card
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add update-plan-card
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 

@@ -21,21 +21,44 @@ You can change the progress color of the usage meter to `default` or `usage`.
 
 ## Installation
 
-<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
-  <Tab value="npx">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/usage-meter-linear.json
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add usage-meter-linear
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add usage-meter-linear
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add usage-meter-linear
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 

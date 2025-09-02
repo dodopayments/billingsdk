@@ -34,21 +34,44 @@ description: The Pricing Table One component provides a clean and modern design 
 
 ## Installation
 
-<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
-  <Tab value="npx">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 
