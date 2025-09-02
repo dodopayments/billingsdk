@@ -3,7 +3,7 @@ import { RootProvider } from "fumadocs-ui/provider";
 import { ThemeProvider } from "@/contexts/theme-context";
 import { Darker_Grotesque, Inter, Kalam } from "next/font/google";
 import type { ReactNode } from "react";
-
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 
 const DarkerGrotesque = Darker_Grotesque({
@@ -103,6 +103,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         />
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="light dark" />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
       </head>
       <body className="flex flex-col min-h-screen font-body">
         <ThemeProvider>
