@@ -147,7 +147,7 @@ After running `npx @billingsdk/cli init` and selecting Express.js:
 
 1. Ensure environment variables are set (copy `.env.example` to `.env`):
    - `DODO_PAYMENTS_API_KEY`
-   - `DODO_PAYMENTS_WEBHOOK_KEY`
+   - `DODO_PAYMENTS_WEBHOOK_SECRET`
    - `DODO_PAYMENTS_ENVIRONMENT` ("test_mode" or "live_mode")
    - `ALLOWED_ORIGINS` (optional, comma-separated)
 
@@ -155,7 +155,7 @@ After running `npx @billingsdk/cli init` and selecting Express.js:
 
 ```ts
 import express from 'express'
-import dodopaymentsRouter from './src/routes/dodopayments/route'
+import dodopaymentsRouter from './src/routes/dodopayments'
 
 const app = express()
 

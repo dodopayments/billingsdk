@@ -3,29 +3,53 @@ import { Webhook } from 'standardwebhooks'
 import { getDodoPaymentsClient } from '../../lib/dodopayments'
 
 const router = express.Router()
-const webhook = new Webhook(process.env.DODO_PAYMENTS_WEBHOOK_KEY!)
+const webhookSecret = process.env.DODO_PAYMENTS_WEBHOOK_SECRET
+if (!webhookSecret) {
+  throw new Error('DODO_PAYMENTS_WEBHOOK_SECRET is missing')
+}
+const webhook = new Webhook(webhookSecret)
 
-router.use(express.raw({ type: 'application/json' }))
+router.use(express.raw({ type: 'application/json', limit: '100kb' }))
 
 router.post('/', async (req, res) => {
   try {
-    const rawBody = req.body.toString()
+    const rawBody = Buffer.isBuffer(req.body) ? req.body.toString() : ''
+    const getHeader = (value: string | string[] | undefined) => Array.isArray(value) ? value[0] : value
     const webhookHeaders = {
-      'webhook-id': req.headers['webhook-id'] as string || '',
-      'webhook-signature': req.headers['webhook-signature'] as string || '',
-      'webhook-timestamp': req.headers['webhook-timestamp'] as string || '',
+      'webhook-id': getHeader(req.headers['webhook-id']) || '',
+      'webhook-signature': getHeader(req.headers['webhook-signature']) || '',
+      'webhook-timestamp': getHeader(req.headers['webhook-timestamp']) || '',
     }
 
-    await webhook.verify(rawBody, webhookHeaders)
-    const payload = JSON.parse(rawBody)
+    if (!webhookHeaders['webhook-id'] || !webhookHeaders['webhook-signature'] || !webhookHeaders['webhook-timestamp']) {
+      return res.status(400).json({ error: 'Missing required webhook headers' })
+    }
+
+    try {
+      await webhook.verify(rawBody, webhookHeaders)
+    } catch (e) {
+      console.error('Webhook verification failed', { error: (e as Error)?.message })
+      return res.status(400).json({ error: 'Invalid webhook signature' })
+    }
+
+    let payload: any
+    try {
+      payload = JSON.parse(rawBody)
+    } catch (_e) {
+      return res.status(400).json({ error: 'Invalid JSON payload' })
+    }
 
     if (payload.data.payload_type === "Subscription") {
       switch (payload.type) {
         case "subscription.active":
           const subscription = await getDodoPaymentsClient().subscriptions.retrieve(payload.data.subscription_id)
-          console.log("-------SUBSCRIPTION DATA START ---------")
-          console.log(subscription)
-          console.log("-------SUBSCRIPTION DATA END ---------")
+          const s: any = subscription as any
+          console.log('subscription.active', {
+            id: s.id,
+            status: s.status,
+            customer_id: s.customer_id,
+            plan_id: s.plan_id,
+          })
           break
         case "subscription.failed":
           break
@@ -42,9 +66,14 @@ router.post('/', async (req, res) => {
       switch (payload.type) {
         case "payment.succeeded":
           const paymentDataResp = await getDodoPaymentsClient().payments.retrieve(payload.data.payment_id)
-          console.log("-------PAYMENT DATA START ---------")
-          console.log(paymentDataResp)
-          console.log("-------PAYMENT DATA END ---------")
+          const p: any = paymentDataResp as any
+          console.log('payment.succeeded', {
+            id: p.id,
+            status: p.status,
+            amount: p.amount,
+            currency: p.currency,
+            customer_id: p.customer_id,
+          })
           break
         default:
           break
@@ -53,9 +82,8 @@ router.post('/', async (req, res) => {
 
     res.json({ message: 'Webhook processed successfully' })
   } catch (error) {
-    console.log(" ----- webhook verification failed -----")
-    console.log(error)
-    res.json({ message: 'Webhook processed successfully' })
+    console.error('Webhook handler error', { error: (error as Error)?.message })
+    res.status(500).json({ error: 'Internal server error' })
   }
 })
 

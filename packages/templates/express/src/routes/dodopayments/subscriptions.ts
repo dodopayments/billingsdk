@@ -11,6 +11,11 @@ const subscriptionQuerySchema = z.object({
 router.get('/', validateQuery(subscriptionQuerySchema), async (req, res, next) => {
   try {
     const { customer_id } = req.query as { customer_id: string };
+    const authCustomerId = (req as any).user?.id ?? (req as any).auth?.userId;
+    const isAdmin = (req as any).user?.roles?.includes?.('admin');
+    if (!isAdmin && authCustomerId && authCustomerId !== customer_id) {
+      return res.status(403).json({ error: 'Forbidden: mismatched customer_id' });
+    }
     const subscriptions = await listCustomerSubscriptions(customer_id);
     res.json(subscriptions);
   } catch (error) {

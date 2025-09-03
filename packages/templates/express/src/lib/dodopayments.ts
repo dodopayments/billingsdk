@@ -8,23 +8,22 @@ let dodopaymentsClient: DodoPayments | null = null
 
 export function getDodoPaymentsClient(): DodoPayments {
   if (!dodopaymentsClient) {
+    // Load environment variables from .env if available
+    try { require('dotenv').config(); } catch (_) {}
     const token = process.env.DODO_PAYMENTS_API_KEY
     const environment = process.env.DODO_PAYMENTS_ENVIRONMENT as "live_mode" | "test_mode"
 
-    console.log('Initializing DodoPayments client...')
-    console.log('Token exists:', !!token)
-    console.log('Environment:', environment)
+    if (process.env.NODE_ENV !== 'production') {
+      const maskedToken = token ? `${token.slice(0, 4)}...${token.slice(-4)}` : 'missing'
+      console.debug('Initializing DodoPayments client...')
+      console.debug('Token present:', !!token ? maskedToken : 'missing')
+      console.debug('Environment:', environment)
+    }
 
     if (!token) {
-      throw new Error(`
-        DODO_PAYMENTS_API_KEY environment variable is missing.
-        
-        Please check:
-        1. Your .env file exists in the project root
-        2. The file contains: DODO_PAYMENTS_API_KEY=<your-api-key>
-        3. You've restarted your development server
-        4. No extra quotes or spaces in the .env file
-      `)
+      const baseMsg = 'DODO_PAYMENTS_API_KEY is missing'
+      const devTips = `\nPlease check:\n1. Your .env file exists in the project root\n2. The file contains: DODO_PAYMENTS_API_KEY=<your-api-key>\n3. You've restarted your development server\n4. No extra quotes or spaces in the .env file\n`
+      throw new Error(process.env.NODE_ENV === 'production' ? baseMsg : baseMsg + devTips)
     }
 
     if (!environment || (environment !== "live_mode" && environment !== "test_mode")) {
@@ -168,7 +167,7 @@ export const retrieveProduct = async (product_id: string): Promise<Product> => {
   }
 }
 
-export const listCustomerSubscriptions = async (customer_id: string) => {
+export const listCustomerSubscriptions = async (customer_id: string): Promise<DodoPayments.Subscriptions.SubscriptionListResponse[]> => {
   try {
     const subscriptions = await getDodoPaymentsClient().subscriptions.list({
       customer_id: customer_id,
@@ -180,7 +179,7 @@ export const listCustomerSubscriptions = async (customer_id: string) => {
   }
 }
 
-export const listCustomerPayments = async (customer_id: string) => {
+export const listCustomerPayments = async (customer_id: string): Promise<DodoPayments.Payments.PaymentListResponse[]> => {
   try {
     const payments = await getDodoPaymentsClient().payments.list({
       customer_id: customer_id,

@@ -54,6 +54,12 @@
                     "target": "src/routes/dodopayments/route.ts"
                 },
                 {
+                    "path": "packages/templates/express/src/routes/dodopayments/index.ts",
+                    "content": "Router index for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/index.ts"
+                },
+                {
                     "path": "packages/templates/express/src/routes/dodopayments/checkout.ts",
                     "content": "Checkout routes for Express.js",
                     "type": "template",
@@ -109,7 +115,8 @@
                 "standardwebhooks",
                 "zod",
                 "cors",
-                "@types/cors"
+                "@types/cors",
+                "dotenv"
             ]
         }
     ]
