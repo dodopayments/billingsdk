@@ -139,6 +139,37 @@ npx @billingsdk/cli init
 npx @billingsdk/cli add pricing-table-one
 ```
 
+The CLI supports both Next.js (App Router) and Express.js frameworks for backend integration.
+
+##### Express.js setup
+
+After running `npx @billingsdk/cli init` and selecting Express.js:
+
+1. Ensure environment variables are set (copy `.env.example` to `.env`):
+   - `DODO_PAYMENTS_API_KEY`
+   - `DODO_PAYMENTS_WEBHOOK_KEY`
+   - `DODO_PAYMENTS_ENVIRONMENT` ("test_mode" or "live_mode")
+   - `ALLOWED_ORIGINS` (optional, comma-separated)
+
+2. Mount the router in your Express app:
+
+```ts
+import express from 'express'
+import dodopaymentsRouter from './src/routes/dodopayments/route'
+
+const app = express()
+
+app.use('/dodopayments', dodopaymentsRouter)
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running')
+})
+```
+
+3. Test the health endpoint: `GET /dodopayments/health`
+
+The generated routes include checkout, products, product, customer, payments, subscriptions, and webhook handlers with Zod validation and TypeScript types.
+
 #### Manual Installation
 
 Add Billing SDK components to your existing shadcn/ui project:

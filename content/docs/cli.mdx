@@ -52,7 +52,7 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (currently Next.js)
+1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
@@ -67,14 +67,14 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router)
+- **Framework**: Next.js or Express.js
 - **Payment Provider**: Dodo Payments
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -91,6 +91,25 @@ After running `init`, you'll get:
     │   └── useBilling.ts
     ├── lib/
     │   └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Express.js + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── dodopayments.ts
+    │   ├── routes/
+    │   │   └── dodopayments/
+    │   │       ├── index.ts
+    │   │       ├── checkout.ts
+    │   │       ├── customer.ts
+    │   │       ├── products.ts
+    │   │       ├── product.ts
+    │   │       ├── subscriptions.ts
+    │   │       ├── payments.ts
+    │   │       └── webhook.ts
     └── .env.example
     ```
   </Tab>
@@ -167,8 +186,12 @@ npx @billingsdk/cli add usage-meter-circle
 - 📁 **Structure**: App Router with API routes
 - 🔧 **Features**: Server components, server actions, middleware support
 
+### Express.js
+- ✅ **Status**: Fully supported
+- 📁 **Structure**: Standard Express.js API routes
+- 🔧 **Features**: Middleware support, CORS handling, webhook verification
+
 ### Coming Soon
-- 🚧 **Express.js**: Backend API integration
 - 🚧 **Fastify**: High-performance backend framework
 - 🚧 **Additional React Frameworks**: Vite, Remix support
 

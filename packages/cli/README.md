@@ -69,6 +69,25 @@ your-project/
 └── .env.example
 ```
 
+**Generated Structure for Express.js:**
+```
+your-project/
+├── src/
+│   ├── lib/
+│   │   └── dodopayments.ts
+│   ├── routes/
+│   │   └── dodopayments/
+│   │       ├── index.ts
+│   │       ├── checkout.ts
+│   │       ├── customer.ts
+│   │       ├── products.ts
+│   │       ├── product.ts
+│   │       ├── subscriptions.ts
+│   │       ├── payments.ts
+│   │       └── webhook.ts
+└── .env.example
+```
+
 ### `@billingsdk/cli add <component>`
 
 Add individual billing components to your existing project.
@@ -108,7 +127,7 @@ The CLI automatically installs:
 
 ### Frameworks
 - ✅ **Next.js** (App Router) - Fully supported
-- 🚧 **Express.js** - Coming soon
+- ✅ **Express.js** - Fully supported
 - 🚧 **Hono** - Coming soon
 
 ### Payment Providers

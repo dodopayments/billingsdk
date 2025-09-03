@@ -35,6 +35,82 @@
                 "standardwebhooks",
                 "zod"
             ]
+        },
+        {
+            "name": "express-dodopayments",
+            "description": "DodoPayments template for Express.js",
+            "framework": "express",
+            "files": [
+                {
+                    "path": "packages/templates/express/src/lib/dodopayments.ts",
+                    "content": "DodoPayments library for Express.js",
+                    "type": "template",
+                    "target": "src/lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/route.ts",
+                    "content": "Main DodoPayments router for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/route.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/checkout.ts",
+                    "content": "Checkout routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/checkout.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/customer.ts",
+                    "content": "Customer management routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/customer.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/products.ts",
+                    "content": "Products listing routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/products.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/product.ts",
+                    "content": "Single product routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/product.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/subscriptions.ts",
+                    "content": "Subscription management routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/subscriptions.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/payments.ts",
+                    "content": "Payment routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/payments.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/webhook.ts",
+                    "content": "Webhook handling routes for Express.js",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/webhook.ts"
+                },
+                {
+                    "path": "packages/templates/express/.env.example",
+                    "content": "Environment variables template for Express.js",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "express",
+                "@types/express",
+                "dodopayments",
+                "standardwebhooks",
+                "zod",
+                "cors",
+                "@types/cors"
+            ]
         }
     ]
 }
