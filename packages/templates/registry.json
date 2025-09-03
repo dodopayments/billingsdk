@@ -35,6 +35,39 @@
                 "standardwebhooks",
                 "zod"
             ]
+        },
+        {
+            "name": "express-dodopayments",
+            "description": "DodoPayments template for ExpressJS",
+            "framework": "express",
+            "files": [
+                {
+                    "path": "packages/templates/express/src/lib/dodopayments.ts",
+                    "content": "DodoPayments library for ExpressJS",
+                    "type": "template",
+                    "target": "src/lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/dodopayments/*",
+                    "content": "DodoPayments API routes for ExpressJS",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/*"
+                },
+                {
+                    "path": "packages/templates/express/.env.example",
+                    "content": "DodoPayments .env.example for ExpressJS",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "express",
+                "standardwebhooks",
+                "cors",
+                "dotenv",
+                "zod"
+            ]
         }
     ]
 }
