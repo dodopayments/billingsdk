@@ -4,7 +4,7 @@ import { Registry, Result } from "../types/registry.js";
 
 export const buildRegistry = async () => {
   try {
-    const registryPath = path.join(process.cwd(), "/packages/templates/registry.json");
+    const registryPath = path.join(process.cwd(), "packages/templates/registry.json");
     if (!fs.existsSync(registryPath)) {
       console.error("registry.json not found in root directory");
       process.exit(1);
