@@ -60,16 +60,22 @@
           "target": "routes/dodopayments/customer.ts"
         },
         {
-          "path": "packages/templates/express/src/routes/dodopayments/products.ts",
+          "path": "packages/templates/express/src/routes/dodopayments/product.ts",
           "content": "Product routes for Express",
           "type": "template",
-          "target": "routes/dodopayments/products.ts"
+          "target": "routes/dodopayments/product.ts"
         },
         {
           "path": "packages/templates/express/src/routes/dodopayments/subscriptions.ts",
           "content": "Subscription routes for Express",
           "type": "template",
           "target": "routes/dodopayments/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/payments.ts",
+          "content": "Payments routes for Express",
+          "type": "template",
+          "target": "routes/dodopayments/payments.ts"
         },
         {
           "path": "packages/templates/express/src/routes/dodopayments/webhook.ts",
@@ -94,7 +100,7 @@
         "express",
         "dodopayments",
         "standardwebhooks",
-        "zod",
+        "zod"
         
       ]
     }
