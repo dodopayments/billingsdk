@@ -81,7 +81,6 @@ export function PreviewComponents({ className, children, registryName }: Preview
               <Button asChild size="sm" variant="outline" className="gap-2">
                 <Link href={`/docs/components/${registryName}`}>
                   <ExternalLink className="h-3 w-3" />
-                  <span className="hidden sm:inline">View docs</span>
                   <span className="sm:hidden">Docs</span>
                 </Link>
               </Button>
