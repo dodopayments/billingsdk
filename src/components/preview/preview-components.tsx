@@ -79,7 +79,7 @@ export function PreviewComponents({ className, children, registryName }: Preview
           <div className="flex items-center gap-2">
             {registryName && (
               <Button asChild size="sm" variant="outline" className="gap-2">
-                <Link href={`/docs/components/${registryName}`}>
+                <Link href={`/docs/components`}>
                   <ExternalLink className="h-3 w-3" />
                   <span className="sm:hidden">Docs</span>
                 </Link>
