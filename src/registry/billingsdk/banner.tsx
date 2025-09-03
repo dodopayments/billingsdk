@@ -4,13 +4,14 @@ import type React from "react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { X } from "lucide-react"
+import { X, AlertTriangle, CheckCircle, Info, AlertCircle, Wrench, Gift, Megaphone, Shield, Beaker, Calendar, Signal, MessageCircle, ArrowUp } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 
 
 export interface BannerProps {
   variant?: "default" | "minimal" | "popup" | "destructive"
+  style?: "warning" | "product-announcement" | "success" | "info" | "error" | "maintenance" | "promotional" | "security" | "beta" | "holiday" | "system-status" | "feedback" | "migration"
   title: string
   description?: string
   buttonText?: string
@@ -24,6 +25,7 @@ export interface BannerProps {
 
 export function Banner({
   variant = "default",
+  style,
   title,
   description,
   buttonText,
@@ -112,6 +114,135 @@ export function Banner({
   }
 
   const styles = getVariantStyles()
+  
+  // Style configuration for semantic banner styles
+  const getStyleConfig = () => {
+    if (!style) return null
+    
+    const styleConfigs = {
+      warning: {
+        icon: <AlertTriangle className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/50 dark:border-amber-800 dark:text-amber-100",
+          title: "text-amber-900 dark:text-amber-100",
+          description: "text-amber-700 dark:text-amber-200"
+        }
+      },
+      "product-announcement": {
+        icon: <Megaphone className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-950/50 dark:border-blue-800 dark:text-blue-100",
+          title: "text-blue-900 dark:text-blue-100",
+          description: "text-blue-700 dark:text-blue-200"
+        }
+      },
+      success: {
+        icon: <CheckCircle className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-green-50 border-green-200 text-green-900 dark:bg-green-950/50 dark:border-green-800 dark:text-green-100",
+          title: "text-green-900 dark:text-green-100",
+          description: "text-green-700 dark:text-green-200"
+        }
+      },
+      info: {
+        icon: <Info className="h-4 w-4" />,
+        defaultVariant: "minimal",
+        colors: {
+          container: "bg-slate-50 border-slate-200 text-slate-900 dark:bg-slate-950/50 dark:border-slate-800 dark:text-slate-100",
+          title: "text-slate-900 dark:text-slate-100",
+          description: "text-slate-700 dark:text-slate-200"
+        }
+      },
+      error: {
+        icon: <AlertCircle className="h-4 w-4" />,
+        defaultVariant: "destructive",
+        colors: {
+          container: "bg-red-50 border-red-200 text-red-900 dark:bg-red-950/50 dark:border-red-800 dark:text-red-100",
+          title: "text-red-900 dark:text-red-100",
+          description: "text-red-700 dark:text-red-200"
+        }
+      },
+      maintenance: {
+        icon: <Wrench className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-orange-50 border-orange-200 text-orange-900 dark:bg-orange-950/50 dark:border-orange-800 dark:text-orange-100",
+          title: "text-orange-900 dark:text-orange-100",
+          description: "text-orange-700 dark:text-orange-200"
+        }
+      },
+      promotional: {
+        icon: <Gift className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-purple-50 border-purple-200 text-purple-900 dark:bg-purple-950/50 dark:border-purple-800 dark:text-purple-100",
+          title: "text-purple-900 dark:text-purple-100",
+          description: "text-purple-700 dark:text-purple-200"
+        }
+      },
+      security: {
+        icon: <Shield className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-indigo-50 border-indigo-200 text-indigo-900 dark:bg-indigo-950/50 dark:border-indigo-800 dark:text-indigo-100",
+          title: "text-indigo-900 dark:text-indigo-100",
+          description: "text-indigo-700 dark:text-indigo-200"
+        }
+      },
+      beta: {
+        icon: <Beaker className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-violet-50 border-violet-200 text-violet-900 dark:bg-violet-950/50 dark:border-violet-800 dark:text-violet-100",
+          title: "text-violet-900 dark:text-violet-100",
+          description: "text-violet-700 dark:text-violet-200"
+        }
+      },
+      holiday: {
+        icon: <Calendar className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/50 dark:border-rose-800 dark:text-rose-100",
+          title: "text-rose-900 dark:text-rose-100",
+          description: "text-rose-700 dark:text-rose-200"
+        }
+      },
+      "system-status": {
+        icon: <Signal className="h-4 w-4" />,
+        defaultVariant: "minimal",
+        colors: {
+          container: "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/50 dark:border-emerald-800 dark:text-emerald-100",
+          title: "text-emerald-900 dark:text-emerald-100",
+          description: "text-emerald-700 dark:text-emerald-200"
+        }
+      },
+      feedback: {
+        icon: <MessageCircle className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-teal-50 border-teal-200 text-teal-900 dark:bg-teal-950/50 dark:border-teal-800 dark:text-teal-100",
+          title: "text-teal-900 dark:text-teal-100",
+          description: "text-teal-700 dark:text-teal-200"
+        }
+      },
+      migration: {
+        icon: <ArrowUp className="h-4 w-4" />,
+        defaultVariant: "default",
+        colors: {
+          container: "bg-cyan-50 border-cyan-200 text-cyan-900 dark:bg-cyan-950/50 dark:border-cyan-800 dark:text-cyan-100",
+          title: "text-cyan-900 dark:text-cyan-100",
+          description: "text-cyan-700 dark:text-cyan-200"
+        }
+      }
+    }
+    
+    return styleConfigs[style]
+  }
+  
+  const styleConfig = getStyleConfig()
 
   const getGradientBackground = () => {
     if (!gradientColors || gradientColors.length === 0) return null
@@ -170,15 +301,30 @@ export function Banner({
         <motion.div
           {...getAnimationProps()}
           transition={{ duration: 0.15, ease: "easeOut" }}
-          className={cn(styles.container, className)}
+          className={cn(
+            styles.container,
+            styleConfig?.colors.container,
+            className
+          )}
         >
           {getGradientBackground()}
           <div className={styles.wrapper}>
             {/* Content */}
             <div className={styles.content}>
               <div className={variant === "minimal" ? "flex flex-col md:flex-row gap-0.5 md:gap-2" : ""}>
-                <p className={styles.title}>{title}</p>
-                {description && <p className={styles.description}>{description}</p>}
+                <div className="flex items-center gap-2">
+                  {styleConfig?.icon && !buttonIcon && (
+                    <span className="flex-shrink-0">
+                      {styleConfig.icon}
+                    </span>
+                  )}
+                  <p className={cn(styles.title, styleConfig?.colors.title)}>{title}</p>
+                </div>
+                {description && (
+                  <p className={cn(styles.description, styleConfig?.colors.description)}>
+                    {description}
+                  </p>
+                )}
               </div>
             </div>
 
