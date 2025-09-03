@@ -52,11 +52,11 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (currently Next.js)
+1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
-5. **File Generation**: Creates necessary configuration files and boilerplate code
+5. **File Generation**: Creates necessary configuration files and boilerplate code  
 
 ### Interactive Setup
 
@@ -67,14 +67,15 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router)
+- **Framework**: Next.js (with App Router) or Express.js
+
 - **Payment Provider**: Dodo Payments
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -91,6 +92,24 @@ After running `init`, you'll get:
     │   └── useBilling.ts
     ├── lib/
     │   └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Express.js + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── dodopayments.ts
+    │   └── routes/
+    │       └── dodopayments/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── customer.ts
+    │           ├── payments.ts
+    │           ├── products.ts
+    │           ├── subscriptions.ts
+    │           └── webhook.ts
     └── .env.example
     ```
   </Tab>
@@ -167,8 +186,13 @@ npx @billingsdk/cli add usage-meter-circle
 - 📁 **Structure**: App Router with API routes
 - 🔧 **Features**: Server components, server actions, middleware support
 
+### Express.js 
+- ✅ **Status**: Fully supported
+- 📁 **Structure**: `src/lib` and `src/routes/dodopayments/*`
+- 🔧 **Features**: REST API routes, middleware support, Zod validation, modular routing
+
 ### Coming Soon
-- 🚧 **Express.js**: Backend API integration
+
 - 🚧 **Fastify**: High-performance backend framework
 - 🚧 **Additional React Frameworks**: Vite, Remix support
 
@@ -194,7 +218,7 @@ After running `@billingsdk/cli init`, configure these environment variables:
 DODO_PAYMENTS_API_KEY=your-api-key
 DODO_PAYMENTS_WEBHOOK_KEY=your-webhook-secret
 DODO_PAYMENTS_RETURN_URL=https://yourdomain.com/checkout/success
-DODO_PAYMENTS_ENVIRONMENT="test"or"live"
+DODO_PAYMENTS_ENVIRONMENT="test_mode"or"live_mode"
 
 # Next.js Configuration
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -255,6 +279,73 @@ npm run build
 cd packages/cli
 npm run dev
 ```
+
+## Express setup
+
+Initialize a Express.js integration with Dodo Payments using the CLI:
+
+### 1) Initialize
+
+```bash
+npx @billingsdk/cli init
+# Choose Express.js → Dodo Payments
+```
+
+This command creates `src/lib/dodopayments.ts` and `src/routes/dodopayments/*`, `.env.example` and install dependencies like `zod`, `express`, `dodopayments`, `standardwebhooks`, `dotenv`.
+
+
+### 2) Add the main Router
+
+```ts
+import express from "express";
+import dotenv from "dotenv";
+import dodopaymentsRoutes from "./src/routes/dodopayments/index.ts"; 
+
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+
+app.use(express.json());
+
+
+app.get("/", (_req, res) => {
+  res.json({ message: "🚀 Express + DodoPayments is running!" });
+});
+
+
+app.use("/dodopayments", dodopaymentsRoutes);
+
+
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ error: "Internal server error" });
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
+
+
+```
+
+### 3) Setup env
+```bash 
+DODO_PAYMENTS_API_KEY=your-api-key
+DODO_PAYMENTS_WEBHOOK_KEY=your-webhook-secret
+DODO_PAYMENTS_RETURN_URL=https://yourdomain.com/checkout/success
+DODO_PAYMENTS_ENVIRONMENT="test_mode" or "live_mode"
+PORT= 4000
+```
+
+### 4) Webhook
+- Configure your provider to call /api/webhook (Next.js) or /routes/  dodopayments/webhook (Express.js)
+- `DODO_PAYMENTS_WEBHOOK_KEY` to securely verify incoming webhook requests.
+
+
 
 ### Contributing
 
