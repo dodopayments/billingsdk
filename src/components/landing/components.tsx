@@ -10,22 +10,25 @@ import { SubscriptionManagementDemo } from "@/components/subscription-management
 import { UpdatePlanCardDemo } from "@/components/update-plan-card-demo";
 import { CancelSubscriptionCard } from "@/registry/billingsdk/cancel-subscription-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import { AiOutlineDollar } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import { BsBell } from "react-icons/bs";
 import { BiBarChartAlt2, BiArrowToTop } from "react-icons/bi";
 import { MdClose } from "react-icons/md";
+import { ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 export function ComponentsSection() {
     return (
         <div className="md:px-8 py-12 relative overflow-hidden w-full max-w-7xl mx-auto">
             <div className="text-center">
                 <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary">
-                    Explore Interactive Billing Components
+                    Live Component Previews
                 </h2>
                 <p className="text-sm mt-4 text-muted-foreground max-w-2xl mx-auto tracking-tight">
-                    Interact with real-time UI elements designed to streamline your billing workflows.
+                    See our billing components in action. Click any component to view its documentation and source code.
                 </p>
             </div>
             <ComponentsShowcase />
@@ -41,12 +44,12 @@ function ComponentsShowcase() {
     const tabsListRef = useRef<HTMLDivElement>(null);
 
     const components = [
-        { id: "pricing", label: "Pricing", icon: AiOutlineDollar },
-        { id: "subscription", label: "Subscription Management", icon: FiSettings },
-        { id: "banner", label: "Banner Notifications", icon: BsBell },
-        { id: "usage", label: "Usage Meters", icon: BiBarChartAlt2 },
-        { id: "updates", label: "Plan Updates", icon: BiArrowToTop },
-        { id: "cancellation", label: "Cancellation Flow", icon: MdClose },
+        { id: "pricing", label: "Pricing", icon: AiOutlineDollar, href: "/docs/components/pricing-table-one" },
+        { id: "subscription", label: "Subscription Management", icon: FiSettings, href: "/docs/components/subscription-management" },
+        { id: "banner", label: "Banner Notifications", icon: BsBell, href: "/docs/components/banner" },
+        { id: "usage", label: "Usage Meters", icon: BiBarChartAlt2, href: "/docs/components/usage-meter-linear" },
+        { id: "updates", label: "Plan Updates", icon: BiArrowToTop, href: "/docs/components/update-plan-card" },
+        { id: "cancellation", label: "Cancellation Flow", icon: MdClose, href: "/docs/components/cancel-subscription-card" },
     ];
 
     useEffect(() => {
@@ -120,48 +123,71 @@ function ComponentsShowcase() {
             className="flex flex-col gap-3 my-auto w-full mt-5">
             <div className="relative flex flex-col sm:flex-row w-full overflow-x-auto scrollbar-hide justify-start sm:justify-center">
                 <Tabs value={active} onValueChange={handleComponentClick} className="w-full">
-                    <div className="flex flex-col sm:flex-row gap-2 md:mx-auto my-auto relative">
-                        <TabsList ref={tabsListRef} className="flex flex-col sm:flex-row gap-2 h-auto bg-background rounded-sm border relative p-0 w-full md:w-auto">
-                            {components.map((item) => {
-                                const IconComponent = item.icon;
-                                return (
-                                    <TabsTrigger
-                                        key={item.id}
-                                        value={item.id}
-                                        className={cn(
-                                            "flex flex-row gap-1 h-auto transition-all duration-200 p-2 w-full",
-                                            "text-xs font-medium whitespace-nowrap border-0 rounded-none",
-                                            "hover:bg-muted/50 w-full sm:w-auto justify-start sm:justify-center"
-                                        )}
-                                    >
-                                        <IconComponent className="h-4 w-4" />
-                                        <span className="hidden sm:inline text-[10px] leading-tight">
-                                            {item.label.split(' ')[0]}
-                                        </span>
-                                        <span className="sm:hidden text-[10px] leading-tight">
-                                            {item.label}
-                                        </span>
-                                    </TabsTrigger>
-                                );
-                            })}
-                        </TabsList>
-                        <motion.div
-                            className="absolute bg-white rounded-full"
-                            animate={{
-                                left: borderPosition.left,
-                                top: borderPosition.top,
-                                width: borderPosition.width,
-                                height: borderPosition.height
-                            }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 300,
-                                damping: 30
-                            }}
-                            style={{
-                                position: 'absolute'
-                            }}
-                        />
+                    <div className="flex flex-col gap-4">
+                        {/* Tab Navigation */}
+                        <div className="flex flex-col sm:flex-row gap-2 md:mx-auto my-auto relative">
+                            <TabsList ref={tabsListRef} className="flex flex-col sm:flex-row gap-2 h-auto bg-background rounded-sm  border relative p-0 w-full md:w-auto">
+                                {components.map((item) => {
+                                    const IconComponent = item.icon;
+                                    return (
+                                        <TabsTrigger
+                                            key={item.id}
+                                            value={item.id}
+                                            className={cn(
+                                                "flex flex-row gap-1 h-auto transition-all duration-200 p-2 w-full",
+                                                "text-md font-medium whitespace-nowrap border-0 rounded-none",
+                                                "hover:bg-muted/50 w-full sm:w-auto justify-start sm:justify-center"
+                                            )}
+                                        >
+                                            <IconComponent className="h-4 w-4" />
+                                            <span className="hidden sm:inline text-[10px] leading-tight">
+                                                {item.label.split(' ')[0]}
+                                            </span>
+                                            <span className="sm:hidden text-[10px] leading-tight">
+                                                {item.label}
+                                            </span>
+                                        </TabsTrigger>
+                                    );
+                                })}
+                            </TabsList>
+                            <motion.div
+                                className="absolute bg-white rounded-full"
+                                animate={{
+                                    left: borderPosition.left,
+                                    top: borderPosition.top,
+                                    width: borderPosition.width,
+                                    height: borderPosition.height
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 30
+                                }}
+                                style={{
+                                    position: 'absolute'
+                                }}
+                            />
+                        </div>
+
+                        {/* Component Info Bar */}
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-3 bg-muted/30 rounded-lg border">
+                            <div className="flex flex-col gap-1">
+                                <h3 className="text-sm font-medium">
+                                    {components.find(comp => comp.id === active)?.label}
+                                </h3>
+                                <p className="text-xs text-muted-foreground">
+                                    Interactive preview - try clicking and interacting with the component
+                                </p>
+                            </div>
+                            <div className="flex gap-2">
+                                <Button asChild size="sm" variant="outline" className="gap-2">
+                                    <Link href={components.find(comp => comp.id === active)?.href || "/docs/components"}>
+                                        View component
+                                        <ExternalLink className="h-3 w-3" />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
                     </div>
 
                     <div
@@ -171,7 +197,7 @@ function ComponentsShowcase() {
                     >
                         <div className="w-full h-full transition-all duration-300 ease-in-out">
                             <TabsContent value="pricing" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in max-w-none w-full h-full border-none  bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in max-w-none w-full h-full border-none  bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="pricing-table-one">
                                     <PricingTableOne
                                         className="w-full"
                                         plans={plans}
@@ -185,7 +211,7 @@ function ComponentsShowcase() {
                             </TabsContent>
 
                             <TabsContent value="banner" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="banner">
                                     <Banner
                                         title="🎉 Start your free trial today!"
                                         description="Get 30 days free access to all premium features"
@@ -197,13 +223,13 @@ function ComponentsShowcase() {
                                             "rgba(255,0,0,0.73)",
                                             "rgba(131,255,166,0.66)",
                                         ]}
-                                        variant="default" // default, minimal, popup
+                                        variant="default"
                                     />
                                 </PreviewComponents>
                             </TabsContent>
 
                             <TabsContent value="usage" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="usage-meter-linear">
                                     <UsageMeter
                                         usage={[{
                                             name: "Claude Sonnet 4",
@@ -217,8 +243,7 @@ function ComponentsShowcase() {
                                             name: "Grok 3",
                                             usage: 95,
                                             limit: 100,
-                                        }
-                                        ]}
+                                        }]}
                                         title="LLM Usage"
                                         description="Your usage of the LLM models"
                                         variant="linear"
@@ -229,7 +254,7 @@ function ComponentsShowcase() {
                             </TabsContent>
 
                             <TabsContent value="subscription" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="subscription-management">
                                     <div className="mt-4">
                                         <SubscriptionManagementDemo />
                                     </div>
@@ -237,7 +262,7 @@ function ComponentsShowcase() {
                             </TabsContent>
 
                             <TabsContent value="updates" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="update-plan-card">
                                     <div className="mt-4 w-full">
                                         <UpdatePlanCardDemo />
                                     </div>
@@ -245,8 +270,8 @@ function ComponentsShowcase() {
                             </TabsContent>
 
                             <TabsContent value="cancellation" className="mt-0">
-                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0">
-                                    <div className=" flex items-center justify-center w-full">
+                                <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[900px] px-0 relative" registryName="cancel-subscription-card">
+                                    <div className="flex items-center justify-center w-full">
                                         <CancelSubscriptionCard
                                             title="We're sorry to see you go..."
                                             description={`Before you cancel, we hope you'll consider upgrading to a ${plans[1].title} plan again.`}

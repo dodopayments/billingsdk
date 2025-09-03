@@ -9,25 +9,28 @@ import type { Metadata } from "next";
 const DarkerGrotesque = Darker_Grotesque({
   subsets: ["latin"],
   variable: "--font-darker-grotesque",
+  display: "swap",
 });
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 const kalam = Kalam({
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["400"],
   variable: "--font-kalam",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Billing SDK - Modern Billing & Monetization Components",
-    template: "%s | Billing SDK",
+    default: "BillingSDK - Copy-paste billing components for React",
+    template: "%s | BillingSDK",
   },
   description:
-    "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
+    "Copy-paste production-ready billing components for React. From pricing tables to subscription management—accessible, customizable, and open source.",
   keywords: [
     "billing components",
     "subscription management",
@@ -43,6 +46,8 @@ export const metadata: Metadata = {
     "pricing UI",
     "billing SDK",
     "payment components",
+    "copy paste components",
+    "open source billing",
   ],
   metadataBase: new URL("https://billingsdk.com"),
   alternates: {
@@ -52,24 +57,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: new URL("https://billingsdk.com"),
-    title: "Billing SDK - Modern Billing & Monetization Components",
+    title: "BillingSDK - Copy-paste billing components for React",
     description:
-      "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS. Perfect companion for shadcn/ui.",
-    siteName: "Billing SDK",
+      "Copy-paste production-ready billing components for React. From pricing tables to subscription management—accessible, customizable, and open source.",
+    siteName: "BillingSDK",
     images: [
       {
         url: "/landing/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Billing SDK - Modern Billing & Monetization Components",
+        alt: "BillingSDK - Copy-paste billing components for React",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Billing SDK - Modern Billing & Subscription Components",
+    title: "BillingSDK - Copy-paste billing components for React",
     description:
-      "A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS.",
+      "Copy-paste production-ready billing components for React. From pricing tables to subscription management—accessible, customizable, and open source.",
     images: ["/logo/logo-dodo.svg"],
     creator: "@billingsdk",
   },
@@ -94,6 +99,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/logo/logo-dodo.svg" />
         <link rel="apple-touch-icon" href="/logo/logo-dodo.svg" />
         <link rel="manifest" href="/manifest.json" />

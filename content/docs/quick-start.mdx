@@ -177,9 +177,18 @@ Use the component in your application and see it in action.
 
 ### Install a Pricing Table
 
-```bash
-npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
-```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn">
+  <Tab value="shadcn">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+    ```
+  </Tab>
+  <Tab value="billingSDK">
+    ```bash
+    npx @billingsdk/cli add pricing-table-one
+    ```
+  </Tab>
+</Tabs>
 
 ### Use in Your App
 
@@ -194,8 +203,40 @@ export default function PricingPage() {
       title="Choose Your Plan"
       description="Select the perfect plan for your needs"
       onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+      size="medium" // small, medium, large
+      theme="classic" // minimal or classic
     />
   );
 }
+```
+
+### More Component Examples
+
+#### Banner Notifications
+```bash
+npx @billingsdk/cli add banner
+```
+
+#### Usage Meters  
+```bash
+npx @billingsdk/cli add usage-meter-circle
+npx @billingsdk/cli add usage-meter-linear
+```
+
+#### Subscription Management
+```bash
+npx @billingsdk/cli add subscription-management
+```
+
+#### Update Plan Components
+```bash
+npx @billingsdk/cli add update-plan-card
+npx @billingsdk/cli add update-plan-dialog
+```
+
+#### Cancellation Flow
+```bash
+npx @billingsdk/cli add cancel-subscription-card
+npx @billingsdk/cli add cancel-subscription-dialog
 ```
 

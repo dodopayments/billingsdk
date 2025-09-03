@@ -96,9 +96,7 @@ const Hero = () => {
               }}
               transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
             >
-              Stop reinventing the wheel. Use production-ready, accessible
-              billing components, from pricing cards to subscription dashboards,
-              built for React and ShadCN.
+              Copy-paste production-ready billing components for React. From pricing tables to subscription management—accessible, customizable, and open source.
             </motion.p>
 
             {/* Email Signup */}

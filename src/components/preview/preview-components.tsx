@@ -3,9 +3,10 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Palette, Check, Sun, Moon } from "lucide-react";
+import { Palette, Check, Sun, Moon, ExternalLink } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 import { getThemeStyles } from "@/lib/themes";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -72,9 +73,23 @@ export function PreviewComponents({ className, children, registryName }: Preview
       className={cn("not-prose bg-background", className)}
       style={themeStyles}
     >
-      <CardHeader className="pb-0" style={previewDarkMode ? themes[0].cssVars.dark : themes[0].cssVars.light}>
-        <div className="flex gap-2 justify-end">
-          <div className="flex gap-2">
+      <CardHeader className="pb-2" style={previewDarkMode ? themes[0].cssVars.dark : themes[0].cssVars.light}>
+        <div className="flex items-center justify-between gap-4">
+          {/* Left side - View docs button */}
+          <div className="flex items-center gap-2">
+            {registryName && (
+              <Button asChild size="sm" variant="outline" className="gap-2">
+                <Link href={`/docs/components/${registryName}`}>
+                  <ExternalLink className="h-3 w-3" />
+                  <span className="hidden sm:inline">View docs</span>
+                  <span className="sm:hidden">Docs</span>
+                </Link>
+              </Button>
+            )}
+          </div>
+          
+          {/* Right side - Controls */}
+          <div className="flex items-center gap-2">
             {registryName && (
               <div className="flex items-center">
                 <Button variant="outline" size={"sm"} aria-label="Open in V0" onClick={openInV0} className="rounded-r-none border-r-0" style={{
@@ -82,7 +97,7 @@ export function PreviewComponents({ className, children, registryName }: Preview
                   color: previewDarkMode ? '#000000' : '#ffffff',
                   borderColor: previewDarkMode ? '#ffffff' : '#000000'
                 }}>
-                  <span className="hidden md:block">Open in</span>
+                  <span className="hidden lg:block">Open in</span>
                   <svg
                     viewBox="0 0 40 20"
                     fill="none"
@@ -151,10 +166,14 @@ export function PreviewComponents({ className, children, registryName }: Preview
                 </DropdownMenu>
               </div>
             )}
+            
+            <div className="w-px h-6 bg-border mx-1"></div>
+            
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setPreviewDarkMode(!previewDarkMode)}
+              className="px-2"
             >
               {previewDarkMode ? (
                 <Sun className="h-4 w-4" />
@@ -166,7 +185,7 @@ export function PreviewComponents({ className, children, registryName }: Preview
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="px-2">
                   <Palette className="h-4 w-4" />
                   <span className="sr-only">Switch theme</span>
                 </Button>
