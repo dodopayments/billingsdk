@@ -4,6 +4,8 @@ import { convertToModelMessages, streamText } from 'ai';
 
 export const runtime = 'edge';
 
+
+
 const openai = createOpenAICompatible({
   name: 'inkeep',
   apiKey: process.env.INKEEP_API_KEY,
@@ -11,6 +13,13 @@ const openai = createOpenAICompatible({
 });
 
 export async function POST(req: Request) {
+  if(!process.env.INKEEP_API_KEY){
+    return Response.json({
+      error: {
+        message: "INKEEP_API_KEY is required"
+      }
+    });
+  }
   const reqJson = await req.json();
 
   const result = streamText({

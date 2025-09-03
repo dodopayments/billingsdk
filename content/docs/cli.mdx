@@ -1,0 +1,265 @@
+---
+title: CLI Reference
+description: Complete guide to the Billing SDK CLI for project setup and component management
+---
+
+import { Callout } from 'fumadocs-ui/components/callout'
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+import { Cards, Card } from 'fumadocs-ui/components/card'
+
+The Billing SDK CLI is a powerful command-line tool that helps you initialize new billing projects, add components, and manage your billing infrastructure with ease.
+
+## Installation
+
+The CLI is published as an npm package and can be used with `npx` without installation:
+
+```bash
+npx @billingsdk/cli --help
+```
+
+For frequent use, you can install it globally:
+
+```bash
+npm install -g @billingsdk/cli
+@billingsdk/cli --help
+```
+
+## Commands
+
+<Cards>
+  <Card title="init">
+    Initialize a new billing project with framework setup and payment provider integration
+  </Card>
+
+  <Card title="add">
+    Add individual billing components to your existing project
+  </Card>
+
+  <Card title="build">
+    Build the component registry for distribution (developer tool)
+  </Card>
+</Cards>
+
+## `@billingsdk/cli init`
+
+Initialize a new billing project with complete setup including framework configuration, payment provider integration, and essential dependencies.
+
+### Usage
+
+```bash
+npx @billingsdk/cli init
+```
+
+### What it does
+
+1. **Framework Selection**: Choose your preferred framework (currently Next.js)
+2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
+3. **Template Installation**: Downloads and installs framework-specific templates
+4. **Dependency Management**: Automatically installs required dependencies
+5. **File Generation**: Creates necessary configuration files and boilerplate code
+
+### Interactive Setup
+
+The command launches an interactive setup process:
+
+```bash
+npx @billingsdk/cli init
+```
+
+You'll be prompted to select:
+- **Framework**: Next.js (with App Router)
+- **Payment Provider**: Dodo Payments
+
+### Generated Files
+
+After running `init`, you'll get:
+
+<Tabs items={['Next.js + Dodo Payments']}>
+  <Tab value="Next.js + Dodo Payments">
+    ```
+    your-project/
+    ├── app/api/
+    │   ├── (dodopayments)/
+    │   │   ├── checkout/route.ts
+    │   │   ├── customer/route.ts
+    │   │   ├── customer/payments/route.ts
+    │   │   ├── customer/subscriptions/route.ts
+    │   │   ├── product/route.ts
+    │   │   ├── products/route.ts
+    │   │   └── webhook/route.ts
+    ├── hooks/
+    │   └── useBilling.ts
+    ├── lib/
+    │   └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
+</Tabs>
+
+### API Routes Included
+
+The init command sets up comprehensive API routes for:
+
+- **Checkout**: Payment processing and order creation
+- **Customer Management**: Customer data and subscription handling
+- **Product Management**: Product catalog and pricing
+- **Webhook Handling**: Payment provider webhook integration
+
+### Dependencies Installed
+
+```json
+{
+  "dependencies": {
+    "dodopayments": "latest",
+    "standardwebhooks": "latest",
+    "zod": "latest"
+  }
+}
+```
+
+<Callout title="Environment Setup">
+  After running `init`, copy `.env.example` to `.env.local` and configure your Dodo Payments API keys and webhook secrets.
+</Callout>
+
+## `@billingsdk/cli add`
+
+Add individual billing components to your existing project using the shadcn/ui registry system.
+
+### Usage
+
+```bash
+npx @billingsdk/cli add <component-name>
+```
+
+### Available Components
+
+See the [components](/docs/components) page for a list of available components.
+
+### Examples
+
+```bash
+# Add a pricing table
+npx @billingsdk/cli add pricing-table-one
+
+# Add subscription management
+npx @billingsdk/cli add subscription-management
+
+# Add usage monitoring
+npx @billingsdk/cli add usage-meter-circle
+```
+
+### What happens
+
+1. Downloads the component configuration from the registry
+2. Installs the component files in your `components/billingsdk/` directory
+3. Updates your project configuration if needed
+4. Installs any additional dependencies
+
+
+<Callout title="Developer Tool">
+  This command is primarily used by Billing SDK maintainers. Regular users typically don't need to run this command.
+</Callout>
+
+## Supported Frameworks
+
+### Next.js (App Router)
+- ✅ **Status**: Fully supported
+- 📁 **Structure**: App Router with API routes
+- 🔧 **Features**: Server components, server actions, middleware support
+
+### Coming Soon
+- 🚧 **Express.js**: Backend API integration
+- 🚧 **Fastify**: High-performance backend framework
+- 🚧 **Additional React Frameworks**: Vite, Remix support
+
+## Supported Payment Providers
+
+### Dodo Payments
+- ✅ **Status**: Fully supported
+- 🔧 **Features**: Payment processing, subscriptions, webhooks
+- 📚 **Integration**: Complete API route templates included
+
+### Coming Soon
+- 🚧 **Stripe**: Industry-standard payment processing
+- 🚧 **Additional Providers**: Based on community demand
+
+## Configuration
+
+### Environment Variables
+
+After running `@billingsdk/cli init`, configure these environment variables:
+
+```bash
+# Dodo Payments Configuration
+DODO_PAYMENTS_API_KEY=your-api-key
+DODO_PAYMENTS_WEBHOOK_KEY=your-webhook-secret
+DODO_PAYMENTS_RETURN_URL=https://yourdomain.com/checkout/success
+DODO_PAYMENTS_ENVIRONMENT="test"or"live"
+
+# Next.js Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+### Customizing Templates
+
+The CLI uses templates from the public registry. You can:
+- Modify generated files after installation
+- Create custom templates for your organization
+- Extend existing components with additional features
+
+## Troubleshooting
+
+### Common Issues
+
+**Command not found**
+```bash
+# Make sure you're using npx
+npx @billingsdk/cli --help
+```
+
+**Permission errors**
+```bash
+# On Unix systems, you might need to adjust permissions
+chmod +x node_modules/.bin/@billingsdk/cli
+```
+
+**Network issues**
+```bash
+# Check your internet connection
+# The CLI downloads templates from @billingsdk/cli.com
+```
+
+### Getting Help
+
+```bash
+# Show all available commands
+npx @billingsdk/cli --help
+
+# Get help for a specific command
+npx @billingsdk/cli init --help
+npx @billingsdk/cli add --help
+```
+
+## Development
+
+### Building the CLI
+
+```bash
+cd packages/cli
+npm run build
+```
+
+### Development Mode
+
+```bash
+cd packages/cli
+npm run dev
+```
+
+### Contributing
+
+The CLI is open source and welcomes contributions. See our [contribution guide](/docs/contribution-open-source) for details.
+
+<Callout title="Need Help?">
+  If you encounter issues or have questions about the CLI, please [open an issue](https://github.com/dodopayments/billingsdk/issues) on GitHub.
+</Callout>

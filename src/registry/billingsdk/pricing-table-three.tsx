@@ -135,7 +135,7 @@ const footerTextVariants = cva("text-lg font-medium text-card-foreground text-le
   },
 })
 
-interface PricingTableProps extends VariantProps<typeof sectionVariants> {
+export interface PricingTableProps extends VariantProps<typeof sectionVariants> {
   className?: string
   plans: Plan[]
   onPlanSelect?: (planId: string) => void

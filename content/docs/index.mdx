@@ -1,52 +1,156 @@
 ---
 title: Introduction
-description: A comprehensive collection of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS.
+description: Complete billing infrastructure for modern web applications with React components, CLI tooling, and full-stack integration
 ---
 
 import { Cards, Card } from 'fumadocs-ui/components/card'
 import { Callout } from 'fumadocs-ui/components/callout'
 
-Billing SDK is a **comprehensive collection** of modern billing and subscription management components built with React, TypeScript, and Tailwind CSS, designed to be fast, flexible, and composes seamlessly into your Next.js applications.
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: 12 }}>
+  <iframe
+    src="https://www.youtube.com/embed/32RVbEllEi0"
+    title="Billing SDK Overview"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  />
+</div>
+
+Billing SDK is a **complete billing infrastructure solution** that combines modern React components with powerful CLI tooling and full-stack integration, designed to help you ship billing features faster than ever.
+
+Whether you're building a SaaS startup or adding billing to an existing application, Billing SDK provides everything you need: beautiful, production-ready UI components, automated project setup, and seamless payment provider integration.
 
 <Callout title="Built on shadcn/ui">
   All components are built on top of shadcn/ui primitives for consistent design and seamless integration with your existing projects.
 </Callout>
 
-## Components Overview
+## What's Included
 
-Billing SDK has different parts:
+Billing SDK provides a complete billing ecosystem with multiple tools and components:
 
 <Cards>
-  <Card title="Pricing Tables">
-    Beautiful pricing table designs with multiple themes and size variants, perfect for conversion-optimized landing pages.
+  <Card title="🎨 UI Components Library">
+    Beautiful, production-ready billing components including pricing tables, subscription management, usage meters, and cancellation flows.
   </Card>
 
-  <Card title="Subscription Management">
-    Complete interfaces for managing subscriptions, plan upgrades, billing details, and user account information.
+  <Card title="🛠️ CLI Tool">
+    Powerful command-line interface for project initialization, component installation, and framework integration with payment providers.
   </Card>
 
-  <Card title="Usage Monitoring">
-    Linear and circular usage meters with animated progress indicators to display quota consumption and limits.
+  <Card title="⚡ Framework Templates">
+    Pre-built templates for Next.js with complete API routes, webhooks, and payment provider integration for Dodo Payments.
   </Card>
 
-  <Card title="Cancellation Flow">
-    User-friendly cancellation experiences with retention features and two-step confirmation processes.
+  <Card title="🔧 Full-Stack Integration">
+    Ready-to-use API endpoints for checkout, customer management, product catalog, and webhook handling.
+  </Card>
+
+  <Card title="📊 Component Registry">
+    Centralized registry system for distributing and managing billing components across projects.
+  </Card>
+
+  <Card title="🎯 Developer Experience">
+    TypeScript-first approach with comprehensive documentation, examples, and automated setup workflows.
   </Card>
 </Cards>
 
-### Key Features
+## Component Categories
 
-- 🎨 **Multiple Themes** - Support for classic, minimal, and custom themes
-- 📱 **Responsive Design** - Works seamlessly across all device sizes
-- ⚡ **Easy Integration** - Single command installation with shadcn/ui
-- 🔧 **Fully Customizable** - Modify colors, fonts, and styling through CSS variables
-- 🛡️ **TypeScript Ready** - Built with TypeScript for better development experience
+### Pricing & Conversion
+- **Pricing Tables**: Multiple variants (1-column, 2-column, 3-column) with themes and responsive design
+- **Banners**: Promotional and notification banners for marketing campaigns
 
-### Terminology
+### Subscription Management
+- **Subscription Dashboard**: Complete interface for managing active subscriptions
+- **Plan Updates**: Upgrade/downgrade flows with confirmation dialogs
+- **Payment Methods**: Secure payment method selection and management
+- **Invoice History**: Customer invoice display and download capabilities
 
-**[Plan Interface](/docs/interfaces):** The core data structure that defines pricing plans with features, pricing tiers, and billing information used across all components.
+### Usage & Analytics
+- **Usage Meters**: Linear and circular progress indicators for quota tracking
+- **Usage Tables**: Detailed usage statistics and consumption reports
 
-### LLMs-full.txt
-Billing SDK provides an LLMs.txt file that helps AI models understand how to interact with these components. You can find it at https://billingsdk.com/llms-full.txt
+### Customer Experience
+- **Cancellation Flow**: User-friendly cancellation with retention features
+- **Customer Portal**: Self-service account management interface
 
-Although not required, some basic knowledge of React and TypeScript would be useful for further customizations.
+## Quick Start Options
+
+Choose the approach that fits your project:
+
+### 🚀 New Project (Recommended)
+```bash
+npx @billingsdk/cli init
+```
+Perfect for starting fresh with complete billing infrastructure, API routes, and payment integration.
+
+### 🔧 Existing Project
+```bash
+npx @billingsdk/cli add pricing-table-one
+```
+Add individual components to your current setup using the CLI or shadcn/ui registry.
+
+### 📚 Manual Installation
+```bash
+npx shadcn@latest add https://billingsdk.com/r/component-name.json
+```
+Install components directly using shadcn/ui for maximum flexibility.
+
+## Key Features
+
+### Developer Experience
+- 🛠️ **CLI Tool** - Interactive setup, component management, and project scaffolding
+- ⚡ **One-Command Setup** - Initialize complete billing infrastructure instantly
+- 📚 **Comprehensive Documentation** - Guides, examples, and API references
+- 🛡️ **TypeScript First** - Full type safety and excellent IDE support
+
+### Component Library
+- 🎨 **Multiple Themes** - Classic, minimal, and custom theme variants
+- 📱 **Responsive Design** - Mobile-first approach that works across all devices
+- 🔧 **Highly Customizable** - CSS variables and theme customization
+- 🎯 **Accessibility Ready** - WCAG compliant components with keyboard navigation
+
+### Full-Stack Integration
+- 🔌 **Payment Providers** - Ready-to-use Dodo Payments integration
+- 🪝 **Webhook Handling** - Automated webhook processing and signature verification
+- 📊 **API Routes** - Complete REST API for billing operations
+- 🔄 **Real-time Updates** - Live subscription status and usage tracking
+
+### Enterprise Ready
+- 🏗️ **Production Tested** - Battle-tested components used in production
+- 📈 **Scalable Architecture** - Built to handle high-traffic billing operations
+- 🔒 **Security Focused** - Secure payment processing and data handling
+- 🎛️ **Monitoring Ready** - Built-in logging and error tracking
+
+## Core Concepts
+
+### Plan Interface
+The **[Plan Interface](/docs/interfaces)** is the core data structure that powers all billing components. It defines pricing plans with features, pricing tiers, billing information, and subscription details used consistently across the entire component library.
+
+### Component Registry
+Billing SDK uses a sophisticated **[Component Registry](/docs/cli#component-registry)** system that allows for:
+- Centralized component distribution
+- Version management and updates
+- Automated dependency resolution
+- Consistent theming across all components
+
+### Framework Integration
+Seamless integration with modern frameworks:
+- ✅ **Next.js** (App Router) - Full support with API routes and server actions
+- 🚧 **Express.js** - Backend API integration (coming soon)
+- 🚧 **Additional Frameworks** - Based on community demand
+
+## AI-Ready Documentation
+
+Billing SDK provides an **[LLMs-full.txt](https://billingsdk.com/llms-full.txt)** file that helps AI models understand how to interact with these components. This enables better AI-assisted development and automated code generation.
+
+## Prerequisites
+
+While not strictly required, familiarity with these technologies will enhance your experience:
+- **React** - Component composition and state management
+- **TypeScript** - Type safety and better developer experience
+- **Tailwind CSS** - Styling and theming customization
+- **Next.js** - Full-stack application development
+
+Ready to get started? Choose your path above or explore the **[CLI documentation](/docs/cli)** for detailed setup instructions.

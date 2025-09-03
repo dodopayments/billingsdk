@@ -1,0 +1,27 @@
+{
+  "name": "BillingSDK",
+  "short_name": "BillingSDK",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0f",
+  "theme_color": "#0b0b0f",
+  "description": "Billing SDK components and docs.",
+  "icons": [
+    {
+      "src": "/logo/Logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/landing/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
+
+

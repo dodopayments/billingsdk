@@ -7,33 +7,58 @@ description: Get up and running with Billing SDK in minutes
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 import { Callout } from 'fumadocs-ui/components/callout'
 
-## Installation
+## Add Components to Your Project
 
-A minimum version of Node.js 18 required. Install any component with a single command:
+A React or Next.js project with Tailwind CSS is required. Install any component with a single command:
 
-<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
-  <Tab value="npm">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/<component-name>.json
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/pricing-table-one.json
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/<component-name>.json
-    ```
-  </Tab>
-
-  <Tab value="yarn">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/<component-name>.json
-    ```
-  </Tab>
-
-  <Tab value="bun">
-    ```bash
-    npx shadcn@latest add https://billingsdk.com/r/<component-name>.json
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        npx @billingsdk/cli add pricing-table-one
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 
@@ -42,6 +67,64 @@ This will automatically install the component and its dependencies into your pro
 <Callout title="From Existing Project?">
   All components are designed to integrate seamlessly with existing Next.js and React applications.
 </Callout>
+
+## Quick Project Setup with CLI
+
+For new projects or comprehensive billing integration, use our CLI tool for complete project setup with framework configuration and payment provider integration.
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npx @billingsdk/cli init
+    ```
+  </Tab>
+
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx @billingsdk/cli init
+    ```
+  </Tab>
+
+  <Tab value="yarn">
+    ```bash
+    npx @billingsdk/cli init
+    ```
+  </Tab>
+
+  <Tab value="bun">
+    ```bash
+    npx @billingsdk/cli init
+    ```
+  </Tab>
+</Tabs>
+
+The CLI provides an interactive setup that will:
+- Configure your framework (Next.js with App Router)
+- Set up payment provider integration (Dodo Payments, adding more providers soon)
+- Generate API routes for checkout, customer management, and webhooks
+- Install all necessary dependencies
+- Create configuration files and boilerplate code
+
+
+<Callout title="What gets installed">
+  The CLI automatically installs: `provider's-api`, `standardwebhooks`, `zod`, and other essential dependencies.
+</Callout>
+Refer to the [CLI](/docs/cli) page for more information.
+
+### Add Individual Components
+
+For existing projects, you can also add specific components using the CLI:
+
+```bash
+# Add a pricing table
+npx @billingsdk/cli add pricing-table-one
+
+# Add subscription management
+npx @billingsdk/cli add subscription-management
+
+# Add usage monitoring
+npx @billingsdk/cli add usage-meter-circle
+```
 
 ## Your First Component
 

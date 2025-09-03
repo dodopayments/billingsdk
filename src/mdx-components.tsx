@@ -9,6 +9,7 @@ import { PricingTableOneMinimalDemo } from '@/components/pricing-table-one-minim
 import { PricingTableTwoMinimalDemo } from '@/components/pricing-table-two-minimal-demo';
 import { PricingTableTwoDemo } from '@/components/pricing-table-two-demo';
 import { PricingTableThreeDemo } from '@/components/pricing-table-three-demo';
+import { PricingTableFourDemo } from '@/components/pricing-table-four-demo';
 import { SubscriptionManagementDemo } from '@/components/subscription-management-demo';
 import { UpdatePlanDialogDemo } from '@/components/update-plan-dialog-demo';
 import { UpdatePlanCardDemo } from '@/components/update-plan-card-demo';
@@ -18,10 +19,13 @@ import BannerDemo from '@/components/banner-demo';
 import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
 import BannerDemoThree from '@/components/banner-demo-three';
+import BannerDestructiveDemo from '@/components/banner-destructive-demo';
 import CustomUsageMeterCircleDemo from '@/components/custom-usage-meter-circle-demo';
 import CustomUsageMeterLinearDemo from '@/components/custom-usage-meter-linear-demo';
 import InvoiceHistoryDemo from '@/components/invoice-history-demo';
 import UsageTableDemo from '@/components/usage-table-demo';
+import { PaymentMethodSelectorDemo } from '@/components/payment-method-selector-demo';
+import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -35,6 +39,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PricingTableTwoDemo,
     PricingTableTwoMinimalDemo,
     PricingTableThreeDemo,
+    PricingTableFourDemo,
     CancelSubscriptionCardDemo,
     CancelSubscriptionDialogDemo,
     SubscriptionManagementDemo,
@@ -48,7 +53,10 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     BannerDemoTwo,
     BannerDemoThree,
     BannerGradientDemo,
+    BannerDestructiveDemo,
     InvoiceHistoryDemo,
     UsageTableDemo,
+    PaymentMethodSelectorDemo,
+    PaymentMethodManagerDemo,
   };
 }

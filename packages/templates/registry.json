@@ -1,0 +1,40 @@
+{
+    "components": [
+        {
+            "name": "nextjs-dodopayments",
+            "description": "DodoPayments template for NextJS",
+            "framework": "nextjs",
+            "files": [
+                {
+                    "path": "packages/templates/nextjs/lib/dodopayments.ts",
+                    "content": "DodoPayments library for NextJS",
+                    "type": "template",
+                    "target": "lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/hooks/useBilling.ts",
+                    "content": "useBilling hook for NextJS",
+                    "type": "template",
+                    "target": "hooks/useBilling.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/api-routes/*",
+                    "content": "DodoPayments API routes for NextJS",
+                    "type": "template",
+                    "target": "app/api/*"
+                },
+                {
+                    "path": "packages/templates/nextjs/.env.example",
+                    "content": "DodoPayments .env.example for NextJS",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "standardwebhooks",
+                "zod"
+            ]
+        }
+    ]
+}
