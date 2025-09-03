@@ -54,7 +54,7 @@
                     "target": "src/routes/dodopayments/*"
                 },
                 {
-                    "path": "packages/templates/express/.env.example",
+                    "path": "packages/templates/express/src/.env.example",
                     "content": "DodoPayments .env.example for ExpressJS",
                     "type": "template",
                     "target": ".env.example"
