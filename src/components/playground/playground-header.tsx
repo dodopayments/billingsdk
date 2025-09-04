@@ -16,7 +16,6 @@ export function PlaygroundHeader() {
   const [selectedCategory] = useState<string>("all");
 
   const categories = [
-    { id: "all", label: "All Components" },
     { id: "pricing", label: "Pricing Tables" },
     { id: "subscription", label: "Subscription" },
     { id: "usage", label: "Usage & Billing" },

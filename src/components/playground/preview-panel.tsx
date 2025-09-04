@@ -198,7 +198,7 @@ function PreviewPanelContent() {
             <DropdownMenu open={isThemeMenuOpen} onOpenChange={setIsThemeMenuOpen}>
               <DropdownMenuTrigger asChild>
                 <Button size="sm" variant="outline" className="h-8">
-                  <Palette className="h-4 w-4 mr-2" />
+                  <Palette className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">

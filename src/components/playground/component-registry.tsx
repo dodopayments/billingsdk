@@ -794,19 +794,68 @@ export const componentRegistry: ComponentConfig[] = [
     status: "active"
   }}
   cancelSubscription={{
-    planName: "Pro Plan",
-    nextBillingDate: "March 15, 2024",
-    amount: "$20.00",
-    onCancel: () => console.log("Subscription cancelled"),
-    onKeep: () => console.log("Subscription kept")
+    title: "Cancel Subscription",
+    description: "Are you sure you want to cancel your subscription?",
+    plan: {
+      id: "pro",
+      title: "Pro",
+      description: "For companies adding collaboration in production.",
+      currency: "$",
+      monthlyPrice: "20",
+      yearlyPrice: "199",
+      buttonText: "Sign up",
+      features: [
+        { name: "Presence", icon: "check", iconColor: "text-green-500" },
+        { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+      ]
+    },
+    onCancel: (planId) => console.log("Subscription cancelled for plan:", planId),
+    onKeepSubscription: (planId) => console.log("Subscription kept for plan:", planId)
   }}
   updatePlan={{
-    currentPlan: "Pro",
-    newPlan: "Enterprise",
-    currentPrice: "$20",
-    newPrice: "Custom",
-    onUpdate: () => console.log("Plan updated"),
-    onCancel: () => console.log("Update cancelled")
+    currentPlan: {
+      id: "pro",
+      title: "Pro",
+      description: "For companies adding collaboration in production.",
+      currency: "$",
+      monthlyPrice: "20",
+      yearlyPrice: "199",
+      buttonText: "Sign up",
+      features: [
+        { name: "Presence", icon: "check", iconColor: "text-green-500" },
+        { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+      ]
+    },
+    plans: [
+      {
+        id: "starter",
+        title: "Starter",
+        description: "For developers testing out Liveblocks locally.",
+        currency: "$",
+        monthlyPrice: "0",
+        yearlyPrice: "0",
+        buttonText: "Start today for free",
+        features: [
+          { name: "Presence", icon: "check", iconColor: "text-green-500" },
+          { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+        ]
+      },
+      {
+        id: "enterprise",
+        title: "Enterprise",
+        description: "For organizations that need more support and compliance features.",
+        currency: "$",
+        monthlyPrice: "Custom",
+        yearlyPrice: "Custom",
+        buttonText: "Contact sales",
+        features: [
+          { name: "Presence", icon: "check", iconColor: "text-green-500" },
+          { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+        ]
+      }
+    ],
+    triggerText: "Change Plan",
+    onPlanChange: (planId) => console.log("Plan changed to:", planId)
   }}
 />`,
     defaultProps: {
@@ -854,19 +903,68 @@ export const componentRegistry: ComponentConfig[] = [
         status: "active"
       },
       cancelSubscription: {
-        planName: "Pro Plan",
-        nextBillingDate: "March 15, 2024",
-        amount: "$20.00",
-        onCancel: () => console.log("Subscription cancelled"),
-        onKeep: () => console.log("Subscription kept")
+        title: "Cancel Subscription",
+        description: "Are you sure you want to cancel your subscription?",
+        plan: {
+          id: "pro",
+          title: "Pro",
+          description: "For companies adding collaboration in production.",
+          currency: "$",
+          monthlyPrice: "20",
+          yearlyPrice: "199",
+          buttonText: "Sign up",
+          features: [
+            { name: "Presence", icon: "check", iconColor: "text-green-500" },
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+          ]
+        },
+        onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),
+        onKeepSubscription: (planId: string) => console.log("Subscription kept for plan:", planId)
       },
       updatePlan: {
-        currentPlan: "Pro",
-        newPlan: "Enterprise",
-        currentPrice: "$20",
-        newPrice: "Custom",
-        onUpdate: () => console.log("Plan updated"),
-        onCancel: () => console.log("Update cancelled")
+        currentPlan: {
+          id: "pro",
+          title: "Pro",
+          description: "For companies adding collaboration in production.",
+          currency: "$",
+          monthlyPrice: "20",
+          yearlyPrice: "199",
+          buttonText: "Sign up",
+          features: [
+            { name: "Presence", icon: "check", iconColor: "text-green-500" },
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+          ]
+        },
+        plans: [
+          {
+            id: "starter",
+            title: "Starter",
+            description: "For developers testing out Liveblocks locally.",
+            currency: "$",
+            monthlyPrice: "0",
+            yearlyPrice: "0",
+            buttonText: "Start today for free",
+            features: [
+              { name: "Presence", icon: "check", iconColor: "text-green-500" },
+              { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+            ]
+          },
+          {
+            id: "enterprise",
+            title: "Enterprise",
+            description: "For organizations that need more support and compliance features.",
+            currency: "$",
+            monthlyPrice: "Custom",
+            yearlyPrice: "Custom",
+            buttonText: "Contact sales",
+            features: [
+              { name: "Presence", icon: "check", iconColor: "text-green-500" },
+              { name: "Comments", icon: "check", iconColor: "text-orange-500" }
+            ]
+          }
+        ],
+        triggerText: "Change Plan",
+        onPlanChange: (planId: string) => console.log("Plan changed to:", planId)
       }
     },
   },
@@ -934,20 +1032,164 @@ export const componentRegistry: ComponentConfig[] = [
     component: UsageTable,
     imports: ["@/components/billingsdk/usage-table"],
     defaultCode: `<UsageTable
-  usage={[
-    { feature: "API Calls", used: "1.2M", limit: "2M", percentage: 60 },
-    { feature: "Storage", used: "75GB", limit: "100GB", percentage: 75 },
-    { feature: "Users", used: "45", limit: "50", percentage: 90 },
+  usageHistory={[
+    {
+      model: 'gpt-5',
+      inputWithCache: 0,
+      inputWithoutCache: 518131,
+      cacheRead: 1646080,
+      output: 103271,
+      totalTokens: 2267482,
+    },
+    {
+      model: 'claude-3.5-sonnet',
+      inputWithCache: 176177,
+      inputWithoutCache: 28413,
+      cacheRead: 434612,
+      output: 8326,
+      totalTokens: 647528,
+      costToYou: 1.00
+    },
+    {
+      model: 'gemini-2.0-flash-exp',
+      inputWithCache: 176100,
+      inputWithoutCache: 28432,
+      cacheRead: 434612,
+      output: 8326,
+      totalTokens: 647528,
+      apiCost: 1,
+      costToYou: 0
+    },
+    {
+      model: 'gemini-2.5-pro',
+      inputWithCache: 176177,
+      inputWithoutCache: 28413,
+      cacheRead: 434612,
+      output: 7000,
+      totalTokens: 647528,
+      apiCost: 1,
+      costToYou: 0
+    },
+    {
+      model: 'claude-4-sonnet',
+      inputWithCache: 68415,
+      inputWithoutCache: 902,
+      cacheRead: 864450,
+      output: 12769,
+      totalTokens: 946536,
+      apiCost: 0.71,
+      costToYou: 0.71
+    },
+    {
+      model: 'claude-3.7-sonnet',
+      inputWithCache: 68415,
+      inputWithoutCache: 902,
+      cacheRead: 864450,
+      output: 12769,
+      totalTokens: 946536,
+      apiCost: 0.71,
+    },
+    {
+      model: 'auto',
+      inputWithCache: 84551,
+      inputWithoutCache: 0,
+      cacheRead: 284876,
+      output: 9458,
+      totalTokens: 378885,
+      apiCost: 0.23,
+      costToYou: 0
+    },
+    {
+      model: 'sonic',
+      inputWithCache: 0,
+      inputWithoutCache: 149484,
+      cacheRead: 4354855,
+      output: 23569,
+      totalTokens: 4527908,
+      costToYou: 2
+    }
   ]}
-  period="This month"
+  title="Usage Summary"
 />`,
     defaultProps: {
-      usage: [
-        { feature: "API Calls", used: "1.2M", limit: "2M", percentage: 60 },
-        { feature: "Storage", used: "75GB", limit: "100GB", percentage: 75 },
-        { feature: "Users", used: "45", limit: "50", percentage: 90 },
+      usageHistory: [
+        {
+          model: 'gpt-5',
+          inputWithCache: 0,
+          inputWithoutCache: 518131,
+          cacheRead: 1646080,
+          output: 103271,
+          totalTokens: 2267482,
+        },
+        {
+          model: 'claude-3.5-sonnet',
+          inputWithCache: 176177,
+          inputWithoutCache: 28413,
+          cacheRead: 434612,
+          output: 8326,
+          totalTokens: 647528,
+          costToYou: 1.00
+        },
+        {
+          model: 'gemini-2.0-flash-exp',
+          inputWithCache: 176100,
+          inputWithoutCache: 28432,
+          cacheRead: 434612,
+          output: 8326,
+          totalTokens: 647528,
+          apiCost: 1,
+          costToYou: 0
+        },
+        {
+          model: 'gemini-2.5-pro',
+          inputWithCache: 176177,
+          inputWithoutCache: 28413,
+          cacheRead: 434612,
+          output: 7000,
+          totalTokens: 647528,
+          apiCost: 1,
+          costToYou: 0
+        },
+        {
+          model: 'claude-4-sonnet',
+          inputWithCache: 68415,
+          inputWithoutCache: 902,
+          cacheRead: 864450,
+          output: 12769,
+          totalTokens: 946536,
+          apiCost: 0.71,
+          costToYou: 0.71
+        },
+        {
+          model: 'claude-3.7-sonnet',
+          inputWithCache: 68415,
+          inputWithoutCache: 902,
+          cacheRead: 864450,
+          output: 12769,
+          totalTokens: 946536,
+          apiCost: 0.71,
+        },
+        {
+          model: 'auto',
+          inputWithCache: 84551,
+          inputWithoutCache: 0,
+          cacheRead: 284876,
+          output: 9458,
+          totalTokens: 378885,
+          apiCost: 0.23,
+          costToYou: 0
+        },
+        {
+          model: 'sonic',
+          inputWithCache: 0,
+          inputWithoutCache: 149484,
+          cacheRead: 4354855,
+          output: 23569,
+          totalTokens: 4527908,
+          costToYou: 2
+        }
       ],
-      period: "This month",
+      title: "Usage Summary",
     },
   },
   {
