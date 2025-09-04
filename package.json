@@ -32,7 +32,7 @@
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
-    "types/express": "^5.0.3",
+    
     "@tsparticles/slim": "^3.9.1",
     "@types/inquirer": "^9.0.9",
     "@uiw/codemirror-theme-vscode": "^4.25.1",
@@ -59,9 +59,7 @@
     "remark-rehype": "^11.1.2",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
-    "zod": "^3.25.76",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0"
+    
   },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
