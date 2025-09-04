@@ -35,7 +35,7 @@ const Hero = () => {
         softness={0.5}
         className="opacity-90"
         intensity={0.27}
-        noise={0.30}
+        noise={0.3}
         shape="corners"
         offsetX={0}
         offsetY={0}
@@ -46,12 +46,12 @@ const Hero = () => {
           "hsl(218, 100%, 50%)",
           "hsl(212, 100%, 83%)",
           "hsl(195, 100%, 50%)",
-          "hsl(250, 100%, 50%)"
+          "hsl(250, 100%, 50%)",
         ]}
       />
       {/* Content */}
       <motion.div
-        className="relative z-10 pt-[calc(70vh/3)] px-6"
+        className="relative z-10 pt-[calc(70vh/4)] px-6"
         initial="hidden"
         animate="visible"
       >
@@ -143,6 +143,21 @@ const Hero = () => {
                 <Link href="/docs/components">Browse Components</Link>
               </Button>
             </motion.div>
+            <div className="flex justify-center items-center w-full">
+              <a
+                className="w-fit"
+                href="https://www.producthunt.com/products/dodo-payments?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-billing&#0045;sdk&#0045;2"
+                target="_blank"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1011707&theme=light&t=1756972570770"
+                  alt="Billing&#0032;SDK - Open&#0032;Source&#0032;Billing&#0032;UI&#0032;Components&#0032;Library | Product Hunt"
+                  style={{ width: "250px", height: "54px" }}
+                  width="250"
+                  height="54"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Demo Section */}
