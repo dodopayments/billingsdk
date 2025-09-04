@@ -1,22 +1,26 @@
 "use client"
 
 import React from "react";
-import { Footer2 } from "@/components/landing/footer2";
 import Hero from "@/components/landing/Hero";
+import Benefits from "@/components/landing/Benefits";
 import { ComponentsSection } from "@/components/landing/components";
-import Features from "@/components/landing/Features";
+import { FAQ } from "@/components/landing/FAQ";
+import FinalCTA from "@/components/landing/FinalCTA";
 import { Footer } from "@/components/landing/footer";
-import { OpenSource } from "@/components/landing/opensource";
+import { Footer2 } from "@/components/landing/footer2";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 const Page = () => {
   return (
-    <main className="w-full relative overflow-hidden p-4">
+    <main className="w-full relative overflow-hidden bg-background">
       <Hero />
-      <Features />
+      <Benefits />
       <ComponentsSection />
-      <OpenSource />
+      <FAQ />
+      <FinalCTA />
       <Footer />
       <Footer2 />
+      <ScrollToTop />
     </main>
   );
 };
