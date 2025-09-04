@@ -4,6 +4,7 @@
     "index",
     "quick-start",
     "cli",
+    "shadcn-cli-3",
     "contribution-open-source", 
     "---Pricing Tables---",
     "components/pricing-table/pricing-table-one",
@@ -26,7 +27,9 @@
     "---Banner---",
     "components/banner/index",
     "---Payment Processing---",
+    "components/payment-success-dialog/index",
     "components/payment-method-selector/index",
+    "components/payment-method-manager/index",
     "---Configuration---",
     "interfaces",
     "theming"

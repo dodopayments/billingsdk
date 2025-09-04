@@ -10,6 +10,8 @@
   ],
   "registryDependencies": [
     "button",
+    "dialog",
+    "tooltip",
     "card",
     "input",
     "label",

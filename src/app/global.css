@@ -172,3 +172,22 @@ pre[class*="language-"]::-webkit-scrollbar {
     background-color: rgb(255 255 255 / 0.02);
   }
 }
+
+/* Playground component centering */
+.preview-component-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Ensure all components in preview are centered */
+.preview-component-wrapper > * {
+  margin: 0 auto;
+}
+
+/* Smooth scrolling for preview panel */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}

@@ -37,7 +37,8 @@
                 "https://billingsdk.com/r/banner.json",
                 "https://billingsdk.com/r/invoice-history.json",
                 "https://billingsdk.com/r/usage-table.json",
-                "https://billingsdk.com/r/payment-method-selector.json"
+                "https://billingsdk.com/r/payment-method-selector.json",
+                "https://billingsdk.com/r/payment-method-manager.json"
             ]
         },
         {
@@ -51,6 +52,39 @@
                     "type": "registry:component",
                     "target": "components/billingsdk/hello-world.tsx"
                 }
+            ]
+        },
+        {
+            "name": "payment-success-dialog",
+            "type": "registry:block",
+            "title": "Payment Success Dialog",
+            "description": "A success confirmation dialog after payment with confetti",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/payment-success-dialog.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-success-dialog.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-success-dialog-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-success-dialog-demo.tsx"
+                },
+                {
+                    "path": "src/registry/lib/billingsdk-config.ts",
+                    "type": "registry:lib",
+                    "target": "lib/billingsdk-config.ts"
+                }
+            ],
+            "dependencies": [
+                "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+                "button",
+                "card",
+                "dialog",
+                "utils"
             ]
         },
         {
@@ -514,6 +548,8 @@
             ],
             "registryDependencies": [
               "button",
+              "dialog",
+              "tooltip",
               "card",
               "input",
               "label",

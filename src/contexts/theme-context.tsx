@@ -51,9 +51,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         // If user has previously set a preference, use it
         setPreviewDarkMode(savedDarkMode === 'true');
       } else {
-        // If no preference saved, sync with global Fumadocs theme on first render
-        const isGlobalDark = document.documentElement.classList.contains('dark');
-        setPreviewDarkMode(isGlobalDark);
+        // If no preference saved, default to light mode for preview
+        setPreviewDarkMode(false);
       }
     }
   }, []);

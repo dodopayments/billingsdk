@@ -1,0 +1,117 @@
+---
+title: Payment Success Dialog
+description: A confirmation dialog that celebrates a successful payment with the paid amount and product name, plus actions to proceed or go back.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-success-dialog">
+      <PaymentSuccessDialogDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/payment-success-dialog-demo.tsx"'>src/components/payment-success-dialog-demo.tsx</include>
+
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/payment-success-dialog.json
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add https://billingsdk.com/r/payment-success-dialog.json
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add https://billingsdk.com/r/payment-success-dialog.json
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add payment-success-dialog
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add payment-success-dialog
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add payment-success-dialog
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentSuccessDialog, type PaymentSuccessDialogRef } from "@/components/billingsdk/payment-success-dialog";
+```
+
+```tsx
+// Controlled usage (recommended)
+const [open, setOpen] = useState(false);
+
+// Show on demand, e.g. after successful payment
+setOpen(true);
+
+<PaymentSuccessDialog
+  open={open}
+  onOpenChange={setOpen}
+  price="29"
+  currencySymbol="$"
+  productName="Pro Plan (Monthly)"
+  proceedButtonText="Go to Dashboard"
+  backButtonText="Back to Pricing"
+/>
+```
+
+```tsx
+// Imperative ref (optional)
+const ref = useRef<PaymentSuccessDialogRef>(null);
+ref.current?.open();
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `title` | `string` | ❌ | Optional heading (default: "Congratulations!") |
+| `subtitle` | `string` | ❌ | Optional subtext (default: "Your payment was successful.") |
+| `currencySymbol` | `string` | ❌ | Currency symbol prefix (default: `$`) |
+| `price` | `string` | ✅ | Amount paid |
+| `productName` | `string` | ✅ | Product Name |
+| `proceedButtonText` | `string` | ❌ | Primary action label |
+| `backButtonText` | `string` | ❌ | Secondary action label |
+| `onProceed` | `() => void` | ❌ | Callback for proceed action |
+| `onBack` | `() => void` | ❌ | Callback for back action |
+| `className` | `string` | ❌ | Additional class names |
+| `open` | `boolean` | ❌ | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | ❌ | Controlled state handler |
+
+## Theming
+
+This dialog inherits BillingSDK theme tokens via `getThemeStyles`, remaining consistent with other components. Colors adapt to light/dark modes and active theme.
+
+## Example
+<include cwd lang="tsx" meta='title="src/components/payment-success-dialog-demo.tsx"'>src/components/payment-success-dialog-demo.tsx</include>
+
+### Credits
+- Created by [@ritiksahni22](https://github.com/ritiksahni)

@@ -1,0 +1,347 @@
+---
+title: ShadCN CLI 3.0 Integration Guide
+description: Comprehensive guide to integrating Billing SDK components using ShadCN CLI 3.0 with MCP support
+keywords: shadcn, cli, billing-sdk, components, mcp, registry
+---
+
+## Project Initialization
+
+Initialize your project with ShadCN CLI to set up the necessary dependencies and configuration.
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest init
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest init
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest init
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest init
+    ```
+    </Tab>
+</Tabs>
+
+The `init` command automatically:
+- Installs required dependencies
+- Adds utility functions to your project
+- Configures `tailwind.config.js` with proper settings
+- Sets up default component styles and theming
+
+## Adding Components
+
+You can add Billing SDK components to your project using either the standard ShadCN CLI or the dedicated Billing SDK CLI. Choose the method that best fits your workflow.
+
+### Using ShadCN CLI
+
+Add components directly using their registry URLs:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    ```
+  </Tab>
+</Tabs>
+
+### Using Billing SDK CLI
+
+For a more streamlined experience, use the dedicated Billing SDK CLI:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+  <Tab value="npx">
+    ```bash
+    npx @billingsdk/cli add <component-name>
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx @billingsdk/cli add <component-name>
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx @billingsdk/cli add <component-name>
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx @billingsdk/cli add <component-name>
+    ```
+  </Tab>
+</Tabs>
+
+> **Note**: Replace `<component-name>` with the actual component name you want to add, such as `pricing-table-one` or `payment-method-manager`.
+
+## Namespaced Registry Setup
+
+ShadCN CLI 3.0 introduces namespaced registries, allowing you to organize and access component collections more efficiently. This feature is particularly useful for managing multiple component libraries.
+
+### Configuration
+
+To set up the Billing SDK namespace, update your `components.json` file:
+
+```json title="components.json"
+"registries": {
+    "@billingsdk": "https://billingsdk.com/r/{name}.json"
+}
+```
+
+This configuration maps the `@billingsdk` namespace to the Billing SDK component registry.
+
+### Usage
+
+Once configured, you can add components using the simplified namespace syntax:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-namespaced-registry-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest add @billingsdk/[component-name]
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add @billingsdk/[component-name]
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest add @billingsdk/[component-name]
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add @billingsdk/[component-name]
+    ```
+    </Tab>
+</Tabs>
+
+### Practical Examples
+
+```bash
+# Add a pricing table component
+npx shadcn@latest add @billingsdk/pricing-table-one
+
+# Add a payment method manager
+npx shadcn@latest add @billingsdk/payment-method-manager
+
+# Add a subscription management component
+npx shadcn@latest add @billingsdk/subscription-management
+```
+
+> **Tip**: The namespaced approach eliminates the need to remember full URLs and provides better autocomplete support in compatible editors.
+
+## Component Discovery
+
+Explore and discover available Billing SDK components using the built-in discovery commands. These tools help you find the right components for your specific use cases.
+
+{/* ### View Registry
+
+Get a detailed overview of all available components in the Billing SDK registry:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-discover-components-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest view @billingsdk
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest view @billingsdk
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest view @billingsdk
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest view @billingsdk
+    ```
+    </Tab>
+</Tabs> */}
+
+### List Components
+
+Get a concise list of all available component names:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-discover-components-list-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest list @billingsdk
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest list @billingsdk
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest list @billingsdk
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest list @billingsdk
+    ```
+    </Tab>
+</Tabs>
+
+### Search Components
+
+Search for specific components using keywords or phrases:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-discover-components-search-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest search @billingsdk -q "banner"
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest search @billingsdk -q "banner"
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest search @billingsdk -q "banner"
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest search @billingsdk -q "banner"
+    ```
+    </Tab>
+</Tabs>
+
+### Search Examples
+
+```bash
+# Search for pricing-related components
+npx shadcn@latest search @billingsdk -q "pricing"
+
+# Find payment method components
+npx shadcn@latest search @billingsdk -q "payment"
+
+# Look for subscription management components
+npx shadcn@latest search @billingsdk -q "subscription"
+```
+
+## MCP (Model Context Protocol) Support
+
+ShadCN CLI 3.0 introduces MCP support, enabling seamless integration with AI assistants for component management. This feature allows your AI coding assistant to directly interact with the component registry and add components to your project through natural language commands.
+
+### Setup Process
+
+#### 1. Configure Registry
+
+First, ensure the Billing SDK registry is configured in your `components.json`:
+
+```json title="components.json"
+{
+  "registries": {
+    "@billingsdk": "https://billingsdk.com/r/{name}.json"
+  }
+}
+```
+
+#### 2. Initialize MCP Server
+
+Initialize the MCP server in your project:
+
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="shadcn-cli-3-mcp-server-tabs">
+    <Tab value="npx">
+    ```bash
+    npx shadcn@latest mcp init
+    ```
+    </Tab>
+    <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest mcp init
+    ```
+    </Tab>
+    <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest mcp init
+    ```
+    </Tab>
+    <Tab value="bun">
+    ```bash
+    bunx shadcn@latest mcp init
+    ```
+    </Tab>
+</Tabs>
+
+### AI-Assisted Component Addition
+
+Once MCP is set up, you can use natural language commands with your AI assistant. Simply describe the component you need:
+
+**Example prompts:**
+
+```bash
+Add a pricing table to my project from billingSDK registry
+```
+
+```bash
+I need a payment method manager component from billingSDK registry
+```
+
+```bash
+Add a subscription management interface from billingSDK registry
+```
+
+```bash
+Include a usage meter component for my billing dashboard from billingSDK registry
+```
+
+### Benefits of MCP Integration
+
+- **Natural Language Commands**: No need to remember specific component names or commands
+- **Context-Aware Suggestions**: AI can suggest appropriate components based on your project needs
+- **Streamlined Workflow**: Reduce time spent searching and adding components
+- **Error Prevention**: AI assistance helps avoid command syntax errors
+
+### Supported AI Assistants
+
+MCP support works with AI coding assistants that support the Model Context Protocol, including:
+- GitHub Copilot
+- Cursor AI
+- Other MCP-compatible tools
+
+> **Note**: Ensure your AI assistant supports MCP before attempting to use these features. The MCP server must be running for the integration to work properly.
+
+---
+
+## Next Steps
+
+- Explore available [Billing SDK components](../components/index.mdx)
+- Learn about [component customization](../theming.mdx)
+- Check out [API integration guides](../interfaces.mdx)
+
+For additional support, visit our [GitHub repository](https://github.com/billingsdk) or [Discord community](https://discord.gg/billingsdk).

@@ -55,6 +55,7 @@ Billing SDK provides production-ready UI building blocks for pricing, usage, and
 
 ## Components
 
+- **Payment Method Manager**: Manage credit cards and ACH accounts for billing. [Docs](https://billingsdk.com/docs/components/payment-method-manager)
 - **Pricing Tables**: Multiple variants for different use cases
 - **Subscription Management**: Manage plans, status, and details
 - **Usage Meters**: Linear and circular quota indicators

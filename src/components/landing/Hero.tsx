@@ -6,6 +6,7 @@ import { CustomCodeBlock } from "@/components/code";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { Cover } from "../ui/cover";
+import { GrainGradient } from "@paper-design/shaders-react";
 const Hero = () => {
   const feature = {
     title: "Plan Upgrades in Seconds",
@@ -27,10 +28,30 @@ const Hero = () => {
   };
 
   return (
-    <div className="bg-[url('/landing/hero-bg.webp')] rounded-lg bg-cover bg-center">
+    <div className="rounded-lg overflow-hidden relative">
+      <GrainGradient
+        style={{ height: "125%", width: "125%", position: "absolute" }}
+        colorBack="hsl(0, 0%, 5%)"
+        softness={0.5}
+        className="opacity-90"
+        intensity={0.27}
+        noise={0.3}
+        shape="corners"
+        offsetX={0}
+        offsetY={0}
+        scale={1}
+        rotation={0}
+        speed={1}
+        colors={[
+          "hsl(218, 100%, 50%)",
+          "hsl(212, 100%, 83%)",
+          "hsl(195, 100%, 50%)",
+          "hsl(250, 100%, 50%)",
+        ]}
+      />
       {/* Content */}
       <motion.div
-        className="relative z-10 pt-[calc(70vh/3)] px-6"
+        className="relative z-10 pt-[calc(70vh/4)] px-6"
         initial="hidden"
         animate="visible"
       >
@@ -47,7 +68,6 @@ const Hero = () => {
             >
               Ship Billing UIs <Cover className="text-primary">10x</Cover>{" "}
               Faster
-
               {/* Fully Open Source annotation inside h1 */}
               <motion.div
                 className="hidden lg:block absolute top-[100px] -right-[145px]"
@@ -89,7 +109,7 @@ const Hero = () => {
             </motion.h1>
 
             <motion.p
-              className="text-neutral-300/80 text-sm sm:text-lg max-w-2xl mx-auto tracking-tighter"
+              className="text-neutral-100/80 text-sm sm:text-lg max-w-2xl mx-auto tracking-tighter"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -118,12 +138,24 @@ const Hero = () => {
                 variant="secondary"
                 className="bg-secondary text-secondary-foreground ring-secondary before:from-secondary-foreground/20 after:from-secondary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
               >
-                <Link href="/docs/components">
-                  Browse Components
-                </Link>
+                <Link href="/docs/components">Browse Components</Link>
               </Button>
             </motion.div>
-
+            <div className="flex justify-center items-center w-full">
+              <a
+                className="w-fit"
+                href="https://www.producthunt.com/products/dodo-payments?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-billing&#0045;sdk&#0045;2"
+                target="_blank"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1011707&theme=light&t=1756972570770"
+                  alt="Billing&#0032;SDK - Open&#0032;Source&#0032;Billing&#0032;UI&#0032;Components&#0032;Library | Product Hunt"
+                  style={{ width: "250px", height: "54px" }}
+                  width="250"
+                  height="54"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Demo Section */}

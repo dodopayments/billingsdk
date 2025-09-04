@@ -20,12 +20,24 @@
 
 import type { ReactNode } from "react";
 import NavBar from "@/components/landing/NavBar";
+import { gradientColors } from "@/components/banner-gradient-demo";
+import { Banner } from "@/registry/billingsdk/banner";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="w-full max-w-[1920px] mx-auto min-h-screen bg-background">
       <NavBar />
       {/* Main Content */}
+      <Banner
+        title="Billing SDK is live on Product Hunt!"
+        description="Go upvote and support us!"
+        dismissable={false}
+        buttonText="Upvote"
+        buttonLink="https://www.producthunt.com/products/dodo-payments/launches/billing-sdk-2"
+        className="border-none p-0 flex justify-center"
+        variant="default"
+        gradientColors={gradientColors}
+      />
       {children}
     </div>
   );
