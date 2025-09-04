@@ -31,8 +31,7 @@
     "@radix-ui/react-toggle": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tsparticles/engine": "^3.9.1",
-    "@tsparticles/react": "^3.0.0",
-    
+    "@tsparticles/react": "^3.0.0",    
     "@tsparticles/slim": "^3.9.1",
     "@types/inquirer": "^9.0.9",
     "@uiw/codemirror-theme-vscode": "^4.25.1",
@@ -58,7 +57,7 @@
     "remark-mdx": "^3.1.0",
     "remark-rehype": "^11.1.2",
     "sonner": "^2.0.7",
-    "tailwind-merge": "^3.3.1",
+    "tailwind-merge": "^3.3.1"
     
   },
   "devDependencies": {
