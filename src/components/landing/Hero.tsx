@@ -30,7 +30,7 @@ const Hero = () => {
   return (
     <div className="rounded-lg overflow-hidden relative">
       <GrainGradient
-        style={{ height: "100%", width: "100%", position: "absolute" }}
+        style={{ height: "125%", width: "125%", position: "absolute" }}
         colorBack="hsl(0, 0%, 5%)"
         softness={0.5}
         className="opacity-90"

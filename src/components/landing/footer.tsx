@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="w-full my-5 py-20 rounded-b-xl overflow-hidden relative">
       <GrainGradient
-        style={{ height: "100%", width: "100%", position: "absolute" }}
+        style={{ height: "150%", width: "100%", position: "absolute" }}
         colorBack="hsl(0, 0%, 5%)"
         softness={0.5}
         className="opacity-90"
