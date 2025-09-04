@@ -10,6 +10,8 @@ import { Toggle } from "@/components/ui/toggle"
 import { Label } from "@/components/ui/label"
 import { type Plan } from "@/lib/billingsdk-config"
 import { cn } from "@/lib/utils"
+import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog"
+import { DialogHeader } from "@/components/ui/dialog"
 
 export interface UpdatePlanCardProps {
     currentPlan: Plan
@@ -22,6 +24,9 @@ export interface UpdatePlanCardProps {
 export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, title }: UpdatePlanCardProps) {
     const [isYearly, setIsYearly] = useState(false)
     const [selectedPlan, setSelectedPlan] = useState<string | undefined>(undefined)
+    // Add state for confirmation dialog
+    const [confirmOpen, setConfirmOpen] = useState(false)
+    const [planToConfirm, setPlanToConfirm] = useState<string | undefined>(undefined)
 
     const getCurrentPrice = (plan: Plan) =>
         isYearly ? `${plan.yearlyPrice}` : `${plan.monthlyPrice}`
@@ -30,7 +35,24 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
         setSelectedPlan((prev => prev == planId ? undefined : planId));
     }
 
+
+    // Handle upgrade button click
+    const handleUpgradeClick = (planId: string) => {
+        setPlanToConfirm(planId)
+        setConfirmOpen(true)
+    }
+
+    // Handle confirmation
+    const handleConfirm = () => {
+        if (planToConfirm) {
+            onPlanChange(planToConfirm)
+            setConfirmOpen(false)
+            setPlanToConfirm(undefined)
+        }
+    }
+
     return (
+    <>
         <Card className={cn("max-w-xl mx-auto text-left overflow-hidden shadow-lg w-full", className)}>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-base font-semibold">
@@ -53,7 +75,7 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                         Yearly
                     </Toggle>
                 </div>
-            </CardHeader>
+            </CardHeader> 
             <CardContent className="space-y-3">
                 <RadioGroup value={selectedPlan} onValueChange={handlePlanChange}>
                     <AnimatePresence mode="wait">
@@ -131,7 +153,7 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                                             <Button className="w-full mt-4"
                                                 disabled={selectedPlan === currentPlan.id}
                                                 onClick={() => {
-                                                    onPlanChange(plan.id)
+                                                    handleUpgradeClick(plan.id)
                                                 }}
                                             >{selectedPlan === currentPlan.id ? "Current Plan" : "Upgrade"}</Button>
                                         </motion.div>
@@ -143,5 +165,25 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                 </RadioGroup>
             </CardContent>
         </Card>
+        {/* Confirmation Dialog */}
+        <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Confirm Plan Change</DialogTitle>
+                </DialogHeader>
+                <div className="py-4">
+                    Are you sure you want to change your plan?
+                </div>
+                <div className="flex gap-2 justify-end">
+                    <Button variant="outline" onClick={() => setConfirmOpen(false)}>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleConfirm}>
+                        Confirm
+                    </Button>
+                </div>
+            </DialogContent>
+        </Dialog>
+    </>
     )
 }
