@@ -7,13 +7,33 @@ import { execSync } from "child_process";
 export const addFiles = async (framework: "nextjs" | "express", provider: "dodopayments") => {
     const result = await fetch(`https://billingsdk.com/tr/${framework}-${provider}.json`)
         .then(res => res.json()) as Result;
-    let srcExists = fs.existsSync(path.join(process.cwd(), "src"));
-    const addToPath = srcExists ? "src" : "";
+    
+    let basePath = "";
+    const srcExists = fs.existsSync(path.join(process.cwd(), "src"));
+    
+    if (framework === "nextjs") {
+        basePath = srcExists ? "src/app/api" : "app/api";
+    } else if (framework === "express") {
+        basePath = "src";
+    }
 
     for (const file of result.files) {
-        const filePath = path.join(process.cwd(), addToPath, file.target);
+        let filePath: string;
+        let relativePath: string;
+        
+        if (framework === "nextjs") {
+            filePath = path.join(process.cwd(), basePath, file.target);
+            relativePath = path.join(basePath, file.target);
+        } else if (framework === "express") {
+            filePath = path.join(process.cwd(), basePath, file.target);
+            relativePath = path.join(basePath, file.target);
+        } else {
+            const addToPath = srcExists ? "src" : "";
+            filePath = path.join(process.cwd(), addToPath, file.target);
+            relativePath = addToPath ? path.join(addToPath, file.target) : file.target;
+        }
+
         const dirPath = path.dirname(filePath);
-        const relativePath = addToPath ? path.join(addToPath, file.target) : file.target;
 
         try {
             fs.mkdirSync(dirPath, { recursive: true });
@@ -39,6 +59,7 @@ export const addFiles = async (framework: "nextjs" | "express", provider: "dodop
             console.error(`Failed to add file ${relativePath}:`, error);
         }
     }
+    
     if (result.dependencies) {
         const s = spinner();
         s.start("Installing dependencies...");
