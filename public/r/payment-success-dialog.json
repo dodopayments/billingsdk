@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "payment-success-dialog",
+  "type": "registry:block",
+  "title": "Payment Success Dialog",
+  "description": "A success confirmation dialog after payment with confetti",
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "card", "dialog", "utils"],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/payment-success-dialog.tsx",
+      "type": "registry:component",
+      "target": "components/billingsdk/payment-success-dialog.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/payment-success-dialog-demo.tsx",
+      "type": "registry:component",
+      "target": "components/payment-success-dialog-demo.tsx"
+    },
+    {
+      "path": "src/registry/lib/billingsdk-config.ts",
+      "type": "registry:lib",
+      "target": "lib/billingsdk-config.ts"
+    }
+  ]
+}
+
+

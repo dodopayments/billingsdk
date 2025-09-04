@@ -26,6 +26,7 @@ import InvoiceHistoryDemo from '@/components/invoice-history-demo';
 import UsageTableDemo from '@/components/usage-table-demo';
 import { PaymentMethodSelectorDemo } from '@/components/payment-method-selector-demo';
 import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-demo';
+import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -58,5 +59,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     UsageTableDemo,
     PaymentMethodSelectorDemo,
     PaymentMethodManagerDemo,
+    PaymentSuccessDialogDemo,
   };
 }

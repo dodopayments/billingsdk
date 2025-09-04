@@ -11,9 +11,10 @@ export const initCommand = new Command()
       intro("Welcome to Billing SDK Setup!");
 
       const framework = await select({
-        message: "Which framework would you like to use? (Adding more frameworks soon)",
+        message: "Which framework would you like to use?",
         options: [
           { value: "nextjs", label: "Next.js", hint: "React framework with App Router" },
+          { value: "express", label: "Express.js", hint: "Node.js web framework" },
         ],
       });
 
