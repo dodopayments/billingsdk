@@ -41,7 +41,7 @@ Thank you for your interest in contributing. This document explains how to set u
    - Run: `npx shadcn@latest build`
    - Output: generated files appear under `public/r/*.json`
 4. Consume in another project:
-   - `npx shadcn@latest add http://localhost:3000/r/<component>.json`
+   - `npx shadcn@latest add @billingsdk/<component>`
 
 ## Development Guidelines
 
