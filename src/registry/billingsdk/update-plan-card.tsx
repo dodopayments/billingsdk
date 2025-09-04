@@ -10,8 +10,7 @@ import { Toggle } from "@/components/ui/toggle"
 import { Label } from "@/components/ui/label"
 import { type Plan } from "@/lib/billingsdk-config"
 import { cn } from "@/lib/utils"
-import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog"
-import { DialogHeader } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog"
 
 export interface UpdatePlanCardProps {
     currentPlan: Plan
@@ -24,7 +23,6 @@ export interface UpdatePlanCardProps {
 export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, title }: UpdatePlanCardProps) {
     const [isYearly, setIsYearly] = useState(false)
     const [selectedPlan, setSelectedPlan] = useState<string | undefined>(undefined)
-    // Add state for confirmation dialog
     const [confirmOpen, setConfirmOpen] = useState(false)
     const [planToConfirm, setPlanToConfirm] = useState<string | undefined>(undefined)
 
@@ -35,14 +33,11 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
         setSelectedPlan((prev => prev == planId ? undefined : planId));
     }
 
-
-    // Handle upgrade button click
     const handleUpgradeClick = (planId: string) => {
         setPlanToConfirm(planId)
         setConfirmOpen(true)
     }
 
-    // Handle confirmation
     const handleConfirm = () => {
         if (planToConfirm) {
             onPlanChange(planToConfirm)
@@ -165,14 +160,17 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                 </RadioGroup>
             </CardContent>
         </Card>
-        {/* Confirmation Dialog */}
         <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Confirm Plan Change</DialogTitle>
                 </DialogHeader>
                 <div className="py-4">
-                    Are you sure you want to change your plan?
+                    {planToConfirm && (
+                        <>
+                            Are you sure you want to change your plan to <span className="font-bold">{plans.find(p => p.id === planToConfirm)?.title}</span>?
+                        </>
+                    )}
                 </div>
                 <div className="flex gap-2 justify-end">
                     <Button variant="outline" onClick={() => setConfirmOpen(false)}>
