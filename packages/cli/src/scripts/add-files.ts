@@ -14,7 +14,7 @@ export const addFiles = async (framework: "nextjs" | "express", provider: "dodop
     if (framework === "nextjs") {
         basePath = srcExists ? "src/app/api" : "app/api";
     } else if (framework === "express") {
-        basePath = "src";
+        basePath = "";
     }
 
     for (const file of result.files) {
@@ -25,8 +25,9 @@ export const addFiles = async (framework: "nextjs" | "express", provider: "dodop
             filePath = path.join(process.cwd(), basePath, file.target);
             relativePath = path.join(basePath, file.target);
         } else if (framework === "express") {
-            filePath = path.join(process.cwd(), basePath, file.target);
-            relativePath = path.join(basePath, file.target);
+            const expressBase = srcExists ? "src" : "";
+            filePath = path.join(process.cwd(), expressBase, file.target);
+            relativePath = path.join(expressBase, file.target);
         } else {
             const addToPath = srcExists ? "src" : "";
             filePath = path.join(process.cwd(), addToPath, file.target);
