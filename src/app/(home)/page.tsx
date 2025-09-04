@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Footer2 } from "@/components/landing/footer2";
