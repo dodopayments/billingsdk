@@ -45,7 +45,7 @@ function ComponentsShowcase() {
 
     const components = [
         { id: "pricing", label: "Pricing", icon: AiOutlineDollar, href: "/docs/components/pricing-table/pricing-table-one" },
-        { id: "subscription", label: "Subscription Management", icon: FiSettings, href: "docs/components/manage-subscription" },
+        { id: "subscription", label: "Subscription Management", icon: FiSettings, href: "/docs/components/manage-subscription" },
         { id: "banner", label: "Banner Notifications", icon: BsBell, href: "/docs/components/banner" },
         { id: "usage", label: "Usage Meters", icon: BiBarChartAlt2, href: "/docs/components/usage-meter/usage-meter-linear" },
         { id: "updates", label: "Plan Updates", icon: BiArrowToTop, href: "/docs/components/update-plan/update-plan-card" },
