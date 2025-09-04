@@ -52,7 +52,7 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (currently Next.js)
+1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
@@ -67,14 +67,14 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router)
+- **Framework**: Next.js (with App Router) or Express.js (Node.js web framework)
 - **Payment Provider**: Dodo Payments
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -94,6 +94,24 @@ After running `init`, you'll get:
     └── .env.example
     ```
   </Tab>
+  <Tab value="Express.js + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── dodopayments.ts
+    │   └── routes/
+    │       └── dodopayments/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── customer.ts
+    │           ├── payments.ts
+    │           ├── products.ts
+    │           ├── subscriptions.ts
+    │           └── webhook.ts
+    └── .env.example
+    ```
+  </Tab>
 </Tabs>
 
 ### API Routes Included
@@ -107,19 +125,134 @@ The init command sets up comprehensive API routes for:
 
 ### Dependencies Installed
 
+<Tabs items={['Next.js', 'Express.js']}>
+  <Tab value="Next.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Express.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "express": "latest",
+        "@types/express": "latest"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Callout title="Environment Setup">
+  After running `init`, copy `.env.example` to `.env.local` (Next.js) or `.env` (Express.js) and configure your Dodo Payments API keys and webhook secrets.
+</Callout>
+
+## Express.js Setup Instructions
+
+### Basic Express.js Integration
+
+After running `@billingsdk/cli init` and selecting Express.js, you'll need to integrate the generated routes into your Express application:
+
+```javascript
+// app.js or server.js
+const express = require('express');
+const { dodopaymentsRouter } = require('./src/routes/dodopayments/route');
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Mount DodoPayments routes
+app.use('/api/dodopayments', dodopaymentsRouter);
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+### Environment Configuration
+
+Create a `.env` file in your project root:
+
+```bash
+# DodoPayments Configuration
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+```
+
+### Available API Endpoints
+
+The Express.js template provides these endpoints:
+
+- `POST /api/dodopayments/checkout` - Create checkout sessions
+- `GET /api/dodopayments/customer` - Retrieve customer data
+- `POST /api/dodopayments/customer` - Create new customers
+- `PUT /api/dodopayments/customer` - Update customer information
+- `GET /api/dodopayments/customer/subscriptions` - Get customer subscriptions
+- `GET /api/dodopayments/customer/payments` - Get customer payment history
+- `GET /api/dodopayments/products` - List all products
+- `GET /api/dodopayments/product` - Get specific product details
+- `GET /api/dodopayments/subscriptions` - Retrieve subscription details
+- `GET /api/dodopayments/payments` - Get payment information
+- `POST /api/dodopayments/webhook` - Handle DodoPayments webhooks
+
+### TypeScript Support
+
+The template includes full TypeScript support. To use with TypeScript:
+
+```bash
+npm install -D typescript @types/node ts-node nodemon
+```
+
+Create a `tsconfig.json`:
+
 ```json
 {
-  "dependencies": {
-    "dodopayments": "latest",
-    "standardwebhooks": "latest",
-    "zod": "latest"
-  }
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
 ```
 
-<Callout title="Environment Setup">
-  After running `init`, copy `.env.example` to `.env.local` and configure your Dodo Payments API keys and webhook secrets.
-</Callout>
+Update your `package.json` scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  }
+}
+```
 
 ## `@billingsdk/cli add`
 
@@ -167,8 +300,12 @@ npx @billingsdk/cli add usage-meter-circle
 - 📁 **Structure**: App Router with API routes
 - 🔧 **Features**: Server components, server actions, middleware support
 
+### Express.js
+- ✅ **Status**: Fully supported
+- 📁 **Structure**: Modular route-based architecture
+- 🔧 **Features**: RESTful API routes, middleware support, TypeScript integration
+
 ### Coming Soon
-- 🚧 **Express.js**: Backend API integration
 - 🚧 **Fastify**: High-performance backend framework
 - 🚧 **Additional React Frameworks**: Vite, Remix support
 

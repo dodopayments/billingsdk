@@ -38,7 +38,8 @@
                 "https://billingsdk.com/r/invoice-history.json",
                 "https://billingsdk.com/r/usage-table.json",
                 "https://billingsdk.com/r/payment-method-selector.json",
-                "https://billingsdk.com/r/payment-method-manager.json"
+                "https://billingsdk.com/r/payment-method-manager.json",
+                "https://billingsdk.com/r/payment-success-dialog.json"
             ]
         },
         {
