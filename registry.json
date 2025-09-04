@@ -472,26 +472,7 @@
                 "utils"
             ]
         },
-        {
-            "name": "usage-table",
-            "type": "registry:block",
-            "title": "Usage Table",
-            "description": "Per-model LLM usage with token counts, cache reads, and API cost",
-            "files": [
-              {
-                "path": "src/registry/billingsdk/usage-table.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/usage-table.tsx"
-              },
-              {
-                "path": "src/registry/billingsdk/demo/usage-table-demo.tsx",
-                "type": "registry:component",
-                "target": "components/usage-table-demo.tsx"
-              }
-            ],
-            "dependencies": ["lucide-react"],
-            "registryDependencies": ["card", "table", "utils"]
-          },
+        
         {
             "name": "payment-method-selector",
             "type": "registry:block",
@@ -522,6 +503,57 @@
               "label",
               "utils"
             ]
+          },
+          {
+            "name": "payment-method-selector",
+            "type": "registry:block",
+            "title": "Payment Method Selector",
+            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+            "files": [
+              {
+                "path": "src/registry/billingsdk/payment-method-selector.tsx",
+                "type": "registry:component",
+                "target": "components/billingsdk/payment-method-selector.tsx"
+              },
+              {
+                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+                "type": "registry:component",
+                "target": "components/payment-method-selector-demo.tsx"
+              }
+            ],
+            "dependencies": [
+              "lucide-react",
+              "motion"
+            ],
+            "registryDependencies": [
+              "button",
+              "dialog",
+              "tooltip",
+              "card",
+              "input",
+              "label",
+              "utils"
+            ]
+          },
+          {
+            "name": "usage-meter-bar",
+            "type": "registry:block",
+            "title": "Usage Meter Bar",
+            "description": "Per-model LLM usage with token counts, cache reads, and API cost",
+            "files": [
+              {
+                "path": "src/registry/billingsdk/usage-meter-bar.tsx",
+                "type": "registry:component",
+                "target": "components/billingsdk/usage-meter-bar.tsx"
+              },
+              {
+                "path": "src/registry/billingsdk/demo/usage-meter-bar-demo.tsx",
+                "type": "registry:component",
+                "target": "components/usage-meter-bar-demo.tsx"
+              }
+            ],
+            "dependencies": ["lucide-react", "motion"],
+            "registryDependencies": ["card", "table", "utils", "badge"]
           }
     ]
 }
