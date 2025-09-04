@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-interface UsageMeterBarProps {
+export interface UsageMeterBarProps {
   title: string
   currentUsage: number
   maxUsage: number
@@ -75,7 +75,7 @@ export function UsageMeterBar({ title, currentUsage, maxUsage, unit, description
 
         {/* Wave-like Usage Meter - more compact */}
         <div className="relative">
-          <div className="flex items-end justify-center gap-0.5 sm:gap-1 h-6 sm:h-8 bg-muted/30 rounded-md p-1 overflow-hidden">
+          <div className="flex items-end justify-center gap-0.5 sm:gap-1 h-6 sm:h-8 bg-transparent rounded-md p-1 overflow-hidden">
             {segments.map((segment, index) => (
               <motion.div
                 key={index}
@@ -107,7 +107,7 @@ export function UsageMeterBar({ title, currentUsage, maxUsage, unit, description
           </div>
 
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-md"
+            className="absolute inset-0 bg-transparent rounded-md"
             initial={{ x: "-100%" }}
             animate={{ x: `${percentage - 100}%` }}
             transition={{ duration: 1, ease: "easeOut" }}
