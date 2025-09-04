@@ -11,11 +11,13 @@ export interface UsageMeterBarProps {
   maxUsage: number
   unit: string
   description?: string
+  animation?: "on" | "off"
 }
 
-export function UsageMeterBar({ title, currentUsage, maxUsage, unit, description }: UsageMeterBarProps) {
+export function UsageMeterBar({ title, currentUsage, maxUsage, unit, description, animation = "on" }: UsageMeterBarProps) {
   const [animatedUsage, setAnimatedUsage] = useState(0)
   const percentage = Math.min((currentUsage / maxUsage) * 100, 100)
+  const isAnimationOn = animation !== "off"
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -84,23 +86,32 @@ export function UsageMeterBar({ title, currentUsage, maxUsage, unit, description
                   ${segment.isActive ? getStatusColor() : "bg-muted/50"}
                 `}
                 initial={{ scaleY: 0.3, height: `${segment.height * 0.3}px` }}
-                animate={{
-                  scaleY: segment.isActive ? [0.3, 1, 0.7, 1] : 0.3,
-                  height: segment.isActive
-                    ? [
-                        `${segment.height * 0.3}px`,
-                        `${segment.height * 0.5}px`,
-                        `${segment.height * 0.4}px`,
-                        `${segment.height * 0.5}px`,
-                      ]
-                    : `${segment.height * 0.3}px`,
-                }}
+                animate={
+                  isAnimationOn
+                    ? {
+                        scaleY: segment.isActive ? [0.3, 1, 0.7, 1] : 0.3,
+                        height: segment.isActive
+                          ? [
+                              `${segment.height * 0.3}px`,
+                              `${segment.height * 0.5}px`,
+                              `${segment.height * 0.4}px`,
+                              `${segment.height * 0.5}px`,
+                            ]
+                          : `${segment.height * 0.3}px`,
+                      }
+                    : {
+                        scaleY: segment.isActive ? 1 : 0.3,
+                        height: segment.isActive
+                          ? `${segment.height * 0.5}px`
+                          : `${segment.height * 0.3}px`,
+                      }
+                }
                 transition={{
-                  duration: 2,
-                  repeat: segment.isActive ? Number.POSITIVE_INFINITY : 0,
+                  duration: isAnimationOn ? 2 : 0,
+                  repeat: isAnimationOn && segment.isActive ? Number.POSITIVE_INFINITY : 0,
                   repeatType: "reverse",
                   ease: "easeInOut",
-                  delay: segment.delay / 1000,
+                  delay: isAnimationOn ? segment.delay / 1000 : 0,
                 }}
               />
             ))}

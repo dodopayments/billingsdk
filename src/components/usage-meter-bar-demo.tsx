@@ -12,6 +12,7 @@ export default function UsageMeterBarDemo() {
             maxUsage={100}
             unit="GB"
             description="Cloud storage capacity"
+            
           />
     </div>
 
