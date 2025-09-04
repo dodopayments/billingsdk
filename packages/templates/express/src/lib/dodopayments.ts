@@ -1,5 +1,3 @@
-
-
 import {DodoPayments} from 'dodopayments';
 import type { PaymentListResponse, ProductListResponse, SubscriptionListResponse } from 'dodopayments/resources.mjs';
 type Product = DodoPayments.Product;
