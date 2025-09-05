@@ -31,8 +31,8 @@ const NavBar = () => {
   return (
     <nav
       className={cn(
-        `fixed  left-0 right-0 z-55 flex justify-center ${
-          isScrolled ? "py-0 top-0" : "p-5 lg:top-15 top-22"
+        `fixed  left-0 right-0 top-0 z-55 flex justify-center ${
+          isScrolled ? "py-0" : "p-5"
         } transition-all duration-300`
       )}
     >
