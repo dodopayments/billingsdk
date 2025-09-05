@@ -28,6 +28,7 @@
                 "@billingsdk/pricing-table-three",
                 "@billingsdk/pricing-table-four",
                 "@billingsdk/pricing-table-five",
+                "@billingsdk/proration-preview",
                 "@billingsdk/cancel-subscription-dialog",
                 "@billingsdk/cancel-subscription-card",
                 "@billingsdk/update-plan-dialog",
@@ -237,6 +238,37 @@
                     "path": "src/registry/billingsdk/demo/pricing-table-five-demo.tsx",
                     "type": "registry:component",
                     "target": "components/pricing-table-five-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react",
+                "class-variance-authority",
+                "motion"
+            ],
+            "registryDependencies": [
+                "card",
+                "button",
+                "badge",
+                "separator",
+                "utils"
+            ]
+        },
+        {
+
+            "name": "proration-preview",
+            "type": "registry:block",
+            "title": "Proration Preview",
+            "description": "A component that shows cost breakdown and proration when changing subscription plans",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/proration-preview.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/proration-preview.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/proration-preview-demo.tsx"
                 },
                 {
                     "path": "src/registry/lib/billingsdk-config.ts",
@@ -250,12 +282,9 @@
                 "motion"
             ],
             "registryDependencies": [
-                "button",
                 "card",
+                "button",
                 "badge",
-                "switch",
-                "radio-group",
-                "label",
                 "separator",
                 "utils"
             ]

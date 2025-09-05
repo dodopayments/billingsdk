@@ -31,6 +31,8 @@
     "components/payment-success-dialog/index",
     "components/payment-method-selector/index",
     "components/payment-method-manager/index",
+    "---Plan Changes---",
+    "components/proration-preview/index",
     "---Configuration---",
     "interfaces",
     "theming"

@@ -1,0 +1,126 @@
+---
+title: Proration Preview
+description: Shows cost breakdown and proration calculations when changing subscription plans with detailed billing information.
+---
+
+## Preview
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="proration-preview">
+      <ProrationPreviewDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/proration-preview-demo.tsx"'>src/components/proration-preview-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/proration-preview.json
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/proration-preview.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/proration-preview.json
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { ProrationPreview } from "@/components/billingsdk/proration-preview"
+```
+
+```tsx
+<ProrationPreview
+  currentPlan={currentPlan}
+  newPlan={newPlan}
+  billingCycle="monthly"
+  daysRemaining={15}
+  onConfirm={() => handleConfirm()}
+  onCancel={() => handleCancel()}
+/>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `currentPlan` | `CurrentPlan` | The user's current subscription plan |
+| `newPlan` | `Plan` | The plan they're switching to |
+| `billingCycle` | `'monthly' \| 'yearly'` | Billing cycle for the new plan |
+| `daysRemaining` | `number` | Days left in current billing cycle (default: 15) |
+| `effectiveDate` | `string` | When the change takes effect (default: "immediately") |
+| `onConfirm` | `() => void` | Called when user confirms the change |
+| `onCancel` | `() => void` | Called when user cancels |
+| `confirmText` | `string` | Custom text for confirm button (default: "Confirm Change") |
+| `cancelText` | `string` | Custom text for cancel button (default: "Cancel") |
+| `theme` | `'minimal' \| 'classic'` | Visual theme variant (default: "minimal") |
+| `size` | `'small' \| 'medium' \| 'large'` | Component size (default: "medium") |
+| `className` | `string` | Optional CSS classes for styling |
+
+### Types
+
+```ts
+interface CurrentPlan {
+  plan: Plan
+  type: 'monthly' | 'yearly' | 'custom'
+  price?: string
+  nextBillingDate: string
+  paymentMethod: string
+  status: 'active' | 'inactive' | 'past_due' | 'cancelled'
+}
+
+interface Plan {
+  id: string
+  title: string
+  description: string
+  currency?: string
+  monthlyPrice: string
+  yearlyPrice: string
+  features: Feature[]
+}
+```
+
+## Features
+
+- **💰 Detailed Cost Breakdown**: Shows credits for unused time and prorated charges
+- **📊 Visual Plan Comparison**: Side-by-side current vs new plan display
+- **🏷️ Smart Detection**: Automatically identifies upgrade/downgrade scenarios
+- **📅 Timeline Information**: Clear indication of when changes take effect
+- **🧮 Accurate Calculations**: Handles complex proration math automatically
+- **🎨 Theme Support**: Both minimal and classic visual themes
+- **📱 Responsive Design**: Optimized for all screen sizes
+- **⚡ Smooth Animations**: Staggered motion effects for enhanced UX
+
+## Use Cases
+
+- **Plan Upgrades**: Show exact charges when upgrading to higher tiers
+- **Plan Downgrades**: Display credits and refunds for downgrades
+- **Billing Cycle Changes**: Calculate savings when switching to annual billing
+- **Trial Conversions**: Present costs when converting from free trials
+- **Mid-cycle Changes**: Handle proration for changes made during billing cycles
+
+## Theming
+
+Styled with `shadcn/ui`. Customize via CSS variables or switch themes in the preview header. See [Theming](/docs/theming).
+
+## Example
+
+<include cwd lang="tsx" meta='title="src/components/proration-preview-demo.tsx"'>src/components/proration-preview-demo.tsx</include>
+
+### Credits
+* Created by [@chinmaykhamkar](https://github.com/chinmaykhamkar)
