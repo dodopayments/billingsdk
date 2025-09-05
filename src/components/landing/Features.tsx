@@ -76,7 +76,7 @@ export default function Features() {
             <div
             key={feature.id}
             className={cn(
-              "bg-black backdrop-blur-sm  border-x-1 border-[#f9f9f9] rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
+              "bg-black backdrop-blur-sm  border-x border-[#f9f9f9] rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
              
             )}
             style={{
@@ -110,7 +110,7 @@ export default function Features() {
               <div
                 key={feature.id}
                 className={cn(
-                  "bg-black backdrop-blur-sm border-x-1 border-[#f9f9f9] text-white border-white rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
+                  "bg-black backdrop-blur-sm border-x border-[#f9f9f9] text-white  rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
                  
                 )}
                 style={{
