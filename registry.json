@@ -573,6 +573,40 @@
               "label",
               "utils"
             ]
-          }
+          },
+        {
+            "name": "billing-settings",
+            "type": "registry:block",
+            "title": "Billing Settings",
+            "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
+            "files": [
+                {
+                "path": "src/registry/billingsdk/billing-setting.tsx",
+                "type": "registry:component",
+                "target": "components/billingsdk/billing-setting.tsx"
+                },
+                {
+                "path": "src/registry/billingsdk/demo/billing-setting-demo.tsx",
+                "type": "registry:component",
+                "target": "components/billing-setting-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+                
+            ],
+             "registryDependencies": [
+                "button",
+                "card",
+                "switch",
+                "badge",
+                "dropdown-menu",
+                "dialog",
+                "input",
+                "label",
+                "sonner" 
+            ]
+        }
+
     ]
 }
