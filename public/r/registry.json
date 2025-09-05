@@ -254,6 +254,7 @@
             ]
         },
         {
+
             "name": "proration-preview",
             "type": "registry:block",
             "title": "Proration Preview",
@@ -281,12 +282,9 @@
                 "motion"
             ],
             "registryDependencies": [
-                "button",
                 "card",
+                "button",
                 "badge",
-                "switch",
-                "radio-group",
-                "label",
                 "separator",
                 "utils"
             ]

@@ -68,28 +68,29 @@ export function ProrationPreview({
   size = "medium",
 }: ProrationPreviewProps) {
   
-  // Calculate current plan pricing
-  const currentPrice = parseFloat(
-    currentPlan.type === 'monthly' ? currentPlan.plan.monthlyPrice : 
+  // Prices & proration (robust)
+  const currentCycleDays = currentPlan.type === 'yearly' ? 365 : 30;
+  const newCycleDays = billingCycle === 'yearly' ? 365 : 30;
+  const toNumber = (v?: string) => {
+    const n = parseFloat(String(v));
+    return Number.isFinite(n) ? n : 0;
+  };
+  const currentPrice = toNumber(
+    currentPlan.type === 'monthly' ? currentPlan.plan.monthlyPrice :
     currentPlan.type === 'yearly' ? currentPlan.plan.yearlyPrice :
-    currentPlan.price || '0'
+    currentPlan.price
   );
-  
-  // Calculate new plan pricing  
-  const newPrice = parseFloat(
-    billingCycle === 'monthly' ? newPlan.monthlyPrice : newPlan.yearlyPrice
-  );
-
-  // Calculate proration
-  const totalDaysInCycle = currentPlan.type === 'yearly' ? 365 : 30;
-  const unusedDays = daysRemaining;
-  const creditAmount = (currentPrice / totalDaysInCycle) * unusedDays;
-  const prorationDays = billingCycle === 'yearly' ? 365 - unusedDays : 30 - unusedDays;
-  const proratedCharge = (newPrice / (billingCycle === 'yearly' ? 365 : 30)) * prorationDays;
-  
+  const newPrice = toNumber(billingCycle === 'monthly' ? newPlan.monthlyPrice : newPlan.yearlyPrice);
+  const clampedUnusedDays = Math.max(0, Math.min(daysRemaining, currentCycleDays));
+  const isNextCycle = typeof effectiveDate === 'string' && effectiveDate.toLowerCase().includes('next');
+  const creditAmount = isNextCycle ? 0 : (currentPrice / currentCycleDays) * clampedUnusedDays;
+  const prorationDays = isNextCycle ? 0 : clampedUnusedDays;
+  const proratedCharge = isNextCycle ? 0 : (newPrice / newCycleDays) * prorationDays;
   const netAmount = proratedCharge - creditAmount;
-  const isUpgrade = newPrice > currentPrice;
-  const isDowngrade = newPrice < currentPrice;
+  const normalizedCurrentMonthly = currentPlan.type === 'yearly' ? currentPrice / 12 : currentPrice;
+  const normalizedNewMonthly = billingCycle === 'yearly' ? newPrice / 12 : newPrice;
+  const isUpgrade = normalizedNewMonthly > normalizedCurrentMonthly;
+  const isDowngrade = normalizedNewMonthly < normalizedCurrentMonthly;
 
   return (
     <div className={cn(prorationPreviewVariants({ theme, size }), className)}>
@@ -219,7 +220,7 @@ export function ProrationPreview({
               <div className="flex justify-between items-center text-sm">
                 <span className="text-muted-foreground">Credit for unused time</span>
                 <span className="text-green-600 font-medium">
-                  -{newPlan.currency}{Math.abs(creditAmount).toFixed(2)}
+                  -{currentPlan.plan.currency || newPlan.currency}{Math.abs(creditAmount).toFixed(2)}
                 </span>
               </div>
               
@@ -257,9 +258,11 @@ export function ProrationPreview({
           >
             <p className="text-sm text-muted-foreground">
               Your plan will change {effectiveDate}. 
-              {netAmount >= 0 
-                ? ` You'll be charged ${newPlan.currency}${Math.abs(netAmount).toFixed(2)}.`
-                : ` You'll receive a ${newPlan.currency}${Math.abs(netAmount).toFixed(2)} credit.`
+              {isNextCycle
+                ? ' No immediate charge.'
+                : (netAmount >= 0
+                    ? ` You'll be charged ${newPlan.currency}${Math.abs(netAmount).toFixed(2)}.`
+                    : ` You'll receive a ${newPlan.currency}${Math.abs(netAmount).toFixed(2)} credit.`)
               }
             </p>
           </motion.div>
