@@ -24,6 +24,7 @@
     "---Usage Meter---",
     "components/usage-meter/usage-meter-circle",
     "components/usage-meter/usage-meter-linear",
+    "components/usage-meter/usage-meter-bar",
     "---Banner---",
     "components/banner/index",
     "---Payment Processing---",
