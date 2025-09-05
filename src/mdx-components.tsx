@@ -30,10 +30,6 @@ import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-de
 import UsageMeterBarDemo from '@/components/usage-meter-bar-demo';
 
 import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-demo';
-<<<<<<< HEAD
-=======
-
->>>>>>> 0c151ce1532792194c3cb222bd7e9083360a54b1
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {

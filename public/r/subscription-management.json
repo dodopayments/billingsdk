@@ -13,8 +13,8 @@
     "badge",
     "separator",
     "utils",
-    "https://billingsdk.com/r/cancel-subscription-dialog.json",
-    "https://billingsdk.com/r/update-plan-dialog.json"
+    "@billingsdk/cancel-subscription-dialog",
+    "@billingsdk/update-plan-dialog"
   ],
   "files": [
     {
