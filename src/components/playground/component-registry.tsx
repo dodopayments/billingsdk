@@ -12,6 +12,7 @@ import { UsageMeter } from "@/components/billingsdk/usage-meter";
 import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
+import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -468,6 +469,248 @@ export const componentRegistry: ComponentConfig[] = [
           ]
         }
       ]
+    },
+  },
+  {
+    id: "pricing-table-five",
+    name: "Pricing Table Five",
+    description: "Modern pricing table with contact us plan",
+    category: "pricing",
+    component: PricingTableFive,
+    imports: ["@/components/billingsdk/pricing-table-five"],
+    defaultCode: `<PricingTableFive
+  plans={ [
+    {
+        id: 'starter',
+        title: 'Starter',
+        description: 'For developers testing out Liveblocks locally.',
+        currency: '$',
+        monthlyPrice: '0',
+        yearlyPrice: '0',
+        buttonText: 'Start today for free',
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    },
+    {
+        id: 'pro',
+        title: 'Pro',
+        description: 'For companies adding collaboration in production.',
+        currency: '$',
+        monthlyPrice: '20',
+        yearlyPrice: '199',
+        buttonText: 'Sign up',
+        badge: 'Most popular',
+        highlight: true,
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    },
+    {
+        id: 'enterprise',
+        title: 'Enterprise',
+        description: 'For organizations that need more support and compliance features.',
+        currency: '$',
+        monthlyPrice: 'Custom',
+        yearlyPrice: 'Custom',
+        buttonText: 'Contact sales',
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    }
+];}
+  title="Pricing Plans"
+  description="Find the right plan for your business"
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+/>`,
+    defaultProps: {
+      plans:  [
+        {
+            id: 'starter',
+            title: 'Starter',
+            description: 'For developers testing out Liveblocks locally.',
+            currency: '$',
+            monthlyPrice: '0',
+            yearlyPrice: '0',
+            buttonText: 'Start today for free',
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        },
+        {
+            id: 'pro',
+            title: 'Pro',
+            description: 'For companies adding collaboration in production.',
+            currency: '$',
+            monthlyPrice: '20',
+            yearlyPrice: '199',
+            buttonText: 'Sign up',
+            badge: 'Most popular',
+            highlight: true,
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        },
+        {
+            id: 'enterprise',
+            title: 'Enterprise',
+            description: 'For organizations that need more support and compliance features.',
+            currency: '$',
+            monthlyPrice: 'Custom',
+            yearlyPrice: 'Custom',
+            buttonText: 'Contact sales',
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        }
+    ],
+      title: "Pricing Plans",
+      description: "Find the right plan for your business",
+      onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
     },
   },
   {

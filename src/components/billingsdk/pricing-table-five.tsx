@@ -1,0 +1,1 @@
+export { PricingTableFive, type PricingTableFiveProps } from "@/registry/billingsdk/pricing-table-five"
