@@ -5,7 +5,6 @@ import {
   CreditCardIcon,
   PlugZap2Icon,
   TrendingUpIcon,
-  ShieldCheckIcon,
   BellIcon,
 } from "lucide-react";
 
@@ -23,11 +22,11 @@ const features = [
   },
   {
     id: 2,
-    label: "Ready to Use",
-    title: "<strong>Ready to Use</strong>",
+    label: "Fast Development",
+    title: "<strong>Fast Development</strong>",
     description:
-      "Production-ready components that have been tested across different browsers and devices. No additional setup or configuration required - just import and use.",
-    icon: ShieldCheckIcon,
+      "Skip weeks of development time with pre-built billing components. Focus on your core business logic while we handle the complex UI patterns and user flows.",
+    icon: TrendingUpIcon,
   },
   {
     id: 3,
@@ -45,14 +44,7 @@ const features = [
       "Completely free to use and modify for personal and commercial projects. Access the full source code, contribute improvements, and customize to your heart's content.",
     icon: Globe2Icon,
   },
-  {
-    id: 5,
-    label: "Fast Development",
-    title: "<strong>Fast Development</strong>",
-    description:
-      "Skip weeks of development time with pre-built billing components. Focus on your core business logic while we handle the complex UI patterns and user flows.",
-    icon: TrendingUpIcon,
-  },
+ 
   {
     id: 6,
     label: "Accessible",
@@ -66,51 +58,86 @@ const features = [
 export default function Features() {
   return (
     <div className="flex flex-col my-24 mt-32 items-center justify-center max-w-7xl mx-auto">
-      <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <div className="text-center">
+
+        <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
         Why choose BillingSDK?
       </h2>
       <p className="text-sm mt-4 text-muted-foreground mb-12 max-w-xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
         Beautiful, customizable billing components that save you development time and effort.
       </p>
+      </div>
+      
 
-      <div className="relative rounded-none -pr-2  ">
-        <div className="w-full md:mx-0">
-          <div className="grid grid-cols-1 relative md:grid-rows-2 md:grid-cols-3">
-            {features.map((feature, index) => (
+      <div className="relative rounded-none px-2 ">
+        <div className="w-full md:mx-0  ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2  ">
+            {features.slice(0,2).map((feature, index) => (
+            <div
+            key={feature.id}
+            className={cn(
+              "bg-black backdrop-blur-sm  border-x-1 border-[#f9f9f9] rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
+             
+            )}
+            style={{
+              animationDelay: `${500 + index * 150}ms`,
+            } as CSSProperties}
+          >
+            <div className="flex flex-col h-full w-full">
+              <div className="mb-5">
+                <feature.icon className="w-12 h-12 hover:scale-110 transition-all duration-100" />
+              </div>
+              <div className="flex-grow">
+                <p
+                  className="max-w-lg text-xl font-normal tracking-tighter md:text-2xl "
+                  dangerouslySetInnerHTML={{
+                    __html: feature.title,
+                  }}
+                />
+                <p className="mt-2 text-sm text-left text-muted-foreground">
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          </div>
+            ))}
+          </div>
+        </div>
+          {/* Second row*/}
+        <div className="mt-2.5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+            {features.slice(2,6).map((feature, index) => (
               <div
                 key={feature.id}
                 className={cn(
-                  "justify-center md:min-h-[240px] transform-gpu flex flex-col p-10 2xl:p-12 animate-in fade-in slide-in-from-bottom-6 duration-1000",
-                  // Add right border for all except last column
-                  (index + 1) % 3 !== 0 && "md:border-r-[1.2px]",
-                  // Add bottom border for first row
-                  index < 3 && "md:border-b-[1.2px]",
-                  // Add top border for mobile
-                  index > 0 && "border-t-[1.2px] md:border-t-0"
+                  "bg-black backdrop-blur-sm border-x-1 border-[#f9f9f9] text-white border-white rounded-md  transition-all duration-300 md:min-h-[190px] transform-gpu flex flex-col p-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 ",
+                 
                 )}
                 style={{
                   animationDelay: `${500 + index * 150}ms`,
                 } as CSSProperties}
               >
-                <div className="mt-2">
-                  <div className="max-w-full">
-                    <div className="flex gap-3 ">
-                      <p
-                        className="max-w-lg text-xl font-normal tracking-tighter md:text-2xl"
-                        dangerouslySetInnerHTML={{
-                          __html: feature.title,
-                        }}
-                      />
-                    </div>
+                <div className="flex flex-col h-full w-full">
+                  <div className="mb-5 ">
+                    <feature.icon className="w-12 h-12 hover:scale-110 transition-all duration-100" />
                   </div>
-                                     <p className="mt-2 text-sm text-left text-muted-foreground">
-                     {feature.description}
-                   </p>
+                  <div className="flex-grow ">
+                    <p
+                      className="max-w-lg text-xl font-normal tracking-tighter md:text-2xl"
+                      dangerouslySetInnerHTML={{
+                        __html: feature.title,
+                      }}
+                    />
+                    <p className="mt-2 text-sm text-left text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
+       
       </div>
     </div>
   );
