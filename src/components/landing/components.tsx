@@ -131,7 +131,7 @@ function ComponentsShowcase() {
                                         className={cn(
                                             "flex flex-row gap-1 h-auto transition-all duration-200 p-2 w-full",
                                             "text-xs font-medium whitespace-nowrap border-0 rounded-none",
-                                            "hover:bg-muted/50 w-full sm:w-auto justify-start sm:justify-center"
+                                            "hover:bg-muted/50 w-full sm:w-auto justify-start sm:justify-center cursor-pointer"
                                         )}
                                     >
                                         <IconComponent className="h-4 w-4" />

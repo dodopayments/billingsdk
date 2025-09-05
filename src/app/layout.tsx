@@ -105,7 +105,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <meta name="color-scheme" content="light dark" />
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
       </head>
-      <body className="flex flex-col min-h-screen font-body" suppressHydrationWarning={true}>
+      <body className="flex flex-col min-h-screen font-body" >
         <ThemeProvider>
           <RootProvider
             theme={{

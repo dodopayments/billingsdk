@@ -178,12 +178,15 @@ export function PreviewComponents({ className, children, registryName }: Preview
                     onClick={() => setTheme(theme)}
                   >
                     <div className="flex items-center gap-2">
-                      <div
-                        className="h-4 w-4 rounded-full border-2 border-border"
-                        style={{
-                          background: `linear-gradient(45deg, ${theme.cssVars.light['--primary']}, ${theme.cssVars.light['--accent']})`
-                        }}
-                      />
+                      <div className="h-4 w-4 rounded-full border-1 border-border overflow-clip">
+                        <div
+                          className="size-4"
+                          style={{
+                            backgroundImage: `linear-gradient(45deg, ${theme.cssVars.light['--primary']}, ${theme.cssVars.light['--accent']})`,
+                        
+                          }}
+                        />
+                      </div>
                       <span>{theme.label}</span>
                       {currentTheme.name === theme.name && (
                         <Check className="ml-auto h-4 w-4" />

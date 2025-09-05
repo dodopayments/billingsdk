@@ -43,27 +43,27 @@ You can add Billing SDK components to your project using either the standard Sha
 
 ### Using ShadCN CLI
 
-Add components directly using their registry URLs:
+Add components using the trusted namespace:
 
 <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
   <Tab value="npx">
     ```bash
-    npx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    npx shadcn@latest add @billingsdk/<component-name>
     ```
   </Tab>
   <Tab value="pnpm">
     ```bash
-    pnpm dlx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    pnpm dlx shadcn@latest add @billingsdk/<component-name>
     ```
   </Tab>
   <Tab value="yarn">
     ```bash
-    yarn dlx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    yarn dlx shadcn@latest add @billingsdk/<component-name>
     ```
   </Tab>
   <Tab value="bun">
     ```bash
-    bunx shadcn@latest add https://billingsdk.com/r/<component-name>.json
+    bunx shadcn@latest add @billingsdk/<component-name>
     ```
   </Tab>
 </Tabs>
