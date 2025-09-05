@@ -1,7 +1,7 @@
 export interface BackendComponent {
     name: string;
     description: string;
-    framework: "nextjs" | "express" | "fastify";
+    framework: "nextjs" | "express" | "fastify" | "react";
     files: Array<{
         path: string;
         content: string;
@@ -19,7 +19,7 @@ export interface Registry {
 export interface Result {
     name: string;
     description: string;
-    framework: "nextjs" | "express" | "fastify";
+    framework: "nextjs" | "express" | "fastify" | "react";
     files: Array<{
         content: string;
         target: string;

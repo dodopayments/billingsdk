@@ -52,7 +52,7 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
+1. **Framework Selection**: Choose your preferred framework (Next.js, React (Vite) or Express.js)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
@@ -67,7 +67,7 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router) or Express.js (Node.js web framework)
+- **Framework**: Next.js (App Router), React (Vite) or Express.js
 - **Payment Provider**: Dodo Payments
 
 ### Generated Files
@@ -301,13 +301,17 @@ npx @billingsdk/cli add usage-meter-circle
 - 🔧 **Features**: Server components, server actions, middleware support
 
 ### Express.js
-- ✅ **Status**: Fully supported
-- 📁 **Structure**: Modular route-based architecture
-- 🔧 **Features**: RESTful API routes, middleware support, TypeScript integration
+✅ **Status**: Fully supported
+- 📁 **Structure**: `src/lib` and `src/routes/dodopayments/*`
+- 🔧 **Features**: Router-mounted API endpoints and webhook handling
+
+### React (Vite)
+- ✅ **Status**: Supported (frontend-only)
+- 📁 **Structure**: `hooks/` and `lib/` for client usage
+- 🔧 **Note**: Pair with Express.js template for backend API routes
 
 ### Coming Soon
 - 🚧 **Fastify**: High-performance backend framework
-- 🚧 **Additional React Frameworks**: Vite, Remix support
 
 ## Supported Payment Providers
 

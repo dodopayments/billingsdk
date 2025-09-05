@@ -37,6 +37,29 @@
             ]
         },
         {
+            "name": "react-dodopayments",
+            "description": "DodoPayments template for React (Vite) frontend",
+            "framework": "react",
+            "files": [
+                {
+                    "path": "packages/templates/react/lib/dodopayments.ts",
+                    "content": "DodoPayments library for React",
+                    "type": "template",
+                    "target": "lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/react/hooks/useBilling.ts",
+                    "content": "useBilling hook for React",
+                    "type": "template",
+                    "target": "hooks/useBilling.ts"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "zod"
+            ]
+        },
+        {
             "name": "express-dodopayments",
             "description": "DodoPayments template for Express.js",
             "framework": "express",

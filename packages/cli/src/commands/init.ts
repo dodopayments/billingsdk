@@ -15,6 +15,7 @@ export const initCommand = new Command()
         options: [
           { value: "nextjs", label: "Next.js", hint: "React framework with App Router" },
           { value: "express", label: "Express.js", hint: "Node.js web framework" },
+          { value: "react", label: "React.js (Vite)", hint: "React frontend with Express backend" },
         ],
       });
 
@@ -28,7 +29,7 @@ export const initCommand = new Command()
       const s = spinner();
       s.start("Setting up your billing project...");
       try {
-        await addFiles(framework as "nextjs" | "express", provider as "dodopayments");
+        await addFiles(framework as "nextjs" | "express" | "react", provider as "dodopayments");
         s.stop("Setup completed successfully!");
       } catch (error) {
         s.stop("Setup failed!");
