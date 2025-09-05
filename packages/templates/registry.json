@@ -52,6 +52,12 @@
                     "content": "useBilling hook for React",
                     "type": "template",
                     "target": "hooks/useBilling.ts"
+                },
+                {
+                    "path": "packages/templates/react/.env.example",
+                    "content": "Env example for React",
+                    "type": "template",
+                    "target": ".env.example"
                 }
             ],
             "dependencies": [
