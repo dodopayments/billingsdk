@@ -183,6 +183,16 @@ pre[class*="language-"]::-webkit-scrollbar {
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+
+  /* Grid Pattern Background */
+  .bg-grid-pattern {
+    background-image: radial-gradient(
+      circle,
+      currentColor 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+  }
 }
 
 /* Playground component centering */

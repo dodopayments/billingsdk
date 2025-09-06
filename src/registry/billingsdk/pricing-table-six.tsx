@@ -620,6 +620,18 @@ export function PricingTableSix({
                 }}
                 onMouseEnter={() => handleCardHover(plan.id, true)}
                 onMouseLeave={() => handleCardHover(plan.id, false)}
+                onClick={() =>
+                  handleCardHover(plan.id, !flippedCards.has(plan.id))
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardHover(plan.id, !flippedCards.has(plan.id));
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-label={`Toggle ${plan.title} plan details`}
               >
                 <div
                   className={cn(
@@ -648,6 +660,7 @@ export function PricingTableSix({
                                 typeof imageHeight === "number"
                                   ? `${imageHeight}px`
                                   : imageHeight,
+                              minHeight: 0,
                             }
                           : undefined
                       }
@@ -799,7 +812,10 @@ export function PricingTableSix({
                         className={cn(
                           buttonVariants({ theme, highlight: plan.highlight })
                         )}
-                        onClick={() => onPlanSelect?.(plan.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onPlanSelect?.(plan.id);
+                        }}
                         aria-label={`Select ${plan.title} plan`}
                       >
                         {plan.buttonText}
@@ -936,7 +952,10 @@ export function PricingTableSix({
                         className={cn(
                           buttonVariants({ theme, highlight: plan.highlight })
                         )}
-                        onClick={() => onPlanSelect?.(plan.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onPlanSelect?.(plan.id);
+                        }}
                         aria-label={`Select ${plan.title} plan`}
                       >
                         {plan.buttonText}
