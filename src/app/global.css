@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'fumadocs-ui/css/vitepress.css';
-@import 'fumadocs-ui/css/preset.css';
+@import "tailwindcss";
+@import "fumadocs-ui/css/vitepress.css";
+@import "fumadocs-ui/css/preset.css";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -47,7 +47,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(16.89% .002 286.18);
+  --background: oklch(16.89% 0.002 286.18);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -145,11 +145,10 @@ pre[class*="language-"]::-webkit-scrollbar {
 
 /* Handwritten font style */
 .handwritten {
-  font-family: var(--font-kalam), 'Comic Sans MS', cursive;
+  font-family: var(--font-kalam), "Comic Sans MS", cursive;
   font-weight: 400;
   letter-spacing: 0.5px;
 }
-
 
 @layer utilities {
   /* Light glass: 1px white/10 border, 10px blur, rgba(255,255,255,.05) bg, 20px radius, inset shadow */
@@ -170,6 +169,19 @@ pre[class*="language-"]::-webkit-scrollbar {
   }
   .glass-hover:hover {
     background-color: rgb(255 255 255 / 0.02);
+  }
+
+  /* 3D Flip Animation Utilities */
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
   }
 }
 

@@ -1,6 +1,6 @@
 ---
 title: Pricing Table Six
-description: The Pricing Table Six component provides a premium pricing table design with image backgrounds and pill-shaped badges. Features split-card layout with dynamic background images in the top half and pricing details in the bottom half.
+description: The Pricing Table Six component provides a premium pricing table design with image backgrounds, interactive flip animation on hover, and pill-shaped badges. Features split-card layout with dynamic background images that flip to reveal detailed features.
 ---
 
 ## Default Theme
@@ -68,11 +68,12 @@ import { plans } from "@/lib/billingsdk-config";
 
 <PricingTableSix 
   plans={plans}
-  title="Premium Pricing"
-  description="Experience our premium pricing cards with stunning visual designs"
+  title="Interactive Pricing Cards"
+  description="Hover over any card to flip and reveal detailed features while keeping pricing intact"
   onPlanSelect={(planId) => console.log('Selected plan:', planId)}
   size="medium" // small, medium, large
   theme="minimal" // minimal or classic
+  imageHeight={250} // Custom image height in pixels
   backgroundImages={{
     'starter': 'url-to-starter-image',
     'pro': 'url-to-pro-image', 
@@ -92,15 +93,27 @@ import { plans } from "@/lib/billingsdk-config";
 | `size` | `"small" \| "medium" \| "large"` | Size variant of the pricing table (default: "medium") |
 | `theme` | `"minimal" \| "classic"` | Theme variant (default: "minimal") |
 | `backgroundImages` | `{ [key: string]: string }` | Custom background images for each plan (optional) |
+| `imageHeight` | `string \| number` | Custom height for image section (supports pixels and CSS values) |
+| `showFeatureTable` | `boolean` | Whether to show the feature comparison table below cards (default: true) |
 | `className` | `string` | Additional CSS classes |
 
 ## Features
+
+### 🔄 Interactive Flip Animation
+- **Whole Card Flip**: Entire card flips on hover to reveal features
+- **Preserved Pricing**: Pricing and button remain consistent on both sides
+- **All Features Visible**: Complete features list displayed without scrolling
+- **3D Transform**: Smooth 700ms perspective-based flip animation
+- **Progressive Disclosure**: Features hidden until user interaction
+- **Visual Hints**: Subtle "Hover to see features" indicator with animated arrow
+- **Staggered Animations**: Feature items animate in sequence for polished feel
 
 ### 🖼️ Image Integration
 - **Split Layout**: Image container in top half, pricing details in bottom half
 - **Dynamic Backgrounds**: Customizable background images per plan via `backgroundImages` prop
 - **Animated Elements**: Floating abstract shapes with smooth animations
 - **Default Images**: Includes colorful fluid/galaxy-like swirl patterns as fallbacks
+- **Customizable Height**: Adjustable image height through `imageHeight` prop
 
 ### 🏷️ Pill-Shaped Badges
 - **Plan Type Badge**: Positioned in top-left (e.g., "Pro", "Starter")

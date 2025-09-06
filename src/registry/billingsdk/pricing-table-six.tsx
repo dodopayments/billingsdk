@@ -1,9 +1,7 @@
 "use client";
 
-"use client";
-
 import { Check, Minus } from "lucide-react";
-import { useState, useId } from "react";
+import { useState, useId, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -79,7 +77,7 @@ const descriptionVariants = cva("text-muted-foreground max-w-3xl", {
 });
 
 const cardVariants = cva(
-  "flex w-full flex-col rounded-xl border border-border/50 text-left h-full transition-all duration-300 shadow-sm overflow-hidden",
+  "relative w-full rounded-xl border-0 text-left transition-all duration-500 shadow-sm overflow-hidden",
   {
     variants: {
       size: {
@@ -89,7 +87,7 @@ const cardVariants = cva(
       },
       theme: {
         minimal: "",
-        classic: "hover:shadow-xl backdrop-blur-sm bg-card/50 border-border/50",
+        classic: "hover:shadow-xl backdrop-blur-sm bg-card/50",
       },
       highlight: {
         true: "",
@@ -101,12 +99,12 @@ const cardVariants = cva(
         theme: "classic",
         highlight: true,
         className:
-          "ring-2 ring-primary/20 border-primary/30 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden",
+          "ring-2 ring-primary/20 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden",
       },
       {
         theme: "minimal",
         highlight: true,
-        className: "ring-2 ring-primary/20 border-primary/30 shadow-lg",
+        className: "ring-2 ring-primary/20 shadow-lg",
       },
     ],
     defaultVariants: {
@@ -117,8 +115,38 @@ const cardVariants = cva(
   }
 );
 
+const flipCardVariants = cva(
+  "w-full h-full transition-transform duration-700 transform-style-preserve-3d cursor-pointer",
+  {
+    variants: {
+      flipped: {
+        true: "rotate-y-180",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      flipped: false,
+    },
+  }
+);
+
+const flipSideVariants = cva(
+  "absolute inset-0 w-full h-full backface-hidden flex flex-col",
+  {
+    variants: {
+      side: {
+        front: "",
+        back: "rotate-y-180",
+      },
+    },
+    defaultVariants: {
+      side: "front",
+    },
+  }
+);
+
 const imageContainerVariants = cva(
-  "relative flex-1 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden",
+  "relative flex-1 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden border border-border/30 rounded-t-xl",
   {
     variants: {
       size: {
@@ -184,7 +212,7 @@ const firstColWidthVariants = cva("", {
 });
 
 const contentContainerVariants = cva(
-  "flex flex-col bg-muted/30 backdrop-blur-sm border-t border-border/30",
+  "flex flex-col bg-muted/30 backdrop-blur-sm border-t border-x border-border/30 rounded-b-xl",
   {
     variants: {
       size: {
@@ -304,7 +332,45 @@ export function PricingTableSix({
   showFeatureTable = true,
 }: PricingTableSixProps) {
   const [isAnnually, setIsAnnually] = useState(false);
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
+  const [cardHeights, setCardHeights] = useState<{ [key: string]: number }>({});
+  const cardRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const uniqueId = useId();
+
+  const calculateCardHeight = (planId: string, isFlipped: boolean): number => {
+    const frontRef = cardRefs.current[`${planId}-front`];
+    const backRef = cardRefs.current[`${planId}-back`];
+
+    if (!frontRef || !backRef) return 500; // Default height
+
+    const frontHeight = frontRef.scrollHeight;
+    const backHeight = backRef.scrollHeight;
+
+    return Math.max(frontHeight, backHeight);
+  };
+
+  useEffect(() => {
+    const newHeights: { [key: string]: number } = {};
+    plans.forEach((plan) => {
+      newHeights[plan.id] = calculateCardHeight(
+        plan.id,
+        flippedCards.has(plan.id)
+      );
+    });
+    setCardHeights(newHeights);
+  }, [plans, flippedCards]);
+
+  const handleCardHover = (planId: string, isHovering: boolean) => {
+    setFlippedCards((prev) => {
+      const newSet = new Set(prev);
+      if (isHovering) {
+        newSet.add(planId);
+      } else {
+        newSet.delete(planId);
+      }
+      return newSet;
+    });
+  };
 
   function calculateDiscount(
     monthlyPrice: string,
@@ -441,160 +507,324 @@ export function PricingTableSix({
                     highlight: plan.highlight,
                   })
                 )}
+                style={{
+                  height: cardHeights[plan.id]
+                    ? `${cardHeights[plan.id]}px`
+                    : "auto",
+                  perspective: "1000px",
+                }}
+                onMouseEnter={() => handleCardHover(plan.id, true)}
+                onMouseLeave={() => handleCardHover(plan.id, false)}
               >
-                {/* Image Container - Top Half */}
                 <div
-                  className={cn(imageContainerVariants({ size }))}
-                  style={
-                    imageHeight
-                      ? {
-                          minHeight:
-                            typeof imageHeight === "number"
-                              ? `${imageHeight}px`
-                              : imageHeight,
-                          height:
-                            typeof imageHeight === "number"
-                              ? `${imageHeight}px`
-                              : imageHeight,
-                        }
-                      : {}
-                  }
-                >
-                  {/* Background Image */}
-                  <div
-                    className="absolute inset-0 bg-center bg-cover"
-                    style={{
-                      backgroundImage: `url("${getBackgroundImage(plan.id)}")`,
-                    }}
-                  />
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-indigo-900/30" />
-
-                  {/* Abstract Shapes for fluid effect */}
-                  <div className="absolute inset-0 overflow-hidden">
-                    <motion.div
-                      className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-full blur-xl"
-                      animate={{
-                        x: [0, 20, 0],
-                        y: [0, -15, 0],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                    <motion.div
-                      className="absolute -bottom-5 -right-5 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-cyan-500/20 rounded-full blur-lg"
-                      animate={{
-                        x: [0, -25, 0],
-                        y: [0, 10, 0],
-                        scale: [1, 0.9, 1],
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1,
-                      }}
-                    />
-                  </div>
-
-                  {/* Plan Type Badge - Top Left */}
-                  <Badge
-                    className={cn(badgeVariants({ position: "top-left" }))}
-                  >
-                    {plan.title}
-                  </Badge>
-
-                  {/* Most Popular Badge - Top Right */}
-                  {plan.highlight && (
-                    <Badge
-                      className={cn(badgeVariants({ position: "top-right" }))}
-                    >
-                      Most Popular
-                    </Badge>
+                  className={cn(
+                    flipCardVariants({
+                      flipped: flippedCards.has(plan.id),
+                    })
                   )}
-                </div>
+                >
+                  {/* Front Side */}
+                  <div
+                    ref={(el) => {
+                      cardRefs.current[`${plan.id}-front`] = el;
+                    }}
+                    className={cn(flipSideVariants({ side: "front" }))}
+                  >
+                    {/* Image Container - Top Half */}
+                    <div
+                      className={cn(imageContainerVariants({ size }))}
+                      style={
+                        imageHeight
+                          ? {
+                              minHeight:
+                                typeof imageHeight === "number"
+                                  ? `${imageHeight}px`
+                                  : imageHeight,
+                              height:
+                                typeof imageHeight === "number"
+                                  ? `${imageHeight}px`
+                                  : imageHeight,
+                            }
+                          : {}
+                      }
+                    >
+                      {/* Background Image */}
+                      <div
+                        className="absolute inset-0 bg-center bg-cover"
+                        style={{
+                          backgroundImage: `url("${getBackgroundImage(
+                            plan.id
+                          )}")`,
+                        }}
+                      />
 
-                {/* Content Container - Bottom Half */}
-                <div className={cn(contentContainerVariants({ size }))}>
-                  <div className="flex flex-col gap-2">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={isAnnually ? "year" : "month"}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="flex items-baseline gap-2"
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-indigo-900/30" />
+
+                      {/* Abstract Shapes for fluid effect */}
+                      <div className="absolute inset-0 overflow-hidden">
+                        <motion.div
+                          className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-full blur-xl"
+                          animate={{
+                            x: [0, 20, 0],
+                            y: [0, -15, 0],
+                            scale: [1, 1.1, 1],
+                          }}
+                          transition={{
+                            duration: 6,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        />
+                        <motion.div
+                          className="absolute -bottom-5 -right-5 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-cyan-500/20 rounded-full blur-lg"
+                          animate={{
+                            x: [0, -25, 0],
+                            y: [0, 10, 0],
+                            scale: [1, 0.9, 1],
+                          }}
+                          transition={{
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 1,
+                          }}
+                        />
+                      </div>
+
+                      {/* Plan Type Badge - Top Left */}
+                      <Badge
+                        className={cn(badgeVariants({ position: "top-left" }))}
                       >
-                        {isAnnually ? (
-                          <>
-                            <span
-                              className={cn(priceTextVariants({ size, theme }))}
-                            >
-                              {parseFloat(plan.yearlyPrice) >= 0 && (
-                                <>{plan.currency}</>
-                              )}
-                              {plan.yearlyPrice}
-                              {calculateDiscount(
-                                plan.monthlyPrice,
-                                plan.yearlyPrice
-                              ) > 0 && (
+                        {plan.title}
+                      </Badge>
+
+                      {/* Most Popular Badge - Top Right */}
+                      {plan.highlight && (
+                        <Badge
+                          className={cn(
+                            badgeVariants({ position: "top-right" })
+                          )}
+                        >
+                          Most Popular
+                        </Badge>
+                      )}
+                    </div>
+
+                    {/* Content Container - Bottom Half */}
+                    <div className={cn(contentContainerVariants({ size }))}>
+                      <div className="flex flex-col gap-2">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={isAnnually ? "year" : "month"}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex items-baseline gap-2"
+                          >
+                            {isAnnually ? (
+                              <>
                                 <span
                                   className={cn(
-                                    "text-xs ml-2",
-                                    theme === "classic"
-                                      ? "text-emerald-500 font-semibold"
-                                      : "text-primary"
+                                    priceTextVariants({ size, theme })
                                   )}
                                 >
+                                  {parseFloat(plan.yearlyPrice) >= 0 && (
+                                    <>{plan.currency}</>
+                                  )}
+                                  {plan.yearlyPrice}
                                   {calculateDiscount(
                                     plan.monthlyPrice,
                                     plan.yearlyPrice
+                                  ) > 0 && (
+                                    <span
+                                      className={cn(
+                                        "text-xs ml-2",
+                                        theme === "classic"
+                                          ? "text-emerald-500 font-semibold"
+                                          : "text-primary"
+                                      )}
+                                    >
+                                      {calculateDiscount(
+                                        plan.monthlyPrice,
+                                        plan.yearlyPrice
+                                      )}
+                                      % off
+                                    </span>
                                   )}
-                                  % off
                                 </span>
-                              )}
-                            </span>
-                            <span className="text-sm text-muted-foreground">
-                              per year
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <span
-                              className={cn(priceTextVariants({ size, theme }))}
-                            >
-                              {parseFloat(plan.monthlyPrice) >= 0 && (
-                                <>{plan.currency}</>
-                              )}
-                              {plan.monthlyPrice}
-                            </span>
-                            <span className="text-sm text-muted-foreground">
-                              per month
-                            </span>
-                          </>
+                                <span className="text-sm text-muted-foreground">
+                                  per year
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span
+                                  className={cn(
+                                    priceTextVariants({ size, theme })
+                                  )}
+                                >
+                                  {parseFloat(plan.monthlyPrice) >= 0 && (
+                                    <>{plan.currency}</>
+                                  )}
+                                  {plan.monthlyPrice}
+                                </span>
+                                <span className="text-sm text-muted-foreground">
+                                  per month
+                                </span>
+                              </>
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      <Button
+                        className={cn(
+                          buttonVariants({ theme, highlight: plan.highlight })
                         )}
-                      </motion.div>
-                    </AnimatePresence>
+                        onClick={() => onPlanSelect?.(plan.id)}
+                        aria-label={`Select ${plan.title} plan`}
+                      >
+                        {plan.buttonText}
+                        {theme === "classic" && plan.highlight && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700" />
+                        )}
+                      </Button>
+                    </div>
                   </div>
 
-                  <Button
-                    className={cn(
-                      buttonVariants({ theme, highlight: plan.highlight })
-                    )}
-                    onClick={() => onPlanSelect?.(plan.id)}
-                    aria-label={`Select ${plan.title} plan`}
+                  {/* Back Side */}
+                  <div
+                    ref={(el) => {
+                      cardRefs.current[`${plan.id}-back`] = el;
+                    }}
+                    className={cn(flipSideVariants({ side: "back" }))}
                   >
-                    {plan.buttonText}
-                    {theme === "classic" && plan.highlight && (
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700" />
-                    )}
-                  </Button>
+                    {/* Features List - Top Section */}
+                    <div className="flex-1 bg-muted/30 backdrop-blur-sm border border-border/30 relative overflow-hidden rounded-t-xl">
+                      {/* No background image on back side - just muted background */}
+
+                      {/* Features Content */}
+                      <div className="relative z-10 p-6 h-full">
+                        <div className="mb-4">
+                          <Badge
+                            className={cn(
+                              badgeVariants({ position: "top-left" })
+                            )}
+                            style={{ position: "relative", top: 0, left: 0 }}
+                          >
+                            {plan.title} Features
+                          </Badge>
+                        </div>
+                        <div className="space-y-3">
+                          {plan.features.map((feature, featureIndex) => (
+                            <motion.div
+                              key={featureIndex}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{
+                                duration: 0.3,
+                                delay: featureIndex * 0.1,
+                              }}
+                              className="flex items-center gap-3 text-foreground"
+                            >
+                              {feature.icon === "check" ? (
+                                <Check className="size-5 text-green-600 flex-shrink-0" />
+                              ) : feature.icon === "minus" ? (
+                                <Minus className="size-5 text-muted-foreground flex-shrink-0" />
+                              ) : null}
+                              <span className="text-sm font-medium">
+                                {feature.name}
+                              </span>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Pricing and Button - Bottom Section */}
+                    <div className={cn(contentContainerVariants({ size }))}>
+                      <div className="flex flex-col gap-2">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={isAnnually ? "year" : "month"}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex items-baseline gap-2"
+                          >
+                            {isAnnually ? (
+                              <>
+                                <span
+                                  className={cn(
+                                    priceTextVariants({ size, theme })
+                                  )}
+                                >
+                                  {parseFloat(plan.yearlyPrice) >= 0 && (
+                                    <>{plan.currency}</>
+                                  )}
+                                  {plan.yearlyPrice}
+                                  {calculateDiscount(
+                                    plan.monthlyPrice,
+                                    plan.yearlyPrice
+                                  ) > 0 && (
+                                    <span
+                                      className={cn(
+                                        "text-xs ml-2",
+                                        theme === "classic"
+                                          ? "text-emerald-500 font-semibold"
+                                          : "text-primary"
+                                      )}
+                                    >
+                                      {calculateDiscount(
+                                        plan.monthlyPrice,
+                                        plan.yearlyPrice
+                                      )}
+                                      % off
+                                    </span>
+                                  )}
+                                </span>
+                                <span className="text-sm text-muted-foreground">
+                                  per year
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span
+                                  className={cn(
+                                    priceTextVariants({ size, theme })
+                                  )}
+                                >
+                                  {parseFloat(plan.monthlyPrice) >= 0 && (
+                                    <>{plan.currency}</>
+                                  )}
+                                  {plan.monthlyPrice}
+                                </span>
+                                <span className="text-sm text-muted-foreground">
+                                  per month
+                                </span>
+                              </>
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      <Button
+                        className={cn(
+                          buttonVariants({ theme, highlight: plan.highlight })
+                        )}
+                        onClick={() => onPlanSelect?.(plan.id)}
+                        aria-label={`Select ${plan.title} plan`}
+                      >
+                        {plan.buttonText}
+                        {theme === "classic" && plan.highlight && (
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700" />
+                        )}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             ))}

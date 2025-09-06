@@ -8,13 +8,13 @@ export function PricingTableSixDemo() {
     <>
       <PricingTableSix
         plans={plans}
-        title="Premium Pricing"
-        description="Experience our premium pricing cards with stunning visual designs"
+        title="Interactive Pricing Cards"
+        description="Hover over any card to flip and reveal detailed features while keeping pricing intact"
         onPlanSelect={(planId) => console.log("Selected plan:", planId)}
-        size="medium" // small, medium, large
+        size="large" // small, medium, large
         theme="minimal" // minimal or classic
         className="w-full"
-        imageHeight={250} // Custom image height in pixels
+        imageHeight={200} // Custom image height in pixels
         showFeatureTable={true} // Show feature comparison table
         backgroundImages={{
           starter:
