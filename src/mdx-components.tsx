@@ -29,6 +29,7 @@ import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-de
 import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-demo';
 import { PricingTableFiveDemo } from '@/components/pricing-table-five-demo';
 import { PricingTableFiveDemoMinimal } from '@/components/pricing-table-five-minimal-demo';
+import { PaymentDetailsDemo } from '@/components/payment-details-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -64,5 +65,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PaymentMethodSelectorDemo,
     PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
+    PaymentDetailsDemo,
   };
 }

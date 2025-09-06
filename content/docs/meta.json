@@ -28,6 +28,7 @@
     "---Banner---",
     "components/banner/index",
     "---Payment Processing---",
+    "components/payment-details/index",
     "components/payment-success-dialog/index",
     "components/payment-method-selector/index",
     "components/payment-method-manager/index",

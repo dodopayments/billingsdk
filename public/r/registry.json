@@ -39,7 +39,8 @@
                 "@billingsdk/invoice-history",
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-method-selector",
-                "@billingsdk/payment-method-manager"
+                "@billingsdk/payment-method-manager",
+                "@billingsdk/payment-details"
             ]
         },
         {
@@ -544,30 +545,27 @@
             ]
           },
           {
-            "name": "payment-method-selector",
+            "name": "payment-details",
             "type": "registry:block",
-            "title": "Payment Method Selector",
-            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+            "title": "Payment Details",
+            "description": "A comprehensive payment details form component with card details, billing information, and country selection",
             "files": [
               {
-                "path": "src/registry/billingsdk/payment-method-selector.tsx",
+                "path": "src/registry/billingsdk/payment-details.tsx",
                 "type": "registry:component",
-                "target": "components/billingsdk/payment-method-selector.tsx"
+                "target": "components/billingsdk/payment-details.tsx"
               },
               {
-                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+                "path": "src/components/payment-details-demo.tsx",
                 "type": "registry:component",
-                "target": "components/payment-method-selector-demo.tsx"
+                "target": "components/payment-details-demo.tsx"
               }
             ],
             "dependencies": [
-              "lucide-react",
-              "motion"
+              "lucide-react"
             ],
             "registryDependencies": [
               "button",
-              "dialog",
-              "tooltip",
               "card",
               "input",
               "label",
