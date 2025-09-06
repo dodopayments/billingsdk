@@ -19,7 +19,7 @@ description: The Pricing Table Six component provides a premium pricing table de
 
 ## Installation
 
-<Tabs items={["shadcn", "billingSDK"]} defaultValue="shadcn" className="bg-transparent border-none">
+<Tabs items={["shadcn", "billingSDK"]}defaultValue="shadcn"className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
     <Tabs items={["npx", "pnpm", "yarn"]} defaultValue="npx" groupId="installation-tabs" >
       <Tab value="npx">
@@ -97,34 +97,33 @@ export default function Example() {
 
 ### Interactive Flip Animation
 
-- **Whole Card Flip**: Entire card flips on hover to reveal features
-- **Preserved Pricing**: Pricing and button remain consistent on both sides
-- **All Features Visible**: Complete features list displayed without scrolling
-- **3D Transform**: Smooth 700ms perspective-based flip animation
-- **Progressive Disclosure**: Features hidden until user interaction
-- **Visual Hints**: Subtle "Hover to see features" indicator with animated arrow
-- **Staggered Animations**: Feature items animate in sequence for polished feel
+- **Seamless Card Transition**: Smooth 700ms 3D perspective-based animation that flips the entire card on hover or click
+- **Dual-Sided Consistency**: Maintains pricing information and call-to-action elements on both front and back sides
+- **Complete Feature Visibility**: All plan features displayed without requiring scrolling for improved user experience
+- **Progressive Disclosure**: Features remain hidden until user interaction to reduce cognitive load
+- **Staggered Animations**: Sequential feature item animations create a polished, professional presentation
 
-### Image Integration
+### Advanced Image Integration
 
-- **Split Layout**: Image container in top half, pricing details in bottom half
-- **Dynamic Backgrounds**: Customizable background images per plan via `backgroundImages` prop
-- **Animated Elements**: Floating abstract shapes with smooth animations
-- **Default Images**: Includes colorful fluid/galaxy-like swirl patterns as fallbacks
-- **Customizable Height**: Adjustable image height through `imageHeight` prop
+- **Flexible Layout**: Split-card design with image container occupying the top half and pricing details in the bottom half
+- **Multi-Format Background Support**: Accepts customizable background images in PNG, JPG, JPEG, WebP, GIF, BMP, and TIFF formats
+- **Dynamic Image Management**: Per-plan background customization via the `backgroundImages` prop with comprehensive format detection
+- **Intelligent Fallbacks**: Theme-aware gradient overlays with animated abstract shapes when no custom images are provided
+- **Height Customization**: Adjustable image section height through the `imageHeight` prop supporting both pixel and CSS values
 
-### Pill-Shaped Badges
+### Distinctive Badge System
 
-- **Plan Type Badge**: Positioned in top-left (e.g., "Pro", "Starter")
-- **"Most Popular" Badge**: Positioned in top-right for highlighted plans
-- **Styling**: Black background with white text and subtle borders
+- **Plan Identification**: Clearly labeled plan type badges positioned in the top-left corner for immediate recognition
+- **Promotional Highlighting**: "Most Popular" badges for featured plans positioned in the top-right corner with visual emphasis
+- **Professional Styling**: Consistent black background with white text and subtle borders for enhanced readability
 
-### Responsive Design
+### Responsive Design & Accessibility
 
-- **Mobile-First**: Adapts to different screen sizes
-- **Rounded Corners**: Soft radius for modern appearance
-- **Dark Borders**: Subtle shadows for visual separation
-- **Optimized Spacing**: Plenty of padding and whitespace
+- **Mobile-First Architecture**: Fully responsive design that adapts seamlessly to all device screen sizes
+- **Modern Aesthetics**: Rounded corners and optimized whitespace for a contemporary appearance
+- **Visual Hierarchy**: Subtle shadows and borders for clear visual separation between elements
+- **Touch Device Support**: Click-based card flipping for improved interaction on touch-enabled devices
+- **Keyboard Navigation**: Full keyboard accessibility support for inclusive user experiences
 
 ## Theming
 
