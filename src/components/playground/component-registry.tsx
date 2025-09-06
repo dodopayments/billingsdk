@@ -13,12 +13,14 @@ import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 
 export const componentRegistry: ComponentConfig[] = [
   {
     id: "banner",
     name: "Banner",
-    description: "Flexible notification banner with multiple variants and animations",
+    description:
+      "Flexible notification banner with multiple variants and animations",
     category: "ui",
     component: Banner,
     imports: ["@/components/billingsdk/banner"],
@@ -44,7 +46,8 @@ export const componentRegistry: ComponentConfig[] = [
   {
     id: "pricing-table-one",
     name: "Pricing Table One",
-    description: "Clean, modern pricing table with feature lists and animations",
+    description:
+      "Clean, modern pricing table with feature lists and animations",
     category: "pricing",
     component: PricingTableOne,
     imports: ["@/components/billingsdk/pricing-table-one"],
@@ -136,19 +139,19 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Up to 5 users",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Basic analytics",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Email support",
               icon: "check",
-              iconColor: "text-orange-500"
-            }
-          ]
+              iconColor: "text-orange-500",
+            },
+          ],
         },
         {
           id: "pro",
@@ -163,26 +166,26 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Up to 25 users",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Advanced analytics",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Priority support",
               icon: "check",
-              iconColor: "text-orange-500"
+              iconColor: "text-orange-500",
             },
             {
               name: "Custom integrations",
               icon: "check",
-              iconColor: "text-purple-500"
-            }
-          ]
-        }
-      ]
+              iconColor: "text-purple-500",
+            },
+          ],
+        },
+      ],
     },
   },
   {
@@ -280,19 +283,19 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Unlimited users",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Basic reporting",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Community support",
               icon: "check",
-              iconColor: "text-orange-500"
-            }
-          ]
+              iconColor: "text-orange-500",
+            },
+          ],
         },
         {
           id: "professional",
@@ -307,26 +310,26 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Everything in Basic",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Advanced analytics",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Priority support",
               icon: "check",
-              iconColor: "text-orange-500"
+              iconColor: "text-orange-500",
             },
             {
               name: "API access",
               icon: "check",
-              iconColor: "text-purple-500"
-            }
-          ]
-        }
-      ]
+              iconColor: "text-purple-500",
+            },
+          ],
+        },
+      ],
     },
   },
   {
@@ -422,19 +425,19 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "1 project",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Basic templates",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Community support",
               icon: "check",
-              iconColor: "text-orange-500"
-            }
-          ]
+              iconColor: "text-orange-500",
+            },
+          ],
         },
         {
           id: "team",
@@ -449,26 +452,26 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Unlimited projects",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Premium templates",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Priority support",
               icon: "check",
-              iconColor: "text-orange-500"
+              iconColor: "text-orange-500",
             },
             {
               name: "Team collaboration",
               icon: "check",
-              iconColor: "text-purple-500"
-            }
-          ]
-        }
-      ]
+              iconColor: "text-purple-500",
+            },
+          ],
+        },
+      ],
     },
   },
   {
@@ -596,127 +599,332 @@ export const componentRegistry: ComponentConfig[] = [
   onPlanSelect={(planId) => console.log('Selected plan:', planId)}
 />`,
     defaultProps: {
-      plans:  [
+      plans: [
         {
-            id: 'starter',
-            title: 'Starter',
-            description: 'For developers testing out Liveblocks locally.',
-            currency: '$',
-            monthlyPrice: '0',
-            yearlyPrice: '0',
-            buttonText: 'Start today for free',
-            features: [
-                {
-                    name: 'Presence',
-                    icon: "check",
-                    iconColor: 'text-green-500'
-                },
-                {
-                    name: 'Comments',
-                    icon: "check",
-                    iconColor: 'text-orange-500'
-                },
-                {
-                    name: 'Notifications',
-                    icon: "check",
-                    iconColor: 'text-teal-500'
-                },
-                {
-                    name: 'Text Editor',
-                    icon: "check",
-                    iconColor: 'text-blue-500'
-                },
-                {
-                    name: 'Sync Datastore',
-                    icon: "check",
-                    iconColor: 'text-zinc-500'
-                }
-            ],
+          id: "starter",
+          title: "Starter",
+          description: "For developers testing out Liveblocks locally.",
+          currency: "$",
+          monthlyPrice: "0",
+          yearlyPrice: "0",
+          buttonText: "Start today for free",
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+            {
+              name: "Text Editor",
+              icon: "check",
+              iconColor: "text-blue-500",
+            },
+            {
+              name: "Sync Datastore",
+              icon: "check",
+              iconColor: "text-zinc-500",
+            },
+          ],
         },
         {
-            id: 'pro',
-            title: 'Pro',
-            description: 'For companies adding collaboration in production.',
-            currency: '$',
-            monthlyPrice: '20',
-            yearlyPrice: '199',
-            buttonText: 'Sign up',
-            badge: 'Most popular',
-            highlight: true,
-            features: [
-                {
-                    name: 'Presence',
-                    icon: "check",
-                    iconColor: 'text-green-500'
-                },
-                {
-                    name: 'Comments',
-                    icon: "check",
-                    iconColor: 'text-orange-500'
-                },
-                {
-                    name: 'Notifications',
-                    icon: "check",
-                    iconColor: 'text-teal-500'
-                },
-                {
-                    name: 'Text Editor',
-                    icon: "check",
-                    iconColor: 'text-blue-500'
-                },
-                {
-                    name: 'Sync Datastore',
-                    icon: "check",
-                    iconColor: 'text-zinc-500'
-                }
-            ],
+          id: "pro",
+          title: "Pro",
+          description: "For companies adding collaboration in production.",
+          currency: "$",
+          monthlyPrice: "20",
+          yearlyPrice: "199",
+          buttonText: "Sign up",
+          badge: "Most popular",
+          highlight: true,
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+            {
+              name: "Text Editor",
+              icon: "check",
+              iconColor: "text-blue-500",
+            },
+            {
+              name: "Sync Datastore",
+              icon: "check",
+              iconColor: "text-zinc-500",
+            },
+          ],
         },
         {
-            id: 'enterprise',
-            title: 'Enterprise',
-            description: 'For organizations that need more support and compliance features.',
-            currency: '$',
-            monthlyPrice: 'Custom',
-            yearlyPrice: 'Custom',
-            buttonText: 'Contact sales',
-            features: [
-                {
-                    name: 'Presence',
-                    icon: "check",
-                    iconColor: 'text-green-500'
-                },
-                {
-                    name: 'Comments',
-                    icon: "check",
-                    iconColor: 'text-orange-500'
-                },
-                {
-                    name: 'Notifications',
-                    icon: "check",
-                    iconColor: 'text-teal-500'
-                },
-                {
-                    name: 'Text Editor',
-                    icon: "check",
-                    iconColor: 'text-blue-500'
-                },
-                {
-                    name: 'Sync Datastore',
-                    icon: "check",
-                    iconColor: 'text-zinc-500'
-                }
-            ],
-        }
-    ],
+          id: "enterprise",
+          title: "Enterprise",
+          description:
+            "For organizations that need more support and compliance features.",
+          currency: "$",
+          monthlyPrice: "Custom",
+          yearlyPrice: "Custom",
+          buttonText: "Contact sales",
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+            {
+              name: "Text Editor",
+              icon: "check",
+              iconColor: "text-blue-500",
+            },
+            {
+              name: "Sync Datastore",
+              icon: "check",
+              iconColor: "text-zinc-500",
+            },
+          ],
+        },
+      ],
       title: "Pricing Plans",
       description: "Find the right plan for your business",
-      onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+      onPlanSelect: (planId: string) => console.log("Selected plan:", planId),
+    },
+  },
+  {
+    id: "pricing-table-six",
+    name: "Pricing Table Six",
+    description:
+      "Premium pricing table with image backgrounds and pill-shaped badges",
+    category: "pricing",
+    component: PricingTableSix,
+    imports: ["@/components/billingsdk/pricing-table-six"],
+    defaultCode: `<PricingTableSix
+  plans={[
+    {
+      id: 'starter',
+      title: 'Starter',
+      description: 'For developers testing out Liveblocks locally.',
+      currency: '$',
+      monthlyPrice: '0',
+      yearlyPrice: '0',
+      buttonText: 'Start today for free',
+      features: [
+        {
+          name: 'Presence',
+          icon: "check",
+          iconColor: 'text-green-500'
+        },
+        {
+          name: 'Comments',
+          icon: "check",
+          iconColor: 'text-orange-500'
+        },
+        {
+          name: 'Notifications',
+          icon: "check",
+          iconColor: 'text-teal-500'
+        }
+      ]
+    },
+    {
+      id: 'pro',
+      title: 'Pro',
+      description: 'For companies adding collaboration in production.',
+      currency: '$',
+      monthlyPrice: '20',
+      yearlyPrice: '199',
+      buttonText: 'Sign up',
+      badge: 'Most popular',
+      highlight: true,
+      features: [
+        {
+          name: 'Presence',
+          icon: "check",
+          iconColor: 'text-green-500'
+        },
+        {
+          name: 'Comments',
+          icon: "check",
+          iconColor: 'text-orange-500'
+        },
+        {
+          name: 'Notifications',
+          icon: "check",
+          iconColor: 'text-teal-500'
+        }
+      ]
+    },
+    {
+      id: 'enterprise',
+      title: 'Enterprise',
+      description: 'For organizations that need more support and compliance features.',
+      currency: '$',
+      monthlyPrice: 'Custom',
+      yearlyPrice: 'Custom',
+      buttonText: 'Contact sales',
+      features: [
+        {
+          name: 'Presence',
+          icon: "check",
+          iconColor: 'text-green-500'
+        },
+        {
+          name: 'Comments',
+          icon: "check",
+          iconColor: 'text-orange-500'
+        },
+        {
+          name: 'Notifications',
+          icon: "check",
+          iconColor: 'text-teal-500'
+        }
+      ]
+    }
+  ]}
+  title="Premium Pricing"
+  description="Experience our premium pricing cards with stunning visual designs"
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+  size="medium"
+  theme="minimal"
+  imageHeight={250}
+  showFeatureTable={true}
+  backgroundImages={{
+    'starter': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad1" cx="30%" cy="30%" r="60%"><stop offset="0%" style="stop-color:%23f59e0b;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%23f97316;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23dc2626;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad1)" /><circle cx="80" cy="60" r="40" fill="%23fbbf24" opacity="0.4" /><circle cx="320" cy="140" r="60" fill="%23fb923c" opacity="0.3" /></svg>',
+    'pro': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad2" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23a855f7;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%233b82f6;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%236366f1;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad2)" /><circle cx="100" cy="80" r="60" fill="%23ec4899" opacity="0.3" /><circle cx="300" cy="120" r="80" fill="%23f59e0b" opacity="0.2" /></svg>',
+    'enterprise': 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad3" cx="70%" cy="70%" r="50%"><stop offset="0%" style="stop-color:%2306b6d4;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%230891b2;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%230e7490;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad3)" /><circle cx="120" cy="100" r="70" fill="%2322d3ee" opacity="0.3" /><circle cx="280" cy="80" r="50" fill="%2367e8f9" opacity="0.4" /></svg>'
+  }}
+/>`,
+    defaultProps: {
+      plans: [
+        {
+          id: "starter",
+          title: "Starter",
+          description: "For developers testing out Liveblocks locally.",
+          currency: "$",
+          monthlyPrice: "0",
+          yearlyPrice: "0",
+          buttonText: "Start today for free",
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+          ],
+        },
+        {
+          id: "pro",
+          title: "Pro",
+          description: "For companies adding collaboration in production.",
+          currency: "$",
+          monthlyPrice: "20",
+          yearlyPrice: "199",
+          buttonText: "Sign up",
+          badge: "Most popular",
+          highlight: true,
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+          ],
+        },
+        {
+          id: "enterprise",
+          title: "Enterprise",
+          description:
+            "For organizations that need more support and compliance features.",
+          currency: "$",
+          monthlyPrice: "Custom",
+          yearlyPrice: "Custom",
+          buttonText: "Contact sales",
+          features: [
+            {
+              name: "Presence",
+              icon: "check",
+              iconColor: "text-green-500",
+            },
+            {
+              name: "Comments",
+              icon: "check",
+              iconColor: "text-orange-500",
+            },
+            {
+              name: "Notifications",
+              icon: "check",
+              iconColor: "text-teal-500",
+            },
+          ],
+        },
+      ],
+      title: "Premium Pricing",
+      description:
+        "Experience our premium pricing cards with stunning visual designs",
+      onPlanSelect: (planId: string) => console.log("Selected plan:", planId),
+      size: "medium",
+      theme: "minimal",
+      backgroundImages: {
+        starter:
+          'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad1" cx="30%" cy="30%" r="60%"><stop offset="0%" style="stop-color:%23f59e0b;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%23f97316;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23dc2626;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad1)" /><circle cx="80" cy="60" r="40" fill="%23fbbf24" opacity="0.4" /><circle cx="320" cy="140" r="60" fill="%23fb923c" opacity="0.3" /></svg>',
+        pro: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad2" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23a855f7;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%233b82f6;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%236366f1;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad2)" /><circle cx="100" cy="80" r="60" fill="%23ec4899" opacity="0.3" /><circle cx="300" cy="120" r="80" fill="%23f59e0b" opacity="0.2" /></svg>',
+        enterprise:
+          'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad3" cx="70%" cy="70%" r="50%"><stop offset="0%" style="stop-color:%2306b6d4;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%230891b2;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%230e7490;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad3)" /><circle cx="120" cy="100" r="70" fill="%2322d3ee" opacity="0.3" /><circle cx="280" cy="80" r="50" fill="%2367e8f9" opacity="0.4" /></svg>',
+      },
     },
   },
   {
     id: "cancel-subscription-card",
     name: "Cancel Subscription Card",
-    description: "Elegant subscription cancellation interface with confirmation flow",
+    description:
+      "Elegant subscription cancellation interface with confirmation flow",
     category: "subscription",
     component: CancelSubscriptionCard,
     imports: ["@/components/billingsdk/cancel-subscription-card"],
@@ -759,7 +967,8 @@ export const componentRegistry: ComponentConfig[] = [
 />`,
     defaultProps: {
       title: "Cancel Subscription",
-      description: "We're sorry to see you go. Your subscription will remain active until the end of your billing period.",
+      description:
+        "We're sorry to see you go. Your subscription will remain active until the end of your billing period.",
       plan: {
         id: "pro",
         title: "Pro",
@@ -773,26 +982,29 @@ export const componentRegistry: ComponentConfig[] = [
           {
             name: "Up to 25 users",
             icon: "check",
-            iconColor: "text-green-500"
+            iconColor: "text-green-500",
           },
           {
             name: "Advanced analytics",
             icon: "check",
-            iconColor: "text-blue-500"
+            iconColor: "text-blue-500",
           },
           {
             name: "Priority support",
             icon: "check",
-            iconColor: "text-orange-500"
-          }
-        ]
+            iconColor: "text-orange-500",
+          },
+        ],
       },
       warningTitle: "What happens when you cancel?",
-      warningText: "You'll lose access to all premium features at the end of your current billing period.",
+      warningText:
+        "You'll lose access to all premium features at the end of your current billing period.",
       keepButtonText: "Keep My Subscription",
       continueButtonText: "Continue Cancellation",
-      onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),
-      onKeepSubscription: (planId: string) => console.log("Subscription kept for plan:", planId),
+      onCancel: (planId: string) =>
+        console.log("Subscription cancelled for plan:", planId),
+      onKeepSubscription: (planId: string) =>
+        console.log("Subscription kept for plan:", planId),
     },
   },
   {
@@ -836,11 +1048,13 @@ export const componentRegistry: ComponentConfig[] = [
         features: [
           { name: "Presence", icon: "check", iconColor: "text-green-500" },
           { name: "Comments", icon: "check", iconColor: "text-orange-500" },
-          { name: "Notifications", icon: "check", iconColor: "text-teal-500" }
-        ]
+          { name: "Notifications", icon: "check", iconColor: "text-teal-500" },
+        ],
       },
-      onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),
-      onKeepSubscription: (planId: string) => console.log("Subscription kept for plan:", planId),
+      onCancel: (planId: string) =>
+        console.log("Subscription cancelled for plan:", planId),
+      onKeepSubscription: (planId: string) =>
+        console.log("Subscription kept for plan:", planId),
     },
   },
   {
@@ -892,8 +1106,8 @@ export const componentRegistry: ComponentConfig[] = [
         buttonText: "Start today for free",
         features: [
           { name: "Presence", icon: "check", iconColor: "text-green-500" },
-          { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-        ]
+          { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+        ],
       },
       plans: [
         {
@@ -906,9 +1120,9 @@ export const componentRegistry: ComponentConfig[] = [
           buttonText: "Sign up",
           features: [
             { name: "Presence", icon: "check", iconColor: "text-green-500" },
-            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-          ]
-        }
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+          ],
+        },
       ],
       onPlanChange: (planId: string) => console.log("Plan changed to:", planId),
     },
@@ -919,7 +1133,7 @@ export const componentRegistry: ComponentConfig[] = [
     description: "Modal dialog for plan changes",
     category: "subscription",
     component: UpdatePlanDialog,
-    imports: ["@/components/billingsdk/update-plan-dialog"], 
+    imports: ["@/components/billingsdk/update-plan-dialog"],
     defaultCode: `<UpdatePlanDialog
   currentPlan={{
     id: "starter",
@@ -963,8 +1177,8 @@ export const componentRegistry: ComponentConfig[] = [
         buttonText: "Start today for free",
         features: [
           { name: "Presence", icon: "check", iconColor: "text-green-500" },
-          { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-        ]
+          { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+        ],
       },
       plans: [
         {
@@ -977,9 +1191,9 @@ export const componentRegistry: ComponentConfig[] = [
           buttonText: "Sign up",
           features: [
             { name: "Presence", icon: "check", iconColor: "text-green-500" },
-            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-          ]
-        }
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+          ],
+        },
       ],
       triggerText: "Change Plan",
       onPlanChange: (planId: string) => console.log("Plan changed to:", planId),
@@ -1116,34 +1330,34 @@ export const componentRegistry: ComponentConfig[] = [
             {
               name: "Presence",
               icon: "check",
-              iconColor: "text-green-500"
+              iconColor: "text-green-500",
             },
             {
               name: "Comments",
               icon: "check",
-              iconColor: "text-orange-500"
+              iconColor: "text-orange-500",
             },
             {
               name: "Notifications",
               icon: "check",
-              iconColor: "text-teal-500"
+              iconColor: "text-teal-500",
             },
             {
               name: "Text Editor",
               icon: "check",
-              iconColor: "text-blue-500"
+              iconColor: "text-blue-500",
             },
             {
               name: "Sync Datastore",
               icon: "check",
-              iconColor: "text-zinc-500"
-            }
-          ]
+              iconColor: "text-zinc-500",
+            },
+          ],
         },
         type: "monthly",
         nextBillingDate: "March 15, 2024",
         paymentMethod: "**** 4242",
-        status: "active"
+        status: "active",
       },
       cancelSubscription: {
         title: "Cancel Subscription",
@@ -1158,11 +1372,13 @@ export const componentRegistry: ComponentConfig[] = [
           buttonText: "Sign up",
           features: [
             { name: "Presence", icon: "check", iconColor: "text-green-500" },
-            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-          ]
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+          ],
         },
-        onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),
-        onKeepSubscription: (planId: string) => console.log("Subscription kept for plan:", planId)
+        onCancel: (planId: string) =>
+          console.log("Subscription cancelled for plan:", planId),
+        onKeepSubscription: (planId: string) =>
+          console.log("Subscription kept for plan:", planId),
       },
       updatePlan: {
         currentPlan: {
@@ -1175,8 +1391,8 @@ export const componentRegistry: ComponentConfig[] = [
           buttonText: "Sign up",
           features: [
             { name: "Presence", icon: "check", iconColor: "text-green-500" },
-            { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-          ]
+            { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+          ],
         },
         plans: [
           {
@@ -1189,26 +1405,28 @@ export const componentRegistry: ComponentConfig[] = [
             buttonText: "Start today for free",
             features: [
               { name: "Presence", icon: "check", iconColor: "text-green-500" },
-              { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-            ]
+              { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+            ],
           },
           {
             id: "enterprise",
             title: "Enterprise",
-            description: "For organizations that need more support and compliance features.",
+            description:
+              "For organizations that need more support and compliance features.",
             currency: "$",
             monthlyPrice: "Custom",
             yearlyPrice: "Custom",
             buttonText: "Contact sales",
             features: [
               { name: "Presence", icon: "check", iconColor: "text-green-500" },
-              { name: "Comments", icon: "check", iconColor: "text-orange-500" }
-            ]
-          }
+              { name: "Comments", icon: "check", iconColor: "text-orange-500" },
+            ],
+          },
         ],
         triggerText: "Change Plan",
-        onPlanChange: (planId: string) => console.log("Plan changed to:", planId)
-      }
+        onPlanChange: (planId: string) =>
+          console.log("Plan changed to:", planId),
+      },
     },
   },
   {
@@ -1252,19 +1470,19 @@ export const componentRegistry: ComponentConfig[] = [
         {
           name: "API Calls",
           usage: 1200000,
-          limit: 2000000
+          limit: 2000000,
         },
         {
           name: "Storage",
           usage: 75,
-          limit: 100
+          limit: 100,
         },
         {
           name: "Users",
           usage: 45,
-          limit: 50
-        }
-      ]
+          limit: 50,
+        },
+      ],
     },
   },
   {
@@ -1357,7 +1575,7 @@ export const componentRegistry: ComponentConfig[] = [
     defaultProps: {
       usageHistory: [
         {
-          model: 'gpt-5',
+          model: "gpt-5",
           inputWithCache: 0,
           inputWithoutCache: 518131,
           cacheRead: 1646080,
@@ -1365,46 +1583,46 @@ export const componentRegistry: ComponentConfig[] = [
           totalTokens: 2267482,
         },
         {
-          model: 'claude-3.5-sonnet',
+          model: "claude-3.5-sonnet",
           inputWithCache: 176177,
           inputWithoutCache: 28413,
           cacheRead: 434612,
           output: 8326,
           totalTokens: 647528,
-          costToYou: 1.00
+          costToYou: 1.0,
         },
         {
-          model: 'gemini-2.0-flash-exp',
+          model: "gemini-2.0-flash-exp",
           inputWithCache: 176100,
           inputWithoutCache: 28432,
           cacheRead: 434612,
           output: 8326,
           totalTokens: 647528,
           apiCost: 1,
-          costToYou: 0
+          costToYou: 0,
         },
         {
-          model: 'gemini-2.5-pro',
+          model: "gemini-2.5-pro",
           inputWithCache: 176177,
           inputWithoutCache: 28413,
           cacheRead: 434612,
           output: 7000,
           totalTokens: 647528,
           apiCost: 1,
-          costToYou: 0
+          costToYou: 0,
         },
         {
-          model: 'claude-4-sonnet',
+          model: "claude-4-sonnet",
           inputWithCache: 68415,
           inputWithoutCache: 902,
           cacheRead: 864450,
           output: 12769,
           totalTokens: 946536,
           apiCost: 0.71,
-          costToYou: 0.71
+          costToYou: 0.71,
         },
         {
-          model: 'claude-3.7-sonnet',
+          model: "claude-3.7-sonnet",
           inputWithCache: 68415,
           inputWithoutCache: 902,
           cacheRead: 864450,
@@ -1413,24 +1631,24 @@ export const componentRegistry: ComponentConfig[] = [
           apiCost: 0.71,
         },
         {
-          model: 'auto',
+          model: "auto",
           inputWithCache: 84551,
           inputWithoutCache: 0,
           cacheRead: 284876,
           output: 9458,
           totalTokens: 378885,
           apiCost: 0.23,
-          costToYou: 0
+          costToYou: 0,
         },
         {
-          model: 'sonic',
+          model: "sonic",
           inputWithCache: 0,
           inputWithoutCache: 149484,
           cacheRead: 4354855,
           output: 23569,
           totalTokens: 4527908,
-          costToYou: 2
-        }
+          costToYou: 2,
+        },
       ],
       title: "Usage Summary",
     },
@@ -1438,7 +1656,8 @@ export const componentRegistry: ComponentConfig[] = [
   {
     id: "invoice-history",
     name: "Invoice History",
-    description: "Display past invoices and payment history with download actions",
+    description:
+      "Display past invoices and payment history with download actions",
     category: "billing",
     component: InvoiceHistory,
     imports: ["@/components/billingsdk/invoice-history"],
@@ -1475,7 +1694,7 @@ export const componentRegistry: ComponentConfig[] = [
           amount: "$49.00",
           status: "paid",
           description: "Pro Plan - February 2024",
-          invoiceUrl: "https://example.com/invoice/INV-001"
+          invoiceUrl: "https://example.com/invoice/INV-001",
         },
         {
           id: "INV-002",
@@ -1483,10 +1702,11 @@ export const componentRegistry: ComponentConfig[] = [
           amount: "$49.00",
           status: "paid",
           description: "Pro Plan - January 2024",
-          invoiceUrl: "https://example.com/invoice/INV-002"
-        }
+          invoiceUrl: "https://example.com/invoice/INV-002",
+        },
       ],
-      onDownload: (invoiceId: string) => console.log("Download invoice:", invoiceId)
+      onDownload: (invoiceId: string) =>
+        console.log("Download invoice:", invoiceId),
     },
   },
   {
@@ -1507,8 +1727,20 @@ export const componentRegistry: ComponentConfig[] = [
 />`,
     defaultProps: {
       methods: [
-        { id: "card_1", type: "card", last4: "4242", brand: "visa", expiry: "12/25" },
-        { id: "card_2", type: "card", last4: "5555", brand: "mastercard", expiry: "06/26" },
+        {
+          id: "card_1",
+          type: "card",
+          last4: "4242",
+          brand: "visa",
+          expiry: "12/25",
+        },
+        {
+          id: "card_2",
+          type: "card",
+          last4: "5555",
+          brand: "mastercard",
+          expiry: "06/26",
+        },
       ],
       selectedMethod: "card_1",
       onSelect: (id: string) => console.log("Selected:", id),

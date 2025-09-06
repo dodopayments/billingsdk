@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-table-six",
+  "type": "registry:block",
+  "title": "Pricing Table Six",
+  "description": "A premium pricing table component with image backgrounds and pill-shaped badges",
+  "dependencies": [
+    "lucide-react",
+    "class-variance-authority",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "badge",
+    "radio-group",
+    "label",
+    "table",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/pricing-table-six.tsx",
+      "type": "registry:component",
+      "target": "components/billingsdk/pricing-table-six.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/pricing-table-six-demo.tsx",
+      "type": "registry:component",
+      "target": "components/pricing-table-six-demo.tsx"
+    },
+    {
+      "path": "src/registry/lib/billingsdk-config.ts",
+      "type": "registry:lib",
+      "target": "lib/billingsdk-config.ts"
+    }
+  ]
+}
