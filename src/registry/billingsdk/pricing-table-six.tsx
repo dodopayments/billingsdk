@@ -610,7 +610,8 @@ export function PricingTableSix({
                     size,
                     theme,
                     highlight: plan.highlight,
-                  })
+                  }),
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                 )}
                 style={{
                   height: cardHeights[plan.id]
@@ -810,7 +811,8 @@ export function PricingTableSix({
 
                       <Button
                         className={cn(
-                          buttonVariants({ theme, highlight: plan.highlight })
+                          buttonVariants({ theme, highlight: plan.highlight }),
+                          "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                         )}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -950,7 +952,8 @@ export function PricingTableSix({
 
                       <Button
                         className={cn(
-                          buttonVariants({ theme, highlight: plan.highlight })
+                          buttonVariants({ theme, highlight: plan.highlight }),
+                          "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                         )}
                         onClick={(e) => {
                           e.stopPropagation();
