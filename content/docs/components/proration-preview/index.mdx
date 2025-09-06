@@ -1,0 +1,199 @@
+---
+title: Proration Preview
+description: Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges with immediate or next-cycle options.
+---
+
+## Default
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="proration-preview">
+      <ProrationPreviewDemo />
+    </PreviewComponents>
+  </Tab>
+
+<Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/proration-preview-demo.tsx"'>src/components/proration-preview-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['CLI', 'Manual']} className="bg-transparent border-none">
+
+<Tab value="CLI" className="mt-3">
+
+```bash
+yarn dlx @billingsdk/cli add proration-preview
+```
+
+</Tab>
+
+<Tab value="Manual" className="mt-3">
+
+**Step 1**: Install the following dependencies:
+
+```bash
+npm install motion lucide-react class-variance-authority
+```
+
+**Step 2**: Copy and paste the following code into your project.
+
+<include cwd lang="tsx" meta='title="src/components/billingsdk/proration-preview.tsx"'>src/registry/billingsdk/proration-preview.tsx</include>
+
+**Step 3**: Update the import paths to match your project setup.
+
+</Tab>
+
+</Tabs>
+
+## Usage
+
+```tsx
+import { ProrationPreview } from "@/components/billingsdk/proration-preview"
+```
+
+```tsx
+<ProrationPreview
+  currentPlan={{
+    plan: {
+      id: "pro",
+      title: "Pro",
+      description: "Best for small teams",
+      monthlyPrice: "29.99",
+      yearlyPrice: "299.99",
+      currency: "$",
+      buttonText: "Current Plan",
+      features: [
+        { name: "Advanced features", icon: "check" },
+        { name: "Priority support", icon: "check" },
+      ],
+    },
+    type: "monthly",
+    price: "29.99",
+    nextBillingDate: "2024-01-15",
+    paymentMethod: "•••• 4242",
+    status: "active",
+  }}
+  newPlan={{
+    id: "enterprise",
+    title: "Enterprise", 
+    description: "For large organizations",
+    monthlyPrice: "99.99",
+    yearlyPrice: "999.99",
+    currency: "$",
+    buttonText: "Upgrade",
+    features: [
+      { name: "All features", icon: "check" },
+      { name: "Priority support", icon: "check" },
+      { name: "Custom integrations", icon: "check" },
+    ],
+  }}
+  billingCycle="monthly"
+  daysRemaining={15}
+  effectiveDate="immediately"
+  onConfirm={() => console.log("Plan change confirmed")}
+  onCancel={() => console.log("Plan change cancelled")}
+/>
+```
+
+## Examples
+
+### Upgrade Scenario
+
+Shows cost breakdown when upgrading from Pro to Enterprise with remaining billing cycle.
+
+### Downgrade Scenario  
+
+Displays credit calculations when downgrading plans with unused time refunds.
+
+### Billing Cycle Changes
+
+Handles switching between monthly and yearly billing for the same plan.
+
+### Next Cycle Changes
+
+Shows plan changes that take effect at the next billing cycle with no immediate charges.
+
+## API Reference
+
+### ProrationPreview
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `currentPlan` | `CurrentPlan` | - | The user's current subscription plan details |
+| `newPlan` | `Plan` | - | The target plan they want to switch to |
+| `billingCycle` | `'monthly' \| 'yearly'` | - | The billing cycle for the new plan |
+| `daysRemaining` | `number` | `15` | Days remaining in current billing cycle |
+| `effectiveDate` | `string` | `"immediately"` | When the plan change takes effect |
+| `onConfirm` | `() => void` | - | Callback when user confirms the change |
+| `onCancel` | `() => void` | - | Callback when user cancels the change |
+| `confirmText` | `string` | `"Confirm Change"` | Text for the confirm button |
+| `cancelText` | `string` | `"Cancel"` | Text for the cancel button |
+| `theme` | `'minimal' \| 'classic'` | `'minimal'` | Visual theme variant |
+| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size |
+| `className` | `string` | - | Additional CSS classes |
+
+### CurrentPlan
+
+```tsx
+interface CurrentPlan {
+  plan: Plan;
+  type: 'monthly' | 'yearly' | 'custom';
+  price?: string;
+  nextBillingDate: string;
+  paymentMethod: string;
+  status: 'active' | 'inactive' | 'past_due' | 'cancelled';
+}
+```
+
+### Plan
+
+```tsx
+interface Plan {
+  id: string;
+  title: string;
+  description: string;
+  monthlyPrice: string;
+  yearlyPrice: string;
+  currency?: string;
+  buttonText: string;
+  features: {
+    name: string;
+    icon: string;
+    iconColor?: string;
+  }[];
+}
+```
+
+## Features
+
+- **Accurate Proration Calculations** - Handles complex billing scenarios with precise math
+- **Credit & Charge Breakdown** - Shows detailed billing adjustments and credits
+- **Immediate vs Next Cycle** - Supports both immediate and next-cycle plan changes  
+- **Theme Variants** - Minimal and classic visual themes
+- **Responsive Design** - Works seamlessly across all device sizes
+- **Accessibility Ready** - Full keyboard navigation and screen reader support
+- **Animation Effects** - Smooth transitions using Motion
+- **Custom Pricing Support** - Handles non-standard pricing like "Custom" or "Enterprise"
+- **Robust Error Handling** - Graceful handling of invalid pricing data
+
+## Use Cases
+
+- **Plan Upgrades** - Show costs when upgrading to higher-tier plans
+- **Plan Downgrades** - Display credits when downgrading plans  
+- **Billing Cycle Changes** - Handle monthly/yearly billing switches
+- **Enterprise Sales** - Support custom pricing and next-cycle changes
+- **Billing Transparency** - Provide clear breakdown of charges and credits
+
+## Billing Logic
+
+The component implements sophisticated proration logic:
+
+- **Credits** - Calculated based on unused time in current plan (remaining days, not elapsed)
+- **Prorated Charges** - New plan charges based on remaining cycle days
+- **Net Amount** - Final charge or credit after calculations
+- **Cycle Handling** - Different logic for immediate vs next-cycle changes
+- **Price Validation** - Robust parsing of pricing strings with fallbacks
+- **Currency Consistency** - Uses current plan currency for credits, new plan currency for charges

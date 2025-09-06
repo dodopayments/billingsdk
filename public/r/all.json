@@ -21,7 +21,8 @@
     "@billingsdk/invoice-history",
     "@billingsdk/usage-table",
     "@billingsdk/payment-method-selector",
-    "@billingsdk/payment-method-manager"
+    "@billingsdk/payment-method-manager",
+    "@billingsdk/proration-preview"
   ],
   "files": []
 }
