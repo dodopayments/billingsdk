@@ -24,7 +24,6 @@
   <img src="https://img.shields.io/github/license/dodopayments/billingsdk" alt="License" />
 </p>
 
-
 Modern, type-safe billing and subscription management components for React, built with TypeScript and Tailwind CSS. Designed to work seamlessly alongside shadcn/ui.
 
 ## Table of Contents
@@ -114,11 +113,13 @@ export default function App() {
 ## Quick Start
 
 1. Install dependencies
+
 ```bash
 npm install
 ```
 
 2. Start the development server
+
 ```bash
 npm run dev
 ```
