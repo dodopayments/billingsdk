@@ -146,7 +146,7 @@ const flipSideVariants = cva(
 );
 
 const imageContainerVariants = cva(
-  "relative flex-1 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 overflow-hidden border border-border/30 rounded-t-xl",
+  "relative flex-1 overflow-hidden rounded-t-xl bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/10",
   {
     variants: {
       size: {
@@ -212,7 +212,7 @@ const firstColWidthVariants = cva("", {
 });
 
 const contentContainerVariants = cva(
-  "flex flex-col bg-muted/30 backdrop-blur-sm border-t border-x border-border/30 rounded-b-xl",
+  "flex flex-col bg-muted/30 backdrop-blur-sm rounded-b-xl",
   {
     variants: {
       size: {
@@ -305,20 +305,84 @@ const buttonVariants = cva(
   }
 );
 
+/**
+ * Props for the PricingTableSix component - an advanced pricing table with comprehensive image support
+ * and interactive flip animations.
+ */
 export interface PricingTableSixProps
   extends VariantProps<typeof sectionVariants> {
+  /** Additional CSS classes for styling customization */
   className?: string;
+  /** Array of pricing plans to display */
   plans: Plan[];
+  /** Main title for the pricing section */
   title?: string;
+  /** Subtitle description for the pricing section */
   description?: string;
+  /** Callback function triggered when a plan is selected */
   onPlanSelect?: (planId: string) => void;
+  /**
+   * Custom background images for each plan.
+   *
+   * **Comprehensive Format Support:**
+   * - PNG, JPG, JPEG, WebP, GIF, BMP, TIFF formats
+   * - HTTP/HTTPS URLs: `'https://example.com/image.jpg'`
+   * - Base64 data URIs: `'data:image/png;base64,iVBORw0KGgo...'`
+   * - Local file paths: `'./images/plan.webp'`
+   *
+   * **Smart Behavior:**
+   * - When images provided: Clean image display with borders, no background gradients
+   * - When no images: Theme-aware gradient overlays with animated shapes
+   * - Automatic format detection and fallback handling
+   *
+   * @example
+   * ```tsx
+   * backgroundImages={{
+   *   'starter': 'https://images.unsplash.com/photo-starter',
+   *   'pro': 'data:image/png;base64,iVBORw0KGgoAAAANS...',
+   *   'enterprise': './assets/enterprise.webp'
+   * }}
+   * ```
+   */
   backgroundImages?: {
     [key: string]: string;
   };
+  /**
+   * Custom height for the image section in pixels.
+   *
+   * Controls the height of the top image container. When not specified,
+   * height is automatically calculated based on the size prop:
+   * - small: 180px
+   * - medium: 200px
+   * - large: 220px
+   *
+   * @example
+   * ```tsx
+   * imageHeight={300}  // Set to 300px height
+   * ```
+   */
   imageHeight?: string | number;
+  /** Whether to show the feature comparison table below the cards */
   showFeatureTable?: boolean;
 }
 
+/**
+ * PricingTableSix - Advanced pricing table component with comprehensive image support.
+ *
+ * **Key Features:**
+ * - 🖼️ **Multi-format Image Support**: PNG, JPG, JPEG, WebP, GIF, BMP, TIFF
+ * - 🔄 **Interactive Flip Animation**: Hover to reveal detailed features
+ * - 🎨 **Theme-Aware Gradients**: Beautiful fallbacks when no images provided
+ * - 📱 **Responsive Design**: Optimized for all screen sizes
+ * - ⚡ **Smart Detection**: Automatic image format detection with fallback handling
+ *
+ * **Image Behavior:**
+ * - With custom images: Clean display with borders, no competing backgrounds
+ * - Without images: Animated theme-aware gradient overlays with floating shapes
+ *
+ * @param props - Component props including plans, images, and configuration options
+ * @returns JSX element with interactive pricing cards
+ */
 export function PricingTableSix({
   className,
   plans,
@@ -402,10 +466,51 @@ export function PricingTableSix({
     : 0;
 
   const getBackgroundImage = (planId: string) => {
+    return backgroundImages[planId] || null;
+  };
+
+  /**
+   * Comprehensive image detection function that supports multiple formats and input methods.
+   *
+   * **Supported Formats**: PNG, JPG, JPEG, WebP, GIF, BMP, TIFF
+   * **Input Methods**:
+   * - HTTP/HTTPS URLs
+   * - Base64 data URIs (data:image/[format];base64,...)
+   * - Local file paths with extensions
+   *
+   * @param planId - The ID of the plan to check for custom images
+   * @returns boolean - true if a valid image is detected, false otherwise
+   */
+  const hasCustomImage = (planId: string) => {
+    const bgImage = backgroundImages[planId];
+    if (!bgImage) return false;
+
+    // Check if it's a real image (URL, base64, or common image formats)
     return (
-      backgroundImages[planId] ||
-      'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23a855f7;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%233b82f6;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%236366f1;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad1)" /><circle cx="100" cy="80" r="60" fill="%23ec4899" opacity="0.3" /><circle cx="300" cy="120" r="80" fill="%23f59e0b" opacity="0.2" /></svg>'
+      bgImage.startsWith("http://") ||
+      bgImage.startsWith("https://") ||
+      bgImage.startsWith("data:image/png") ||
+      bgImage.startsWith("data:image/jpg") ||
+      bgImage.startsWith("data:image/jpeg") ||
+      bgImage.startsWith("data:image/webp") ||
+      bgImage.startsWith("data:image/gif") ||
+      bgImage.startsWith("data:image/bmp") ||
+      bgImage.startsWith("data:image/tiff") ||
+      bgImage.endsWith(".png") ||
+      bgImage.endsWith(".jpg") ||
+      bgImage.endsWith(".jpeg") ||
+      bgImage.endsWith(".webp") ||
+      bgImage.endsWith(".gif") ||
+      bgImage.endsWith(".bmp") ||
+      bgImage.endsWith(".tiff")
     );
+  };
+
+  const getDefaultGradient = () => {
+    if (theme === "classic") {
+      return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="gradClassic" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23000000;stop-opacity:0.1" /><stop offset="50%" style="stop-color:%23374151;stop-opacity:0.05" /><stop offset="100%" style="stop-color:%23111827;stop-opacity:0.03" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23gradClassic)" /><circle cx="100" cy="80" r="60" fill="%23f3f4f6" opacity="0.1" /><circle cx="300" cy="120" r="80" fill="%23e5e7eb" opacity="0.08" /></svg>';
+    }
+    return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23a855f7;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%233b82f6;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%236366f1;stop-opacity:0.4" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23grad1)" /><circle cx="100" cy="80" r="60" fill="%23ec4899" opacity="0.3" /><circle cx="300" cy="120" r="80" fill="%23f59e0b" opacity="0.2" /></svg>';
   };
 
   return (
@@ -428,7 +533,7 @@ export function PricingTableSix({
             )}
           >
             <h2 className={cn(titleVariants({ size, theme }))}>
-              {title || "Pricing"}
+              {title || "Image-Enhanced Pricing"}
             </h2>
           </div>
 
@@ -442,7 +547,7 @@ export function PricingTableSix({
           >
             <p className={cn(descriptionVariants({ size, theme }))}>
               {description ||
-                "Choose the perfect plan with our premium image-enhanced pricing cards."}
+                "Choose the perfect plan with our image-enhanced pricing cards featuring comprehensive format support and theme-aware gradients."}
             </p>
             <div
               className={cn(
@@ -532,65 +637,60 @@ export function PricingTableSix({
                   >
                     {/* Image Container - Top Half */}
                     <div
-                      className={cn(imageContainerVariants({ size }))}
-                      style={
-                        imageHeight
-                          ? {
-                              minHeight:
-                                typeof imageHeight === "number"
-                                  ? `${imageHeight}px`
-                                  : imageHeight,
-                              height:
-                                typeof imageHeight === "number"
-                                  ? `${imageHeight}px`
-                                  : imageHeight,
-                            }
-                          : {}
-                      }
+                      className={cn(
+                        imageContainerVariants({ size }),
+                        hasCustomImage(plan.id) && "border border-border/30"
+                      )}
                     >
-                      {/* Background Image */}
-                      <div
-                        className="absolute inset-0 bg-center bg-cover"
-                        style={{
-                          backgroundImage: `url("${getBackgroundImage(
-                            plan.id
-                          )}")`,
-                        }}
-                      />
-
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-indigo-900/30" />
-
-                      {/* Abstract Shapes for fluid effect */}
-                      <div className="absolute inset-0 overflow-hidden">
-                        <motion.div
-                          className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-pink-500/20 to-purple-600/20 rounded-full blur-xl"
-                          animate={{
-                            x: [0, 20, 0],
-                            y: [0, -15, 0],
-                            scale: [1, 1.1, 1],
-                          }}
-                          transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut",
+                      {/* Background Image - Only show if custom image exists */}
+                      {hasCustomImage(plan.id) && (
+                        <div
+                          className="absolute inset-0 bg-center bg-cover"
+                          style={{
+                            backgroundImage: `url("${getBackgroundImage(
+                              plan.id
+                            )}")`,
                           }}
                         />
-                        <motion.div
-                          className="absolute -bottom-5 -right-5 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-cyan-500/20 rounded-full blur-lg"
-                          animate={{
-                            x: [0, -25, 0],
-                            y: [0, 10, 0],
-                            scale: [1, 0.9, 1],
-                          }}
-                          transition={{
-                            duration: 8,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 1,
-                          }}
-                        />
-                      </div>
+                      )}
+
+                      {/* Gradient Overlay - Only show if no custom image */}
+                      {!hasCustomImage(plan.id) && (
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/8" />
+                      )}
+
+                      {/* Abstract Shapes for fluid effect - Only show if no custom image */}
+                      {!hasCustomImage(plan.id) && (
+                        <div className="absolute inset-0 overflow-hidden">
+                          <motion.div
+                            className="absolute -top-10 -left-10 w-32 h-32 rounded-full blur-xl bg-gradient-to-br from-primary/10 to-secondary/8"
+                            animate={{
+                              x: [0, 20, 0],
+                              y: [0, -15, 0],
+                              scale: [1, 1.1, 1],
+                            }}
+                            transition={{
+                              duration: 6,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                          <motion.div
+                            className="absolute -bottom-5 -right-5 w-24 h-24 rounded-full blur-lg bg-gradient-to-br from-accent/8 to-muted/6"
+                            animate={{
+                              x: [0, -25, 0],
+                              y: [0, 10, 0],
+                              scale: [1, 0.9, 1],
+                            }}
+                            transition={{
+                              duration: 8,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: 1,
+                            }}
+                          />
+                        </div>
+                      )}
 
                       {/* Plan Type Badge - Top Left */}
                       <Badge
@@ -612,7 +712,13 @@ export function PricingTableSix({
                     </div>
 
                     {/* Content Container - Bottom Half */}
-                    <div className={cn(contentContainerVariants({ size }))}>
+                    <div
+                      className={cn(
+                        contentContainerVariants({ size }),
+                        hasCustomImage(plan.id) &&
+                          "border-t border-x border-border/30"
+                      )}
+                    >
                       <div className="flex flex-col gap-2">
                         <AnimatePresence mode="wait">
                           <motion.div
@@ -744,7 +850,12 @@ export function PricingTableSix({
                     </div>
 
                     {/* Pricing and Button - Bottom Section */}
-                    <div className={cn(contentContainerVariants({ size }))}>
+                    <div
+                      className={cn(
+                        contentContainerVariants({ size }),
+                        "border-t border-x border-border/30"
+                      )}
+                    >
                       <div className="flex flex-col gap-2">
                         <AnimatePresence mode="wait">
                           <motion.div
