@@ -1,0 +1,112 @@
+---
+title: Detailed Usage Table
+---
+
+import { DetailedUsageTableDemo } from '@/registry/billingsdk/demo/detailed-usage-table-demo';
+
+The Detailed Usage Table component provides a comprehensive breakdown of resource consumption with columns for resource name, used amount, limit, and percentage utilization.
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billingsdk">
+      <DetailedUsageTableDemo />
+    </PreviewComponents>
+  </Tab>
+
+<Tab value="Code" className="mt-3">
+	<include
+		cwd
+		lang="tsx"
+		meta='title="src/registry/billingsdk/demo/detailed-usage-table-demo.tsx"'
+	>
+		src/registry/billingsdk/demo/detailed-usage-table-demo.tsx
+	</include>
+</Tab>
+
+</Tabs>
+
+```tsx
+import { DetailedUsageTable } from '@/components/billingsdk/detailed-usage-table';
+
+<DetailedUsageTable
+	title="Resource Usage"
+	description="Detailed breakdown of your resource consumption"
+	resources={[
+		{
+			name: 'API Calls',
+			used: 12300,
+			limit: 20000,
+			percentage: 61.5,
+			unit: 'calls',
+		},
+		{ name: 'Storage', used: 850, limit: 1000, percentage: 85, unit: 'GB' },
+		{ name: 'Team Members', used: 4, limit: 5, percentage: 80, unit: 'users' },
+	]}
+/>;
+```
+
+## Props
+
+| Prop        | Type              | Description                                      |
+| ----------- | ----------------- | ------------------------------------------------ |
+| className   | `string`          | Additional CSS classes to apply to the component |
+| title       | `string`          | Title for the usage table section                |
+| description | `string`          | Description for the usage table section          |
+| resources   | `UsageResource[]` | Array of resource usage data                     |
+
+### UsageResource Object
+
+| Property   | Type     | Description                    |
+| ---------- | -------- | ------------------------------ |
+| name       | `string` | Name of the resource           |
+| used       | `number` | Amount of the resource used    |
+| limit      | `number` | Total limit for the resource   |
+| percentage | `number` | Percentage of resource used    |
+| unit       | `string` | Unit of measurement (optional) |
+
+```tsx
+<DetailedUsageTable
+	title="Monthly Resource Consumption"
+	description="Track your usage across all plan resources"
+	resources={[
+		{
+			name: 'API Requests',
+			used: 45210,
+			limit: 50000,
+			percentage: 90.4,
+			unit: 'requests',
+		},
+		{
+			name: 'File Storage',
+			used: 750,
+			limit: 1000,
+			percentage: 75,
+			unit: 'GB',
+		},
+		{ name: 'Team Seats', used: 8, limit: 10, percentage: 80, unit: 'seats' },
+		{
+			name: 'Bandwidth',
+			used: 1850,
+			limit: 2000,
+			percentage: 92.5,
+			unit: 'GB',
+		},
+	]}
+/>
+```
+
+<div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+	<div className="flex items-center justify-between">
+		<div>
+			<span className="text-sm text-gray-500 dark:text-gray-400">
+				Created by{' '}
+				<a
+					href="https://github.com/sapatmohit"
+					className="text-blue-600 hover:underline dark:text-blue-400"
+				>
+					Mohit Sapat
+				</a>
+			</span>
+		</div>
+	</div>
+</div>
