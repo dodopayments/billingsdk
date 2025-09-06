@@ -35,6 +35,7 @@
                 "@billingsdk/subscription-management",
                 "@billingsdk/usage-meter-linear",
                 "@billingsdk/usage-meter-circle",
+                "@billingsdk/usage-forecast",
                 "@billingsdk/banner",
                 "@billingsdk/invoice-history",
                 "@billingsdk/usage-table",
@@ -544,33 +545,29 @@
             ]
           },
           {
-            "name": "payment-method-selector",
+            "name": "usage-forecast",
             "type": "registry:block",
-            "title": "Payment Method Selector",
-            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+            "title": "Usage Forecast",
+            "description": "A smart usage forecasting component with trend analysis and cost projections",
             "files": [
               {
-                "path": "src/registry/billingsdk/payment-method-selector.tsx",
+                "path": "src/registry/billingsdk/usage-forecast.tsx",
                 "type": "registry:component",
-                "target": "components/billingsdk/payment-method-selector.tsx"
+                "target": "components/billingsdk/usage-forecast.tsx"
               },
               {
-                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+                "path": "src/registry/billingsdk/demo/usage-forecast-demo.tsx",
                 "type": "registry:component",
-                "target": "components/payment-method-selector-demo.tsx"
+                "target": "components/usage-forecast-demo.tsx"
               }
             ],
             "dependencies": [
-              "lucide-react",
               "motion"
             ],
             "registryDependencies": [
-              "button",
-              "dialog",
-              "tooltip",
               "card",
-              "input",
-              "label",
+              "badge",
+              "button",
               "utils"
             ]
           }

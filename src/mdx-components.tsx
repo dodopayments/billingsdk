@@ -15,6 +15,7 @@ import { UpdatePlanDialogDemo } from '@/components/update-plan-dialog-demo';
 import { UpdatePlanCardDemo } from '@/components/update-plan-card-demo';
 import UsageMeterLinearDemo from '@/components/usage-meter-linear-demo';
 import UsageMeterCircleDemo from '@/components/usage-meter-circle-demo';
+import UsageForecastDemo from '@/components/usage-forecast-demo';
 import BannerDemo from '@/components/banner-demo';
 import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
@@ -54,6 +55,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CustomUsageMeterCircleDemo,
     UsageMeterCircleDemo,
     CustomUsageMeterLinearDemo,
+    UsageForecastDemo,
     BannerDemo,
     BannerDemoTwo,
     BannerDemoThree,

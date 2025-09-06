@@ -9,6 +9,7 @@ import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card";
 import { UpdatePlanDialog } from "@/components/billingsdk/update-plan-dialog";
 import { SubscriptionManagement } from "@/components/billingsdk/subscription-management";
 import { UsageMeter } from "@/components/billingsdk/usage-meter";
+import { UsageForecast } from "@/components/billingsdk/usage-forecast";
 import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
@@ -1513,6 +1514,80 @@ export const componentRegistry: ComponentConfig[] = [
       selectedMethod: "card_1",
       onSelect: (id: string) => console.log("Selected:", id),
       onAddNew: () => console.log("Add new method"),
+    },
+  },
+  {
+    id: "usage-forecast",
+    name: "Usage Forecast",
+    description: "Smart usage forecasting with trend analysis",
+    category: "usage",
+    component: UsageForecast,
+    imports: ["@/components/billingsdk/usage-forecast"],
+    defaultCode: `<UsageForecast
+  title="Usage Forecast"
+  description="Predictions based on usage patterns"
+  showChart={true}
+  metrics={[
+    {
+      name: "API Calls",
+      currentUsage: 45000,
+      limit: 50000,
+      unitCost: 0.001,
+      currency: "$",
+      unitName: "calls",
+      historicalData: [
+        { date: "2024-01-01", usage: 35000, cost: 35 },
+        { date: "2024-01-02", usage: 36000, cost: 36 },
+        { date: "2024-01-03", usage: 37000, cost: 37 }
+      ]
+    },
+    {
+      name: "Storage",
+      currentUsage: 750,
+      limit: 1000,
+      unitCost: 0.1,
+      currency: "$",
+      unitName: "GB",
+      historicalData: [
+        { date: "2024-01-01", usage: 900, cost: 90 },
+        { date: "2024-01-02", usage: 850, cost: 85 },
+        { date: "2024-01-03", usage: 800, cost: 80 }
+      ]
+    }
+  ]}
+/>`,
+    defaultProps: {
+      title: "Usage Forecast",
+      description: "Predictions based on usage patterns",
+      showChart: true,
+      metrics: [
+        {
+          name: "API Calls",
+          currentUsage: 45000,
+          limit: 50000,
+          unitCost: 0.001,
+          currency: "$",
+          unitName: "calls",
+          historicalData: [
+            { date: "2024-01-01", usage: 35000, cost: 35 },
+            { date: "2024-01-02", usage: 36000, cost: 36 },
+            { date: "2024-01-03", usage: 37000, cost: 37 }
+          ]
+        },
+        {
+          name: "Storage",
+          currentUsage: 750,
+          limit: 1000,
+          unitCost: 0.1,
+          currency: "$",
+          unitName: "GB",
+          historicalData: [
+            { date: "2024-01-01", usage: 900, cost: 90 },
+            { date: "2024-01-02", usage: 850, cost: 85 },
+            { date: "2024-01-03", usage: 800, cost: 80 }
+          ]
+        }
+      ]
     },
   },
 ];
