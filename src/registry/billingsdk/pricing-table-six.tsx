@@ -638,11 +638,19 @@ export function PricingTableSix({
                     {/* Image Container - Top Half */}
                     <div
                       className={cn(
-                        imageContainerVariants({ size })
+                        imageContainerVariants({ size }),
+                        hasCustomImage(plan.id) && "border border-border/30"
                       )}
-                      style={{
-                        height: imageHeight ? (typeof imageHeight === 'number' ? `${imageHeight}px` : imageHeight) : undefined,
-                      }}
+                      style={
+                        imageHeight != null
+                          ? {
+                              height:
+                                typeof imageHeight === "number"
+                                  ? `${imageHeight}px`
+                                  : imageHeight,
+                            }
+                          : undefined
+                      }
                     >
                       {/* Background Image - Only show if custom image exists */}
                       {hasCustomImage(plan.id) && (
