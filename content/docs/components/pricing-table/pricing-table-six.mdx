@@ -29,7 +29,7 @@ description: The Pricing Table Six component provides a premium pricing table de
         ```bash pnpm dlx shadcn@latest add https://billingsdk.com/r/pricing-table-six.json ```
       </Tab>
       <Tab value="yarn">
-        ```bash npx shadcn@latest add https://billingsdk.com/r/pricing-table-six.json ```
+        ```bash yarn dlx shadcn@latest add https://billingsdk.com/r/pricing-table-six.json ```
       </Tab>
     </Tabs>
   </Tab>
@@ -42,7 +42,7 @@ description: The Pricing Table Six component provides a premium pricing table de
         ```bash pnpm dlx @billingsdk/cli add pricing-table-six ```
       </Tab>
       <Tab value="yarn">
-        ```bash npx @billingsdk/cli add pricing-table-six ```
+        ```bash yarn dlx @billingsdk/cli add pricing-table-six ```
       </Tab>
     </Tabs>
   </Tab>
@@ -54,7 +54,28 @@ description: The Pricing Table Six component provides a premium pricing table de
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { plans } from "@/lib/billingsdk-config";
 
-<PricingTableSix plans={plans} title="Image-Enhanced Pricing Cards" description="Hover to flip and explore features with comprehensive image support and theme-aware gradients" onPlanSelect={(planId) => console.log("Selected plan:", planId)} size="large" // small, medium, large theme="minimal" // minimal or classic className="w-full" imageHeight={200} // Custom image height in pixels showFeatureTable={true} // Show feature comparison table // backgroundImages={{ //   'starter': 'https://images.unsplash.com/photo-1557804506-669a67965ba0', //   'pro': 'https://images.unsplash.com/photo-1551434678-e076c223a692', //   'enterprise': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...' // }} // Optional: Add custom images (PNG, JPG, JPEG, WebP, GIF, BMP, TIFF)/>;
+export default function Example() {
+  return (
+    <PricingTableSix
+      plans={plans}
+      title="Image-Enhanced Pricing Cards"
+      description="Hover to flip and explore features with comprehensive image support and theme-aware gradients"
+      onPlanSelect={(planId) => console.log("Selected plan:", planId)}
+      size="large" /* small, medium, large */
+      theme="minimal" /* minimal or classic */
+      className="w-full"
+      imageHeight={200} /* Custom image height in pixels */
+      showFeatureTable={
+        true
+      } /* Show feature comparison table */ /* Optional: Add custom images (PNG, JPG, JPEG, WebP, GIF, BMP, TIFF) */
+      /* backgroundImages={{
+        'starter': 'https://images.unsplash.com/photo-1557804506-669a67965ba0',
+        'pro': 'https://images.unsplash.com/photo-1551434678-e076c223a692',
+        'enterprise': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...'
+      }} */
+    />
+  );
+}
 ```
 
 ## Props
@@ -111,7 +132,11 @@ The pricing table component is styled using the `shadcn/ui` library. You can cus
 
 ## Example
 
-<include cwd lang="tsx" meta='title="src/components/pricing-table-six-demo.tsx"'>
+<include
+  cwd
+  lang="tsx"
+  meta='title="src/components/pricing-table-six-demo.tsx"'
+>
   src/components/pricing-table-six-demo.tsx
 </include>
 

@@ -125,6 +125,20 @@ npm run dev
 
 3. Open `http://localhost:3000`
 
+4. Set up environment variables
+
+   Copy the `.env.example` file to `.env` and set the required environment variables:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Then, obtain your INKEEP_API_KEY from [Inkeep](https://inkeep.com) and update the `.env` file:
+
+   ```env
+   INKEEP_API_KEY=your_actual_api_key_here
+   ```
+
 ### Installation in Your Project
 
 #### Using CLI (Recommended)

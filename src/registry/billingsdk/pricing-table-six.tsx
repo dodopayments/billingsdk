@@ -2,7 +2,7 @@
 
 import { Check, Minus } from "lucide-react";
 import { useState, useId, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { Badge } from "@/components/ui/badge";
@@ -557,7 +557,7 @@ export function PricingTableSix({
             >
               <RadioGroup
                 defaultValue="monthly"
-                className="h-full grid-cols-2"
+                className="h-full grid grid-cols-2"
                 onValueChange={(value) => {
                   setIsAnnually(value === "annually");
                 }}
@@ -638,9 +638,11 @@ export function PricingTableSix({
                     {/* Image Container - Top Half */}
                     <div
                       className={cn(
-                        imageContainerVariants({ size }),
-                        hasCustomImage(plan.id) && "border border-border/30"
+                        imageContainerVariants({ size })
                       )}
+                      style={{
+                        height: imageHeight ? (typeof imageHeight === 'number' ? `${imageHeight}px` : imageHeight) : undefined,
+                      }}
                     >
                       {/* Background Image - Only show if custom image exists */}
                       {hasCustomImage(plan.id) && (

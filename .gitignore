@@ -6,6 +6,9 @@ node_modules
 .content-collections
 .source
 
+# sitemaps
+public/sitemap*.xml
+
 # test & build
 /coverage
 /.next/
@@ -23,6 +26,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # others
+.env
 .env*.local
 .vercel
 next-env.d.ts
