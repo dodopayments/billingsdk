@@ -15,6 +15,7 @@ export const initCommand = new Command()
         options: [
           { value: "nextjs", label: "Next.js", hint: "React framework with App Router" },
           { value: "express", label: "Express.js", hint: "Node.js web framework" },
+          { value: "react", label: "React.js", hint: "Client-side React app template"}
         ],
       });
 
