@@ -17,9 +17,9 @@ export function PricingTableSixDemo() {
         imageHeight={200} // Custom image height in pixels
         showFeatureTable={true} // Show feature comparison table
         // backgroundImages={{
-        //   'starter': 'https://images.unsplash.com/photo-1557804506-669a67965ba0',
-        //   'pro': 'https://images.unsplash.com/photo-1551434678-e076c223a692',
-        //   'enterprise': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...'
+        //   'starter': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&h=400',
+        //   'pro': 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&h=400',
+        //   'enterprise': 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&h=400'
         // }} // Optional: Add custom images (PNG, JPG, JPEG, WebP, GIF, BMP, TIFF)
       />
     </>

@@ -680,34 +680,34 @@ export function PricingTableSix({
 
                       {/* Gradient Overlay - Only show if no custom image */}
                       {!hasCustomImage(plan.id) && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/8" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/25 via-secondary/20 to-accent/15" />
                       )}
 
                       {/* Abstract Shapes for fluid effect - Only show if no custom image */}
                       {!hasCustomImage(plan.id) && (
                         <div className="absolute inset-0 overflow-hidden">
                           <motion.div
-                            className="absolute -top-10 -left-10 w-32 h-32 rounded-full blur-xl bg-gradient-to-br from-primary/10 to-secondary/8"
+                            className="absolute -top-16 -left-16 w-40 h-40 rounded-full blur-2xl bg-gradient-to-br from-primary/20 to-secondary/15"
                             animate={{
-                              x: [0, 20, 0],
-                              y: [0, -15, 0],
-                              scale: [1, 1.1, 1],
+                              x: [0, 30, 0],
+                              y: [0, -20, 0],
+                              scale: [1, 1.2, 1],
                             }}
                             transition={{
-                              duration: 6,
+                              duration: 8,
                               repeat: Infinity,
                               ease: "easeInOut",
                             }}
                           />
                           <motion.div
-                            className="absolute -bottom-5 -right-5 w-24 h-24 rounded-full blur-lg bg-gradient-to-br from-accent/8 to-muted/6"
+                            className="absolute -bottom-8 -right-8 w-32 h-32 rounded-full blur-xl bg-gradient-to-br from-accent/15 to-muted/10"
                             animate={{
-                              x: [0, -25, 0],
-                              y: [0, 10, 0],
-                              scale: [1, 0.9, 1],
+                              x: [0, -30, 0],
+                              y: [0, 15, 0],
+                              scale: [1, 0.8, 1],
                             }}
                             transition={{
-                              duration: 8,
+                              duration: 10,
                               repeat: Infinity,
                               ease: "easeInOut",
                               delay: 1,
@@ -733,6 +733,30 @@ export function PricingTableSix({
                           Most Popular
                         </Badge>
                       )}
+
+                      {/* Hover to know details overlay - Bottom with padding */}
+                      <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+                        <div className="bg-black/40 text-white text-sm rounded-lg px-3 py-1.5 backdrop-blur-sm flex items-center gap-2">
+                          <span className="hidden sm:inline">
+                            hover for details
+                          </span>
+                          <span className="sm:hidden">tap for details</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12h14" />
+                            <path d="M12 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
 
                     {/* Content Container - Bottom Half */}
@@ -864,9 +888,23 @@ export function PricingTableSix({
                               className="flex items-center gap-3 text-foreground"
                             >
                               {feature.icon === "check" ? (
-                                <Check className="size-5 text-green-600 flex-shrink-0" />
+                                <Check
+                                  className={cn(
+                                    "size-5 flex-shrink-0",
+                                    theme === "minimal"
+                                      ? "text-primary"
+                                      : "text-emerald-500"
+                                  )}
+                                />
                               ) : feature.icon === "minus" ? (
-                                <Minus className="size-5 text-muted-foreground flex-shrink-0" />
+                                <Minus
+                                  className={cn(
+                                    "size-5 flex-shrink-0",
+                                    theme === "minimal"
+                                      ? "text-muted-foreground"
+                                      : "text-muted-foreground"
+                                  )}
+                                />
                               ) : null}
                               <span className="text-sm font-medium">
                                 {feature.name}
