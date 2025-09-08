@@ -461,66 +461,6 @@
                     "path": "src/registry/billingsdk/demo/banner-demo.tsx",
                     "type": "registry:component",
                     "target": "components/banner-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-warning-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-warning-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-product-announcement-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-product-announcement-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-success-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-success-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-info-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-info-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-maintenance-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-maintenance-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-promotional-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-promotional-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-security-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-security-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-beta-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-beta-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-holiday-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-holiday-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-system-status-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-system-status-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-feedback-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-feedback-demo.tsx"
-                },
-                {
-                    "path": "src/components/banner-migration-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-migration-demo.tsx"
                 }
             ],
             "dependencies": [
