@@ -12,7 +12,11 @@ export const addFiles = async (
 	async function fetchTemplate(): Promise<Result> {
 		const url = `https://billingsdk.com/tr/${framework}-${provider}.json`;
 		try {
-			const res = await fetch(url);
+			// Set a timeout for the fetch request (8 seconds)
+			const controller = new AbortController();
+			const t = setTimeout(() => controller.abort(), 8000);
+			const res = await fetch(url, { signal: controller.signal });
+			clearTimeout(t);
 			if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
 			return (await res.json()) as Result;
 		} catch (err) {

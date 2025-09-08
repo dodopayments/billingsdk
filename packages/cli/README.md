@@ -2,6 +2,10 @@
 
 A command-line tool for managing billing components and framework integration. Built with TypeScript and designed to work seamlessly with React, Next.js, Express.js, and other popular frameworks.
 
+## Prerequisites
+
+- Node.js 18 or newer (required for global fetch API)
+
 ## Installation
 
 The CLI can be used directly with `npx` without installation:
@@ -63,7 +67,7 @@ Initialize a new billing project with complete setup.
 
 #### Next.js (App Router)
 
-```
+```text
 your-project/
 ├── app/api/(dodopayments)/  or  app/api/(paypal)/
 │   ├── checkout/route.ts
@@ -79,7 +83,7 @@ your-project/
 
 #### Express.js
 
-```
+```text
 your-project/
 ├── src/
 │   ├── lib/
@@ -98,7 +102,7 @@ your-project/
 
 #### React (Client-side only)
 
-```
+```text
 your-project/
 ├── hooks/
 │   └── useBilling.ts

@@ -10,6 +10,9 @@
 	"bin": {
 		"billingsdk": "dist/index.js"
 	},
+	"engines": {
+		"node": ">=18"
+	},
 	"publishConfig": {
 		"access": "public"
 	},
