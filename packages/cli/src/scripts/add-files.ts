@@ -13,9 +13,12 @@ export const addFiles = async (
 		const url = `https://billingsdk.com/tr/${framework}-${provider}.json`;
 		try {
 			const res = await fetch(url);
-			if (!res.ok) throw new Error(`Failed ${res.status} ${res.statusText}`);
+			if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
 			return (await res.json()) as Result;
-		} catch {
+		} catch (err) {
+			console.warn(
+				`Remote template not available (${err.message}), using local template instead`
+			);
 			// Local fallback to repo templates when remote registry is unavailable
 			const currentDir = path.dirname(fileURLToPath(import.meta.url));
 			const localPath = path.resolve(
@@ -33,9 +36,20 @@ export const addFiles = async (
 	const addToPath = srcExists ? 'src' : '';
 
 	for (const file of result.files) {
-		const filePath = path.join(process.cwd(), addToPath, file.target);
+		// Validate and sanitize file.target to prevent path traversal
+		const baseDir = path.resolve(process.cwd(), addToPath ?? '.');
+		const dest = path.resolve(process.cwd(), addToPath ?? '.', file.target);
+		const relativePath = path.relative(baseDir, dest);
+
+		// Check if the resolved path is outside the intended base directory
+		if (relativePath.startsWith('..') || relativePath === '..') {
+			console.error(`Skipping file ${file.target}: Path traversal detected`);
+			continue;
+		}
+
+		const filePath = dest;
 		const dirPath = path.dirname(filePath);
-		const relativePath = addToPath
+		const displayPath = addToPath
 			? path.join(addToPath, file.target)
 			: file.target;
 
@@ -94,7 +108,7 @@ export const addFiles = async (
 					fs.writeFileSync(filePath, newContent);
 				} else {
 					const overwrite = await confirm({
-						message: `File ${relativePath} already exists. Do you want to overwrite it?`,
+						message: `File ${displayPath} already exists. Do you want to overwrite it?`,
 					});
 					if (overwrite) {
 						fs.writeFileSync(filePath, file.content);
@@ -104,18 +118,19 @@ export const addFiles = async (
 				fs.writeFileSync(filePath, file.content);
 			}
 		} catch (error) {
-			console.error(`Failed to add file ${relativePath}:`, error);
+			console.error(`Failed to add file ${displayPath}:`, error);
 		}
 	}
 	if (result.dependencies && process.env.BILLINGSDK_SKIP_INSTALL !== '1') {
 		const s = spinner();
 		s.start('Installing dependencies...');
 		try {
-			await execSync(`npm install ${result.dependencies.join(' ')}`, {
+			execSync(`npm install ${result.dependencies.join(' ')}`, {
 				stdio: 'inherit',
 			});
 			s.stop('Dependencies installed successfully!');
 		} catch (error) {
+			s.stop('Dependency installation failed.');
 			console.error('Failed to install dependencies:', error);
 		}
 	}
