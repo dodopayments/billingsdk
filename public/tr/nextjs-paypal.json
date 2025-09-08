@@ -1,0 +1,28 @@
+{
+	"name": "nextjs-paypal",
+	"description": "PayPal template for NextJS",
+	"framework": "nextjs",
+	"files": [
+		{
+			"target": "lib/paypal.ts",
+			"type": "template",
+			"content": "import paypal from '@paypal/checkout-server-sdk'\n\nlet paypalClient: paypal.core.PayPalHttpClient | null = null\n\nexport function getPayPalClient(): paypal.core.PayPalHttpClient {\n  if (!paypalClient) {\n    const clientId = process.env.PAYPAL_CLIENT_ID\n    const clientSecret = process.env.PAYPAL_CLIENT_SECRET\n    if (!clientId || !clientSecret) {\n      throw new Error('PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET are not set')\n    }\n    const environment = process.env.PAYPAL_ENV === 'live'\n      ? new paypal.core.LiveEnvironment(clientId, clientSecret)\n      : new paypal.core.SandboxEnvironment(clientId, clientSecret)\n    paypalClient = new paypal.core.PayPalHttpClient(environment)\n  }\n  return paypalClient\n}\n"
+		},
+		{
+			"target": "app/api/(paypal)/checkout/route.ts",
+			"type": "template",
+			"content": "import { NextResponse } from 'next/server'\nimport paypal from '@paypal/checkout-server-sdk'\nimport { z } from 'zod'\nimport { getPayPalClient } from '@/lib/paypal'\n\nconst schema = z.object({\n  amount: z.string().regex(/^\\\\d+(\\\\.\\\\d{1,2})?$/),\n  currency: z.string().default('USD'),\n})\n\nexport async function POST(request: Request) {\n  try {\n    const body = await request.json()\n    const parsed = schema.safeParse(body)\n    if (!parsed.success) {\n      return NextResponse.json({ error: 'Invalid input', details: parsed.error.flatten() }, { status: 400 })\n    }\n    const requestOrder = new paypal.orders.OrdersCreateRequest()\n    requestOrder.headers['Prefer'] = 'return=representation'\n    requestOrder.requestBody({\n      intent: 'CAPTURE',\n      purchase_units: [{ amount: { currency_code: parsed.data.currency, value: parsed.data.amount } }],\n    })\n    const client = getPayPalClient()\n    const response = await client.execute(requestOrder)\n    return NextResponse.json(response.result)\n  } catch (e) {\n    return NextResponse.json({ error: 'Internal error' }, { status: 500 })\n  }\n}\n"
+		},
+		{
+			"target": "app/api/(paypal)/webhook/route.ts",
+			"type": "template",
+			"content": "import { NextResponse } from 'next/server'\n\nexport async function POST() {\n  return NextResponse.json({ received: true })\n}\n"
+		},
+		{
+			"target": ".env.example",
+			"type": "template",
+			"content": "PAYPAL_CLIENT_ID=YOUR-CLIENT-ID\nPAYPAL_CLIENT_SECRET=YOUR-CLIENT-SECRET\nPAYPAL_ENV=sandbox\nNEXT_PUBLIC_APP_URL=http://localhost:3000"
+		}
+	],
+	"dependencies": ["@paypal/checkout-server-sdk", "zod"]
+}

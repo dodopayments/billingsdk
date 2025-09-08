@@ -1,0 +1,43 @@
+{
+	"name": "express-paypal",
+	"description": "PayPal template for Express",
+	"framework": "express",
+	"files": [
+		{
+			"target": "src/lib/paypal.ts",
+			"type": "template",
+			"content": "import paypal from '@paypal/checkout-server-sdk'\n\nlet paypalClient: paypal.core.PayPalHttpClient | null = null\n\nexport function getPayPalClient(): paypal.core.PayPalHttpClient {\n  if (!paypalClient) {\n    const clientId = process.env.PAYPAL_CLIENT_ID\n    const clientSecret = process.env.PAYPAL_CLIENT_SECRET\n    if (!clientId || !clientSecret) {\n      throw new Error('PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET are not set')\n    }\n    const environment = process.env.PAYPAL_ENV === 'live'\n      ? new paypal.core.LiveEnvironment(clientId, clientSecret)\n      : new paypal.core.SandboxEnvironment(clientId, clientSecret)\n    paypalClient = new paypal.core.PayPalHttpClient(environment)\n  }\n  return paypalClient\n}\n"
+		},
+		{
+			"target": "src/routes/paypal/route.ts",
+			"type": "template",
+			"content": "import express from 'express'\nimport { checkoutRouter } from './checkout'\nimport { orderRouter } from './order'\nimport { webhookRouter } from './webhook'\n\nconst router = express.Router()\nrouter.use('/checkout', checkoutRouter)\nrouter.use('/order', orderRouter)\nrouter.use('/webhook', webhookRouter)\nexport { router as paypalRouter }\n"
+		},
+		{
+			"target": "src/routes/paypal/checkout.ts",
+			"type": "template",
+			"content": "import express from 'express'\nimport paypal from '@paypal/checkout-server-sdk'\nimport { z } from 'zod'\nimport { getPayPalClient } from '../../lib/paypal'\n\nconst router = express.Router()\n\nconst schema = z.object({\n  amount: z.string().regex(/^\\\\d+(\\\\.\\\\d{1,2})?$/),\n  currency: z.string().default('USD'),\n})\n\nrouter.post('/', async (req, res) => {\n  try {\n    const parsed = schema.safeParse(req.body)\n    if (!parsed.success) {\n      return res.status(400).json({ error: 'Invalid input' })\n    }\n    const requestOrder = new paypal.orders.OrdersCreateRequest()\n    requestOrder.headers['Prefer'] = 'return=representation'\n    requestOrder.requestBody({\n      intent: 'CAPTURE',\n      purchase_units: [{ amount: { currency_code: parsed.data.currency, value: parsed.data.amount } }],\n    })\n    const client = getPayPalClient()\n    const response = await client.execute(requestOrder)\n    res.json(response.result)\n  } catch (e) {\n    res.status(500).json({ error: 'Internal error' })\n  }\n})\n\nexport { router as checkoutRouter }\n"
+		},
+		{
+			"target": "src/routes/paypal/order.ts",
+			"type": "template",
+			"content": "import express from 'express'\nimport paypal from '@paypal/checkout-server-sdk'\nimport { getPayPalClient } from '../../lib/paypal'\n\nconst router = express.Router()\n\nrouter.post('/capture', async (req, res) => {\n  try {\n    const { orderId } = req.body as { orderId?: string }\n    if (!orderId) return res.status(400).json({ error: 'orderId is required' })\n    const client = getPayPalClient()\n    const capReq = new paypal.orders.OrdersCaptureRequest(orderId)\n    capReq.requestBody({})\n    const response = await client.execute(capReq)\n    res.json(response.result)\n  } catch {\n    res.status(500).json({ error: 'Internal error' })\n  }\n})\n\nrouter.get('/:orderId', async (req, res) => {\n  try {\n    const { orderId } = req.params\n    const client = getPayPalClient()\n    const getReq = new paypal.orders.OrdersGetRequest(orderId)\n    const response = await client.execute(getReq)\n    res.json(response.result)\n  } catch {\n    res.status(500).json({ error: 'Internal error' })\n  }\n})\n\nexport { router as orderRouter }\n"
+		},
+		{
+			"target": "src/routes/paypal/webhook.ts",
+			"type": "template",
+			"content": "import express from 'express'\n\nconst router = express.Router()\n\nrouter.post('/', express.raw({ type: 'application/json' }), async (req, res) => {\n  // TODO: Verify PayPal webhook using the Webhook Verification API\n  res.status(200).json({ received: true })\n})\n\nexport { router as webhookRouter }\n"
+		},
+		{
+			"target": ".env.example",
+			"type": "template",
+			"content": "PAYPAL_CLIENT_ID=YOUR-CLIENT-ID\nPAYPAL_CLIENT_SECRET=YOUR-CLIENT-SECRET\nPAYPAL_ENV=sandbox"
+		}
+	],
+	"dependencies": [
+		"@paypal/checkout-server-sdk",
+		"zod",
+		"express",
+		"@types/express"
+	]
+}
