@@ -167,6 +167,7 @@ The CLI automatically detects your framework based on your project dependencies 
 ### Payment Providers
 
 - ✅ **Dodo Payments** - Fully supported
+- ✅ **PayPal** - Fully supported
 - 🚧 **Additional providers** - Based on community demand
 
 ## Development

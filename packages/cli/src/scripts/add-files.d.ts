@@ -1,4 +1,4 @@
 export declare const addFiles: (
 	framework: 'nextjs' | 'express' | 'react',
-	provider: 'dodopayments' | 'paypal' | 'stripe' | 'razorpay'
+	provider: 'dodopayments' | 'paypal'
 ) => Promise<void>;

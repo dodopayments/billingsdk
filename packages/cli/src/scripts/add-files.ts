@@ -46,7 +46,51 @@ export const addFiles = async (
 			if (fs.existsSync(filePath)) {
 				if (fileName === '.env.example') {
 					const existingContent = fs.readFileSync(filePath, 'utf8');
-					const newContent = existingContent + '\n' + file.content + '\n';
+
+					// Parse existing content into a set of keys (ignore blank lines and comments)
+					const existingLines = existingContent.split('\n');
+					const existingKeys = new Set<string>();
+					for (const line of existingLines) {
+						const trimmedLine = line.trim();
+						if (trimmedLine && !trimmedLine.startsWith('#')) {
+							const [key] = trimmedLine.split('=', 2);
+							if (key) {
+								existingKeys.add(key.trim());
+							}
+						}
+					}
+
+					// Parse new content and filter out duplicate keys
+					const newLines = file.content.split('\n');
+					const filteredNewLines: string[] = [];
+					for (const line of newLines) {
+						const trimmedLine = line.trim();
+						if (trimmedLine && !trimmedLine.startsWith('#')) {
+							const [key] = trimmedLine.split('=', 2);
+							if (key && !existingKeys.has(key.trim())) {
+								filteredNewLines.push(line);
+							}
+						} else {
+							// Keep comments and blank lines
+							filteredNewLines.push(line);
+						}
+					}
+
+					// Only append non-duplicate lines
+					let newContent = existingContent;
+					if (filteredNewLines.length > 0) {
+						// Ensure there's a newline at the end of existing content before appending
+						if (!newContent.endsWith('\n')) {
+							newContent += '\n';
+						}
+						// Append filtered lines
+						newContent += filteredNewLines.join('\n');
+						// Ensure file ends with a newline
+						if (!newContent.endsWith('\n')) {
+							newContent += '\n';
+						}
+					}
+
 					fs.writeFileSync(filePath, newContent);
 				} else {
 					const overwrite = await confirm({

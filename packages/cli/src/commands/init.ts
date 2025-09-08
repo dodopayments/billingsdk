@@ -13,8 +13,10 @@ type Framework = 'nextjs' | 'express' | 'react';
 type Provider = 'dodopayments' | 'paypal';
 
 const addFiles = async (framework: Framework, provider: Provider) => {
-	const mod = await import('../scripts/add-files.js');
-	return mod.addFiles(framework, provider as any);
+	const mod = (await import(
+		'../scripts/add-files.js'
+	)) as typeof import('../scripts/add-files.js');
+	return mod.addFiles(framework, provider);
 };
 
 export const initCommand = new Command()
@@ -55,6 +57,11 @@ export const initCommand = new Command()
 				initialValue: detectedFramework ?? undefined,
 			});
 
+			if (isCancel(framework)) {
+				cancel('Setup cancelled.');
+				process.exit(0);
+			}
+
 			const providerChoice = await select({
 				message:
 					'Which payment provider would you like to use? (Adding more providers soon)',
@@ -75,10 +82,19 @@ export const initCommand = new Command()
 			try {
 				await addFiles(framework as Framework, provider);
 				s.stop('Setup completed successfully!');
+			} catch (error) {
+				s.stop('Setup failed!');
+				console.error(
+					`Error: ${(error as Error).message || 'Unknown error occurred'}`
+				);
+				process.exit(1);
 			} finally {
 				outro('Thanks for using Billing SDK CLI!');
 			}
-		} catch {
+		} catch (error) {
+			console.error(
+				`Error: ${(error as Error).message || 'Unknown error occurred'}`
+			);
 			process.exit(1);
 		}
 	});
