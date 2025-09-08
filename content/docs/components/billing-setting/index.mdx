@@ -1,0 +1,140 @@
+---
+title: Billing Settings
+description: The Billing Settings component provides a user-friendly interface for managing billing preferences, payment methods, invoices, and usage limits. This component features a tabbed navigation system, form controls, and an interactive payment card management section.
+---
+import BillingSettingsDemo from "src/components/billing-settings-demo.tsx"
+
+    <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+    <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billing-settings">
+    <BillingSettingsDemo  />
+    </PreviewComponents>
+    </Tab>
+
+    <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/billing-settings-demo.tsx"'>src/components/billing-settings-demo.tsx</include>
+    </Tab>
+    </Tabs>
+
+
+### Installation
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+    <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+        <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+            <Tab value="npx">
+                ```bash
+                npx shadcn@latest add @billingsdk/billing-settings
+                ```
+            </Tab>
+            <Tab value="pnpm">
+                ```bash
+                pnpm dlx shadcn@latest add @billingsdk/billing-settings
+                ```
+            </Tab>
+            <Tab value="yarn">
+                ```bash
+                yarn dlx shadcn@latest add @billingsdk/billing-settings
+                ```
+            </Tab>
+        </Tabs>
+    </Tab>
+    <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+        <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+            <Tab value="npx">
+                ```bash
+                npx @billingsdk/cli add billing-settings
+                ```
+            </Tab>
+            <Tab value="pnpm">
+                ```bash
+                pnpm dlx @billingsdk/cli add billing-settings
+                ```
+            </Tab>
+            <Tab value="yarn">
+                ```bash
+                yarn dlx @billingsdk/cli add billing-settings
+                ```
+            </Tab>
+        </Tabs>
+    </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { BillingSettings } from "@/components/billingsdk/billing-settings";
+```
+
+```tsx
+const [activeTab, setActiveTab] = useState("general")
+const [emailNotifications, setEmailNotifications] = useState(true)
+const [usageAlerts, setUsageAlerts] = useState(true)
+const [invoiceReminders, setInvoiceReminders] = useState(false)
+const [cards, setCards] = useState([{ id: "1", last4: "4242", brand: "Visa", expiry: "12/25", primary: true }])
+const [invoiceFormat, setInvoiceFormat] = useState("PDF")
+const [overageProtection, setOverageProtection] = useState(true)
+const [usageLimitAlerts, setUsageLimitAlerts] = useState(true)
+```
+
+```tsx
+<BillingSettings
+  activeTab={activeTab}
+  onTabChange={setActiveTab}
+  emailNotifications={emailNotifications}
+  onEmailNotificationsChange={setEmailNotifications}
+  usageAlerts={usageAlerts}
+  onUsageAlertsChange={setUsageAlerts}
+  invoiceReminders={invoiceReminders}
+  onInvoiceRemindersChange={setInvoiceReminders}
+  cards={cards}
+  onAddCard={() => console.log("Add card clicked")}
+  invoiceFormat={invoiceFormat}
+  onInvoiceFormatChange={setInvoiceFormat}
+  onEditBillingAddress={() => console.log("Edit billing address clicked")}
+  overageProtection={overageProtection}
+  onOverageProtectionChange={setOverageProtection}
+  usageLimitAlerts={usageLimitAlerts}
+  onUsageLimitAlertsChange={setUsageLimitAlerts}
+/>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `activeTab` | `String` | The currently active tab (`"general"`, `"payment"`, `"invoices"`, `"limits"`) |
+| `onTabChange` | `(tab: string) => void` | Callback function for when a tab is changed |
+| `emailNotifications` | `boolean` | State for email notifications switch |
+| `onEmailNotificationsChange` | `(value: boolean) => void` | Callback for email notifications switch change |
+| `usageAlerts` | `boolean` | 	State for usage alerts switch |
+| `onUsageAlertsChange` | `(value: boolean) => void` | Callback for usage alerts switch change |
+| `invoiceReminders` | `boolean` | State for invoice reminders switch |
+| `onInvoiceRemindersChange` | `(value: boolean) => void` | Callback for invoice reminders switch change |
+| `cards` | `CardInfo[]` | An array of payment card objects |
+| `onAddCard` | `() => void` | Callback for the "Add new card" button |
+| `invoiceFormat` | `"PDF" \| "HTML"` | The current invoice format |
+| `onInvoiceFormatChange` | `(format: "PDF" \| "HTML") => void` | Callback for invoice format change |
+| `onEditBillingAddress` | `() => void` | Callback for the "Edit billing address" button |
+| `overageProtection` | `boolean` | State for overage protection switch |
+| `onOverageProtectionChange` | `(value: boolean) => void` | Callback for overage protection switch change |
+| `usageLimitAlerts` | `boolean` | State for usage limit alerts switch |
+| `onUsageLimitAlertsChange` | `(value: boolean) => void` | Callback for usage limit alerts switch change |
+
+
+## Features
+
+- **Tabbed Navigation**: Easily switch between different billing sections.
+- **Payment Method Management**: View and add credit cards with basic validation.
+- **Toggle Settings**: Control various notification and protection settings with switches.
+- **Customizable Invoices**: Option to choose between PDF and HTML invoice formats.
+- **Responsive Design**: Adapts to different screen sizes for a seamless user experience.
+
+## Theming
+
+The pricing table component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+
+## Example
+<include cwd lang="tsx" meta='title="src/components/billing-settings-demo.tsx"'>src/components/billing-settings-demo.tsx</include>
+
+### Credits
+- Created by [@shashwat558](https://github.com/shashwat558)

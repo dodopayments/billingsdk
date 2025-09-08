@@ -106,7 +106,7 @@ export function Banner({
           wrapper:
             "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
           content:
-            "flex flex-col sm:flex-row md:items-start items-center gap-2 w-full",
+             "flex flex-col text-center sm:text-left sm:flex-row md:items-start items-center gap-2 w-full",
           title: hasGradient
             ? "text-sm font-medium text-foreground leading-tight"
             : "text-sm font-medium text-primary-foreground leading-tight",
@@ -114,7 +114,7 @@ export function Banner({
             ? "text-xs text-foreground/80"
             : "text-xs text-primary-foreground/80",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+           "flex items-center justify-center md:justify-start gap-2 sm:self-auto sm:pr-8",
         };
     }
   };
@@ -225,7 +225,7 @@ export function Banner({
                 size="icon"
                 onClick={handleDismiss}
                 className={cn(
-                  "absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8",
+                  "absolute right-1 sm:right-2 top-3  sm:top-1/2 pl-2 sm:pl-0 -translate-y-1/2 h-8 w-8",
                   gradientColors && gradientColors.length > 0
                     ? "hover:bg-foreground/20 text-foreground"
                     : variant === "default" &&

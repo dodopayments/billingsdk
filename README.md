@@ -144,7 +144,7 @@ npx @billingsdk/cli add pricing-table-one
 Add Billing SDK components to your existing shadcn/ui project:
 
 ```bash
-npx shadcn@latest add https://billingsdk.com/r/[component-name].json
+npx shadcn@latest add @billingsdk/[component-name]
 ```
 
 ## Documentation

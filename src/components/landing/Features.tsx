@@ -69,8 +69,9 @@ export default function Features() {
       <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
         Why choose BillingSDK?
       </h2>
-      <p className="text-sm mt-4 text-muted-foreground mb-12 max-w-xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-        Beautiful, customizable billing components that save you development time and effort.
+      <p className="text-sm mt-4 text-muted-foreground mb-12 max-w-xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 text-center">
+        Beautiful, customizable billing components that save you development
+        time and effort.
       </p>
 
       <div className="relative rounded-none -pr-2  ">

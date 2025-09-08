@@ -24,7 +24,7 @@
     },
     {
       "path": "src/registry/billingsdk/demo/pricing-table-two-demo.tsx",
-      "content": "\"use client\"\n\nimport { plans } from \"@/lib/billingsdk-config\";\nimport { PricingTableTwo } from \"@/components/billingsdk/pricing-table-two\";\n\nexport function PricingTableTwoDemo() {\n    return <>\n        <PricingTableTwo plans={plans} className=\"w-full max-w-4xl mx-auto\"\n            title={`We offer ${plans.length} plans`}\n            description=\"Choose the plan that's right for you\"\n            onPlanSelect={(planId) => console.log('Selected plan:', planId)}\n            size=\"small\" // small, medium, large\n            theme=\"classic\" // minimal or classic\n        />\n    </>\n} ",
+      "content": "\"use client\"\n\nimport { plans } from \"@/lib/billingsdk-config\"\nimport { PricingTableTwo } from \"@/components/billingsdk/pricing-table-two\"\n\nexport function PricingTableTwoDemo() {\n  return (\n    <PricingTableTwo\n      plans={plans}\n      className=\"w-full max-w-4xl mx-auto\"\n      title={`We offer ${plans.length} plans`}\n      description=\"Choose the plan that's right for you\"\n      onPlanSelect={(planId) => console.log(\"Selected plan:\", planId)}\n      size=\"small\" // small, medium, large\n      theme=\"classic\" // minimal or classic\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "components/pricing-table-two-demo.tsx"
     },

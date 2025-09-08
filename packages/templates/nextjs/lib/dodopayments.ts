@@ -37,9 +37,9 @@ export function getDodoPaymentsClient(): DodoPayments {
   return dodopaymentsClient
 }
 
-export const getProducts = async (): Promise<Product[]> => {
+export const getProducts = async ({ baseUrl }: { baseUrl?: string }): Promise<Product[]> => {
   try {
-    const response = await fetch('/api/products')
+    const response = await fetch(`${baseUrl}/api/products`)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch products: ${response.status} ${response.statusText}`)
@@ -52,9 +52,9 @@ export const getProducts = async (): Promise<Product[]> => {
   }
 }
 
-export const getProduct = async (product_id: string): Promise<Product> => {
+export const getProduct = async ({ baseUrl, product_id }: { baseUrl?: string, product_id: string }): Promise<Product> => {
   try {
-    const response = await fetch(`/api/product?product_id=${product_id}`)
+    const response = await fetch(`${baseUrl}/api/product?product_id=${product_id}`)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch product: ${response.status} ${response.statusText}`)
@@ -67,9 +67,9 @@ export const getProduct = async (product_id: string): Promise<Product> => {
   }
 }
 
-export const getCustomer = async (customer_id: string): Promise<DodoPayments.Customers.Customer> => {
+export const getCustomer = async ({ baseUrl, customer_id }: { baseUrl?: string, customer_id: string }): Promise<DodoPayments.Customers.Customer> => {
   try {
-    const response = await fetch(`/api/customer?customer_id=${customer_id}`)
+    const response = await fetch(`${baseUrl}/api/customer?customer_id=${customer_id}`)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch customer: ${response.status} ${response.statusText}`)
@@ -82,9 +82,9 @@ export const getCustomer = async (customer_id: string): Promise<DodoPayments.Cus
   }
 }
 
-export const getCustomerSubscriptions = async (customer_id: string): Promise<DodoPayments.Subscriptions.Subscription[]> => {
+export const getCustomerSubscriptions = async ({ baseUrl, customer_id }: { baseUrl?: string, customer_id: string }): Promise<DodoPayments.Subscriptions.Subscription[]> => {
   try {
-    const response = await fetch(`/api/customer/subscriptions?customer_id=${customer_id}`)
+    const response = await fetch(`${baseUrl}/api/customer/subscriptions?customer_id=${customer_id}`)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch customer subscriptions: ${response.status} ${response.statusText}`)
@@ -97,9 +97,9 @@ export const getCustomerSubscriptions = async (customer_id: string): Promise<Dod
   }
 }
 
-export const getCustomerPayments = async (customer_id: string): Promise<DodoPayments.Payments.Payment[]> => {
+export const getCustomerPayments = async ({ baseUrl, customer_id }: { baseUrl?: string, customer_id: string }): Promise<DodoPayments.Payments.Payment[]> => {
   try {
-    const response = await fetch(`/api/customer/payments?customer_id=${customer_id}`)
+    const response = await fetch(`${baseUrl}/api/customer/payments?customer_id=${customer_id}`)
 
     if (!response.ok) {
       throw new Error(`Failed to fetch customer payments: ${response.status} ${response.statusText}`)
@@ -112,9 +112,9 @@ export const getCustomerPayments = async (customer_id: string): Promise<DodoPaym
   }
 }
 
-export const createCustomer = async (customer: DodoPayments.Customers.CustomerCreateParams): Promise<DodoPayments.Customers.Customer> => {
+export const createCustomer = async ({ baseUrl, customer }: { baseUrl?: string, customer: DodoPayments.Customers.CustomerCreateParams }): Promise<DodoPayments.Customers.Customer> => {
   try {
-    const response = await fetch('/api/customer', {
+    const response = await fetch(`${baseUrl}/api/customer`, {
       method: 'POST',
       body: JSON.stringify(customer),
     })
@@ -130,9 +130,9 @@ export const createCustomer = async (customer: DodoPayments.Customers.CustomerCr
   }
 }
 
-export const updateCustomer = async (customer_id: string, customer: DodoPayments.Customers.CustomerUpdateParams): Promise<DodoPayments.Customers.Customer> => {
+export const updateCustomer = async ({ baseUrl, customer_id, customer }: { baseUrl?: string, customer_id: string, customer: DodoPayments.Customers.CustomerUpdateParams }): Promise<DodoPayments.Customers.Customer> => {
   try {
-    const response = await fetch(`/api/customer?customer_id=${customer_id}`, {
+    const response = await fetch(`${baseUrl}/api/customer?customer_id=${customer_id}`, {
       method: 'PUT',
       body: JSON.stringify(customer),
     })
@@ -148,9 +148,9 @@ export const updateCustomer = async (customer_id: string, customer: DodoPayments
   }
 }
 
-export const checkout = async (productCart: Array<{ product_id: string; quantity: number; amount?: number }>, customer: DodoPayments.Payments.CustomerRequest, billing_address: DodoPayments.Payments.BillingAddress, return_url: string, customMetadata?: Record<string, string>) => {
+export const checkout = async ({ baseUrl, productCart, customer, billing_address, return_url, customMetadata }: { baseUrl?: string, productCart: Array<{ product_id: string; quantity: number; amount?: number }>, customer: DodoPayments.Payments.CustomerRequest, billing_address: DodoPayments.Payments.BillingAddress, return_url: string, customMetadata?: Record<string, string> }) => {
   try {
-    const response = await fetch('/api/checkout', {
+    const response = await fetch(`${baseUrl}/api/checkout`, {
       method: 'POST',
       body: JSON.stringify({ productCart, customer, billing_address, return_url, customMetadata }),
     })

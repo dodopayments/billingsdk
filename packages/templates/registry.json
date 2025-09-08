@@ -103,6 +103,37 @@
                 "express",
                 "@types/express"
             ]
-        }
+        },
+
+        {
+            "name": "react-dodopayments",
+            "description": "DodoPayments template for React.js",
+            "framework": "react",
+            "files": [
+                {
+                "path": "packages/templates/react/lib/dodopayments.ts",
+                "content": "DodoPayments library for React.js",
+                "type": "template",
+                "target": "lib/dodopayments.ts"
+                },
+                {
+                "path": "packages/templates/react/hooks/useBilling.ts",
+                "content": "Custom React hook for managing DodoPayments billing flows",
+                "type": "template",
+                "target": "hooks/useBilling.ts"
+                },
+                {
+                "path": "packages/templates/react/.env.example",
+                "content": "DodoPayments .env.example for React.js",
+                "type": "template",
+                "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "react"
+            ]
+}
+
     ]
 }

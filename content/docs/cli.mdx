@@ -74,7 +74,7 @@ You'll be prompted to select:
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -112,6 +112,17 @@ After running `init`, you'll get:
     └── .env.example
     ```
   </Tab>
+   <Tab value="React.js + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── hooks/
+    │   │   └── useBilling.ts
+    │   └── lib/
+    │       └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
 </Tabs>
 
 ### API Routes Included
@@ -125,7 +136,7 @@ The init command sets up comprehensive API routes for:
 
 ### Dependencies Installed
 
-<Tabs items={['Next.js', 'Express.js']}>
+<Tabs items={['Next.js', 'Express.js', "React.js"]}>
   <Tab value="Next.js">
     ```json
     {
@@ -150,12 +161,26 @@ The init command sets up comprehensive API routes for:
     }
     ```
   </Tab>
+  <Tab value="React.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest"
+      }
+    }
+    ```
+  </Tab>
 </Tabs>
 
 <Callout title="Environment Setup">
-  After running `init`, copy `.env.example` to `.env.local` (Next.js) or `.env` (Express.js) and configure your Dodo Payments API keys and webhook secrets.
-</Callout>
+  After running `init`, copy the example environment file and configure your Dodo Payments API keys and webhook secrets:
 
+  - **Next.js** → copy `.env.example` to `.env.local`
+  - **Express.js** → copy `.env.example` to `.env`
+  - **React.js** → copy `.env.example` to `.env` (or `.env.local` if using Vite)
+
+  Make sure to restart your dev server after updating environment variables.
+</Callout>
 ## Express.js Setup Instructions
 
 ### Basic Express.js Integration
@@ -252,6 +277,56 @@ Update your `package.json` scripts:
     "start": "node dist/app.js"
   }
 }
+```
+
+## React.js Setup Instructions
+
+### Basic React.js Integration
+
+After running `@billingsdk/cli init` and selecting **React.js**, the CLI generates a `lib/dodopayments.ts` and a `hooks/useBilling.ts` file for your project.
+
+You can use the `useBilling` hook directly in your components to interact with the backend API:
+
+```tsx
+// src/App.tsx or any component
+import React, { useEffect } from 'react'
+import { useBilling } from './hooks/useBilling'
+
+function App() {
+  const { fetchProducts, loading, error } = useBilling()
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const products = await fetchProducts()
+        console.log('Products:', products)
+      } catch (err) {
+        console.error('Failed to fetch products:', err)
+      }
+    }
+    loadProducts()
+  }, [fetchProducts])
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p style={{ color: 'red' }}>{error}</p>
+
+  return <h1>Welcome to DodoPayments + React</h1>
+}
+
+export default App
+```
+
+### Environment Configuration
+
+Create a `.env` (or `.env.local` if using Vite) in your project root:
+
+```bash
+# DodoPayments Configuration
+VITE_DODO_PAYMENTS_API_KEY=your_api_key_here
+VITE_DODO_PAYMENTS_ENVIRONMENT=test_mode
+
+# Backend API URL (Express.js server or Next.js API routes)
+VITE_BASE_URL=http://localhost:3000
 ```
 
 ## `@billingsdk/cli add`

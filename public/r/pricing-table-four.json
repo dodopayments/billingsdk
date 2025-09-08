@@ -21,7 +21,7 @@
     },
     {
       "path": "src/registry/billingsdk/demo/pricing-table-four-demo.tsx",
-      "content": "\"use client\";\n\nimport { PricingTableFour } from \"@/registry/billingsdk/pricing-table-four\";\nimport { plans } from \"@/lib/billingsdk-config\";\n\nexport function PricingTableFourDemo() {\n  return (\n    <PricingTableFour\n      plans={plans}\n      title=\"Choose Your Perfect Plan\"\n      description=\"Transform your project with our comprehensive pricing options designed for every need.\"\n      subtitle=\"Simple Pricing\"\n      onPlanSelect={(planId: string) => console.log('Selected plan:', planId)}\n      size=\"medium\"\n      className=\"w-full\"\n      showBillingToggle={true}\n      billingToggleLabels={{\n        monthly: \"Monthly\",\n        yearly: \"Yearly\",\n      }}\n    />\n  );\n}",
+      "content": "\"use client\"\n\nimport { PricingTableFour } from \"@/registry/billingsdk/pricing-table-four\"\nimport { plans } from \"@/lib/billingsdk-config\"\n\nexport function PricingTableFourDemo() {\n  return (\n    <PricingTableFour\n      plans={plans}\n      title=\"Choose Your Perfect Plan\"\n      description=\"Transform your project with our comprehensive pricing options designed for every need.\"\n      subtitle=\"Simple Pricing\"\n      onPlanSelect={(planId: string) => console.log('Selected plan:', planId)}\n      size=\"medium\"\n      className=\"w-full\"\n      showBillingToggle={true}\n      billingToggleLabels={{\n        monthly: \"Monthly\",\n        yearly: \"Yearly\",\n      }}\n    />\n  )\n}",
       "type": "registry:component",
       "target": "components/pricing-table-four-demo.tsx"
     },

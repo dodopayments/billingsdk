@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { GrainGradient } from "@paper-design/shaders-react";

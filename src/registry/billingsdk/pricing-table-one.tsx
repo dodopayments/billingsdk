@@ -123,7 +123,7 @@ const priceTextVariants = cva("font-medium", {
   },
 });
 
-const featureIconVariants = cva("", {
+const featureIconVariants = cva("flex-none h-[1lh]", {
   variants: {
     size: {
       small: "size-3",
@@ -385,7 +385,7 @@ export function PricingTableOne({
                     {plan.features.map((feature, featureIndex) => (
                       <motion.li 
                         key={featureIndex} 
-                        className="flex items-center gap-3"
+                        className="flex gap-3"
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: featureIndex * 0.05 }}

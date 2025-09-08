@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { PricingTableFour } from "@/registry/billingsdk/pricing-table-four";
-import { plans } from "@/lib/billingsdk-config";
+import { PricingTableFour } from "@/registry/billingsdk/pricing-table-four"
+import { plans } from "@/lib/billingsdk-config"
 
 export function PricingTableFourDemo() {
   return (
@@ -19,5 +19,5 @@ export function PricingTableFourDemo() {
         yearly: "Yearly",
       }}
     />
-  );
+  )
 }

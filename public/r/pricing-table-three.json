@@ -26,7 +26,7 @@
     },
     {
       "path": "src/registry/billingsdk/demo/pricing-table-three-demo.tsx",
-      "content": "'use client'\n\nimport { PricingTableThree } from '@/components/billingsdk/pricing-table-three';\nimport { plans } from '@/lib/billingsdk-config';\n\nexport function PricingTableThreeDemo() {\n\n    return (\n        <PricingTableThree \n            plans={plans}\n            onPlanSelect={(planId) => console.log('Selected plan:', planId)}\n            className={\"w-full max-w-4xl mx-auto\"}\n            variant=\"small\"\n            showFooter={true}\n            footerText=\"Pre-negotiated discounts are available to early-stage startups and nonprofits.\"\n            footerButtonText=\"Apply now\"\n            onFooterButtonClick={() => console.log('Footer button clicked')}\n        />\n    );\n}\n",
+      "content": "\"use client\"\n\nimport { PricingTableThree } from \"@/components/billingsdk/pricing-table-three\"\nimport { plans } from \"@/lib/billingsdk-config\"\n\nexport function PricingTableThreeDemo() {\n  return (\n    <PricingTableThree\n      plans={plans}\n      onPlanSelect={(planId) => console.log(\"Selected plan:\", planId)}\n      className={\"w-full max-w-4xl mx-auto\"}\n      variant=\"small\"\n      showFooter={true}\n      footerText=\"Pre-negotiated discounts are available to early-stage startups and nonprofits.\"\n      footerButtonText=\"Apply now\"\n      onFooterButtonClick={() => console.log(\"Footer button clicked\")}\n    />\n  )\n}\n",
       "type": "registry:component",
       "target": "components/pricing-table-three-demo.tsx"
     },
