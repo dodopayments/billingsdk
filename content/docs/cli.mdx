@@ -53,7 +53,7 @@ npx @billingsdk/cli init
 ### What it does
 
 1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
-2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
+2. **Provider Selection**: Select your payment provider (currently Dodo Payments and stripe)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
 5. **File Generation**: Creates necessary configuration files and boilerplate code
@@ -68,13 +68,13 @@ npx @billingsdk/cli init
 
 You'll be prompted to select:
 - **Framework**: Next.js (with App Router) or Express.js (Node.js web framework)
-- **Payment Provider**: Dodo Payments
+- **Payment Providers**: Dodo Payments or Stripe
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Next.js + Stripe', 'Express.js + Stripe', 'React.js + Stripe']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -120,6 +120,54 @@ After running `init`, you'll get:
     │   │   └── useBilling.ts
     │   └── lib/
     │       └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Next.js + Stripe">
+    ```
+    your-project/
+    ├── app/api/
+    │   ├── (stripe)/
+    │   │   ├── checkout/route.ts
+    │   │   ├── customer/route.ts
+    │   │   ├── customer/payments/route.ts
+    │   │   ├── customer/subscriptions/route.ts
+    │   │   ├── product/route.ts
+    │   │   ├── products/route.ts
+    │   │   └── webhook/route.ts
+    ├── hooks/
+    │   └── useBilling.ts
+    ├── lib/
+    │   └── stripe.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Express.js + Stripe">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── stripe.ts
+    │   └── routes/
+    │       └── stripe/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── customer.ts
+    │           ├── payments.ts
+    │           ├── products.ts
+    │           ├── subscriptions.ts
+    │           └── webhook.ts
+    └── .env.example
+    ```
+  </Tab>
+   <Tab value="React.js + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── hooks/
+    │   │   └── useStripeBilling.ts
+    │   └── lib/
+    │       └── stripe.ts
     └── .env.example
     ```
   </Tab>
