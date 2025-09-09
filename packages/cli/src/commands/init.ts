@@ -26,6 +26,7 @@ export const initCommand = new Command()
         message: "Which payment provider would you like to use? (Adding more providers soon)",
         options: [
           { value: "dodopayments", label: "Dodo Payments" },
+          {value: "stripe", label: "Stripe"}
         ],
       });
 
@@ -33,12 +34,12 @@ export const initCommand = new Command()
         cancel("Setup cancelled.");
         process.exit(0);
       }
-      const provider = providerChoice as "dodopayments";
+      const provider = providerChoice as "dodopayments" | "stripe";
 
       const s = spinner();
       s.start("Setting up your billing project...");
       try {
-        await addFiles(framework as "nextjs" | "express" | "react", provider as "dodopayments");
+        await addFiles(framework as "nextjs" | "express" | "react", provider);
         s.stop("Setup completed successfully!");
       } catch (error) {
         s.stop("Setup failed!");

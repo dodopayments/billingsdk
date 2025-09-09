@@ -1,26 +1,23 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { findUpSync } from "find-up"; // find a file path by walking up parent directories
+import findUp from "find-up";
 
 export const detectFramework = (): "nextjs" | "express" | "react" | null => {
     try {
-
-        const pkgPath = findUpSync("package.json");
+        const pkgPath = findUp.sync("package.json");
         if (!pkgPath) return null;
+
         const rootDir = path.dirname(pkgPath);
         const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
 
         function hasFile(file: string) {
             return existsSync(path.join(rootDir, file));
         }
-        const {
-            dependencies = {},
-            devDependencies = {},
-            peerDependencies = {},
-        } = (pkg ?? {});
+
+        const { dependencies = {}, devDependencies = {}, peerDependencies = {} } = pkg ?? {};
         const deps = { ...dependencies, ...devDependencies, ...peerDependencies };
 
-        //  nextjs detection
+        // nextjs detection
         if (
             deps.next ||
             hasFile("next.config.js") ||
@@ -31,17 +28,15 @@ export const detectFramework = (): "nextjs" | "express" | "react" | null => {
         ) {
             return "nextjs";
         }
-        
-        //  express detection
-        if (deps.express) {
-            return "express";
-        }
-        //  reactjs detection
-        if (deps.react) {
-            return "react";
-        }
+
+        // express detection
+        if (deps.express) return "express";
+
+        // react detection
+        if (deps.react) return "react";
+
         return null;
     } catch {
-        return null
+        return null;
     }
-}
+};
