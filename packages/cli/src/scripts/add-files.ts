@@ -1,5 +1,5 @@
 import { confirm, spinner } from '@clack/prompts';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -20,8 +20,9 @@ export const addFiles = async (
 			if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
 			return (await res.json()) as Result;
 		} catch (err) {
+			const errorMessage = err instanceof Error ? err.message : String(err);
 			console.warn(
-				`Remote template not available (${err.message}), using local template instead`
+				`Remote template not available (${errorMessage}), using local template instead`
 			);
 			// Local fallback to repo templates when remote registry is unavailable
 			const currentDir = path.dirname(fileURLToPath(import.meta.url));
@@ -30,8 +31,24 @@ export const addFiles = async (
 				'../../../public/tr',
 				`${framework}-${provider}.json`
 			);
-			const raw = fs.readFileSync(localPath, 'utf8');
-			return JSON.parse(raw) as Result;
+
+			// Check if local template file exists and can be read
+			if (!fs.existsSync(localPath)) {
+				throw new Error(
+					`Local template file not found at ${localPath}. Remote template failed with: ${errorMessage}`
+				);
+			}
+
+			try {
+				const raw = fs.readFileSync(localPath, 'utf8');
+				return JSON.parse(raw) as Result;
+			} catch (readError) {
+				const readErrorMessage =
+					readError instanceof Error ? readError.message : String(readError);
+				throw new Error(
+					`Failed to read or parse local template at ${localPath}. Error: ${readErrorMessage}. Remote template failed with: ${errorMessage}`
+				);
+			}
 		}
 	}
 
@@ -125,11 +142,29 @@ export const addFiles = async (
 			console.error(`Failed to add file ${displayPath}:`, error);
 		}
 	}
+
+	function getPackageManager(): string {
+		const userAgent = process.env.npm_config_user_agent || '';
+
+		if (userAgent.startsWith('bun')) {
+			return 'bun';
+		} else if (userAgent.startsWith('pnpm')) {
+			return 'pnpm';
+		} else if (userAgent.startsWith('yarn')) {
+			return 'yarn';
+		} else {
+			return 'npm';
+		}
+	}
+
 	if (result.dependencies && process.env.BILLINGSDK_SKIP_INSTALL !== '1') {
 		const s = spinner();
 		s.start('Installing dependencies...');
 		try {
-			execSync(`npm install ${result.dependencies.join(' ')}`, {
+			// Use execFileSync instead of execSync to prevent shell injection
+			const packageManager = getPackageManager();
+			const args = ['install', ...result.dependencies];
+			execFileSync(packageManager, args, {
 				stdio: 'inherit',
 			});
 			s.stop('Dependencies installed successfully!');
