@@ -26,7 +26,7 @@ export const addFiles = async (
 	 * @throws {Error} If neither remote nor local templates are available or parseable
 	 */
 	async function fetchTemplate(): Promise<Result> {
-		const url = `https://billingsdk.com/tr/${framework}-${provider}.json`;
+		const url = `https://billingsdk.com/r/${framework}-${provider}.json`;
 		try {
 			// Set a timeout for the fetch request (8 seconds)
 			const controller = new AbortController();
@@ -44,7 +44,7 @@ export const addFiles = async (
 			const currentDir = path.dirname(fileURLToPath(import.meta.url));
 			const localPath = path.resolve(
 				currentDir,
-				'../../../public/tr',
+				'../../../public/r',
 				`${framework}-${provider}.json`
 			);
 

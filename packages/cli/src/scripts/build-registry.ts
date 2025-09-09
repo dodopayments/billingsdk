@@ -5,7 +5,7 @@ import { Registry, Result } from '../types/registry.js';
 /**
  * Builds the registry by processing component templates and generating JSON files.
  * This function reads the registry.json file, processes each component's files,
- * and generates individual JSON files for each component in the public/tr directory.
+ * and generates individual JSON files for each component in the public/r directory.
  *
  * @returns A promise that resolves when the registry build is complete
  * @throws {Error} If the registry.json file is not found or if there are file system errors
@@ -19,8 +19,8 @@ export const buildRegistry = async () => {
 			'registry.json'
 		);
 		if (!fs.existsSync(registryPath)) {
-			console.error('registry.json not found in root directory');
-			process.exit(1);
+			// Throw an error instead of calling process.exit(1) so callers can decide exit behavior
+			throw new Error('registry.json not found in root directory');
 		}
 
 		const registry: Registry = JSON.parse(
@@ -45,8 +45,21 @@ export const buildRegistry = async () => {
 			 *
 			 * @param absSourcePath - The absolute path to the source file
 			 * @param relativeFromBase - The relative path from the base directory (for wildcard processing)
+			 * @param base - The base directory for calculating relative paths
+			 * @param hasWildcard - Whether the source path contains a wildcard
+			 * @param targetHasWildcard - Whether the target path contains a wildcard
+			 * @param targetBaseRaw - The base target path
+			 * @param fileType - The type of the file
 			 */
-			const pushFile = (absSourcePath: string, relativeFromBase?: string) => {
+			const pushFile = (
+				absSourcePath: string,
+				relativeFromBase: string | undefined,
+				base: string,
+				hasWildcard: boolean,
+				targetHasWildcard: boolean,
+				targetBaseRaw: string,
+				fileType?: 'template' | 'config' | 'types'
+			) => {
 				const content = fs.readFileSync(absSourcePath, 'utf-8');
 
 				// Compute target path with proper POSIX normalization
@@ -69,7 +82,7 @@ export const buildRegistry = async () => {
 
 				processedComponent.files.push({
 					target: targetPath,
-					type: file.type ?? 'template',
+					type: fileType ?? 'template',
 					content: content,
 				});
 			};
@@ -120,7 +133,15 @@ export const buildRegistry = async () => {
 								walk(abs, base);
 							} else if (entry.isFile()) {
 								const rel = path.relative(base, abs);
-								pushFile(abs, rel);
+								pushFile(
+									abs,
+									rel,
+									base,
+									hasWildcard,
+									targetHasWildcard,
+									targetBaseRaw,
+									file.type
+								);
 							}
 						}
 					};
@@ -131,7 +152,15 @@ export const buildRegistry = async () => {
 						console.warn(`Skipping missing file: ${sourceBase}`);
 						continue;
 					}
-					pushFile(sourceBase);
+					pushFile(
+						sourceBase,
+						undefined,
+						sourceBase,
+						hasWildcard,
+						targetHasWildcard,
+						targetBaseRaw,
+						file.type
+					);
 				}
 			}
 
@@ -153,6 +182,7 @@ export const buildRegistry = async () => {
 				error instanceof Error ? error.message : 'Unknown error'
 			}`
 		);
-		process.exit(1);
+		// Throw the error instead of calling process.exit(1) so it can be handled by the top-level catch
+		throw error;
 	}
 };
