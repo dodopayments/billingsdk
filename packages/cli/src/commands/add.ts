@@ -31,8 +31,12 @@ export const addCommand = new Command()
 	.action(async (component) => {
 		try {
 			if (!component) {
-				console.error('Component name is required');
-				console.error('Usage: billingsdk add <component>');
+				console.error('Component name is required.\nUsage: billingsdk add <component>');
+				process.exit(1);
+			}
+			const valid = /^[a-z0-9][a-z0-9-]*$/i.test(component);
+			if (!valid) {
+				console.error(`Invalid component "${component}". Use letters, numbers, and dashes only.`);
 				process.exit(1);
 			}
 
