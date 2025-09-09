@@ -13,8 +13,19 @@ import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
+import { PricingPage } from "@/components/billingsdk/pricing-page";
 
 export const componentRegistry: ComponentConfig[] = [
+  {
+    id: "pricing-page",
+    name: "Pricing Page",
+    description: "Full pricing landing page with hero, plans, comparison and footer",
+    category: "pricing",
+    component: PricingPage,
+    imports: ["@/components/billingsdk/pricing-page"],
+    defaultCode: `<PricingPage />`,
+    defaultProps: {},
+  },
   {
     id: "banner",
     name: "Banner",

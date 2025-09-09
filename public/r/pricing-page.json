@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-page",
+  "type": "registry:block",
+  "title": "Pricing Page",
+  "description": "A full pricing landing page with hero, slider, plans, comparison table and footer",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "badge",
+    "slider",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/pricing-page.tsx",
+      "type": "registry:component",
+      "target": "components/billingsdk/pricing-page.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/pricing-page-demo.tsx",
+      "type": "registry:component",
+      "target": "components/pricing-page-demo.tsx"
+    }
+  ]
+}
+
+
