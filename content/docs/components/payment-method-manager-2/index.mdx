@@ -1,0 +1,69 @@
+---
+title: Payment Method Manager 2
+---
+
+import { PaymentMethodManager2Demo } from '@/registry/billingsdk/demo/payment-method-manager-2-demo';
+
+The Payment Method Manager 2 component displays saved payment methods and provides actions to add, remove, edit, or set a default payment method.
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billingsdk">
+      <PaymentMethodManager2Demo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include
+      cwd
+      lang="tsx"
+      meta='title="src/registry/billingsdk/demo/payment-method-manager-2-demo.tsx"'
+    >
+      src/registry/billingsdk/demo/payment-method-manager-2-demo.tsx
+    </include>
+  </Tab>
+</Tabs>
+## Props
+
+| Prop           | Type                                                    | Description                                               |
+| -------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| paymentMethods | `PaymentMethod2[]`                                      | Array of saved payment methods                            |
+| onAdd          | `() => void`                                            | (optional) Called when the add button is clicked          |
+| onEdit         | (id: string, changes?: Partial<PaymentMethod2>) => void | (optional) Called when the edit button is clicked         |
+| onRemove       | `(id: string) => void`                                  | (optional) Called when the remove button is clicked       |
+| onSetDefault   | `(id: string) => void`                                  | (optional) Called when the set default button is clicked  |
+| onViewDetails  | `(id: string) => void`                                  | (optional) Called when the view details button is clicked |
+| className      | `string`                                                | (optional) Additional CSS classes                         |
+| isLoading      | `boolean`                                               | (optional) Whether the component is in a loading state    |
+| error          | `string \| null`                                        | (optional) Error message to display                       |
+
+### Payment Method 2 Object
+
+| Property       | Type                                  | Description                                                   |
+| -------------- | ------------------------------------- | ------------------------------------------------------------- |
+| id             | `string`                              | Unique identifier for the payment method                      |
+| type           | `"credit" \| "ach"`                   | Type of payment method                                        |
+| last4          | `string`                              | Last 4 digits of the payment method                           |
+| expiry         | `string` (optional)                   | Expiration date (for cards), format MM/YYYY (e.g., "12/2027") |
+| isDefault      | `boolean`                             | Whether this is the default payment method                    |
+| brand          | `string` (optional)                   | Brand of the card (e.g., "Visa", "Mastercard")                |
+| bankName       | `string` (optional)                   | Name of the bank (for ACH accounts)                           |
+| cardholderName | `string` (optional)                   | Name of the cardholder                                        |
+| createdAt      | `string`                              | Date when the payment method was created                      |
+| status         | `"active" \| "expired" \| "inactive"` | Status of the payment method                                  |
+
+<div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+	<div className="flex items-center justify-between">
+		<div>
+			<span className="text-sm text-gray-500 dark:text-gray-400">
+				Created by{' '}
+				<a
+					href="https://github.com/sapatmohit"
+					className="text-blue-600 hover:underline dark:text-blue-400"
+				>
+					Mohit Sapat
+				</a>
+			</span>
+		</div>
+	</div>
+</div>
