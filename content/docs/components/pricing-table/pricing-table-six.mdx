@@ -1,0 +1,51 @@
+---
+title: Pricing Table Six
+description: Full pricing landing page with hero, slider, plans, comparison and footer.
+---
+
+## Preview
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="pricing-table-six">
+      <PricingTableSixDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/pricing-page-demo.tsx"'>src/components/pricing-page-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/pricing-page.json
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add https://billingsdk.com/r/pricing-page.json
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    npx shadcn@latest add https://billingsdk.com/r/pricing-page.json
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PricingTableSix } from "@/components/billingsdk/pricing-page";
+
+export default function Example() {
+  return <PricingTableSix />
+}
+```
+
+
