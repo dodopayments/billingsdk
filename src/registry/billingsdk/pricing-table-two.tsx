@@ -281,7 +281,7 @@ const buttonVariants = cva("w-full hover:cursor-pointer transition-all duration-
 
 export interface PricingTableTwoProps extends VariantProps<typeof sectionVariants> {
   className?: string;
-  plans: Plan[];
+  plans?: Plan[];
   title?: string;
   description?: string;
   onPlanSelect?: (planId: string) => void;
@@ -289,7 +289,7 @@ export interface PricingTableTwoProps extends VariantProps<typeof sectionVariant
 
 export function PricingTableTwo({
   className,
-  plans,
+  plans = [],
   title,
   description,
   onPlanSelect,
@@ -316,7 +316,7 @@ export function PricingTableTwo({
     return Math.round(discount);
   }
 
-  const yearlyPriceDiscount = plans.length
+  const yearlyPriceDiscount = plans?.length
     ? Math.max(
       ...plans.map((plan) =>
         calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)

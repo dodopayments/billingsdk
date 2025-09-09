@@ -721,7 +721,19 @@ export const componentRegistry: ComponentConfig[] = [
     category: "pricing",
     component: PricingTableSix,
     imports: ["@/components/billingsdk/pricing-table-six"],
-    defaultCode: `<PricingTableSix />`,
+    defaultCode: `// Pricing Table Six - Self-contained component with hardcoded data
+// This component includes interactive slider, pricing plans, and comparison table
+// No props required - all data is built-in
+
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
+
+export default function Page() {
+  return (
+    <div className="w-full">
+      <PricingTableSix />
+    </div>
+  );
+}`,
     defaultProps: {
       // PricingTableSix doesn't accept props - it uses hardcoded data
       // This ensures clean state when switching components

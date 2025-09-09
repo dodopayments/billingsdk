@@ -137,7 +137,7 @@ const footerTextVariants = cva("text-lg font-medium text-card-foreground text-le
 
 export interface PricingTableProps extends VariantProps<typeof sectionVariants> {
   className?: string
-  plans: Plan[]
+  plans?: Plan[]
   onPlanSelect?: (planId: string) => void
   showFooter?: boolean
   footerText?: string
@@ -145,7 +145,7 @@ export interface PricingTableProps extends VariantProps<typeof sectionVariants> 
   onFooterButtonClick?: () => void
 }
 
-export function PricingTableThree({ className, plans, onPlanSelect, showFooter, footerText, footerButtonText, onFooterButtonClick, variant }: PricingTableProps) {
+export function PricingTableThree({ className, plans = [], onPlanSelect, showFooter, footerText, footerButtonText, onFooterButtonClick, variant }: PricingTableProps) {
   const [isAnnually, setIsAnnually] = useState(false);
 
   function calculateDiscount(monthlyPrice: string, yearlyPrice: string): number {
@@ -166,7 +166,7 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
     return Math.round(discount);
   }
 
-  const yearlyPriceDiscount = plans.length
+  const yearlyPriceDiscount = plans?.length
     ? Math.max(
       ...plans.map((plan) =>
         calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)

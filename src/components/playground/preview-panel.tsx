@@ -76,6 +76,7 @@ function PreviewPanelContent() {
   useEffect(() => {
     if (state.selectedComponent) {
       console.log('Setting component:', state.selectedComponent.id, state.selectedComponent.name);
+      // console.log('Component code:', state.code);
       setComponent(() => state.selectedComponent!.component);
       setError(null);
       // Force refresh when component changes
@@ -283,6 +284,12 @@ function PreviewPanelContent() {
                     {...state.props} 
                     data-component-id={state.selectedComponent?.id}
                     data-component-name={state.selectedComponent?.name}
+                    onError={(error: Error) => {
+                      console.error('Component error:', error);
+                      console.log('Selected component:', state.selectedComponent?.id, state.selectedComponent?.name);
+                      console.log('Component function:', Component.name);
+                      console.log('Props:', state.props);
+                    }}
                   />
                 </ErrorBoundary>
               </div>
