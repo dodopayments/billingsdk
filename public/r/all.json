@@ -21,7 +21,7 @@
     "@billingsdk/invoice-history",
     "@billingsdk/usage-table",
     "@billingsdk/payment-method-selector",
-    "@billingsdk/pricing-page",
+    "@billingsdk/pricing-table-six",
     "@billingsdk/payment-method-manager",
     "@billingsdk/billing-setting",
     "@billingsdk/proration-preview"
