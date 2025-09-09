@@ -1,22 +1,28 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { Command } from 'commander';
 
 /**
  * Determines the appropriate package manager runner.
  *
- * @returns The package manager runner command
+ * @returns An array with the command and its arguments
  */
-function getPackageManagerRunner(): string {
+function getPackageManagerRunner(): [string, ...string[]] {
 	const userAgent = process.env.npm_config_user_agent || '';
 
 	if (userAgent.startsWith('bun')) {
-		return 'bunx';
+		return ['bunx'];
 	} else if (userAgent.startsWith('pnpm')) {
-		return 'pnpm dlx';
+		return ['pnpm', 'dlx'];
 	} else if (userAgent.startsWith('yarn')) {
-		return 'yarn dlx';
+		// Check if it's Yarn 1 (yarn/1.x.x)
+		if (/^yarn\/1\./.test(userAgent)) {
+			return ['npx']; // or ['yarn'] if preferred
+		} else {
+			// Yarn >= 2
+			return ['yarn', 'dlx'];
+		}
 	} else {
-		return 'npx';
+		return ['npx'];
 	}
 }
 
@@ -36,11 +42,28 @@ export const addCommand = new Command()
 				process.exit(1);
 			}
 
+			// Validate component name to prevent path traversal or special characters
+			if (
+				typeof component !== 'string' ||
+				component.includes('/') ||
+				component.includes('\\') ||
+				component.includes('..')
+			) {
+				console.error('Invalid component name');
+				process.exit(1);
+			}
+
 			const templateRegistry = `@billingsdk/${component}.json`;
-			const runner = getPackageManagerRunner();
-			execSync(`${runner} shadcn@latest add ${templateRegistry}`, {
-				stdio: 'inherit',
-			});
+			const [command, ...args] = getPackageManagerRunner();
+
+			// Execute the command with discrete arguments to prevent shell injection
+			execFileSync(
+				command,
+				[...args, 'shadcn@latest', 'add', templateRegistry],
+				{
+					stdio: 'inherit',
+				}
+			);
 		} catch (error) {
 			process.exit(1);
 		}

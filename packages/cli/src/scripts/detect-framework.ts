@@ -6,13 +6,18 @@ import path from 'node:path';
  * Detects the framework used in the current project by examining package.json dependencies
  * and project structure.
  *
- * This function attempts to identify if the project is using Next.js, Express, or React
+ * This function attempts to identify if the project is using Next.js, Express, Fastify, or React
  * by checking for specific dependencies and configuration files.
  *
- * @returns The detected framework ('nextjs', 'express', 'react') or null if no framework is detected
+ * @returns The detected framework ('nextjs', 'express', 'react', 'fastify') or null if no framework is detected
  * @throws Will return null if any error occurs during detection
  */
-export const detectFramework = (): 'nextjs' | 'express' | 'react' | null => {
+export const detectFramework = ():
+	| 'nextjs'
+	| 'express'
+	| 'react'
+	| 'fastify'
+	| null => {
 	try {
 		const pkgPath = findUpSync('package.json');
 		if (!pkgPath) return null;
@@ -50,6 +55,11 @@ export const detectFramework = (): 'nextjs' | 'express' | 'react' | null => {
 		// Express detection
 		if (deps.express) {
 			return 'express';
+		}
+
+		// Fastify detection
+		if (deps.fastify) {
+			return 'fastify';
 		}
 
 		// React detection

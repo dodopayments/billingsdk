@@ -14,6 +14,13 @@ export const buildCommand = new Command()
 			await buildRegistry();
 			console.log('Registry built successfully!');
 		} catch (error) {
-			process.exit(1);
+			console.error(
+				'Failed to build registry:',
+				error instanceof Error ? error.message : 'Unknown error occurred'
+			);
+			if (error instanceof Error && error.stack) {
+				console.error(error.stack);
+			}
+			process.exitCode = 1;
 		}
 	});

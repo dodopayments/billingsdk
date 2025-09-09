@@ -79,7 +79,7 @@ export const ErrorBanner = () => (
 	<BigTextBanner
 		text="Error"
 		font="simple"
-		colors={['dimGray']}
+		colors={['gray']}
 		showSubtitle={false}
 	/>
 );

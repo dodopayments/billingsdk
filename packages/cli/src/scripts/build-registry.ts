@@ -14,7 +14,9 @@ export const buildRegistry = async () => {
 	try {
 		const registryPath = path.join(
 			process.cwd(),
-			'/packages/templates/registry.json'
+			'packages',
+			'templates',
+			'registry.json'
 		);
 		if (!fs.existsSync(registryPath)) {
 			console.error('registry.json not found in root directory');
@@ -25,7 +27,7 @@ export const buildRegistry = async () => {
 			fs.readFileSync(registryPath, 'utf-8')
 		);
 
-		const outputDir = path.join(process.cwd(), 'public/tr');
+		const outputDir = path.join(process.cwd(), 'public/r');
 		fs.mkdirSync(outputDir, { recursive: true });
 
 		const componentsToProcess = registry.components;
@@ -46,10 +48,25 @@ export const buildRegistry = async () => {
 			 */
 			const pushFile = (absSourcePath: string, relativeFromBase?: string) => {
 				const content = fs.readFileSync(absSourcePath, 'utf-8');
-				const targetPath =
-					hasWildcard && targetHasWildcard && relativeFromBase
-						? path.join(targetBaseRaw, relativeFromBase)
-						: targetBaseRaw;
+
+				// Compute target path with proper POSIX normalization
+				let targetPath: string;
+				if (hasWildcard && targetHasWildcard && relativeFromBase) {
+					// When both source and target have wildcards and we have a relative path
+					targetPath = path.posix.join(targetBaseRaw, relativeFromBase);
+				} else if (!hasWildcard && targetHasWildcard) {
+					// When source is a single file but target has a wildcard
+					// Substitute the '*' with the source filename
+					const fileName = path.basename(absSourcePath);
+					targetPath = targetBaseRaw.replace(/\*$/, fileName);
+				} else {
+					// Simple case - no wildcards or only source has wildcard
+					targetPath = targetBaseRaw;
+				}
+
+				// Ensure the resulting target string is normalized to POSIX separators
+				targetPath = targetPath.replace(/\\/g, '/');
+
 				processedComponent.files.push({
 					target: targetPath,
 					type: file.type ?? 'template',
@@ -58,8 +75,19 @@ export const buildRegistry = async () => {
 			};
 
 			for (const file of component.files) {
-				const filePathPattern =
-					typeof (file as any).path === 'string' ? (file as any).path : '';
+				// Validate that file.path is a non-empty string before using it
+				if (
+					typeof (file as any).path !== 'string' ||
+					(file as any).path.trim() === ''
+				) {
+					console.warn(
+						`Skipping file with invalid path in component ${component.name}:`,
+						file
+					);
+					continue;
+				}
+
+				const filePathPattern = (file as any).path;
 				const hasWildcard = filePathPattern.includes('*');
 				const sourceBase = hasWildcard
 					? path.join(process.cwd(), filePathPattern.split('*')[0])
@@ -114,12 +142,10 @@ export const buildRegistry = async () => {
 				'utf-8'
 			);
 
-			console.log(
-				`Built ${component.name} -> public/tr/${component.name}.json`
-			);
+			console.log(`Built ${component.name} -> public/r/${component.name}.json`);
 		}
 		console.log(
-			`Successfully built ${componentsToProcess.length} component(s)`
+			`Successfully built ${componentsToProcess.length} component(s) to public/r`
 		);
 	} catch (error) {
 		console.error(
