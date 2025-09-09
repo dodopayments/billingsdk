@@ -5,10 +5,26 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { Result } from '../types/registry.js';
 
+/**
+ * Adds files from a template to the current project based on the specified framework and provider.
+ * This function fetches template files either from a remote registry or a local fallback,
+ * then writes them to the appropriate locations in the project directory.
+ *
+ * @param framework - The framework to use for the template ('nextjs', 'express', or 'react')
+ * @param provider - The payment provider to use for the template ('dodopayments' or 'paypal')
+ * @returns A promise that resolves when all files have been added
+ * @throws {Error} If neither remote nor local templates are available
+ */
 export const addFiles = async (
 	framework: 'nextjs' | 'express' | 'react',
 	provider: 'dodopayments' | 'paypal'
 ) => {
+	/**
+	 * Fetches a template from the remote registry or falls back to a local template.
+	 *
+	 * @returns A promise that resolves to the template result
+	 * @throws {Error} If neither remote nor local templates are available or parseable
+	 */
 	async function fetchTemplate(): Promise<Result> {
 		const url = `https://billingsdk.com/tr/${framework}-${provider}.json`;
 		try {
@@ -143,6 +159,11 @@ export const addFiles = async (
 		}
 	}
 
+	/**
+	 * Determines the package manager being used based on the npm_config_user_agent environment variable.
+	 *
+	 * @returns The name of the package manager ('bun', 'pnpm', 'yarn', or 'npm')
+	 */
 	function getPackageManager(): string {
 		const userAgent = process.env.npm_config_user_agent || '';
 

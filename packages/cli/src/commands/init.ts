@@ -9,9 +9,19 @@ import {
 import { Command } from 'commander';
 import { detectFramework } from '../scripts/detect-framework.js';
 
+/**
+ * Type representing the supported frameworks.
+ */
 type Framework = 'nextjs' | 'express' | 'react';
+
+/**
+ * Type representing the supported payment providers.
+ */
 type Provider = 'dodopayments' | 'paypal';
 
+/**
+ * Adds files for the specified framework and provider.
+ */
 const addFiles = async (framework: Framework, provider: Provider) => {
 	const mod = (await import(
 		'../scripts/add-files.js'
@@ -19,6 +29,9 @@ const addFiles = async (framework: Framework, provider: Provider) => {
 	return mod.addFiles(framework, provider);
 };
 
+/**
+ * Command to initialize a new billing project.
+ */
 export const initCommand = new Command()
 	.name('init')
 	.description('Initialize a new billing project')
