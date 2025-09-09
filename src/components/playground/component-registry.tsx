@@ -17,19 +17,6 @@ import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 
 export const componentRegistry: ComponentConfig[] = [
   {
-    id: "pricing-table-six",
-    name: "Pricing Table Six",
-    description: "Comprehensive pricing table with interactive slider, plans, and detailed comparison table",
-    category: "pricing",
-    component: PricingTableSix,
-    imports: ["@/components/billingsdk/pricing-table-six"],
-    defaultCode: `<PricingTableSix />`,
-    defaultProps: {
-      // PricingTableSix doesn't accept props - it uses hardcoded data
-      // This ensures clean state when switching components
-    },
-  },
-  {
     id: "banner",
     name: "Banner",
     description: "Flexible notification banner with multiple variants and animations",
@@ -725,6 +712,19 @@ export const componentRegistry: ComponentConfig[] = [
       title: "Pricing Plans",
       description: "Find the right plan for your business",
       onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+    },
+  },
+  {
+    id: "pricing-table-six",
+    name: "Pricing Table Six",
+    description: "Comprehensive pricing table with interactive slider, plans, and detailed comparison table",
+    category: "pricing",
+    component: PricingTableSix,
+    imports: ["@/components/billingsdk/pricing-table-six"],
+    defaultCode: `<PricingTableSix />`,
+    defaultProps: {
+      // PricingTableSix doesn't accept props - it uses hardcoded data
+      // This ensures clean state when switching components
     },
   },
   {
