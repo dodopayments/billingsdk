@@ -205,5 +205,3 @@ export function PricingTableSix() {
     </div>
   )
 }
-
-

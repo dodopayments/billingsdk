@@ -1,4 +1,4 @@
 "use client";
-export { PricingTableSix } from "@/registry/billingsdk/pricing-page";
+export { PricingTableSix } from "@/registry/billingsdk/pricing-table-six";
 
 

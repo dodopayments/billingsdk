@@ -16,14 +16,14 @@
   ],
   "files": [
     {
-      "path": "src/registry/billingsdk/pricing-page.tsx",
+      "path": "src/registry/billingsdk/pricing-table-six.tsx",
       "type": "registry:component",
-      "target": "components/billingsdk/pricing-page.tsx"
+      "target": "components/billingsdk/pricing-table-six.tsx"
     },
     {
-      "path": "src/registry/billingsdk/demo/pricing-page-demo.tsx",
+      "path": "src/registry/billingsdk/demo/pricing-table-six-demo.tsx",
       "type": "registry:component",
-      "target": "components/pricing-page-demo.tsx"
+      "target": "components/pricing-table-six-demo.tsx"
     }
   ]
 }

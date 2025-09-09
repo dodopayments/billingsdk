@@ -1,6 +1,6 @@
 "use client"
 
-import { PricingTableSix } from "@/components/billingsdk/pricing-page"
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six"
 
 export function PricingTableSixDemo() {
   return (
@@ -11,5 +11,3 @@ export function PricingTableSixDemo() {
     </div>
   )
 }
-
-
