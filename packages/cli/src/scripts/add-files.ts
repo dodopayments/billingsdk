@@ -5,7 +5,7 @@ import { confirm, spinner } from "@clack/prompts";
 import { execSync } from "child_process";
 
 export const addFiles = async (framework: "nextjs" | "express" | "react", provider: "dodopayments" | "stripe") => {
-    const result = await fetch(`http://127.0.0.1:4000/tr/${framework}-${provider}.json`)
+    const result = await fetch(`https://billingsdk.com/tr/${framework}-${provider}.json`)
         .then(res => res.json()) as Result;
     let srcExists = fs.existsSync(path.join(process.cwd(), "src"));
     const addToPath = srcExists ? "src" : "";
