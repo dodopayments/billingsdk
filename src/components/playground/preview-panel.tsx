@@ -75,8 +75,11 @@ function PreviewPanelContent() {
 
   useEffect(() => {
     if (state.selectedComponent) {
+      console.log('Setting component:', state.selectedComponent.id, state.selectedComponent.name);
       setComponent(() => state.selectedComponent!.component);
       setError(null);
+      // Force refresh when component changes
+      setRefreshKey(prev => prev + 1);
     }
   }, [state.selectedComponent, state.code]);
 
@@ -274,8 +277,13 @@ function PreviewPanelContent() {
                   minHeight: viewportSize === "mobile" ? "600px" : "auto"
                 }}
               >
-                <ErrorBoundary key={`${refreshKey}-${state.code}`} onError={setError}>
-                  <Component key={`${refreshKey}-${state.code}`} {...state.props} />
+                <ErrorBoundary key={`${refreshKey}-${state.selectedComponent?.id}-${state.code}`} onError={setError}>
+                  <Component 
+                    key={`${refreshKey}-${state.selectedComponent?.id}-${state.code}`} 
+                    {...state.props} 
+                    data-component-id={state.selectedComponent?.id}
+                    data-component-name={state.selectedComponent?.name}
+                  />
                 </ErrorBoundary>
               </div>
             ) : (

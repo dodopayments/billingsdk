@@ -19,12 +19,15 @@ export const componentRegistry: ComponentConfig[] = [
   {
     id: "pricing-table-six",
     name: "Pricing Table Six",
-    description: "Full pricing landing page with hero, plans, comparison and footer",
+    description: "Comprehensive pricing table with interactive slider, plans, and detailed comparison table",
     category: "pricing",
     component: PricingTableSix,
     imports: ["@/components/billingsdk/pricing-table-six"],
     defaultCode: `<PricingTableSix />`,
-    defaultProps: {},
+    defaultProps: {
+      // PricingTableSix doesn't accept props - it uses hardcoded data
+      // This ensures clean state when switching components
+    },
   },
   {
     id: "banner",
