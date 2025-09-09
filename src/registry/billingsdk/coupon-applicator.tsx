@@ -46,6 +46,7 @@ export function CouponApplicator({
 	autoApply = false,
 	onRemove,
 }: CouponApplicatorProps) {
+	const inputRef = useRef<HTMLInputElement>(null);
 	const [code, setCode] = useState('');
 	const [status, setStatus] = useState<
 		'idle' | 'loading' | 'success' | 'error'
@@ -53,7 +54,7 @@ export function CouponApplicator({
 	const [validationResult, setValidationResult] =
 		useState<ValidationResult | null>(null);
 	const [message, setMessage] = useState<string | null>(null);
-	const inputRef = useRef<HTMLInputElement>(null);
+	const [isApplied, setIsApplied] = useState(false); // New state to track if the discount is applied
 
 	// Format currency
 	const formatCurrency = (amount: number) => {
@@ -94,18 +95,7 @@ export function CouponApplicator({
 	// Handle apply
 	const handleApply = async () => {
 		const trimmedCode = code.trim();
-
-		// Local validation
-		const localError = validateLocally(trimmedCode);
-		if (localError) {
-			setStatus('error');
-			setMessage(localError);
-			return;
-		}
-
-		// Apply coupon
 		setStatus('loading');
-		setMessage(null);
 
 		try {
 			const result = await onApply(trimmedCode.toUpperCase());
@@ -114,6 +104,7 @@ export function CouponApplicator({
 			if (result.isValid) {
 				setStatus('success');
 				setMessage(result.message || 'Coupon applied successfully!');
+				setIsApplied(true); // Set isApplied to true when the discount is applied
 			} else {
 				setStatus('error');
 				setMessage(result.message || 'Invalid coupon code');
@@ -122,6 +113,8 @@ export function CouponApplicator({
 			setStatus('error');
 			setMessage('Failed to apply coupon. Please try again.');
 			console.error('Coupon application error:', error);
+		} finally {
+			setStatus('idle');
 		}
 	};
 
@@ -212,7 +205,8 @@ export function CouponApplicator({
 								className={cn(
 									'h-12 px-5 rounded-lg font-medium transition-all hover:scale-[1.02]',
 									theme === 'minimal' &&
-										'bg-transparent text-primary hover:bg-muted'
+										'bg-transparent text-primary hover:bg-muted',
+									isApplied && 'bg-green-500 text-white hover:bg-green-600' // Add green styling when applied
 								)}
 							>
 								{status === 'loading' ? (
@@ -262,9 +256,11 @@ export function CouponApplicator({
 								<div className="flex justify-between items-center">
 									<span className="text-muted-foreground">Discount</span>
 									<span className="font-semibold text-lg">
-										{validationResult?.discount?.type === 'percentage'
+										{validationResult?.discount?.type === 'percentage' && validationResult?.discount?.value
 											? `${validationResult.discount.value}%`
-											: formatCurrency(validationResult.discount.value)}
+											: validationResult?.discount?.value 
+											? formatCurrency(validationResult.discount.value)
+											: ''}
 									</span>
 								</div>
 
