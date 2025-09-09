@@ -182,7 +182,7 @@ const footerLinks = {
   LEGAL: ["Terms", "Privacy", "Cookies", "Licenses", "Settings", "Contact"],
 }
 
-export function PricingPage() {
+export function PricingTableSix() {
   const [users, setUsers] = useState([14])
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
