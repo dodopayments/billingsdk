@@ -6,49 +6,97 @@ import { ComponentConfig, PlaygroundState } from "./types";
 
 function parseJSXProps(code: string): Record<string, any> {
   try {
-    const jsxMatch = code.match(/<(\w+)([^>]*)>/);
+    const jsxMatch = code.match(/<(\w+)([^>]*?)(?:\/?>|>[\s\S]*?<\/\1>)/s);
     if (!jsxMatch) return {};
 
     const propsString = jsxMatch[2];
     const props: Record<string, any> = {};
-    const propRegex = /(\w+)=({[^}]*}|"[^"]*"|'[^']*'|\w+)/g;
-    let match;
-
-    while ((match = propRegex.exec(propsString)) !== null) {
-      const [, propName, propValue] = match;
+    
+    let currentIndex = 0;
+    while (currentIndex < propsString.length) {
+      const propMatch = propsString.slice(currentIndex).match(/^\s*(\w+)=/);
+      if (!propMatch) break;
       
-      try {
-
-        if (propValue.startsWith('{') && propValue.endsWith('}')) {
-
-          const innerValue = propValue.slice(1, -1);
-          if (innerValue.includes('=>') || innerValue.includes('function')) {
-
-            props[propName] = () => console.log(`${propName} called`);
-          } else if (innerValue.includes('{') && innerValue.includes('}')) {
-            try {
-              props[propName] = eval(`(${innerValue})`);
-            } catch {
-              props[propName] = {};
-            }
-          } else {
-
-            try {
-              props[propName] = eval(innerValue);
-            } catch {
-              props[propName] = innerValue;
+      const propName = propMatch[1];
+      currentIndex += propMatch[0].length;
+      
+      if (currentIndex >= propsString.length) break;
+      
+      const nextChar = propsString[currentIndex];
+      let propValue: any;
+      
+      if (nextChar === '{') {
+        let braceCount = 0;
+        let valueStart = currentIndex + 1;
+        let valueEnd = valueStart;
+        
+        for (let i = currentIndex; i < propsString.length; i++) {
+          if (propsString[i] === '{') braceCount++;
+          else if (propsString[i] === '}') {
+            braceCount--;
+            if (braceCount === 0) {
+              valueEnd = i;
+              currentIndex = i + 1;
+              break;
             }
           }
-        } else if (propValue.startsWith('"') || propValue.startsWith("'")) {
-          props[propName] = propValue.slice(1, -1);
-        } else {
-          if (propValue === 'true') props[propName] = true;
-          else if (propValue === 'false') props[propName] = false;
-          else if (!isNaN(Number(propValue))) props[propName] = Number(propValue);
-          else props[propName] = propValue;
         }
-      } catch {
-        props[propName] = propValue;
+        
+        const innerValue = propsString.slice(valueStart, valueEnd).trim();
+        
+        try {
+          if (innerValue.includes('=>') || innerValue.includes('function')) {
+            props[propName] = () => console.log(`${propName} called`);
+          } else if (innerValue === '' || innerValue === '{}') {
+            props[propName] = {};
+          } else if (innerValue === '[]') {
+            props[propName] = [];
+          } else {
+            const sanitizedValue = innerValue
+              .replace(/(\w+):/g, '"$1":')
+              .replace(/'/g, '"')
+              .replace(/undefined/g, 'null')
+              .replace(/\s+/g, ' ')
+              .trim();
+            
+            try {
+              props[propName] = JSON.parse(sanitizedValue);
+            } catch {
+              const safeEval = new Function(`return (${innerValue})`);
+              props[propName] = safeEval();
+            }
+          }
+        } catch {
+          props[propName] = innerValue;
+        }
+      } else if (nextChar === '"' || nextChar === "'") {
+        const quote = nextChar;
+        let valueStart = currentIndex + 1;
+        let valueEnd = propsString.indexOf(quote, valueStart);
+        
+        if (valueEnd === -1) valueEnd = propsString.length;
+        
+        propValue = propsString.slice(valueStart, valueEnd);
+        currentIndex = valueEnd + 1;
+        
+        if (propValue === 'true') props[propName] = true;
+        else if (propValue === 'false') props[propName] = false;
+        else if (!isNaN(Number(propValue))) props[propName] = Number(propValue);
+        else props[propName] = propValue;
+      } else {
+        const nextSpace = propsString.indexOf(' ', currentIndex);
+        const nextProp = propsString.indexOf('=', currentIndex + 1);
+        let valueEnd = nextSpace !== -1 ? Math.min(nextSpace, nextProp !== -1 ? nextProp : Infinity) : nextProp;
+        
+        if (valueEnd === -1 || valueEnd === Infinity) valueEnd = propsString.length;
+        
+        propValue = propsString.slice(currentIndex, valueEnd).trim();
+        currentIndex = valueEnd;
+        
+        if (propValue === 'true') props[propName] = true;
+        else if (propValue === 'false') props[propName] = false;
+        else if (!isNaN(Number(propValue))) props[propName] = Number(propValue);
+        else props[propName] = propValue;
       }
     }
 
@@ -93,22 +141,35 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateCode = useCallback((code: string) => {
-    setState((prev: PlaygroundState) => ({ ...prev, code }));
-    
-
-    try {
-      const props = parseJSXProps(code);
-      if (props && Object.keys(props).length > 0) {
-        setState((prev: PlaygroundState) => ({ 
+    setState((prev: PlaygroundState) => {
+      try {
+        const parsedProps = parseJSXProps(code);
+        
+        // If parsing fails or returns empty, keep existing props but update code
+        if (!parsedProps || Object.keys(parsedProps).length === 0) {
+          return { ...prev, code };
+        }
+        
+        // Merge parsed props with existing props, giving priority to parsed props
+        const mergedProps = { ...prev.props };
+        
+        // Only update props that were successfully parsed
+        Object.entries(parsedProps).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            mergedProps[key] = value;
+          }
+        });
+        
+        return { 
           ...prev, 
           code,
-          props: { ...prev.props, ...props }
-        }));
+          props: mergedProps
+        };
+      } catch (error) {
+        console.warn("Failed to parse JSX props:", error);
+        return { ...prev, code };
       }
-    } catch (error) {
-
-      console.warn("Failed to parse JSX props:", error);
-    }
+    });
   }, []);
 
   const updateProps = useCallback((props: Record<string, any>) => {

@@ -40,7 +40,8 @@
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",
-                "@billingsdk/billing-setting"
+                "@billingsdk/billing-settings",
+                "@billingsdk/proration-preview"
             ]
         },
         {
@@ -607,7 +608,43 @@
                 "label",
                 "sonner" 
             ]
-        }
+        },
 
+        {
+            "name": "proration-preview",
+            "type": "registry:block",
+            "title": "Proration Preview",
+            "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
+            "files": [
+              {
+                "path": "src/registry/billingsdk/proration-preview.tsx",
+                "type": "registry:component",
+                "target": "components/billingsdk/proration-preview.tsx"
+              },
+              {
+                "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
+                "type": "registry:component",
+                "target": "components/proration-preview-demo.tsx"
+              },
+              {
+                "path": "src/registry/lib/billingsdk-config.ts",
+                "type": "registry:lib",
+                "target": "lib/billingsdk-config.ts"
+              }
+            ],
+            "dependencies": [
+              "lucide-react",
+              "class-variance-authority",
+              "motion"
+            ],
+            "registryDependencies": [
+              "button",
+              "card",
+              "badge",
+              "separator",
+              "tabs",
+              "utils"
+            ]
+        }
     ]
 }

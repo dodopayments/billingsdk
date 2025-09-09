@@ -19,6 +19,8 @@
     "---Update Plan---",
     "components/update-plan/update-plan-card",
     "components/update-plan/update-plan-dialog",
+    "---Proration---", 
+    "components/proration-preview/index",
     "---Cancel Subscription---",
     "components/cancel-subscription/cancel-subscription-card",
     "components/cancel-subscription/cancel-subscription-dialog",

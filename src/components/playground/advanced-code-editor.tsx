@@ -19,7 +19,7 @@ export function AdvancedCodeEditor() {
     }
     debounceTimeoutRef.current = setTimeout(() => {
       updateCode(code);
-    }, 500);
+    }, 300); 
   }, [updateCode]);
 
   const tabs: FileTab[] = [
@@ -86,7 +86,9 @@ export function AdvancedCodeEditor() {
     if (activeTab === "styles.css") {
       updateStyles(newValue);
     } else if (activeTab === "page.tsx") {
-      // Debounce updates for page.tsx to avoid excessive re-renders
+      // Update code immediately for better responsiveness
+      updateCode(newValue);
+      // Also debounce to avoid excessive re-renders
       debouncedUpdateCode(newValue);
     }
   };

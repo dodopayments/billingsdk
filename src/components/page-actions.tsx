@@ -6,6 +6,7 @@ import {
   Copy,
   ExternalLinkIcon,
   MessageCircleIcon,
+  Play,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
@@ -245,6 +246,23 @@ export function ViewOptions({
         ),
       },
       {
+        title: 'Open in Grok',
+        href: `https://grok.com/?${new URLSearchParams({
+          q,
+        })}`,
+        icon: (
+          <svg
+            fill="currentColor"
+            role="img"
+            viewBox="0 0 48 48"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Grok</title>
+            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608"/>
+          </svg>
+        ),
+      },
+      {
         title: 'Open in T3 Chat',
         href: `https://t3.chat/new?${new URLSearchParams({
           q,
@@ -286,12 +304,41 @@ export function ViewOptions({
   );
 }
 
+function PlaygroundButton({
+  componentName,
+}: {
+  componentName?: string;
+}) {
+  return (
+    <a
+      href={
+        componentName
+          ? `/playground?component=${encodeURIComponent(componentName)}`
+          : '/playground'
+      }
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        buttonVariants({
+          variant: 'secondary',
+          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-none',
+        }),
+      )}
+    >
+      <Play />
+      Playground
+    </a>
+  );
+}
+
 export function CombinedAIButton({
   markdownUrl,
   githubUrl,
+  componentName,
 }: {
   markdownUrl: string;
   githubUrl: string;
+  componentName?: string;
 }) {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
@@ -411,6 +458,23 @@ export function CombinedAIButton({
         ),
       },
       {
+        title: 'Open in Grok',
+        href: `https://grok.com/?${new URLSearchParams({
+          q,
+        })}`,
+        icon: (
+          <svg
+            fill="currentColor"
+            role="img"
+            viewBox="0 0 48 48"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Grok</title>
+            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608"/>
+          </svg>
+        ),
+      },
+      {
         title: 'Open in T3 Chat',
         href: `https://t3.chat/new?${new URLSearchParams({
           q,
@@ -421,13 +485,14 @@ export function CombinedAIButton({
   }, [githubUrl, markdownUrl]);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-2">
+      <PlaygroundButton componentName={componentName} />
       <button
         disabled={isLoading}
         className={cn(
           buttonVariants({
             variant: 'secondary',
-            className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-r-none border-r-0',
+            className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-none',
           }),
         )}
         onClick={onClick}

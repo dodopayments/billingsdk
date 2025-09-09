@@ -1,4 +1,5 @@
 import { Playground } from "@/components/playground/playground";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Playground | Billing SDK",
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function PlaygroundPage() {
-  return <Playground />;
+  return (
+    <Suspense fallback={null}>
+      <Playground />
+    </Suspense>
+  );
 }

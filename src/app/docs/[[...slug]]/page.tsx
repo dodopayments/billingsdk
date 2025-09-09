@@ -18,6 +18,38 @@ export default async function Page(props: {
   if (!page) notFound();
 
   const MDXContent = page.data.body;
+  
+  // Extract component name from the path for playground integration
+  const getComponentName = (slug?: string[]): string | undefined => {
+    if (!slug || slug.length < 2) return undefined;
+    
+    // Check if this is a component page (starts with 'components')
+    if (slug[0] !== 'components') return undefined;
+    
+    // Map component paths to playground component names (matching registry exactly)
+    const componentMap: Record<string, string> = {
+      'banner': 'Banner',
+      'cancel-subscription/cancel-subscription-card': 'Cancel Subscription Card',
+      'cancel-subscription/cancel-subscription-dialog': 'Cancel Subscription Dialog',
+      'invoice-history': 'Invoice History',
+      'payment-method-selector': 'Payment Method Selector',
+      'pricing-table/pricing-table-one': 'Pricing Table One',
+      'pricing-table/pricing-table-two': 'Pricing Table Two',
+      'pricing-table/pricing-table-three': 'Pricing Table Three',
+      'pricing-table/pricing-table-five': 'Pricing Table Five',
+      'manage-subscription': 'Subscription Management',
+      'update-plan/update-plan-card': 'Update Plan Card',
+      'update-plan/update-plan-dialog': 'Update Plan Dialog',
+      'usage-meter/usage-meter-circle': 'Usage Meter',
+      'usage-meter/usage-meter-linear': 'Usage Meter',
+      'usage-table': 'Usage Table',
+    };
+    
+    const componentPath = slug.slice(1).join('/');
+    return componentMap[componentPath];
+  };
+  
+  const componentName = getComponentName(params.slug);
 
   return (
     <DocsPage
@@ -33,6 +65,7 @@ export default async function Page(props: {
           <CombinedAIButton
             markdownUrl={`${page.url}.mdx`}
             githubUrl={`https://github.com/dodopayments/billingsdk/tree/main/content/docs/${page.path}`}
+            componentName={componentName}
           />
         </div>
       </DocsTitle>
@@ -41,6 +74,7 @@ export default async function Page(props: {
         <CombinedAIButton
           markdownUrl={`${page.url}.mdx`}
           githubUrl={`https://github.com/dodopayments/billingsdk/tree/main/content/docs/${page.path}`}
+          componentName={componentName}
         />
       </div>
       <DocsBody>

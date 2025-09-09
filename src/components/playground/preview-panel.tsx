@@ -78,7 +78,7 @@ function PreviewPanelContent() {
       setComponent(() => state.selectedComponent!.component);
       setError(null);
     }
-  }, [state.selectedComponent]);
+  }, [state.selectedComponent, state.code]);
 
   
   useEffect(() => {
@@ -274,8 +274,8 @@ function PreviewPanelContent() {
                   minHeight: viewportSize === "mobile" ? "600px" : "auto"
                 }}
               >
-                <ErrorBoundary key={refreshKey} onError={setError}>
-                  <Component key={refreshKey} {...state.props} />
+                <ErrorBoundary key={`${refreshKey}-${state.code}`} onError={setError}>
+                  <Component key={`${refreshKey}-${state.code}`} {...state.props} />
                 </ErrorBoundary>
               </div>
             ) : (
@@ -294,18 +294,19 @@ function PreviewPanelContent() {
 
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode; onError: (error: string) => void },
-  { hasError: boolean }
+  { hasError: boolean; error?: string }
 > {
   constructor(props: { children: React.ReactNode; onError: (error: string) => void }) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error: error.message };
   }
 
-  componentDidCatch(error: Error) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("Component error:", error, errorInfo);
     this.props.onError(error.message);
   }
 
@@ -316,9 +317,22 @@ class ErrorBoundary extends React.Component<
           <div className="text-destructive text-lg font-semibold mb-2">
             Component Failed to Render
           </div>
-          <div className="text-muted-foreground">
-            Check the code for syntax errors or invalid props
+          <div className="text-muted-foreground mb-4">
+            {this.state.error || "Check the code for syntax errors or invalid props"}
           </div>
+          <Button 
+            onClick={() => {
+              this.setState({ hasError: false, error: undefined });
+              // Trigger a re-render of the parent component
+              if (this.props.onError) {
+                this.props.onError("");
+              }
+            }} 
+            variant="outline" 
+            size="sm"
+          >
+            Try Again
+          </Button>
         </div>
       );
     }
