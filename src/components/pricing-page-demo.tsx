@@ -1,11 +1,11 @@
 "use client"
 
-import { PricingPage } from "@/components/billingsdk/pricing-page"
+import { PricingTableSix } from "@/components/billingsdk/pricing-page"
 
-export function PricingPageDemo() {
+export function PricingTableSixDemo() {
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <PricingPage />
+      <PricingTableSix />
     </div>
   )
 }

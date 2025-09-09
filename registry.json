@@ -577,9 +577,9 @@
             ]
           },
         {
-            "name": "pricing-page",
+            "name": "pricing-table-six",
             "type": "registry:block",
-            "title": "Pricing Page",
+            "title": "Pricing Table Six",
             "description": "A full pricing landing page with hero, slider, plans, comparison table and footer",
             "files": [
               {

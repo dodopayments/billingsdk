@@ -13,17 +13,17 @@ import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
-import { PricingPage } from "@/components/billingsdk/pricing-page";
+import { PricingTableSix } from "@/components/billingsdk/pricing-page";
 
 export const componentRegistry: ComponentConfig[] = [
   {
-    id: "pricing-page",
-    name: "Pricing Page",
+    id: "pricing-table-six",
+    name: "Pricing Table Six",
     description: "Full pricing landing page with hero, plans, comparison and footer",
     category: "pricing",
-    component: PricingPage,
+    component: PricingTableSix,
     imports: ["@/components/billingsdk/pricing-page"],
-    defaultCode: `<PricingPage />`,
+    defaultCode: `<PricingTableSix />`,
     defaultProps: {},
   },
   {
