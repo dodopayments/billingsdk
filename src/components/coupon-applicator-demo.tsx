@@ -20,19 +20,19 @@ import { useState } from 'react';
 const COUPON_CODES = [
 	{
 		code: 'SAVE10',
-		valid: true,
+		isValid: true,
 		discount: { type: 'percentage' as const, value: 10 },
 		message: '10% discount applied successfully!',
 	},
 	{
 		code: 'SAVE20',
-		valid: true,
+		isValid: true,
 		discount: { type: 'percentage' as const, value: 20 },
 		message: '20% discount applied successfully!',
 	},
 	{
 		code: 'FLAT50',
-		valid: true,
+		isValid: true,
 		discount: { type: 'fixed' as const, value: 50 },
 		message: '$50 discount applied successfully!',
 	},
@@ -50,16 +50,15 @@ export default function CouponApplicatorDemo() {
 
 		if (coupon) {
 			return {
-				valid: coupon.valid,
+				isValid: coupon.isValid,
 				discount: coupon.discount,
 				message: coupon.message,
 			};
 		}
 
 		return {
-			valid: false,
-			error: 'Invalid coupon code',
-			message: 'Try SAVE10, SAVE20, or FLAT50.',
+			isValid: false,
+			message: 'Invalid coupon code. Try SAVE10, SAVE20, or FLAT50.',
 		};
 	};
 
@@ -67,9 +66,9 @@ export default function CouponApplicatorDemo() {
 		setApplied(false);
 	};
 
-	const tax = 9.99;
-	const shipping = 0;
-	const total = subtotal + tax + shipping;
+	const tax: number = 9.99;
+	const shipping: number = 0;
+	const total: number = subtotal + tax + shipping;
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center p-4">
@@ -120,7 +119,7 @@ export default function CouponApplicatorDemo() {
 					<CouponApplicator
 						onApply={async (code) => {
 							const result = await handleApply(code);
-							if (result.valid) setApplied(true);
+							if (result.isValid) setApplied(true);
 							return result;
 						}}
 						currentPrice={total}

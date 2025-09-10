@@ -6,8 +6,6 @@ import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
-// Alert component not available, using simple divs instead
-import { CheckCircle, Loader2, Ticket, X, XCircle } from 'lucide-react';
 
 // Validation schema for coupon codes
 const couponCodeSchema = z
@@ -15,6 +13,106 @@ const couponCodeSchema = z
 	.min(1, 'Coupon code is required')
 	.max(12, 'Coupon code must be 12 characters or less')
 	.regex(/^[a-zA-Z0-9]+$/, 'Coupon code must be alphanumeric');
+
+// Simple SVG Icons
+const TicketIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="2"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		className={className}
+	>
+		<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+		<path d="M13 5v2" />
+		<path d="M13 17v2" />
+		<path d="M13 11v2" />
+	</svg>
+);
+
+const XIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="2"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		className={className}
+	>
+		<path d="M18 6 6 18" />
+		<path d="m6 6 12 12" />
+	</svg>
+);
+
+const LoaderIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="2"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		className={className}
+	>
+		<path d="M12 2v4" />
+		<path d="m16.2 7.8 2.9-2.9" />
+		<path d="M18 12h4" />
+		<path d="m16.2 16.2 2.9 2.9" />
+		<path d="M12 18v4" />
+		<path d="m4.9 19.1 2.9-2.9" />
+		<path d="M2 12h4" />
+		<path d="m4.9 4.9 2.9 2.9" />
+	</svg>
+);
+
+const CheckCircleIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="2"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		className={className}
+	>
+		<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+		<path d="m9 11 3 3L22 4" />
+	</svg>
+);
+
+const XCircleIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="24"
+		height="24"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="2"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		className={className}
+	>
+		<circle cx="12" cy="12" r="10" />
+		<path d="m15 9-6 6" />
+		<path d="m9 9 6 6" />
+	</svg>
+);
 
 // Validation result type
 export interface ValidationResult {
@@ -46,7 +144,6 @@ export function CouponApplicator({
 	autoApply = false,
 	onRemove,
 }: CouponApplicatorProps) {
-	const inputRef = useRef<HTMLInputElement>(null);
 	const [code, setCode] = useState('');
 	const [status, setStatus] = useState<
 		'idle' | 'loading' | 'success' | 'error'
@@ -54,7 +151,7 @@ export function CouponApplicator({
 	const [validationResult, setValidationResult] =
 		useState<ValidationResult | null>(null);
 	const [message, setMessage] = useState<string | null>(null);
-	const [isApplied, setIsApplied] = useState(false); // New state to track if the discount is applied
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	// Format currency
 	const formatCurrency = (amount: number) => {
@@ -104,7 +201,6 @@ export function CouponApplicator({
 			if (result.isValid) {
 				setStatus('success');
 				setMessage(result.message || 'Coupon applied successfully!');
-				setIsApplied(true); // Set isApplied to true when the discount is applied
 			} else {
 				setStatus('error');
 				setMessage(result.message || 'Invalid coupon code');
@@ -114,7 +210,7 @@ export function CouponApplicator({
 			setMessage('Failed to apply coupon. Please try again.');
 			console.error('Coupon application error:', error);
 		} finally {
-			setStatus('idle');
+			// preserve success/error state for UI feedback
 		}
 	};
 
@@ -152,7 +248,7 @@ export function CouponApplicator({
 			<div className="space-y-5">
 				<div className="flex items-center gap-3">
 					<div className="rounded-lg bg-primary/10 p-2">
-						<Ticket className="h-5 w-5 text-primary" />
+						<TicketIcon className="h-5 w-5 text-primary" />
 					</div>
 					<div>
 						<h3 className="text-lg font-semibold">Apply Coupon</h3>
@@ -190,12 +286,12 @@ export function CouponApplicator({
 										className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors rounded-full p-1 hover:bg-muted"
 										aria-label="Clear coupon code"
 									>
-										<X className="h-4 w-4" />
+										<XIcon className="h-4 w-4" />
 									</button>
 								)}
 								{status === 'loading' && (
 									<div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-										<Loader2 className="h-4 w-4 animate-spin" />
+										<LoaderIcon className="h-4 w-4 animate-spin" />
 									</div>
 								)}
 							</div>
@@ -205,12 +301,11 @@ export function CouponApplicator({
 								className={cn(
 									'h-12 px-5 rounded-lg font-medium transition-all hover:scale-[1.02]',
 									theme === 'minimal' &&
-										'bg-transparent text-primary hover:bg-muted',
-									isApplied && 'bg-green-500 text-white hover:bg-green-600' // Add green styling when applied
+										'bg-transparent text-primary hover:bg-muted'
 								)}
 							>
 								{status === 'loading' ? (
-									<Loader2 className="h-4 w-4 animate-spin" />
+									<LoaderIcon className="h-4 w-4 animate-spin" />
 								) : (
 									'Apply'
 								)}
@@ -229,7 +324,7 @@ export function CouponApplicator({
 						<div className="flex items-center justify-between p-4 bg-emerald-50 dark:bg-emerald-950/20 rounded-lg border border-emerald-200 dark:border-emerald-800">
 							<div className="flex items-center gap-3">
 								<div className="rounded-full bg-emerald-100 dark:bg-emerald-900/50 p-2">
-									<CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+									<CheckCircleIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
 								</div>
 								<div>
 									<p className="font-semibold text-emerald-800 dark:text-emerald-200">
@@ -247,7 +342,7 @@ export function CouponApplicator({
 								className="h-8 w-8 p-0 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full"
 								aria-label="Remove coupon"
 							>
-								<X className="h-4 w-4" />
+								<XIcon className="h-4 w-4" />
 							</Button>
 						</div>
 
@@ -256,9 +351,10 @@ export function CouponApplicator({
 								<div className="flex justify-between items-center">
 									<span className="text-muted-foreground">Discount</span>
 									<span className="font-semibold text-lg">
-										{validationResult?.discount?.type === 'percentage' && validationResult?.discount?.value
+										{validationResult?.discount?.type === 'percentage' &&
+										validationResult?.discount?.value
 											? `${validationResult.discount.value}%`
-											: validationResult?.discount?.value 
+											: validationResult?.discount?.value
 											? formatCurrency(validationResult.discount.value)
 											: ''}
 									</span>
@@ -283,10 +379,14 @@ export function CouponApplicator({
 										<div
 											className="bg-emerald-500 h-2 rounded-full transition-all duration-500 ease-out"
 											style={{
-												width: `${Math.min(
-													100,
-													(discountInfo.savings / currentPrice) * 100
-												)}%`,
+												width: `${
+													currentPrice > 0
+														? Math.min(
+																100,
+																(discountInfo.savings / currentPrice) * 100
+														  )
+														: 0
+												}%`,
 											}}
 										></div>
 									</div>
@@ -317,9 +417,9 @@ export function CouponApplicator({
 								)}
 							>
 								{status === 'success' ? (
-									<CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+									<CheckCircleIcon className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
 								) : status === 'error' ? (
-									<XCircle className="h-5 w-5 flex-shrink-0 mt-0.5 text-destructive" />
+									<XCircleIcon className="h-5 w-5 flex-shrink-0 mt-0.5 text-destructive" />
 								) : null}
 								<span>{message}</span>
 							</div>
