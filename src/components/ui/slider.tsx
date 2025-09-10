@@ -15,10 +15,12 @@ export interface SliderProps {
 
 export function Slider({ value, onValueChange, min = 0, max = 100, step = 1, className, disabled }: SliderProps) {
   const current = value?.[0] ?? min
-  const progress = ((current - min) / (max - min)) * 100
+  const range = Math.max(0, max - min)
+  const clampedCurrent = Math.min(max, Math.max(min, Number.isFinite(current) ? current : min))
+  const progress = range === 0 ? 0 : ((clampedCurrent - min) / range) * 100
 
   const sliderStyle: React.CSSProperties = {
-    background: `linear-gradient(to right, var(--slider-active) ${progress}%, var(--slider-inactive) ${progress}%)`,
+    background: `linear-gradient(to right, var(--slider-active, #6366f1) ${progress}%, var(--slider-inactive, #e5e7eb) ${progress}%)`,
   }
 
   return (
