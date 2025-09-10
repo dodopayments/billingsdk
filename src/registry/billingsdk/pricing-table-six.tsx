@@ -7,31 +7,61 @@ import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
 import { Check, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { type Plan } from "@/lib/billingsdk-config"
 
-const plans = [
+const defaultPlans: Plan[] = [
   {
     id: "basic",
-    name: "Basic plan",
+    title: "Basic plan",
     description: "Our most popular plan.",
-    price: 10,
-    popular: false,
-    users: 5,
+    currency: "$",
+    monthlyPrice: "10",
+    yearlyPrice: "100",
+    buttonText: "Get started",
+    features: [
+      { name: "Basic features", icon: "check" },
+      { name: "10 users", icon: "check" },
+      { name: "20GB storage", icon: "check" },
+      { name: "Email support", icon: "check" },
+    ],
   },
   {
     id: "business",
-    name: "Business plan",
+    title: "Business plan",
     description: "Best for growing teams.",
-    price: 20,
-    popular: true,
-    users: 15,
+    currency: "$",
+    monthlyPrice: "20",
+    yearlyPrice: "200",
+    buttonText: "Get started",
+    badge: "Most popular",
+    highlight: true,
+    features: [
+      { name: "Basic features", icon: "check" },
+      { name: "20 users", icon: "check" },
+      { name: "40GB storage", icon: "check" },
+      { name: "Priority support", icon: "check" },
+      { name: "Automated workflows", icon: "check" },
+      { name: "200+ integrations", icon: "check" },
+    ],
   },
   {
     id: "enterprise",
-    name: "Enterprise plan",
+    title: "Enterprise plan",
     description: "Best for large teams.",
-    price: 40,
-    popular: false,
-    users: "25+",
+    currency: "$",
+    monthlyPrice: "40",
+    yearlyPrice: "400",
+    buttonText: "Get started",
+    features: [
+      { name: "Basic features", icon: "check" },
+      { name: "Unlimited users", icon: "check" },
+      { name: "Unlimited storage", icon: "check" },
+      { name: "24/7 support", icon: "check" },
+      { name: "Automated workflows", icon: "check" },
+      { name: "200+ integrations", icon: "check" },
+      { name: "Advanced analytics", icon: "check" },
+      { name: "Custom fields", icon: "check" },
+    ],
   },
 ]
 
@@ -71,11 +101,41 @@ const features = [
   },
 ]
 
-export function PricingTableSix() {
+export interface PricingTableSixProps {
+  className?: string;
+  title?: string;
+  description?: string;
+  plans?: Plan[];
+  features?: Array<{
+    category: string;
+    items: Array<{
+      name: string;
+      tooltip: boolean;
+      basic: boolean | string;
+      business: boolean | string;
+      enterprise: boolean | string;
+    }>;
+  }>;
+  onPlanSelect?: (planId: string) => void;
+}
+
+export function PricingTableSix({
+  className,
+  title = "Choose a plan that's right for you",
+  description = "We believe Untitled should be accessible to all companies, no matter the size of your startup.",
+  plans: customPlans,
+  features: customFeatures,
+  onPlanSelect
+}: PricingTableSixProps) {
   const [selectedPlan, setSelectedPlan] = useState("business")
 
-  const currentPlan = plans.find((plan) => plan.id === selectedPlan) || plans[1]
-  const sliderValue = [typeof currentPlan.users === "string" ? 25 : currentPlan.users]
+  // Use custom plans if provided, otherwise use default plans
+  const plansToUse = customPlans || defaultPlans
+  const featuresToUse = customFeatures || features
+
+  const currentPlan = plansToUse.find((plan) => plan.id === selectedPlan) || plansToUse[1]
+  // For slider, we'll use a simple calculation based on plan index
+  const sliderValue = [plansToUse.indexOf(currentPlan) + 1]
 
   const renderFeatureValue = (value: boolean | string) => {
     if (typeof value === "boolean") {
@@ -86,16 +146,17 @@ export function PricingTableSix() {
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId)
+    onPlanSelect?.(planId)
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+    <div className={cn("max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8", className)}>
       <div className="text-center">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl text-balance">
-          Choose a plan that's right for you
+          {title}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-          We believe Untitled should be accessible to all companies, no matter the size of your startup.
+          {description}
         </p>
       </div>
 
@@ -103,7 +164,7 @@ export function PricingTableSix() {
         <div className="relative">
           <Slider value={sliderValue} max={25} min={1} step={1} className="w-full" disabled />
           <div className="mt-2 text-center">
-            <span className="text-sm font-medium text-foreground">{currentPlan.users} users</span>
+            <span className="text-sm font-medium text-foreground">{currentPlan.title}</span>
           </div>
         </div>
       </div>
@@ -111,9 +172,9 @@ export function PricingTableSix() {
       <div className="mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
           <div></div>
-          {plans.map((plan) => (
+          {plansToUse.map((plan) => (
             <Card
-              key={plan.name}
+              key={plan.id}
               className={cn(
                 "relative cursor-pointer transition-all duration-200 hover:shadow-lg",
                 selectedPlan === plan.id
@@ -122,18 +183,18 @@ export function PricingTableSix() {
               )}
               onClick={() => handlePlanSelect(plan.id)}
             >
-              {plan.popular && (
+              {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                   <Badge className="bg-indigo-600 hover:bg-indigo-600 text-white px-4 py-1 text-sm font-medium rounded-md shadow-sm">
-                    Most popular
+                    {plan.badge || "Most popular"}
                   </Badge>
                 </div>
               )}
               <CardHeader className="text-center">
-                <CardTitle className="text-lg font-semibold text-foreground">{plan.name}</CardTitle>
+                <CardTitle className="text-lg font-semibold text-foreground">{plan.title}</CardTitle>
                 <CardDescription className="text-sm text-muted-foreground">{plan.description}</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold text-foreground">${plan.price}</span>
+                  <span className="text-4xl font-bold text-foreground">{plan.currency}{plan.monthlyPrice}</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -145,7 +206,7 @@ export function PricingTableSix() {
                       : "bg-background border text-foreground hover:bg-muted",
                   )}
                 >
-                  Get started
+                  {plan.buttonText}
                 </Button>
               </CardContent>
             </Card>
@@ -153,7 +214,7 @@ export function PricingTableSix() {
         </div>
 
         <div className="overflow-hidden rounded-lg border border-border bg-card">
-          {features.map((category, categoryIndex) => (
+          {featuresToUse.map((category, categoryIndex) => (
             <div key={category.category}>
               {categoryIndex > 0 && <div className="border-t border-border" />}
 
@@ -190,14 +251,14 @@ export function PricingTableSix() {
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-4">
           <div></div>
-          {plans.map((plan) => (
+          {plansToUse.map((plan) => (
             <Button
-              key={plan.name}
+              key={plan.id}
               variant={selectedPlan === plan.id ? "default" : "outline"}
               className={cn(selectedPlan === plan.id && "bg-indigo-600 hover:bg-indigo-700")}
               onClick={() => handlePlanSelect(plan.id)}
             >
-              Get started
+              {plan.buttonText}
             </Button>
           ))}
         </div>

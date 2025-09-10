@@ -77,9 +77,18 @@ description: A comprehensive pricing table component with slider (rendered disab
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 
 export default function PricingPage() {
+  const handlePlanSelect = (planId: string) => {
+    console.log("Selected plan:", planId);
+    // Handle plan selection logic
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      <PricingTableSix />
+      <PricingTableSix 
+        title="Choose Your Plan"
+        description="Select the perfect plan for your needs"
+        onPlanSelect={handlePlanSelect}
+      />
     </div>
   );
 }
