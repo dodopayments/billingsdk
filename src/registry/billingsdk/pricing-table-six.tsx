@@ -162,13 +162,16 @@ export function PricingTableSix({
   features: customFeatures,
   onPlanSelect
 }: PricingTableSixProps) {
-  const [selectedPlan, setSelectedPlan] = useState("business")
+  const [selectedPlan, setSelectedPlan] = useState(() => {
+    const plans = customPlans?.length ? customPlans : defaultPlans
+    return plans.find((p) => (p as any).highlight)?.id ?? plans[1]?.id ?? plans[0]?.id
+  })
 
   // Use custom plans if provided, otherwise use default plans
-  const plansToUse = customPlans || defaultPlans
+  const plansToUse = customPlans?.length ? customPlans : defaultPlans
   const featuresToUse = customFeatures || features
 
-  const currentPlan = plansToUse.find((plan) => plan.id === selectedPlan) || plansToUse[1]
+  const currentPlan = plansToUse.find((plan) => plan.id === selectedPlan) || plansToUse[0]
   const userCount = getUserCountFromPlan(currentPlan)
   const userCountDisplayText = getUserCountDisplayText(currentPlan)
   const sliderValue = [userCount]
