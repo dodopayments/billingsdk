@@ -42,16 +42,20 @@ export const addFiles = async (
 			);
 			// Local fallback to repo templates when remote registry is unavailable
 			const currentDir = path.dirname(fileURLToPath(import.meta.url));
-			const localPath = path.resolve(
-				currentDir,
-				'../../../public/r',
-				`${framework}-${provider}.json`
-			);
+			const candidateRoots = [
+				path.resolve(process.cwd(), 'public/r'),
+				path.resolve(currentDir, '../../../public/r'),
+				path.resolve(process.cwd(), 'packages/cli/public/r'),
+				path.resolve(process.cwd(), 'packages/public/r'),
+			];
+			const localPath = candidateRoots
+				.map((root) => path.join(root, `${framework}-${provider}.json`))
+				.find((p) => fs.existsSync(p));
 
 			// Check if local template file exists and can be read
-			if (!fs.existsSync(localPath)) {
+			if (!localPath) {
 				throw new Error(
-					`Local template file not found at ${localPath}. Remote template failed with: ${errorMessage}`
+					`Local template file not found in any candidate path. Remote template failed with: ${errorMessage}`
 				);
 			}
 

@@ -1,4 +1,4 @@
-import paypal from '@paypal/checkout-server-sdk';
+import * as paypal from '@paypal/checkout-server-sdk';
 
 let paypalClient: paypal.core.PayPalHttpClient | null = null;
 

@@ -22,9 +22,7 @@
 	},
 	"dependencies": {
 		"@clack/prompts": "^0.11.0",
-		"@paypal/checkout-server-sdk": "^1.0.3",
 		"commander": "^14.0.0",
-		"dodopayments": "^1.52.5",
 		"find-up": "^7.0.0",
 		"ink": "^6.2.3",
 		"ink-big-text": "^2.0.0",

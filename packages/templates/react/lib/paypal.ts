@@ -16,13 +16,13 @@ export const createOrder = async ({
 	currency,
 }: {
 	baseUrl: string;
-	amount: string;
+	amount: number;
 	currency: string;
 }): Promise<PayPalOrder> => {
 	const controller = new AbortController();
 	const t = setTimeout(() => controller.abort(), 10_000);
 	try {
-		const res = await fetch(`${baseUrl}/api/checkout`, {
+		const res = await fetch(`${baseUrl}/api/paypal/checkout`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ amount, currency }),
@@ -45,7 +45,7 @@ export const captureOrder = async ({
 	const controller = new AbortController();
 	const t = setTimeout(() => controller.abort(), 10_000);
 	try {
-		const res = await fetch(`${baseUrl}/api/order/capture`, {
+		const res = await fetch(`${baseUrl}/api/paypal/order/capture`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ orderId }),
@@ -69,7 +69,7 @@ export const getOrder = async ({
 	const t = setTimeout(() => controller.abort(), 10_000);
 	try {
 		const res = await fetch(
-			`${baseUrl}/api/order/${encodeURIComponent(orderId)}`,
+			`${baseUrl}/api/paypal/order/${encodeURIComponent(orderId)}`,
 			{
 				method: 'GET',
 				signal: controller.signal,

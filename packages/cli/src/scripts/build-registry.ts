@@ -57,24 +57,30 @@ export const buildRegistry = async () => {
 				base: string,
 				hasWildcard: boolean,
 				targetHasWildcard: boolean,
-				targetBaseRaw: string,
+				targetTemplate: string,
 				fileType?: 'template' | 'config' | 'types'
 			) => {
 				const content = fs.readFileSync(absSourcePath, 'utf-8');
 
 				// Compute target path with proper POSIX normalization
 				let targetPath: string;
+				const [prefix, suffix = ''] = targetTemplate.split('*');
 				if (hasWildcard && targetHasWildcard && relativeFromBase) {
-					// When both source and target have wildcards and we have a relative path
-					targetPath = path.posix.join(targetBaseRaw, relativeFromBase);
+					// Substitute the wildcard with the relative path (POSIX)
+					targetPath = `${prefix}${relativeFromBase.replace(
+						/\\/g,
+						'/'
+					)}${suffix}`;
 				} else if (!hasWildcard && targetHasWildcard) {
-					// When source is a single file but target has a wildcard
-					// Substitute the '*' with the source filename
+					// Substitute the wildcard with the source filename
 					const fileName = path.basename(absSourcePath);
-					targetPath = targetBaseRaw.replace(/\*$/, fileName);
+					targetPath = `${prefix}${fileName}${suffix}`;
 				} else {
-					// Simple case - no wildcards or only source has wildcard
-					targetPath = targetBaseRaw;
+					// No target wildcard; use targetTemplate as-is (or fallback)
+					targetPath =
+						targetTemplate ||
+						(relativeFromBase?.replace(/\\/g, '/') ??
+							path.basename(absSourcePath));
 				}
 
 				// Ensure the resulting target string is normalized to POSIX separators
@@ -109,9 +115,7 @@ export const buildRegistry = async () => {
 				const fileTarget =
 					typeof (file as any).target === 'string' ? (file as any).target : '';
 				const targetHasWildcard = fileTarget.includes('*');
-				const targetBaseRaw = targetHasWildcard
-					? fileTarget.split('*')[0]
-					: fileTarget;
+				const targetTemplate = fileTarget;
 
 				if (hasWildcard) {
 					if (!fs.existsSync(sourceBase)) {
@@ -139,7 +143,7 @@ export const buildRegistry = async () => {
 									base,
 									hasWildcard,
 									targetHasWildcard,
-									targetBaseRaw,
+									targetTemplate,
 									file.type
 								);
 							}
@@ -158,7 +162,7 @@ export const buildRegistry = async () => {
 						sourceBase,
 						hasWildcard,
 						targetHasWildcard,
-						targetBaseRaw,
+						targetTemplate,
 						file.type
 					);
 				}

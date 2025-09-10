@@ -70,6 +70,7 @@ export const addCommand = new Command()
 				[...args, 'shadcn@latest', 'add', templateRegistry],
 				{
 					stdio: 'inherit',
+					timeout: 5 * 60 * 1000, // 5 minutes
 				}
 			);
 		} catch (error) {

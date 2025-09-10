@@ -16,9 +16,6 @@ export interface BackendComponent {
 		/** The source path of the file */
 		path: string;
 
-		/** The content of the file */
-		content: string;
-
 		/** The target path where the file should be placed */
 		target: string;
 

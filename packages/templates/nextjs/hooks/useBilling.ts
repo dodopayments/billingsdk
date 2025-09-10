@@ -24,6 +24,8 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 		error: null,
 	});
 
+	const resolvedBaseUrl = baseUrl ?? process.env.NEXT_PUBLIC_APP_URL ?? '';
+
 	const setLoading = useCallback((loading: boolean) => {
 		setState((prev) => ({ ...prev, loading }));
 	}, []);
@@ -56,59 +58,60 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 
 	const fetchProducts = useCallback(async () => {
 		return handleAsyncOperation(
-			() => getProducts({ baseUrl }),
+			() => getProducts({ baseUrl: resolvedBaseUrl }),
 			'fetch products'
 		);
-	}, [handleAsyncOperation]);
+	}, [handleAsyncOperation, resolvedBaseUrl]);
 
 	const fetchProduct = useCallback(
 		async (product_id: string) => {
 			return handleAsyncOperation(
-				() => getProduct({ baseUrl, product_id }),
+				() => getProduct({ baseUrl: resolvedBaseUrl, product_id }),
 				'fetch product'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const fetchCustomer = useCallback(
 		async (customer_id: string) => {
 			return handleAsyncOperation(
-				() => getCustomer({ baseUrl, customer_id }),
+				() => getCustomer({ baseUrl: resolvedBaseUrl, customer_id }),
 				'fetch customer'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const fetchCustomerSubscriptions = useCallback(
 		async (customer_id: string) => {
 			return handleAsyncOperation(
-				() => getCustomerSubscriptions({ baseUrl, customer_id }),
+				() =>
+					getCustomerSubscriptions({ baseUrl: resolvedBaseUrl, customer_id }),
 				'fetch customer subscriptions'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const fetchCustomerPayments = useCallback(
 		async (customer_id: string) => {
 			return handleAsyncOperation(
-				() => getCustomerPayments({ baseUrl, customer_id }),
+				() => getCustomerPayments({ baseUrl: resolvedBaseUrl, customer_id }),
 				'fetch customer payments'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const createNewCustomer = useCallback(
 		async (customer: DodoPayments.Customers.CustomerCreateParams) => {
 			return handleAsyncOperation(
-				() => createCustomer({ baseUrl, customer }),
+				() => createCustomer({ baseUrl: resolvedBaseUrl, customer }),
 				'create customer'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const updateExistingCustomer = useCallback(
@@ -117,11 +120,12 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 			customer: DodoPayments.Customers.CustomerUpdateParams
 		) => {
 			return handleAsyncOperation(
-				() => updateCustomer({ baseUrl, customer_id, customer }),
+				() =>
+					updateCustomer({ baseUrl: resolvedBaseUrl, customer_id, customer }),
 				'update customer'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const createCheckout = useCallback(
@@ -139,7 +143,7 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 			return handleAsyncOperation(
 				() =>
 					checkout({
-						baseUrl,
+						baseUrl: resolvedBaseUrl,
 						productCart,
 						customer,
 						billing_address,
@@ -149,7 +153,7 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 				'create checkout'
 			);
 		},
-		[handleAsyncOperation]
+		[handleAsyncOperation, resolvedBaseUrl]
 	);
 
 	const clearError = useCallback(() => {

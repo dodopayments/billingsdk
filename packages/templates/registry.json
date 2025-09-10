@@ -97,6 +97,11 @@
 					"type": "template"
 				},
 				{
+					"path": "packages/templates/nextjs/hooks/useBilling.ts",
+					"target": "hooks/useBilling.ts",
+					"type": "template"
+				},
+				{
 					"path": "packages/templates/nextjs/api-routes/(paypal)/*",
 					"target": "app/api/(paypal)/*",
 					"type": "template"
