@@ -23,7 +23,7 @@ export function PlanChangeCalculatorDemo() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmedQuote, setConfirmedQuote] = useState<ProrationQuote | null>(null);
   const [showEnhancedFeatures, setShowEnhancedFeatures] = useState(true);
-  const [selectedPlanForComparison, _setSelectedPlanForComparison] = useState<string | null>(null);
+  const [_selectedPlanForComparison, _setSelectedPlanForComparison] = useState<string | null>(null);
 
   const scenarios = MockBillingProvider.getScenarios();
   const currentScenario = scenarios.find(s => s.id === selectedScenario) || scenarios[0];
@@ -45,7 +45,7 @@ export function PlanChangeCalculatorDemo() {
   };
 
   const handleSelectPlan = (planId: string) => {
-    setSelectedPlanForComparison(planId);
+    _setSelectedPlanForComparison(planId);
     // Find the scenario that matches this plan change
     const matchingScenario = scenarios.find(s => s.toPlan.id === planId);
     if (matchingScenario) {

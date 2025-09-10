@@ -11,7 +11,7 @@ import {
   DialogCustomDescription, 
   DialogCustomFooter 
 } from "@/components/ui/dialog-custom";
-import { CheckCircle, AlertCircle, TrendingUp, TrendingDown, Sparkles } from "lucide-react";
+import { CheckCircle, TrendingUp, TrendingDown, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ProrationQuote } from "@/lib/billing-core/types";
 import { ProrationEngine } from "@/lib/billing-core/proration-engine";
@@ -22,7 +22,7 @@ interface ConfirmationModalProps {
   quote: ProrationQuote;
   onConfirm: () => void;
   onCancel: () => void;
-  type?: 'upgrade' | 'downgrade' | 'change';
+  _type?: 'upgrade' | 'downgrade' | 'change';
 }
 
 export function ConfirmationModal({
@@ -31,7 +31,7 @@ export function ConfirmationModal({
   quote,
   onConfirm,
   onCancel,
-  type = 'change'
+  _type = 'change'
 }: ConfirmationModalProps) {
   const isUpgrade = quote.newPlan.price > quote.currentPlan.price;
   const isDowngrade = quote.newPlan.price < quote.currentPlan.price;

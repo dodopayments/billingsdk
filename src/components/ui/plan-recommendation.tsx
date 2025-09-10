@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Lightbulb, TrendingUp, Star, ArrowRight } from "lucide-react";
+import { Lightbulb, Star, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Plan } from "@/lib/billing-core/types";
 import { PlanRecommendation, UsagePattern } from "@/lib/billing-core/usage-patterns";

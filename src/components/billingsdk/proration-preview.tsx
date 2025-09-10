@@ -1,2 +1,2 @@
 "use client";
-export { ProrationPreview, type ProrationPreviewProps } from "@/registry/billingsdk/proration-preview"
+export { PlanChangeCalculator, type PlanChangeCalculatorProps } from "@/registry/billingsdk/plan-change-calculator"

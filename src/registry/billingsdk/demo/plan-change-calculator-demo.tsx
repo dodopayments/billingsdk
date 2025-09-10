@@ -1,6 +1,6 @@
 "use client";
 
-import { PlanChangeCalculator } from "@/components/billingsdk/plan-change-calculator";
+import { PlanChangeCalculator } from "@/registry/billingsdk/plan-change-calculator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
