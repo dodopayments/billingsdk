@@ -51,7 +51,7 @@ export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
 				setLoading(false);
 			}
 		},
-		[]
+		[setLoading, setError]
 	);
 
 	const fetchProducts = useCallback(async () => {
