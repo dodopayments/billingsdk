@@ -1,9 +1,9 @@
 ---
 title: Proration Preview
-description: Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges with immediate or next-cycle options.
+description: Unified billing proration engine with provider adapters. Shows precise billing adjustments for plan changes with support for coupons, taxes, and multiple billing providers.
 ---
 
-## Default
+## Interactive Demo
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
   <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
@@ -20,17 +20,59 @@ description: Interactive component that shows billing adjustments when users cha
 
 ## Installation
 
-<Tabs items={['CLI', 'Manual']} className="bg-transparent border-none">
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/proration-preview
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/proration-preview
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/proration-preview
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/proration-preview
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add proration-preview
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add proration-preview
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add proration-preview
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add proration-preview
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
 
-<Tab value="CLI" className="mt-3">
 
-```bash
-yarn dlx @billingsdk/cli add proration-preview
-```
-
-</Tab>
-
-<Tab value="Manual" className="mt-3">
+## Manual Installation
 
 **Step 1**: Install the following dependencies:
 
@@ -40,61 +82,60 @@ npm install motion lucide-react class-variance-authority
 
 **Step 2**: Copy and paste the following code into your project.
 
-<include cwd lang="tsx" meta='title="src/components/billingsdk/proration-preview.tsx"'>src/registry/billingsdk/proration-preview.tsx</include>
+<include cwd lang="tsx" meta='title="src/registry/billingsdk/proration-preview.tsx"'>src/registry/billingsdk/proration-preview.tsx</include>
 
-**Step 3**: Update the import paths to match your project setup.
+**Step 3**: Copy the billing engine core files:
 
-</Tab>
+<include cwd lang="tsx" meta='title="src/lib/billing-core/types.ts"'>src/lib/billing-core/types.ts</include>
 
-</Tabs>
+<include cwd lang="tsx" meta='title="src/lib/billing-core/proration-engine.ts"'>src/lib/billing-core/proration-engine.ts</include>
+
+<include cwd lang="tsx" meta='title="src/lib/providers/mock-adapter.ts"'>src/lib/providers/mock-adapter.ts</include>
+
+**Step 4**: Update the import paths to match your project setup.
 
 ## Usage
 
 ```tsx
 import { ProrationPreview } from "@/components/billingsdk/proration-preview"
+import { mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter"
 ```
+
+### Basic Usage
 
 ```tsx
 <ProrationPreview
-  currentPlan={{
-    plan: {
-      id: "pro",
-      title: "Pro",
-      description: "Best for small teams",
-      monthlyPrice: "29.99",
-      yearlyPrice: "299.99",
-      currency: "$",
-      buttonText: "Current Plan",
-      features: [
-        { name: "Advanced features", icon: "check" },
-        { name: "Priority support", icon: "check" },
-      ],
-    },
-    type: "monthly",
-    price: "29.99",
-    nextBillingDate: "2024-01-15",
-    paymentMethod: "•••• 4242",
-    status: "active",
-  }}
-  newPlan={{
-    id: "enterprise",
-    title: "Enterprise", 
-    description: "For large organizations",
-    monthlyPrice: "99.99",
-    yearlyPrice: "999.99",
-    currency: "$",
-    buttonText: "Upgrade",
-    features: [
-      { name: "All features", icon: "check" },
-      { name: "Priority support", icon: "check" },
-      { name: "Custom integrations", icon: "check" },
-    ],
-  }}
-  billingCycle="monthly"
-  daysRemaining={15}
-  effectiveDate="immediately"
-  onConfirm={() => console.log("Plan change confirmed")}
+  currentPlan={mockPlans[0]} // Starter plan
+  newPlan={mockPlans[1]} // Pro plan
+  onConfirm={(quote) => console.log("Plan change confirmed:", quote)}
   onCancel={() => console.log("Plan change cancelled")}
+/>
+```
+
+### With Custom Subscription
+
+```tsx
+<ProrationPreview
+  subscription={MockBillingProvider.createMockSubscription('pro', 15)}
+  currentPlan={mockPlans[1]} // Pro
+  newPlan={mockPlans[2]} // Enterprise
+  changeDate={new Date()}
+  onConfirm={(quote) => handlePlanChange(quote)}
+  onCancel={() => handleCancel()}
+/>
+```
+
+### With Coupon and Tax
+
+```tsx
+import { mockCoupons, mockTaxRates } from "@/lib/providers/mock-adapter"
+
+<ProrationPreview
+  currentPlan={mockPlans[0]}
+  newPlan={mockPlans[1]}
+  coupon={mockCoupons[0]} // 20% off
+  tax={mockTaxRates[0]} // Netherlands VAT
+  onConfirm={(quote) => console.log("Total:", quote.total)}
 />
 ```
 
@@ -122,78 +163,127 @@ Shows plan changes that take effect at the next billing cycle with no immediate 
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `currentPlan` | `CurrentPlan` | - | The user's current subscription plan details |
-| `newPlan` | `Plan` | - | The target plan they want to switch to |
-| `billingCycle` | `'monthly' \| 'yearly'` | - | The billing cycle for the new plan |
-| `daysRemaining` | `number` | `15` | Days remaining in current billing cycle |
-| `effectiveDate` | `string` | `"immediately"` | When the plan change takes effect |
-| `onConfirm` | `() => void` | - | Callback when user confirms the change |
-| `onCancel` | `() => void` | - | Callback when user cancels the change |
-| `confirmText` | `string` | `"Confirm Change"` | Text for the confirm button |
-| `cancelText` | `string` | `"Cancel"` | Text for the cancel button |
-| `theme` | `'minimal' \| 'classic'` | `'minimal'` | Visual theme variant |
-| `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size |
+| `provider` | `BillingProvider` | `mockProvider` | Billing provider adapter for computing quotes |
+| `subscription` | `Subscription` | - | Current subscription details |
+| `currentPlan` | `Plan` | - | Current subscription plan |
+| `newPlan` | `Plan` | - | Target plan to switch to |
+| `changeDate` | `Date` | `new Date()` | When the plan change takes effect |
+| `coupon` | `Coupon` | - | Optional coupon to apply |
+| `tax` | `Tax` | - | Optional tax rate to apply |
+| `onConfirm` | `(quote: ProrationQuote) => void` | - | Callback when user confirms with quote details |
+| `onCancel` | `() => void` | - | Callback when user cancels |
+| `showControls` | `boolean` | `true` | Whether to show confirm/cancel buttons |
+| `variant` | `'default' \| 'compact'` | `'default'` | Component size variant |
 | `className` | `string` | - | Additional CSS classes |
 
-### CurrentPlan
-
-```tsx
-interface CurrentPlan {
-  plan: Plan;
-  type: 'monthly' | 'yearly' | 'custom';
-  price?: string;
-  nextBillingDate: string;
-  paymentMethod: string;
-  status: 'active' | 'inactive' | 'past_due' | 'cancelled';
-}
-```
-
-### Plan
+### Core Types
 
 ```tsx
 interface Plan {
   id: string;
-  title: string;
-  description: string;
-  monthlyPrice: string;
-  yearlyPrice: string;
+  name: string;
+  price: number;
+  currency: string;
+  interval: 'month' | 'year';
+  intervalCount: number;
+  features: string[];
+}
+
+interface Subscription {
+  id: string;
+  planId: string;
+  status: 'active' | 'trialing' | 'past_due' | 'canceled';
+  currentPeriodStart: Date;
+  currentPeriodEnd: Date;
+  cancelAtPeriodEnd: boolean;
+  trialEnd?: Date;
+}
+
+interface ProrationQuote {
+  currentPlan: Plan;
+  newPlan: Plan;
+  changeDate: Date;
+  adjustments: ProrationAdjustment[];
+  subtotal: number;
+  couponDiscount: number;
+  taxAmount: number;
+  total: number;
+  currency: string;
+  nextBillingDate: Date;
+  immediateCharge: number;
+}
+
+interface Coupon {
+  id: string;
+  name: string;
+  type: 'percent' | 'fixed';
+  value: number;
   currency?: string;
-  buttonText: string;
-  features: {
-    name: string;
-    icon: string;
-    iconColor?: string;
-  }[];
+  expiresAt?: Date;
+}
+
+interface Tax {
+  rate: number; // e.g., 0.21 for 21%
+  name: string; // e.g., "VAT", "GST"
+  country: string;
+  region?: string;
 }
 ```
 
 ## Features
 
-- **Accurate Proration Calculations** - Handles complex billing scenarios with precise math
-- **Credit & Charge Breakdown** - Shows detailed billing adjustments and credits
-- **Immediate vs Next Cycle** - Supports both immediate and next-cycle plan changes  
-- **Theme Variants** - Minimal and classic visual themes
-- **Responsive Design** - Works seamlessly across all device sizes
-- **Accessibility Ready** - Full keyboard navigation and screen reader support
-- **Animation Effects** - Smooth transitions using Motion
-- **Custom Pricing Support** - Handles non-standard pricing like "Custom" or "Enterprise"
-- **Robust Error Handling** - Graceful handling of invalid pricing data
+- **Unified Billing Engine** - Provider-agnostic proration calculations with adapters for Stripe, Paddle, etc.
+- **Precise Math** - Deterministic proration engine with proper rounding and currency handling
+- **Coupon Support** - Percentage and fixed-amount discounts with expiration validation
+- **Tax Integration** - VAT, GST, and sales tax calculations by region
+- **Detailed Breakdown** - Line-by-line adjustments showing credits, charges, and totals
+- **Real-time Preview** - Async quote computation with loading states
+- **Beautiful UI** - Smooth animations and responsive design
+- **Extensible** - Easy to add new billing providers and custom logic
+
+## Provider Architecture
+
+The component uses a unified adapter pattern for billing providers:
+
+```tsx
+interface BillingProvider {
+  name: string;
+  computeProrationQuote(
+    subscription: Subscription,
+    currentPlan: Plan,
+    newPlan: Plan,
+    changeDate: Date,
+    coupon?: Coupon,
+    tax?: Tax
+  ): Promise<ProrationQuote>;
+}
+```
+
+### Built-in Providers
+
+- **Mock Provider** - For development and testing with realistic scenarios
+- **Stripe Adapter** - (Coming soon) Direct integration with Stripe billing
+- **Paddle Adapter** - (Coming soon) Support for Paddle subscriptions
+
+## Proration Engine
+
+The core engine implements sophisticated billing logic:
+
+- **Time-based Credits** - Precise calculation of unused subscription time
+- **Prorated Charges** - New plan costs based on remaining billing period
+- **Coupon Application** - Supports both percentage and fixed-amount discounts
+- **Tax Calculation** - Regional tax rates applied to final amounts
+- **Currency Handling** - Proper formatting and rounding for all currencies
+- **Edge Cases** - Handles downgrades, upgrades, and billing cycle changes
 
 ## Use Cases
 
-- **Plan Upgrades** - Show costs when upgrading to higher-tier plans
-- **Plan Downgrades** - Display credits when downgrading plans  
-- **Billing Cycle Changes** - Handle monthly/yearly billing switches
-- **Enterprise Sales** - Support custom pricing and next-cycle changes
-- **Billing Transparency** - Provide clear breakdown of charges and credits
+- **SaaS Plan Changes** - Handle mid-cycle upgrades and downgrades
+- **Billing Transparency** - Show users exactly what they'll pay
+- **Enterprise Sales** - Support complex pricing with coupons and taxes
+- **Multi-Provider Support** - Switch between Stripe, Paddle, etc. seamlessly
+- **Development Testing** - Use mock provider for reliable testing
 
-## Billing Logic
+---
 
-The component implements sophisticated proration logic:
-
-- **Credits** - Calculated based on unused time in current plan (remaining days, not elapsed)
-- **Prorated Charges** - New plan charges based on remaining cycle days
-- **Net Amount** - Final charge or credit after calculations
-- **Cycle Handling** - Different logic for immediate vs next-cycle changes
-- **Price Validation** - Robust parsing of pricing strings with fallbacks
-- **Currency Consistency** - Uses current plan currency for credits, new plan currency for charges
+**Made by** - [Aditya Garud](https://aditya-garud.me/)
