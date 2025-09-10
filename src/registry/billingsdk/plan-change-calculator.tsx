@@ -6,14 +6,157 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ArrowRight, Calendar, CreditCard, Calculator, Clock, Loader2, TrendingUp, TrendingDown, CalendarDays } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ArrowRight, Calendar, CreditCard, Calculator, Clock, Loader2, TrendingUp, TrendingDown, CalendarDays } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Plan, Subscription, Coupon, Tax, ProrationQuote, BillingProvider } from "@/lib/billing-core/types";
-import { ProrationEngine } from "@/lib/billing-core/proration-engine";
-import { mockProvider, mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter";
+
+// Simplified types
+interface Plan {
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  interval: string;
+  intervalCount: number;
+  features: string[];
+}
+
+interface Subscription {
+  id: string;
+  planId: string;
+  status: string;
+  currentPeriodStart: Date;
+  currentPeriodEnd: Date;
+  nextBillingDate: Date;
+}
+
+interface Coupon {
+  id: string;
+  code: string;
+  discountType: 'percentage' | 'fixed';
+  discountValue: number;
+}
+
+interface Tax {
+  id: string;
+  name: string;
+  rate: number;
+}
+
+interface Adjustment {
+  type: 'credit' | 'charge';
+  description: string;
+  amount: number;
+}
+
+interface ProrationQuote {
+  currentPlan: Plan;
+  newPlan: Plan;
+  changeDate: Date;
+  nextBillingDate: Date;
+  adjustments: Adjustment[];
+  couponDiscount: number;
+  taxAmount: number;
+  total: number;
+  currency: string;
+}
+
+interface BillingProvider {
+  computeProrationQuote(
+    subscription: Subscription,
+    currentPlan: Plan,
+    newPlan: Plan,
+    changeDate: Date,
+    coupon?: Coupon,
+    tax?: Tax
+  ): Promise<ProrationQuote>;
+}
+
+// Simplified proration engine
+class ProrationEngine {
+  static calculatePlanDifference(currentPlan: Plan, newPlan: Plan) {
+    const priceDiff = newPlan.price - currentPlan.price;
+    return {
+      type: priceDiff > 0 ? 'upgrade' : priceDiff < 0 ? 'downgrade' : 'same',
+      amount: Math.abs(priceDiff)
+    };
+  }
+
+  static formatCurrency(amount: number, currency: string): string {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency
+    }).format(amount);
+  }
+}
+
+// Mock provider
+const mockProvider: BillingProvider = {
+  async computeProrationQuote(
+    subscription: Subscription,
+    currentPlan: Plan,
+    newPlan: Plan,
+    changeDate: Date,
+    coupon?: Coupon,
+    tax?: Tax
+  ): Promise<ProrationQuote> {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const planDiff = ProrationEngine.calculatePlanDifference(currentPlan, newPlan);
+    const daysRemaining = Math.ceil((subscription.nextBillingDate.getTime() - changeDate.getTime()) / (1000 * 60 * 60 * 24));
+    const dailyRate = currentPlan.price / 30; // Assuming monthly billing
+    const creditAmount = Math.max(0, daysRemaining * dailyRate);
+    
+    const adjustments: Adjustment[] = [];
+    
+    if (creditAmount > 0) {
+      adjustments.push({
+        type: 'credit',
+        description: `Unused time on ${currentPlan.name}`,
+        amount: creditAmount
+      });
+    }
+    
+    if (planDiff.type === 'upgrade') {
+      adjustments.push({
+        type: 'charge',
+        description: `Upgrade to ${newPlan.name}`,
+        amount: newPlan.price
+      });
+    } else if (planDiff.type === 'downgrade') {
+      adjustments.push({
+        type: 'credit',
+        description: `Downgrade to ${newPlan.name}`,
+        amount: newPlan.price
+      });
+    }
+    
+    const subtotal = adjustments.reduce((sum, adj) => 
+      sum + (adj.type === 'credit' ? -adj.amount : adj.amount), 0
+    );
+    
+    const couponDiscount = coupon ? 
+      (coupon.discountType === 'percentage' ? subtotal * (coupon.discountValue / 100) : coupon.discountValue) : 0;
+    
+    const taxAmount = tax ? (subtotal - couponDiscount) * (tax.rate / 100) : 0;
+    const total = subtotal - couponDiscount + taxAmount;
+    
+    return {
+      currentPlan,
+      newPlan,
+      changeDate,
+      nextBillingDate: subscription.nextBillingDate,
+      adjustments,
+      couponDiscount,
+      taxAmount,
+      total,
+      currency: currentPlan.currency
+    };
+  }
+};
 
 const planChangeCalculatorVariants = cva("w-full max-w-4xl mx-auto", {
   variants: {
@@ -39,7 +182,6 @@ export interface PlanChangeCalculatorProps extends VariantProps<typeof planChang
   onConfirm?: (quote: ProrationQuote) => void;
   onCancel?: () => void;
   showControls?: boolean;
-  showDatePicker?: boolean;
 }
 
 export function PlanChangeCalculator({
@@ -54,27 +196,81 @@ export function PlanChangeCalculator({
   onConfirm,
   onCancel,
   showControls = true,
-  showDatePicker = true,
   variant = "default",
 }: PlanChangeCalculatorProps) {
   const [quote, setQuote] = useState<ProrationQuote | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedChangeDate, setSelectedChangeDate] = useState<Date>(changeDate || new Date());
-  const [showDateInput, setShowDateInput] = useState(false);
+  const [selectedDateOption, setSelectedDateOption] = useState<'today' | 'tomorrow' | 'nextWeek' | 'nextMonth' | 'custom'>('today');
+  const [customDate, setCustomDate] = useState<string>(new Date().toISOString().split('T')[0]);
+
+  const getEffectiveDate = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    switch (selectedDateOption) {
+      case 'today':
+        return today;
+      case 'tomorrow':
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        return tomorrow;
+      case 'nextWeek':
+        const nextWeek = new Date(today);
+        nextWeek.setDate(today.getDate() + 7);
+        return nextWeek;
+      case 'nextMonth':
+        const nextMonth = new Date(today);
+        nextMonth.setMonth(today.getMonth() + 1);
+        return nextMonth;
+      case 'custom':
+        return customDate ? new Date(customDate) : today;
+      default:
+        return today;
+    }
+  }, [selectedDateOption, customDate]);
 
   // Use memoized defaults to prevent infinite re-renders
   const defaultSubscription = useMemo(() => 
-    subscription || MockBillingProvider.createMockSubscription('starter'), 
+    subscription || {
+      id: 'sub_123',
+      planId: 'starter',
+      status: 'active',
+      currentPeriodStart: new Date(),
+      currentPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+    }, 
     [subscription]
   );
+  
   const defaultCurrentPlan = useMemo(() => 
-    currentPlan || mockPlans[0], 
+    currentPlan || {
+      id: 'starter',
+      name: 'Starter',
+      price: 9,
+      currency: 'USD',
+      interval: 'month',
+      intervalCount: 1,
+      features: ['100 requests', 'Basic support', '1 project']
+    }, 
     [currentPlan]
   );
+  
   const defaultNewPlan = useMemo(() => 
-    newPlan || mockPlans[1], 
+    newPlan || {
+      id: 'pro',
+      name: 'Pro',
+      price: 29,
+      currency: 'USD',
+      interval: 'month',
+      intervalCount: 1,
+      features: ['Unlimited requests', 'Priority support', '10 projects']
+    }, 
     [newPlan]
+  );
+  
+  const memoizedChangeDate = useMemo(() => 
+    changeDate || getEffectiveDate, 
+    [changeDate, getEffectiveDate]
   );
 
   useEffect(() => {
@@ -91,7 +287,7 @@ export function PlanChangeCalculator({
           defaultSubscription,
           defaultCurrentPlan,
           defaultNewPlan,
-          selectedChangeDate,
+          memoizedChangeDate,
           coupon,
           tax
         );
@@ -104,47 +300,11 @@ export function PlanChangeCalculator({
     }
 
     computeQuote();
-  }, [provider, defaultSubscription, defaultCurrentPlan, defaultNewPlan, selectedChangeDate, coupon, tax]);
+  }, [provider, defaultSubscription, defaultCurrentPlan, defaultNewPlan, memoizedChangeDate, coupon, tax]);
 
   const planDifference = defaultCurrentPlan && defaultNewPlan 
     ? ProrationEngine.calculatePlanDifference(defaultCurrentPlan, defaultNewPlan)
     : null;
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
-  const handleDateChange = (dateString: string) => {
-    const newDate = new Date(dateString);
-    if (!isNaN(newDate.getTime())) {
-      setSelectedChangeDate(newDate);
-      setShowDateInput(false);
-    }
-  };
-
-  const getQuickDateOptions = () => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
-    const nextWeek = new Date(today);
-    nextWeek.setDate(nextWeek.getDate() + 7);
-    
-    const nextMonth = new Date(today);
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-    nextMonth.setDate(1);
-
-    return [
-      { label: 'Today', value: today, description: 'Immediate change' },
-      { label: 'Tomorrow', value: tomorrow, description: 'Next business day' },
-      { label: 'Next Week', value: nextWeek, description: 'In 7 days' },
-      { label: 'Next Month', value: nextMonth, description: 'Start of next month' },
-    ];
-  };
 
   if (loading) {
     return (
@@ -153,7 +313,7 @@ export function PlanChangeCalculator({
           <CardContent className="flex items-center justify-center py-12">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" />
-              Computing plan change quote...
+              Computing proration quote...
             </div>
           </CardContent>
         </Card>
@@ -179,6 +339,8 @@ export function PlanChangeCalculator({
     return null;
   }
 
+  const formattedChangeDate = memoizedChangeDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
   return (
     <div className={cn(planChangeCalculatorVariants({ variant }), className)}>
       <Card>
@@ -193,55 +355,60 @@ export function PlanChangeCalculator({
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Date Picker Section */}
-          {showDatePicker && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="p-4 rounded-lg border bg-muted/20"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <Label className="text-sm font-medium flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4" />
-                  Change Effective Date
-                </Label>
-                <Button
-                  variant="outline"
+          {/* Date Picker Controls */}
+          {showControls && (
+            <div className="space-y-4 p-4 border rounded-lg bg-muted/50">
+              <h4 className="font-medium flex items-center gap-2"><CalendarDays className="h-4 w-4" /> Change Effective Date</h4>
+              <div className="flex flex-wrap gap-2">
+                <Button 
+                  variant={selectedDateOption === 'today' ? 'default' : 'outline'}
+                  onClick={() => setSelectedDateOption('today')}
                   size="sm"
-                  onClick={() => setShowDateInput(!showDateInput)}
-                  className="text-xs"
                 >
-                  {showDateInput ? 'Quick Options' : 'Custom Date'}
+                  Today
+                </Button>
+                <Button 
+                  variant={selectedDateOption === 'tomorrow' ? 'default' : 'outline'}
+                  onClick={() => setSelectedDateOption('tomorrow')}
+                  size="sm"
+                >
+                  Tomorrow
+                </Button>
+                <Button 
+                  variant={selectedDateOption === 'nextWeek' ? 'default' : 'outline'}
+                  onClick={() => setSelectedDateOption('nextWeek')}
+                  size="sm"
+                >
+                  Next Week
+                </Button>
+                <Button 
+                  variant={selectedDateOption === 'nextMonth' ? 'default' : 'outline'}
+                  onClick={() => setSelectedDateOption('nextMonth')}
+                  size="sm"
+                >
+                  Next Month
+                </Button>
+                <Button 
+                  variant={selectedDateOption === 'custom' ? 'default' : 'outline'}
+                  onClick={() => setSelectedDateOption('custom')}
+                  size="sm"
+                >
+                  Custom Date
                 </Button>
               </div>
-
-              {showDateInput ? (
-                <div className="space-y-3">
-                  <Input
+              {selectedDateOption === 'custom' && (
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="custom-date" className="sr-only">Custom Date</Label>
+                  <Input 
+                    id="custom-date"
                     type="date"
-                    value={selectedChangeDate.toISOString().split('T')[0]}
-                    onChange={(e) => handleDateChange(e.target.value)}
-                    className="w-full"
-                    min={new Date().toISOString().split('T')[0]}
+                    value={customDate}
+                    onChange={(e) => setCustomDate(e.target.value)}
+                    className="w-auto"
                   />
                 </div>
-              ) : (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  {getQuickDateOptions().map((option) => (
-                    <Button
-                      key={option.label}
-                      variant={selectedChangeDate.toDateString() === option.value.toDateString() ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => setSelectedChangeDate(option.value)}
-                      className="flex flex-col items-center p-3 h-auto"
-                    >
-                      <span className="text-xs font-medium">{option.label}</span>
-                      <span className="text-xs text-muted-foreground">{formatDate(option.value)}</span>
-                    </Button>
-                  ))}
-                </div>
               )}
-            </motion.div>
+            </div>
           )}
 
           {/* Plan Comparison */}
@@ -305,7 +472,7 @@ export function PlanChangeCalculator({
               </p>
               <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
                 <Calendar className="h-3 w-3" />
-                Effective {formatDate(selectedChangeDate)}
+                Effective {formattedChangeDate}
               </div>
             </motion.div>
           </div>
@@ -380,7 +547,7 @@ export function PlanChangeCalculator({
             className="text-center p-3 bg-muted/20 rounded-lg border"
           >
             <p className="text-sm text-muted-foreground">
-              Your plan will change on {formatDate(selectedChangeDate)}. 
+              Your plan will change effective {formattedChangeDate}. 
               {quote.total > 0 
                 ? ` You'll be charged ${ProrationEngine.formatCurrency(quote.total, quote.currency)}.`
                 : quote.total < 0

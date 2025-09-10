@@ -13,7 +13,7 @@ description: Interactive component that calculates billing adjustments when user
   </Tab>
 
 <Tab value="Code" className="mt-3">
-  <include cwd lang="tsx" meta='title="src/components/proration-preview-demo.tsx"'>src/components/proration-preview-demo.tsx</include>
+  <include cwd lang="tsx" meta='title="src/components/plan-change-calculator-demo.tsx"'>src/components/plan-change-calculator-demo.tsx</include>
   </Tab>
 
 </Tabs>
@@ -84,13 +84,7 @@ npm install motion lucide-react class-variance-authority
 
 <include cwd lang="tsx" meta='title="src/registry/billingsdk/plan-change-calculator.tsx"'>src/registry/billingsdk/plan-change-calculator.tsx</include>
 
-**Step 3**: Copy the billing engine core files:
-
-<include cwd lang="tsx" meta='title="src/lib/billing-core/types.ts"'>src/lib/billing-core/types.ts</include>
-
-<include cwd lang="tsx" meta='title="src/lib/billing-core/proration-engine.ts"'>src/lib/billing-core/proration-engine.ts</include>
-
-<include cwd lang="tsx" meta='title="src/lib/providers/mock-adapter.ts"'>src/lib/providers/mock-adapter.ts</include>
+**Step 3**: The component is self-contained and includes all necessary types and logic.
 
 **Step 4**: Update the import paths to match your project setup.
 
@@ -98,15 +92,30 @@ npm install motion lucide-react class-variance-authority
 
 ```tsx
 import { PlanChangeCalculator } from "@/components/billingsdk/plan-change-calculator"
-import { mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter"
 ```
 
 ### Basic Usage
 
 ```tsx
 <PlanChangeCalculator
-  currentPlan={mockPlans[0]} // Starter plan
-  newPlan={mockPlans[1]} // Pro plan
+  currentPlan={{
+    id: "starter",
+    name: "Starter",
+    price: 9,
+    currency: "USD",
+    interval: "month",
+    intervalCount: 1,
+    features: ["100 requests", "Basic support", "1 project"]
+  }}
+  newPlan={{
+    id: "pro",
+    name: "Pro",
+    price: 29,
+    currency: "USD",
+    interval: "month",
+    intervalCount: 1,
+    features: ["Unlimited requests", "Priority support", "10 projects"]
+  }}
   onConfirm={(quote) => console.log("Plan change confirmed:", quote)}
   onCancel={() => console.log("Plan change cancelled")}
 />
