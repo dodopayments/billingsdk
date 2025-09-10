@@ -1,98 +1,12 @@
 "use client";
 
-import { PlanChangeCalculator } from "@/registry/billingsdk/plan-change-calculator";
+import { PlanChangeCalculator } from "@/components/billingsdk/plan-change-calculator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-const _currentPlan = {
-  plan: {
-    id: "pro",
-    title: "Pro",
-    description: "Best for small teams",
-    monthlyPrice: "29.99",
-    yearlyPrice: "299.99",
-    currency: "$",
-    buttonText: "Current Plan",
-    features: [
-      { name: "Advanced features", icon: "check" },
-      { name: "Priority support", icon: "check" },
-    ],
-  },
-  type: "monthly" as const,
-  price: "29.99",
-  nextBillingDate: "2024-01-15",
-  paymentMethod: "•••• 4242",
-  status: "active" as const,
-};
-
-const _yearlyCurrentPlan = {
-  plan: {
-    id: "pro-yearly",
-    title: "Pro", 
-    description: "Best for small teams",
-    monthlyPrice: "29.99",
-    yearlyPrice: "299.99",
-    currency: "$",
-    buttonText: "Current Plan",
-    features: [
-      { name: "Advanced features", icon: "check" },
-      { name: "Priority support", icon: "check" },
-    ],
-  },
-  type: "yearly" as const,
-  price: "299.99",
-  nextBillingDate: "2024-12-15",
-  paymentMethod: "•••• 4242",
-  status: "active" as const,
-};
-
-const _basicPlan = {
-  id: "basic",
-  title: "Basic",
-  description: "Perfect for getting started",
-  monthlyPrice: "9.99",
-  yearlyPrice: "99.99", 
-  currency: "$",
-  buttonText: "Downgrade",
-  features: [
-    { name: "Basic features", icon: "check" },
-    { name: "Email support", icon: "check" },
-  ],
-};
-
-const _enterprisePlan = {
-  id: "enterprise",
-  title: "Enterprise",
-  description: "For large organizations",
-  monthlyPrice: "99.99",
-  yearlyPrice: "999.99",
-  currency: "$",
-  buttonText: "Upgrade",
-  features: [
-    { name: "All features", icon: "check" },
-    { name: "Priority support", icon: "check" },
-    { name: "Custom integrations", icon: "check" },
-  ],
-};
-
-const _customPlan = {
-  id: "custom",
-  title: "Custom",
-  description: "Tailored for your needs",
-  monthlyPrice: "Custom",
-  yearlyPrice: "Custom",
-  currency: "$",
-  buttonText: "Contact Sales",
-  features: [
-    { name: "Custom features", icon: "check" },
-    { name: "Dedicated support", icon: "check" },
-  ],
-};
 
 export function PlanChangeCalculatorDemo() {
   return (
     <div className="space-y-8">
-
       <Tabs defaultValue="upgrade" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="upgrade">Upgrade</TabsTrigger>
@@ -134,7 +48,6 @@ export function PlanChangeCalculatorDemo() {
               />
             </CardContent>
           </Card>
-
         </TabsContent>
 
         <TabsContent value="downgrade" className="space-y-6">
@@ -205,39 +118,6 @@ export function PlanChangeCalculatorDemo() {
               />
             </CardContent>
           </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Yearly to Monthly Switch</CardTitle>
-              <CardDescription>
-                Switching from yearly to monthly billing
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <PlanChangeCalculator
-                currentPlan={{
-                  id: "pro-yearly",
-                  name: "Pro",
-                  price: 299.99,
-                  currency: "USD",
-                  interval: "year",
-                  intervalCount: 1,
-                  features: ["Advanced features", "Priority support"]
-                }}
-                newPlan={{
-                  id: "pro",
-                  name: "Pro",
-                  price: 29.99,
-                  currency: "USD",
-                  interval: "month",
-                  intervalCount: 1,
-                  features: ["Advanced features", "Priority support"]
-                }}
-                onConfirm={() => console.log("Cycle change confirmed")}
-                onCancel={() => console.log("Cycle change cancelled")}
-              />
-            </CardContent>
-          </Card>
         </TabsContent>
 
         <TabsContent value="next-cycle" className="space-y-6">
@@ -270,39 +150,6 @@ export function PlanChangeCalculatorDemo() {
                 }}
                 onConfirm={() => console.log("Next cycle change confirmed")}
                 onCancel={() => console.log("Next cycle change cancelled")}
-              />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Custom Pricing Scenario</CardTitle>
-              <CardDescription>
-                Handling custom/enterprise pricing that doesn't follow standard rates
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <PlanChangeCalculator
-                currentPlan={{
-                  id: "pro",
-                  name: "Pro",
-                  price: 29.99,
-                  currency: "USD",
-                  interval: "month",
-                  intervalCount: 1,
-                  features: ["Advanced features", "Priority support"]
-                }}
-                newPlan={{
-                  id: "custom",
-                  name: "Custom",
-                  price: 0,
-                  currency: "USD",
-                  interval: "month",
-                  intervalCount: 1,
-                  features: ["Custom features", "Dedicated support"]
-                }}
-                onConfirm={() => console.log("Custom plan confirmed")}
-                onCancel={() => console.log("Custom plan cancelled")}
               />
             </CardContent>
           </Card>

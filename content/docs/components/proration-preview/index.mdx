@@ -1,14 +1,14 @@
 ---
-title: Proration Preview
-description: Unified billing proration engine with provider adapters. Shows precise billing adjustments for plan changes with support for coupons, taxes, and multiple billing providers.
+title: Plan Change Calculator
+description: Interactive component that calculates billing adjustments when users change subscription plans, featuring cost breakdowns, credits, prorated charges, and date picker for change timing.
 ---
 
 ## Interactive Demo
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
   <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
-    <PreviewComponents registryName="proration-preview">
-      <ProrationPreviewDemo />
+    <PreviewComponents registryName="plan-change-calculator">
+      <PlanChangeCalculatorDemo />
     </PreviewComponents>
   </Tab>
 
@@ -25,22 +25,22 @@ description: Unified billing proration engine with provider adapters. Shows prec
     <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
-        npx shadcn@latest add @billingsdk/proration-preview
+        npx shadcn@latest add @billingsdk/plan-change-calculator
         ```
       </Tab>
       <Tab value="pnpm">
         ```bash
-        pnpm dlx shadcn@latest add @billingsdk/proration-preview
+        pnpm dlx shadcn@latest add @billingsdk/plan-change-calculator
         ```
       </Tab>
       <Tab value="yarn">
         ```bash
-        yarn dlx shadcn@latest add @billingsdk/proration-preview
+        yarn dlx shadcn@latest add @billingsdk/plan-change-calculator
         ```
       </Tab>
       <Tab value="bun">
         ```bash
-        bunx shadcn@latest add @billingsdk/proration-preview
+        bunx shadcn@latest add @billingsdk/plan-change-calculator
         ```
       </Tab>
     </Tabs>
@@ -49,22 +49,22 @@ description: Unified billing proration engine with provider adapters. Shows prec
     <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
-        npx @billingsdk/cli add proration-preview
+        npx @billingsdk/cli add plan-change-calculator
         ```
       </Tab>
       <Tab value="pnpm">
         ```bash
-        pnpm dlx @billingsdk/cli add proration-preview
+        pnpm dlx @billingsdk/cli add plan-change-calculator
         ```
       </Tab>
       <Tab value="yarn">
         ```bash
-        yarn dlx @billingsdk/cli add proration-preview
+        yarn dlx @billingsdk/cli add plan-change-calculator
         ```
       </Tab>
       <Tab value="bun">
         ```bash
-        bunx @billingsdk/cli add proration-preview
+        bunx @billingsdk/cli add plan-change-calculator
         ```
       </Tab>
     </Tabs>
@@ -82,7 +82,7 @@ npm install motion lucide-react class-variance-authority
 
 **Step 2**: Copy and paste the following code into your project.
 
-<include cwd lang="tsx" meta='title="src/registry/billingsdk/proration-preview.tsx"'>src/registry/billingsdk/proration-preview.tsx</include>
+<include cwd lang="tsx" meta='title="src/registry/billingsdk/plan-change-calculator.tsx"'>src/registry/billingsdk/plan-change-calculator.tsx</include>
 
 **Step 3**: Copy the billing engine core files:
 
@@ -97,14 +97,14 @@ npm install motion lucide-react class-variance-authority
 ## Usage
 
 ```tsx
-import { ProrationPreview } from "@/components/billingsdk/proration-preview"
+import { PlanChangeCalculator } from "@/components/billingsdk/plan-change-calculator"
 import { mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter"
 ```
 
 ### Basic Usage
 
 ```tsx
-<ProrationPreview
+<PlanChangeCalculator
   currentPlan={mockPlans[0]} // Starter plan
   newPlan={mockPlans[1]} // Pro plan
   onConfirm={(quote) => console.log("Plan change confirmed:", quote)}
@@ -115,7 +115,7 @@ import { mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter"
 ### With Custom Subscription
 
 ```tsx
-<ProrationPreview
+<PlanChangeCalculator
   subscription={MockBillingProvider.createMockSubscription('pro', 15)}
   currentPlan={mockPlans[1]} // Pro
   newPlan={mockPlans[2]} // Enterprise
@@ -130,7 +130,7 @@ import { mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter"
 ```tsx
 import { mockCoupons, mockTaxRates } from "@/lib/providers/mock-adapter"
 
-<ProrationPreview
+<PlanChangeCalculator
   currentPlan={mockPlans[0]}
   newPlan={mockPlans[1]}
   coupon={mockCoupons[0]} // 20% off
@@ -159,7 +159,7 @@ Shows plan changes that take effect at the next billing cycle with no immediate 
 
 ## API Reference
 
-### ProrationPreview
+### PlanChangeCalculator
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |

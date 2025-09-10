@@ -6,17 +6,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowRight, Calendar, CreditCard, Calculator, Clock, Loader2, TrendingUp, TrendingDown, CalendarDays } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight, Calendar, CreditCard, Calculator, Clock, Loader2, TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Plan, Subscription, Coupon, Tax, ProrationQuote, BillingProvider } from "@/lib/billing-core/types";
 import { ProrationEngine } from "@/lib/billing-core/proration-engine";
-import { mockProvider, mockPlans, mockCoupons, mockTaxRates, MockBillingProvider } from "@/lib/providers/mock-adapter";
+import { mockProvider, mockPlans, MockBillingProvider } from "@/lib/providers/mock-adapter";
 
-const prorationPreviewVariants = cva("w-full max-w-4xl mx-auto", {
+const planChangeCalculatorVariants = cva("w-full max-w-4xl mx-auto", {
   variants: {
     variant: {
       default: "space-y-6",
@@ -28,7 +27,7 @@ const prorationPreviewVariants = cva("w-full max-w-4xl mx-auto", {
   },
 });
 
-export interface ProrationPreviewProps extends VariantProps<typeof prorationPreviewVariants> {
+export interface PlanChangeCalculatorProps extends VariantProps<typeof planChangeCalculatorVariants> {
   className?: string;
   provider?: BillingProvider;
   subscription?: Subscription;
@@ -40,9 +39,10 @@ export interface ProrationPreviewProps extends VariantProps<typeof prorationPrev
   onConfirm?: (quote: ProrationQuote) => void;
   onCancel?: () => void;
   showControls?: boolean;
+  showDatePicker?: boolean;
 }
 
-export function ProrationPreview({
+export function PlanChangeCalculator({
   className,
   provider = mockProvider,
   subscription,
@@ -54,11 +54,14 @@ export function ProrationPreview({
   onConfirm,
   onCancel,
   showControls = true,
+  showDatePicker = true,
   variant = "default",
-}: ProrationPreviewProps) {
+}: PlanChangeCalculatorProps) {
   const [quote, setQuote] = useState<ProrationQuote | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedChangeDate, setSelectedChangeDate] = useState<Date>(changeDate || new Date());
+  const [showDateInput, setShowDateInput] = useState(false);
 
   // Use memoized defaults to prevent infinite re-renders
   const defaultSubscription = useMemo(() => 
@@ -72,10 +75,6 @@ export function ProrationPreview({
   const defaultNewPlan = useMemo(() => 
     newPlan || mockPlans[1], 
     [newPlan]
-  );
-  const memoizedChangeDate = useMemo(() => 
-    changeDate || new Date(), 
-    [changeDate]
   );
 
   useEffect(() => {
@@ -92,7 +91,7 @@ export function ProrationPreview({
           defaultSubscription,
           defaultCurrentPlan,
           defaultNewPlan,
-          memoizedChangeDate,
+          selectedChangeDate,
           coupon,
           tax
         );
@@ -105,20 +104,56 @@ export function ProrationPreview({
     }
 
     computeQuote();
-  }, [provider, defaultSubscription, defaultCurrentPlan, defaultNewPlan, memoizedChangeDate, coupon, tax]);
+  }, [provider, defaultSubscription, defaultCurrentPlan, defaultNewPlan, selectedChangeDate, coupon, tax]);
 
   const planDifference = defaultCurrentPlan && defaultNewPlan 
     ? ProrationEngine.calculatePlanDifference(defaultCurrentPlan, defaultNewPlan)
     : null;
 
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
+  const handleDateChange = (dateString: string) => {
+    const newDate = new Date(dateString);
+    if (!isNaN(newDate.getTime())) {
+      setSelectedChangeDate(newDate);
+      setShowDateInput(false);
+    }
+  };
+
+  const getQuickDateOptions = () => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const nextWeek = new Date(today);
+    nextWeek.setDate(nextWeek.getDate() + 7);
+    
+    const nextMonth = new Date(today);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+    nextMonth.setDate(1);
+
+    return [
+      { label: 'Today', value: today, description: 'Immediate change' },
+      { label: 'Tomorrow', value: tomorrow, description: 'Next business day' },
+      { label: 'Next Week', value: nextWeek, description: 'In 7 days' },
+      { label: 'Next Month', value: nextMonth, description: 'Start of next month' },
+    ];
+  };
+
   if (loading) {
     return (
-      <div className={cn(prorationPreviewVariants({ variant }), className)}>
+      <div className={cn(planChangeCalculatorVariants({ variant }), className)}>
         <Card>
           <CardContent className="flex items-center justify-center py-12">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin" />
-              Computing proration quote...
+              Computing plan change quote...
             </div>
           </CardContent>
         </Card>
@@ -128,7 +163,7 @@ export function ProrationPreview({
 
   if (error) {
     return (
-      <div className={cn(prorationPreviewVariants({ variant }), className)}>
+      <div className={cn(planChangeCalculatorVariants({ variant }), className)}>
         <Card>
           <CardContent className="py-12">
             <div className="text-center text-destructive">
@@ -145,12 +180,12 @@ export function ProrationPreview({
   }
 
   return (
-    <div className={cn(prorationPreviewVariants({ variant }), className)}>
+    <div className={cn(planChangeCalculatorVariants({ variant }), className)}>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Calculator className="h-5 w-5 text-primary" />
-            Plan Change Preview
+            Plan Change Calculator
           </CardTitle>
           <p className="text-sm text-muted-foreground">
             Review the charges and credits for your plan change
@@ -158,6 +193,57 @@ export function ProrationPreview({
         </CardHeader>
 
         <CardContent className="space-y-6">
+          {/* Date Picker Section */}
+          {showDatePicker && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 rounded-lg border bg-muted/20"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Label className="text-sm font-medium flex items-center gap-2">
+                  <CalendarDays className="h-4 w-4" />
+                  Change Effective Date
+                </Label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowDateInput(!showDateInput)}
+                  className="text-xs"
+                >
+                  {showDateInput ? 'Quick Options' : 'Custom Date'}
+                </Button>
+              </div>
+
+              {showDateInput ? (
+                <div className="space-y-3">
+                  <Input
+                    type="date"
+                    value={selectedChangeDate.toISOString().split('T')[0]}
+                    onChange={(e) => handleDateChange(e.target.value)}
+                    className="w-full"
+                    min={new Date().toISOString().split('T')[0]}
+                  />
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {getQuickDateOptions().map((option) => (
+                    <Button
+                      key={option.label}
+                      variant={selectedChangeDate.toDateString() === option.value.toDateString() ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedChangeDate(option.value)}
+                      className="flex flex-col items-center p-3 h-auto"
+                    >
+                      <span className="text-xs font-medium">{option.label}</span>
+                      <span className="text-xs text-muted-foreground">{formatDate(option.value)}</span>
+                    </Button>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          )}
+
           {/* Plan Comparison */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
             {/* Current Plan */}
@@ -219,7 +305,7 @@ export function ProrationPreview({
               </p>
               <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
                 <Calendar className="h-3 w-3" />
-                Effective immediately
+                Effective {formatDate(selectedChangeDate)}
               </div>
             </motion.div>
           </div>
@@ -294,7 +380,7 @@ export function ProrationPreview({
             className="text-center p-3 bg-muted/20 rounded-lg border"
           >
             <p className="text-sm text-muted-foreground">
-              Your plan will change immediately. 
+              Your plan will change on {formatDate(selectedChangeDate)}. 
               {quote.total > 0 
                 ? ` You'll be charged ${ProrationEngine.formatCurrency(quote.total, quote.currency)}.`
                 : quote.total < 0

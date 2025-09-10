@@ -42,7 +42,7 @@
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
-                "@billingsdk/proration-preview"
+                "@billingsdk/plan-change-calculator"
             ]
         },
         {
@@ -640,25 +640,20 @@
         },
 
         {
-            "name": "proration-preview",
+            "name": "plan-change-calculator",
             "type": "registry:block",
-            "title": "Proration Preview",
-            "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
+            "title": "Plan Change Calculator",
+            "description": "Interactive component that calculates billing adjustments when users change subscription plans, featuring cost breakdowns, credits, prorated charges, and date picker for change timing",
             "files": [
               {
-                "path": "src/registry/billingsdk/proration-preview.tsx",
+                "path": "src/registry/billingsdk/plan-change-calculator.tsx",
                 "type": "registry:component",
-                "target": "components/billingsdk/proration-preview.tsx"
+                "target": "components/billingsdk/plan-change-calculator.tsx"
               },
               {
-                "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
+                "path": "src/registry/billingsdk/demo/plan-change-calculator-demo.tsx",
                 "type": "registry:component",
-                "target": "components/proration-preview-demo.tsx"
-              },
-              {
-                "path": "src/registry/lib/billingsdk-config.ts",
-                "type": "registry:lib",
-                "target": "lib/billingsdk-config.ts"
+                "target": "components/plan-change-calculator-demo.tsx"
               }
             ],
             "dependencies": [
@@ -671,7 +666,8 @@
               "card",
               "badge",
               "separator",
-              "tabs",
+              "input",
+              "label",
               "utils"
             ]
         }

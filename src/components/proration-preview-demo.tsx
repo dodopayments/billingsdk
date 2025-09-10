@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { ProrationPreview } from "@/components/billingsdk/proration-preview";
+import { PlanChangeCalculator } from "@/registry/billingsdk/plan-change-calculator";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -9,22 +9,21 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { PlanConfirmationModal } from "@/components/ui/plan-confirmation-modal";
-import { PlanRecommendationComponent } from "@/components/ui/plan-recommendation";
 import { SavingsCalculator } from "@/components/ui/savings-calculator";
 import { PlanComparison } from "@/components/ui/plan-comparison";
 import { mockPlans, mockCoupons, mockTaxRates, MockBillingProvider } from "@/lib/providers/mock-adapter";
-import { ProrationQuote, Plan } from "@/lib/billing-core/types";
+import { ProrationQuote } from "@/lib/billing-core/types";
 import { RecommendationEngine, usagePatterns } from "@/lib/billing-core/usage-patterns";
 import { ProrationEngine } from "@/lib/billing-core/proration-engine";
 
-export function ProrationPreviewDemo() {
+export function PlanChangeCalculatorDemo() {
   const [selectedScenario, setSelectedScenario] = useState("upgrade-mid-cycle");
   const [selectedCoupon, setSelectedCoupon] = useState<string | undefined>(undefined);
   const [selectedTax, setSelectedTax] = useState<string | undefined>(undefined);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [confirmedQuote, setConfirmedQuote] = useState<ProrationQuote | null>(null);
   const [showEnhancedFeatures, setShowEnhancedFeatures] = useState(true);
-  const [selectedPlanForComparison, setSelectedPlanForComparison] = useState<string | null>(null);
+  const [selectedPlanForComparison, _setSelectedPlanForComparison] = useState<string | null>(null);
 
   const scenarios = MockBillingProvider.getScenarios();
   const currentScenario = scenarios.find(s => s.id === selectedScenario) || scenarios[0];
@@ -235,7 +234,7 @@ export function ProrationPreviewDemo() {
           <CardDescription>{currentScenario.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <ProrationPreview
+          <PlanChangeCalculator
             subscription={currentScenario.subscription}
             currentPlan={currentScenario.fromPlan}
             newPlan={currentScenario.toPlan}
@@ -266,7 +265,7 @@ export function ProrationPreviewDemo() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProrationPreview
+              <PlanChangeCalculator
                 currentPlan={mockPlans[0]} // Starter
                 newPlan={mockPlans[1]} // Pro
                 onConfirm={handleConfirm}
@@ -285,7 +284,7 @@ export function ProrationPreviewDemo() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProrationPreview
+              <PlanChangeCalculator
                 subscription={MockBillingProvider.createMockSubscription('pro', 5)}
                 currentPlan={mockPlans[1]} // Pro
                 newPlan={mockPlans[0]} // Starter
@@ -305,7 +304,7 @@ export function ProrationPreviewDemo() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProrationPreview
+              <PlanChangeCalculator
                 subscription={MockBillingProvider.createMockSubscription('pro', 15)}
                 currentPlan={mockPlans[1]} // Pro monthly
                 newPlan={mockPlans[3]} // Pro yearly
@@ -325,7 +324,7 @@ export function ProrationPreviewDemo() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProrationPreview
+              <PlanChangeCalculator
                 subscription={MockBillingProvider.createMockSubscription('pro', 12)}
                 currentPlan={mockPlans[1]} // Pro
                 newPlan={mockPlans[2]} // Enterprise
@@ -345,7 +344,7 @@ export function ProrationPreviewDemo() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ProrationPreview
+              <PlanChangeCalculator
                 currentPlan={mockPlans[0]} // Starter
                 newPlan={mockPlans[1]} // Pro
                 coupon={mockCoupons[1]} // WELCOME10
