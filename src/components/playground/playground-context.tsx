@@ -62,8 +62,9 @@ function parseJSXProps(code: string): Record<string, any> {
             try {
               props[propName] = JSON.parse(sanitizedValue);
             } catch {
-              const safeEval = new Function(`return (${innerValue})`);
-              props[propName] = safeEval();
+              // Fallback to string value to avoid code execution
+              // For richer expression parsing, use a proper parser (Babel/Acorn) in a sandboxed worker
+              props[propName] = innerValue;
             }
           }
         } catch {
