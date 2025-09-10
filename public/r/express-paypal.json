@@ -1,0 +1,43 @@
+{
+  "name": "express-paypal",
+  "description": "PayPal template for Express",
+  "framework": "express",
+  "files": [
+    {
+      "target": "src/lib/paypal.ts",
+      "type": "template",
+      "content": "import paypal from '@paypal/checkout-server-sdk'\r\n\r\nlet paypalClient: paypal.core.PayPalHttpClient | null = null\r\n\r\nexport function getPayPalClient(): paypal.core.PayPalHttpClient {\r\n  if (!paypalClient) {\r\n    const clientId = process.env.PAYPAL_CLIENT_ID\r\n    const clientSecret = process.env.PAYPAL_CLIENT_SECRET\r\n    if (!clientId || !clientSecret) {\r\n      throw new Error('PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET are not set')\r\n    }\r\n    const environment = process.env.PAYPAL_ENV === 'live'\r\n      ? new paypal.core.LiveEnvironment(clientId, clientSecret)\r\n      : new paypal.core.SandboxEnvironment(clientId, clientSecret)\r\n    paypalClient = new paypal.core.PayPalHttpClient(environment)\r\n  }\r\n  return paypalClient\r\n}"
+    },
+    {
+      "target": "src/routes/paypal/checkout.ts",
+      "type": "template",
+      "content": "import express from 'express'\r\nimport paypal from '@paypal/checkout-server-sdk'\r\nimport { z } from 'zod'\r\nimport { getPayPalClient } from '../../lib/paypal'\r\n\r\nconst router = express.Router()\r\n\r\n// ISO 4217 currency decimal places lookup\r\nconst currencyDecimals: Record<string, number> = {\r\n  'USD': 2, 'EUR': 2, 'GBP': 2, 'CAD': 2, 'AUD': 2, 'CNY': 2,\r\n  'JPY': 0, 'KRW': 0, 'VND': 0, 'CLP': 0, 'PYG': 0, 'XOF': 0,\r\n  'HUF': 2, 'ISK': 0, 'MXN': 2, 'NOK': 2, 'PLN': 2, 'SEK': 2,\r\n  'CHF': 2, 'CZK': 2, 'DKK': 2, 'RON': 2, 'BRL': 2, 'MYR': 2,\r\n  'THB': 2, 'PHP': 2, 'INR': 2, 'SGD': 2, 'ILS': 2, 'TWD': 2,\r\n  'ZAR': 2, 'NZD': 2, 'TRY': 2, 'HKD': 2, 'SAR': 2, 'AED': 2,\r\n  'RUB': 2, 'EGP': 2, 'IDR': 2, 'ARS': 2, 'COP': 2, 'PEN': 2,\r\n  'UYU': 2, 'BOB': 2, 'CRC': 2, 'DOP': 2, 'GTQ': 2, 'HNL': 2,\r\n  'NIO': 2, 'PAB': 2, 'UYI': 0\r\n};\r\n\r\nconst schema = z.object({\r\n  amount: z.string().regex(/^\\d+(\\.\\d{1,2})?$/).transform(Number).refine(val => val > 0, { message: 'Amount must be greater than 0' }),\r\n  currency: z.string().regex(/^[A-Z]{3}$/, { message: 'Currency must be a 3-letter uppercase code' }).refine(currency => ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY', 'CNY'].includes(currency), { message: 'Unsupported currency' }),\r\n})\r\n\r\nrouter.post('/', async (req, res) => {\r\n  try {\r\n    const parsed = schema.safeParse(req.body)\r\n    if (!parsed.success) {\r\n      return res.status(400).json({ error: 'Invalid input', details: parsed.error.flatten() })\r\n    }\r\n    \r\n    // Get the correct number of decimal places for the currency\r\n    const decimals = currencyDecimals[parsed.data.currency] ?? 2;\r\n    \r\n    const requestOrder = new paypal.orders.OrdersCreateRequest()\r\n    requestOrder.headers['Prefer'] = 'return=representation'\r\n    requestOrder.requestBody({\r\n      intent: 'CAPTURE',\r\n      purchase_units: [{ amount: { currency_code: parsed.data.currency, value: parsed.data.amount.toFixed(decimals) } }],\r\n    })\r\n    const client = getPayPalClient()\r\n    const response = await client.execute(requestOrder)\r\n    res.json(response.result)\r\n  } catch (e) {\r\n    res.status(500).json({ error: 'Internal error' })\r\n  }\r\n})\r\n\r\nexport { router as checkoutRouter }"
+    },
+    {
+      "target": "src/routes/paypal/order.ts",
+      "type": "template",
+      "content": "import express from 'express'\r\nimport paypal from '@paypal/checkout-server-sdk'\r\nimport { getPayPalClient } from '../../lib/paypal'\r\nimport { z } from 'zod'\r\n\r\nconst router = express.Router()\r\n\r\nconst capSchema = z.object({ orderId: z.string().min(1) })\r\nrouter.post('/capture', async (req, res) => {\r\n  try {\r\n    const parsed = capSchema.safeParse(req.body)\r\n    if (!parsed.success) return res.status(400).json({ error: 'Invalid input', details: parsed.error.flatten() })\r\n    const { orderId } = parsed.data\r\n    \r\n    const client = getPayPalClient()\r\n    const capReq = new paypal.orders.OrdersCaptureRequest(orderId)\r\n    capReq.requestBody({})\r\n    const response = await client.execute(capReq)\r\n    res.json(response.result)\r\n  } catch {\r\n    res.status(500).json({ error: 'Internal error' })\r\n  }\r\n})\r\n\r\nrouter.get('/:orderId', async (req, res) => {\r\n  try {\r\n    // Validate orderId parameter is present and non-empty\r\n    const { orderId } = req.params\r\n    if (!orderId || typeof orderId !== 'string' || orderId.trim() === '') {\r\n      return res.status(400).json({ error: 'orderId parameter is required and must be a non-empty string' })\r\n    }\r\n    \r\n    const client = getPayPalClient()\r\n    const getReq = new paypal.orders.OrdersGetRequest(orderId)\r\n    const response = await client.execute(getReq)\r\n    res.json(response.result)\r\n  } catch {\r\n    res.status(500).json({ error: 'Internal error' })\r\n  }\r\n})\r\n\r\nexport { router as orderRouter }"
+    },
+    {
+      "target": "src/routes/paypal/route.ts",
+      "type": "template",
+      "content": "import express from 'express'\r\nimport { checkoutRouter } from './checkout'\r\nimport { orderRouter } from './order'\r\nimport { webhookRouter } from './webhook'\r\n\r\nconst router = express.Router()\r\n// Mount webhook route before any express.json() middleware to preserve raw body\r\nrouter.use('/webhook', webhookRouter)\r\nrouter.use(express.json()) // Ensure request body is parsed for other routes\r\nrouter.use('/checkout', checkoutRouter)\r\nrouter.use('/order', orderRouter)\r\nexport { router as paypalRouter }"
+    },
+    {
+      "target": "src/routes/paypal/webhook.ts",
+      "type": "template",
+      "content": "import express from 'express'\r\nimport paypal from '@paypal/checkout-server-sdk'\r\nimport { getPayPalClient } from '../../lib/paypal'\r\n\r\nconst router = express.Router()\r\n\r\nrouter.post('/', express.raw({ type: 'application/json' }), async (req, res) => {\r\n  try {\r\n    // Verify PayPal webhook signature\r\n    const client = getPayPalClient()\r\n    const verifyRequest = new paypal.notifications.VerifyWebhookSignatureRequest()\r\n    \r\n    // Get webhook ID from environment variables\r\n    const webhookId = process.env.PAYPAL_WEBHOOK_ID\r\n    if (!webhookId) {\r\n      console.error('PAYPAL_WEBHOOK_ID is not set in environment variables')\r\n      return res.status(500).json({ error: 'Webhook verification not configured' })\r\n    }\r\n    \r\n    // Parse raw body once and reuse\r\n    const event = JSON.parse(req.body.toString())\r\n    verifyRequest.requestBody({\r\n      auth_algo: req.headers['paypal-auth-algo'],\r\n      cert_url: req.headers['paypal-cert-url'],\r\n      transmission_id: req.headers['paypal-transmission-id'],\r\n      transmission_sig: req.headers['paypal-transmission-sig'],\r\n      transmission_time: req.headers['paypal-transmission-time'],\r\n      webhook_id: webhookId,\r\n      webhook_event: event\r\n    })\r\n    \r\n    // Execute verification\r\n    const verifyResponse = await client.execute(verifyRequest)\r\n    \r\n    // Check verification result\r\n    if (verifyResponse.result.verification_status !== 'SUCCESS') {\r\n      console.warn('PayPal webhook signature verification failed')\r\n      return res.status(400).json({ error: 'Webhook signature verification failed' })\r\n    }\r\n    \r\n    // Process verified webhook event\r\n    // event already parsed above\r\n    console.log('Verified PayPal webhook event received:', event.event_type)\r\n    \r\n    // TODO: Handle specific webhook events (e.g., payment completed, subscription cancelled, etc.)\r\n    \r\n    res.status(200).json({ received: true })\r\n  } catch (error) {\r\n    console.error('Error processing PayPal webhook:', error)\r\n    res.status(500).json({ error: 'Internal error processing webhook' })\r\n  }\r\n})\r\n\r\nexport { router as webhookRouter }"
+    },
+    {
+      "target": ".env.example",
+      "type": "template",
+      "content": "PAYPAL_CLIENT_ID=YOUR-CLIENT-ID\nPAYPAL_CLIENT_SECRET=YOUR-CLIENT-SECRET\nPAYPAL_ENV=sandbox\nPAYPAL_WEBHOOK_ID=YOUR-WEBHOOK-ID\nNEXT_PUBLIC_APP_URL=http://localhost:8080/paypal"
+    }
+  ],
+  "dependencies": [
+    "@paypal/checkout-server-sdk",
+    "zod",
+    "express",
+    "@types/express"
+  ]
+}

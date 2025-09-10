@@ -1,0 +1,25 @@
+{
+  "name": "react-paypal",
+  "description": "PayPal hooks/utilities for React (client-only)",
+  "framework": "react",
+  "files": [
+    {
+      "target": "lib/paypal.ts",
+      "type": "template",
+      "content": "export type PayPalOrder = { id: string; status: string }\r\n\r\nexport function assertPayPalEnv(baseUrl?: string) {\r\n  if (baseUrl) {\r\n    // If baseUrl is provided, validation passes\r\n    return\r\n  }\r\n  if (!(import.meta as any).env.VITE_BASE_URL) {\r\n    throw new Error('VITE_BASE_URL is not set')\r\n  }\r\n}\r\n\r\nexport const createOrder = async ({ baseUrl, amount, currency }: { baseUrl: string; amount: string; currency: string }): Promise<PayPalOrder> => {\r\n  const controller = new AbortController()\r\n  const t = setTimeout(() => controller.abort(), 10_000)\r\n  try {\r\n    const res = await fetch(`${baseUrl}/api/checkout`, {\r\n      method: 'POST', \r\n      headers: { 'Content-Type': 'application/json' }, \r\n      body: JSON.stringify({ amount, currency }),\r\n      signal: controller.signal\r\n    })\r\n    if (!res.ok) throw new Error(`Failed to create order: ${res.status}`)\r\n    return res.json()\r\n  } finally {\r\n    clearTimeout(t)\r\n  }\r\n}\r\n\r\nexport const captureOrder = async ({ baseUrl, orderId }: { baseUrl: string; orderId: string }): Promise<PayPalOrder> => {\r\n  const controller = new AbortController()\r\n  const t = setTimeout(() => controller.abort(), 10_000)\r\n  try {\r\n    const res = await fetch(`${baseUrl}/api/order/capture`, {\r\n      method: 'POST', \r\n      headers: { 'Content-Type': 'application/json' }, \r\n      body: JSON.stringify({ orderId }),\r\n      signal: controller.signal\r\n    })\r\n    if (!res.ok) throw new Error(`Failed to capture order: ${res.status}`)\r\n    return res.json()\r\n  } finally {\r\n    clearTimeout(t)\r\n  }\r\n}\r\n\r\nexport const getOrder = async ({ baseUrl, orderId }: { baseUrl: string; orderId: string }): Promise<PayPalOrder> => {\r\n  const controller = new AbortController()\r\n  const t = setTimeout(() => controller.abort(), 10_000)\r\n  try {\r\n    const res = await fetch(`${baseUrl}/api/order/${encodeURIComponent(orderId)}`, {\r\n      method: 'GET',\r\n      signal: controller.signal\r\n    })\r\n    if (!res.ok) throw new Error(`Failed to fetch order: ${res.status}`)\r\n    return res.json()\r\n  } finally {\r\n    clearTimeout(t)\r\n  }\r\n}"
+    },
+    {
+      "target": "hooks/useBilling.ts",
+      "type": "template",
+      "content": "import { useState, useCallback } from 'react'\r\nimport { assertPayPalEnv, createOrder, captureOrder, getOrder } from '../lib/paypal'\r\n\r\nexport function useBilling({ baseUrl }: { baseUrl?: string } = {}) {\r\n  const resolvedBaseUrl = baseUrl ?? (import.meta as any).env.VITE_BASE_URL ?? 'http://localhost:3000'\r\n  const [loading, setLoading] = useState(false)\r\n  const [error, setError] = useState<string | null>(null)\r\n  const [lastOrderId, setLastOrderId] = useState<string | null>(null)\r\n\r\n  const create = useCallback(async (amount: string, currency: string) => {\r\n    try {\r\n      setLoading(true); setError(null); assertPayPalEnv(resolvedBaseUrl)\r\n      const order = await createOrder({ baseUrl: resolvedBaseUrl, amount, currency })\r\n      setLastOrderId(order.id)\r\n      return order\r\n    } catch (e: any) { setError(e?.message ?? 'Failed to create order'); throw e } finally { setLoading(false) }\r\n  }, [resolvedBaseUrl])\r\n\r\n  const capture = useCallback(async (orderId: string) => {\r\n    try {\r\n      setLoading(true); setError(null)\r\n      const order = await captureOrder({ baseUrl: resolvedBaseUrl, orderId })\r\n      return order\r\n    } catch (e: any) { setError(e?.message ?? 'Failed to capture order'); throw e } finally { setLoading(false) }\r\n  }, [resolvedBaseUrl])\r\n\r\n  const fetchOrder = useCallback(async (orderId: string) => {\r\n    try {\r\n      setLoading(true); setError(null)\r\n      const order = await getOrder({ baseUrl: resolvedBaseUrl, orderId })\r\n      return order\r\n    } catch (e: any) { setError(e?.message ?? 'Failed to fetch order'); throw e } finally { setLoading(false) }\r\n  }, [resolvedBaseUrl])\r\n\r\n  return { loading, error, lastOrderId, create, capture, fetchOrder }\r\n}\r\n"
+    },
+    {
+      "target": ".env.example",
+      "type": "template",
+      "content": "PAYPAL_CLIENT_ID=YOUR-CLIENT-ID\nPAYPAL_CLIENT_SECRET=YOUR-CLIENT-SECRET\nPAYPAL_ENV=sandbox\nPAYPAL_WEBHOOK_ID=YOUR-WEBHOOK-ID\nNEXT_PUBLIC_APP_URL=http://localhost:3000"
+    }
+  ],
+  "dependencies": [
+    "react"
+  ]
+}
