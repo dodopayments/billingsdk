@@ -23,7 +23,7 @@
     "@billingsdk/payment-method-selector",
     "@billingsdk/pricing-table-six",
     "@billingsdk/payment-method-manager",
-    "@billingsdk/billing-setting",
+    "@billingsdk/billing-settings",
     "@billingsdk/proration-preview"
   ],
   "files": []
