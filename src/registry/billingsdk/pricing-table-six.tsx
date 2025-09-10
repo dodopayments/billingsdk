@@ -20,7 +20,7 @@ const defaultPlans: Plan[] = [
     buttonText: "Get started",
     features: [
       { name: "Basic features", icon: "check" },
-      { name: "10 users", icon: "check" },
+      { name: "5 users", icon: "check" },
       { name: "20GB storage", icon: "check" },
       { name: "Email support", icon: "check" },
     ],
@@ -37,7 +37,7 @@ const defaultPlans: Plan[] = [
     highlight: true,
     features: [
       { name: "Basic features", icon: "check" },
-      { name: "20 users", icon: "check" },
+      { name: "15 users", icon: "check" },
       { name: "40GB storage", icon: "check" },
       { name: "Priority support", icon: "check" },
       { name: "Automated workflows", icon: "check" },
@@ -54,7 +54,7 @@ const defaultPlans: Plan[] = [
     buttonText: "Get started",
     features: [
       { name: "Basic features", icon: "check" },
-      { name: "Unlimited users", icon: "check" },
+      { name: "25+ users", icon: "check" },
       { name: "Unlimited storage", icon: "check" },
       { name: "24/7 support", icon: "check" },
       { name: "Automated workflows", icon: "check" },
@@ -70,7 +70,7 @@ const features = [
     category: "Overview",
     items: [
       { name: "Basic features", tooltip: true, basic: true, business: true, enterprise: true },
-      { name: "Users", tooltip: true, basic: "10", business: "20", enterprise: "Unlimited" },
+      { name: "Users", tooltip: true, basic: "5", business: "15", enterprise: "25+" },
       { name: "Individual data", tooltip: true, basic: "20GB", business: "40GB", enterprise: "Unlimited" },
       { name: "Support", tooltip: true, basic: true, business: true, enterprise: true },
       { name: "Automated workflows", tooltip: true, basic: false, business: true, enterprise: true },
@@ -119,6 +119,41 @@ export interface PricingTableSixProps {
   onPlanSelect?: (planId: string) => void;
 }
 
+// Helper function to extract user count from plan features for slider position
+const getUserCountFromPlan = (plan: Plan): number => {
+  const userFeature = plan.features.find(feature => 
+    feature.name.toLowerCase().includes('user')
+  )
+  
+  if (!userFeature) return 5 // default fallback
+  
+  const userText = userFeature.name.toLowerCase()
+  if (userText.includes('unlimited') || userText.includes('25+')) {
+    return 25
+  }
+  
+  // Extract number from text like "5 users", "15 users", etc.
+  const match = userText.match(/(\d+)/)
+  return match ? parseInt(match[1]) : 5
+}
+
+// Helper function to get user count display text
+const getUserCountDisplayText = (plan: Plan): string => {
+  const userFeature = plan.features.find(feature => 
+    feature.name.toLowerCase().includes('user')
+  )
+  
+  if (!userFeature) return "5 users" // default fallback
+  
+  const userText = userFeature.name
+  if (userText.toLowerCase().includes('unlimited')) {
+    return "25+ users"
+  }
+  
+  // Return the original text (e.g., "5 users", "15 users", "25+ users")
+  return userText
+}
+
 export function PricingTableSix({
   className,
   title = "Choose a plan that's right for you",
@@ -134,8 +169,9 @@ export function PricingTableSix({
   const featuresToUse = customFeatures || features
 
   const currentPlan = plansToUse.find((plan) => plan.id === selectedPlan) || plansToUse[1]
-  // For slider, we'll use a simple calculation based on plan index
-  const sliderValue = [plansToUse.indexOf(currentPlan) + 1]
+  const userCount = getUserCountFromPlan(currentPlan)
+  const userCountDisplayText = getUserCountDisplayText(currentPlan)
+  const sliderValue = [userCount]
 
   const renderFeatureValue = (value: boolean | string) => {
     if (typeof value === "boolean") {
@@ -164,7 +200,7 @@ export function PricingTableSix({
         <div className="relative">
           <Slider value={sliderValue} max={25} min={1} step={1} className="w-full" disabled />
           <div className="mt-2 text-center">
-            <span className="text-sm font-medium text-foreground">{currentPlan.title}</span>
+            <span className="text-sm font-medium text-foreground">{userCountDisplayText}</span>
           </div>
         </div>
       </div>
