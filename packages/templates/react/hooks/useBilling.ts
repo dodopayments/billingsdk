@@ -17,9 +17,13 @@ interface UseBillingState {
 }
 
 export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
-	const resolvedBaseUrl =
-		baseUrl ?? process.env.VITE_BASE_URL ?? 'http://localhost:8080';
+// packages/templates/react/hooks/useBilling.ts
 
+const resolvedBaseUrl =
+  baseUrl ??
+  (typeof import.meta !== 'undefined' ? (import.meta as any).env?.VITE_BASE_URL : undefined) ??
+  process.env.VITE_BASE_URL ??
+  'http://localhost:8080';
 	const [state, setState] = useState<UseBillingState>({
 		loading: false,
 		error: null,

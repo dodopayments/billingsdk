@@ -15,18 +15,18 @@ export function usePayPal({ baseUrl }: { baseUrl?: string } = {}) {
 	const [error, setError] = useState<string | null>(null);
 	const [lastOrderId, setLastOrderId] = useState<string | null>(null);
 
-	const createPayPalOrder = useCallback(
-		async (amount: string, currency: string) => {
-			try {
-				setLoading(true);
-				setError(null);
-				assertPayPalEnv(resolvedBaseUrl);
-				const order = await createOrder({
-					baseUrl: resolvedBaseUrl,
-					amount,
-					currency,
-				});
-				setLastOrderId(order.id);
+  const createPayPalOrder = useCallback(
+   async (amount: number, currency: string) => {
+      try {
+        setLoading(true);
+        setError(null);
+        assertPayPalEnv(resolvedBaseUrl);
+        const order = await createOrder({
+          baseUrl: resolvedBaseUrl,
+          amount,
+          currency,
+        });
+        setLastOrderId(order.id);
 				return order;
 			} catch (e: any) {
 				setError(e?.message ?? 'Failed to create order');
