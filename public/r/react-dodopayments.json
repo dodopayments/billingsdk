@@ -88,6 +88,8 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
     products,
     product,
     checkout,
+    createCustomer: (customer: any) =>
+      createCustomer({ baseUrl: resolvedBaseUrl, customer }),
     getCustomer: (customer_id: string) =>
       getCustomer({ baseUrl: resolvedBaseUrl, customer_id }),
     updateCustomer: (
