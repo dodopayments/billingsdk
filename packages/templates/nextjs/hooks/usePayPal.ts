@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 export function usePayPal({ baseUrl }: { baseUrl?: string } = {}) {
 	const resolvedBaseUrl =
 		baseUrl ??
-		(import.meta as any).env.VITE_BASE_URL ??
+		process.env.NEXT_PUBLIC_APP_URL ??
 		'http://localhost:3000';
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
