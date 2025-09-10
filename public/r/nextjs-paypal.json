@@ -9,94 +9,10 @@
       "content": "import paypal from '@paypal/checkout-server-sdk'\r\n\r\nlet paypalClient: paypal.core.PayPalHttpClient | null = null\r\n\r\nexport function getPayPalClient(): paypal.core.PayPalHttpClient {\r\n  if (!paypalClient) {\r\n    const clientId = process.env.PAYPAL_CLIENT_ID\r\n    const clientSecret = process.env.PAYPAL_CLIENT_SECRET\r\n    if (!clientId || !clientSecret) {\r\n      throw new Error('PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET are not set')\r\n    }\r\n    const environment = process.env.PAYPAL_ENV === 'live'\r\n      ? new paypal.core.LiveEnvironment(clientId, clientSecret)\r\n      : new paypal.core.SandboxEnvironment(clientId, clientSecret)\r\n    paypalClient = new paypal.core.PayPalHttpClient(environment)\r\n  }\r\n  return paypalClient\r\n}"
     },
     {
-import { useState, useCallback } from 'react'
-
-export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
-  const resolvedBaseUrl = baseUrl ?? (import.meta as any).env.VITE_BASE_URL ?? 'http://localhost:3000'
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [lastOrderId, setLastOrderId] = useState<string | null>(null)
-
-  const create = useCallback(async (amount: string, currency: string) => {
-    try {
-      setLoading(true); setError(null)
-      const controller = new AbortController()
-      const t = setTimeout(() => controller.abort(), 10_000)
-      const response = await fetch(`${resolvedBaseUrl}/api/checkout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount, currency }),
-        signal: controller.signal,
-      })
-      clearTimeout(t)
-
-      if (!response.ok) {
-        throw new Error(`Failed to create order: ${response.status}`)
-      }
-
-      const order = await response.json()
-      setLastOrderId(order.id)
-      return order
-    } catch (e: any) {
-      setError(e?.message ?? 'Failed to create order')
-      throw e
-    } finally {
-      setLoading(false)
-    }
-  }, [resolvedBaseUrl])
-
-  const capture = useCallback(async (orderId: string) => {
-    try {
-      setLoading(true); setError(null)
-      const controller = new AbortController()
-      const t = setTimeout(() => controller.abort(), 10_000)
-      const response = await fetch(`${resolvedBaseUrl}/api/order/capture`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId }),
-        signal: controller.signal,
-      })
-      clearTimeout(t)
-
-      if (!response.ok) {
-        throw new Error(`Failed to capture order: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (e: any) {
-      setError(e?.message ?? 'Failed to capture order')
-      throw e
-    } finally {
-      setLoading(false)
-    }
-  }, [resolvedBaseUrl])
-
-  const fetchOrder = useCallback(async (orderId: string) => {
-    try {
-      setLoading(true); setError(null)
-      const controller = new AbortController()
-      const t = setTimeout(() => controller.abort(), 10_000)
-      const response = await fetch(`${resolvedBaseUrl}/api/order/${encodeURIComponent(orderId)}`, {
-        method: 'GET',
-        signal: controller.signal,
-      })
-      clearTimeout(t)
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch order: ${response.status}`)
-      }
-
-      return await response.json()
-    } catch (e: any) {
-      setError(e?.message ?? 'Failed to fetch order')
-      throw e
-    } finally {
-      setLoading(false)
-    }
-  }, [resolvedBaseUrl])
-
-  return { loading, error, lastOrderId, create, capture, fetchOrder }
-}
+    {
+      "target": "hooks/useBilling.ts",
+      "type": "template",
+      "content": "import { useState, useCallback } from 'react'\\n\\nexport function useBilling({ baseUrl }: { baseUrl?: string } = {}) {\\n  const resolvedBaseUrl = baseUrl ?? process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'\\n  const [loading, setLoading] = useState(false)\\n  const [error, setError] = useState<string | null>(null)\\n  const [lastOrderId, setLastOrderId] = useState<string | null>(null)\\n\\n  const create = useCallback(async (amount: string, currency: string) => {\\n    try { setLoading(true); setError(null); const controller = new AbortController(); const t = setTimeout(() => controller.abort(), 10_000);\\n      const response = await fetch(`${resolvedBaseUrl}/api/checkout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ amount, currency }), signal: controller.signal });\\n      clearTimeout(t); if (!response.ok) throw new Error(`Failed to create order: ${response.status}`); const order = await response.json(); setLastOrderId(order.id); return order;\\n    } catch (e: any) { setError(e?.message ?? 'Failed to create order'); throw e; } finally { setLoading(false); }\\n  }, [resolvedBaseUrl]);\\n\\n  const capture = useCallback(async (orderId: string) => {\\n    try { setLoading(true); setError(null); const controller = new AbortController(); const t = setTimeout(() => controller.abort(), 10_000);\\n      const response = await fetch(`${resolvedBaseUrl}/api/order/capture`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId }), signal: controller.signal });\\n      clearTimeout(t); if (!response.ok) throw new Error(`Failed to capture order: ${response.status}`); return await response.json();\\n    } catch (e: any) { setError(e?.message ?? 'Failed to capture order'); throw e; } finally { setLoading(false); }\\n  }, [resolvedBaseUrl]);\\n\\n  const fetchOrder = useCallback(async (orderId: string) => {\\n    try { setLoading(true); setError(null); const controller = new AbortController(); const t = setTimeout(() => controller.abort(), 10_000);\\n      const response = await fetch(`${resolvedBaseUrl}/api/order/${encodeURIComponent(orderId)}`, { method: 'GET', signal: controller.signal });\\n      clearTimeout(t); if (!response.ok) throw new Error(`Failed to fetch order: ${response.status}`); return await response.json();\\n    } catch (e: any) { setError(e?.message ?? 'Failed to fetch order'); throw e; } finally { setLoading(false); }\\n  }, [resolvedBaseUrl]);\\n\\n  return { loading, error, lastOrderId, create, capture, fetchOrder };\\n}\\n"
     },
     {
       "target": "app/api/(paypal)/checkout/route.ts",
