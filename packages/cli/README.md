@@ -2,6 +2,10 @@
 
 A command-line tool for managing billing components and framework integration. Built with TypeScript and designed to work seamlessly with React, Next.js, Express.js, and other popular frameworks.
 
+## Prerequisites
+
+- Node.js 18 or newer (required for global fetch API)
+
 ## Installation
 
 The CLI can be used directly with `npx` without installation:
@@ -11,8 +15,9 @@ npx @billingsdk/cli --help
 ```
 
 This command provides two setup options:
+
 - **UI Components**: Sets up shadcn/ui components
-- **Framework Setup**: Configures your framework (Next.js, Express.js, or React) with Dopayments integration
+- **Framework Setup**: Configures your framework (Next.js, Express.js, or React) with a payment provider (Dodo Payments or PayPal)
 
 ## Quick Start
 
@@ -23,9 +28,10 @@ npx @billingsdk/cli init
 ```
 
 This interactive command will:
+
 - Automatically detect your framework (Next.js, Express.js, or React) from your project dependencies
 - Guide you through framework selection if auto-detection fails or you prefer manual selection
-- Help you choose a payment provider (Dodo Payments)
+- Help you choose a payment provider (Dodo Payments or PayPal)
 - Set up complete project structure with API routes (for full-stack frameworks) or hooks/utilities (for React)
 - Install all necessary dependencies
 - Generate configuration files and boilerplate code
@@ -50,7 +56,8 @@ npx @billingsdk/cli add usage-meter-circle
 Initialize a new billing project with complete setup.
 
 **Options:**
-- Automatic framework detection (Next.js, Express.js, React) from project dependencies
+
+- Automatic framework detection (Next.js, Express.js, or React) from project dependencies
 - Interactive framework selection as fallback or when preferred
 - Payment provider configuration
 - Automatic dependency installation
@@ -58,10 +65,11 @@ Initialize a new billing project with complete setup.
 
 **Generated Structures:**
 
-*Next.js (App Router):*
-```
+#### Next.js (App Router)
+
+```text
 your-project/
-├── app/api/(dodopayments)/
+├── app/api/(dodopayments)/  or  app/api/(paypal)/
 │   ├── checkout/route.ts
 │   ├── customer/route.ts
 │   ├── products/route.ts
@@ -69,18 +77,19 @@ your-project/
 ├── hooks/
 │   └── useBilling.ts
 ├── lib/
-│   └── dodopayments.ts
+│   └── dodopayments.ts  or  paypal.ts
 └── .env.example
 ```
 
-*Express.js:*
-```
+#### Express.js
+
+```text
 your-project/
 ├── src/
 │   ├── lib/
-│   │   └── dodopayments.ts
+│   │   └── dodopayments.ts  or  paypal.ts
 │   └── routes/
-│       └── dodopayments/
+│       └── dodopayments/    or    paypal/
 │           ├── checkout.ts
 │           ├── customer.ts
 │           ├── payments.ts
@@ -91,13 +100,14 @@ your-project/
 └── package.json
 ```
 
-*React (Client-side only):*
-```
+#### React (Client-side only)
+
+```text
 your-project/
 ├── hooks/
 │   └── useBilling.ts
 ├── lib/
-│   └── dodopayments.ts
+│   └── dodopayments.ts  or  paypal.ts
 └── .env.example
 ```
 
@@ -106,12 +116,12 @@ your-project/
 Add individual billing components to your existing project.
 
 **Examples:**
+
 ```bash
 npx @billingsdk/cli add pricing-table-one
 npx @billingsdk/cli add subscription-management
 npx @billingsdk/cli add usage-meter-circle
 ```
-
 
 ## Configuration
 
@@ -131,10 +141,10 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ### Dependencies Installed
 
-The CLI automatically installs:
-- `dodopayments` - Payment processing library
-- `standardwebhooks` - Webhook verification
-- `zod` - TypeScript schema validation
+The CLI automatically installs provider-specific dependencies from the selected template (examples):
+
+- **Dodo Payments template**: `dodopayments`, `standardwebhooks`, `zod`
+- **PayPal template**: `@paypal/checkout-server-sdk`, `zod`
 
 ## Supported Frameworks & Providers
 
@@ -151,14 +161,16 @@ The CLI automatically detects your framework based on your project dependencies 
 - 🚧 **Hono** - Coming soon
 
 **Auto-Detection Process:**
+
 1. Scans your `package.json` for framework-specific dependencies
 2. Checks for framework configuration files in your project root
 3. Presents detected framework as the default option during setup
 4. Falls back to manual selection if no framework is detected
 
 ### Payment Providers
+
 - ✅ **Dodo Payments** - Fully supported
-- 🚧 **Stripe** - Coming soon
+- ✅ **PayPal** - Fully supported
 - 🚧 **Additional providers** - Based on community demand
 
 ## Development
@@ -181,22 +193,26 @@ npm run dev
 
 ### Common Issues
 
-**Command not found**
+#### Command not found
+
 ```bash
 # Ensure you're using npx correctly
 npx @billingsdk/cli --help
 ```
 
-**Permission errors**
+#### Permission errors
+
 ```bash
 # On Unix systems
 chmod +x node_modules/.bin/@billingsdk/cli
 ```
 
-**Network issues**
+#### Network issues
+
 ```bash
 # Check internet connection
-# CLI downloads templates from @billingsdk/cli.com
+# CLI downloads templates from billingsdk.com in production
+# During development, local templates are used as fallback
 ```
 
 ### Getting Help
