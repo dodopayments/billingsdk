@@ -241,6 +241,8 @@ export function PricingTableSix({
                       ? "bg-indigo-600 hover:bg-indigo-700 text-white"
                       : "bg-background border text-foreground hover:bg-muted",
                   )}
+                  onClick={() => handlePlanSelect(plan.id)}
+                  aria-pressed={selectedPlan === plan.id}
                 >
                   {plan.buttonText}
                 </Button>
