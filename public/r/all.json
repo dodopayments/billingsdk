@@ -18,6 +18,7 @@
     "@billingsdk/subscription-management",
     "@billingsdk/usage-meter-linear",
     "@billingsdk/usage-meter-circle",
+    "@billingsdk/usage-forecast",
     "@billingsdk/banner",
     "@billingsdk/invoice-history",
     "@billingsdk/usage-table",
