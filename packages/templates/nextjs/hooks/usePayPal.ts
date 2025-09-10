@@ -81,12 +81,17 @@ export function usePayPal({ baseUrl }: { baseUrl?: string } = {}) {
 			try {
 				setLoading(true);
 				setError(null);
+				const controller = new AbortController();
+				let t: ReturnType<typeof setTimeout> | null = null;
+				t = setTimeout(() => controller.abort(), 10_000);
 				const response = await fetch(
-					`${resolvedBaseUrl}/api/paypal/order/${encodeURIComponent(orderId)}`,
+					`${resolvedBaseUrl}/api/order/${encodeURIComponent(orderId)}`,
 					{
 						method: 'GET',
+						signal: controller.signal,
 					}
 				);
+				if (t) clearTimeout(t);
 
 				if (!response.ok) {
 					throw new Error(`Failed to fetch order: ${response.status}`);
