@@ -1,176 +1,164 @@
 {
-    "$schema": "https://billingsdk.com/r/registry.json",
-    "components": [
-        {
-            "name": "nextjs-dodopayments",
-            "description": "DodoPayments template for NextJS",
-            "framework": "nextjs",
-            "files": [
-                {
-                    "path": "packages/templates/nextjs/lib/dodopayments.ts",
-                    "target": "lib/dodopayments.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/hooks/useBilling.ts",
-                    "target": "hooks/useBilling.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/api-routes/(dodopayments)/*",
-                    "target": "app/api/(dodopayments)/*",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/.env.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod"
-            ]
-        },
-        {
-            "name": "express-dodopayments",
-            "description": "DodoPayments template for Express.js",
-            "framework": "express",
-            "files": [
-                {
-                    "path": "packages/templates/express/src/lib/dodopayments.ts",
-                    "target": "src/lib/dodopayments.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/*",
-                    "target": "src/routes/dodopayments/*",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/express/.env.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod",
-                "express",
-                "@types/express"
-            ]
-        },
-        {
-            "name": "react-dodopayments",
-            "description": "DodoPayments template for React.js",
-            "framework": "react",
-            "files": [
-                {
-                    "path": "packages/templates/react/lib/dodopayments.ts",
-                    "target": "lib/dodopayments.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/react/hooks/useBilling.ts",
-                    "target": "hooks/useBilling.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/react/.env.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "react"
-            ]
-        },
-        {
-            "name": "nextjs-paypal",
-            "description": "PayPal template for NextJS",
-            "framework": "nextjs",
-            "files": [
-                {
-                    "path": "packages/templates/nextjs/lib/paypal.ts",
-                    "target": "lib/paypal.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/hooks/useBilling.ts",
-                    "target": "hooks/useBilling.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/api-routes/(paypal)/*",
-                    "target": "app/api/(paypal)/*",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/nextjs/.env.paypal.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "@paypal/checkout-server-sdk",
-                "zod"
-            ]
-        },
-        {
-            "name": "express-paypal",
-            "description": "PayPal template for Express",
-            "framework": "express",
-            "files": [
-                {
-                    "path": "packages/templates/express/src/lib/paypal.ts",
-                    "target": "src/lib/paypal.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/paypal/*",
-                    "target": "src/routes/paypal/*",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/express/.env.paypal.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "@paypal/checkout-server-sdk",
-                "zod",
-                "express",
-                "@types/express"
-            ]
-        },
-        {
-            "name": "react-paypal",
-            "description": "PayPal hooks/utilities for React (client-only)",
-            "framework": "react",
-            "files": [
-                {
-                    "path": "packages/templates/react/lib/paypal.ts",
-                    "target": "lib/paypal.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/react/hooks/useBilling.ts",
-                    "target": "hooks/useBilling.ts",
-                    "type": "template"
-                },
-                {
-                    "path": "packages/templates/react/.env.paypal.example",
-                    "target": ".env.example",
-                    "type": "template"
-                }
-            ],
-            "dependencies": [
-                "react"
-            ]
-        }
-    ]
+	"$schema": "https://billingsdk.com/r/registry.json",
+	"components": [
+		{
+			"name": "nextjs-dodopayments",
+			"description": "DodoPayments template for NextJS",
+			"framework": "nextjs",
+			"files": [
+				{
+					"path": "packages/templates/nextjs/lib/dodopayments.ts",
+					"target": "lib/dodopayments.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/hooks/useBilling.ts",
+					"target": "hooks/useBilling.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/api-routes/(dodopayments)/*",
+					"target": "app/api/(dodopayments)/*",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/.env.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": ["dodopayments", "standardwebhooks", "zod"]
+		},
+		{
+			"name": "express-dodopayments",
+			"description": "DodoPayments template for Express.js",
+			"framework": "express",
+			"files": [
+				{
+					"path": "packages/templates/express/src/lib/dodopayments.ts",
+					"target": "src/lib/dodopayments.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/express/src/routes/dodopayments/*",
+					"target": "src/routes/dodopayments/*",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/express/.env.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": [
+				"dodopayments",
+				"standardwebhooks",
+				"zod",
+				"express",
+				"@types/express"
+			]
+		},
+		{
+			"name": "react-dodopayments",
+			"description": "DodoPayments template for React.js",
+			"framework": "react",
+			"files": [
+				{
+					"path": "packages/templates/react/lib/dodopayments.ts",
+					"target": "lib/dodopayments.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/react/hooks/useBilling.ts",
+					"target": "hooks/useBilling.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/react/.env.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": ["dodopayments", "react"]
+		},
+		{
+			"name": "nextjs-paypal",
+			"description": "PayPal template for NextJS",
+			"framework": "nextjs",
+			"files": [
+				{
+					"path": "packages/templates/nextjs/lib/paypal.ts",
+					"target": "lib/paypal.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/hooks/usePayPal.ts",
+					"target": "hooks/usePayPal.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/api-routes/(paypal)/*",
+					"target": "app/api/(paypal)/*",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/nextjs/.env.paypal.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": ["@paypal/checkout-server-sdk", "zod"]
+		},
+		{
+			"name": "express-paypal",
+			"description": "PayPal template for Express",
+			"framework": "express",
+			"files": [
+				{
+					"path": "packages/templates/express/src/lib/paypal.ts",
+					"target": "src/lib/paypal.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/express/src/routes/paypal/*",
+					"target": "src/routes/paypal/*",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/express/.env.paypal.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": [
+				"@paypal/checkout-server-sdk",
+				"zod",
+				"express",
+				"@types/express"
+			]
+		},
+		{
+			"name": "react-paypal",
+			"description": "PayPal hooks/utilities for React (client-only)",
+			"framework": "react",
+			"files": [
+				{
+					"path": "packages/templates/react/lib/paypal.ts",
+					"target": "lib/paypal.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/react/hooks/usePayPal.ts",
+					"target": "hooks/usePayPal.ts",
+					"type": "template"
+				},
+				{
+					"path": "packages/templates/react/.env.paypal.example",
+					"target": ".env.example",
+					"type": "template"
+				}
+			],
+			"dependencies": ["react"]
+		}
+	]
 }

@@ -1,80 +1,181 @@
-import { useState, useCallback } from 'react'
+'use client';
 
-export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
-  const resolvedBaseUrl = baseUrl ?? (import.meta as any).env.VITE_BASE_URL ?? 'http://localhost:3000'
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [lastOrderId, setLastOrderId] = useState<string | null>(null)
+import {
+	checkout,
+	createCustomer,
+	getCustomer,
+	getCustomerPayments,
+	getCustomerSubscriptions,
+	getProduct,
+	getProducts,
+	updateCustomer,
+} from '@/lib/dodopayments';
+import { DodoPayments } from 'dodopayments';
+import { useCallback, useState } from 'react';
 
-  const create = useCallback(async (amount: string, currency: string) => {
-    try {
-      setLoading(true); setError(null);
-      // In a real implementation, we would validate PayPal environment here
-      // For now, we'll just simulate the call
-      const response = await fetch(`${resolvedBaseUrl}/api/paypal/checkout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount, currency }),
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to create order: ${response.status}`);
-      }
-      
-      const order = await response.json();
-      setLastOrderId(order.id);
-      return order;
-    } catch (e: any) { 
-      setError(e?.message ?? 'Failed to create order'); 
-      throw e; 
-    } finally { 
-      setLoading(false); 
-    }
-  }, [resolvedBaseUrl])
-
-  const capture = useCallback(async (orderId: string) => {
-    try {
-      setLoading(true); setError(null);
-      const response = await fetch(`${resolvedBaseUrl}/api/paypal/order/capture`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderId }),
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to capture order: ${response.status}`);
-      }
-      
-      const order = await response.json();
-      return order;
-    } catch (e: any) { 
-      setError(e?.message ?? 'Failed to capture order'); 
-      throw e; 
-    } finally { 
-      setLoading(false); 
-    }
-  }, [resolvedBaseUrl])
-
-  const fetchOrder = useCallback(async (orderId: string) => {
-    try {
-      setLoading(true); setError(null);
-      const response = await fetch(`${resolvedBaseUrl}/api/paypal/order/${encodeURIComponent(orderId)}`, {
-        method: 'GET',
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to fetch order: ${response.status}`);
-      }
-      
-      const order = await response.json();
-      return order;
-    } catch (e: any) { 
-      setError(e?.message ?? 'Failed to fetch order'); 
-      throw e; 
-    } finally { 
-      setLoading(false); 
-    }
-  }, [resolvedBaseUrl])
-
-  return { loading, error, lastOrderId, create, capture, fetchOrder }
+interface UseBillingState {
+	loading: boolean;
+	error: string | null;
 }
+
+export const useBilling = ({ baseUrl }: { baseUrl?: string }) => {
+	const [state, setState] = useState<UseBillingState>({
+		loading: false,
+		error: null,
+	});
+
+	const setLoading = useCallback((loading: boolean) => {
+		setState((prev) => ({ ...prev, loading }));
+	}, []);
+
+	const setError = useCallback((error: string | null) => {
+		setState((prev) => ({ ...prev, error }));
+	}, []);
+
+	const handleAsyncOperation = useCallback(
+		async <T>(
+			operation: () => Promise<T>,
+			operationName: string
+		): Promise<T> => {
+			try {
+				setLoading(true);
+				setError(null);
+				const result = await operation();
+				return result;
+			} catch (error) {
+				const errorMessage =
+					error instanceof Error ? error.message : `Failed to ${operationName}`;
+				setError(errorMessage);
+				throw error;
+			} finally {
+				setLoading(false);
+			}
+		},
+		[]
+	);
+
+	const fetchProducts = useCallback(async () => {
+		return handleAsyncOperation(
+			() => getProducts({ baseUrl }),
+			'fetch products'
+		);
+	}, [handleAsyncOperation]);
+
+	const fetchProduct = useCallback(
+		async (product_id: string) => {
+			return handleAsyncOperation(
+				() => getProduct({ baseUrl, product_id }),
+				'fetch product'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const fetchCustomer = useCallback(
+		async (customer_id: string) => {
+			return handleAsyncOperation(
+				() => getCustomer({ baseUrl, customer_id }),
+				'fetch customer'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const fetchCustomerSubscriptions = useCallback(
+		async (customer_id: string) => {
+			return handleAsyncOperation(
+				() => getCustomerSubscriptions({ baseUrl, customer_id }),
+				'fetch customer subscriptions'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const fetchCustomerPayments = useCallback(
+		async (customer_id: string) => {
+			return handleAsyncOperation(
+				() => getCustomerPayments({ baseUrl, customer_id }),
+				'fetch customer payments'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const createNewCustomer = useCallback(
+		async (customer: DodoPayments.Customers.CustomerCreateParams) => {
+			return handleAsyncOperation(
+				() => createCustomer({ baseUrl, customer }),
+				'create customer'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const updateExistingCustomer = useCallback(
+		async (
+			customer_id: string,
+			customer: DodoPayments.Customers.CustomerUpdateParams
+		) => {
+			return handleAsyncOperation(
+				() => updateCustomer({ baseUrl, customer_id, customer }),
+				'update customer'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const createCheckout = useCallback(
+		async (
+			productCart: Array<{
+				product_id: string;
+				quantity: number;
+				amount?: number;
+			}>,
+			customer: DodoPayments.Payments.CustomerRequest,
+			billing_address: DodoPayments.Payments.BillingAddress,
+			return_url: string,
+			customMetadata?: Record<string, string>
+		) => {
+			return handleAsyncOperation(
+				() =>
+					checkout({
+						baseUrl,
+						productCart,
+						customer,
+						billing_address,
+						return_url,
+						customMetadata,
+					}),
+				'create checkout'
+			);
+		},
+		[handleAsyncOperation]
+	);
+
+	const clearError = useCallback(() => {
+		setError(null);
+	}, [setError]);
+
+	return {
+		// State
+		loading: state.loading,
+		error: state.error,
+
+		// Actions
+		clearError,
+
+		// Product operations
+		fetchProducts,
+		fetchProduct,
+
+		// Customer operations
+		fetchCustomer,
+		fetchCustomerSubscriptions,
+		fetchCustomerPayments,
+		createNewCustomer,
+		updateExistingCustomer,
+
+		// Checkout operations
+		createCheckout,
+	};
+};
