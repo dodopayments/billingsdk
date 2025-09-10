@@ -26,7 +26,40 @@
 		{
 			"target": "app/api/(paypal)/webhook/route.ts",
 			"type": "template",
-			"content": "import { NextResponse } from 'next/server'\nimport paypal from '@paypal/checkout-server-sdk'\nimport { getPayPalClient } from '@/lib/paypal'\n\nexport async function POST(request: Request) {\n  try {\n    // Get raw body for webhook verification\n    const rawBody = await request.text()\n    \n    // Verify PayPal webhook signature\n    const client = getPayPalClient()\n    const verifyRequest = new paypal.notifications.VerifyWebhookSignatureRequest()\n    \n    // Get webhook ID from environment variables\n    const webhookId = process.env.PAYPAL_WEBHOOK_ID\n    if (!webhookId) {\n      console.error('PAYPAL_WEBHOOK_ID is not set in environment variables')\n      return NextResponse.json({ error: 'Webhook verification not configured' }, { status: 500 })\n    }\n    \n    // Get headers\n    const headers = Object.fromEntries(request.headers.entries())\n    \n    // Parse raw body once and reuse\n    const event = JSON.parse(rawBody)\n    verifyRequest.requestBody({\n      auth_algo: headers['paypal-auth-algo'],\n      cert_url: headers['paypal-cert-url'],\n      transmission_id: headers['paypal-transmission-id'],\n      transmission_sig: headers['paypal-transmission-sig'],\n      transmission_time: headers['paypal-transmission-time'],\n      webhook_id: webhookId,\n      webhook_event: event\n    })\n    \n    // Execute verification\n    const verifyResponse = await client.execute(verifyRequest)\n    \n    // Check verification result\n    if (verifyResponse.result.verification_status !== 'SUCCESS') {\n      console.warn('PayPal webhook signature verification failed')\n      return NextResponse.json({ error: 'Webhook signature verification failed' }, { status: 400 })\n    }\n    \n    // Process verified webhook event\n    // event already parsed above\n    console.log('Verified PayPal webhook event received:', event.event_type)\n    \n    // TODO: Handle specific webhook events (e.g., payment completed, subscription cancelled, etc.)\n    \n    return NextResponse.json({ received: true })\n  } catch (error) {\n    console.error('Error processing PayPal webhook:', error)\n    return NextResponse.json({ error: 'Internal error processing webhook' }, { status: 500 })\n  }\n}\n"
+    // Get headers
+    const headers = Object.fromEntries(request.headers.entries())
+    
+    // Parse raw body once and reuse
+    let event: any
+    try {
+      event = JSON.parse(rawBody)
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
+    }
+
+    // Ensure all required PayPal webhook headers are present
+    const required = [
+      'paypal-auth-algo',
+      'paypal-cert-url',
+      'paypal-transmission-id',
+      'paypal-transmission-sig',
+      'paypal-transmission-time'
+    ] as const
+    for (const h of required) {
+      if (!headers[h]) {
+        return NextResponse.json({ error: `Missing header: ${h}` }, { status: 400 })
+      }
+    }
+
+    verifyRequest.requestBody({
+      auth_algo: headers['paypal-auth-algo'],
+      cert_url: headers['paypal-cert-url'],
+      transmission_id: headers['paypal-transmission-id'],
+      transmission_sig: headers['paypal-transmission-sig'],
+      transmission_time: headers['paypal-transmission-time'],
+      webhook_id: webhookId,
+      webhook_event: event
+    })
 		},
 		{
 			"target": ".env.example",
