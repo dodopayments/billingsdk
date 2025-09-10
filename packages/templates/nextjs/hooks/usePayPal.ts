@@ -44,14 +44,21 @@ export function usePayPal({ baseUrl }: { baseUrl?: string } = {}) {
 			try {
 				setLoading(true);
 				setError(null);
+				// add a timeout to avoid hanging indefinitely
+				const controller = new AbortController();
+				let t: ReturnType<typeof setTimeout> | null = null;
+				t = setTimeout(() => controller.abort(), 10_000);
+
 				const response = await fetch(
-					`${resolvedBaseUrl}/api/paypal/order/capture`,
+					`${resolvedBaseUrl}/api/order/capture`,
 					{
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ orderId }),
+						signal: controller.signal,
 					}
 				);
+				if (t) clearTimeout(t);
 
 				if (!response.ok) {
 					throw new Error(`Failed to capture order: ${response.status}`);
