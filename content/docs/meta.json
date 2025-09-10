@@ -29,7 +29,6 @@
     "components/billing-setting/index",
     "components/usage-meter/usage-meter-circle",
     "components/usage-meter/usage-meter-linear",
-    "components/usage-forecast/index",
     "---Banner---",
     "components/banner/index",
     "---Payment Processing---",

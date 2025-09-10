@@ -35,14 +35,13 @@
                 "@billingsdk/subscription-management",
                 "@billingsdk/usage-meter-linear",
                 "@billingsdk/usage-meter-circle",
-                "@billingsdk/usage-forecast",
                 "@billingsdk/banner",
                 "@billingsdk/invoice-history",
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
-                "@billingsdk/plan-change-calculator"
+                "@billingsdk/proration-preview"
             ]
         },
         {
@@ -579,29 +578,33 @@
             ]
           },
           {
-            "name": "usage-forecast",
+            "name": "payment-method-selector",
             "type": "registry:block",
-            "title": "Usage Forecast",
-            "description": "A smart usage forecasting component with trend analysis and cost projections",
+            "title": "Payment Method Selector",
+            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
             "files": [
               {
-                "path": "src/registry/billingsdk/usage-forecast.tsx",
+                "path": "src/registry/billingsdk/payment-method-selector.tsx",
                 "type": "registry:component",
-                "target": "components/billingsdk/usage-forecast.tsx"
+                "target": "components/billingsdk/payment-method-selector.tsx"
               },
               {
-                "path": "src/registry/billingsdk/demo/usage-forecast-demo.tsx",
+                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
                 "type": "registry:component",
-                "target": "components/usage-forecast-demo.tsx"
+                "target": "components/payment-method-selector-demo.tsx"
               }
             ],
             "dependencies": [
+              "lucide-react",
               "motion"
             ],
             "registryDependencies": [
-              "card",
-              "badge",
               "button",
+              "dialog",
+              "tooltip",
+              "card",
+              "input",
+              "label",
               "utils"
             ]
           },
@@ -640,20 +643,25 @@
         },
 
         {
-            "name": "plan-change-calculator",
+            "name": "proration-preview",
             "type": "registry:block",
-            "title": "Plan Change Calculator",
-            "description": "Interactive component that calculates billing adjustments when users change subscription plans, featuring cost breakdowns, credits, prorated charges, and date picker for change timing",
+            "title": "Proration Preview",
+            "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
             "files": [
               {
-                "path": "src/registry/billingsdk/plan-change-calculator.tsx",
+                "path": "src/registry/billingsdk/proration-preview.tsx",
                 "type": "registry:component",
-                "target": "components/billingsdk/plan-change-calculator.tsx"
+                "target": "components/billingsdk/proration-preview.tsx"
               },
               {
-                "path": "src/registry/billingsdk/demo/plan-change-calculator-demo.tsx",
+                "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
                 "type": "registry:component",
-                "target": "components/plan-change-calculator-demo.tsx"
+                "target": "components/proration-preview-demo.tsx"
+              },
+              {
+                "path": "src/registry/lib/billingsdk-config.ts",
+                "type": "registry:lib",
+                "target": "lib/billingsdk-config.ts"
               }
             ],
             "dependencies": [
@@ -666,8 +674,7 @@
               "card",
               "badge",
               "separator",
-              "input",
-              "label",
+              "tabs",
               "utils"
             ]
         }

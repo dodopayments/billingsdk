@@ -16,7 +16,6 @@ import { UpdatePlanDialogDemo } from '@/components/update-plan-dialog-demo';
 import { UpdatePlanCardDemo } from '@/components/update-plan-card-demo';
 import UsageMeterLinearDemo from '@/components/usage-meter-linear-demo';
 import UsageMeterCircleDemo from '@/components/usage-meter-circle-demo';
-import UsageForecastDemo from '@/components/usage-forecast-demo';
 import BannerDemo from '@/components/banner-demo';
 import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
@@ -31,7 +30,7 @@ import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-de
 import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-demo';
 import { PricingTableFiveDemo } from '@/components/pricing-table-five-demo';
 import { PricingTableFiveDemoMinimal } from '@/components/pricing-table-five-minimal-demo';
-import { PlanChangeCalculatorDemo } from '@/components/plan-change-calculator-demo';
+import { ProrationPreviewDemo } from '@/components/proration-preview-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -58,7 +57,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CustomUsageMeterCircleDemo,
     UsageMeterCircleDemo,
     CustomUsageMeterLinearDemo,
-    UsageForecastDemo,
     BannerDemo,
     BannerDemoTwo,
     BannerDemoThree,
@@ -69,6 +67,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PaymentMethodSelectorDemo,
     PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
-    PlanChangeCalculatorDemo,
+    ProrationPreviewDemo,
   };
 }
