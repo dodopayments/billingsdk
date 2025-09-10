@@ -4,6 +4,7 @@ import { PricingTableOne } from "@/components/billingsdk/pricing-table-one";
 import { PricingTableTwo } from "@/components/billingsdk/pricing-table-two";
 import { PricingTableThree } from "@/components/billingsdk/pricing-table-three";
 import { CancelSubscriptionCard } from "@/components/billingsdk/cancel-subscription-card";
+import {CancelSubscriptionCardTwo} from "@/components/billingsdk/cancel-subscription-card-two"
 import { CancelSubscriptionDialog } from "@/components/billingsdk/cancel-subscription-dialog";
 import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card";
 import { UpdatePlanDialog } from "@/components/billingsdk/update-plan-dialog";
@@ -789,6 +790,86 @@ export const componentRegistry: ComponentConfig[] = [
       },
       warningTitle: "What happens when you cancel?",
       warningText: "You'll lose access to all premium features at the end of your current billing period.",
+      keepButtonText: "Keep My Subscription",
+      continueButtonText: "Continue Cancellation",
+      onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),
+      onKeepSubscription: (planId: string) => console.log("Subscription kept for plan:", planId),
+    },
+  },
+  {
+    id: "cancel-subscription-card-two",
+    name: "Cancel Subscription Card Two",
+    description: "Elegant Subscription cancellation ui component",
+    category: "subscription",
+    component: CancelSubscriptionCardTwo,
+    imports: ["@/components/billingsdk/cancel-subscription-card-two"],
+    defaultCode: `<CancelSubscriptionCardTwo
+  title="We're sorry to see you go..."
+  description="Before you cancel, we hope you'll consider upgrading to a Pro plan again."
+  plan={{
+    id: "pro",
+    title: "Pro",
+    description: "Best for growing businesses and startups",
+    currency: "$",
+    monthlyPrice: "29",
+    yearlyPrice: "299",
+    buttonText: "Get Started",
+    highlight: true,
+    features: [
+      {
+        name: "Up to 25 users",
+        icon: "check",
+        iconColor: "text-green-500"
+      },
+      {
+        name: "Advanced analytics",
+        icon: "check",
+        iconColor: "text-blue-500"
+      },
+      {
+        name: "Priority support",
+        icon: "check",
+        iconColor: "text-orange-500"
+      }
+    ]
+  }}
+  warningText="You'll lose access to all premium features at the end of your current billing period."
+  keepButtonText="Keep My Subscription"
+  continueButtonText="Continue Cancellation"
+  onCancel={(planId) => console.log("Subscription cancelled for plan:", planId)}
+  onKeepSubscription={(planId) => console.log("Subscription kept for plan:", planId)}
+/>`,
+    defaultProps: {
+      title: "We're sorry to see you go...",
+      description: "Before you cancel, we hope you'll consider upgrading to a Pro plan again.",
+      plan: {
+        id: "pro",
+        title: "Pro",
+        description: "Best for growing businesses",
+        currency: "$",
+        monthlyPrice: "29",
+        yearlyPrice: "299",
+        buttonText: "Get Started",
+        highlight: true,
+        features: [
+          {
+            name: "Up to 25 users",
+            icon: "check",
+            iconColor: "text-green-500"
+          },
+          {
+            name: "Advanced analytics",
+            icon: "check",
+            iconColor: "text-blue-500"
+          },
+          {
+            name: "Priority support",
+            icon: "check",
+            iconColor: "text-orange-500"
+          }
+        ]
+      },
+      supportText:"Need help? Our team is here to assist you.",
       keepButtonText: "Keep My Subscription",
       continueButtonText: "Continue Cancellation",
       onCancel: (planId: string) => console.log("Subscription cancelled for plan:", planId),

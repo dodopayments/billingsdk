@@ -326,6 +326,38 @@
                 "utils"
             ]
         },
+         {
+            "name": "cancel-subscription-card-two",
+            "type": "registry:block",
+            "title": "Cancel Subscription Card",
+            "description": "A modern cancel subscription card component",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/cancel-subscription-card-two.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/cancel-subscription-card-two.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/cancel-subscription-card-two-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/cancel-subscription-card-two-demo.tsx"
+                },
+                {
+                    "path": "src/registry/lib/billingsdk-config.ts",
+                    "type": "registry:lib",
+                    "target": "lib/billingsdk-config.ts"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "button",
+                "badge",
+                "card",
+                "utils"
+            ]
+        },
         {
             "name": "update-plan-dialog",
             "type": "registry:block",
