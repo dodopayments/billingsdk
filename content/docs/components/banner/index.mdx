@@ -3,7 +3,8 @@ title: Top Banner
 description: The Top Banner component displays a banner at the top of the page.
 ---
 
-You can change the variant of the banner to `default`, `minimal`, or `popup`.
+
+You can change the variant of the banner to `default`, `minimal`, `popup`, `destructive`, `warning`, `success`, `info`, or `announcement`.
 
 ## Default Banner
 
@@ -135,7 +136,65 @@ The banner component supports animated gradient backgrounds with custom colors. 
 
 </Tabs>
 
+## Warning Banner
 
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="banner">
+      <BannerWarningDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/banner-warning-demo.tsx"'>src/components/banner-warning-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Success Banner
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="banner">
+      <BannerSuccessDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/banner-success-demo.tsx"'>src/components/banner-success-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Info Banner
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="banner">
+      <BannerInfoDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/banner-info-demo.tsx"'>src/components/banner-info-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Announcement Banner
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="banner">
+      <BannerAnnouncementDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/banner-announcement-demo.tsx"'>src/components/banner-announcement-demo.tsx</include>
+  </Tab>
+
+</Tabs>
 
 ## Usage
 
@@ -198,7 +257,51 @@ import { Banner } from "@/components/billingsdk/banner";
   description="Your subscription will be canceled in 3 days if payment is not updated"
   buttonText="Update Payment"
   buttonLink="https://example.com/billing"
-  variant="destructive" // destructive
+  variant="destructive"
+/>
+```
+
+```tsx
+// Warning Banner
+<Banner
+  title="⚠️ System Maintenance Scheduled"
+  description="Our services will be temporarily unavailable on Sunday, 2AM-4AM UTC"
+  buttonText="Learn More"
+  buttonLink="https://example.com/maintenance"
+  variant="warning"
+/>
+```
+
+```tsx
+// Success Banner
+<Banner
+  title="✅ Payment Processed Successfully"
+  description="Your subscription has been activated and you now have access to all premium features"
+  buttonText="View Dashboard"
+  buttonLink="https://example.com/dashboard"
+  variant="success"
+/>
+```
+
+```tsx
+// Info Banner
+<Banner
+  title="ℹ️ New API Version Available"
+  description="API v2.1 is now available with improved performance and new endpoints"
+  buttonText="View Docs"
+  buttonLink="https://example.com/api-docs"
+  variant="info"
+/>
+```
+
+```tsx
+// Announcement Banner
+<Banner
+  title="🚀 Introducing Advanced Analytics"
+  description="Get deeper insights into your billing data with our new analytics dashboard"
+  buttonText="Explore Now"
+  buttonLink="https://example.com/analytics"
+  variant="announcement"
 />
 ```
 
@@ -212,7 +315,7 @@ import { Banner } from "@/components/billingsdk/banner";
 | `buttonText` | `string` | ❌ | The text of the button |
 | `buttonIcon` | `React.ReactNode` | ❌ | The icon of the button |
 | `buttonLink` | `string` | ❌ | The link of the button |
-| `variant` | `"default" \| "minimal" \| "popup" \| "destructive"` | ✅ | The variant of the banner |
+| `variant` | `"default" \| "minimal" \| "popup" \| "destructive" \| "warning" \| "success" \| "info" \| "announcement"` | ✅ | The variant of the banner |
 | `autoDismiss` | `number` | ❌ | The time in milliseconds to auto dismiss the banner |
 | `onDismiss` | `() => void` | ❌ | The function to call when the banner is dismissed |
 | `gradientColors` | `string[]` | ❌ | Array of color strings for animated gradient background |

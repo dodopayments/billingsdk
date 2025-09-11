@@ -21,6 +21,10 @@ import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
 import BannerDemoThree from '@/components/banner-demo-three';
 import BannerDestructiveDemo from '@/components/banner-destructive-demo';
+import BannerWarningDemo from '@/components/banner-warning-demo';
+import BannerSuccessDemo from '@/components/banner-success-demo';
+import BannerInfoDemo from '@/components/banner-info-demo';
+import BannerAnnouncementDemo from '@/components/banner-announcement-demo';
 import CustomUsageMeterCircleDemo from '@/components/custom-usage-meter-circle-demo';
 import CustomUsageMeterLinearDemo from '@/components/custom-usage-meter-linear-demo';
 import InvoiceHistoryDemo from '@/components/invoice-history-demo';
@@ -64,6 +68,10 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     BannerDemoThree,
     BannerGradientDemo,
     BannerDestructiveDemo,
+    BannerWarningDemo,
+    BannerSuccessDemo,
+    BannerInfoDemo,
+    BannerAnnouncementDemo,
     InvoiceHistoryDemo,
     UsageTableDemo,
     PaymentMethodSelectorDemo,
