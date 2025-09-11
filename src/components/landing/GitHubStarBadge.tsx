@@ -29,13 +29,10 @@ export default function GitHubStarBadge() {
   function formatApprox(value: number | null | undefined): string {
     const n = Number(value ?? 0);
     if (n < 100) {
-      // For numbers less than 100, round down to nearest 10
       const approx = Math.floor(n / 10) * 10;
-      // If the result is 0, show 10+ for values between 1-9
       return `${approx === 0 ? (n > 0 ? "10" : "0") : approx}+`;
     }
     if (n < 1000) {
-      // For numbers between 100-999, round down to nearest 25
       const approx = Math.floor(n / 25) * 25;
       return `${approx}+`;
     }
@@ -49,36 +46,27 @@ export default function GitHubStarBadge() {
 
   useEffect(() => {
     let cancelled = false;
-    // Create AbortController for fetch requests
     let controller: AbortController | null = null;
 
     async function load() {
-      // Create new controller for each request
       controller = new AbortController();
 
       try {
         const res = await fetch("/api/github-stars", {
           cache: "no-store",
         });
-
-        // Check if response is ok before parsing JSON
         if (!res.ok) {
-          // Don't clobber existing display on error
           return;
         }
 
         const data: StarResponse = await res.json();
-        // Only update state if component is still mounted and request wasn't aborted
         if (!cancelled && controller && !controller.signal.aborted) {
           setMetrics(data);
           const initial = formatApprox(data.stars);
           setDisplay({ kind: "stars", text: initial });
         }
       } catch {
-        // Only clear display if component is still mounted and request wasn't aborted
-        // Don't clobber existing display on error
         if (!cancelled && controller && !controller.signal.aborted) {
-          // Keep existing display/metrics instead of setting to null
         }
       }
     }
@@ -90,14 +78,12 @@ export default function GitHubStarBadge() {
     return () => {
       cancelled = true;
       clearInterval(id);
-      // Abort any ongoing fetch requests
       if (controller) {
         controller.abort();
       }
     };
   }, []);
 
-  // Cycle between stars and forks every 4s
   useEffect(() => {
     if (!metrics) return;
     const cycle = setInterval(() => {
