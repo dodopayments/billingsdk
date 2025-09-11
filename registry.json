@@ -1,333 +1,284 @@
 {
-    "$schema": "https://ui.shadcn.com/schema.json",
-    "name": "billingsdk",
-    "homepage": "https://billingsdk.com",
-    "items": [
-        {
-            "name": "index",
-            "type": "registry:lib",
-            "title": "BillingSDK Config",
-            "description": "Config for BillingSDK components",
-            "files": [
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ]
-        },
-        {
-            "name": "all",
-            "type": "registry:block",
-            "title": "All Components",
-            "description": "All components in the BillingSDK",
-            "files": [],
-            "registryDependencies": [
-                "@billingsdk/pricing-table-one",
-                "@billingsdk/pricing-table-two",
-                "@billingsdk/pricing-table-three",
-                "@billingsdk/pricing-table-four",
-                "@billingsdk/pricing-table-five",
-                "@billingsdk/cancel-subscription-dialog",
-                "@billingsdk/cancel-subscription-card",
-                "@billingsdk/update-plan-dialog",
-                "@billingsdk/update-plan-card",
-                "@billingsdk/subscription-management",
-                "@billingsdk/usage-meter-linear",
-                "@billingsdk/usage-meter-circle",
-                "@billingsdk/banner",
-                "@billingsdk/invoice-history",
-                "@billingsdk/usage-table",
-                "@billingsdk/payment-method-selector",
-                "@billingsdk/payment-method-manager",
-                "@billingsdk/billing-settings",
-                "@billingsdk/proration-preview",
-                "@billingsdk/coupon"
-            ]
-        },
-        {
-            "name": "hello-world",
-            "type": "registry:block",
-            "title": "Hello World Component",
-            "description": "A simple hello world component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/hello-world.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/hello-world.tsx"
-                }
-            ]
-        },
-        {
-            "name": "invoice-history",
-            "type": "registry:block",
-            "title": "Invoice History",
-            "description": "A read-only invoice history table",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/invoice-history.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/invoice-history.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/invoice-history-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/invoice-history-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react"
-            ],
-            "registryDependencies": [
-                "card",
-                "button",
-                "table",
-                "badge",
-                "utils"
-            ]
-        },
-        {
-            "name": "pricing-table-one",
-            "type": "registry:block",
-            "title": "Pricing Table One",
-            "description": "A pricing table component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/pricing-table-one.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/pricing-table-one.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/pricing-table-one-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/pricing-table-one-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "badge",
-                "switch",
-                "radio-group",
-                "label",
-                "separator",
-                "utils"
-            ]
-        },
-        {
-            "name": "pricing-table-two",
-            "type": "registry:block",
-            "title": "Pricing Table Two",
-            "description": "A pricing table component with a feature table",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/pricing-table-two.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/pricing-table-two.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/pricing-table-two-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/pricing-table-two-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "table",
-                "switch",
-                "utils"
-            ]
-        },
-        {
-            "name": "pricing-table-three",
-            "type": "registry:block",
-            "title": "Pricing Table Three",
-            "description": "A pricing table component with a feature table",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/pricing-table-three.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/pricing-table-three.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/pricing-table-three-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/pricing-table-three-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "badge",
-                "radio-group",
-                "label",
-                "utils"
-            ]
-        },
-        {
-            "name": "pricing-table-four",
-            "type": "registry:block",
-            "title": "Pricing Table Four",
-            "description": "A modern pricing table component with gradient design",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/pricing-table-four.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/pricing-table-four.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/pricing-table-four-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/pricing-table-four-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "utils"
-            ]
-        },
-        {
-            "name": "pricing-table-five",
-            "type": "registry:block",
-            "title": "Pricing Table Five",
-            "description": "A modern pricing table component with contact us plan",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/pricing-table-five.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/pricing-table-five.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/pricing-table-five-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/pricing-table-five-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "badge",
-                "switch",
-                "radio-group",
-                "label",
-                "separator",
-                "utils"
-            ]
-        },
-        {
-            "name": "cancel-subscription-dialog",
-            "type": "registry:block",
-            "title": "Cancel Subscription Dialog",
-            "description": "A cancel subscription dialog component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/cancel-subscription-dialog.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/cancel-subscription-dialog.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/cancel-subscription-dialog-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/cancel-subscription-dialog-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react"
-            ],
-            "registryDependencies": [
-                "button",
-                "badge",
-                "dialog",
-                "utils"
-            ]
-        },
-        {
-            "name": "cancel-subscription-card",
-            "type": "registry:block",
-            "title": "Cancel Subscription Card",
-            "description": "A cancel subscription card component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/cancel-subscription-card.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/cancel-subscription-card.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/cancel-subscription-card-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/cancel-subscription-card-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react"
-            ],
-            "registryDependencies": [
-                "button",
-                "badge",
-                "card",
-                "utils"
-            ]
-        },
-        {
+	"$schema": "https://ui.shadcn.com/schema.json",
+	"name": "billingsdk",
+	"homepage": "https://billingsdk.com",
+	"items": [
+		{
+			"name": "index",
+			"type": "registry:lib",
+			"title": "BillingSDK Config",
+			"description": "Config for BillingSDK components",
+			"files": [
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			]
+		},
+		{
+			"name": "all",
+			"type": "registry:block",
+			"title": "All Components",
+			"description": "All components in the BillingSDK",
+			"files": [],
+			"registryDependencies": [
+				"@billingsdk/pricing-table-one",
+				"@billingsdk/pricing-table-two",
+				"@billingsdk/pricing-table-three",
+				"@billingsdk/pricing-table-four",
+				"@billingsdk/pricing-table-five",
+				"@billingsdk/cancel-subscription-dialog",
+				"@billingsdk/cancel-subscription-card",
+				"@billingsdk/update-plan-dialog",
+				"@billingsdk/update-plan-card",
+				"@billingsdk/subscription-management",
+				"@billingsdk/usage-meter-linear",
+				"@billingsdk/usage-meter-circle",
+				"@billingsdk/banner",
+				"@billingsdk/invoice-history",
+				"@billingsdk/usage-table",
+				"@billingsdk/payment-method-selector",
+				"@billingsdk/payment-method-manager",
+				"@billingsdk/billing-settings",
+				"@billingsdk/proration-preview",
+				"@billingsdk/coupon-applicator"
+			]
+		},
+		{
+			"name": "hello-world",
+			"type": "registry:block",
+			"title": "Hello World Component",
+			"description": "A simple hello world component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/hello-world.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/hello-world.tsx"
+				}
+			]
+		},
+		{
+			"name": "invoice-history",
+			"type": "registry:block",
+			"title": "Invoice History",
+			"description": "A read-only invoice history table",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/invoice-history.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/invoice-history.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/invoice-history-demo.tsx",
+					"type": "registry:component",
+					"target": "components/invoice-history-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["card", "button", "table", "badge", "utils"]
+		},
+		{
+			"name": "pricing-table-one",
+			"type": "registry:block",
+			"title": "Pricing Table One",
+			"description": "A pricing table component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/pricing-table-one.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/pricing-table-one.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/pricing-table-one-demo.tsx",
+					"type": "registry:component",
+					"target": "components/pricing-table-one-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"badge",
+				"switch",
+				"radio-group",
+				"label",
+				"separator",
+				"utils"
+			]
+		},
+		{
+			"name": "pricing-table-two",
+			"type": "registry:block",
+			"title": "Pricing Table Two",
+			"description": "A pricing table component with a feature table",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/pricing-table-two.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/pricing-table-two.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/pricing-table-two-demo.tsx",
+					"type": "registry:component",
+					"target": "components/pricing-table-two-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": ["button", "table", "switch", "utils"]
+		},
+		{
+			"name": "pricing-table-three",
+			"type": "registry:block",
+			"title": "Pricing Table Three",
+			"description": "A pricing table component with a feature table",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/pricing-table-three.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/pricing-table-three.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/pricing-table-three-demo.tsx",
+					"type": "registry:component",
+					"target": "components/pricing-table-three-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"badge",
+				"radio-group",
+				"label",
+				"utils"
+			]
+		},
+		{
+			"name": "pricing-table-four",
+			"type": "registry:block",
+			"title": "Pricing Table Four",
+			"description": "A modern pricing table component with gradient design",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/pricing-table-four.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/pricing-table-four.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/pricing-table-four-demo.tsx",
+					"type": "registry:component",
+					"target": "components/pricing-table-four-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": ["utils"]
+		},
+		{
+			"name": "pricing-table-five",
+			"type": "registry:block",
+			"title": "Pricing Table Five",
+			"description": "A modern pricing table component with contact us plan",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/pricing-table-five.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/pricing-table-five.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/pricing-table-five-demo.tsx",
+					"type": "registry:component",
+					"target": "components/pricing-table-five-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"badge",
+				"switch",
+				"radio-group",
+				"label",
+				"separator",
+				"utils"
+			]
+		},
+		{
+			"name": "cancel-subscription-dialog",
+			"type": "registry:block",
+			"title": "Cancel Subscription Dialog",
+			"description": "A cancel subscription dialog component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/cancel-subscription-dialog.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/cancel-subscription-dialog.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/cancel-subscription-dialog-demo.tsx",
+					"type": "registry:component",
+					"target": "components/cancel-subscription-dialog-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["button", "badge", "dialog", "utils"]
+		},
+		{
+			"name": "cancel-subscription-card",
+			"type": "registry:block",
+			"title": "Cancel Subscription Card",
+			"description": "A cancel subscription card component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/cancel-subscription-card.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/cancel-subscription-card.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/cancel-subscription-card-demo.tsx",
+					"type": "registry:component",
+					"target": "components/cancel-subscription-card-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["button", "badge", "card", "utils"]
+		},
+{
             "name": "cancel-subscription-card-two",
             "type": "registry:block",
             "title": "Cancel Subscription Card",
@@ -359,320 +310,303 @@
                 "utils"
             ]
         },
-        {
-            "name": "update-plan-dialog",
-            "type": "registry:block",
-            "title": "Update Plan Dialog",
-            "description": "A update plan dialog component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/update-plan-dialog.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/update-plan-dialog.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/update-plan-dialog-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/update-plan-dialog-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "badge",
-                "radio-group",
-                "toggle",
-                "label",
-                "dialog",
-                "utils"
-            ]
-        },
-        {
-            "name": "update-plan-card",
-            "type": "registry:block",
-            "title": "Update Plan Card",
-            "description": "A update plan card component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/update-plan-card.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/update-plan-card.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/update-plan-card-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/update-plan-card-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "badge",
-                "radio-group",
-                "toggle",
-                "label",
-                "card",
-                "utils"
-            ]
-        },
-        {
-            "name": "subscription-management",
-            "type": "registry:block",
-            "title": "Subscription Management",
-            "description": "A subscription management component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/subscription-management.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/subscription-management.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/subscription-management-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/subscription-management-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "badge",
-                "separator",
-                "utils",
-                "@billingsdk/cancel-subscription-dialog",
-                "@billingsdk/update-plan-dialog"
-            ]
-        },
-        {
-            "name": "usage-meter-linear",
-            "type": "registry:block",
-            "title": "Usage Meter Linear",
-            "description": "A usage meter linear component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/usage-meter.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/usage-meter.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/usage-meter-linear-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/usage-meter-linear-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "card",
-                "badge",
-                "utils"
-            ]
-        },
-        {
-            "name": "usage-meter-circle",
-            "type": "registry:block",
-            "title": "Usage Meter Circle",
-            "description": "A usage meter circle component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/usage-meter.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/usage-meter.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/usage-meter-circle-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/usage-meter-circle-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "card",
-                "badge",
-                "utils"
-            ]
-        },
-        {
-            "name": "banner",
-            "type": "registry:block",
-            "title": "Top Banner",
-            "description": "A banner component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/banner.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/banner.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/banner-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/banner-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "utils"
-            ]
-        },
-        {
-            "name": "payment-method-selector",
-            "type": "registry:block",
-            "title": "Payment Method Selector",
-            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/payment-method-selector.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/payment-method-selector.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/payment-method-selector-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "dialog",
-                "tooltip",
-                "card",
-                "input",
-                "label",
-                "utils"
-            ]
-        },
-        {
-            "name": "coupon",
-            "type": "registry:block",
-            "title": "Coupon Generator",
-            "description": "A coupon code generator component for billing and promotional purposes",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/coupon.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/coupon.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/coupon-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/coupon-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react"
-            ],
-            "registryDependencies": [
-                "card",
-                "button",
-                "input",
-                "switch",
-                "label",
-                "select"
-            ]
-        },
-        {
-            "name": "billing-settings",
-            "type": "registry:block",
-            "title": "Billing Settings",
-            "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/billing-settings.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/billing-settings.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/billing-settings-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/billing-settings-demo.tsx"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "sonner"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "switch",
-                "badge",
-                "dropdown-menu",
-                "dialog",
-                "input",
-                "label"
-            ]
-        },
-        {
-            "name": "proration-preview",
-            "type": "registry:block",
-            "title": "Proration Preview",
-            "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/proration-preview.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/proration-preview.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/proration-preview-demo.tsx"
-                },
-                {
-                    "path": "src/registry/lib/billingsdk-config.ts",
-                    "type": "registry:lib",
-                    "target": "lib/billingsdk-config.ts"
-                }
-            ],
-            "dependencies": [
-                "lucide-react",
-                "class-variance-authority",
-                "motion"
-            ],
-            "registryDependencies": [
-                "button",
-                "card",
-                "badge",
-                "separator",
-                "tabs",
-                "utils"
-            ]
-        }
+		{
+			"name": "update-plan-dialog",
+			"type": "registry:block",
+			"title": "Update Plan Dialog",
+			"description": "A update plan dialog component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/update-plan-dialog.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/update-plan-dialog.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/update-plan-dialog-demo.tsx",
+					"type": "registry:component",
+					"target": "components/update-plan-dialog-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": [
+				"button",
+				"badge",
+				"radio-group",
+				"toggle",
+				"label",
+				"dialog",
+				"utils"
+			]
+		},
+		{
+			"name": "update-plan-card",
+			"type": "registry:block",
+			"title": "Update Plan Card",
+			"description": "A update plan card component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/update-plan-card.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/update-plan-card.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/update-plan-card-demo.tsx",
+					"type": "registry:component",
+					"target": "components/update-plan-card-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": [
+				"button",
+				"badge",
+				"radio-group",
+				"toggle",
+				"label",
+				"card",
+				"utils"
+			]
+		},
+		{
+			"name": "subscription-management",
+			"type": "registry:block",
+			"title": "Subscription Management",
+			"description": "A subscription management component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/subscription-management.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/subscription-management.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/subscription-management-demo.tsx",
+					"type": "registry:component",
+					"target": "components/subscription-management-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"badge",
+				"separator",
+				"utils",
+				"@billingsdk/cancel-subscription-dialog",
+				"@billingsdk/update-plan-dialog"
+			]
+		},
+		{
+			"name": "usage-meter-linear",
+			"type": "registry:block",
+			"title": "Usage Meter Linear",
+			"description": "A usage meter linear component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/usage-meter.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/usage-meter.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/usage-meter-linear-demo.tsx",
+					"type": "registry:component",
+					"target": "components/usage-meter-linear-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": ["card", "badge", "utils"]
+		},
+		{
+			"name": "usage-meter-circle",
+			"type": "registry:block",
+			"title": "Usage Meter Circle",
+			"description": "A usage meter circle component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/usage-meter.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/usage-meter.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/usage-meter-circle-demo.tsx",
+					"type": "registry:component",
+					"target": "components/usage-meter-circle-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": ["card", "badge", "utils"]
+		},
+		{
+			"name": "banner",
+			"type": "registry:block",
+			"title": "Top Banner",
+			"description": "A banner component",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/banner.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/banner.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/banner-demo.tsx",
+					"type": "registry:component",
+					"target": "components/banner-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": ["button", "utils"]
+		},
+		{
+			"name": "payment-method-selector",
+			"type": "registry:block",
+			"title": "Payment Method Selector",
+			"description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/payment-method-selector.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/payment-method-selector.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+					"type": "registry:component",
+					"target": "components/payment-method-selector-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": [
+				"button",
+				"dialog",
+				"tooltip",
+				"card",
+				"input",
+				"label",
+				"utils"
+			]
+		},
+		{
+			"name": "payment-method-selector",
+			"type": "registry:block",
+			"title": "Payment Method Selector",
+			"description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/payment-method-selector.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/payment-method-selector.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+					"type": "registry:component",
+					"target": "components/payment-method-selector-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion"],
+			"registryDependencies": [
+				"button",
+				"dialog",
+				"tooltip",
+				"card",
+				"input",
+				"label",
+				"utils"
+			]
+		},
+		{
+			"name": "billing-settings",
+			"type": "registry:block",
+			"title": "Billing Settings",
+			"description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/billing-settings.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/billing-settings.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/billing-settings-demo.tsx",
+					"type": "registry:component",
+					"target": "components/billing-settings-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"switch",
+				"badge",
+				"dropdown-menu",
+				"dialog",
+				"input",
+				"label",
+				"sonner"
+			]
+		},
+
+		{
+			"name": "proration-preview",
+			"type": "registry:block",
+			"title": "Proration Preview",
+			"description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/proration-preview.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/proration-preview.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
+					"type": "registry:component",
+					"target": "components/proration-preview-demo.tsx"
+				},
+				{
+					"path": "src/registry/lib/billingsdk-config.ts",
+					"type": "registry:lib",
+					"target": "lib/billingsdk-config.ts"
+				}
+			],
+			"dependencies": ["lucide-react", "class-variance-authority", "motion"],
+			"registryDependencies": [
+				"button",
+				"card",
+				"badge",
+				"separator",
+				"tabs",
+				"utils"
+			]
+		},
+		{
+			"name": "coupon-applicator",
+			"type": "registry:block",
+			"title": "Coupon Applicator",
+			"description": "Component for applying discount coupons with real-time preview of savings and new total",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/coupon-applicator.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/coupon-applicator.tsx"
+				},
+				{
+					"path": "src/components/coupon-applicator-demo.tsx",
+					"type": "registry:component",
+					"target": "components/coupon-applicator-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react", "motion", "zod"],
+			"registryDependencies": ["button", "input", "utils"]
+		}
     ]
 }
