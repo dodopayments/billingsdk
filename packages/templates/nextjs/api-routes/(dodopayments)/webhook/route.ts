@@ -5,7 +5,7 @@ import { getDodoPaymentsClient } from "@/lib/dodopayments";
 const webhook = new Webhook(process.env.DODO_PAYMENTS_WEBHOOK_KEY!);
 
 export async function POST(request: Request) {
-  const headersList =  await headers();
+  const headersList = await headers();
   try {
     const rawBody = await request.text();
     const webhookHeaders = {
@@ -36,16 +36,16 @@ export async function POST(request: Request) {
           break;
       }
     } else if (payload.data.payload_type === "Payment") {
-        switch (payload.type) {
-            case "payment.succeeded":
-              const paymentDataResp = await getDodoPaymentsClient().payments.retrieve(payload.data.payment_id)
-              console.log("-------PAYMENT DATA START ---------")
-              console.log(paymentDataResp)
-              console.log("-------PAYMENT DATA END ---------")
-              break;
-            default:
-                break;
-        }
+      switch (payload.type) {
+        case "payment.succeeded":
+          const paymentDataResp = await getDodoPaymentsClient().payments.retrieve(payload.data.payment_id)
+          console.log("-------PAYMENT DATA START ---------")
+          console.log(paymentDataResp)
+          console.log("-------PAYMENT DATA END ---------")
+          break;
+        default:
+          break;
+      }
     }
     return Response.json(
       { message: "Webhook processed successfully" },
@@ -54,6 +54,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.log(" ----- webhoook verification failed -----")
     console.log(error)
+    // FIX: Should return 400 to indicate bad request
     return Response.json(
       { message: "Webhook processed successfully" },
       { status: 200 }
