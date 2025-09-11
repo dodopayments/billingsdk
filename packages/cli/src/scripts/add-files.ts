@@ -81,9 +81,12 @@ export const addFiles = async (
 		const baseDir = path.resolve(process.cwd(), addToPath ?? '.');
 		const dest = path.resolve(process.cwd(), addToPath ?? '.', file.target);
 		const relativePath = path.relative(baseDir, dest);
-
-		// Check if the resolved path is outside the intended base directory
-		if (relativePath.startsWith('..') || relativePath === '..') {
+		const insideBase =
+			!path.isAbsolute(file.target) &&
+			!relativePath.startsWith('..') &&
+			!path.isAbsolute(relativePath) &&
+			dest.startsWith(baseDir + path.sep);
+		if (!insideBase) {
 			console.error(`Skipping file ${file.target}: Path traversal detected`);
 			continue;
 		}
