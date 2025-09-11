@@ -78,7 +78,7 @@ export function Banner({
           title: "text-sm font-medium text-popover-foreground leading-snug",
           description: "text-xs text-muted-foreground",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto flex-shrink-0 pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto flex-shrink-0 pr-12",
         };
       case "destructive":
         return {
@@ -96,7 +96,7 @@ export function Banner({
             ? "text-xs text-destructive/80"
             : "text-xs text-destructive-foreground/80",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       case "warning":
         return {
@@ -114,7 +114,7 @@ export function Banner({
             ? "text-xs text-yellow-700 dark:text-yellow-300"
             : "text-xs text-yellow-700 dark:text-yellow-300",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       case "success":
         return {
@@ -132,7 +132,7 @@ export function Banner({
             ? "text-xs text-green-700 dark:text-green-300"
             : "text-xs text-green-700 dark:text-green-300",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       case "info":
         return {
@@ -150,7 +150,7 @@ export function Banner({
             ? "text-xs text-blue-700 dark:text-blue-300"
             : "text-xs text-blue-700 dark:text-blue-300",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       case "announcement":
         return {
@@ -168,7 +168,7 @@ export function Banner({
             ? "text-xs text-purple-700 dark:text-purple-300"
             : "text-xs text-purple-700 dark:text-purple-300",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       default:
         return {
@@ -186,7 +186,7 @@ export function Banner({
             ? "text-xs text-foreground/80"
             : "text-xs text-primary-foreground/80",
           actions:
-           "flex items-center justify-center md:justify-start gap-2 sm:self-auto sm:pr-8",
+           "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
     }
   };
@@ -297,7 +297,7 @@ export function Banner({
                 size="icon"
                 onClick={handleDismiss}
                 className={cn(
-                  "absolute right-1 sm:right-2 top-3  sm:top-1/2 pl-2 sm:pl-0 -translate-y-1/2 h-8 w-8",
+                  "absolute right-1 sm:right-2 top-2 sm:top-1/2 sm:-translate-y-1/2 h-8 w-8",
                   gradientColors && gradientColors.length > 0
                     ? "hover:bg-foreground/20 text-foreground"
                     : variant === "default" &&
