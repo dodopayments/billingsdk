@@ -189,11 +189,23 @@ export const addFiles = async (
 		const s = spinner();
 		s.start('Installing dependencies...');
 		try {
-			// Use execFileSync instead of execSync to prevent shell injection
 			const packageManager = getPackageManager();
-			const args = ['install', ...result.dependencies];
+			const mkArgs = (pm: string, deps: string[]) => {
+				switch (pm) {
+					case 'pnpm':
+						return ['add', ...deps];
+					case 'yarn':
+						return ['add', ...deps];
+					case 'bun':
+						return ['add', ...deps];
+					default: // npm
+						return ['install', ...deps];
+				}
+			};
+			const args = mkArgs(packageManager, result.dependencies);
 			execFileSync(packageManager, args, {
 				stdio: 'inherit',
+				timeout: 5 * 60 * 1000,
 			});
 			s.stop('Dependencies installed successfully!');
 		} catch (error) {
