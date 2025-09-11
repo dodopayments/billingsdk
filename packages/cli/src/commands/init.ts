@@ -17,6 +17,7 @@ export const initCommand = new Command()
         options: [
           { value: "nextjs", label: detectedFramework === "nextjs" ? "Next.js (detected)" : "Next.js", hint: "React framework with App Router" },
           { value: "express", label: detectedFramework === "express" ? "Express.js (detected)" : "Express.js", hint: "Node.js web framework" },
+          { value: "hono", label: detectedFramework === "hono" ? "Hono (detected)" : "Hono", hint: "Lightweight, ultrafast web framework" },
           { value: "react", label: detectedFramework === "react" ? "React.js (detected)" : "React.js", hint: "Client-side React app template" }
         ],
         initialValue: detectedFramework ?? undefined  // cursor will already be on detected framework
@@ -38,7 +39,7 @@ export const initCommand = new Command()
       const s = spinner();
       s.start("Setting up your billing project...");
       try {
-        await addFiles(framework as "nextjs" | "express" | "react", provider as "dodopayments");
+        await addFiles(framework as "nextjs" | "express" | "react" | "hono", provider as "dodopayments");
         s.stop("Setup completed successfully!");
       } catch (error) {
         s.stop("Setup failed!");
