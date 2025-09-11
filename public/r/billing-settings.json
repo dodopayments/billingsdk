@@ -5,7 +5,8 @@
   "title": "Billing Settings",
   "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
   "dependencies": [
-    "lucide-react"
+    "lucide-react",
+    "sonner"
   ],
   "registryDependencies": [
     "button",
@@ -15,8 +16,7 @@
     "dropdown-menu",
     "dialog",
     "input",
-    "label",
-    "sonner"
+    "label"
   ],
   "files": [
     {

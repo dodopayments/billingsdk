@@ -21,6 +21,10 @@ import BannerGradientDemo from '@/components/banner-gradient-demo';
 import BannerDemoTwo from '@/components/banner-demo-two';
 import BannerDemoThree from '@/components/banner-demo-three';
 import BannerDestructiveDemo from '@/components/banner-destructive-demo';
+import BannerWarningDemo from '@/components/banner-warning-demo';
+import BannerSuccessDemo from '@/components/banner-success-demo';
+import BannerInfoDemo from '@/components/banner-info-demo';
+import BannerAnnouncementDemo from '@/components/banner-announcement-demo';
 import CustomUsageMeterCircleDemo from '@/components/custom-usage-meter-circle-demo';
 import CustomUsageMeterLinearDemo from '@/components/custom-usage-meter-linear-demo';
 import InvoiceHistoryDemo from '@/components/invoice-history-demo';
@@ -31,6 +35,8 @@ import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-de
 import { PricingTableFiveDemo } from '@/components/pricing-table-five-demo';
 import { PricingTableFiveDemoMinimal } from '@/components/pricing-table-five-minimal-demo';
 import { ProrationPreviewDemo } from '@/components/proration-preview-demo';
+import { CouponDemo } from '@/components/coupon-demo';
+import { BillingSummaryCardDemo } from '@/components/billing-summary-card-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -62,11 +68,17 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     BannerDemoThree,
     BannerGradientDemo,
     BannerDestructiveDemo,
+    BannerWarningDemo,
+    BannerSuccessDemo,
+    BannerInfoDemo,
+    BannerAnnouncementDemo,
     InvoiceHistoryDemo,
     UsageTableDemo,
     PaymentMethodSelectorDemo,
     PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
     ProrationPreviewDemo,
+    CouponDemo,
+	 BillingSummaryCardDemo
   };
 }

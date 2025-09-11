@@ -30,10 +30,10 @@ export default function GitHubStarBadge() {
     const n = Number(value ?? 0);
     if (n < 100) {
       const approx = Math.floor(n / 10) * 10;
-      return `${approx}+`;
+      return `${approx === 0 ? (n > 0 ? "10" : "0") : approx}+`;
     }
     if (n < 1000) {
-      const approx = Math.floor(n / 100) * 100;
+      const approx = Math.floor(n / 25) * 25;
       return `${approx}+`;
     }
     if (n < 1_000_000) {
@@ -46,55 +46,44 @@ export default function GitHubStarBadge() {
 
   useEffect(() => {
     let cancelled = false;
-    // Create AbortController for fetch requests
     let controller: AbortController | null = null;
 
     async function load() {
-      // Create new controller for each request
       controller = new AbortController();
 
       try {
         const res = await fetch("/api/github-stars", {
           cache: "no-store",
         });
-
-        // Check if response is ok before parsing JSON
         if (!res.ok) {
-          // Don't clobber existing display on error
           return;
         }
 
         const data: StarResponse = await res.json();
-        // Only update state if component is still mounted and request wasn't aborted
         if (!cancelled && controller && !controller.signal.aborted) {
           setMetrics(data);
           const initial = formatApprox(data.stars);
           setDisplay({ kind: "stars", text: initial });
         }
-      } catch (error) {
-        // Only clear display if component is still mounted and request wasn't aborted
-        // Don't clobber existing display on error
+      } catch {
         if (!cancelled && controller && !controller.signal.aborted) {
-          // Keep existing display/metrics instead of setting to null
         }
       }
     }
 
     load();
-    // Schedule refresh twice hourly (every 30 minutes)
-    const id = setInterval(load, 60_000 * 30);
+    // Schedule refresh every 5 minutes (instead of 30 minutes)
+    const id = setInterval(load, 5 * 60 * 1000);
 
     return () => {
       cancelled = true;
       clearInterval(id);
-      // Abort any ongoing fetch requests
       if (controller) {
         controller.abort();
       }
     };
   }, []);
 
-  // Cycle between stars and forks every 4s
   useEffect(() => {
     if (!metrics) return;
     const cycle = setInterval(() => {
@@ -125,7 +114,7 @@ export default function GitHubStarBadge() {
         <FaGithub className="h-5 w-5" />
       </span>
       {/* Middle: number */}
-      <span className="flex items-center h-full px-1 w-10 justify-center border-l border-white/20 pl-2 text-sm font-medium">
+      <span className="flex items-center h-full px-1 w-10 justify-center border-l border-white/20 pl-2 text-sm font-normal">
         <AnimatePresence mode="popLayout" initial={false}>
           {display && (
             <motion.span

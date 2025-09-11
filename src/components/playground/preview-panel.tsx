@@ -14,6 +14,7 @@ import {
 import { RefreshCw, Maximize2, Minimize2, Monitor, Smartphone, Palette, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { themes, applyScopedTheme } from "@/lib/themes";
+import { plans as defaultPlans } from "@/lib/billingsdk-config";
 
 type ViewportSize = "desktop" | "mobile";
 
@@ -66,16 +67,61 @@ function PreviewPanelContent() {
   const { state } = usePlayground();
   const { previewDarkMode, currentTheme, setTheme, setPreviewDarkMode } = useTheme();
   const [error, setError] = useState<string | null>(null);
-  const [Component, setComponent] = useState<React.ComponentType<any> | null>(null);
   const [viewportSize, setViewportSize] = useState<ViewportSize>("desktop");
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  
+  // Always reference the latest component export to respect HMR updates
+  const LiveComponent = state.selectedComponent?.component ?? null;
+  const defaultProps = state.selectedComponent?.defaultProps || {};
 
+  function deepMerge(base: any, override: any): any {
+    const isPlainObject = (val: any) => val !== null && typeof val === "object" && !Array.isArray(val);
+    const dangerousKeys = new Set(["__proto__", "prototype", "constructor"]);
+
+    // Arrays are replaced entirely by override arrays (preserve current semantics)
+    if (Array.isArray(base)) {
+      return Array.isArray(override) ? override : base;
+    }
+
+    // Merge plain objects only; copy into a safe, fresh object
+    if (isPlainObject(base)) {
+      const result: any = Object.assign({}, base);
+      if (isPlainObject(override)) {
+        for (const key of Object.keys(override)) {
+          // Process only own, non-dangerous properties
+          if (dangerousKeys.has(key)) continue;
+          if (!Object.prototype.hasOwnProperty.call(override, key)) continue;
+
+          const baseVal = (base as any)[key];
+          const overrideVal = (override as any)[key];
+
+          if (isPlainObject(baseVal)) {
+            result[key] = deepMerge(baseVal, overrideVal);
+          } else {
+            result[key] = overrideVal;
+          }
+        }
+      }
+      return result;
+    }
+
+    // For primitives or non-plain objects, prefer override when defined
+    return override !== undefined ? override : base;
+  }
+
+  const mergedProps = deepMerge(defaultProps, state.props);
+  const effectiveProps = typeof mergedProps === 'object' && mergedProps !== null
+    ? {
+        ...mergedProps,
+        // Global fallback: ensure `plans` exists for pricing components
+        ...(mergedProps.plans === undefined ? { plans: defaultPlans } : {}),
+      }
+    : mergedProps;
   useEffect(() => {
     if (state.selectedComponent) {
-      setComponent(() => state.selectedComponent!.component);
       setError(null);
     }
   }, [state.selectedComponent, state.code]);
@@ -100,9 +146,7 @@ function PreviewPanelContent() {
     await new Promise(resolve => setTimeout(resolve, 100));
     
     setRefreshKey(prev => prev + 1);
-    if (state.selectedComponent) {
-      setComponent(() => state.selectedComponent!.component);
-    }
+    // No explicit component reset needed; render uses live export
     
     setIsRefreshing(false);
   };
@@ -263,7 +307,7 @@ function PreviewPanelContent() {
                   Try Again
                 </Button>
               </div>
-            ) : Component ? (
+            ) : LiveComponent ? (
               <div 
                 className={cn(
                   "preview-component-wrapper w-full",
@@ -274,8 +318,13 @@ function PreviewPanelContent() {
                   minHeight: viewportSize === "mobile" ? "600px" : "auto"
                 }}
               >
-                <ErrorBoundary key={`${refreshKey}-${state.code}`} onError={setError}>
-                  <Component key={`${refreshKey}-${state.code}`} {...state.props} />
+                <ErrorBoundary key={`${state.selectedComponent?.id}-${refreshKey}-${state.code}`} onError={setError}>
+                  {/**
+                   * Use the live component reference so edits to source files
+                   * hot-reload correctly. Key on component id + code + refreshKey
+                   * to force remounts when the code sample changes.
+                   */}
+                  <LiveComponent key={`${state.selectedComponent?.id}-${refreshKey}-${state.code}`} {...effectiveProps} />
                 </ErrorBoundary>
               </div>
             ) : (

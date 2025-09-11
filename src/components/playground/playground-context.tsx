@@ -42,7 +42,11 @@ function parseJSXProps(code: string): Record<string, any> {
           }
         }
         
-        const innerValue = propsString.slice(valueStart, valueEnd).trim();
+        let innerValue = propsString.slice(valueStart, valueEnd).trim();
+        // Normalize trailing commas that would break JSON.parse for objects/arrays
+        innerValue = innerValue
+          .replace(/,\s*([}\]])/g, '$1')
+          .replace(/([\{\[])(\s*),/g, '$1');
         
         try {
           if (innerValue.includes('=>') || innerValue.includes('function')) {
@@ -62,7 +66,8 @@ function parseJSXProps(code: string): Record<string, any> {
             try {
               props[propName] = JSON.parse(sanitizedValue);
             } catch {
-              const safeEval = new Function(`return (${innerValue})`);
+              // Fallback to evaluating as an expression (arrays/objects/functions)
+              const safeEval = new Function('return (' + innerValue + ')');
               props[propName] = safeEval();
             }
           }
@@ -107,6 +112,35 @@ function parseJSXProps(code: string): Record<string, any> {
   }
 }
 
+function deepMerge<T>(base: T, override: any): T {
+  if (Array.isArray(base)) {
+    // If override is an array, use it; otherwise keep base array
+    return (Array.isArray(override) ? override : base) as unknown as T;
+  }
+  if (typeof base === "object" && base !== null) {
+    const result: any = { ...base };
+    if (override && typeof override === "object") {
+      for (const key of Object.keys(override)) {
+        const baseVal = (base as any)[key];
+        const overrideVal = override[key];
+        if (
+          baseVal !== undefined &&
+          baseVal !== null &&
+          typeof baseVal === "object" &&
+          !Array.isArray(baseVal)
+        ) {
+          result[key] = deepMerge(baseVal, overrideVal);
+        } else {
+          result[key] = overrideVal;
+        }
+      }
+    }
+    return result as T;
+  }
+  // Primitive base; prefer override if provided, else base
+  return (override !== undefined ? override : base) as T;
+}
+
 interface PlaygroundContextType {
   state: PlaygroundState;
   setSelectedComponent: (component: ComponentConfig) => void;
@@ -149,21 +183,14 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
         if (!parsedProps || Object.keys(parsedProps).length === 0) {
           return { ...prev, code };
         }
-        
-        // Merge parsed props with existing props, giving priority to parsed props
-        const mergedProps = { ...prev.props };
-        
-        // Only update props that were successfully parsed
-        Object.entries(parsedProps).forEach(([key, value]) => {
-          if (value !== undefined && value !== null) {
-            mergedProps[key] = value;
-          }
-        });
-        
-        return { 
-          ...prev, 
+
+        // Start from the component defaults, then deep-merge parsed overrides
+        const baseDefaults = prev.selectedComponent?.defaultProps || {};
+        const merged = deepMerge(baseDefaults, parsedProps);
+        return {
+          ...prev,
           code,
-          props: mergedProps
+          props: merged,
         };
       } catch (error) {
         console.warn("Failed to parse JSX props:", error);

@@ -12,7 +12,6 @@
     "@billingsdk/pricing-table-five",
     "@billingsdk/cancel-subscription-dialog",
     "@billingsdk/cancel-subscription-card",
-    "@billingsdk/cancel-subscription-card-two",
     "@billingsdk/update-plan-dialog",
     "@billingsdk/update-plan-card",
     "@billingsdk/subscription-management",
@@ -23,8 +22,9 @@
     "@billingsdk/usage-table",
     "@billingsdk/payment-method-selector",
     "@billingsdk/payment-method-manager",
-    "@billingsdk/billing-setting",
-    "@billingsdk/proration-preview"
+    "@billingsdk/billing-settings",
+    "@billingsdk/proration-preview",
+    "@billingsdk/coupon"
   ],
   "files": []
 }

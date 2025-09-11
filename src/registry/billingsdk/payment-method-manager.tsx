@@ -428,7 +428,6 @@ export function PaymentMethodManager({
 }: PaymentMethodManagerProps) {
   // Dialog states
   const [addOpen, setAddOpen] = useState(false);
-  const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null);
 
   // Handlers
   const handleAddRedirect = () => {
