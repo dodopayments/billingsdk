@@ -28,6 +28,7 @@ declare module 'lucide-react' {
 	export const Zap: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Minus: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const ArrowRight: React.FC<React.SVGProps<SVGSVGElement>>;
+	export const ArrowLeft: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Calendar: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Calculator: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Clock: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -45,9 +46,12 @@ declare module 'lucide-react' {
 	export const PanelLeft: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const PanelRight: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Copy: React.FC<React.SVGProps<SVGSVGElement>>;
+	export const Scissors: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const RotateCcw: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Save: React.FC<React.SVGProps<SVGSVGElement>>;
 	export const Upload: React.FC<React.SVGProps<SVGSVGElement>>;
+	export const Info: React.FC<React.SVGProps<SVGSVGElement>>;
+	export const Share2: React.FC<React.SVGProps<SVGSVGElement>>;
 
 	// Icons with "Icon" suffix (for compatibility)
 	export const XIcon: React.FC<React.SVGProps<SVGSVGElement>>;
