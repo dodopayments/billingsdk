@@ -327,7 +327,7 @@
                 "utils"
             ]
         },
-         {
+        {
             "name": "cancel-subscription-card-two",
             "type": "registry:block",
             "title": "Cancel Subscription Card",
