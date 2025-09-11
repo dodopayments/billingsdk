@@ -8,7 +8,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 
 // Validation schema for coupon codes
-const couponCodeSchema = z
+const _couponCodeSchema = z
 	.string()
 	.min(1, 'Coupon code is required')
 	.max(12, 'Coupon code must be 12 characters or less')
@@ -182,12 +182,6 @@ export function CouponApplicator({
 	};
 
 	const discountInfo = calculateDiscount();
-
-	// Validate locally
-	const validateLocally = (input: string) => {
-		const result = couponCodeSchema.safeParse(input.trim());
-		return result.success ? null : result.error.errors[0].message;
-	};
 
 	// Handle apply
 	const handleApply = async () => {
