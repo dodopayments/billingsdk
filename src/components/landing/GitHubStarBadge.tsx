@@ -29,11 +29,14 @@ export default function GitHubStarBadge() {
   function formatApprox(value: number | null | undefined): string {
     const n = Number(value ?? 0);
     if (n < 100) {
+      // For numbers less than 100, round down to nearest 10
       const approx = Math.floor(n / 10) * 10;
-      return `${approx}+`;
+      // If the result is 0, show 10+ for values between 1-9
+      return `${approx === 0 ? (n > 0 ? "10" : "0") : approx}+`;
     }
     if (n < 1000) {
-      const approx = Math.floor(n / 100) * 100;
+      // For numbers between 100-999, round down to nearest 25
+      const approx = Math.floor(n / 25) * 25;
       return `${approx}+`;
     }
     if (n < 1_000_000) {
@@ -81,8 +84,8 @@ export default function GitHubStarBadge() {
     }
 
     load();
-    // Schedule refresh twice hourly (every 30 minutes)
-    const id = setInterval(load, 60_000 * 30);
+    // Schedule refresh every 5 minutes (instead of 30 minutes)
+    const id = setInterval(load, 5 * 60 * 1000);
 
     return () => {
       cancelled = true;
@@ -125,7 +128,7 @@ export default function GitHubStarBadge() {
         <FaGithub className="h-5 w-5" />
       </span>
       {/* Middle: number */}
-      <span className="flex items-center h-full px-1 w-10 justify-center border-l border-white/20 pl-2 text-sm font-medium">
+      <span className="flex items-center h-full px-1 w-10 justify-center border-l border-white/20 pl-2 text-sm font-normal">
         <AnimatePresence mode="popLayout" initial={false}>
           {display && (
             <motion.span
