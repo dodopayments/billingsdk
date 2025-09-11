@@ -24,69 +24,11 @@
       "content": "import express from 'express'\r\nimport { checkoutRouter } from './checkout'\r\nimport { orderRouter } from './order'\r\nimport { webhookRouter } from './webhook'\r\n\r\nconst router = express.Router()\r\n// Mount webhook route before any express.json() middleware to preserve raw body\r\nrouter.use('/webhook', webhookRouter)\r\nrouter.use(express.json()) // Ensure request body is parsed for other routes\r\nrouter.use('/checkout', checkoutRouter)\r\nrouter.use('/order', orderRouter)\r\nexport { router as paypalRouter }"
     },
     {
-      "target": "src/routes/paypal/webhook.ts",
-      "type": "template",
-router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
-  try {
-    // Verify PayPal webhook signature
-    const client = getPayPalClient()
-    const verifyRequest = new paypal.notifications.VerifyWebhookSignatureRequest()
-
-    // Get webhook ID from environment variables
-    const webhookId = process.env.PAYPAL_WEBHOOK_ID
-    if (!webhookId) {
-      console.error('PAYPAL_WEBHOOK_ID is not set in environment variables')
-      return res.status(500).json({ error: 'Webhook verification not configured' })
-    }
-
-    let event: any
-    try {
-      event = JSON.parse(req.body.toString())
-    } catch {
-      return res.status(400).json({ error: 'Invalid JSON body' })
-    }
-    const requiredHeaders = [
-      'paypal-auth-algo',
-      'paypal-cert-url',
-      'paypal-transmission-id',
-      'paypal-transmission-sig',
-      'paypal-transmission-time'
-    ] as const
-    for (const h of requiredHeaders) {
-      if (!req.headers[h]) {
-        return res.status(400).json({ error: `Missing header: ${h}` })
-      }
-    }
-
-    verifyRequest.requestBody({
-      auth_algo: req.headers['paypal-auth-algo'],
-      cert_url: req.headers['paypal-cert-url'],
-      transmission_id: req.headers['paypal-transmission-id'],
-      transmission_sig: req.headers['paypal-transmission-sig'],
-      transmission_time: req.headers['paypal-transmission-time'],
-      webhook_id: webhookId,
-      webhook_event: event
-    })
-
-    // Execute verification
-    const verifyResponse = await client.execute(verifyRequest)
-
-    if (verifyResponse.result.verification_status !== 'SUCCESS') {
-      console.warn('PayPal webhook signature verification failed')
-      return res.status(400).json({ error: 'Webhook signature verification failed' })
-    }
-
-    // Process verified webhook event
-    console.log('Verified PayPal webhook event received:', event.event_type)
-
-    // TODO: Handle specific webhook events (e.g., payment completed, subscription cancelled, etc.)
-    res.status(200).json({ received: true })
-  } catch (error) {
-    console.error('Error processing PayPal webhook:', error)
-    res.status(500).json({ error: 'Internal error processing webhook' })
-  }
-})
-    },
+      {
+        "path": "packages/templates/express/src/routes/paypal/webhook.ts",
+        "target": "src/routes/paypal/webhook.ts",
+        "type": "template"
+      },
     {
       "target": ".env.example",
       "type": "template",
