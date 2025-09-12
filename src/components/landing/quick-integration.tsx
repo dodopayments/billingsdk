@@ -217,7 +217,7 @@ import { plans } from "@/lib/billingsdk-config";`}
       {/* Right side instruction section */}
       <div className="flex md:flex-col items-start md:ml-8 mb-2 md:mt-4 gap-4 md:gap-0">
         {/* Circle with 3 */}
-        <StepNumber num={2} />
+        <StepNumber num={3} />
 
         <div className="md:flex flex-col">
           {/* Heading */}
