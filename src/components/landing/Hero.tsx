@@ -2,58 +2,18 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { CustomCodeBlock } from "@/components/code";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { Cover } from "../ui/cover";
 import { GrainGradient } from "@paper-design/shaders-react";
-import Image from "next/image";
-import { ComponentsSection } from "./components";
-import { Input } from "../ui/input";
+
 import { HeroComponentsShowcase } from "./hero-components";
 const Hero = () => {
-  const feature = {
-    title: "Plan Upgrades in Seconds",
-    description: "Beautiful plan upgrade interface - copy, paste, done!",
-    code: `
-  import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card"
-  import { plans } from "@/lib/billingsdk-config"
 
-  export default function App() {
-    return (
-      <UpdatePlanCard
-        currentPlan={plans[0]}
-        plans={plans}
-        onPlanChange={(planId) => console.log('Upgraded to:', planId)}
-      />
-    ) 
-  }`,
-    language: "tsx",
-  };
 
   return (
     <div className="rounded-lg overflow-hidden relative">
-      {/* <GrainGradient
-        style={{ height: "125%", width: "125%", position: "absolute" }}
-        colorBack="hsl(0, 0%, 5%)"
-        softness={0.5}
-        className="opacity-90"
-        intensity={0.27}
-        noise={0.3}
-        shape="corners"
-        offsetX={0}
-        offsetY={0}
-        scale={1}
-        rotation={0}
-        speed={1}
-        colors={[
-          "hsl(218, 100%, 50%)",
-          "hsl(212, 100%, 83%)",
-          "hsl(195, 100%, 50%)",
-          "hsl(250, 100%, 50%)",
-        ]}
-      /> */}
-      {/* Content */}
+
+      <DiagonalLightBeams />
       <motion.div
         className="relative z-10 pt-[calc(70vh/4)] px-6"
         initial="hidden"
@@ -67,16 +27,12 @@ const Hero = () => {
             <Header />
             <SubHeader />
             <CTA />
-
           </div>
-
-
 
           <div className="relative ">
             <EasyToUseAnnotation />
             <HeroComponentsShowcase />
           </div>
-
 
         </div>
       </motion.div>
@@ -96,7 +52,7 @@ function Header() {
         }}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        Billing components for building payment <Cover>infrastructure</Cover>
+        Billing components for building payment infrastructure
         {/* Fully Open Source annotation inside h1 */}
         <motion.div
           className="hidden lg:block absolute top-[100px] -right-[145px]"
@@ -172,17 +128,17 @@ function CTA() {
         }}
         transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
       >
-      <Button
-  className="relative isolate inline-flex items-center justify-center 
+        <Button
+          className="relative isolate inline-flex items-center justify-center 
              overflow-hidden rounded-md px-6 py-3 text-sm font-semibold 
              bg-gray-100 text-gray-800
              shadow-[inset_4px_4px_8px_rgba(0,0,0,0.1),inset_-4px_-4px_8px_rgba(255,255,255,0.7)]
              ring-1 ring-gray-200
              transition-all duration-300 hover:shadow-[inset_2px_2px_6px_rgba(0,0,0,0.15),inset_-2px_-2px_6px_rgba(255,255,255,0.8)]"
-  asChild
->
-  <Link href="/docs">Get Started</Link>
-</Button>
+          asChild
+        >
+          <Link href="/docs">Get Started</Link>
+        </Button>
 
 
         <Button
@@ -220,24 +176,6 @@ function ProductHuntBadge() {
   )
 }
 
-
-// function WindowChrome() {
-//   return (
-//     <>
-//        {/* Window chrome */}
-//               <div className="py-2 px-4 border-b border-border bg-transparent border-l-foreground relative flex items-center justify-between">
-//                 <div className="flex items-center gap-1.5">
-//                   <div className="size-2 outline rounded-full outline-border bg-red-500"></div>
-//                   <div className="size-2 outline rounded-full outline-accent bg-yellow-500"></div>
-//                   <div className="size-2 outline rounded-full outline-accent bg-green-500"></div>
-//                 </div>
-
-//                 <Input value= "https://billingsdk.com" readOnly className="max-w-lg h-7 text-[13px] text-center  text-muted-foreground"/>
-
-//                 <div>hi</div>
-//               </div>
-//     </>
-//   ) }
 
 function EasyToUseAnnotation() {
   return (
@@ -285,6 +223,43 @@ function EasyToUseAnnotation() {
     </>
   )
 }
+
+
+
+import { useMotionValue, useTransform } from "framer-motion";
+
+export function DiagonalLightBeams() {
+  const offsetX = useMotionValue(0);
+  const offsetY = useMotionValue(0);
+
+  // Animate offsets in a loop
+  useTransform(offsetX, [0, 1], [-0.5, 0.5]);
+  useTransform(offsetY, [0, 1], [-0.5, 0.5]);
+
+  return (
+    <motion.div
+      //@ts-ignore
+      style={{ offsetX, offsetY }}
+      //@ts-ignore
+      animate={{ offsetX: [0, 1], offsetY: [0, 1] }}
+      transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
+      className="absolute inset-0"
+    >
+      <GrainGradient
+        style={{ height: "150%", width: "200%", position: "absolute" }}
+        colorBack="hsl(0,0%,5%)"
+        softness={0.8}
+        intensity={0.25}
+        noise={0.05}
+        shape="wave"
+        rotation={45}
+        scale={3}
+        colors={["rgba(255,255,0,0.2)", "rgba(128,0,128,0.15)"]}
+      />
+    </motion.div>
+  );
+}
+
 
 
 
