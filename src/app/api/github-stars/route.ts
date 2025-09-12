@@ -6,9 +6,9 @@ function formatStars(count: number): string {
   return String(count);
 }
 
-// Cache for 30 minutes (1800 seconds) with stale-while-revalidate
-const CACHE_TTL = 1800;
-const STALE_TTL = 86400; // 24 hours
+// Cache for 5 minutes (300 seconds) with shorter stale-while-revalidate
+const CACHE_TTL = 300;
+const STALE_TTL = 3600; // 1 hour
 
 export async function GET() {
   const repo = 'dodopayments/billingsdk';
@@ -26,7 +26,7 @@ export async function GET() {
   try {
     const response = await fetch(url, { 
       headers, 
-      next: { revalidate: 3600 },
+      next: { revalidate: 300 }, // Revalidate every 5 minutes
       signal: controller.signal
     });
     
@@ -71,7 +71,7 @@ export async function GET() {
         status: 408,
         headers: {
           'content-type': 'application/json',
-          'cache-control': `s-maxage=${CACHE_TTL / 60}, stale-while-revalidate=${STALE_TTL / 24}`,
+          'cache-control': `s-maxage=60, stale-while-revalidate=600`,
         },
       });
     }
