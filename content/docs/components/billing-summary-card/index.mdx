@@ -1,0 +1,117 @@
+---
+title: Billing Summary Card
+description: Displays the current subscription plan, pricing information, renewal date, and payment method, with an option to upgrade.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billingsdk">
+      <BillingSummaryCardDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/billing-summary-card-demo.tsx"'>src/components/billing-summary-card-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs
+	items={['shadcn', 'billingSDK']}
+	defaultValue="shadcn"
+	className="bg-transparent border-none"
+>
+	<Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="installation-tabs"
+		>
+			<Tab value="npx">
+			```bash
+			npx shadcn@latest add @billingsdk/billing-summary-card 
+			```
+			</Tab>
+			<Tab value="pnpm">
+			```bash
+			pnpm dlx shadcn@latest add @billingsdk/billing-summary-card 
+			```
+			</Tab>
+			<Tab value="yarn">
+			```bash
+			yarn dlx shadcn@latest add @billingsdk/billing-summary-card 
+			```
+			</Tab>
+		</Tabs>
+	</Tab>
+	<Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="billingsdk-cli-tabs"
+		>
+			<Tab value="npx">
+				```bash 
+				npx @billingsdk/cli add billing-summary-card 
+				```
+			</Tab>
+			<Tab value="pnpm">
+				```bash
+				pnpm dlx @billingsdk/cli add billing-summary-card 
+				```
+			</Tab>
+			<Tab value="yarn">
+				```bash
+				yarn dlx @billingsdk/cli add billing-summary-card 
+				```		
+			</Tab>
+			<Tab value="bun">
+				```bash 
+				bunx @billingsdk/cli add billing-summary-card 
+				```
+			</Tab>
+		</Tabs>
+	</Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { BillingSummaryCard } from '@/components/billingsdk/billing-summary-card';
+```
+
+```tsx
+<BillingSummaryCard
+	plan={{
+		name: 'Pro',
+		price: '$29',
+		period: 'month',
+		renewalDate: 'Oct 15, 2025',
+		paymentMethod: 'Visa ending in 4242',
+	}}
+	onUpgrade={() => console.log('Upgrade clicked')}
+/>
+```
+
+## Props
+
+| Prop        | Type                                                                                          | Description                                        |
+| ----------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `className` | `string`                                                                                      | Additional CSS classes to apply to the card        |
+| `plan`      | `{ name: string; price: string; period: string; renewalDate: string; paymentMethod: string }` | Object containing plan information                 |
+| `onUpgrade` | `() => void`                                                                                  | Function called when the upgrade button is clicked |
+
+### Plan Object
+
+| Property        | Type     | Description                                |
+| --------------- | -------- | ------------------------------------------ |
+| `name`          | `string` | Name of the current plan                   |
+| `price`         | `string` | Price of the plan                          |
+| `period`        | `string` | Billing period (e.g., `"month"`, `"year"`) |
+| `renewalDate`   | `string` | Date when the subscription renews          |
+| `paymentMethod` | `string` | Description of the payment method          |
+
+### Credits
+
+- Created by [@sapatmohit](https://github.com/sapatmohit)

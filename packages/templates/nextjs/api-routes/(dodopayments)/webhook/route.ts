@@ -52,11 +52,11 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(" ----- webhoook verification failed -----")
+    console.log(" ----- webhook verification failed -----")
     console.log(error)
     return Response.json(
-      { message: "Webhook processed successfully" },
-      { status: 200 }
+      { message: "Webhook verification failed" },
+      { status: 400 }
     );
   }
 }

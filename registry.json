@@ -41,7 +41,8 @@
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
-                "@billingsdk/proration-preview"
+                "@billingsdk/proration-preview",
+                "@billingsdk/coupon"
             ]
         },
         {
@@ -327,6 +328,38 @@
             ]
         },
         {
+            "name": "cancel-subscription-card-two",
+            "type": "registry:block",
+            "title": "Cancel Subscription Card",
+            "description": "A modern cancel subscription card component",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/cancel-subscription-card-two.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/cancel-subscription-card-two.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/cancel-subscription-card-two-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/cancel-subscription-card-two-demo.tsx"
+                },
+                {
+                    "path": "src/registry/lib/billingsdk-config.ts",
+                    "type": "registry:lib",
+                    "target": "lib/billingsdk-config.ts"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "button",
+                "badge",
+                "card",
+                "utils"
+            ]
+        },
+        {
             "name": "update-plan-dialog",
             "type": "registry:block",
             "title": "Update Plan Dialog",
@@ -513,69 +546,66 @@
                 "utils"
             ]
         },
-        
         {
             "name": "payment-method-selector",
             "type": "registry:block",
             "title": "Payment Method Selector",
             "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
             "files": [
-              {
-                "path": "src/registry/billingsdk/payment-method-selector.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/payment-method-selector.tsx"
-              },
-              {
-                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
-                "type": "registry:component",
-                "target": "components/payment-method-selector-demo.tsx"
-              }
+                {
+                    "path": "src/registry/billingsdk/payment-method-selector.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-method-selector.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-method-selector-demo.tsx"
+                }
             ],
             "dependencies": [
-              "lucide-react",
-              "motion"
+                "lucide-react",
+                "motion"
             ],
             "registryDependencies": [
-              "button",
-              "dialog",
-              "tooltip",
-              "card",
-              "input",
-              "label",
-              "utils"
+                "button",
+                "dialog",
+                "tooltip",
+                "card",
+                "input",
+                "label",
+                "utils"
             ]
-          },
-          {
-            "name": "payment-method-selector",
+        },
+        {
+            "name": "coupon",
             "type": "registry:block",
-            "title": "Payment Method Selector",
-            "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
+            "title": "Coupon Generator",
+            "description": "A coupon code generator component for billing and promotional purposes",
             "files": [
-              {
-                "path": "src/registry/billingsdk/payment-method-selector.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/payment-method-selector.tsx"
-              },
-              {
-                "path": "src/registry/billingsdk/demo/payment-method-selector-demo.tsx",
-                "type": "registry:component",
-                "target": "components/payment-method-selector-demo.tsx"
-              }
+                {
+                    "path": "src/registry/billingsdk/coupon.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/coupon.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/coupon-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/coupon-demo.tsx"
+                }
             ],
             "dependencies": [
-              "lucide-react",
-              "motion"
+                "lucide-react"
             ],
             "registryDependencies": [
-              "button",
-              "dialog",
-              "tooltip",
-              "card",
-              "input",
-              "label",
-              "utils"
+                "card",
+                "button",
+                "input",
+                "switch",
+                "label",
+                "select"
             ]
-          },
+        },
         {
             "name": "pricing-table-six",
             "type": "registry:block",
@@ -616,21 +646,21 @@
             "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
             "files": [
                 {
-                "path": "src/registry/billingsdk/billing-settings.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/billing-settings.tsx"
+                    "path": "src/registry/billingsdk/billing-settings.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/billing-settings.tsx"
                 },
                 {
-                "path": "src/registry/billingsdk/demo/billing-settings-demo.tsx",
-                "type": "registry:component",
-                "target": "components/billing-settings-demo.tsx"
+                    "path": "src/registry/billingsdk/demo/billing-settings-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/billing-settings-demo.tsx"
                 }
             ],
             "dependencies": [
-                "lucide-react"
-                
+                "lucide-react",
+                "sonner"
             ],
-             "registryDependencies": [
+            "registryDependencies": [
                 "button",
                 "card",
                 "switch",
@@ -638,45 +668,43 @@
                 "dropdown-menu",
                 "dialog",
                 "input",
-                "label",
-                "sonner" 
+                "label"
             ]
         },
-
         {
             "name": "proration-preview",
             "type": "registry:block",
             "title": "Proration Preview",
             "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
             "files": [
-              {
-                "path": "src/registry/billingsdk/proration-preview.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/proration-preview.tsx"
-              },
-              {
-                "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
-                "type": "registry:component",
-                "target": "components/proration-preview-demo.tsx"
-              },
-              {
-                "path": "src/registry/lib/billingsdk-config.ts",
-                "type": "registry:lib",
-                "target": "lib/billingsdk-config.ts"
-              }
+                {
+                    "path": "src/registry/billingsdk/proration-preview.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/proration-preview.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/proration-preview-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/proration-preview-demo.tsx"
+                },
+                {
+                    "path": "src/registry/lib/billingsdk-config.ts",
+                    "type": "registry:lib",
+                    "target": "lib/billingsdk-config.ts"
+                }
             ],
             "dependencies": [
-              "lucide-react",
-              "class-variance-authority",
-              "motion"
+                "lucide-react",
+                "class-variance-authority",
+                "motion"
             ],
             "registryDependencies": [
-              "button",
-              "card",
-              "badge",
-              "separator",
-              "tabs",
-              "utils"
+                "button",
+                "card",
+                "badge",
+                "separator",
+                "tabs",
+                "utils"
             ]
         }
     ]

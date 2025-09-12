@@ -1,0 +1,132 @@
+---
+title: Coupon Generator
+description: The Coupon Generator component provides an interactive interface for creating and displaying coupon codes for billing and promotional purposes. It features customizable discount rates, validity periods, and a beautiful coupon display with sharing capabilities.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="coupon">
+      <CouponDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/coupon-demo.tsx"'>src/components/coupon-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/coupon
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/coupon
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx shadcn@latest add @billingsdk/coupon
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add coupon
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add coupon
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        npx @billingsdk/cli add coupon
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { CouponGenerator, type CouponGeneratorProps } from "@/components/billingsdk/coupon";
+```
+
+```tsx
+<CouponGenerator
+  companyName="Your Company"
+  applicableOptions={[
+    { label: "For new users only", value: "new-users" },
+    { label: "For existing users only", value: "existing-users" },
+    { label: "For all users", value: "all-users" },
+    { label: "Premium subscribers", value: "premium-subscribers" },
+  ]}
+  onGenerate={(couponData) => {
+    console.log('Generated Coupon:', couponData);
+  }}
+  onCopy={(code) => {
+    navigator.clipboard.writeText(code);
+  }}
+  onShare={(code) => {
+    console.log('Sharing Coupon Code:', code);
+  }}
+  defaultCode="SAVE20"
+/>
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `companyName` | `string` | ✅ | Company name displayed on the coupon |
+| `applicableOptions` | `{ label: string; value: string }[]` | ❌ | Options for coupon applicability rules |
+| `onGenerate` | `(couponData: CouponData) => void` | ✅ | Callback when coupon is generated |
+| `onCopy` | `(code: string) => void` | ❌ | Callback when coupon code is copied |
+| `onShare` | `(code: string) => void` | ❌ | Callback when coupon is shared |
+| `className` | `string` | ❌ | Additional CSS classes for styling |
+| `cardClassName` | `string` | ❌ | CSS classes for the card container |
+| `generateButtonClassName` | `string` | ❌ | CSS classes for the generate button |
+| `defaultCode` | `string` | ❌ | Default coupon code to use |
+
+## Features
+
+- **Interactive Form**: Create coupons with custom discount rates and validity periods
+- **Custom Codes**: Option to use custom coupon codes or auto-generated ones
+- **Beautiful Display**: Ticket-style coupon design with company branding
+- **Copy & Share**: Built-in functionality to copy and share coupon codes
+- **Form Validation**: Required field validation for proper coupon creation
+- **Dark Mode Support**: Full support for light and dark themes
+- **Responsive Design**: Works perfectly on all device sizes
+- **Smooth Animations**: Polished transitions and micro-interactions
+
+## CouponData Interface
+
+```tsx
+interface CouponData {
+  code: string;
+  discount: number;
+  rule: string;
+  startDate?: string;
+  endDate?: string;
+}
+```
+
+## Theming
+
+The coupon component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+
+## Example
+
+<include cwd lang="tsx" meta='title="src/components/coupon-demo.tsx"'>src/components/coupon-demo.tsx</include>

@@ -42,7 +42,11 @@ function parseJSXProps(code: string): Record<string, any> {
           }
         }
         
-        const innerValue = propsString.slice(valueStart, valueEnd).trim();
+        let innerValue = propsString.slice(valueStart, valueEnd).trim();
+        // Normalize trailing commas that would break JSON.parse for objects/arrays
+        innerValue = innerValue
+          .replace(/,\s*([}\]])/g, '$1')
+          .replace(/([\{\[])(\s*),/g, '$1');
         
         try {
           if (innerValue.includes('=>') || innerValue.includes('function')) {
@@ -62,9 +66,9 @@ function parseJSXProps(code: string): Record<string, any> {
             try {
               props[propName] = JSON.parse(sanitizedValue);
             } catch {
-              // Fallback to string value to avoid code execution
-              // For richer expression parsing, use a proper parser (Babel/Acorn) in a sandboxed worker
-              props[propName] = innerValue;
+              // Fallback to evaluating as an expression (arrays/objects/functions)
+              const safeEval = new Function('return (' + innerValue + ')');
+              props[propName] = safeEval();
             }
           }
         } catch {
@@ -106,6 +110,35 @@ function parseJSXProps(code: string): Record<string, any> {
     console.warn("Error parsing JSX props:", error);
     return {};
   }
+}
+
+function deepMerge<T>(base: T, override: any): T {
+  if (Array.isArray(base)) {
+    // If override is an array, use it; otherwise keep base array
+    return (Array.isArray(override) ? override : base) as unknown as T;
+  }
+  if (typeof base === "object" && base !== null) {
+    const result: any = { ...base };
+    if (override && typeof override === "object") {
+      for (const key of Object.keys(override)) {
+        const baseVal = (base as any)[key];
+        const overrideVal = override[key];
+        if (
+          baseVal !== undefined &&
+          baseVal !== null &&
+          typeof baseVal === "object" &&
+          !Array.isArray(baseVal)
+        ) {
+          result[key] = deepMerge(baseVal, overrideVal);
+        } else {
+          result[key] = overrideVal;
+        }
+      }
+    }
+    return result as T;
+  }
+  // Primitive base; prefer override if provided, else base
+  return (override !== undefined ? override : base) as T;
 }
 
 interface PlaygroundContextType {

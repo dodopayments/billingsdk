@@ -1,0 +1,112 @@
+---
+title: Cancel Subscription Card Two
+description: The Cancel Subscription Card Two component provides an improved, user-friendly interface for handling subscription cancellations. It includes collapsible plan benefits, support info, error handling, and a two-step confirmation process with customizable texts.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="cancel-subscription-card-two">
+      <CancelSubscriptionCardTwoDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/cancel-subscription-card-two-demo.tsx"'>src/components/cancel-subscription-card-two-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/cancel-subscription-card-two
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/cancel-subscription-card-two
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/cancel-subscription-card-two
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add cancel-subscription-card-two
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add cancel-subscription-card-two
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add cancel-subscription-card-two
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { CancelSubscriptionCardTwo } from "@/components/billingsdk/cancel-subscription-card-two";
+import { plans } from "@/lib/billingsdk-config";
+```
+```tsx
+<CancelSubscriptionCardTwo
+  title="We're sorry to see you go..."
+  description="Before you cancel, let us know what we could do better."
+  plan={plans[1]}
+  onCancel={async (planId) => {
+    // Handle cancellation
+    await cancelSubscription(planId);
+  }}
+  onKeepSubscription={async (planId) => {
+    // Handle keeping subscription
+    await keepSubscription(planId);
+  }}
+/>
+```
+
+## Props
+
+## Props
+
+| Prop                 | Type                                             | Required | Description                                |
+|----------------------|--------------------------------------------------|----------|--------------------------------------------|
+| `title`              | `string`                                        | ✅       | Main card title                            |
+| `description`        | `string`                                        | ✅       | Card description text                       |
+| `plan`               | `Plan`                                          | ✅       | Plan object with subscription info          |
+| `onCancel`           | `(planId: string) => Promise<void> \| void`     | ✅       | Callback for cancel action                  |
+| `warningText`        | `string`                                        | ❌       | Warning message text                        |
+| `supportText`        | `string`                                        | ❌       | Title for customer support                  |
+| `supportLink`        | `string`                                        | ❌       | Link for customer support          |
+| `keepButtonText`     | `string`                                        | ❌       | Text for keep subscription button           |
+| `continueButtonText` | `string`                                        | ❌       | Text for continue button                    |
+| `finalTitle`         | `string`                                        | ❌       | Final confirmation screen title             |
+| `finalSubtitle`      | `string`                                        | ❌       | Final confirmation screen subtitle          |
+| `goBackButtonText`   | `string`                                        | ❌       | Text for go-back button                     |
+| `confirmButtonText`  | `string`                                        | ❌       | Text for final confirm button               |
+| `onKeepSubscription` | `(planId: string) => Promise<void> \| void`     | ❌       | Callback for keep subscription action       |
+| `className`          | `string`                                        | ❌       | Additional CSS classes                      |
+
+
+## Theming
+
+The cancel subscription card component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+
+
+## Example
+<include cwd lang="tsx" meta='title="src/components/cancel-subscription-card-two-demo.tsx"'>src/components/cancel-subscription-card-two-demo.tsx</include>

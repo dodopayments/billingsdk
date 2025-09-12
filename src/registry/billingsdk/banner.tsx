@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 export interface BannerProps {
-  variant?: "default" | "minimal" | "popup" | "destructive";
+  variant?: "default" | "minimal" | "popup" | "destructive" | "warning" | "success" | "info" | "announcement";
   title: string;
   description?: string;
   buttonText?: string;
@@ -78,7 +78,7 @@ export function Banner({
           title: "text-sm font-medium text-popover-foreground leading-snug",
           description: "text-xs text-muted-foreground",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto flex-shrink-0 pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto flex-shrink-0 pr-12",
         };
       case "destructive":
         return {
@@ -96,7 +96,79 @@ export function Banner({
             ? "text-xs text-destructive/80"
             : "text-xs text-destructive-foreground/80",
           actions:
-            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-8 md:pr-0",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
+        };
+      case "warning":
+        return {
+          container: hasGradient
+            ? "sticky top-0 z-50 w-full border-b border-yellow-500/20 backdrop-blur supports-[backdrop-filter]:bg-yellow-50/60 dark:supports-[backdrop-filter]:bg-yellow-950/60"
+            : "sticky top-0 z-50 w-full border-b bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800 shadow-sm backdrop-blur",
+          wrapper:
+            "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
+          content:
+            "flex flex-col sm:flex-row md:items-start items-center gap-2 w-full",
+          title: hasGradient
+            ? "text-sm font-medium text-yellow-800 dark:text-yellow-200 leading-tight"
+            : "text-sm font-medium text-yellow-800 dark:text-yellow-200 leading-tight",
+          description: hasGradient
+            ? "text-xs text-yellow-700 dark:text-yellow-300"
+            : "text-xs text-yellow-700 dark:text-yellow-300",
+          actions:
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
+        };
+      case "success":
+        return {
+          container: hasGradient
+            ? "sticky top-0 z-50 w-full border-b border-green-500/20 backdrop-blur supports-[backdrop-filter]:bg-green-50/60 dark:supports-[backdrop-filter]:bg-green-950/60"
+            : "sticky top-0 z-50 w-full border-b bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800 shadow-sm backdrop-blur",
+          wrapper:
+            "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
+          content:
+            "flex flex-col sm:flex-row md:items-start items-center gap-2 w-full",
+          title: hasGradient
+            ? "text-sm font-medium text-green-800 dark:text-green-200 leading-tight"
+            : "text-sm font-medium text-green-800 dark:text-green-200 leading-tight",
+          description: hasGradient
+            ? "text-xs text-green-700 dark:text-green-300"
+            : "text-xs text-green-700 dark:text-green-300",
+          actions:
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
+        };
+      case "info":
+        return {
+          container: hasGradient
+            ? "sticky top-0 z-50 w-full border-b border-blue-500/20 backdrop-blur supports-[backdrop-filter]:bg-blue-50/60 dark:supports-[backdrop-filter]:bg-blue-950/60"
+            : "sticky top-0 z-50 w-full border-b bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800 shadow-sm backdrop-blur",
+          wrapper:
+            "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
+          content:
+            "flex flex-col sm:flex-row md:items-start items-center gap-2 w-full",
+          title: hasGradient
+            ? "text-sm font-medium text-blue-800 dark:text-blue-200 leading-tight"
+            : "text-sm font-medium text-blue-800 dark:text-blue-200 leading-tight",
+          description: hasGradient
+            ? "text-xs text-blue-700 dark:text-blue-300"
+            : "text-xs text-blue-700 dark:text-blue-300",
+          actions:
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
+        };
+      case "announcement":
+        return {
+          container: hasGradient
+            ? "sticky top-0 z-50 w-full border-b border-purple-500/20 backdrop-blur supports-[backdrop-filter]:bg-purple-50/60 dark:supports-[backdrop-filter]:bg-purple-950/60"
+            : "sticky top-0 z-50 w-full border-b bg-purple-50 dark:bg-purple-950 border-purple-200 dark:border-purple-800 shadow-sm backdrop-blur",
+          wrapper:
+            "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
+          content:
+            "flex flex-col sm:flex-row md:items-start items-center gap-2 w-full",
+          title: hasGradient
+            ? "text-sm font-medium text-purple-800 dark:text-purple-200 leading-tight"
+            : "text-sm font-medium text-purple-800 dark:text-purple-200 leading-tight",
+          description: hasGradient
+            ? "text-xs text-purple-700 dark:text-purple-300"
+            : "text-xs text-purple-700 dark:text-purple-300",
+          actions:
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
       default:
         return {
@@ -114,7 +186,7 @@ export function Banner({
             ? "text-xs text-foreground/80"
             : "text-xs text-primary-foreground/80",
           actions:
-           "flex items-center justify-center md:justify-start gap-2 sm:self-auto sm:pr-8",
+           "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
     }
   };
@@ -225,7 +297,7 @@ export function Banner({
                 size="icon"
                 onClick={handleDismiss}
                 className={cn(
-                  "absolute right-1 sm:right-2 top-3  sm:top-1/2 pl-2 sm:pl-0 -translate-y-1/2 h-8 w-8",
+                  "absolute right-1 sm:right-2 top-2 sm:top-1/2 sm:-translate-y-1/2 h-8 w-8",
                   gradientColors && gradientColors.length > 0
                     ? "hover:bg-foreground/20 text-foreground"
                     : variant === "default" &&
@@ -235,7 +307,19 @@ export function Banner({
                     "hover:bg-accent text-popover-foreground",
                   variant === "minimal" &&
                     !gradientColors &&
-                    "hover:bg-accent text-card-foreground"
+                    "hover:bg-accent text-card-foreground",
+                  variant === "warning" &&
+                    !gradientColors &&
+                    "hover:bg-yellow-200 dark:hover:bg-yellow-800 text-yellow-800 dark:text-yellow-200",
+                  variant === "success" &&
+                    !gradientColors &&
+                    "hover:bg-green-200 dark:hover:bg-green-800 text-green-800 dark:text-green-200",
+                  variant === "info" &&
+                    !gradientColors &&
+                    "hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200",
+                  variant === "announcement" &&
+                    !gradientColors &&
+                    "hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-800 dark:text-purple-200"
                 )}
               >
                 <X className="h-4 w-4" />
