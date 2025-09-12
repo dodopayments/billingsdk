@@ -1,12 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { Copy, ArrowLeft, Share2, Scissors } from "lucide-react"
 import {
     Select,
     SelectContent,
@@ -16,6 +13,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
+import { ArrowLeft, Copy, Scissors, Share2 } from "lucide-react"
+import { ChangeEvent, useState } from "react"
 
 export interface CouponGeneratorProps {
     companyName: string
@@ -128,7 +128,7 @@ export function CouponGenerator({
         setGenerated(true)
     }
 
-    const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDiscountChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (value === "") {
             setDiscount("");
@@ -149,7 +149,7 @@ export function CouponGenerator({
     };
 
     return (
-        <>
+        <div className={className}>
             {generated ? (
                 <Card
                     className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
@@ -353,6 +353,6 @@ export function CouponGenerator({
                     </CardFooter>
                 </Card>
             )}
-        </>
+        </div>
     )
 }
