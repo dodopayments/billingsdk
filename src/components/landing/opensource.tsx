@@ -25,7 +25,7 @@ export function OpenSource() {
     ]
     return (
         <div className="flex flex-col mt-12 md:mt-16 w-full max-w-4xl mx-auto mb-12">
-            <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary text-center mb-4">
+            <h2 className="text-3xl sm:text-3xl font-display md:text-5xl font-medium text-primary text-center mb-4 lg:mt-16">
                 Join our community
             </h2>
             <p className="text-sm mt-2 text-muted-foreground max-w-2xl mx-auto tracking-tight text-center mb-8">
