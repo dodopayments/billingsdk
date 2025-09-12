@@ -30,6 +30,7 @@
     "components/billing-summary-card/index",
     "components/usage-meter/usage-meter-circle",
     "components/usage-meter/usage-meter-linear",
+    "components/detailed-usage-table/index",
     "---Banner---",
     "components/banner/index",
     "components/coupon/index",
