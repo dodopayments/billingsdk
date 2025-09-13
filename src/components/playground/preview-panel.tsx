@@ -123,6 +123,8 @@ function PreviewPanelContent() {
   useEffect(() => {
     if (state.selectedComponent) {
       setError(null);
+      // Force refresh when component changes
+      setRefreshKey(prev => prev + 1);
     }
   }, [state.selectedComponent, state.code]);
 

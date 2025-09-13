@@ -14,6 +14,7 @@ import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -712,6 +713,31 @@ export const componentRegistry: ComponentConfig[] = [
       title: "Pricing Plans",
       description: "Find the right plan for your business",
       onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+    },
+  },
+  {
+    id: "pricing-table-six",
+    name: "Pricing Table Six",
+    description: "Comprehensive pricing table with interactive slider, plans, and detailed comparison table",
+    category: "pricing",
+    component: PricingTableSix,
+    imports: ["@/components/billingsdk/pricing-table-six"],
+    defaultCode: `// Pricing Table Six - Self-contained component with hardcoded data
+// This component includes interactive slider, pricing plans, and comparison table
+// No props required - all data is built-in
+
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
+
+export default function Page() {
+  return (
+    <div className="w-full">
+      <PricingTableSix />
+    </div>
+  );
+}`,
+    defaultProps: {
+      // PricingTableSix doesn't accept props - it uses hardcoded data
+      // This ensures clean state when switching components
     },
   },
   {

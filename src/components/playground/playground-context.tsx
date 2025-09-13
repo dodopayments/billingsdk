@@ -166,12 +166,15 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
   });
 
   const setSelectedComponent = useCallback((component: ComponentConfig) => {
-    setState((prev: PlaygroundState) => ({
-      ...prev,
+    setState({
       selectedComponent: component,
       code: component.defaultCode,
       props: component.defaultProps || {},
-    }));
+      styles: `/* Component styles */
+.component-container {
+  /* Add your custom styles here */
+}`,
+    });
   }, []);
 
   const updateCode = useCallback((code: string) => {
@@ -183,14 +186,13 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
         if (!parsedProps || Object.keys(parsedProps).length === 0) {
           return { ...prev, code };
         }
-
-        // Start from the component defaults, then deep-merge parsed overrides
-        const baseDefaults = prev.selectedComponent?.defaultProps || {};
-        const merged = deepMerge(baseDefaults, parsedProps);
-        return {
-          ...prev,
+        
+        // For component switching, we should replace props entirely, not merge
+        // This prevents props from previous components from interfering
+        return { 
+          ...prev, 
           code,
-          props: merged,
+          props: parsedProps
         };
       } catch (error) {
         console.warn("Failed to parse JSX props:", error);

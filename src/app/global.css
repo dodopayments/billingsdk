@@ -78,6 +78,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Slider colors */
+  --slider-active: #6366f1; /* indigo-500 */
+  --slider-inactive: #e5e7eb; /* gray-200 */
 }
 
 .dark {
@@ -112,6 +116,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Slider colors - dark */
+  --slider-active: #6366f1; /* indigo-500 */
+  --slider-inactive: #374151; /* gray-700 */
 }
 
 @layer base {
@@ -149,7 +157,6 @@ pre[class*="language-"]::-webkit-scrollbar {
   font-weight: 400;
   letter-spacing: 0.5px;
 }
-
 
 @layer utilities {
   /* Light glass: 1px white/10 border, 10px blur, rgba(255,255,255,.05) bg, 20px radius, inset shadow */

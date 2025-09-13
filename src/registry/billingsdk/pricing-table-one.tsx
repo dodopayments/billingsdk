@@ -182,7 +182,7 @@ const buttonVariants = cva(
 
 export interface PricingTableOneProps extends VariantProps<typeof sectionVariants> {
   className?: string;
-  plans: Plan[];
+  plans?: Plan[];
   title?: string;
   description?: string;
   onPlanSelect?: (planId: string) => void;
@@ -190,7 +190,7 @@ export interface PricingTableOneProps extends VariantProps<typeof sectionVariant
 
 export function PricingTableOne({ 
   className, 
-  plans, 
+  plans = [], 
   title, 
   description, 
   onPlanSelect, 
@@ -218,7 +218,7 @@ export function PricingTableOne({
     return Math.round(discount);
   }
 
-  const yearlyPriceDiscount = plans.length
+  const yearlyPriceDiscount = plans?.length
     ? Math.max(
       ...plans.map((plan) =>
         calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)
