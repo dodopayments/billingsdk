@@ -1,18 +1,18 @@
 import { Hono } from "hono";
 import { getDodoPaymentsClient } from '../../lib/dodopayments';
 import { zValidator } from "@hono/zod-validator";
-import z from "zod";
+import { z } from "zod";
 
 const router = new Hono()
-  .get('/',
-    zValidator('query', z.object({ subscription_id: z.string() }), (result, c) => {
+  .get('/:subscription_id',
+    zValidator('param', z.object({ subscription_id: z.string() }), (result, c) => {
       if (!result.success) {
         return c.json({ error: 'subscription_id is required' }, 400);
       }
     }),
     async (c) => {
       try {
-        const { subscription_id } = c.req.valid('query');
+        const { subscription_id } = c.req.valid('param');
         const subscription = await getDodoPaymentsClient().subscriptions.retrieve(subscription_id);
         return c.json(subscription);
       } catch (error) {

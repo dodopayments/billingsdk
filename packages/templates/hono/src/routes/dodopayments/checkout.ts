@@ -49,7 +49,7 @@ const router = new Hono()
           field: issue.path.join('.'),
           message: issue.message
         }))
-      })
+      },400)
     }
   }), async (c) => {
     const { productCart, customer, billing_address, return_url, customMetadata } = c.req.valid('json')

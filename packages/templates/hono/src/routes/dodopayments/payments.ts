@@ -1,10 +1,10 @@
 import { Hono } from 'hono';
 import { getDodoPaymentsClient } from '../../lib/dodopayments';
 import { zValidator } from '@hono/zod-validator';
-import z from 'zod';
+import { z } from 'zod';
 
 const router = new Hono()
-  .get('/', zValidator('param', z.object({ payment_id: z.string() }), (result, c) => {
+  .get('/:payment_id', zValidator('param', z.object({ payment_id: z.string() }), (result, c) => {
     if (!result.success) {
       return c.json({ error: 'payment_id is required' }, 400);
     }

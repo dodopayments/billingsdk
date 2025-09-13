@@ -16,13 +16,13 @@ const customerUpdateSchema = z.object({
 });
 
 const router = new Hono().
-  get('/', zValidator('query', z.object({ customer_id: z.string() }), (result, c) => {
+  get('/:customer_id', zValidator('param', z.object({ customer_id: z.string() }), (result, c) => {
     if (!result.success) {
       return c.json({ error: 'customer_id is required' }, 400);
     }
   }), async (c) => {
     try {
-      const { customer_id } = c.req.valid('query')
+      const { customer_id } = c.req.valid('param')
       const customer = await getDodoPaymentsClient().customers.retrieve(customer_id);
       return c.json(customer);
     } catch (error) {
@@ -50,7 +50,7 @@ const router = new Hono().
       return c.json({ error: 'Internal server error' }, 500);
     }
   })
-  .put('/', zValidator('query', z.object({ customer_id: z.string() }), (result, c) => {
+  .put('/:customer_id', zValidator('param', z.object({ customer_id: z.string() }), (result, c) => {
     if (!result.success) {
       return c.json({ error: 'customer_id is required' }, 400);
     }
@@ -66,7 +66,7 @@ const router = new Hono().
     }
   }), async (c) => {
     try {
-      const { customer_id } = c.req.valid('query')
+      const { customer_id } = c.req.valid('param')
       const updateData = c.req.valid('json')
       const customer = await getDodoPaymentsClient().customers.update(customer_id, updateData);
       return c.json(customer);
@@ -75,13 +75,13 @@ const router = new Hono().
       return c.json({ error: 'Internal server error' }, 500);
     }
   })
-  .get('/subscriptions', zValidator('query', z.object({ customer_id: z.string() }), (result, c) => {
+  .get('/subscriptions/:customer_id', zValidator('param', z.object({ customer_id: z.string() }), (result, c) => {
     if (!result.success) {
       return c.json({ error: 'customer_id is required' }, 400);
     }
   }), async (c) => {
     try {
-      const { customer_id } = c.req.valid('query')
+      const { customer_id } = c.req.valid('param')
       const subscriptions = await getDodoPaymentsClient().subscriptions.list({
         customer_id: customer_id,
       });
@@ -91,13 +91,13 @@ const router = new Hono().
       return c.json({ error: 'Internal server error' }, 500);
     }
   })
-  .get('/payments', zValidator('query', z.object({ customer_id: z.string() }), (result, c) => {
+  .get('/payments/:customer_id', zValidator('param', z.object({ customer_id: z.string() }), (result, c) => {
     if (!result.success) {
       return c.json({ error: 'customer_id is required' }, 400);
     }
   }), async (c) => {
     try {
-      const { customer_id } = c.req.valid('query')
+      const { customer_id } = c.req.valid('param')
 
       const payments = await getDodoPaymentsClient().payments.list({
         customer_id: customer_id,

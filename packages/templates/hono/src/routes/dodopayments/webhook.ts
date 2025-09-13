@@ -18,12 +18,13 @@ const router = new Hono()
       const payload = JSON.parse(rawBody);
       if (payload.data.payload_type === "Subscription") {
         switch (payload.type) {
-          case "subscription.active":
+          case "subscription.active": {
             const subscription = await getDodoPaymentsClient().subscriptions.retrieve(payload.data.subscription_id);
             console.log("-------SUBSCRIPTION DATA START ---------")
             console.log(subscription)
             console.log("-------SUBSCRIPTION DATA END ---------")
             break;
+          }
           case "subscription.failed":
             break;
           case "subscription.cancelled":
@@ -37,12 +38,13 @@ const router = new Hono()
         }
       } else if (payload.data.payload_type === "Payment") {
         switch (payload.type) {
-          case "payment.succeeded":
+          case "payment.succeeded": {
             const paymentDataResp = await getDodoPaymentsClient().payments.retrieve(payload.data.payment_id)
             console.log("-------PAYMENT DATA START ---------")
             console.log(paymentDataResp)
             console.log("-------PAYMENT DATA END ---------")
             break;
+          }
           default:
             break;
         }

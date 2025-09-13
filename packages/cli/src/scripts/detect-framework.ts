@@ -36,15 +36,17 @@ export const detectFramework = (): "nextjs" | "express" | "react" | "hono" | nul
         if (deps.express) {
             return "express";
         }
-        //  reactjs detection
-        if (deps.react) {
-            return "react";
-        }
 
         // hono detection
         if (deps.hono) {
             return "hono";
         }
+
+        //  reactjs detection
+        if (deps.react) {
+            return "react";
+        }
+
         return null;
     } catch {
         return null
