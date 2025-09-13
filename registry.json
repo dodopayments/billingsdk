@@ -37,6 +37,7 @@
                 "@billingsdk/usage-meter-circle",
                 "@billingsdk/banner",
                 "@billingsdk/invoice-history",
+                "@billingsdk/invoice-history-2",
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",
@@ -73,6 +74,34 @@
                     "path": "src/registry/billingsdk/demo/invoice-history-demo.tsx",
                     "type": "registry:component",
                     "target": "components/invoice-history-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "card",
+                "button",
+                "table",
+                "badge",
+                "utils"
+            ]
+        },
+        {
+            "name": "invoice-history-2",
+            "type": "registry:block",
+            "title": "Invoice History 2",
+            "description": "An enhanced invoice history table with action buttons",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/invoice-history-2.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/invoice-history-2.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/invoice-history-2-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/invoice-history-2-demo.tsx"
                 }
             ],
             "dependencies": [

@@ -37,6 +37,7 @@
                 "@billingsdk/usage-meter-circle",
                 "@billingsdk/banner",
                 "@billingsdk/invoice-history",
+                "@billingsdk/invoice-history-2",
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-method-manager",

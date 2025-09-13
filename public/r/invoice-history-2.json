@@ -1,0 +1,28 @@
+{
+  "name": "invoice-history-2",
+  "type": "registry:block",
+  "title": "Invoice History 2",
+  "description": "An enhanced invoice history table with action buttons",
+  "files": [
+    {
+      "path": "src/registry/billingsdk/invoice-history-2.tsx",
+      "type": "registry:component",
+      "target": "components/billingsdk/invoice-history-2.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/invoice-history-2-demo.tsx",
+      "type": "registry:component",
+      "target": "components/invoice-history-2-demo.tsx"
+    }
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "card",
+    "button",
+    "table",
+    "badge",
+    "utils"
+  ]
+}
