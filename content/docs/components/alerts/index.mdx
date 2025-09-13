@@ -1,0 +1,152 @@
+---
+title: Alerts
+description: The Alerts component displays important notifications and warnings to users, such as high usage alerts or plan expiration warnings. It supports different alert types and includes action buttons and dismiss functionality.
+---
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="alerts">
+      <AlertsDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/alerts-demo.tsx"'>
+      src/components/alerts-demo.tsx
+    </include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/alerts
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/alerts
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/alerts
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add alerts
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add alerts
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add alerts
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { Alerts } from "@/components/billingsdk/alerts";
+```
+
+```tsx
+<Alerts
+	alerts={[
+		{
+			id: '1',
+			type: 'warning',
+			title: 'High Usage Alert',
+			message:
+				"You've used 90% of your API quota. Upgrade to avoid service interruption.",
+			actionText: 'Upgrade Plan',
+			onAction: () => console.log('Upgrade clicked'),
+			dismissible: true,
+		},
+	]}
+	onDismiss={(id) => console.log('Dismissed alert', id)}
+/>;
+```
+
+## Props
+
+| Prop      | Type                   | Description                                      |
+| --------- | ---------------------- | ------------------------------------------------ |
+| className | `string`               | Additional CSS classes to apply to the component |
+| alerts    | `AlertItem[]`          | Array of alerts to display                       |
+| onDismiss | `(id: string) => void` | Function called when an alert is dismissed       |
+
+### AlertItem Object
+
+| Property    | Type                                          | Description                                              |
+| ----------- | --------------------------------------------- | -------------------------------------------------------- |
+| id          | `string`                                      | Unique identifier for the alert                          |
+| type        | `"warning" \| "info" \| "success" \| "error"` | Type of alert                                            |
+| title       | `string`                                      | Title of the alert                                       |
+| message     | `string`                                      | Message content of the alert                             |
+| actionText  | `string`                                      | Text for the action button (optional)                    |
+| onAction    | `() => void`                                  | Function called when action button is clicked (optional) |
+| dismissible | `boolean`                                     | Whether the alert can be dismissed (default: true)       |
+
+```tsx
+<Alerts
+	alerts={[
+		{
+			id: 'usage-warning',
+			type: 'warning',
+			title: 'High Usage Alert',
+			message:
+				"You've used 90% of your API quota. Upgrade to avoid service interruption.",
+			actionText: 'Upgrade Plan',
+			onAction: () => {
+				// Handle upgrade action
+				router.push('/billing/upgrade');
+			},
+			dismissible: true,
+		},
+		{
+			id: 'new-feature',
+			type: 'info',
+			title: 'New Feature Available',
+			message: 'Check out our new analytics dashboard for better insights.',
+			actionText: 'View Dashboard',
+			onAction: () => {
+				// Handle view dashboard action
+				router.push('/analytics');
+			},
+			dismissible: true,
+		},
+		{
+			id: 'payment-success',
+			type: 'success',
+			title: 'Payment Successful',
+			message: 'Your payment of $29.00 has been processed successfully.',
+			dismissible: true,
+		},
+	]}
+	onDismiss={(alertId) => {
+		// Handle alert dismissal
+		dismissAlert(alertId);
+	}}
+/>
+```
+
+### Credits
+
+- Created by [@sapatmohit](https://github.com/sapatmohit)

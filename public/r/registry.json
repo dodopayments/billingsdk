@@ -638,6 +638,26 @@
                 "label"
             ]
         },
+      {
+			"name": "alerts",
+			"type": "registry:block",
+			"title": "Alerts",
+			"description": "A component for displaying important notifications and warnings to users",
+			"files": [
+				{
+					"path": "src/registry/billingsdk/alerts.tsx",
+					"type": "registry:component",
+					"target": "components/billingsdk/alerts.tsx"
+				},
+				{
+					"path": "src/registry/billingsdk/demo/alerts-demo.tsx",
+					"type": "registry:component",
+					"target": "components/alerts-demo.tsx"
+				}
+			],
+			"dependencies": ["lucide-react"],
+			"registryDependencies": ["button", "utils"]
+		},
         {
             "name": "proration-preview",
             "type": "registry:block",
