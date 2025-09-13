@@ -74,7 +74,7 @@ You'll be prompted to select:
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Next.js + Stripe', 'Express.js + Stripe', 'React.js + Stripe']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -102,6 +102,24 @@ After running `init`, you'll get:
     │   │   └── dodopayments.ts
     │   └── routes/
     │       └── dodopayments/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── customer.ts
+    │           ├── payments.ts
+    │           ├── products.ts
+    │           ├── subscriptions.ts
+    │           └── webhook.ts
+    └── .env.example
+    ```
+  </Tab>
+   <Tab value="Express.js + Stripe">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── stripe.ts
+    │   └── routes/
+    │       └── stripe/
     │           ├── route.ts
     │           ├── checkout.ts
     │           ├── customer.ts

@@ -46,7 +46,7 @@
     {
       "target": ".env.example",
       "type": "template",
-      "content": "# DodoPayments Configuration\nDODO_PAYMENTS_API_KEY=your_api_key_here\nDODO_PAYMENTS_ENVIRONMENT=test_mode\nDODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here\n\n# Server Configuration\nPORT=3000\nNODE_ENV=development\n"
+      "content": "# DodoPayments Configuration\nDODO_PAYMENTS_API_KEY=your_api_key_here\nDODO_PAYMENTS_ENVIRONMENT=test_mode\nDODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here\n\n# Server Configuration\nPORT=3000\nNODE_ENV=development\n\nSTRIPE_SECRET_KEY=\"your_secret_key_here\"\nSTRIPE_SECRET_KEY=sk_test_12345...\nSTRIPE_WEBHOOK_SECRET=whsec_12345\n"
     }
   ],
   "dependencies": [
