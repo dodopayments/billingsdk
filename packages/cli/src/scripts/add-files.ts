@@ -4,9 +4,20 @@ import { Result } from "../types/registry.js";
 import { confirm, spinner } from "@clack/prompts";
 import { execSync } from "child_process";
 
-export const addFiles = async (framework: "nextjs" | "express" | "react", provider: "dodopayments") => {
-    const result = await fetch(`https://billingsdk.com/tr/${framework}-${provider}.json`)
-        .then(res => res.json()) as Result;
+export const addFiles = async (framework: "nextjs" | "express" | "react" | "fastify", provider: "dodopayments") => {
+    // Allow overriding registry source for local testing
+    const localPathBase = process.env.BILLINGSDK_REGISTRY_PATH;
+    const urlBase = process.env.BILLINGSDK_REGISTRY_URL ?? "https://billingsdk.com/tr";
+
+    let result: Result;
+    if (localPathBase) {
+        const p = path.join(localPathBase, `${framework}-${provider}.json`);
+        const raw = fs.readFileSync(p, "utf-8");
+        result = JSON.parse(raw) as Result;
+    } else {
+        const url = `${urlBase}/${framework}-${provider}.json`;
+        result = await fetch(url).then(res => res.json()) as Result;
+    }
     let srcExists = fs.existsSync(path.join(process.cwd(), "src"));
     const addToPath = srcExists ? "src" : "";
 

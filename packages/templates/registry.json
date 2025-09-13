@@ -104,7 +104,74 @@
                 "@types/express"
             ]
         },
-
+        {
+            "name": "fastify-dodopayments",
+            "description": "DodoPayments template for Fastify",
+            "framework": "fastify",
+            "files": [
+                {
+                    "path": "packages/templates/fastify/src/lib/dodopayments.ts",
+                    "content": "DodoPayments library for Fastify",
+                    "type": "template",
+                    "target": "lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/route.ts",
+                    "content": "Main DodoPayments routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/route.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/checkout.ts",
+                    "content": "Checkout routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/checkout.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/customer.ts",
+                    "content": "Customer management routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/customer.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/payments.ts",
+                    "content": "Payment routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/payments.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/products.ts",
+                    "content": "Product management routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/products.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/subscriptions.ts",
+                    "content": "Subscription management routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/subscriptions.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/src/routes/dodopayments/webhook.ts",
+                    "content": "Webhook handling routes for Fastify",
+                    "type": "template",
+                    "target": "routes/dodopayments/webhook.ts"
+                },
+                {
+                    "path": "packages/templates/fastify/.env.example",
+                    "content": "DodoPayments .env.example for Fastify",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "standardwebhooks",
+                "zod",
+                "fastify",
+                "fastify-raw-body"
+            ]
+        },
         {
             "name": "react-dodopayments",
             "description": "DodoPayments template for React.js",

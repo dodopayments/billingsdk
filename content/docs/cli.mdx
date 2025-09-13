@@ -52,7 +52,7 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (Next.js or Express.js)
+1. **Framework Selection**: Choose your preferred framework (Next.js, Express.js, or Fastify)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
@@ -67,14 +67,14 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router) or Express.js (Node.js web framework)
+- **Framework**: Next.js (with App Router), Express.js (Node.js web framework), or Fastify (high-performance Node.js framework)
 - **Payment Provider**: Dodo Payments
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'Fastify + Dodo Payments', 'React.js + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -91,6 +91,24 @@ After running `init`, you'll get:
     │   └── useBilling.ts
     ├── lib/
     │   └── dodopayments.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Fastify + Dodo Payments">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── dodopayments.ts
+    │   └── routes/
+    │       └── dodopayments/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── customer.ts
+    │           ├── payments.ts
+    │           ├── products.ts
+    │           ├── subscriptions.ts
+    │           └── webhook.ts
     └── .env.example
     ```
   </Tab>
@@ -136,7 +154,7 @@ The init command sets up comprehensive API routes for:
 
 ### Dependencies Installed
 
-<Tabs items={['Next.js', 'Express.js', "React.js"]}>
+<Tabs items={['Next.js', 'Express.js', 'Fastify', "React.js"]}>
   <Tab value="Next.js">
     ```json
     {
@@ -144,6 +162,19 @@ The init command sets up comprehensive API routes for:
         "dodopayments": "latest",
         "standardwebhooks": "latest",
         "zod": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Fastify">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "fastify": "latest",
+        "fastify-raw-body": "latest"
       }
     }
     ```
@@ -181,6 +212,48 @@ The init command sets up comprehensive API routes for:
 
   Make sure to restart your dev server after updating environment variables.
 </Callout>
+## Fastify Setup Instructions
+
+### Basic Fastify Integration
+
+After running `@billingsdk/cli init` and selecting Fastify, register the generated routes in your Fastify application:
+
+```ts
+// server.ts
+import Fastify from 'fastify'
+import rawBody from 'fastify-raw-body'
+import dodopaymentsRoutes from './src/routes/dodopayments/route'
+
+const fastify = Fastify({ logger: true })
+
+// Enable raw body for webhook route verification
+await fastify.register(rawBody, { field: 'rawBody', global: false, encoding: 'utf8', runFirst: true })
+
+// Mount DodoPayments routes
+await fastify.register(dodopaymentsRoutes, { prefix: '/api/dodopayments' })
+
+// Start server
+const PORT = Number(process.env.PORT) || 3000
+await fastify.listen({ port: PORT })
+console.log(`Server running on port ${PORT}`)
+```
+
+### Available API Endpoints
+
+The Fastify template provides these endpoints (same as Express):
+
+- `POST /api/dodopayments/checkout`
+- `GET /api/dodopayments/customer`
+- `POST /api/dodopayments/customer`
+- `PUT /api/dodopayments/customer`
+- `GET /api/dodopayments/customer/subscriptions`
+- `GET /api/dodopayments/customer/payments`
+- `GET /api/dodopayments/products`
+- `GET /api/dodopayments/product`
+- `GET /api/dodopayments/subscriptions`
+- `GET /api/dodopayments/payments`
+- `POST /api/dodopayments/webhook`
+
 ## Express.js Setup Instructions
 
 ### Basic Express.js Integration
@@ -380,8 +453,12 @@ npx @billingsdk/cli add usage-meter-circle
 - 📁 **Structure**: Modular route-based architecture
 - 🔧 **Features**: RESTful API routes, middleware support, TypeScript integration
 
+### Fastify
+- ✅ **Status**: Fully supported
+- 📁 **Structure**: Plugin-registered routes under a `routes/` directory
+- 🔧 **Features**: High-performance routing, schema validation with Zod, webhook raw-body support
+
 ### Coming Soon
-- 🚧 **Fastify**: High-performance backend framework
 - 🚧 **Additional React Frameworks**: Vite, Remix support
 
 ## Supported Payment Providers
