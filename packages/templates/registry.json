@@ -133,7 +133,121 @@
                 "dodopayments",
                 "react"
             ]
-}
-
+        },
+        {
+            "name": "nextjs-paypal",
+            "description": "PayPal template for NextJS",
+            "framework": "nextjs",
+            "files": [
+                {
+                    "path": "packages/templates/nextjs/lib/paypal.ts",
+                    "content": "PayPal library for NextJS",
+                    "type": "template",
+                    "target": "lib/paypal.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/hooks/usePayPal.ts",
+                    "content": "usePayPal hook for NextJS",
+                    "type": "template",
+                    "target": "hooks/usePayPal.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/api-routes/(paypal)/*",
+                    "content": "PayPal API routes for NextJS",
+                    "type": "template",
+                    "target": "app/api/(paypal)/*"
+                },
+                {
+                    "path": "packages/templates/nextjs/.env.paypal.example",
+                    "content": "PayPal .env.example for NextJS",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "@paypal/paypal-server-sdk",
+                "standardwebhooks",
+                "zod"
+            ]
+        },
+        {
+            "name": "express-paypal",
+            "description": "PayPal template for Express.js",
+            "framework": "express",
+            "files": [
+                {
+                    "path": "packages/templates/express/src/lib/paypal.ts",
+                    "content": "PayPal library for Express.js",
+                    "type": "template",
+                    "target": "lib/paypal.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/paypal/route.ts",
+                    "content": "Main PayPal router for Express.js",
+                    "type": "template",
+                    "target": "routes/paypal/route.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/paypal/checkout.ts",
+                    "content": "Checkout routes for Express.js",
+                    "type": "template",
+                    "target": "routes/paypal/checkout.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/paypal/order.ts",
+                    "content": "Order management routes for Express.js",
+                    "type": "template",
+                    "target": "routes/paypal/order.ts"
+                },
+                {
+                    "path": "packages/templates/express/src/routes/paypal/webhook.ts",
+                    "content": "Webhook handling routes for Express.js",
+                    "type": "template",
+                    "target": "routes/paypal/webhook.ts"
+                },
+                {
+                    "path": "packages/templates/express/.env.paypal.example",
+                    "content": "PayPal .env.example for Express.js",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "@paypal/paypal-server-sdk",
+                "standardwebhooks",
+                "zod",
+                "express",
+                "@types/express"
+            ]
+        },
+        {
+            "name": "react-paypal",
+            "description": "PayPal template for React.js",
+            "framework": "react",
+            "files": [
+                {
+                "path": "packages/templates/react/lib/paypal.ts",
+                "content": "PayPal library for React.js",
+                "type": "template",
+                "target": "lib/paypal.ts"
+                },
+                {
+                "path": "packages/templates/react/hooks/usePayPal.ts",
+                "content": "Custom React hook for managing PayPal billing flows",
+                "type": "template",
+                "target": "hooks/usePayPal.ts"
+                },
+                {
+                "path": "packages/templates/react/.env.paypal.example",
+                "content": "PayPal .env.example for React.js",
+                "type": "template",
+                "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "@paypal/paypal-server-sdk",
+                "react"
+            ]
+        }
     ]
 }

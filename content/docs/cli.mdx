@@ -68,13 +68,13 @@ npx @billingsdk/cli init
 
 You'll be prompted to select:
 - **Framework**: Next.js (with App Router) or Express.js (Node.js web framework)
-- **Payment Provider**: Dodo Payments
+- **Payment Provider**: Dodo Payments or PayPal
 
 ### Generated Files
 
 After running `init`, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Next.js + PayPal', 'Express.js + PayPal', 'React.js + PayPal']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -123,6 +123,47 @@ After running `init`, you'll get:
     └── .env.example
     ```
   </Tab>
+  <Tab value="Next.js + PayPal">
+    ```
+    your-project/
+    ├── app/api/
+    │   ├── (paypal)/
+    │   │   ├── checkout/route.ts
+    │   │   ├── order/[orderId]/route.ts
+    │   │   └── order/capture/route.ts
+    ├── hooks/
+    │   └── usePayPal.ts
+    ├── lib/
+    │   └── paypal.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="Express.js + PayPal">
+    ```
+    your-project/
+    ├── src/
+    │   ├── lib/
+    │   │   └── paypal.ts
+    │   └── routes/
+    │       └── paypal/
+    │           ├── route.ts
+    │           ├── checkout.ts
+    │           ├── order/[orderId].ts
+    │           └── order/capture.ts
+    └── .env.example
+    ```
+  </Tab>
+  <Tab value="React.js + PayPal">
+    ```
+    your-project/
+    ├── src/
+    │   ├── hooks/
+    │   │   └── usePayPal.ts
+    │   └── lib/
+    │       └── paypal.ts
+    └── .env.example
+    ```
+  </Tab>
 </Tabs>
 
 ### API Routes Included
@@ -134,6 +175,12 @@ The init command sets up comprehensive API routes for:
 - **Product Management**: Product catalog and pricing
 - **Webhook Handling**: Payment provider webhook integration
 
+For PayPal integrations, the following API routes are created:
+
+- `POST /api/(paypal)/checkout` - Create PayPal order
+- `GET /api/(paypal)/order/[orderId]` - Get order details
+- `POST /api/(paypal)/order/capture` - Capture PayPal order
+
 ### Dependencies Installed
 
 <Tabs items={['Next.js', 'Express.js', "React.js"]}>
@@ -142,6 +189,17 @@ The init command sets up comprehensive API routes for:
     {
       "dependencies": {
         "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest"
+      }
+    }
+    ```
+    
+    For PayPal integrations:
+    ```json
+    {
+      "dependencies": {
+        "@paypal/paypal-server-sdk": "latest",
         "standardwebhooks": "latest",
         "zod": "latest"
       }
@@ -160,6 +218,19 @@ The init command sets up comprehensive API routes for:
       }
     }
     ```
+    
+    For PayPal integrations:
+    ```json
+    {
+      "dependencies": {
+        "@paypal/paypal-server-sdk": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "express": "latest",
+        "@types/express": "latest"
+      }
+    }
+    ```
   </Tab>
   <Tab value="React.js">
     ```json
@@ -169,11 +240,20 @@ The init command sets up comprehensive API routes for:
       }
     }
     ```
+    
+    For PayPal integrations:
+    ```json
+    {
+      "dependencies": {
+        "@paypal/paypal-server-sdk": "latest"
+      }
+    }
+    ```
   </Tab>
 </Tabs>
 
 <Callout title="Environment Setup">
-  After running `init`, copy the example environment file and configure your Dodo Payments API keys and webhook secrets:
+  After running `init`, copy the example environment file and configure your payment provider API keys and webhook secrets:
 
   - **Next.js** → copy `.env.example` to `.env.local`
   - **Express.js** → copy `.env.example` to `.env`
@@ -181,62 +261,115 @@ The init command sets up comprehensive API routes for:
 
   Make sure to restart your dev server after updating environment variables.
 </Callout>
+
 ## Express.js Setup Instructions
 
 ### Basic Express.js Integration
 
 After running `@billingsdk/cli init` and selecting Express.js, you'll need to integrate the generated routes into your Express application:
 
-```javascript
-// app.js or server.js
-const express = require('express');
-const { dodopaymentsRouter } = require('./src/routes/dodopayments/route');
+<Tabs items={['Dodo Payments', 'PayPal']}>
+  <Tab value="Dodo Payments">
+    ```javascript
+    // app.js or server.js
+    const express = require('express');
+    const { dodopaymentsRouter } = require('./src/routes/dodopayments/route');
 
-const app = express();
+    const app = express();
 
-// Middleware
-app.use(express.json());
+    // Middleware
+    app.use(express.json());
 
-// Mount DodoPayments routes
-app.use('/api/dodopayments', dodopaymentsRouter);
+    // Mount DodoPayments routes
+    app.use('/api/dodopayments', dodopaymentsRouter);
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
+    // Start server
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+    ```
+  </Tab>
+  <Tab value="PayPal">
+    ```javascript
+    // app.js or server.js
+    const express = require('express');
+    const { paypalRouter } = require('./src/routes/paypal/route');
+
+    const app = express();
+
+    // Middleware
+    app.use(express.json());
+
+    // Mount PayPal routes
+    app.use('/api/paypal', paypalRouter);
+
+    // Start server
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+    ```
+  </Tab>
+</Tabs>
 
 ### Environment Configuration
 
 Create a `.env` file in your project root:
 
-```bash
-# DodoPayments Configuration
-DODO_PAYMENTS_API_KEY=your_api_key_here
-DODO_PAYMENTS_ENVIRONMENT=test_mode
-DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+<Tabs items={['Dodo Payments', 'PayPal']}>
+  <Tab value="Dodo Payments">
+    ```bash
+    # DodoPayments Configuration
+    DODO_PAYMENTS_API_KEY=your_api_key_here
+    DODO_PAYMENTS_ENVIRONMENT=test_mode
+    DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
 
-# Server Configuration
-PORT=3000
-NODE_ENV=development
-```
+    # Server Configuration
+    PORT=3000
+    NODE_ENV=development
+    ```
+  </Tab>
+  <Tab value="PayPal">
+    ```bash
+    # PayPal Configuration
+    NEXT_PUBLIC_APP_URL=http://localhost:3000
+    PAYPAL_CLIENT_ID=your_client_id_here
+    PAYPAL_CLIENT_SECRET=your_client_secret_here
+    PAYPAL_ENV=sandbox
+    PAYPAL_WEBHOOK_ID=your_webhook_id_here
+
+    # Server Configuration
+    PORT=3000
+    NODE_ENV=development
+    ```
+  </Tab>
+</Tabs>
 
 ### Available API Endpoints
 
 The Express.js template provides these endpoints:
 
-- `POST /api/dodopayments/checkout` - Create checkout sessions
-- `GET /api/dodopayments/customer` - Retrieve customer data
-- `POST /api/dodopayments/customer` - Create new customers
-- `PUT /api/dodopayments/customer` - Update customer information
-- `GET /api/dodopayments/customer/subscriptions` - Get customer subscriptions
-- `GET /api/dodopayments/customer/payments` - Get customer payment history
-- `GET /api/dodopayments/products` - List all products
-- `GET /api/dodopayments/product` - Get specific product details
-- `GET /api/dodopayments/subscriptions` - Retrieve subscription details
-- `GET /api/dodopayments/payments` - Get payment information
-- `POST /api/dodopayments/webhook` - Handle DodoPayments webhooks
+<Tabs items={['Dodo Payments', 'PayPal']}>
+  <Tab value="Dodo Payments">
+    - `POST /api/dodopayments/checkout` - Create checkout sessions
+    - `GET /api/dodopayments/customer` - Retrieve customer data
+    - `POST /api/dodopayments/customer` - Create new customers
+    - `PUT /api/dodopayments/customer` - Update customer information
+    - `GET /api/dodopayments/customer/subscriptions` - Get customer subscriptions
+    - `GET /api/dodopayments/customer/payments` - Get customer payment history
+    - `GET /api/dodopayments/products` - List all products
+    - `GET /api/dodopayments/product` - Get specific product details
+    - `GET /api/dodopayments/subscriptions` - Retrieve subscription details
+    - `GET /api/dodopayments/payments` - Get payment information
+    - `POST /api/dodopayments/webhook` - Handle DodoPayments webhooks
+  </Tab>
+  <Tab value="PayPal">
+    - `POST /api/paypal/checkout` - Create PayPal order
+    - `GET /api/paypal/order/:orderId` - Get order details
+    - `POST /api/paypal/order/capture` - Capture PayPal order
+  </Tab>
+</Tabs>
 
 ### TypeScript Support
 
@@ -287,47 +420,105 @@ After running `@billingsdk/cli init` and selecting **React.js**, the CLI generat
 
 You can use the `useBilling` hook directly in your components to interact with the backend API:
 
-```tsx
-// src/App.tsx or any component
-import React, { useEffect } from 'react'
-import { useBilling } from './hooks/useBilling'
+<Tabs items={['Dodo Payments', 'PayPal']}>
+  <Tab value="Dodo Payments">
+    ```tsx
+    // src/App.tsx or any component
+    import React, { useEffect } from 'react'
+    import { useBilling } from './hooks/useBilling'
 
-function App() {
-  const { fetchProducts, loading, error } = useBilling()
+    function App() {
+      const { fetchProducts, loading, error } = useBilling()
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const products = await fetchProducts()
-        console.log('Products:', products)
-      } catch (err) {
-        console.error('Failed to fetch products:', err)
-      }
+      useEffect(() => {
+        const loadProducts = async () => {
+          try {
+            const products = await fetchProducts()
+            console.log('Products:', products)
+          } catch (err) {
+            console.error('Failed to fetch products:', err)
+          }
+        }
+        loadProducts()
+      }, [fetchProducts])
+
+      if (loading) return <p>Loading...</p>
+      if (error) return <p style={{ color: 'red' }}>{error}</p>
+
+      return <h1>Welcome to DodoPayments + React</h1>
     }
-    loadProducts()
-  }, [fetchProducts])
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+    export default App
+    ```
+  </Tab>
+  <Tab value="PayPal">
+    ```tsx
+    // src/App.tsx or any component
+    import React, { useEffect } from 'react'
+    import { usePayPal } from './hooks/usePayPal'
 
-  return <h1>Welcome to DodoPayments + React</h1>
-}
+    function App() {
+      const { createOrder, captureOrder, loading, error } = usePayPal()
 
-export default App
-```
+      const handlePayment = async () => {
+        try {
+          // Create a PayPal order
+          const orderId = await createOrder('100.00', 'USD', 'BillingSDK Purchase')
+          
+          // In a real app, you would redirect to PayPal for approval
+          // Then capture the order after approval
+          const result = await captureOrder(orderId)
+          console.log('Payment captured:', result)
+        } catch (err) {
+          console.error('Payment failed:', err)
+        }
+      }
+
+      if (loading) return <p>Processing payment...</p>
+      if (error) return <p style={{ color: 'red' }}>{error}</p>
+
+      return (
+        <div>
+          <h1>Welcome to PayPal + React</h1>
+          <button onClick={handlePayment}>Pay with PayPal</button>
+        </div>
+      )
+    }
+
+    export default App
+    ```
+  </Tab>
+</Tabs>
 
 ### Environment Configuration
 
 Create a `.env` (or `.env.local` if using Vite) in your project root:
 
-```bash
-# DodoPayments Configuration
-VITE_DODO_PAYMENTS_API_KEY=your_api_key_here
-VITE_DODO_PAYMENTS_ENVIRONMENT=test_mode
+<Tabs items={['Dodo Payments', 'PayPal']}>
+  <Tab value="Dodo Payments">
+    ```bash
+    # DodoPayments Configuration
+    VITE_DODO_PAYMENTS_API_KEY=your_api_key_here
+    VITE_DODO_PAYMENTS_ENVIRONMENT=test_mode
 
-# Backend API URL (Express.js server or Next.js API routes)
-VITE_BASE_URL=http://localhost:3000
-```
+    # Backend API URL (Express.js server or Next.js API routes)
+    VITE_BASE_URL=http://localhost:3000
+    ```
+  </Tab>
+  <Tab value="PayPal">
+    ```bash
+    # PayPal Configuration
+    VITE_PAYPAL_CLIENT_ID=your_client_id_here
+    VITE_PAYPAL_CLIENT_SECRET=your_client_secret_here
+    VITE_PAYPAL_ENV=sandbox
+    VITE_PAYPAL_WEBHOOK_ID=your_webhook_id_here
+    VITE_APP_URL=http://localhost:3000
+
+    # Backend API URL (Express.js server or Next.js API routes)
+    VITE_BASE_URL=http://localhost:3000
+    ```
+  </Tab>
+</Tabs>
 
 ## `@billingsdk/cli add`
 
@@ -389,6 +580,11 @@ npx @billingsdk/cli add usage-meter-circle
 ### Dodo Payments
 - ✅ **Status**: Fully supported
 - 🔧 **Features**: Payment processing, subscriptions, webhooks
+- 📚 **Integration**: Complete API route templates included
+
+### PayPal
+- ✅ **Status**: Fully supported
+- 🔧 **Features**: Payment processing, order management
 - 📚 **Integration**: Complete API route templates included
 
 ### Coming Soon

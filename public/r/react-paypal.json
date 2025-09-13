@@ -1,0 +1,31 @@
+{
+  "name": "react-paypal",
+  "description": "PayPal template for React.js",
+  "framework": "react",
+  "files": [
+    {
+      "path": "packages/templates/react/lib/paypal.ts",
+      "content": "PayPal library for React.js",
+      "type": "template",
+      "target": "lib/paypal.ts"
+    },
+    {
+      "path": "packages/templates/react/hooks/usePayPal.ts",
+      "content": "Custom React hook for managing PayPal billing flows",
+      "type": "template",
+      "target": "hooks/usePayPal.ts"
+    },
+    {
+      "path": "packages/templates/react/.env.paypal.example",
+      "content": "PayPal .env.example for React.js",
+      "type": "template",
+      "target": ".env.example"
+    }
+  ],
+  "dependencies": [
+    "@paypal/paypal-server-sdk",
+    "standardwebhooks",
+    "zod",
+    "react"
+  ]
+}

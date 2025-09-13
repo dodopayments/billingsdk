@@ -1,0 +1,50 @@
+{
+  "name": "express-paypal",
+  "description": "PayPal template for Express.js",
+  "framework": "express",
+  "files": [
+    {
+      "path": "packages/templates/express/src/lib/paypal.ts",
+      "content": "PayPal library for Express.js",
+      "type": "template",
+      "target": "src/lib/paypal.ts"
+    },
+    {
+      "path": "packages/templates/express/src/routes/paypal/route.ts",
+      "content": "Main PayPal router for Express.js",
+      "type": "template",
+      "target": "src/routes/paypal/route.ts"
+    },
+    {
+      "path": "packages/templates/express/src/routes/paypal/checkout.ts",
+      "content": "Checkout routes for Express.js",
+      "type": "template",
+      "target": "src/routes/paypal/checkout.ts"
+    },
+    {
+      "path": "packages/templates/express/src/routes/paypal/order.ts",
+      "content": "Order management routes for Express.js",
+      "type": "template",
+      "target": "src/routes/paypal/order.ts"
+    },
+    {
+      "path": "packages/templates/express/src/routes/paypal/webhook.ts",
+      "content": "Webhook handling routes for Express.js",
+      "type": "template",
+      "target": "src/routes/paypal/webhook.ts"
+    },
+    {
+      "path": "packages/templates/express/.env.paypal.example",
+      "content": "PayPal .env.example for Express.js",
+      "type": "template",
+      "target": ".env.example"
+    }
+  ],
+  "dependencies": [
+    "@paypal/paypal-server-sdk",
+    "standardwebhooks",
+    "zod",
+    "express",
+    "@types/express"
+  ]
+}

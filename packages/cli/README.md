@@ -11,8 +11,9 @@ npx @billingsdk/cli --help
 ```
 
 This command provides two setup options:
+
 - **UI Components**: Sets up shadcn/ui components
-- **Framework Setup**: Configures your framework (Next.js, Express.js, or React) with Dopayments integration
+- **Framework Setup**: Configures your framework (Next.js, Express.js, or React) with payment provider integration
 
 ## Quick Start
 
@@ -23,9 +24,10 @@ npx @billingsdk/cli init
 ```
 
 This interactive command will:
+
 - Automatically detect your framework (Next.js, Express.js, or React) from your project dependencies
 - Guide you through framework selection if auto-detection fails or you prefer manual selection
-- Help you choose a payment provider (Dodo Payments)
+- Help you choose a payment provider (Dodo Payments or PayPal)
 - Set up complete project structure with API routes (for full-stack frameworks) or hooks/utilities (for React)
 - Install all necessary dependencies
 - Generate configuration files and boilerplate code
@@ -50,54 +52,57 @@ npx @billingsdk/cli add usage-meter-circle
 Initialize a new billing project with complete setup.
 
 **Options:**
-- Automatic framework detection (Next.js, Express.js, React) from project dependencies
+
+- Automatic framework detection (Next.js, Express.js, or React) from project dependencies
 - Interactive framework selection as fallback or when preferred
-- Payment provider configuration
+- Payment provider configuration (Dodo Payments or PayPal)
 - Automatic dependency installation
 - Template-based file generation
+- `--skip-deps` - Skip automatic dependency installation (useful for troubleshooting)
 
 **Generated Structures:**
 
 *Next.js (App Router):*
+
 ```
 your-project/
-├── app/api/(dodopayments)/
+├── app/api/(provider)/
 │   ├── checkout/route.ts
-│   ├── customer/route.ts
-│   ├── products/route.ts
+│   ├── order/[orderId]/route.ts
+│   ├── order/capture/route.ts
 │   └── webhook/route.ts
 ├── hooks/
-│   └── useBilling.ts
+│   └── useBilling.ts (or usePayPal.ts)
 ├── lib/
-│   └── dodopayments.ts
+│   └── provider.ts (dodopayments.ts or paypal.ts)
 └── .env.example
 ```
 
 *Express.js:*
+
 ```
 your-project/
 ├── src/
 │   ├── lib/
-│   │   └── dodopayments.ts
+│   │   └── provider.ts (dodopayments.ts or paypal.ts)
 │   └── routes/
-│       └── dodopayments/
+│       └── provider/
 │           ├── checkout.ts
-│           ├── customer.ts
-│           ├── payments.ts
-│           ├── products.ts
-│           ├── subscriptions.ts
+│           ├── order.ts
+│           ├── route.ts
 │           └── webhook.ts
 ├── .env.example
 └── package.json
 ```
 
 *React (Client-side only):*
+
 ```
 your-project/
 ├── hooks/
-│   └── useBilling.ts
+│   └── useBilling.ts (or usePayPal.ts)
 ├── lib/
-│   └── dodopayments.ts
+│   └── provider.ts (dodopayments.ts or paypal.ts)
 └── .env.example
 ```
 
@@ -106,12 +111,12 @@ your-project/
 Add individual billing components to your existing project.
 
 **Examples:**
+
 ```bash
 npx @billingsdk/cli add pricing-table-one
 npx @billingsdk/cli add subscription-management
 npx @billingsdk/cli add usage-meter-circle
 ```
-
 
 ## Configuration
 
@@ -123,16 +128,25 @@ After running `init`, configure your environment:
 # Copy the generated .env.example to .env.local
 cp .env.example .env.local
 
-# Add your Dodo Payments credentials
+# For Dodo Payments
 DODO_PAYMENTS_API_KEY=your_api_key_here
 DODO_PAYMENTS_WEBHOOK_SECRET=your_webhook_secret_here
+
+# For PayPal
+PAYPAL_CLIENT_ID=your_client_id_here
+PAYPAL_CLIENT_SECRET=your_client_secret_here
+PAYPAL_WEBHOOK_ID=your_webhook_id_here
+PAYPAL_ENV=sandbox # or live
+
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 ### Dependencies Installed
 
 The CLI automatically installs:
-- `dodopayments` - Payment processing library
+
+- `dodopayments` - Payment processing library (when Dodo Payments selected)
+- `@paypal/paypal-server-sdk` - PayPal SDK (when PayPal selected)
 - `standardwebhooks` - Webhook verification
 - `zod` - TypeScript schema validation
 
@@ -151,80 +165,40 @@ The CLI automatically detects your framework based on your project dependencies 
 - 🚧 **Hono** - Coming soon
 
 **Auto-Detection Process:**
+
 1. Scans your `package.json` for framework-specific dependencies
 2. Checks for framework configuration files in your project root
 3. Presents detected framework as the default option during setup
 4. Falls back to manual selection if no framework is detected
 
 ### Payment Providers
+
 - ✅ **Dodo Payments** - Fully supported
+- ✅ **PayPal** - Fully supported
 - 🚧 **Stripe** - Coming soon
 - 🚧 **Additional providers** - Based on community demand
 
-## Development
-
-### Building the CLI
-
-```bash
-cd packages/cli
-npm run build
-```
-
-### Development Mode
-
-```bash
-cd packages/cli
-npm run dev
-```
-
 ## Troubleshooting
+
+### Dependency Installation Issues
+
+If you encounter issues with automatic dependency installation (particularly on Windows), you can:
+
+1. Skip automatic installation and install dependencies manually:
+
+   ```bash
+   npx @billingsdk/cli init --skip-deps
+   # Then manually install dependencies as instructed
+   ```
+
+2. Set an environment variable to skip installation:
+
+   ```bash
+   BILLINGSDK_SKIP_INSTALL=1 npx @billingsdk/cli init
+   ```
+
+3. Ensure your package manager (npm, yarn, pnpm, bun) is properly installed and in your system PATH
 
 ### Common Issues
 
 **Command not found**
-```bash
-# Ensure you're using npx correctly
-npx @billingsdk/cli --help
-```
-
-**Permission errors**
-```bash
-# On Unix systems
-chmod +x node_modules/.bin/@billingsdk/cli
-```
-
-**Network issues**
-```bash
-# Check internet connection
-# CLI downloads templates from @billingsdk/cli.com
-```
-
-### Getting Help
-
-```bash
-# Show all commands
-npx @billingsdk/cli --help
-
-# Get help for specific command
-npx @billingsdk/cli init --help
-```
-
-## Contributing
-
-The CLI is part of the Billing SDK monorepo. See the main [CONTRIBUTING.md](../CONTRIBUTING.md) for development setup and contribution guidelines.
-
-### Adding New Commands
-
-1. Create a new command file in `src/commands/`
-2. Export the command from `src/index.ts`
-3. Update this README with documentation
-
-### Adding New Components
-
-1. Add component templates to `packages/templates/`
-2. Update the registry configuration
-3. Run `@billingsdk/cli build` to generate new registry files
-
-## License
-
-This project is licensed under the GNU General Public License (GPL). See the main [LICENSE](../LICENSE) file for details.

@@ -52,6 +52,7 @@ Billing SDK provides production-ready UI building blocks for pricing, usage, and
 - **Responsive by default**: Optimized for mobile, tablet, and desktop
 - **TypeScript-first**: Strongly typed props for safe composition
 - **Easy integration**: One-command install via CLI or shadcn/ui registry
+- **Multi-provider support**: Works with Dodo Payments and PayPal
 
 ## Components
 
