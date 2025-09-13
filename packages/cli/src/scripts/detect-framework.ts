@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { findUpSync } from "find-up"; // find a file path by walking up parent directories
 
-export const detectFramework = (): "nextjs" | "express" | "react" | null => {
+export const detectFramework = (): "nextjs" | "express" | "react" | "hono" | null => {
     try {
 
         const pkgPath = findUpSync("package.json");
@@ -36,10 +36,17 @@ export const detectFramework = (): "nextjs" | "express" | "react" | null => {
         if (deps.express) {
             return "express";
         }
+
+        // hono detection
+        if (deps.hono) {
+            return "hono";
+        }
+
         //  reactjs detection
         if (deps.react) {
             return "react";
         }
+
         return null;
     } catch {
         return null
