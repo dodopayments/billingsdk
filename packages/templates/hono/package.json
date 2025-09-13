@@ -1,0 +1,12 @@
+{
+  "name": "hono",
+  "scripts": {
+    "dev": "bun run --hot src/routes/route.ts"
+  },
+  "dependencies": {
+    "hono": "^4.9.7"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

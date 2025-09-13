@@ -133,6 +133,74 @@
                 "dodopayments",
                 "react"
             ]
+        },
+        {
+            "name": "hono-dodopayments",
+            "description": "DodoPayments template for Hono",
+            "framework": "hono",
+            "files": [
+                {
+                    "path": "packages/templates/hono/src/lib/dodopayments.ts",
+                    "content": "DodoPayments library for Hono",
+                    "type": "template",
+                    "target": "src/lib/dodopayments.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/route.ts",
+                    "content": "Main DodoPayments router for Hono",
+                    "type": "template",
+                    "target": "src/routes/route.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/checkout.ts",
+                    "content": "Checkout routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/checkout.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/customer.ts",
+                    "content": "Customer management routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/customer.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/payments.ts",
+                    "content": "Payment routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/payments.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/products.ts",
+                    "content": "Product management routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/products.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/subscriptions.ts",
+                    "content": "Subscription management routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/subscriptions.ts"
+                },
+                {
+                    "path": "packages/templates/hono/src/routes/dodopayments/webhook.ts",
+                    "content": "Webhook handling routes for Hono",
+                    "type": "template",
+                    "target": "src/routes/dodopayments/webhook.ts"
+                },
+                {
+                    "path": "packages/templates/hono/.env.example",
+                    "content": "DodoPayments .env.example for Hono",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "dodopayments",
+                "standardwebhooks",
+                "zod",
+                "hono",
+                "@types/bun"
+            ]
 }
 
     ]
