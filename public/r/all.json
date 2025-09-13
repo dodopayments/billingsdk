@@ -15,6 +15,7 @@
     "@billingsdk/update-plan-dialog",
     "@billingsdk/update-plan-card",
     "@billingsdk/subscription-management",
+    "@billingsdk/usage-based-pricing",
     "@billingsdk/usage-meter-linear",
     "@billingsdk/usage-meter-circle",
     "@billingsdk/banner",

@@ -9,6 +9,7 @@ import { CancelSubscriptionDialog } from "@/components/billingsdk/cancel-subscri
 import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card";
 import { UpdatePlanDialog } from "@/components/billingsdk/update-plan-dialog";
 import { SubscriptionManagement } from "@/components/billingsdk/subscription-management";
+import { UsageBasedPricing } from "@/components/billingsdk/usage-based-pricing";
 import { UsageMeter } from "@/components/billingsdk/usage-meter";
 import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
@@ -41,6 +42,35 @@ export const componentRegistry: ComponentConfig[] = [
       autoDismiss: 5000,
       onDismiss: () => console.log("Banner dismissed"),
     },
+  },
+  {
+    id: "usage-based-pricing",
+    name: "Usage Based Pricing",
+    description: "Interactive usage pricing slider with ruler ticks and animated price",
+    category: "subscription",
+    component: UsageBasedPricing,
+    imports: ["@/components/billingsdk/usage-based-pricing"],
+    defaultCode: `<UsageBasedPricing
+  min={4000}
+  max={25000}
+  step={250}
+  defaultValue={4000}
+  currency="$"
+  basePrice={39.99}
+  includedCredits={4000}
+  unitPricePerCredit={0.01}
+/>`,
+    defaultProps: {
+      min: 4000,
+      max: 25000,
+      step: 250,
+      defaultValue: 4000,
+      currency: "$",
+      basePrice: 39.99,
+      includedCredits: 4000,
+      unitPricePerCredit: 0.01,
+    },
+  
   },
   {
     id: "pricing-table-one",
