@@ -14,14 +14,23 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const seen = sessionStorage.getItem("homeLoadedOnce") === "1";
+    if (seen) {
+      setIsLoading(false);
+      return;
+    }
+    // Show loading screen only once per session, respecting user preferences for reduced motion and data saving.
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const saveData = (navigator as any)?.connection?.saveData;
+    const delay = prefersReducedMotion || saveData ? 300 : 1200;
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500); // 2.5 seconds - as per i calculated
-
+      sessionStorage.setItem("homeLoadedOnce", "1");
+    }, delay);
     return () => clearTimeout(timer);
   }, []);
 
-  
+
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
   }
