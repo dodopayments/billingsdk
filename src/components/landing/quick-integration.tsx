@@ -14,10 +14,8 @@ export default function QuickIntegration() {
         <p className=" mt-4 text-muted-foreground mb-12 max-w-xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 text-center">
           Beautiful, customizable billing components that save you development
           time and effort.
-        </p> <div>
-          <h1></h1>
-
-        </div>
+        </p> 
+     
         <div className="flex flex-col gap-y-6">
 
           <Installation />

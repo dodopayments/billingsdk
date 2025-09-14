@@ -24,7 +24,7 @@ export default function Features() {
         time and effort.
       </p>
 
-      <div className="relative rounded-none -pr-2  ">
+      <div className="relative rounded-none   ">
         <div className="w-full md:mx-0">
           <FeatureBento />
         </div>
@@ -37,7 +37,7 @@ export default function Features() {
 function FeatureBento() {
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-3  w-full gap-5 lg:min-w-4xl lg:max-w-5xl">
+      <div className="grid grid-cols-1 lg:grid-cols-3  w-full gap-5  lg:max-w-5xl">
 
         <div className="col-span-1 lg:col-span-2 border rounded overflow-hidden">
           <EasyCodeIntegration />
@@ -71,7 +71,7 @@ function EasyCodeIntegration() {
       >
         <h2 className="md:text-[17px]">Easily Integrates with your system</h2>
         <h2 className="md:text-[16px] text-muted-foreground mt-1">
-          Its built in shadcn ecosystem, code at your doorstep with just one command
+         It’s built on the shadcn ecosystem—code at your doorstep with just one command
         </h2>
       </motion.div>
 
@@ -94,7 +94,7 @@ function EasyCodeIntegration() {
           <Input
             readOnly
             value="https://billingsdk.com"
-            className="text-sm text-center text-muted-foreground max-w-xs h-6.5"
+            className="text-sm text-center text-muted-foreground max-w-xs h-6"
           />
 
           <FiSearch className="size-5 text-muted-foreground" />
@@ -244,7 +244,7 @@ function FastDevelopment() {
             className="relative  h-36 mt-4 rounded-lg shadow-lg overflow-hidden flex w-full text-lg px-12 items-center justify-center"
 
           >
-            Faster Developemnt
+            Faster Developement
             <motion.div
               className="flex items-center gap-4"
               initial={{ opacity: 0, x: -30 }}

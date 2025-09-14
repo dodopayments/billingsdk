@@ -1,33 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { GrainGradient } from "@paper-design/shaders-react";
 import { DiagonalLightBeams } from "./Hero";
 
 export function Footer() {
   return (
     <footer className="w-full my-5 py-20 rounded-b-xl overflow-hidden relative">
-      {/* <GrainGradient
-        style={{ height: "150%", width: "100%", position: "absolute" }}
-        colorBack="hsl(0, 0%, 5%)"
-        softness={0.5}
-        className="opacity-90"
-        intensity={0.27}
-        noise={0.30}
-        shape="wave"
-        offsetX={0}
-        offsetY={0}
-        scale={1}
-        rotation={0}
-        speed={1}
-        colors={[
-          "hsl(218, 100%, 50%)",
-          "hsl(212, 100%, 83%)",
-          "hsl(195, 100%, 50%)",
-          "hsl(250, 100%, 50%)",
-        ]}
-      /> */}
-      <DiagonalLightBeams/>
+
+      <DiagonalLightBeams />
       <div className="relative z-10 flex flex-col items-center justify-center h-full my-12 space-y-10 px-6">
         <div className="relative flex flex-col items-center justify-center">
           <p className="text-white mt-3 tracking-tight text-xl md:text-3xl text-center">
