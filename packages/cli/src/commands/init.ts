@@ -32,7 +32,7 @@ export const initCommand = new Command()
       const frameworkValue = framework as "nextjs" | "express" | "react" | "fastify" | "hono";
 
       const providerOptions =
-        frameworkValue === "express" || frameworkValue === "hono" || frameworkValue === "nextjs" 
+        frameworkValue === "express" || frameworkValue === "hono" || frameworkValue === "nextjs" || frameworkValue ==="react" 
           ? [
               { value: "dodopayments", label: "Dodo Payments" },
               { value: "stripe", label: "Stripe payments" },

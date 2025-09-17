@@ -435,7 +435,40 @@
                 "react",
                 "zod"
             ]
-       }
+       },
+
+
+       {
+
+            "name": "react-stripe",
+            "description": "Stripe template for React.js",
+            "framework": "react",
+            "files": [
+                {
+                    "path": "packages/templates/react/lib/stripe.ts",
+                    "content": "Stripe client setup for React.js",
+                    "type": "template",
+                    "target": "lib/stripe.ts"
+                },
+                {
+                    "path": "packages/templates/react/hooks/useStripeBilling.ts",
+                    "content": "Custom React hook for managing Stripe billing flows",
+                    "type": "template",
+                    "target": "hooks/useStripeBilling.ts"
+                },
+                {
+                    "path": "packages/templates/react/.env.example",
+                    "content": "Stripe .env.example for React.js",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "stripe",
+                "react",
+                "zod"
+            ]
+        }
 
 
 
