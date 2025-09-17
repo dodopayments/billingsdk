@@ -9,7 +9,7 @@ export const initCommand = new Command()
   .summary("Set up billing components and framework integration")
   .option("--framework <framework>", "Framework to use (nextjs|express|react|hono|fastify)")
   .option("--provider <provider>", "Payment provider (dodopayments|stripe|paypal)")
-  .action(async (_opts, cmd) => {
+  .action(async (_opts: unknown, cmd: Command) => {
     try {
       intro("Welcome to Billing SDK Setup!");
 
