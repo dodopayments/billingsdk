@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import type Stripe from 'stripe'
+
 
 interface UseStripeBillingState {
   loading: boolean

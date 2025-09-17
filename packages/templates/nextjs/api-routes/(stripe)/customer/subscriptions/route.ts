@@ -2,9 +2,6 @@ import { z } from "zod";
 import { NextResponse } from "next/server";
 import { getStripe } from "../../../../lib/stripe";
 
-
-const stripe = getStripe()
-
 const subscriptionQuerySchema = z.object({
     customer_id: z.string().min(1, "Customer ID is required"),
 })

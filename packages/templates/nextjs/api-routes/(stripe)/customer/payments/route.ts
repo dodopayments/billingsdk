@@ -7,7 +7,6 @@ const paymentQuerySchema = z.object({
     customer_id: z.string().min(1, "Customer ID is required"),
 })
 
-const stripe = getStripe()
 
 export async function GET(request: Request) {
     try {
@@ -24,7 +23,7 @@ export async function GET(request: Request) {
         const validatedParams = validatedResult.data
 
         const payments = await getStripe().paymentIntents.list({ customer: validatedParams.customer_id, limit: 100 });
-        
+
         return NextResponse.json(payments)
     } catch (error) {
         console.error('Error fetching customer payments:', error);

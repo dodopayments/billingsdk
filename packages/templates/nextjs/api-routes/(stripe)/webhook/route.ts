@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { getStripe } from "../../../lib/stripe";
 import type Stripe from "stripe";
 
