@@ -32,7 +32,7 @@ export function CouponDemo() {
   }
 
   return (
-    <div className="w-full flex justify-center items-center p-4 bg-background">
+    <div className="w-full flex justify-center items-center p-4 min-h-[400px]">
       <CouponGenerator
         companyName="Dodopayments"
         applicableOptions={[

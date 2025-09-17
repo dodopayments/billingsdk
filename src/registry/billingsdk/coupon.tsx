@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Copy, ArrowLeft, Share2, Scissors } from "lucide-react"
+import { cn } from "@/lib/utils"
 import {
     Select,
     SelectContent,
@@ -151,95 +152,80 @@ export function CouponGenerator({
     return (
         <>
             {generated ? (
-                <Card
-                    className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
-                    bg-background text-foreground
-                    border border-border shadow-2xl 
-                    ${cardClassName || ""}`}
-                >
+                <Card className={cn("w-full max-w-md mx-auto", cardClassName)}>
                     <CardContent className="p-0">
                         <div className="relative overflow-hidden">
-                            <div className="bg-zinc-900 dark:bg-zinc-100 p-6 relative">
-                                <div className="absolute top-0 left-0 w-full h-full opacity-5">
+                            <div className="bg-primary p-8 relative">
+                                <div className="absolute top-0 left-0 w-full h-full opacity-10">
                                     <div className="w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,255,255,0.1)_10px,rgba(255,255,255,0.1)_20px)]"></div>
                                 </div>
-                                <div className="relative z-10 text-center">
-                                    <div className="inline-flex items-center gap-2 mb-2">
-                                        <Scissors className="w-4 h-4 text-white dark:text-zinc-900" />
-                                        <span className="text-xs font-medium text-zinc-400 dark:text-zinc-600 uppercase tracking-wider">
+                                <div className="relative z-10 text-center space-y-3">
+                                    <div className="inline-flex items-center gap-2">
+                                        <Scissors className="w-4 h-4 text-primary-foreground" />
+                                        <span className="text-xs font-medium text-primary-foreground/80 uppercase tracking-wider">
                                             Coupon
                                         </span>
                                     </div>
-                                    <div className="text-3xl font-bold text-white dark:text-zinc-900 tracking-tight mb-1">
+                                    <div className="text-3xl font-bold text-primary-foreground tracking-tight">
                                         {generatedCouponCode}
                                     </div>
-                                    <div className="text-sm text-zinc-300 dark:text-zinc-700 font-medium">{companyName}</div>
+                                    <div className="text-sm text-primary-foreground/80 font-medium">{companyName}</div>
                                 </div>
                             </div>
 
-                            <div className="p-6 bg-white dark:bg-zinc-900">
-                                <div className="text-center space-y-2">
-                                    <div className="text-2xl font-bold text-zinc-900 dark:text-white">{discount}% OFF</div>
-                                    <div className="text-sm text-zinc-600 dark:text-zinc-400">
+                            <div className="p-8 bg-card">
+                                <div className="text-center space-y-3">
+                                    <div className="text-2xl font-bold text-card-foreground">{discount}% OFF</div>
+                                    <div className="text-sm text-muted-foreground">
                                         Valid until {endDate}
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-zinc-50 dark:bg-zinc-950 rounded-full -ml-3 border-2 border-zinc-200 dark:border-zinc-800"></div>
-                            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-zinc-50 dark:bg-zinc-950 rounded-full -mr-3 border-2 border-zinc-200 dark:border-zinc-800"></div>
+                            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background rounded-full -ml-3 border-2 border-border"></div>
+                            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-6 h-6 bg-background rounded-full -mr-3 border-2 border-border"></div>
                         </div>
                     </CardContent>
 
-                    <CardFooter className="flex justify-between items-center p-4 border-t border-border">
+                    <CardFooter className="flex justify-between items-center p-6 border-t">
                         <Button
                             variant="ghost"
                             size="sm"
                             onClick={() => setGenerated(false)}
-                            className="text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                         >
-                            <ArrowLeft className="w-4 h-4 mr-1" />
+                            <ArrowLeft className="w-4 h-4 mr-2" />
                             Back
                         </Button>
-                        <div className="flex gap-2">
+                        <div className="flex gap-3">
                             <Button
                                 variant="outline"
                                 size="sm"
                                 onClick={() => onCopy?.(generatedCouponCode)}
-                                className="border-border hover:bg-muted transition-colors bg-transparent"
                             >
-                                <Copy className="w-4 h-4 mr-1" />
+                                <Copy className="w-4 h-4 mr-2" />
                                 Copy
                             </Button>
                             <Button
                                 variant="outline"
                                 size="sm"
                                 onClick={() => onShare?.(generatedCouponCode)}
-                                className="border-border hover:bg-muted transition-colors bg-transparent"
                             >
-                                <Share2 className="w-4 h-4 mr-1" />
+                                <Share2 className="w-4 h-4 mr-2" />
                                 Share
                             </Button>
                         </div>
                     </CardFooter>
                 </Card>
             ) : (
-                <Card
-                    className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
-                    bg-background text-foreground
-                    border border-border shadow-2xl 
-                    ${cardClassName || ""}`}
-                >
-                    <CardHeader className="pb-4">
-                        <CardTitle className="text-xl font-semibold text-center">
+                <Card className={cn("w-full max-w-md mx-auto", cardClassName)}>
+                    <CardHeader className="space-y-4">
+                        <CardTitle className="text-lg sm:text-xl text-center">
                             Create Coupon Code
                         </CardTitle>
                     </CardHeader>
 
-                    <div className="h-px bg-border mx-6"></div>
-
-                    <CardContent className="space-y-6 p-6">
-                        <div className="grid grid-cols-2 gap-4">
+                    <CardContent className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <Label htmlFor="discount" className="text-sm font-medium">
                                     Discount (%)
@@ -251,19 +237,18 @@ export function CouponGenerator({
                                     onChange={handleDiscountChange}
                                     min={0}
                                     max={100}
-                                    className="bg-background border-border text-foreground"
                                 />
                                 {discountError && (
-                                    <div className="text-sm text-red-500">{discountError}</div>
+                                    <p className="text-sm text-destructive">{discountError}</p>
                                 )}
                             </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="applicable" className="text-sm font-medium">
-                                    Applicable to <span className="text-red-500">*</span>
+                                    Applicable to <span className="text-destructive">*</span>
                                 </Label>
                                 <Select value={selectedRule} onValueChange={setSelectedRule}>
-                                    <SelectTrigger className="bg-background border-border text-foreground">
+                                    <SelectTrigger>
                                         <SelectValue placeholder="Select rule" />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -273,7 +258,6 @@ export function CouponGenerator({
                                                 <SelectItem
                                                     key={option.value}
                                                     value={option.value}
-                                                    className="text-foreground hover:bg-muted"
                                                 >
                                                     {option.label}
                                                 </SelectItem>
@@ -284,13 +268,13 @@ export function CouponGenerator({
                             </div>
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                             <Label className="text-sm font-medium">
-                                Validity Period <span className="text-red-500">*</span>
+                                Validity Period <span className="text-destructive">*</span>
                             </Label>
-                            <div className="grid grid-cols-2 gap-3">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label htmlFor="start-date" className="text-xs">
+                                    <Label htmlFor="start-date" className="text-sm">
                                         Start Date
                                     </Label>
                                     <Input
@@ -298,11 +282,10 @@ export function CouponGenerator({
                                         id="start-date"
                                         value={startDate}
                                         onChange={(e) => setStartDate(e.target.value)}
-                                        className="bg-background border-border text-foreground"
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label htmlFor="end-date" className="text-xs">
+                                    <Label htmlFor="end-date" className="text-sm">
                                         End Date
                                     </Label>
                                     <Input
@@ -310,22 +293,20 @@ export function CouponGenerator({
                                         id="end-date"
                                         value={endDate}
                                         onChange={(e) => setEndDate(e.target.value)}
-                                        className="bg-background border-border text-foreground"
                                     />
                                 </div>
                             </div>
                             {dateError && (
-                                <div className="text-sm text-red-500 mt-2">{dateError}</div>
+                                <p className="text-sm text-destructive">{dateError}</p>
                             )}
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                             <div className="flex items-center space-x-3">
                                 <Switch
                                     id="custom-code"
                                     checked={enabled}
                                     onCheckedChange={setEnabled}
-                                    className="data-[state=checked]:bg-zinc-900 data-[state=unchecked]:bg-zinc-200 dark:data-[state=checked]:bg-zinc-100 dark:data-[state=unchecked]:bg-zinc-700"
                                 />
                                 <Label htmlFor="custom-code" className="text-sm font-medium">
                                     Custom Code
@@ -333,7 +314,6 @@ export function CouponGenerator({
                             </div>
                             {enabled && (
                                 <Input
-                                    className="bg-background border-border text-foreground"
                                     placeholder="DODO20"
                                     value={customCode}
                                     onChange={(e) => setCustomCode(e.target.value)}
@@ -342,11 +322,11 @@ export function CouponGenerator({
                         </div>
                     </CardContent>
 
-                    <CardFooter className="flex justify-end p-6 pt-0">
+                    <CardFooter className="flex justify-end p-6">
                         <Button
                             onClick={handleGenerate}
                             disabled={!isFormValid}
-                            className={`bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all duration-200 hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:bg-zinc-900 dark:disabled:bg-zinc-100 ${generateButtonClassName || ""}`}
+                            className={cn("w-full sm:w-auto", generateButtonClassName)}
                         >
                             Generate Coupon
                         </Button>
