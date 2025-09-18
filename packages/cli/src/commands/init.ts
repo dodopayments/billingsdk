@@ -77,8 +77,7 @@ export const initCommand = new Command()
       const providerOptions =
         frameworkValue === "express" ||
         frameworkValue === "hono" ||
-        frameworkValue === "fastify" ||
-        frameworkValue === "react"
+        frameworkValue === "fastify"
           ? [
               { value: "dodopayments", label: "Dodo Payments" },
               { value: "stripe", label: "Stripe payments" },
