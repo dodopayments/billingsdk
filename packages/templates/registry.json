@@ -258,6 +258,74 @@
       ]
     },
     {
+      "name": "fastify-stripe",
+      "description": "Stripe template for Fastify",
+      "framework": "fastify",
+      "files": [
+        {
+          "path": "packages/templates/fastify/src/lib/stripe.ts",
+          "content": "Stripe library for Fastify",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/route.ts",
+          "content": "Main Stripe routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/route.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/checkout.ts",
+          "content": "Stripe checkout routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/checkout.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/customer.ts",
+          "content": "Stripe customer routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/customer.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/payments.ts",
+          "content": "Stripe payments routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/payments.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/products.ts",
+          "content": "Stripe products routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/products.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/subscriptions.ts",
+          "content": "Stripe subscriptions routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/stripe/webhook.ts",
+          "content": "Stripe webhook routes for Fastify",
+          "type": "template",
+          "target": "routes/stripe/webhook.ts"
+        },
+        {
+          "path": "packages/templates/fastify/.env.example",
+          "content": "Stripe .env.example for Fastify",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "stripe",
+        "standardwebhooks",
+        "zod",
+        "fastify",
+        "fastify-raw-body"
+      ]
+    },
+    {
       "name": "hono-dodopayments",
       "description": "DodoPayments template for Hono",
       "framework": "hono",
