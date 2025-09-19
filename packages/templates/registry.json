@@ -403,7 +403,41 @@
                 "hono",
                 "@hono/zod-validator"
             ]
-        }
+        },
+
+
+        {
+            "name": "nextjs-stripe",
+            "description": "Stripe template for NextJS",
+            "framework": "nextjs",
+            "files": [
+                {
+                    "path": "packages/templates/nextjs/lib/stripe.ts",
+                    "content": "Stripe library for NextJS",
+                    "type": "template",
+                    "target": "lib/stripe.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/api-routes/(stripe)/*",
+                    "content": "Stripe API routes for NextJS",
+                    "type": "template",
+                    "target": "app/api/(stripe)/*"
+                },
+                {
+                    "path": "packages/templates/nextjs/.env.example",
+                    "content": "Stripe .env.example for NextJS",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "stripe",
+                "react",
+                "zod"
+            ]
+       }
+
+
 
     ]
 }
