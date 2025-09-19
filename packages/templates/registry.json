@@ -403,6 +403,42 @@
                 "hono",
                 "@hono/zod-validator"
             ]
+        },
+        {
+            "name": "nextjs-paypal",
+            "description": "PayPal template for NextJS",
+            "framework": "nextjs",
+            "files": [
+                {
+                    "path": "packages/templates/nextjs/lib/paypal.ts",
+                    "content": "PayPal library for NextJS",
+                    "type": "template",
+                    "target": "lib/paypal.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/hooks/usePayPal.ts",
+                    "content": "usePayPal hook for NextJS",
+                    "type": "template",
+                    "target": "hooks/usePayPal.ts"
+                },
+                {
+                    "path": "packages/templates/nextjs/api-routes/(paypal)/*",
+                    "content": "PayPal API routes for NextJS",
+                    "type": "template",
+                    "target": "app/api/(paypal)/*"
+                },
+                {
+                    "path": "packages/templates/nextjs/.env.paypal.example",
+                    "content": "PayPal .env.example for NextJS",
+                    "type": "template",
+                    "target": ".env.example"
+                }
+            ],
+            "dependencies": [
+                "@paypal/paypal-server-sdk",
+                "standardwebhooks",
+                "zod"
+            ]
         }
 
     ]

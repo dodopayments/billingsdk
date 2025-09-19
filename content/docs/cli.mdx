@@ -52,13 +52,13 @@ npx @billingsdk/cli add <component-name>
 
 ## Supported Frameworks
 
-| Framework  | Dodo Payments | Stripe        |
-|------------|---------------|---------------|
-| Next.js    | Yes           | Coming soon   |
-| Express.js | Yes           | Yes           |
-| Hono       | Yes           | Yes           |
-| React      | Yes           | Coming soon   |
-| Fastify    | Yes           | Coming soon   |
+| Framework  | Dodo Payments | Stripe        | PayPal       |
+|------------|---------------|---------------|--------------|
+| Next.js    | Yes           | Coming soon   | Yes          |
+| Express.js | Yes           | Yes           | Coming soon  |
+| Hono       | Yes           | Yes           | Coming soon  |
+| React      | Yes           | Coming soon   | Coming soon  |
+| Fastify    | Yes           | Coming soon   | Coming soon  |
 
 ## Supported Payment Providers
 
@@ -70,6 +70,11 @@ npx @billingsdk/cli add <component-name>
 - ✅ **Status**: Supported for Express.js and Hono
 - 📚 **Integration**: Express.js, Hono
 - 🚧 **Adding Soon**: Next.js, React.js, Fastify
+
+### PayPal
+- ✅ **Status**: Supported for Next.js
+- 📚 **Integration**: Next.js
+- 🚧 **Adding Soon**: Express.js, Hono, React.js, Fastify
 
 ## `@billingsdk/cli init`
 
@@ -99,7 +104,7 @@ npx @billingsdk/cli init
 
 You'll be prompted to select:
 - **Framework**: Next.js (with App Router), Express.js (Node.js web framework), Hono (lightweight web framework for edge runtimes), Fastify (fast and low overhead web framework)
-- **Payment Provider**: Dodo Payments or Stripe (Stripe currently supported for Express.js and Hono)
+- **Payment Provider**: Dodo Payments, Stripe, or PayPal (PayPal currently supported for Next.js; Stripe supported for Express.js and Hono)
 
 ### Generated Files (Dodo Payments)
 
@@ -230,6 +235,27 @@ After running `init` with Stripe, you'll get:
     │           ├── products.ts
     │           ├── subscriptions.ts
     │           └── webhook.ts
+    └── .env.example
+    ```
+  </Tab>
+</Tabs>
+
+### Generated Files (PayPal)
+
+After running `init` with PayPal, you'll get:
+
+<Tabs items={['Next.js + PayPal']}>
+  <Tab value="Next.js + PayPal">
+    ```
+    your-project/
+    ├── app/api/
+    │   ├── (paypal)/
+    │   │   ├── client-token/route.ts
+    │   │   └── webhook/route.ts
+    ├── hooks/
+    │   └── usePayPal.ts
+    ├── lib/
+    │   └── paypal.ts
     └── .env.example
     ```
   </Tab>
@@ -634,6 +660,22 @@ PORT=3000
         "zod": "latest",
         "hono": "latest",
         "@types/bun": "latest"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Dependencies Installed (PayPal)
+
+<Tabs items={['Next.js']}>
+  <Tab value="Next.js">
+    ```json
+    {
+      "dependencies": {
+        "@paypal/paypal-server-sdk": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest"
       }
     }
     ```
