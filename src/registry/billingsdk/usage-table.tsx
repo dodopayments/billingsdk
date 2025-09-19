@@ -76,36 +76,42 @@ export function UsageTable({
                     </CardDescription>
                 )}
             </CardHeader>
-            <CardContent className="px-3 md:px-6">
+            <CardContent className="px-2 sm:px-3 md:px-6">
                 <div className="overflow-x-auto border rounded-lg">
                     <Table>
                         <TableCaption className="sr-only">Model usage summary with token counts and costs</TableCaption>
                         <TableHeader>
                             <TableRow className="border-muted-foreground/30 bg-muted/50 hover:bg-muted/50">
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-left whitespace-pre-wrap">MODEL</TableHead>
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    INPUT (W/ CACHE WRITE)
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-left min-w-[80px] sm:min-w-[100px]">MODEL</TableHead>
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[70px] sm:min-w-[90px]">
+                                    <span className="block sm:hidden">INPUT (W/ CACHE)</span>
+                                    <span className="hidden sm:block">INPUT (W/ CACHE WRITE)</span>
                                 </TableHead>
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    INPUT (W/O CACHE WRITE)
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[70px] sm:min-w-[90px]">
+                                    <span className="block sm:hidden">INPUT (W/O CACHE)</span>
+                                    <span className="hidden sm:block">INPUT (W/O CACHE WRITE)</span>
                                 </TableHead>
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    CACHE READ
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[60px] sm:min-w-[80px]">
+                                    <span className="block sm:hidden">CACHE</span>
+                                    <span className="hidden sm:block">CACHE READ</span>
                                 </TableHead>
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[60px] sm:min-w-[80px]">
                                     OUTPUT
                                 </TableHead>
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    TOTAL TOKENS
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[70px] sm:min-w-[90px]">
+                                    <span className="block sm:hidden">TOTAL</span>
+                                    <span className="hidden sm:block">TOTAL TOKENS</span>
                                 </TableHead>
                                 {hasApiCost && (
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    API COST
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[60px] sm:min-w-[80px]">
+                                    <span className="block sm:hidden">API</span>
+                                    <span className="hidden sm:block">API COST</span>
                                 </TableHead>
                                 )}
                                 {hasCostToYou && (
-                                <TableHead className="text-muted-foreground text-xs font-semibold text-right whitespace-pre-wrap">
-                                    COST TO YOU
+                                <TableHead className="text-muted-foreground text-[12px] sm:text-xs font-semibold text-right min-w-[60px] sm:min-w-[80px]">
+                                    <span className="block sm:hidden">COST</span>
+                                    <span className="hidden sm:block">COST TO YOU</span>
                                 </TableHead>
                                 )}
                             </TableRow>
