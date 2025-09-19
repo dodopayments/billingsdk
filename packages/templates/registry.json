@@ -1,409 +1,417 @@
 {
-    "components": [
+  "components": [
+    {
+      "name": "nextjs-dodopayments",
+      "description": "DodoPayments template for NextJS",
+      "framework": "nextjs",
+      "files": [
         {
-            "name": "nextjs-dodopayments",
-            "description": "DodoPayments template for NextJS",
-            "framework": "nextjs",
-            "files": [
-                {
-                    "path": "packages/templates/nextjs/lib/dodopayments.ts",
-                    "content": "DodoPayments library for NextJS",
-                    "type": "template",
-                    "target": "lib/dodopayments.ts"
-                },
-                {
-                    "path": "packages/templates/nextjs/hooks/useBilling.ts",
-                    "content": "useBilling hook for NextJS",
-                    "type": "template",
-                    "target": "hooks/useBilling.ts"
-                },
-                {
-                    "path": "packages/templates/nextjs/api-routes/*",
-                    "content": "DodoPayments API routes for NextJS",
-                    "type": "template",
-                    "target": "app/api/*"
-                },
-                {
-                    "path": "packages/templates/nextjs/.env.example",
-                    "content": "DodoPayments .env.example for NextJS",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod"
-            ]
+          "path": "packages/templates/nextjs/lib/dodopayments.ts",
+          "content": "DodoPayments library for NextJS",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
         },
         {
-            "name": "express-dodopayments",
-            "description": "DodoPayments template for Express.js",
-            "framework": "express",
-            "files": [
-                {
-                    "path": "packages/templates/express/src/lib/dodopayments.ts",
-                    "content": "DodoPayments library for Express.js",
-                    "type": "template",
-                    "target": "lib/dodopayments.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/route.ts",
-                    "content": "Main DodoPayments router for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/route.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/checkout.ts",
-                    "content": "Checkout routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/checkout.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/customer.ts",
-                    "content": "Customer management routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/customer.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/payments.ts",
-                    "content": "Payment routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/payments.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/products.ts",
-                    "content": "Product management routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/products.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/subscriptions.ts",
-                    "content": "Subscription management routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/subscriptions.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/dodopayments/webhook.ts",
-                    "content": "Webhook handling routes for Express.js",
-                    "type": "template",
-                    "target": "routes/dodopayments/webhook.ts"
-                },
-                {
-                    "path": "packages/templates/express/.env.example",
-                    "content": "DodoPayments .env.example for Express.js",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod",
-                "express",
-                "@types/express"
-            ]
+          "path": "packages/templates/nextjs/hooks/useBilling.ts",
+          "content": "useBilling hook for NextJS",
+          "type": "template",
+          "target": "hooks/useBilling.ts"
         },
         {
-            "name": "express-stripe",
-            "description": "Stripe template for Express.js",
-            "framework": "express",
-            "files": [
-                {
-                    "path": "packages/templates/express/src/lib/stripe.ts",
-                    "content": "Stripe client setup for Express.js",
-                    "type": "template",
-                    "target": "lib/stripe.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/route.ts",
-                    "content": "Main DodoPayments router for Express.js",
-                    "type": "template",
-                    "target": "routes/stripe/route.ts"
-                },
-                
-                {
-                    "path": "packages/templates/express/src/routes/stripe/checkout.ts",
-                    "content": "Stripe checkout routes",
-                    "type": "template",
-                    "target": "routes/stripe/checkout.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/customer.ts",
-                    "content": "Stripe customer routes",
-                    "type": "template",
-                    "target": "routes/stripe/customer.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/payments.ts",
-                    "content": "Stripe payments routes",
-                    "type": "template",
-                    "target": "routes/stripe/payments.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/products.ts",
-                    "content": "Stripe product routes",
-                    "type": "template",
-                    "target": "routes/stripe/products.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/subscriptions.ts",
-                    "content": "Stripe checkout routes",
-                    "type": "template",
-                    "target": "routes/stripe/subscriptions.ts"
-                },
-                {
-                    "path": "packages/templates/express/src/routes/stripe/webhook.ts",
-                    "content": "Webhook handling routes for Express.js",
-                    "type": "template",
-                    "target": "routes/stripe/webhook.ts"
-                },
-                {
-                    "path": "packages/templates/express/.env.example",
-                    "content": "Stripe .env.example for Express.js",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "stripe",
-                "express",
-                "zod",
-                "@types/express"
-            ]
-      },
-        {
-            "name": "react-dodopayments",
-            "description": "DodoPayments template for React.js",
-            "framework": "react",
-            "files": [
-                {
-                "path": "packages/templates/react/lib/dodopayments.ts",
-                "content": "DodoPayments library for React.js",
-                "type": "template",
-                "target": "lib/dodopayments.ts"
-                },
-                {
-                "path": "packages/templates/react/hooks/useBilling.ts",
-                "content": "Custom React hook for managing DodoPayments billing flows",
-                "type": "template",
-                "target": "hooks/useBilling.ts"
-                },
-                {
-                "path": "packages/templates/react/.env.example",
-                "content": "DodoPayments .env.example for React.js",
-                "type": "template",
-                "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "react"
-            ]
+          "path": "packages/templates/nextjs/api-routes/*",
+          "content": "DodoPayments API routes for NextJS",
+          "type": "template",
+          "target": "app/api/*"
         },
         {
-            "name": "fastify-dodopayments",
-            "description": "DodoPayments template for Fastify",
-            "framework": "fastify",
-            "files": [
-                {
-                    "path": "packages/templates/fastify/src/lib/dodopayments.ts",
-                    "content": "DodoPayments library for Fastify",
-                    "type": "template",
-                    "target": "lib/dodopayments.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/route.ts",
-                    "content": "Main DodoPayments routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/route.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/checkout.ts",
-                    "content": "Checkout routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/checkout.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/customer.ts",
-                    "content": "Customer management routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/customer.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/payments.ts",
-                    "content": "Payment routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/payments.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/products.ts",
-                    "content": "Product management routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/products.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/subscriptions.ts",
-                    "content": "Subscription management routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/subscriptions.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/src/routes/dodopayments/webhook.ts",
-                    "content": "Webhook handling routes for Fastify",
-                    "type": "template",
-                    "target": "routes/dodopayments/webhook.ts"
-                },
-                {
-                    "path": "packages/templates/fastify/.env.example",
-                    "content": "DodoPayments .env.example for Fastify",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod",
-                "fastify",
-                "fastify-raw-body"
-            ]
-        },
-        {
-            "name": "hono-dodopayments",
-            "description": "DodoPayments template for Hono",
-            "framework": "hono",
-            "files": [
-                {
-                    "path": "packages/templates/hono/src/lib/dodopayments.ts",
-                    "content": "DodoPayments library for Hono",
-                    "type": "template",
-                    "target": "lib/dodopayments.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/route.ts",
-                    "content": "Main DodoPayments router for Hono",
-                    "type": "template",
-                    "target": "routes/route.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/checkout.ts",
-                    "content": "Checkout routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/checkout.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/customer.ts",
-                    "content": "Customer management routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/customer.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/payments.ts",
-                    "content": "Payment routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/payments.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/products.ts",
-                    "content": "Product management routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/products.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/subscriptions.ts",
-                    "content": "Subscription management routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/subscriptions.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/dodopayments/webhook.ts",
-                    "content": "Webhook handling routes for Hono",
-                    "type": "template",
-                    "target": "routes/dodopayments/webhook.ts"
-                },
-                {
-                    "path": "packages/templates/hono/.env.example",
-                    "content": "DodoPayments .env.example for Hono",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "dodopayments",
-                "standardwebhooks",
-                "zod",
-                "hono"
-            ]
-        },
-        {
-            "name": "hono-stripe",
-            "description": "Stripe template for Hono",
-            "framework": "hono",
-            "files": [
-                {
-                    "path": "packages/templates/hono/src/lib/stripe.ts",
-                    "content": "Stripe library for Hono",
-                    "type": "template",
-                    "target": "lib/stripe.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/route.ts",
-                    "content": "Main Stripe router for Hono",
-                    "type": "template",
-                    "target": "routes/route.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/checkout.ts",
-                    "content": "Checkout routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/checkout.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/customer.ts",
-                    "content": "Customer management routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/customer.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/payments.ts",
-                    "content": "Payment routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/payments.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/products.ts",
-                    "content": "Product management routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/products.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/subscriptions.ts",
-                    "content": "Subscription management routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/subscriptions.ts"
-                },
-                {
-                    "path": "packages/templates/hono/src/routes/stripe/webhook.ts",
-                    "content": "Webhook handling routes for Hono",
-                    "type": "template",
-                    "target": "routes/stripe/webhook.ts"
-                },
-                {
-                    "path": "packages/templates/hono/.env.example",
-                    "content": "Stripe .env.example for Hono",
-                    "type": "template",
-                    "target": ".env.example"
-                }
-            ],
-            "dependencies": [
-                "stripe",
-                "standardwebhooks",
-                "zod",
-                "hono",
-                "@hono/zod-validator"
-            ]
+          "path": "packages/templates/nextjs/.env.example",
+          "content": "DodoPayments .env.example for NextJS",
+          "type": "template",
+          "target": ".env.example"
         }
+      ],
+      "dependencies": ["dodopayments", "standardwebhooks", "zod"]
+    },
+    {
+      "name": "express-dodopayments",
+      "description": "DodoPayments template for Express.js",
+      "framework": "express",
+      "files": [
+        {
+          "path": "packages/templates/express/src/lib/dodopayments.ts",
+          "content": "DodoPayments library for Express.js",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/route.ts",
+          "content": "Main DodoPayments router for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/route.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/checkout.ts",
+          "content": "Checkout routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/checkout.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/customer.ts",
+          "content": "Customer management routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/customer.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/payments.ts",
+          "content": "Payment routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/payments.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/products.ts",
+          "content": "Product management routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/products.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/subscriptions.ts",
+          "content": "Subscription management routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/dodopayments/webhook.ts",
+          "content": "Webhook handling routes for Express.js",
+          "type": "template",
+          "target": "routes/dodopayments/webhook.ts"
+        },
+        {
+          "path": "packages/templates/express/.env.example",
+          "content": "DodoPayments .env.example for Express.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "dodopayments",
+        "standardwebhooks",
+        "zod",
+        "express",
+        "@types/express"
+      ]
+    },
+    {
+      "name": "express-stripe",
+      "description": "Stripe template for Express.js",
+      "framework": "express",
+      "files": [
+        {
+          "path": "packages/templates/express/src/lib/stripe.ts",
+          "content": "Stripe client setup for Express.js",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/route.ts",
+          "content": "Main DodoPayments router for Express.js",
+          "type": "template",
+          "target": "routes/stripe/route.ts"
+        },
 
-    ]
+        {
+          "path": "packages/templates/express/src/routes/stripe/checkout.ts",
+          "content": "Stripe checkout routes",
+          "type": "template",
+          "target": "routes/stripe/checkout.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/customer.ts",
+          "content": "Stripe customer routes",
+          "type": "template",
+          "target": "routes/stripe/customer.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/payments.ts",
+          "content": "Stripe payments routes",
+          "type": "template",
+          "target": "routes/stripe/payments.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/products.ts",
+          "content": "Stripe product routes",
+          "type": "template",
+          "target": "routes/stripe/products.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/subscriptions.ts",
+          "content": "Stripe checkout routes",
+          "type": "template",
+          "target": "routes/stripe/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/express/src/routes/stripe/webhook.ts",
+          "content": "Webhook handling routes for Express.js",
+          "type": "template",
+          "target": "routes/stripe/webhook.ts"
+        },
+        {
+          "path": "packages/templates/express/.env.example",
+          "content": "Stripe .env.example for Express.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["stripe", "express", "zod", "@types/express"]
+    },
+    {
+      "name": "react-dodopayments",
+      "description": "DodoPayments template for React.js",
+      "framework": "react",
+      "files": [
+        {
+          "path": "packages/templates/react/lib/dodopayments.ts",
+          "content": "DodoPayments library for React.js",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/react/hooks/dodopayments/useBilling.ts",
+          "content": "Custom React hook for managing DodoPayments billing flows",
+          "type": "template",
+          "target": "hooks/dodopayments/useBilling.ts"
+        },
+        {
+          "path": "packages/templates/react/.env.example",
+          "content": "DodoPayments .env.example for React.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["dodopayments", "react"]
+    },
+    {
+      "name": "fastify-dodopayments",
+      "description": "DodoPayments template for Fastify",
+      "framework": "fastify",
+      "files": [
+        {
+          "path": "packages/templates/fastify/src/lib/dodopayments.ts",
+          "content": "DodoPayments library for Fastify",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/route.ts",
+          "content": "Main DodoPayments routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/route.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/checkout.ts",
+          "content": "Checkout routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/checkout.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/customer.ts",
+          "content": "Customer management routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/customer.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/payments.ts",
+          "content": "Payment routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/payments.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/products.ts",
+          "content": "Product management routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/products.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/subscriptions.ts",
+          "content": "Subscription management routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/fastify/src/routes/dodopayments/webhook.ts",
+          "content": "Webhook handling routes for Fastify",
+          "type": "template",
+          "target": "routes/dodopayments/webhook.ts"
+        },
+        {
+          "path": "packages/templates/fastify/.env.example",
+          "content": "DodoPayments .env.example for Fastify",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "dodopayments",
+        "standardwebhooks",
+        "zod",
+        "fastify",
+        "fastify-raw-body"
+      ]
+    },
+    {
+      "name": "hono-dodopayments",
+      "description": "DodoPayments template for Hono",
+      "framework": "hono",
+      "files": [
+        {
+          "path": "packages/templates/hono/src/lib/dodopayments.ts",
+          "content": "DodoPayments library for Hono",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/route.ts",
+          "content": "Main DodoPayments router for Hono",
+          "type": "template",
+          "target": "routes/route.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/checkout.ts",
+          "content": "Checkout routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/checkout.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/customer.ts",
+          "content": "Customer management routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/customer.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/payments.ts",
+          "content": "Payment routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/payments.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/products.ts",
+          "content": "Product management routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/products.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/subscriptions.ts",
+          "content": "Subscription management routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/dodopayments/webhook.ts",
+          "content": "Webhook handling routes for Hono",
+          "type": "template",
+          "target": "routes/dodopayments/webhook.ts"
+        },
+        {
+          "path": "packages/templates/hono/.env.example",
+          "content": "DodoPayments .env.example for Hono",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["dodopayments", "standardwebhooks", "zod", "hono"]
+    },
+    {
+      "name": "hono-stripe",
+      "description": "Stripe template for Hono",
+      "framework": "hono",
+      "files": [
+        {
+          "path": "packages/templates/hono/src/lib/stripe.ts",
+          "content": "Stripe library for Hono",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/route.ts",
+          "content": "Main Stripe router for Hono",
+          "type": "template",
+          "target": "routes/route.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/checkout.ts",
+          "content": "Checkout routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/checkout.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/customer.ts",
+          "content": "Customer management routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/customer.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/payments.ts",
+          "content": "Payment routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/payments.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/products.ts",
+          "content": "Product management routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/products.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/subscriptions.ts",
+          "content": "Subscription management routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/subscriptions.ts"
+        },
+        {
+          "path": "packages/templates/hono/src/routes/stripe/webhook.ts",
+          "content": "Webhook handling routes for Hono",
+          "type": "template",
+          "target": "routes/stripe/webhook.ts"
+        },
+        {
+          "path": "packages/templates/hono/.env.example",
+          "content": "Stripe .env.example for Hono",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "stripe",
+        "standardwebhooks",
+        "zod",
+        "hono",
+        "@hono/zod-validator"
+      ]
+    },
+    {
+      "name": "react-stripe",
+      "description": "Stripe template for React.js",
+      "framework": "react",
+      "files": [
+        {
+          "path": "packages/templates/react/lib/stripe.ts",
+          "content": "Stripe library for React.js",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/react/hooks/stripe/useBilling.ts",
+          "content": "Custom React hook for managing Stripe billing flows",
+          "type": "template",
+          "target": "hooks/stripe/useBilling.ts"
+        },
+        {
+          "path": "packages/templates/react/.env.example",
+          "content": "Stripe .env.example for React.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["stripe", "react"]
+    }
+  ]
 }
