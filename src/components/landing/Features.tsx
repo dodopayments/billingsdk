@@ -7,109 +7,85 @@ import {
   TrendingUpIcon,
   ShieldCheckIcon,
   BellIcon,
+  Crown,
 } from "lucide-react";
+import React from "react";
+import { ShineButton } from "./shine-button";
+import { FeatureCard } from "./feature-card";
 
-import { cn } from "@/lib/utils";
-import React, { CSSProperties } from "react";
-
-const features = [
+export const features = [
   {
     id: 1,
-    label: "Customizable",
-    title: "<strong>Customizable</strong>",
+    label: "customizable",
+    title: "Customizable",
     description:
-      "Easily modify components with props and Tailwind classes to match your brand. Full control over styling, colors, and layout without compromising functionality or accessibility.",
+      "Easily adjust components with props and Tailwind classes for full control over styling, colors, and layout.",
     icon: PlugZap2Icon,
   },
   {
     id: 2,
-    label: "Ready to Use",
-    title: "<strong>Ready to Use</strong>",
+    label: "copy-paste",
+    title: "Copy & Paste",
     description:
-      "Production-ready components that have been tested across different browsers and devices. No additional setup or configuration required - just import and use.",
-    icon: ShieldCheckIcon,
-  },
-  {
-    id: 3,
-    label: "Copy & Paste",
-    title: "<strong>Copy & Paste</strong>",
-    description:
-      "No package dependencies or complex installations. Simply copy the component code directly into your project and start using it immediately with full source code access.",
+      "No dependencies or installs required. Copy the code into your project and start using it instantly.",
     icon: CreditCardIcon,
   },
   {
-    id: 4,
-    label: "Open Source",
-    title: "<strong>Open Source</strong>",
+    id: 3,
+    label: "ready-to-use",
+    title: "Ready to Use",
     description:
-      "Completely free to use and modify for personal and commercial projects. Access the full source code, contribute improvements, and customize to your heart's content.",
+      "Production-ready components tested across browsers and devices—just import and use, no setup needed.",
+    icon: ShieldCheckIcon,
+  },
+  {
+    id: 4,
+    label: "open-source",
+    title: "Open Source",
+    description:
+      "Free to use and modify for any project with full source code access and community contributions.",
     icon: Globe2Icon,
   },
   {
     id: 5,
-    label: "Fast Development",
-    title: "<strong>Fast Development</strong>",
+    label: "fast-dev",
+    title: "Fast Development",
     description:
-      "Skip weeks of development time with pre-built billing components. Focus on your core business logic while we handle the complex UI patterns and user flows.",
+      "Save weeks of work with pre-built billing components and focus on core business logic instead.",
     icon: TrendingUpIcon,
   },
   {
     id: 6,
-    label: "Accessible",
-    title: "<strong>Accessible</strong>",
+    label: "accessible",
+    title: "Accessible",
     description:
-      "Built with accessibility in mind, ensuring your billing interfaces work for all users. WCAG compliant components with proper ARIA labels and keyboard navigation support.",
+      "WCAG-compliant components with ARIA labels and keyboard support to ensure usability for all.",
     icon: BellIcon,
   },
 ];
 
 export default function Features() {
   return (
-    <div className="flex flex-col my-24 mt-32 items-center justify-center max-w-7xl mx-auto">
-      <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="flex relative flex-col my-24 mt-32 items-center justify-center max-w-7xl mx-auto">
+      <ShineButton
+        Icon={Crown}
+        className="shadow-xl shadow-white/20"
+        label="Features"
+      />
+      <h2 className="text-3xl mt-4 sm:text-3xl font-display md:text-5xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
         Why choose BillingSDK?
       </h2>
-      <p className="text-sm mt-4 text-muted-foreground mb-12 max-w-xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 text-center">
+      <p className="text-sm md:text-base text-balance mt-4 text-muted-foreground mb-12 max-w-3xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 text-center">
         Beautiful, customizable billing components that save you development
         time and effort.
       </p>
 
-      <div className="relative rounded-none -pr-2  ">
-        <div className="w-full md:mx-0">
-          <div className="grid grid-cols-1 relative md:grid-rows-2 md:grid-cols-3">
-            {features.map((feature, index) => (
-              <div
-                key={feature.id}
-                className={cn(
-                  "justify-center md:min-h-[240px] transform-gpu flex flex-col p-10 2xl:p-12 animate-in fade-in slide-in-from-bottom-6 duration-1000",
-                  // Add right border for all except last column
-                  (index + 1) % 3 !== 0 && "md:border-r-[1.2px]",
-                  // Add bottom border for first row
-                  index < 3 && "md:border-b-[1.2px]",
-                  // Add top border for mobile
-                  index > 0 && "border-t-[1.2px] md:border-t-0"
-                )}
-                style={{
-                  animationDelay: `${500 + index * 150}ms`,
-                } as CSSProperties}
-              >
-                <div className="mt-2">
-                  <div className="max-w-full">
-                    <div className="flex gap-3 ">
-                      <p
-                        className="max-w-lg text-xl font-normal tracking-tighter md:text-2xl"
-                        dangerouslySetInnerHTML={{
-                          __html: feature.title,
-                        }}
-                      />
-                    </div>
-                  </div>
-                                     <p className="mt-2 text-sm text-left text-muted-foreground">
-                     {feature.description}
-                   </p>
-                </div>
-              </div>
-            ))}
+      <div className="relative w-full rounded-none -pr-2  ">
+        <div className="w-full">
+          <div className="grid grid-cols-1 gap-4 w-full relative sm:grid-cols-2 lg:grid-cols-10">
+            {features.map((item, index) => {
+              return <FeatureCard key={item.title} item={item} index={index} />;
+            })}
           </div>
         </div>
       </div>
