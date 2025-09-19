@@ -64,12 +64,14 @@ interface SettingItemProps {
 
 function SettingItem({ title, description, checked, onCheckedChange }: SettingItemProps) {
   return (
-    <div className="flex items-start justify-between py-4 gap-4 w-full">
-      <div className="space-y-1 flex-1 min-w-0">
-        <h3 className="font-medium text-foreground">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+    <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start py-4 gap-3 sm:gap-4 w-full">
+      <div className="space-y-1 min-w-0">
+        <h3 className="font-medium text-foreground break-words hyphens-auto">{title}</h3>
+        <p className="text-sm text-muted-foreground break-words hyphens-auto">{description}</p>
       </div>
-      <Switch checked={checked} onCheckedChange={onCheckedChange} className="flex-shrink-0" />
+      <div className="sm:justify-self-end">
+        <Switch checked={checked} onCheckedChange={onCheckedChange} className="flex-shrink-0" />
+      </div>
     </div>
   )
 }
@@ -81,7 +83,7 @@ interface TabNavigationProps {
 
 function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1">
+    <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1 rounded-lg bg-muted p-1">
       {tabs.map((tab) => (
         <button
           key={tab.id}
@@ -89,7 +91,7 @@ function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
             console.log("[v0] Tab button clicked:", tab.id)
             onTabChange(tab.id)
           }}
-          className={`flex-1 min-w-0 rounded-md px-2 py-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+          className={`w-full sm:flex-1 rounded-md px-3 py-2 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
             activeTab === tab.id
               ? "bg-background text-foreground shadow-sm"
               : "text-muted-foreground hover:text-foreground hover:bg-background/50"
@@ -148,7 +150,7 @@ export function BillingSettings({
   const renderPaymentContent = () => (
     <div className="space-y-4">
       {cards.map((card) => (
-        <div key={card.id} className="flex items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
+        <div key={card.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
           <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
             <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
             <div className="min-w-0 flex-1">
@@ -160,7 +162,7 @@ export function BillingSettings({
               </p>
             </div>
           </div>
-          {card.primary && <Badge variant="secondary" className="flex-shrink-0 text-xs">Primary</Badge>}
+          {card.primary && <Badge variant="secondary" className="flex-shrink-0 text-xs self-start sm:self-auto">Primary</Badge>}
         </div>
       ))}
       <Button variant="outline" className="w-full bg-transparent" onClick={onAddCard}>
