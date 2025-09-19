@@ -14,6 +14,7 @@ import { UsageMeter } from "@/components/billingsdk/usage-meter";
 import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
+import { PaymentCard } from "@/components/billingsdk/payment-card";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
@@ -1976,4 +1977,46 @@ export const componentRegistry: ComponentConfig[] = [
       onAddNew: () => console.log("Add new method"),
     },
   },
+  {
+    id: "payment-card",
+    name: "Payment Card",
+    description: "A comprehensive final payment interface for processing transactions with card details.",
+    category: "ui",
+    component: PaymentCard,
+    imports: ["@/components/billingsdk/payment-card"],
+    defaultCode: `<PaymentCard
+   title="Final step, make the payment."
+  description="To finalize your subscription, kindly complete your payment using a valid credit card."
+  price="100"
+  finalText={[
+    { text: "Automated billing & invoices" },
+    { text: "Priority support" },
+    { text: "Exclusive member benefits" },
+  ]}
+  feature="Payment & Invoice"
+  featuredescription="Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email."
+  feature2="Priority Support"
+  feature2description="Get dedicated customer support with faster response times and direct access to our technical team for any issues."
+  onPay={async ({ cardNumber, expiry, cvc }) => {
+    console.log(\`Payment Processed! \${cardNumber}, exp \${expiry}, cvc \${cvc}\`);
+  }}
+  />`,
+    defaultProps: {
+      title: "Final step, make the payment.",
+      description: "To finalize your subscription, kindly complete your payment using a valid credit card.",
+      price: "100",
+      finalText: [
+        { text: "Automated billing & invoices" },
+        { text: "Priority support" },
+        { text: "Exclusive member benefits" },
+      ],
+      feature: "Payment & Invoice",
+      featuredescription: "Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email.",
+      feature2: "Priority Support",
+      feature2description: "Get dedicated customer support with faster response times and direct access to our technical team for any issues.",
+      onPay: async ({ cardNumber, expiry, cvc }: { cardNumber: string; expiry: string; cvc: string }) => {
+        console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);
+      },
+    },
+  }
 ];
