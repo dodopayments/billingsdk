@@ -16,7 +16,7 @@
     {
       "target": ".env.example",
       "type": "template",
-      "content": "VITE_BASE_URL=\"YOUR API URL\""
+      "content": " VITE_BASE_URL=\"YOUR API URL\"\nSTRIPE_SECRET_KEY=sk_test_12345...\nSTRIPE_WEBHOOK_SECRET=whsec_12345\nVITE_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_12345\n"
     }
   ],
   "dependencies": [
