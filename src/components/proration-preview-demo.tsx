@@ -94,11 +94,11 @@ export function ProrationPreviewDemo() {
     <div className="space-y-8">
 
       <Tabs defaultValue="upgrade" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="upgrade">Upgrade</TabsTrigger>
-          <TabsTrigger value="downgrade">Downgrade</TabsTrigger>
-          <TabsTrigger value="cycle-change">Cycle Change</TabsTrigger>
-          <TabsTrigger value="next-cycle">Next Cycle</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto p-1">
+          <TabsTrigger value="upgrade" className="text-xs sm:text-sm">Upgrade</TabsTrigger>
+          <TabsTrigger value="downgrade" className="text-xs sm:text-sm">Downgrade</TabsTrigger>
+          <TabsTrigger value="cycle-change" className="text-xs sm:text-sm">Cycle Change</TabsTrigger>
+          <TabsTrigger value="next-cycle" className="text-xs sm:text-sm">Next Cycle</TabsTrigger>
         </TabsList>
 
         <TabsContent value="upgrade" className="space-y-6">
