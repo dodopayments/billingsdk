@@ -49,7 +49,8 @@
                 "@billingsdk/proration-preview",
                 "@billingsdk/proration-preview",
                 "@billingsdk/upcoming-charges",
-                "@billingsdk/coupon"
+                "@billingsdk/coupon",
+                "@billingsdk/coupon-applicator"
             ]
         },
         {
@@ -846,14 +847,41 @@
                 }
             ],
             "dependencies": [
-             "lucide-react",
+                "lucide-react",
                 "motion"
             ],
             "registryDependencies": [
-             "button",
-              "card",
-              "utils"
-        ]
+                "button",
+                "card",
+                "utils"
+            ]
+        },
+        {
+            "name": "coupon-applicator",
+            "type": "registry:block",
+            "title": "Coupon Applicator",
+            "description": "A coupon code applicator component with validation, discount calculation, and animated feedback",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/coupon-applicator.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/coupon-applicator.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/coupon-applicator-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/coupon-applicator-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "motion",
+                "zod"
+            ],
+            "registryDependencies": [
+                "button",
+                "input",
+                "utils"
+            ]
         }
     ]
 }

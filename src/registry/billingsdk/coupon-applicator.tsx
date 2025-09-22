@@ -246,7 +246,7 @@ const calculateDiscount = () => {
 	}, []);
 
 	return (
-		<div className={cn('w-full', className)}>
+		<div className={cn('w-full max-w-md', className)}>
 			<div className="space-y-5">
 				<div className="flex items-center gap-3">
 					<div className="rounded-lg bg-primary/10 p-2">
@@ -263,7 +263,7 @@ const calculateDiscount = () => {
 				{status !== 'success' ? (
 					<div className="space-y-4">
 						<div className="flex gap-2">
-							<div className="relative flex-1">
+							<div className="relative flex-1 min-w-0">
 								<Input
 									ref={inputRef}
 									type="text"
@@ -282,15 +282,16 @@ const calculateDiscount = () => {
 									)}
 									aria-label="Coupon code"
 								/>
-								{code && status !== 'loading' && (
-									<button
-										onClick={() => setCode('')}
-										className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors rounded-full p-1 hover:bg-muted"
-										aria-label="Clear coupon code"
-									>
-										<XIcon className="h-4 w-4" />
-									</button>
-								)}
+								<button
+									onClick={() => setCode('')}
+									className={cn(
+										"absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors rounded-full p-1 hover:bg-muted",
+										(!code || status === 'loading') && 'opacity-0 pointer-events-none'
+									)}
+									aria-label="Clear coupon code"
+								>
+									<XIcon className="h-4 w-4" />
+								</button>
 								{status === 'loading' && (
 									<div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
 										<LoaderIcon className="h-4 w-4 animate-spin" />
@@ -301,7 +302,7 @@ const calculateDiscount = () => {
 								onClick={handleApply}
 								disabled={status === 'loading' || !code.trim()}
 								className={cn(
-									'h-12 px-5 rounded-lg font-medium transition-all hover:scale-[1.02]',
+									'h-12 w-24 shrink-0 rounded-lg font-medium transition-all hover:scale-[1.02] justify-center',
 									theme === 'minimal' &&
 										'bg-transparent text-primary hover:bg-muted'
 								)}
@@ -349,10 +350,10 @@ const calculateDiscount = () => {
 						</div>
 
 						{discountInfo && (
-							<div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-sm">
+							<div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-sm w-full">
 								<div className="flex justify-between items-center">
-									<span className="text-muted-foreground">Discount</span>
-									<span className="font-semibold text-lg">
+									<span className="text-muted-foreground text-sm">Discount</span>
+									<span className="font-semibold text-sm">
 										{validationResult?.discount?.type === 'percentage' &&
 										validationResult?.discount?.value
 											? `${validationResult.discount.value}%`
@@ -363,15 +364,15 @@ const calculateDiscount = () => {
 								</div>
 
 								<div className="flex justify-between items-center">
-									<span className="text-muted-foreground">You Save</span>
-									<span className="text-emerald-600 dark:text-emerald-400 font-bold text-lg">
+									<span className="text-muted-foreground text-sm">You Save</span>
+									<span className="text-emerald-600 dark:text-emerald-400 font-bold text-sm">
 										-{discountInfo.displaySavings}
 									</span>
 								</div>
 
 								<div className="pt-3 border-t flex justify-between items-center">
-									<span className="font-medium">New Total</span>
-									<span className="text-2xl font-bold text-primary">
+									<span className="font-medium text-sm">New Total</span>
+									<span className="text-lg font-bold text-primary">
 										{discountInfo.displayNewTotal}
 									</span>
 								</div>
