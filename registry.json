@@ -43,6 +43,7 @@
                 "@billingsdk/payment-details",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-method-selector",
+                "@billingsdk/payment-card",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
                 "@billingsdk/proration-preview",
@@ -826,6 +827,33 @@
                 "badge",
                 "utils"
             ]
+        },
+        {
+            "name": "payment-card",
+            "type": "registry:block",
+            "title": "Payment Card",
+            "description": "A payment card component",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/payment-card.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-card.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-card-demo.tsx"
+                }
+            ],
+            "dependencies": [
+             "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+             "button",
+              "card",
+              "utils"
+        ]
         }
     ]
 }
