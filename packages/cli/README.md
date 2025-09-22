@@ -25,7 +25,7 @@ npx @billingsdk/cli init
 This interactive command will:
 - Automatically detect your framework (Next.js, Express.js, React, or Hono) from your project dependencies
 - Guide you through framework selection if auto-detection fails or you prefer manual selection
-- Help you choose a payment provider: Dodo Payments (all frameworks) or Stripe (Express/Hono only)
+- Help you choose a payment provider: Dodo Payments (all frameworks) or Stripe (Express/Hono/Next.js only)
 - Set up complete project structure with API routes (for full-stack frameworks) or hooks/utilities (for React)
 - Install all necessary dependencies
 - Generate configuration files and boilerplate code
@@ -52,7 +52,7 @@ Initialize a new billing project with complete setup.
 **Options:**
 - Automatic framework detection (Next.js, Express.js, React, Hono) from project dependencies
 - Interactive framework selection as fallback or when preferred
-- Payment provider configuration (Stripe offered for Express/Hono; Dodo for all)
+- Payment provider configuration (Stripe offered for Express/Hono/Next.js; Dodo for all)
 - Automatic dependency installation
 - Template-based file generation
 
@@ -152,7 +152,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 The CLI installs dependencies based on your selections:
 - Dodo Payments: `dodopayments`, `standardwebhooks`, `zod` (plus framework libs)
-- Stripe (Express/Hono only): `stripe`, `standardwebhooks`, `zod` (plus framework libs)
+- Stripe (Express/Hono/Next.js only): `stripe`, `standardwebhooks`, `zod` (plus framework libs)
 
 ## Supported Frameworks & Providers
 
@@ -176,7 +176,7 @@ The CLI automatically detects your framework based on your project dependencies 
 
 ### Payment Providers
 - ✅ **Dodo Payments** - Fully supported
-- ✅ **Stripe** - Supported for Express.js and Hono (Next.js/React coming soon)
+- ✅ **Stripe** - Supported for Express.js, Hono, and Next.js (React coming soon)
 - 🚧 **Additional providers** - Based on community demand
 
 ## Development
