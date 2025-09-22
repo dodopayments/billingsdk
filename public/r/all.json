@@ -26,6 +26,7 @@
     "@billingsdk/payment-method-manager",
     "@billingsdk/payment-method-selector",
     "@billingsdk/payment-method-manager",
+    "@billingsdk/payment-card",
     "@billingsdk/billing-settings",
     "@billingsdk/proration-preview",
     "@billingsdk/proration-preview",

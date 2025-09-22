@@ -44,6 +44,7 @@
 		"components/payment-method-selector/index",
 		"components/payment-method-manager/index",
     "components/coupon-applicator/index",
+		"components/payment-card/index",
 		"---Configuration---",
 		"interfaces",
 		"theming"

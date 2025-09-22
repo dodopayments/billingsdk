@@ -141,10 +141,10 @@
                     "target": "routes/stripe/payments.ts"
                 },
                 {
-                    "path": "packages/templates/express/src/routes/stripe/product.ts",
+                    "path": "packages/templates/express/src/routes/stripe/products.ts",
                     "content": "Stripe product routes",
                     "type": "template",
-                    "target": "routes/stripe/product.ts"
+                    "target": "routes/stripe/products.ts"
                 },
                 {
                     "path": "packages/templates/express/src/routes/stripe/subscriptions.ts",
