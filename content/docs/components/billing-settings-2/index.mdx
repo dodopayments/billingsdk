@@ -1,0 +1,204 @@
+---
+title: Billing Settings 2
+description: Variant of Billing Settings matching the inline form layout with switches and actions.
+---
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+	<Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+		<PreviewComponents registryName="billingsdk">
+			<BillingSettings2Demo />
+		</PreviewComponents>
+	</Tab>
+
+    <Tab value="Code" className="mt-3">
+    	<include cwd lang="tsx" meta='title="src/components/billing-settings-2-demo.tsx"'>src/components/billing-settings-2-demo.tsx</include>
+    </Tab>
+
+</Tabs>
+
+### Installation
+
+<Tabs
+	items={['shadcn', 'billingSDK']}
+	defaultValue="shadcn"
+	className="bg-transparent border-none"
+>
+	<Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="installation-tabs"
+		>
+			<Tab value="npx">
+				```bash 
+				npx shadcn@latest add @billingsdk/billing-settings-2 
+				```
+			</Tab>
+			<Tab value="pnpm">
+				```bash 
+				pnpm dlx shadcn@latest add @billingsdk/billing-settings-2 
+				```
+			</Tab>
+			<Tab value="yarn">
+				```bash 
+				yarn dlx shadcn@latest add @billingsdk/billing-settings-2 
+				```
+			</Tab>
+		</Tabs>
+	</Tab>
+	<Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="billingsdk-cli-tabs"
+		>
+			<Tab value="npx">
+				```bash 
+				npx @billingsdk/cli add billing-settings-2 
+				```
+			</Tab>
+			<Tab value="pnpm">
+				```bash 
+				pnpm dlx @billingsdk/cli add billing-settings-2 
+				```
+			</Tab>
+			<Tab value="yarn">
+				```bash 
+				yarn dlx @billingsdk/cli add billing-settings-2 
+				```
+			</Tab>
+		</Tabs>
+	</Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { BillingSettings2 } from '@/components/billingsdk/billing-settings-2';
+```
+
+```tsx
+<BillingSettings2
+	title="Custom Billing Settings"
+	enableValidation
+	currencyRequired
+	inputFields={[
+		{
+			id: "fullName",
+			name: "fullName",
+			value: inputValues.fullName,
+			placeholder: "Enter your full name",
+			onChange: (value) => handleInputChange('fullName', value),
+			label: "Full Name",
+			type: "text",
+			required: true,
+			validation: { minLength: 2, maxLength: 50 },
+		},
+		{
+			id: "billingEmail",
+			name: "billingEmail",
+			value: inputValues.billingEmail,
+			placeholder: "user@example.com",
+			onChange: (value) => handleInputChange('billingEmail', value),
+			label: "Billing Email",
+			helperText: "Invoices will be sent to this email address",
+			type: "email",
+			required: true,
+		},
+		{
+			id: "taxId",
+			name: "taxId",
+			value: inputValues.taxId,
+			placeholder: "EU123456789",
+			onChange: (value) => handleInputChange('taxId', value),
+			label: "Tax ID (Optional)",
+			helperText: "For VAT or other tax purposes",
+			type: "text",
+			validation: { pattern: /^[A-Z]{2}\d{8,12}$/ },
+		},
+	]}
+	features={[
+		{
+			id: "auto-renewal",
+			label: "Auto-Renewal",
+			description: "Automatically renew your subscription",
+			enabled: featureToggles.autoRenewal,
+			onToggle: (enabled) => handleFeatureToggle('autoRenewal', enabled),
+		},
+		{
+			id: "invoice-emails",
+			label: "Invoice Emails",
+			description: "Receive emails when invoices are generated",
+			enabled: featureToggles.invoiceEmails,
+			onToggle: (enabled) => handleFeatureToggle('invoiceEmails', enabled),
+		},
+		{
+			id: "promotional-emails",
+			label: "Promotional Emails",
+			description: "Receive occasional updates about new features and offers",
+			enabled: featureToggles.promotionalEmails,
+			onToggle: (enabled) => handleFeatureToggle('promotionalEmails', enabled),
+		},
+	]}
+	currencyOptions={[
+		{ value: "usd", label: "USD - US Dollar" },
+		{ value: "eur", label: "EUR - Euro" },
+		{ value: "gbp", label: "GBP - British Pound" },
+	]}
+	defaultCurrency={selectedCurrency}
+	onCurrencyChange={setSelectedCurrency}
+	onSave={handleSave}
+	onCancel={handleCancel}
+	saveButtonText="Save Preferences"
+	cancelButtonText="Discard Changes"
+/>
+```
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | `"Billing Settings"` | The title displayed at the top of the component |
+| `features` | `FeatureToggle[]` | See below | Array of feature toggle configurations |
+| `inputFields` | `InputField[]` | See below | Array of input field configurations |
+| `onSave` | `() => void` | `() => {}` | Function called when save button is clicked |
+| `onCancel` | `() => void` | `() => {}` | Function called when cancel button is clicked |
+| `saveButtonText` | `string` | `"Save Changes"` | Text for the save button |
+| `cancelButtonText` | `string` | `"Cancel"` | Text for the cancel button |
+| `currencyOptions` | `{value: string, label: string}[]` | USD and major currencies | Array of currency options |
+| `defaultCurrency` | `string` | `"usd"` | Default selected currency |
+| `onCurrencyChange` | `(value: string) => void` | `() => {}` | Function called when currency is changed |
+| `enableValidation` | `boolean` | `true` | Enables built-in validation and error display |
+| `currencyRequired` | `boolean` | `true` | Requires a currency selection when saving |
+| `className` | `string` | `undefined` | Additional CSS classes to apply |
+
+### FeatureToggle Object
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Unique identifier for the feature |
+| `label` | `string` | Display label for the feature |
+| `description` | `string` | Description of what the feature does |
+| `enabled` | `boolean` | Current state of the feature toggle |
+| `onToggle` | `(enabled: boolean) => void` | Function called when toggle is switched |
+
+### InputField Object
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | Unique identifier for the input field |
+| `name` | `string` | Name attribute for the input field |
+| `value` | `string` | Current value of the input field |
+| `placeholder` | `string` | Placeholder text for the input field |
+| `onChange` | `(value: string) => void` | Function called when input value changes |
+| `label` | `string` | Label displayed above the input field |
+| `helperText` | `string` (optional) | Helper text displayed below the input field |
+| `type` | `string` | Type of input field (text, email, etc.) |
+| `required` | `boolean` | Whether the field is required |
+| `validation` | `{ minLength?: number; maxLength?: number; pattern?: RegExp; customValidator?: (value: string) => string \| null }` | Optional validation rules |
+
+> Note: When validation fails, the save button is disabled. It re-enables automatically as users correct invalid fields. Error messages are shown inline beneath each field.
+
+### Credits
+
+- Created by [@sapatmohit](https://github.com/sapatmohit) [@tsahil01](https://github.com/tsahil01)

@@ -1,0 +1,146 @@
+---
+title: Upcoming Charges
+description: The Upcoming Charges component displays information about upcoming billing cycles, including the next billing date, total amount, and a breakdown of individual charges.
+---
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="upcoming-charges">
+      <UpcomingChargesDemo />
+    </PreviewComponents>
+  </Tab>
+
+<Tab value="Code" className="mt-3">
+	<include
+		cwd
+		lang="tsx"
+		meta='title="src/components/upcoming-charges-demo.tsx"'
+	>
+		src/components/upcoming-charges-demo.tsx
+	</include>
+</Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/upcoming-charges
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/upcoming-charges
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/upcoming-charges
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add upcoming-charges
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add upcoming-charges
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add upcoming-charges
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { UpcomingCharges } from '@/components/billingsdk/upcoming-charges';
+```
+
+```tsx
+<UpcomingCharges
+	title="Next Billing Cycle"
+	description="Your upcoming charges for the next billing period"
+	nextBillingDate="Oct 15, 2025"
+	totalAmount="$39.50"
+	charges={[
+		{
+			id: '1',
+			description: 'Pro Plan (Monthly)',
+			amount: '$29.00',
+			date: 'Oct 15, 2025',
+			type: 'recurring',
+		},
+		{
+			id: '2',
+			description: 'Additional Storage (10GB)',
+			amount: '$5.00',
+			date: 'Oct 15, 2025',
+			type: 'prorated',
+		},
+	]}
+/>;
+```
+
+## Props
+
+| Prop            | Type           | Description                                      |
+| --------------- | -------------- | ------------------------------------------------ |
+| className       | `string`       | Additional CSS classes to apply to the component |
+| title           | `string`       | Title for the upcoming charges section           |
+| description     | `string`       | Description for the upcoming charges section     |
+| nextBillingDate | `string`       | Date of the next billing cycle                   |
+| totalAmount     | `string`       | Total amount for the next billing cycle          |
+| charges         | `ChargeItem[]` | Array of upcoming charges                        |
+
+### ChargeItem Object
+
+| Property    | Type                                      | Description                      |
+| ----------- | ----------------------------------------- | -------------------------------- |
+| id          | `string`                                  | Unique identifier for the charge |
+| description | `string`                                  | Description of the charge        |
+| amount      | `string`                                  | Amount of the charge             |
+| date        | `string`                                  | Date of the charge               |
+| type        | `"prorated" \| "recurring" \| "one-time"` | Type of charge                   |
+
+```tsx
+<UpcomingCharges
+	title="Upcoming Charges"
+	description="Charges for your next billing cycle"
+	nextBillingDate="November 1, 2025"
+	totalAmount="$149.99"
+	charges={[
+		{
+			id: 'ch_001',
+			description: 'Enterprise Plan (Annual)',
+			amount: '$119.99',
+			date: 'Nov 1, 2025',
+			type: 'recurring',
+		},
+		{
+			id: 'ch_002',
+			description: 'Additional Team Seats (5 seats)',
+			amount: '$30.00',
+			date: 'Nov 1, 2025',
+			type: 'prorated',
+		},
+	]}
+/>
+```
+
+### Credits
+- Created by [@sapatmohit](https://github.com/sapatmohit)

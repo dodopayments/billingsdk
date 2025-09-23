@@ -10,6 +10,7 @@ import GitHubStarBadge from "./GitHubStarBadge";
 
 export const Logo = () => {
   return (
+   
     <div className="flex items-center justify-center gap-2">
       <Image
         src="/logo/logo-dodo.svg"
@@ -20,6 +21,8 @@ export const Logo = () => {
       <span className="text-3xl font-display">/</span>
       <Image src="/logo/Logo.svg" alt="Billing SDK" width={120} height={120} />
     </div>
+    
+    
   );
 };
 
@@ -46,7 +49,10 @@ const NavBar = () => {
             }`
           )}
         >
+          <Link href="/" className="cursor-pointer">
           <Logo />
+          </Link>
+       
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">

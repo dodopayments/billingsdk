@@ -321,7 +321,7 @@ function PlaygroundButton({
       className={cn(
         buttonVariants({
           variant: 'secondary',
-          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-none',
+          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-md',
         }),
       )}
       onClick={(e) => {

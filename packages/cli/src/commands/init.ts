@@ -17,28 +17,45 @@ export const initCommand = new Command()
         options: [
           { value: "nextjs", label: detectedFramework === "nextjs" ? "Next.js (detected)" : "Next.js", hint: "React framework with App Router" },
           { value: "express", label: detectedFramework === "express" ? "Express.js (detected)" : "Express.js", hint: "Node.js web framework" },
-          { value: "react", label: detectedFramework === "react" ? "React.js (detected)" : "React.js", hint: "Client-side React app template" }
+          { value: "react", label: detectedFramework === "react" ? "React.js (detected)" : "React.js", hint: "Client-side React app template" },
+          { value: "hono", label: detectedFramework === "hono" ? "Hono.js (detected)" : "Hono.js", hint: "Lightweight web framework for edge runtimes" },
+          { value: "fastify", label: detectedFramework === "fastify" ? "Fastify.js (detected)" : "Fastify.js", hint: "Fast and low overhead web framework" }
         ],
         initialValue: detectedFramework ?? undefined  // cursor will already be on detected framework
       });
 
+      if (isCancel(framework)) {
+        cancel("Setup cancelled.");
+        process.exit(0);
+      }
+
+      const frameworkValue = framework as "nextjs" | "express" | "react" | "fastify" | "hono";
+
+      const providerOptions =
+        frameworkValue === "express" || frameworkValue === "hono"
+          ? [
+              { value: "dodopayments", label: "Dodo Payments" },
+              { value: "stripe", label: "Stripe payments" },
+            ]
+          : [
+              { value: "dodopayments", label: "Dodo Payments" },
+            ];
+
       const providerChoice = await select({
         message: "Which payment provider would you like to use? (Adding more providers soon)",
-        options: [
-          { value: "dodopayments", label: "Dodo Payments" },
-        ],
+        options: providerOptions,
       });
 
       if (isCancel(providerChoice)) {
         cancel("Setup cancelled.");
         process.exit(0);
       }
-      const provider = providerChoice as "dodopayments";
+      const provider = providerChoice as "dodopayments" | "stripe";
 
       const s = spinner();
       s.start("Setting up your billing project...");
       try {
-        await addFiles(framework as "nextjs" | "express" | "react", provider as "dodopayments");
+        await addFiles(frameworkValue, provider);
         s.stop("Setup completed successfully!");
       } catch (error) {
         s.stop("Setup failed!");

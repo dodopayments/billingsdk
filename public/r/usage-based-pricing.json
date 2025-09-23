@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "usage-based-pricing",
+  "type": "registry:block",
+  "title": "Usage Based Pricing",
+  "description": "Interactive usage pricing slider with ruler ticks and animated price",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "card",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/usage-based-pricing.tsx",
+      "content": "" ,
+      "type": "registry:component",
+      "target": "components/billingsdk/usage-based-pricing.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/usage-based-pricing-demo.tsx",
+      "content": "",
+      "type": "registry:component",
+      "target": "components/usage-based-pricing-demo.tsx"
+    }
+  ]
+}

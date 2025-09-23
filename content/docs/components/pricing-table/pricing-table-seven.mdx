@@ -1,0 +1,68 @@
+---
+title: Pricing Table Seven
+description: The Pricing Table Seven component provides a Modern pricing design that balances clarity, usability and conversion-focused layout.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="pricing-table-seven">
+      <PricingTableSevenDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/pricing-table-seven-demo.tsx"'>src/components/pricing-table-seven-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
+import { plans } from "@/lib/billingsdk-config";
+
+<PricingTableSeven
+  plans={plans}
+  title="The Perfect Plan For Your Needs"
+  description="Our transparent pricing makes it easy to find a plan that works within your financial constraints."
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+/>
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `plans` | `PlanProps[]` | Array of pricing plans |
+| `onPlanSelect` | `(planId: string) => void` | Callback when a plan is selected |
+
+
+## Theming
+
+The pricing table component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+
+## Example
+<include cwd lang="tsx" meta='title="src/components/pricing-table-seven-demo.tsx"'>src/components/pricing-table-seven-demo.tsx</include>
+
+### Credits
+- Created by [@rohanshrma26](https://x.com/rohanshrma26)

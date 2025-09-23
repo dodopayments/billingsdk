@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "upcoming-charges",
+  "type": "registry:block",
+  "title": "Upcoming Charges",
+  "description": "A component that displays information about upcoming billing cycles, including the next billing date, total amount, and a breakdown of individual charges",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "card",
+    "badge",
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/upcoming-charges.tsx",
+      "content": "'use client';\n\nimport { Badge } from '@/components/ui/badge';\nimport {\n\tCard,\n\tCardContent,\n\tCardDescription,\n\tCardHeader,\n\tCardTitle,\n} from '@/components/ui/card';\nimport { cn } from '@/lib/utils';\nimport { Calendar } from 'lucide-react';\n\nexport interface ChargeItem {\n\tid: string;\n\tdescription: string;\n\tamount: string;\n\tdate: string;\n\ttype: 'prorated' | 'recurring' | 'one-time';\n}\n\nexport interface UpcomingChargesProps {\n\tclassName?: string;\n\ttitle?: string;\n\tdescription?: string;\n\tnextBillingDate: string;\n\ttotalAmount: string;\n\tcharges: ChargeItem[];\n}\n\nexport function UpcomingCharges({\n\tclassName,\n\ttitle = 'Upcoming Charges',\n\tdescription,\n\tnextBillingDate,\n\ttotalAmount,\n\tcharges,\n}: UpcomingChargesProps) {\n\tconst getChargeTypeBadge = (type: ChargeItem['type']) => {\n\t\tswitch (type) {\n\t\t\tcase 'prorated':\n\t\t\t\treturn <Badge variant=\"secondary\">Prorated</Badge>;\n\t\t\tcase 'recurring':\n\t\t\t\treturn <Badge variant=\"default\">Recurring</Badge>;\n\t\t\tcase 'one-time':\n\t\t\t\treturn <Badge variant=\"outline\">One-time</Badge>;\n\t\t\tdefault:\n\t\t\t\treturn <Badge variant=\"outline\">Unknown</Badge>;\n\t\t}\n\t};\n\n\treturn (\n\t\t<Card className={cn('w-full', className)}>\n\t\t\t<CardHeader className=\"pb-4\">\n\t\t\t\t<CardTitle className=\"text-lg\">{title}</CardTitle>\n\t\t\t\t{description && <CardDescription>{description}</CardDescription>}\n\t\t\t</CardHeader>\n\t\t\t<CardContent className=\"space-y-6\">\n\t\t\t\t<div className=\"rounded-lg border bg-muted/20 p-4\">\n\t\t\t\t\t<div className=\"flex items-center justify-between\">\n\t\t\t\t\t\t<div className=\"flex items-center gap-3\">\n\t\t\t\t\t\t\t<Calendar className=\"h-5 w-5 text-muted-foreground\" />\n\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t<p className=\"text-sm text-muted-foreground\">\n\t\t\t\t\t\t\t\t\tNext Billing Date\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<p className=\"font-medium\">{nextBillingDate}</p>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div className=\"text-right\">\n\t\t\t\t\t\t\t<p className=\"text-sm text-muted-foreground\">Total Amount</p>\n\t\t\t\t\t\t\t<p className=\"text-2xl font-bold\">{totalAmount}</p>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t\t<div className=\"space-y-3\">\n\t\t\t\t\t<h3 className=\"font-medium\">Charge Breakdown</h3>\n\t\t\t\t\t<div className=\"space-y-2\">\n\t\t\t\t\t\t{charges.map((charge) => (\n\t\t\t\t\t\t\t<div\n\t\t\t\t\t\t\t\tkey={charge.id}\n\t\t\t\t\t\t\t\tclassName=\"flex items-center justify-between rounded-lg border p-3\"\n\t\t\t\t\t\t\t>\n\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t<div className=\"flex items-center gap-2\">\n\t\t\t\t\t\t\t\t\t\t<span className=\"font-medium\">{charge.description}</span>\n\t\t\t\t\t\t\t\t\t\t{getChargeTypeBadge(charge.type)}\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<p className=\"text-sm text-muted-foreground\">{charge.date}</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div className=\"text-right\">\n\t\t\t\t\t\t\t\t\t<p className=\"font-medium\">{charge.amount}</p>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t))}\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</CardContent>\n\t\t</Card>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "components/billingsdk/upcoming-charges.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/upcoming-charges-demo.tsx",
+      "content": "'use client';\n\nimport { UpcomingCharges } from '@/registry/billingsdk/upcoming-charges';\n\nexport function UpcomingChargesDemo() {\n\treturn (\n\t\t<UpcomingCharges\n\t\t\ttitle=\"Upcoming Charges\"\n\t\t\tdescription=\"Your upcoming charges for the next billing period\"\n\t\t\tnextBillingDate=\"November 1, 2025\"\n\t\t\ttotalAmount=\"$149.99\"\n\t\t\tcharges={[\n\t\t\t\t{\n\t\t\t\t\tid: 'ch_001',\n\t\t\t\t\tdescription: 'Enterprise Plan (Annual)',\n\t\t\t\t\tamount: '$119.99',\n\t\t\t\t\tdate: 'Nov 1, 2025',\n\t\t\t\t\ttype: 'recurring',\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tid: 'ch_002',\n\t\t\t\t\tdescription: 'Additional Team Seats (5 seats)',\n\t\t\t\t\tamount: '$30.00',\n\t\t\t\t\tdate: 'Nov 1, 2025',\n\t\t\t\t\ttype: 'prorated',\n\t\t\t\t},\n\t\t\t]}\n\t\t/>\n\t);\n}\n",
+      "type": "registry:component",
+      "target": "components/upcoming-charges-demo.tsx"
+    }
+  ]
+}

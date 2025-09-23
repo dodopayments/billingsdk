@@ -9,11 +9,15 @@ import { CancelSubscriptionDialog } from "@/components/billingsdk/cancel-subscri
 import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card";
 import { UpdatePlanDialog } from "@/components/billingsdk/update-plan-dialog";
 import { SubscriptionManagement } from "@/components/billingsdk/subscription-management";
+import { UsageBasedPricing } from "@/components/billingsdk/usage-based-pricing";
 import { UsageMeter } from "@/components/billingsdk/usage-meter";
 import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
+import { PaymentCard } from "@/components/billingsdk/payment-card";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
+import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
+import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -41,6 +45,35 @@ export const componentRegistry: ComponentConfig[] = [
       autoDismiss: 5000,
       onDismiss: () => console.log("Banner dismissed"),
     },
+  },
+  {
+    id: "usage-based-pricing",
+    name: "Usage Based Pricing",
+    description: "Interactive usage pricing slider with ruler ticks and animated price",
+    category: "subscription",
+    component: UsageBasedPricing,
+    imports: ["@/components/billingsdk/usage-based-pricing"],
+    defaultCode: `<UsageBasedPricing
+  min={4000}
+  max={25000}
+  step={250}
+  defaultValue={4000}
+  currency="$"
+  basePrice={39.99}
+  includedCredits={4000}
+  unitPricePerCredit={0.01}
+/>`,
+    defaultProps: {
+      min: 4000,
+      max: 25000,
+      step: 250,
+      defaultValue: 4000,
+      currency: "$",
+      basePrice: 39.99,
+      includedCredits: 4000,
+      unitPricePerCredit: 0.01,
+    },
+  
   },
   {
     id: "pricing-table-one",
@@ -592,6 +625,354 @@ export const componentRegistry: ComponentConfig[] = [
         ],
     }
 ];}
+  title="Pricing Plans"
+  description="Find the right plan for your business"
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+/>`,
+    defaultProps: {
+      plans:  [
+        {
+            id: 'starter',
+            title: 'Starter',
+            description: 'For developers testing out Liveblocks locally.',
+            currency: '$',
+            monthlyPrice: '0',
+            yearlyPrice: '0',
+            buttonText: 'Start today for free',
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        },
+        {
+            id: 'pro',
+            title: 'Pro',
+            description: 'For companies adding collaboration in production.',
+            currency: '$',
+            monthlyPrice: '20',
+            yearlyPrice: '199',
+            buttonText: 'Sign up',
+            badge: 'Most popular',
+            highlight: true,
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        },
+        {
+            id: 'enterprise',
+            title: 'Enterprise',
+            description: 'For organizations that need more support and compliance features.',
+            currency: '$',
+            monthlyPrice: 'Custom',
+            yearlyPrice: 'Custom',
+            buttonText: 'Contact sales',
+            features: [
+                {
+                    name: 'Presence',
+                    icon: "check",
+                    iconColor: 'text-green-500'
+                },
+                {
+                    name: 'Comments',
+                    icon: "check",
+                    iconColor: 'text-orange-500'
+                },
+                {
+                    name: 'Notifications',
+                    icon: "check",
+                    iconColor: 'text-teal-500'
+                },
+                {
+                    name: 'Text Editor',
+                    icon: "check",
+                    iconColor: 'text-blue-500'
+                },
+                {
+                    name: 'Sync Datastore',
+                    icon: "check",
+                    iconColor: 'text-zinc-500'
+                }
+            ],
+        }
+    ],
+      title: "Pricing Plans",
+      description: "Find the right plan for your business",
+      onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+    },
+  },
+  {
+    id: "pricing-table-six",
+    name: "Pricing Table Six",
+    description: "Modern pricing table with contact us plan",
+    category: "pricing",
+    component: PricingTableSix,
+    imports: ["@/components/billingsdk/pricing-table-six"],
+    defaultCode: `<PricingTableSix
+  plans={[
+        {
+          id: "basic",
+          title: "Starter",
+          description: "Best for individuals and small teams",
+          monthlyPrice: 0,
+          yearlyPrice: 0,
+          features: [
+            "Core tools with modest usage allowances",
+            "Getting-started guides to launch quickly",
+            "Fundamental analytics and reports",
+            "Standard email assistance",
+          ]
+        },
+        {
+          id: "premium",
+          title: "Growth",
+          description: "Built for expanding teams",
+          monthlyPrice: 50,
+          yearlyPrice: 500,
+          isFeatured: true,
+          features: [
+            "Advanced tools with priority updates",
+            "Onboarding guides to ramp fast",
+            "Live chat support access",
+            "Automation to streamline workflows",
+            "Premium tutorials and webinars access",
+          ]
+        },
+        {
+          id: "custom",
+          title: "Enterprise",
+          description: "Tailored for specialized requirements",
+          monthlyPrice: 99,
+          yearlyPrice: 990,
+          isCustom: true,
+          features: [
+            "Unlimited users, projects, and data",
+            "Resources that scale with your needs",
+            "24/7 priority support",
+            "White-label reports, dashboards, and UIs",
+            "Support for custom API integrations",
+            "Works with advanced or proprietary systems",
+          ]
+        },
+      ]}
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+/>`,
+    defaultProps: {
+      plans: [
+        {
+          id: "basic",
+          title: "Starter",
+          description: "Best for individuals and small teams",
+          monthlyPrice: 0,
+          yearlyPrice: 0,
+          features: [
+            "Core tools with modest usage allowances",
+            "Getting-started guides to launch quickly",
+            "Fundamental analytics and reports",
+            "Standard email assistance",
+          ]
+        },
+        {
+          id: "premium",
+          title: "Growth",
+          description: "Built for expanding teams",
+          monthlyPrice: 50,
+          yearlyPrice: 500,
+          isFeatured: true,
+          features: [
+            "Advanced tools with priority updates",
+            "Onboarding guides to ramp fast",
+            "Live chat support access",
+            "Automation to streamline workflows",
+            "Premium tutorials and webinars access",
+          ]
+        },
+        {
+          id: "custom",
+          title: "Enterprise",
+          description: "Tailored for specialized requirements",
+          monthlyPrice: 99,
+          yearlyPrice: 990,
+          isCustom: true,
+          features: [
+            "Unlimited users, projects, and data",
+            "Resources that scale with your needs",
+            "24/7 priority support",
+            "White-label reports, dashboards, and UIs",
+            "Support for custom API integrations",
+            "Works with advanced or proprietary systems",
+          ]
+        },
+      ],
+      onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+    },
+  },
+  {
+    id: "pricing-table-seven",
+    name: "Pricing Table Seven",
+    description: "Modern pricing table with contact us plan",
+    category: "pricing",
+    component: PricingTableSeven,
+    imports: ["@/components/billingsdk/pricing-table-seven"],
+    defaultCode: `<PricingTableSeven
+  plans={ [
+    {
+        id: 'starter',
+        title: 'Starter',
+        description: 'For developers testing out Liveblocks locally.',
+        currency: '$',
+        monthlyPrice: '0',
+        yearlyPrice: '0',
+        buttonText: 'Start today for free',
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    },
+    {
+        id: 'pro',
+        title: 'Pro',
+        description: 'For companies adding collaboration in production.',
+        currency: '$',
+        monthlyPrice: '20',
+        yearlyPrice: '199',
+        buttonText: 'Sign up',
+        badge: 'Most popular',
+        highlight: true,
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    },
+    {
+        id: 'enterprise',
+        title: 'Enterprise',
+        description: 'For organizations that need more support and compliance features.',
+        currency: '$',
+        monthlyPrice: 'Custom',
+        yearlyPrice: 'Custom',
+        buttonText: 'Contact sales',
+        features: [
+            {
+                name: 'Presence',
+                icon: "check",
+                iconColor: 'text-green-500'
+            },
+            {
+                name: 'Comments',
+                icon: "check",
+                iconColor: 'text-orange-500'
+            },
+            {
+                name: 'Notifications',
+                icon: "check",
+                iconColor: 'text-teal-500'
+            },
+            {
+                name: 'Text Editor',
+                icon: "check",
+                iconColor: 'text-blue-500'
+            },
+            {
+                name: 'Sync Datastore',
+                icon: "check",
+                iconColor: 'text-zinc-500'
+            }
+        ],
+    }
+]}
   title="Pricing Plans"
   description="Find the right plan for your business"
   onPlanSelect={(planId) => console.log('Selected plan:', planId)}
@@ -1596,4 +1977,46 @@ export const componentRegistry: ComponentConfig[] = [
       onAddNew: () => console.log("Add new method"),
     },
   },
+  {
+    id: "payment-card",
+    name: "Payment Card",
+    description: "A comprehensive final payment interface for processing transactions with card details.",
+    category: "ui",
+    component: PaymentCard,
+    imports: ["@/components/billingsdk/payment-card"],
+    defaultCode: `<PaymentCard
+   title="Final step, make the payment."
+  description="To finalize your subscription, kindly complete your payment using a valid credit card."
+  price="100"
+  finalText={[
+    { text: "Automated billing & invoices" },
+    { text: "Priority support" },
+    { text: "Exclusive member benefits" },
+  ]}
+  feature="Payment & Invoice"
+  featuredescription="Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email."
+  feature2="Priority Support"
+  feature2description="Get dedicated customer support with faster response times and direct access to our technical team for any issues."
+  onPay={async ({ cardNumber, expiry, cvc }) => {
+    console.log(\`Payment Processed! \${cardNumber}, exp \${expiry}, cvc \${cvc}\`);
+  }}
+  />`,
+    defaultProps: {
+      title: "Final step, make the payment.",
+      description: "To finalize your subscription, kindly complete your payment using a valid credit card.",
+      price: "100",
+      finalText: [
+        { text: "Automated billing & invoices" },
+        { text: "Priority support" },
+        { text: "Exclusive member benefits" },
+      ],
+      feature: "Payment & Invoice",
+      featuredescription: "Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email.",
+      feature2: "Priority Support",
+      feature2description: "Get dedicated customer support with faster response times and direct access to our technical team for any issues.",
+      onPay: async ({ cardNumber, expiry, cvc }: { cardNumber: string; expiry: string; cvc: string }) => {
+        console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);
+      },
+    },
+  }
 ];
