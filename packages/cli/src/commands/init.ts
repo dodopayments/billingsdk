@@ -48,42 +48,49 @@ export const initCommand = new Command()
             ],
             initialValue: detectedFramework ?? undefined
           });
-        } catch (e) {
-          console.error("Interactive prompts failed. Try providing flags, e.g.:\n  billingsdk init --framework nextjs --provider paypal");
-          throw e;
-        }
+          } catch (e) {
+            console.error(
+              "Interactive prompts failed. Try providing flags, e.g.:\n  billingsdk init --framework nextjs --provider paypal"
+            );
+            throw e;
+          }
 
-        if (isCancel(framework)) {
-          cancel("Setup cancelled.");
-          process.exit(0);
-        }
-        frameworkValue = framework as typeof frameworkValue;
+          if (isCancel(framework)) {
+            cancel("Setup cancelled.");
+            process.exit(0);
+          }
+          frameworkValue = framework as typeof frameworkValue;
 
-        const providerOptions: { value: "dodopayments" | "stripe" | "paypal"; label: string }[] = [
-          { value: "dodopayments", label: "Dodo Payments" }
-        ];
-        if (frameworkValue === "express" || frameworkValue === "hono") {
-          providerOptions.push({ value: "stripe", label: "Stripe payments" });
-        }
-        if (frameworkValue === "nextjs") {
-          providerOptions.push({ value: "paypal", label: "PayPal" });
-        }
+          const providerOptions: {
+            value: "dodopayments" | "stripe" | "paypal";
+            label: string;
+          }[] = [{ value: "dodopayments", label: "Dodo Payments" }];
 
-        let providerChoice: unknown;
-        try {
-          providerChoice = await select({
-            message: "Which payment provider would you like to use? (Adding more providers soon)",
-            options: providerOptions,
-          });
-        } catch (e) {
-          console.error("Interactive prompts failed. Try providing flags, e.g.:\n  billingsdk init --framework nextjs --provider paypal");
-          throw e;
-        }
-        if (isCancel(providerChoice)) {
-          cancel("Setup cancelled.");
-          process.exit(0);
-        }
-        provider = providerChoice as typeof provider;
+          if (frameworkValue === "express" || frameworkValue === "hono") {
+            providerOptions.push({ value: "stripe", label: "Stripe payments" });
+          }
+          if (frameworkValue === "nextjs") {
+            providerOptions.push({ value: "paypal", label: "PayPal" });
+          }
+
+          let providerChoice: unknown;
+          try {
+            providerChoice = await select({
+              message:
+                "Which payment provider would you like to use? (Adding more providers soon)",
+              options: providerOptions,
+            });
+          } catch (e) {
+            console.error(
+              "Interactive prompts failed. Try providing flags, e.g.:\n  billingsdk init --framework nextjs --provider paypal"
+            );
+            throw e;
+          }
+          if (isCancel(providerChoice)) {
+            cancel("Setup cancelled.");
+            process.exit(0);
+          }
+          provider = providerChoice as typeof provider;
       }
 
       const s = spinner();

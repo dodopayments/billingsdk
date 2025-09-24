@@ -42,7 +42,9 @@ import { UpcomingChargesDemo } from '@/components/upcoming-charges-demo';
 import { BillingSettings2Demo } from '@/components/billing-settings-2-demo';
 import { PricingTableSixDemo } from '@/components/pricing-table-six-demo';
 import { UsageBasedPricingDemo } from '@/components/usage-based-pricing-demo';
+import { DetailedUsageTableDemo } from '@/components/detailed-usage-table-demo';
 import { PricingTableSevenDemo } from '@/components/pricing-table-seven-demo';
+import {PaymentCardDemo} from '@/components/payment-card-demo';
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -84,13 +86,15 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
     PaymentDetailsDemo,
+    PaymentCardDemo,
     ProrationPreviewDemo,
     CouponDemo,
 	  BillingSummaryCardDemo,
     UpcomingChargesDemo,
 	  PricingTableSixDemo,
+    DetailedUsageTableDemo,
     PricingTableSevenDemo,
-	 BillingSettings2Demo,
+	  BillingSettings2Demo,
     UsageBasedPricingDemo
   };
 }
