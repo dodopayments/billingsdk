@@ -5,18 +5,8 @@ import { Result } from "../types/registry.js";
 import { confirm, spinner } from "@clack/prompts";
 import { execSync } from "child_process";
 
-    // __dirname is not available in ESM; derive it from import.meta.url
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    // Resolve registry source (local only)
-    const filename = `${framework}-${provider}.json`;
-    const explicitLocal = process.env.BILLINGSDK_REGISTRY_LOCAL_PATH;
-    const candidates = [
-        explicitLocal,
-        path.join(process.cwd(), "public", "tr"),
-        path.join(process.cwd(), "..", "..", "public", "tr"),
-        path.join(__dirname, "..", "..", "..", "public", "tr"),
-        path.join(__dirname, "..", "..", "public", "tr"),
-    ].filter(Boolean) as string[];
+// __dirname is not available in ESM; derive it from import.meta.url
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export async function addFiles(
   framework: "nextjs" | "express" | "react" | "fastify" | "hono",
