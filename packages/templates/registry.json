@@ -430,7 +430,9 @@
                 {
                     "path": "packages/templates/nextjs/.env.paypal.example",
                     "content": "PayPal .env.example for NextJS",
-                },
+                    "type": "template",
+                    "target": ".env.example"
+                }
             ],
             "dependencies": [
                 "@paypal/paypal-server-sdk",
