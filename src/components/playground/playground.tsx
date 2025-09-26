@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { PlaygroundHeader } from "./playground-header";
 import { CodePanel } from "./code-panel";
@@ -16,11 +16,35 @@ import { cn } from "@/lib/utils";
 function PlaygroundContent() {
   const [showCodePanel, setShowCodePanel] = useState(true);
   const [showPreviewPanel, setShowPreviewPanel] = useState(true);
+  const [splitPercent, setSplitPercent] = useState(50); // Code panel width percent
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useSearchParams();
   const { setSelectedComponent } = usePlayground();
 
   const toggleCodePanel = () => setShowCodePanel(!showCodePanel);
   const togglePreviewPanel = () => setShowPreviewPanel(!showPreviewPanel);
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const percent = (x / rect.width) * 100;
+      const clamped = Math.min(70, Math.max(30, percent));
+      setSplitPercent(clamped);
+    };
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging]);
 
   // Handle component parameter from URL for direct-deep linking from docs
   useEffect(() => {
@@ -151,24 +175,48 @@ function PlaygroundContent() {
           </div>
         </div>
         
-        {/* Main Content - Responsive Split */}
-        <div className="flex-1 flex overflow-hidden">
+        {/* Main Content - Responsive Split (Resizable) */}
+        <div ref={containerRef} className="flex-1 flex overflow-hidden relative">
           {/* Left Panel - CODE */}
           {showCodePanel && (
-            <div className={cn(
-              "border-r border-border",
-              showPreviewPanel ? "w-1/2" : "w-full"
-            )}>
+            <div
+              className={cn(
+                "border-r border-border"
+              )}
+              style={{
+                width: showPreviewPanel ? `${splitPercent}%` : '100%'
+              }}
+            >
               <CodePanel />
             </div>
           )}
 
           {/* Right Panel - PREVIEW */}
           {showPreviewPanel && (
-            <div className={cn(
-              showCodePanel ? "w-1/2" : "w-full"
-            )}>
+            <div
+              className={cn()}
+              style={{
+                width: showCodePanel ? `${100 - splitPercent}%` : '100%'
+              }}
+            >
               <PreviewPanel />
+            </div>
+          )}
+
+          {/* Drag handle (only when both panels visible) */}
+          {showCodePanel && showPreviewPanel && (
+            <div
+              onMouseDown={() => setIsDragging(true)}
+              className={cn(
+                "absolute top-0 bottom-0 w-2 cursor-col-resize z-10",
+                isDragging && "bg-primary/10"
+              )}
+              style={{
+                left: `${splitPercent}%`,
+                transform: 'translateX(-50%)'
+              }}
+            >
+              <div className="h-full w-px bg-border hover:bg-primary mx-auto" />
             </div>
           )}
         </div>
