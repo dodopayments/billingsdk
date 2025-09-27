@@ -30,7 +30,7 @@
     "components/cancel-subscription/cancel-subscription-dialog",
     "---Billing & Usage Analytics---",
     "components/billing-setting/index",
-  		"components/billing-settings-2/index",
+  	"components/billing-settings-2/index",
     "components/billing-summary-card/index",
     "components/usage-meter/usage-meter-circle",
     "components/usage-meter/usage-meter-linear",
@@ -39,15 +39,16 @@
     "---Banner---",
     "components/banner/index",
     "components/coupon/index",
-		"---Payment Processing---",
+	"---Payment Processing---",
     "components/payment-details/index",
-		"components/payment-success-dialog/index",
-		"components/payment-method-selector/index",
-		"components/payment-method-manager/index",
+	"components/payment-success-dialog/index",
+	"components/payment-method-selector/index",
+	"components/payment-method-manager/index",
+	"components/coupon-applicator/index",
     "components/coupon-applicator/index",
-		"components/payment-card/index",
-		"---Configuration---",
-		"interfaces",
-		"theming"
+	"components/payment-card/index",
+	"---Configuration---",
+	"interfaces",
+	"theming"
 	]
 }
