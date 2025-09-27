@@ -22,7 +22,11 @@
     },
     {
       "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
-      "content": "'use client';\r\nimport {PaymentCard} from \"@/components/billingsdk/payment-card\";\r\n\r\nexport function PaymentCardDemo() {\r\n  return <PaymentCard\r\n  title=\"Final step, make the payment.\"\r\n  description=\"To finalize your subscription, kindly complete your payment using a valid credit card.\"\r\n  price=\"100\"\r\n  finalText={[\r\n    { text: \"Automated billing & invoices\" },\r\n    { text: \"Priority support\" },\r\n    { text: \"Exclusive member benefits\" },\r\n  ]}\r\n  feature=\"Payment & Invoice\"\r\n  featuredescription=\"Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email.\"\r\n  feature2=\"Priority Support\"\r\n  feature2description=\"Get dedicated customer support with faster response times and direct access to our technical team for any issues.\"\r\n  onPay={async ({ cardNumber, expiry, cvc }) => {\r\n    console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);\r\n  }}\r\n  />;\r\n}\r\n\r\nexport default PaymentCardDemo;",
+  onPay={async ({ cardNumber, expiry }) => {
+    // Mask the PAN to only the last 4 digits; do not log CVC
+    const last4 = cardNumber.replace(/\s+/g, "").slice(-4);
+    console.log(`Payment processed •••• ${last4}, exp ${expiry}`);
+  }}
       "type": "registry:component",
       "target": "components/payment-card-demo.tsx"
     }
