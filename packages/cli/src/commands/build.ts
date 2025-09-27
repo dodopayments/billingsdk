@@ -10,7 +10,7 @@ export const buildCommand = new Command()
       console.log("Building component registry...");
       await buildRegistry();
       console.log("Registry built successfully!");
-    } catch (error) {
+    } catch {
     //   console.error("Failed to build registry");
       process.exit(1);
     }

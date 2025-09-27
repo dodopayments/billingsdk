@@ -35,8 +35,8 @@ export const addFiles = async (framework: "nextjs" | "express" | "react" | "fast
             } else {
                 fs.writeFileSync(filePath, file.content);
             }
-        } catch (error) {
-            console.error(`Failed to add file ${relativePath}:`, error);
+        } catch (_error) {
+            console.error(`Failed to add file ${relativePath}:`, _error);
         }
     }
     if (result.dependencies) {
@@ -45,8 +45,8 @@ export const addFiles = async (framework: "nextjs" | "express" | "react" | "fast
         try {
             await execSync(`npm install ${result.dependencies.join(" ")}`, { stdio: "inherit" });
             s.stop("Dependencies installed successfully!");
-        } catch (error) {
-            console.error("Failed to install dependencies:", error);
+        } catch (_error) {
+            console.error("Failed to install dependencies:", _error);
         }
     }
 }

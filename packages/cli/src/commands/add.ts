@@ -32,7 +32,7 @@ export const addCommand = new Command()
       const templateRegistry = `@billingsdk/${component}.json`;
       const runner = getPackageManagerRunner();
       execSync(`${runner} shadcn@latest add ${templateRegistry}`, { stdio: "inherit" });
-    } catch (error) {
+    } catch {
       // console.error(`Failed to add component "${component}",);
       process.exit(1);
     }

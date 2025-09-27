@@ -43,7 +43,6 @@ export function UsageBasedPricing({
   currency = "$",
   basePrice = 39.99,
   includedCredits = 4000,
-  unitPricePerCredit = 0.01,
   title = "Pay as you use pricing",
   subtitle = "Start with a flat monthly rate that includes 4,000 credits.",
 }: UsageBasedPricingProps) {
@@ -108,9 +107,6 @@ export function UsageBasedPricing({
   const pct = posPct
   // unified tick count used everywhere
   const tickCount = useMemo(() => Math.max(80, Math.floor((trackWidth || 1) / 6)), [trackWidth])
-  const currentTickIndex = useMemo(() => {
-    return Math.round((posPct / 100) * (tickCount - 1))
-  }, [posPct, tickCount])
   const currentTickIndexFloat = useMemo(() => (posPct / 100) * (tickCount - 1), [posPct, tickCount])
 
   const commitValue = (v: number, fireEnd = false) => {
@@ -220,14 +216,6 @@ export function UsageBasedPricing({
   const startLabel = `${formatNumber(firstThousand)} credits`
   const endLabel = `${formatNumber(lastThousand)} credits`
 
-  // Bubble position (clamped in px within track)
-  const bubbleLeftPx = useMemo(() => {
-    const pad = 16 // px padding to keep bubble inside
-    const w = trackWidth || 1
-    const x = (posPct / 100) * w
-    return clamp(x, pad, w - pad)
-  }, [posPct, trackWidth])
-
   // Keyboard Accessibility
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     let delta = 0
@@ -322,10 +310,6 @@ export function UsageBasedPricing({
                 const spread = 2 // influence range (in ticks)
                 const factor = Math.max(0, 1 - distFloat / spread)
                 // extra boost for ticks that align with 1,000-credit multiples
-                const valuePerTick = (max - min) / (tickCount - 1)
-                const approxValue = min + (i / (tickCount - 1)) * (max - min)
-                const nearestThousand = Math.round(approxValue / 1000) * 1000
-                const isThousandTick = Math.abs(approxValue - nearestThousand) <= valuePerTick * 0.5
                 const thousandBoost = 0
                 const height = base + peak * factor + thousandBoost
                 // color bands similar to before

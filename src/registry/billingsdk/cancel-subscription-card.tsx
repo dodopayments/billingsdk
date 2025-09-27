@@ -89,6 +89,7 @@ export function CancelSubscriptionCard({
         <Card className={cn("sm:max-w-[1000px] flex flex-col md:flex-row p-0 overflow-hidden w-full", leftPanelImageUrl ? "" : "sm:max-w-[500px]", className)}>
             {leftPanelImageUrl && (
                 <div className="w-full md:w-1/2 min-h-[500px] relative hidden md:block overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={leftPanelImageUrl} alt="Cancel Subscription" className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-background/30 to-background/90 dark:block hidden"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20 dark:block hidden"></div>

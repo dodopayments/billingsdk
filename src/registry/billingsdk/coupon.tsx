@@ -155,7 +155,7 @@ export function CouponGenerator({
                     className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
                     bg-background text-foreground
                     border border-border shadow-2xl 
-                    ${cardClassName || ""}`}
+                    ${className || ""} ${cardClassName || ""}`}
                 >
                     <CardContent className="p-0">
                         <div className="relative overflow-hidden">
@@ -228,7 +228,7 @@ export function CouponGenerator({
                     className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
                     bg-background text-foreground
                     border border-border shadow-2xl 
-                    ${cardClassName || ""}`}
+                    ${className || ""} ${cardClassName || ""}`}
                 >
                     <CardHeader className="pb-4">
                         <CardTitle className="text-xl font-semibold text-center">
