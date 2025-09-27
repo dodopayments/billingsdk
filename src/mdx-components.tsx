@@ -38,6 +38,7 @@ import { PaymentDetailsDemo } from '@/components/payment-details-demo';
 import { ProrationPreviewDemo } from '@/components/proration-preview-demo';
 import { CouponDemo } from '@/components/coupon-demo';
 import { BillingSummaryCardDemo } from '@/components/billing-summary-card-demo';
+import CouponApplicatorDemo from '@/components/coupon-applicator-demo';
 import { UpcomingChargesDemo } from '@/components/upcoming-charges-demo';
 import { BillingSettings2Demo } from '@/components/billing-settings-2-demo';
 import { PricingTableSixDemo } from '@/components/pricing-table-six-demo';
@@ -89,7 +90,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PaymentCardDemo,
     ProrationPreviewDemo,
     CouponDemo,
-	  BillingSummaryCardDemo,
+    BillingSummaryCardDemo,
+    CouponApplicatorDemo,
     UpcomingChargesDemo,
 	  PricingTableSixDemo,
     DetailedUsageTableDemo,
