@@ -6,7 +6,14 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { Copy, ArrowLeft, Share2, Scissors } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { 
+    Copy, 
+    ArrowLeft, 
+    Share2, 
+    Scissors, 
+    Sparkles,
+} from "lucide-react"
 import {
     Select,
     SelectContent,
@@ -148,9 +155,9 @@ export function CouponGenerator({
         setDiscount(num); 
     };
 
-    return (
-        <>
-            {generated ? (
+    if (generated) {
+        return (
+            <div className={`w-full max-w-md mx-auto ${className || ""}`}>
                 <Card
                     className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
                     bg-background text-foreground
@@ -223,136 +230,152 @@ export function CouponGenerator({
                         </div>
                     </CardFooter>
                 </Card>
-            ) : (
-                <Card
-                    className={`w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-4 duration-700 
-                    bg-background text-foreground
-                    border border-border shadow-2xl 
-                    ${cardClassName || ""}`}
-                >
-                    <CardHeader className="pb-4">
-                        <CardTitle className="text-xl font-semibold text-center">
-                            Create Coupon Code
-                        </CardTitle>
-                    </CardHeader>
+            </div>
+        );
+    }
 
-                    <div className="h-px bg-border mx-6"></div>
+    return (
+        <div className={`w-full max-w-md mx-auto ${className || ""}`}>
+            <Card className={`shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden bg-gradient-to-b from-background to-muted/20 ${cardClassName || ""}`}>
+                <CardHeader className="px-4 sm:px-6">
+                    <CardTitle className="text-lg sm:text-xl">
+                        Create Coupon
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                        Generate discount codes for your customers
+                    </p>
+                </CardHeader>
 
-                    <CardContent className="space-y-6 p-6">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <Label htmlFor="discount" className="text-sm font-medium">
-                                    Discount (%)
-                                </Label>
-                                <Input
-                                    type="number"
-                                    id="discount"
-                                    value={discount}
-                                    onChange={handleDiscountChange}
-                                    min={0}
-                                    max={100}
-                                    className="bg-background border-border text-foreground"
-                                />
-                                {discountError && (
-                                    <div className="text-sm text-red-500">{discountError}</div>
-                                )}
-                            </div>
+                <Separator />
 
-                            <div className="space-y-2">
-                                <Label htmlFor="applicable" className="text-sm font-medium">
-                                    Applicable to <span className="text-red-500">*</span>
-                                </Label>
-                                <Select value={selectedRule} onValueChange={setSelectedRule}>
-                                    <SelectTrigger className="bg-background border-border text-foreground">
-                                        <SelectValue placeholder="Select rule" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            <SelectLabel>Rules</SelectLabel>
-                                            {applicableOptions.map((option) => (
-                                                <SelectItem
-                                                    key={option.value}
-                                                    value={option.value}
-                                                    className="text-foreground hover:bg-muted"
-                                                >
-                                                    {option.label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <Label className="text-sm font-medium">
-                                Validity Period <span className="text-red-500">*</span>
+                <CardContent className="space-y-6 px-4 sm:px-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="discount" className="text-sm font-medium">
+                                Discount (%)
                             </Label>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div className="space-y-2">
-                                    <Label htmlFor="start-date" className="text-xs">
-                                        Start Date
-                                    </Label>
-                                    <Input
-                                        type="date"
-                                        id="start-date"
-                                        value={startDate}
-                                        onChange={(e) => setStartDate(e.target.value)}
-                                        className="bg-background border-border text-foreground"
-                                    />
+                            <Input
+                                type="number"
+                                id="discount"
+                                value={discount}
+                                onChange={handleDiscountChange}
+                                min={0}
+                                max={100}
+                                className="border-border/50 focus:border-primary/50 transition-colors"
+                                placeholder="20"
+                            />
+                            {discountError && (
+                                <div className="text-xs text-destructive flex items-center gap-1 mt-1">
+                                    <div className="w-1 h-1 rounded-full bg-destructive"></div>
+                                    {discountError}
                                 </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="end-date" className="text-xs">
-                                        End Date
-                                    </Label>
-                                    <Input
-                                        type="date"
-                                        id="end-date"
-                                        value={endDate}
-                                        onChange={(e) => setEndDate(e.target.value)}
-                                        className="bg-background border-border text-foreground"
-                                    />
-                                </div>
-                            </div>
-                            {dateError && (
-                                <div className="text-sm text-red-500 mt-2">{dateError}</div>
                             )}
                         </div>
 
-                        <div className="space-y-3">
-                            <div className="flex items-center space-x-3">
-                                <Switch
-                                    id="custom-code"
-                                    checked={enabled}
-                                    onCheckedChange={setEnabled}
-                                    className="data-[state=checked]:bg-zinc-900 data-[state=unchecked]:bg-zinc-200 dark:data-[state=checked]:bg-zinc-100 dark:data-[state=unchecked]:bg-zinc-700"
-                                />
-                                <Label htmlFor="custom-code" className="text-sm font-medium">
-                                    Custom Code
+                        <div className="space-y-2">
+                            <Label htmlFor="applicable" className="text-sm font-medium">
+                                Applicable to <span className="text-destructive">*</span>
+                            </Label>
+                            <Select value={selectedRule} onValueChange={setSelectedRule}>
+                                <SelectTrigger className="border-border/50 focus:border-primary/50 transition-colors">
+                                    <SelectValue placeholder="Select rule" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Rules</SelectLabel>
+                                        {applicableOptions.map((option) => (
+                                            <SelectItem
+                                                key={option.value}
+                                                value={option.value}
+                                            >
+                                                {option.label}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                    </div>
+
+                    <div className="space-y-3">
+                        <Label className="text-sm font-medium flex items-center gap-2">
+                            Validity Period <span className="text-destructive">*</span>
+                        </Label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="space-y-2">
+                                <Label htmlFor="start-date" className="text-xs text-muted-foreground">
+                                    Start Date
                                 </Label>
-                            </div>
-                            {enabled && (
                                 <Input
-                                    className="bg-background border-border text-foreground"
-                                    placeholder="DODO20"
-                                    value={customCode}
-                                    onChange={(e) => setCustomCode(e.target.value)}
+                                    type="date"
+                                    id="start-date"
+                                    value={startDate}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                    className="border-border/50 focus:border-primary/50 transition-colors"
                                 />
-                            )}
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="end-date" className="text-xs text-muted-foreground">
+                                    End Date
+                                </Label>
+                                <Input
+                                    type="date"
+                                    id="end-date"
+                                    value={endDate}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                    className="border-border/50 focus:border-primary/50 transition-colors"
+                                />
+                            </div>
                         </div>
-                    </CardContent>
+                        {dateError && (
+                            <div className="text-xs text-destructive flex items-center gap-1 mt-2">
+                                <div className="w-1 h-1 rounded-full bg-destructive"></div>
+                                {dateError}
+                            </div>
+                        )}
+                    </div>
 
-                    <CardFooter className="flex justify-end p-6 pt-0">
-                        <Button
-                            onClick={handleGenerate}
-                            disabled={!isFormValid}
-                            className={`bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all duration-200 hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:bg-zinc-900 dark:disabled:bg-zinc-100 ${generateButtonClassName || ""}`}
-                        >
-                            Generate Coupon
-                        </Button>
-                    </CardFooter>
-                </Card>
-            )}
-        </>
+                    <div className="space-y-3">
+                        <div className="flex items-center space-x-3">
+                            <Switch
+                                id="custom-code"
+                                checked={enabled}
+                                onCheckedChange={setEnabled}
+                            />
+                            <Label htmlFor="custom-code" className="text-sm font-medium">
+                                Custom Code
+                            </Label>
+                        </div>
+                        {enabled && (
+                            <Input
+                                placeholder="Enter custom code"
+                                value={customCode}
+                                onChange={(e) => setCustomCode(e.target.value)}
+                                className="border-border/50 focus:border-primary/50 transition-colors"
+                            />
+                        )}
+                        {!enabled && (
+                            <p className="text-xs text-muted-foreground">
+                                A random code will be generated automatically
+                            </p>
+                        )}
+                    </div>
+                </CardContent>
+
+                <Separator />
+
+                <CardFooter className="flex justify-end px-4 sm:px-6">
+                    <Button
+                        onClick={handleGenerate}
+                        disabled={!isFormValid}
+                        className={`gap-2 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] disabled:hover:scale-100 ${generateButtonClassName || ""}`}
+                        size="default"
+                    >
+                        <Sparkles className="w-4 h-4" />
+                        Generate Coupon
+                    </Button>
+                </CardFooter>
+            </Card>
+        </div>
     )
 }
