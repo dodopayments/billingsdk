@@ -16,28 +16,11 @@
   "files": [
     {
       "path": "src/registry/billingsdk/payment-card.tsx",
-    // Expiry validation 
-    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
-      newErrors.expiry = "Enter a valid expiry date (MM/YY).";
-    } else {
-      const [month, year] = expiry.split("/").map(Number);
-      const now = new Date();
-      // Last moment of the expiry month
-      const expDate = new Date(2000 + year, month, 0, 23, 59, 59, 999);
-      if (now > expDate) {
-        newErrors.expiry = "Expiry date cannot be in the past.";
-      }
-    }
       "type": "registry:component",
       "target": "components/billingsdk/payment-card.tsx"
     },
     {
       "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
-  onPay={async ({ cardNumber, expiry }) => {
-    // Mask the PAN to only the last 4 digits; do not log CVC
-    const last4 = cardNumber.replace(/\s+/g, "").slice(-4);
-    console.log(`Payment processed •••• ${last4}, exp ${expiry}`);
-  }}
       "type": "registry:component",
       "target": "components/payment-card-demo.tsx"
     }
