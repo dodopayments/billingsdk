@@ -1,0 +1,162 @@
+---
+title: Detailed Usage Table
+description: The Detailed Usage Table component provides a comprehensive breakdown of resource consumption with columns for resource name, used amount, limit, and percentage utilization. The percentage field is now optional and will be automatically calculated if not provided.
+---
+
+<Tabs items={["Preview", "Code"]} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billingsdk">
+      <DetailedUsageTableDemo />
+    </PreviewComponents>
+  </Tab>
+
+<Tab value="Code" className="mt-3">
+	<include
+		cwd
+		lang="tsx"
+		meta='title="src/components/detailed-usage-table-demo.tsx"'
+	>
+		src/components/detailed-usage-table-demo.tsx
+	</include>
+</Tab>
+
+</Tabs>
+
+
+## Installation
+
+<Tabs
+	items={['shadcn', 'billingSDK']}
+	defaultValue="shadcn"
+	className="bg-transparent border-none"
+>
+	<Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="installation-tabs"
+		>
+			<Tab value="npx">
+			```bash
+			npx shadcn@latest add @billingsdk/detailed-usage-table
+			```
+			</Tab>
+			<Tab value="pnpm">
+			```bash
+			pnpm dlx shadcn@latest add @billingsdk/detailed-usage-table
+			```
+			</Tab>
+			<Tab value="yarn">
+			```bash
+			yarn dlx shadcn@latest add @billingsdk/detailed-usage-table
+			```
+			</Tab>
+		</Tabs>
+	</Tab>
+	<Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+		<Tabs
+			items={['npx', 'pnpm', 'yarn']}
+			defaultValue="npx"
+			groupId="billingsdk-cli-tabs"
+		>
+			<Tab value="npx">
+				```bash 
+				npx @billingsdk/cli add detailed-usage-table
+				```
+			</Tab>
+			<Tab value="pnpm">
+				```bash
+				pnpm dlx @billingsdk/cli add detailed-usage-table
+				```
+			</Tab>
+			<Tab value="yarn">
+				```bash
+				yarn dlx @billingsdk/cli add detailed-usage-table
+				```		
+			</Tab>
+			<Tab value="bun">
+				```bash 
+				bunx @billingsdk/cli add detailed-usage-table
+				```
+			</Tab>
+		</Tabs>
+	</Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { DetailedUsageTable } from '@/components/billingsdk/detailed-usage-table';
+```
+
+```tsx
+<DetailedUsageTable
+	title="Resource Usage"
+	description="Detailed breakdown of your resource consumption"
+	resources={[
+		{
+			name: 'API Calls',
+			used: 12300,
+			limit: 20000,
+			// percentage will be automatically calculated as 61.5%
+			unit: 'calls',
+		},
+		{ name: 'Storage', used: 850, limit: 1000, percentage: 85, unit: 'GB' },
+		{ name: 'Team Members', used: 4, limit: 5, unit: 'users' }, // percentage will be automatically calculated as 80%
+	]}
+/>;
+```
+
+## Props
+
+| Prop        | Type              | Description                                      |
+| ----------- | ----------------- | ------------------------------------------------ |
+| className   | `string`          | Additional CSS classes to apply to the component |
+| title       | `string`          | Title for the usage table section                |
+| description | `string`          | Description for the usage table section          |
+| resources   | `UsageResource[]` | Array of resource usage data                     |
+
+### UsageResource Object
+
+| Property   | Type                | Description                                                            |
+| ---------- | ------------------- | ---------------------------------------------------------------------- |
+| name       | `string`            | Name of the resource                                                   |
+| used       | `number`            | Amount of the resource used                                            |
+| limit      | `number`            | Total limit for the resource                                           |
+| percentage | `number` _optional_ | Percentage of resource used (automatically calculated if not provided) |
+| unit       | `string`            | Unit of measurement (optional)                                         |
+
+```tsx
+<DetailedUsageTable
+	title="Monthly Resource Consumption"
+	description="Track your usage across all plan resources"
+	resources={[
+		{
+			name: 'API Requests',
+			used: 45210,
+			limit: 50000,
+			// percentage will be automatically calculated as 90.4%
+			unit: 'requests',
+		},
+		{
+			name: 'File Storage',
+			used: 750,
+			limit: 1000,
+			percentage: 75,
+			unit: 'GB',
+		},
+		{ name: 'Team Seats', used: 8, limit: 5, unit: 'seats' }, // percentage will be automatically calculated as 160%
+		{
+			name: 'Bandwidth',
+			used: 1850,
+			limit: 2000,
+			// percentage will be automatically calculated as 92.5%
+			unit: 'GB',
+		},
+	]}
+/>
+```
+
+### Credits
+
+- Created by [@sapatmohit](https://github.com/sapatmohit)

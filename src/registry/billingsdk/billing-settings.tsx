@@ -63,13 +63,27 @@ interface SettingItemProps {
 }
 
 function SettingItem({ title, description, checked, onCheckedChange }: SettingItemProps) {
+  const switchId = `switch-${title.toLowerCase().replace(/\s+/g, '-')}`;
+  
   return (
-    <div className="flex items-start justify-between py-4 gap-4 w-full">
-      <div className="space-y-1 flex-1 min-w-0">
-        <h3 className="font-medium text-foreground">{title}</h3>
-        <p className="text-sm text-muted-foreground">{description}</p>
+    <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start py-4 gap-3 sm:gap-4 w-full">
+      <div className="space-y-1 min-w-0">
+        <h3 id={switchId} className="font-medium text-foreground break-words hyphens-auto">
+          {title}
+        </h3>
+        <p className="text-sm text-muted-foreground break-words hyphens-auto">
+          {description}
+        </p>
       </div>
-      <Switch checked={checked} onCheckedChange={onCheckedChange} className="flex-shrink-0" />
+      <div className="sm:justify-self-end">
+        <Switch 
+          id={switchId}
+          checked={checked}
+          onCheckedChange={onCheckedChange}
+          className="flex-shrink-0"
+          aria-labelledby={`${switchId}-label`}
+        />
+      </div>
     </div>
   )
 }
@@ -81,21 +95,20 @@ interface TabNavigationProps {
 
 function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="flex flex-wrap gap-1 rounded-lg bg-muted p-1">
+    <div className="grid grid-cols-4 sm:flex sm:flex-wrap gap-0.5 sm:gap-1 rounded-lg bg-muted p-0.5 sm:p-1">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => {
-            console.log("[v0] Tab button clicked:", tab.id)
             onTabChange(tab.id)
           }}
-          className={`flex-1 min-w-0 rounded-md px-2 py-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
+          className={`w-full sm:flex-1 min-w-0 rounded-md px-1 py-2 sm:px-3 sm:py-2 text-[10px] sm:text-sm leading-tight tracking-tighter font-medium transition-colors cursor-pointer inline-flex items-center justify-center ${
             activeTab === tab.id
               ? "bg-background text-foreground shadow-sm"
               : "text-muted-foreground hover:text-foreground hover:bg-background/50"
           }`}
         >
-          <span className="truncate">{tab.label}</span>
+          {tab.label}
         </button>
       ))}
     </div>
@@ -148,7 +161,7 @@ export function BillingSettings({
   const renderPaymentContent = () => (
     <div className="space-y-4">
       {cards.map((card) => (
-        <div key={card.id} className="flex items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
+        <div key={card.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
           <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
             <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
             <div className="min-w-0 flex-1">
@@ -160,7 +173,7 @@ export function BillingSettings({
               </p>
             </div>
           </div>
-          {card.primary && <Badge variant="secondary" className="flex-shrink-0 text-xs">Primary</Badge>}
+          {card.primary && <Badge variant="secondary" className="flex-shrink-0 text-xs self-start sm:self-auto">Primary</Badge>}
         </div>
       ))}
       <Button variant="outline" className="w-full bg-transparent" onClick={onAddCard}>
@@ -236,12 +249,12 @@ export function BillingSettings({
   }
 
   return (
-    <Card className={`mx-auto md:min-w-xl max-w-2xl overflow-hidden ${className || ''}`}>
-      <CardHeader className="space-y-4">
+    <Card className={`mx-auto w-full max-w-2xl ${className || ''}`}>
+      <CardHeader className="space-y-4 px-4 sm:px-6">
         <CardTitle className="text-lg sm:text-xl">Billing settings</CardTitle>
         <TabNavigation activeTab={activeTab} onTabChange={onTabChange} />
       </CardHeader>
-      <CardContent className="px-3 sm:px-6 overflow-hidden">
+      <CardContent className="px-4 sm:px-6">
         <div className="w-full">
           {renderTabContent()}
         </div>
