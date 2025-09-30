@@ -76,6 +76,12 @@
           "target": "lib/stripe.ts"
         },
         {
+          "path": "packages/templates/nextjs/hooks/useStripe.ts",
+          "content": "Stripe client hook for NextJS",
+          "type": "template",
+          "target": "hooks/useStripe.ts"
+        },
+        {
           "path": "packages/templates/nextjs/api-routes/(stripe)/*",
           "content": "Stripe API routes for NextJS",
           "type": "template",
