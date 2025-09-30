@@ -19,7 +19,7 @@ description: The Coupon Generator component provides an interactive interface fo
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/coupon
@@ -32,13 +32,18 @@ description: The Coupon Generator component provides an interactive interface fo
       </Tab>
       <Tab value="yarn">
         ```bash
-        npx shadcn@latest add @billingsdk/coupon
+        yarn dlx shadcn@latest add @billingsdk/coupon
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/coupon
         ```
       </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add coupon
@@ -51,7 +56,12 @@ description: The Coupon Generator component provides an interactive interface fo
       </Tab>
       <Tab value="yarn">
         ```bash
-        npx @billingsdk/cli add coupon
+        yarn dlx @billingsdk/cli add coupon
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add coupon
         ```
       </Tab>
     </Tabs>

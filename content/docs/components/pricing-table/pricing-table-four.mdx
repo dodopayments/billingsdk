@@ -17,21 +17,54 @@ description: The Pricing Table Four component provides a modern gradient design 
 
 ## Installation
 
-<Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
-  <Tab value="npx">
-    ```bash
-    npx shadcn@latest add @billingsdk/pricing-table-four
-    ```
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/pricing-table-four
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/pricing-table-four
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/pricing-table-four
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/pricing-table-four
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
-  <Tab value="pnpm">
-    ```bash
-    pnpm dlx shadcn@latest add @billingsdk/pricing-table-four
-    ```
-  </Tab>
-  <Tab value="yarn">
-    ```bash
-    yarn dlx shadcn@latest add @billingsdk/pricing-table-four
-    ```
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add pricing-table-four
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add pricing-table-four
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add pricing-table-four
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add pricing-table-four
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 </Tabs>
 
