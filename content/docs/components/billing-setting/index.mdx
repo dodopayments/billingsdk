@@ -20,7 +20,7 @@ import BillingSettingsDemo from "src/components/billing-settings-demo.tsx"
 ### Installation
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
     <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-        <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+        <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
             <Tab value="npx">
                 ```bash
                 npx shadcn@latest add @billingsdk/billing-settings
@@ -36,10 +36,15 @@ import BillingSettingsDemo from "src/components/billing-settings-demo.tsx"
                 yarn dlx shadcn@latest add @billingsdk/billing-settings
                 ```
             </Tab>
+            <Tab value="bun">
+                ```bash
+                bunx shadcn@latest add @billingsdk/billing-settings
+                ```
+            </Tab>
         </Tabs>
     </Tab>
     <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-        <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+        <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
             <Tab value="npx">
                 ```bash
                 npx @billingsdk/cli add billing-settings
@@ -53,6 +58,11 @@ import BillingSettingsDemo from "src/components/billing-settings-demo.tsx"
             <Tab value="yarn">
                 ```bash
                 yarn dlx @billingsdk/cli add billing-settings
+                ```
+            </Tab>
+            <Tab value="bun">
+                ```bash
+                bunx @billingsdk/cli add billing-settings
                 ```
             </Tab>
         </Tabs>

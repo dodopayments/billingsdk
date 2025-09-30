@@ -20,7 +20,7 @@ description: The Update Plan Dialog component provides an interactive interface 
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/update-plan-dialog
@@ -36,10 +36,15 @@ description: The Update Plan Dialog component provides an interactive interface 
         yarn dlx shadcn@latest add @billingsdk/update-plan-dialog
         ```
       </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/update-plan-dialog
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add update-plan-dialog
@@ -53,6 +58,11 @@ description: The Update Plan Dialog component provides an interactive interface 
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add update-plan-dialog
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add update-plan-dialog
         ```
       </Tab>
     </Tabs>
