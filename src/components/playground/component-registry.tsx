@@ -18,6 +18,7 @@ import { PaymentCard } from "@/components/billingsdk/payment-card";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
+import { PricingTableEight } from "@/components/billingsdk/pricing-table-eight";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -1092,6 +1093,242 @@ export const componentRegistry: ComponentConfig[] = [
     ],
       title: "Pricing Plans",
       description: "Find the right plan for your business",
+      onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
+    },
+  },
+  {
+    id: "pricing-table-eight",
+    name: "Pricing Table Eight",
+    description: "Feature-comparison pricing table with aligned cards and user slider",
+    category: "pricing",
+    component: PricingTableEight,
+    imports: ["@/components/billingsdk/pricing-table-eight"],
+    defaultCode: `<PricingTableEight
+  plans={[
+    {
+      id: "basic",
+      name: "Basic plan",
+      description: "Our most popular plan.",
+      price: 10,
+      users: 5,
+      popular: false,
+    },
+    {
+      id: "business",
+      name: "Business plan",
+      description: "Best for growing teams.",
+      price: 20,
+      users: 15,
+      popular: true,
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise plan",
+      description: "Best for large teams.",
+      price: 40,
+      users: "25+",
+      popular: false,
+    },
+  ]}
+  features={[
+    {
+      category: "Overview",
+      items: [
+        {
+          name: "Basic features",
+          tooltip: true,
+          basic: true,
+          business: true,
+          enterprise: true,
+        },
+        {
+          name: "Users",
+          tooltip: true,
+          basic: "10",
+          business: "20",
+          enterprise: "Unlimited",
+        },
+      ],
+    },
+  ]}
+  title="Choose a plan that's right for you"
+  description="We believe Untitled should be accessible to all companies, no matter the size of your startup."
+  onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+  size="medium"
+  theme="minimal"
+/>`,
+    defaultProps: {
+      plans: [
+        {
+          id: "basic",
+          name: "Basic plan",
+          description: "Our most popular plan.",
+          price: 10,
+          users: 5,
+          popular: false,
+        },
+        {
+          id: "business",
+          name: "Business plan",
+          description: "Best for growing teams.",
+          price: 20,
+          users: 15,
+          popular: true,
+        },
+        {
+          id: "enterprise",
+          name: "Enterprise plan",
+          description: "Best for large teams.",
+          price: 40,
+          users: "25+",
+          popular: false,
+        },
+      ],
+      features: [
+        {
+          category: "Overview",
+          items: [
+            {
+              name: "Basic features",
+              tooltip: true,
+              basic: true,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Users",
+              tooltip: true,
+              basic: "10",
+              business: "20",
+              enterprise: "Unlimited",
+            },
+            {
+              name: "Individual data",
+              tooltip: true,
+              basic: "20GB",
+              business: "40GB",
+              enterprise: "Unlimited",
+            },
+            {
+              name: "Support",
+              tooltip: true,
+              basic: true,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Automated workflows",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "200+ integrations",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+          ],
+        },
+        {
+          category: "Reporting and analytics",
+          items: [
+            {
+              name: "Analytics",
+              tooltip: true,
+              basic: "Basic",
+              business: "Advanced",
+              enterprise: "Advanced",
+            },
+            {
+              name: "Export reports",
+              tooltip: true,
+              basic: true,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Scheduled reports",
+              tooltip: true,
+              basic: true,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "API access",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Advanced reports",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Saved reports",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Customer properties",
+              tooltip: true,
+              basic: false,
+              business: false,
+              enterprise: true,
+            },
+            {
+              name: "Custom fields",
+              tooltip: true,
+              basic: false,
+              business: false,
+              enterprise: true,
+            },
+          ],
+        },
+        {
+          category: "User access",
+          items: [
+            {
+              name: "SSO/SAML authentication",
+              tooltip: true,
+              basic: true,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Advanced permissions",
+              tooltip: true,
+              basic: false,
+              business: true,
+              enterprise: true,
+            },
+            {
+              name: "Audit log",
+              tooltip: true,
+              basic: false,
+              business: false,
+              enterprise: true,
+            },
+            {
+              name: "Data history",
+              tooltip: true,
+              basic: false,
+              business: false,
+              enterprise: true,
+            },
+          ],
+        },
+      ],
+      title: "Choose a plan that's right for you",
+      description: "We believe Untitled should be accessible to all companies, no matter the size of your startup.",
       onPlanSelect: (planId: string) => console.log('Selected plan:', planId),
     },
   },

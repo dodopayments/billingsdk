@@ -30,6 +30,7 @@
                 "@billingsdk/pricing-table-five",
                 "@billingsdk/pricing-table-six",
                 "@billingsdk/pricing-table-seven",
+                "@billingsdk/pricing-table-eight",
                 "@billingsdk/cancel-subscription-dialog",
                 "@billingsdk/cancel-subscription-card",
                 "@billingsdk/update-plan-dialog",
@@ -43,8 +44,8 @@
                 "@billingsdk/payment-details",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-method-selector",
-                "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-card",
+                "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
                 "@billingsdk/proration-preview",
                 "@billingsdk/proration-preview",
@@ -327,11 +328,45 @@
             ],
             "dependencies": [
                 "lucide-react",
-                "framer-motion"
+                "motion"
             ],
             "registryDependencies": [
                 "button",
                 "card",
+                "utils"
+            ]
+        },
+        {
+            "name": "pricing-table-eight",
+            "type": "registry:block",
+            "title": "Pricing Table Eight",
+            "description": "Feature-comparison pricing table with aligned cards and user slider",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/pricing-table-eight.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/pricing-table-eight.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/pricing-table-eight-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/pricing-table-eight-demo.tsx"
+                },
+                {
+                    "path": "src/registry/lib/billingsdk-config.ts",
+                    "type": "registry:lib",
+                    "target": "lib/billingsdk-config.ts"
+                }
+            ],
+            "dependencies": [
+                "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+                "button",
+                "card",
+                "badge",
+                "slider",
                 "utils"
             ]
         },
@@ -678,33 +713,6 @@
               ]
         },
         {
-            "name": "payment-card",
-            "type": "registry:block",
-            "title": "Payment Card",
-            "description": "A payment card component",
-            "files": [
-                {
-                    "path": "src/registry/billingsdk/payment-card.tsx",
-                    "type": "registry:component",
-                    "target": "components/billingsdk/payment-card.tsx"
-                },
-                {
-                    "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
-                    "type": "registry:component",
-                    "target": "components/payment-card-demo.tsx"
-                }
-            ],
-            "dependencies": [
-             "lucide-react",
-                "motion"
-            ],
-            "registryDependencies": [
-             "button",
-              "card",
-              "utils"
-        ]
-        },
-        {
             "name": "coupon",
             "type": "registry:block",
             "title": "Coupon Generator",
@@ -830,6 +838,30 @@
             ]
         },
         {
+            "name": "detailed-usage-table",
+            "type": "registry:block",
+            "title": "Detailed Usage Table",
+            "description": "A detailed usage table component with resource consumption breakdown",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/detailed-usage-table.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/detailed-usage-table.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/detailed-usage-table-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/detailed-usage-table-demo.tsx"
+                }
+            ],
+            "registryDependencies": [
+                "table",
+                "card",
+                "badge",
+                "utils"
+            ]
+        },
+        {
             "name": "upcoming-charges",
             "type": "registry:block",
             "title": "Upcoming Charges",
@@ -854,6 +886,33 @@
                 "badge",
                 "utils"
             ]
+        },
+        {
+            "name": "payment-card",
+            "type": "registry:block",
+            "title": "Payment Card",
+            "description": "A payment card component",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/payment-card.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-card.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-card-demo.tsx"
+                }
+            ],
+            "dependencies": [
+             "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+             "button",
+              "card",
+              "utils"
+        ]
         }
     ]
 }
