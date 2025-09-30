@@ -21,6 +21,7 @@
     },
     {
       "path": "src/registry/billingsdk/demo/payment-card-demo.tsx",
+      "content": "'use client';\nimport {PaymentCard} from \"@/components/billingsdk/payment-card\";\n\nexport function PaymentCardDemo() {\n  return <PaymentCard\n  title=\"Final step, make the payment.\"\n  description=\"To finalize your subscription, kindly complete your payment using a valid credit card.\"\n  price=\"100\"\n  finalText={[\n    { text: \"Automated billing & invoices\" },\n    { text: \"Priority support\" },\n    { text: \"Exclusive member benefits\" },\n  ]}\n  feature=\"Payment & Invoice\"\n  featuredescription=\"Automated billing and invoicing with detailed transaction records. Professional receipts delivered instantly to your email.\"\n  feature2=\"Priority Support\"\n  feature2description=\"Get dedicated customer support with faster response times and direct access to our technical team for any issues.\"\n  onPay={async ({ cardNumber, expiry, cvc }) => {\n    console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);\n  }}\n  />;\n}\n\nexport default PaymentCardDemo;",
       "type": "registry:component",
       "target": "components/payment-card-demo.tsx"
     }
