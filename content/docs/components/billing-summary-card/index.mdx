@@ -24,7 +24,7 @@ description: Displays the current subscription plan, pricing information, renewa
 >
 	<Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
 		<Tabs
-			items={['npx', 'pnpm', 'yarn']}
+			items={['npx', 'pnpm', 'yarn', 'bun']}
 			defaultValue="npx"
 			groupId="installation-tabs"
 		>
@@ -43,11 +43,16 @@ description: Displays the current subscription plan, pricing information, renewa
 			yarn dlx shadcn@latest add @billingsdk/billing-summary-card 
 			```
 			</Tab>
+			<Tab value="bun">
+			```bash
+			bunx shadcn@latest add @billingsdk/billing-summary-card 
+			```
+			</Tab>
 		</Tabs>
 	</Tab>
 	<Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
 		<Tabs
-			items={['npx', 'pnpm', 'yarn']}
+			items={['npx', 'pnpm', 'yarn', 'bun']}
 			defaultValue="npx"
 			groupId="billingsdk-cli-tabs"
 		>

@@ -32,7 +32,7 @@ description: The Detailed Usage Table component provides a comprehensive breakdo
 >
 	<Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
 		<Tabs
-			items={['npx', 'pnpm', 'yarn']}
+			items={['npx', 'pnpm', 'yarn', 'bun']}
 			defaultValue="npx"
 			groupId="installation-tabs"
 		>
@@ -51,11 +51,16 @@ description: The Detailed Usage Table component provides a comprehensive breakdo
 			yarn dlx shadcn@latest add @billingsdk/detailed-usage-table
 			```
 			</Tab>
+			<Tab value="bun">
+			```bash
+			bunx shadcn@latest add @billingsdk/detailed-usage-table
+			```
+			</Tab>
 		</Tabs>
 	</Tab>
 	<Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
 		<Tabs
-			items={['npx', 'pnpm', 'yarn']}
+			items={['npx', 'pnpm', 'yarn', 'bun']}
 			defaultValue="npx"
 			groupId="billingsdk-cli-tabs"
 		>

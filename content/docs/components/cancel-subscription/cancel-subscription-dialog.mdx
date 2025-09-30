@@ -20,7 +20,7 @@ description: The Cancel Subscription Dialog component provides a comprehensive a
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/cancel-subscription-dialog
@@ -36,10 +36,15 @@ description: The Cancel Subscription Dialog component provides a comprehensive a
         yarn dlx shadcn@latest add @billingsdk/cancel-subscription-dialog
         ```
       </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/cancel-subscription-dialog
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add cancel-subscription-dialog
@@ -53,6 +58,11 @@ description: The Cancel Subscription Dialog component provides a comprehensive a
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add cancel-subscription-dialog
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add cancel-subscription-dialog
         ```
       </Tab>
     </Tabs>

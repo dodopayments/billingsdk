@@ -21,7 +21,7 @@ Choose your preferred installation method:
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/payment-details
@@ -37,10 +37,15 @@ Choose your preferred installation method:
         yarn dlx shadcn@latest add @billingsdk/payment-details
         ```
       </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/payment-details
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add payment-details
@@ -54,6 +59,11 @@ Choose your preferred installation method:
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add payment-details
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add payment-details
         ```
       </Tab>
     </Tabs>
