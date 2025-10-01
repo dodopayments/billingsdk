@@ -46,7 +46,7 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
                     <div className="relative inline-flex items-center bg-primary-foreground/70 rounded-full p-2 dark:!shadow-[inset_0_2.5px_0_color-mix(in_oklch,_var(--primary)_15%,_transparent)]  ">
                         <button
                             className={`relative z-5 px-6 py-2 text-primary rounded-full text-sm font-medium cursor-pointer ${!isYearly ? "text-primary border border-muted-foreground/5" : "text-primary/50"}`}
-                            aria-pressed={isYearly}
+                            aria-pressed={!isYearly}
                             onClick={() => setIsYearly(false)}
                         >
                             {!isYearly && (
