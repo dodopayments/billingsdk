@@ -38,7 +38,7 @@ const plans: PlanProps[] = [
         monthlyPrice: 69,
         yearlyPrice: 699,
         features: [
-            "Unlock exclusive benifits with your linked accounts!",
+            "Unlock exclusive benefits with your linked accounts!",
             "Enjoy enhanced premium features with this plan!",
             "Maximize you experience and share with your other developer, no hassle.",
             "Maximize you experience and share with your other developer, no hassle.",
