@@ -249,8 +249,7 @@ export function PricingTableEight({
 
         {/* Pricing Cards */}
         <div className="mt-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
-            <div></div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
             {plans.map((plan) => (
               <motion.div
                 key={plan.id}
