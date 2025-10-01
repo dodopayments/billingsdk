@@ -1,0 +1,35 @@
+{
+  "name": "plan-recommendation-widget",
+  "type": "registry:block",
+  "title": "Plan Recommendation Widget",
+  "description": "Adaptive component that helps users select the most suitable subscription plan based on usage data and team size.",
+  "files": [
+    {
+      "path": "src/registry/billingsdk/plan-recommendation-widget.tsx",
+      "type": "registry:component",
+      "target": "components/billingsdk/plan-recommendation-widget.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/plan-recommendation-widget-demo.tsx",
+      "type": "registry:component",
+      "target": "components/plan-recommendation-widget-demo.tsx"
+    },
+    {
+      "path": "src/registry/lib/billingsdk-config.ts",
+      "type": "registry:lib",
+      "target": "lib/billingsdk-config.ts"
+    }
+  ],
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "badge",
+    "radio-group",
+    "label",
+    "utils"
+  ]
+}
