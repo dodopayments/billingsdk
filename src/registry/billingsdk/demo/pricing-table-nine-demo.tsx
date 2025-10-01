@@ -11,7 +11,7 @@ const plans: PlanProps[] = [
         yearlyPrice: 0,
         features: [
             "Access special perks by linking your accounts.",
-            "Get more our of your experience by connecting your accounts now!",
+            "Get more out of your experience by connecting your accounts now!",
             "Elevate your experience with our exclusive premium account features.",
             "Elevate your experience with our exclusive premium account features.",
             "Elevate your experience with our exclusive premium account features.",
@@ -25,7 +25,7 @@ const plans: PlanProps[] = [
         yearlyPrice: 500,
         features: [
             "Access special perks by linking your accounts.",
-            "Get more our of your experience by connecting your accounts now!",
+            "Get more out of your experience by connecting your accounts now!",
             "Elevate your experience with our exclusive premium account features.",
             "Elevate your experience with our exclusive premium account features.",
             "Elevate your experience with our exclusive premium account features.",
