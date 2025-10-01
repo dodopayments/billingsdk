@@ -41,7 +41,7 @@ export function UpdatePlanDialog({ currentPlan, plans, onPlanChange, className, 
             <DialogTrigger asChild>
                 <Button>{triggerText || "Update Plan"}</Button>
             </DialogTrigger>
-            <DialogContent className={cn("space-y-3 max-h-[90vh] flex flex-col text-foreground", className)} style={themeStyles}>
+            <DialogContent className={cn("space-y-3 max-h-[90vh] flex flex-col text-foreground max-sm:overflow-scroll", className)} style={themeStyles}>
                 <DialogHeader className="flex flex-row items-center justify-between py-2">
                     <DialogTitle className="text-base font-semibold">
                         {title || "Upgrade Plan"}

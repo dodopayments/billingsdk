@@ -120,8 +120,6 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
     const expiryYear = 2000 + parseInt(year)
     
     const currentDate = new Date()
-    const currentMonth = currentDate.getMonth() + 1 // getMonth() returns 0-11
-    const currentYear = currentDate.getFullYear()
     
     if (expiryMonth < 1 || expiryMonth > 12) {
       errors.validTill = "Invalid expiry month"

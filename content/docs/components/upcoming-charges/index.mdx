@@ -26,7 +26,7 @@ description: The Upcoming Charges component displays information about upcoming 
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/upcoming-charges
@@ -42,10 +42,15 @@ description: The Upcoming Charges component displays information about upcoming 
         yarn dlx shadcn@latest add @billingsdk/upcoming-charges
         ```
       </Tab>
+			<Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/upcoming-charges
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add upcoming-charges
@@ -59,6 +64,11 @@ description: The Upcoming Charges component displays information about upcoming 
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add upcoming-charges
+        ```
+      </Tab>
+			<Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add upcoming-charges
         ```
       </Tab>
     </Tabs>

@@ -19,7 +19,7 @@ description: Read-only table for displaying past invoices and receipts with stat
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/invoice-history
@@ -35,10 +35,15 @@ description: Read-only table for displaying past invoices and receipts with stat
         yarn dlx shadcn@latest add @billingsdk/invoice-history
         ```
       </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/invoice-history
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add invoice-history
@@ -52,6 +57,11 @@ description: Read-only table for displaying past invoices and receipts with stat
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add invoice-history
+        ```
+      </Tab>
+       <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add invoice-history
         ```
       </Tab>
     </Tabs>

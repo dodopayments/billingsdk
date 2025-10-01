@@ -73,13 +73,6 @@ const validateEmail = (email: string): string | null => {
 	return null;
 };
 
-const validateRequired = (value: string, fieldName: string): string | null => {
-	if (!value.trim()) {
-		return `${fieldName} is required`;
-	}
-	return null;
-};
-
 const validateField = (value: string, field: InputField): string | null => {
 	// Check required validation
 	if (field.required && !value.trim()) {

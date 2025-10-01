@@ -138,7 +138,7 @@ function PaymentMethodCard({
         <div className="space-y-2">
           <div className="flex justify-between items-center p-2 rounded-md bg-muted/30 border border-border/30">
             <span className="text-xs sm:text-sm text-muted-foreground">Last 4 digits:</span>
-            <span className="font-mono text-sm sm:text-base font-medium">•••• {method.last4}</span>
+            <span className="font-mono text-sm sm:text-base font-medium">**** {method.last4}</span>
           </div>
           {method.expiry && (
             <div className="flex justify-between items-center p-2 rounded-md bg-muted/30 border border-border/30">
@@ -163,10 +163,10 @@ function PaymentMethodCard({
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   onClick={handleEdit}
-                  className="gap-1 h-8 px-3 shadow-sm hover:shadow-md transition-all duration-200"
+                  className="h-8 px-3 transition-all duration-200 border border-input"
                   aria-label={`Edit ${method.type === "credit" ? "credit card" : "ACH account"} ending in ${method.last4}`}
                 >
                   <Pencil className="h-3 w-3" />
@@ -183,7 +183,7 @@ function PaymentMethodCard({
                 variant="ghost"
                 size="sm"
                 onClick={handleRemove}
-                className="gap-1 h-8 px-3 shadow-sm hover:shadow-md transition-all duration-200 text-destructive hover:bg-destructive/10 hover:text-destructive border border-input"
+                className="h-8 px-3 transition-all duration-200 text-destructive hover:bg-destructive/10 hover:text-destructive border border-input"
                 aria-label={`Remove ${method.type === "credit" ? "credit card" : "ACH account"} ending in ${method.last4}`}
               >
                 <Trash2 className="h-3 w-3" />
@@ -205,7 +205,7 @@ function PaymentMethodCard({
                   className="gap-1 h-8 px-3 shadow-sm hover:shadow-md transition-all duration-200"
                   aria-label={`Set as default payment method`}
                 >
-                  <span className="hidden sm:inline">Set Default</span>
+                  <span>Set Default</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent>Set as default payment method</TooltipContent>
@@ -481,7 +481,7 @@ export function PaymentMethodManager({
     <TooltipProvider>
       <div className={cn("space-y-6", className)}>
         {/* Header Section */}
-        <Card className="shadow-lg">
+        <Card>
           <CardHeader className="px-3 sm:px-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
@@ -498,7 +498,7 @@ export function PaymentMethodManager({
                     <Button
                       variant="default"
                       onClick={() => setAddOpen(true)}
-                      className="gap-2 w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-200"
+                      className="gap-2 w-full sm:w-auto transition-all duration-200"
                       aria-label="Add New Payment Method"
                       disabled={isLoading}
                     >

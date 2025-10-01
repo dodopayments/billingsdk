@@ -25,7 +25,8 @@ app.get('/', async (c) => {
             return c.json({ error: "customer_id is required" }, 400)
         }
 
-        const costumer = await getDodoPaymentsClient().customers.retrieve(customer_id)
+        const customer = await getDodoPaymentsClient().customers.retrieve(customer_id)
+        return c.json(customer)
     } catch (error) {
         console.error("Error fetching customer", error);
         return c.json({ error: "internal server error" }, 500)
@@ -70,7 +71,7 @@ app.put('/', async (c) => {
 
         if(!validatedResult.success) {
             return c.json({
-                error: "Valdiation failed",
+                error: "Validation failed",
                 details: validatedResult.error.issues.map(issue => ({
                     field: issue.path.join("."),
                     message: issue.message
@@ -87,7 +88,7 @@ app.put('/', async (c) => {
     }
 })
 
-app.get('/subsriptions', async (c) => {
+app.get('/subscriptions', async (c) => {
     try {
         const customer_id = c.req.query('customer_id')
         
@@ -107,7 +108,7 @@ app.get('/subsriptions', async (c) => {
     }
 })
 
-app.get('payments', async (c) => {
+app.get('/payments', async (c) => {
     try {
         const customer_id = c.req.query('customer_id')
 
@@ -115,7 +116,7 @@ app.get('payments', async (c) => {
             return c.json({error: "customer_id is required"}, 400)
         }
 
-        const payments = getDodoPaymentsClient().payments.list({
+        const payments = await getDodoPaymentsClient().payments.list({
             customer_id: customer_id
         })
         return c.json(payments)

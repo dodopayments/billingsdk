@@ -148,7 +148,9 @@ const Hero = () => {
                 className="w-fit"
                 href="https://www.producthunt.com/products/dodo-payments?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_source=badge-billing&#0045;sdk&#0045;2"
                 target="_blank"
+                rel="noopener noreferrer"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1011707&theme=light&period=daily&t=1757072846066"
                   alt="Billing&#0032;SDK - Open&#0032;source&#0032;billing&#0032;UI&#0032;components | Product Hunt"

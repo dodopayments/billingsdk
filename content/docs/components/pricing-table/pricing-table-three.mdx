@@ -19,7 +19,7 @@ description: The Pricing Table Three component provides a third design option fo
 
 <Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
   <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
       <Tab value="npx">
         ```bash
         npx shadcn@latest add @billingsdk/pricing-table-three
@@ -35,10 +35,15 @@ description: The Pricing Table Three component provides a third design option fo
         yarn dlx shadcn@latest add @billingsdk/pricing-table-three
         ```
       </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/pricing-table-three
+        ```
+      </Tab>
     </Tabs>
   </Tab>
   <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
       <Tab value="npx">
         ```bash
         npx @billingsdk/cli add pricing-table-three
@@ -52,6 +57,11 @@ description: The Pricing Table Three component provides a third design option fo
       <Tab value="yarn">
         ```bash
         yarn dlx @billingsdk/cli add pricing-table-three
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add pricing-table-three
         ```
       </Tab>
     </Tabs>

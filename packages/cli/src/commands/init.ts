@@ -57,14 +57,14 @@ export const initCommand = new Command()
       try {
         await addFiles(frameworkValue, provider);
         s.stop("Setup completed successfully!");
-      } catch (error) {
+      } catch {
         s.stop("Setup failed!");
         process.exit(1);
       }
 
       outro("Your billing project is ready! Happy coding! 🎉");
 
-    } catch (error) {
+    } catch {
       process.exit(1);
     }
   });
