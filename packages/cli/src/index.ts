@@ -15,7 +15,8 @@ program
   .description("Billing SDK CLI for managing billing components")
   .version("1.0.0");
 
-// if (process.argv.length === 2) {
+// Show banner only when no arguments are passed to avoid interfering with clack prompts output.
+if (process.argv.length === 2) {
   render(
     React.createElement(BigTextBanner, {
       text: "Billing\nSDK",
@@ -25,9 +26,9 @@ program
       showSubtitle: false
     })
   );
-  // program.help();
-  // process.exit(0);
-// }
+  program.help();
+  process.exit(0);
+}
 
 // Register commands
 program.addCommand(initCommand);
@@ -35,4 +36,4 @@ program.addCommand(addCommand);
 program.addCommand(buildCommand);
 
 // Parse arguments
-program.parse();
+await program.parseAsync();
