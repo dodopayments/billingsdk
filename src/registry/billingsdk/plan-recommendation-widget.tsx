@@ -270,7 +270,6 @@ export function PlanRecommendationWidget({
                 </div>
                 
                 {/* Usage Warning */}
-                {(selectedPlanUsage.api > 80 || selectedPlanUsage.storage > 80 || selectedPlanUsage.team > 80) && (
                 {/* Usage Warning */}
                 {(selectedPlanUsage.api > 80 || selectedPlanUsage.storage > 80 || selectedPlanUsage.team > 80) && (
                   <div className="text-xs text-red-500 bg-red-50 dark:bg-red-950/20 p-2 rounded space-y-1">
@@ -278,7 +277,6 @@ export function PlanRecommendationWidget({
                     {selectedPlanUsage.storage > 80 && <div>⚠️ Storage approaching limit</div>}
                     {selectedPlanUsage.team > 80 && <div>⚠️ Team size approaching limit</div>}
                   </div>
-                )}
                 )}
                 
                 {/* Plan Features */}
