@@ -175,12 +175,9 @@ export function PlanRecommendationWidget({
       impactText,
       featureDifference
     };
-       featureDifference
-     };
   };
   
    return (
-  return (
     <Card className={cn('w-full max-w-2xl mx-auto', className)}>
       <CardHeader className="text-center pb-4">
         <div className="flex justify-center mb-2">
