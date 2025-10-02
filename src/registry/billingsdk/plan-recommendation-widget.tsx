@@ -10,6 +10,23 @@ import { cn } from '@/lib/utils';
 import { ArrowUpDown, Check, Database, Sparkles, TrendingUp, Users, Zap } from 'lucide-react';
 import { useState } from 'react';
 
+// Helper function to derive a stable rank for plans
+const getPlanRank = (plan: Plan): number => {
+  // If plan has a priority/tier field, use that (assuming it would be added to the Plan interface)
+  // For now, we'll parse the monthly price to determine rank
+  if (plan.monthlyPrice === 'Custom') {
+    return Number.MAX_SAFE_INTEGER; // Enterprise/custom plans get highest rank
+  }
+  
+  const price = parseFloat(plan.monthlyPrice);
+  return isNaN(price) ? 0 : price;
+};
+
+// Sort plans by their rank (ascending order - lowest price/tier first)
+const sortPlansByRank = (plans: Plan[]): Plan[] => {
+  return [...plans].sort((a, b) => getPlanRank(a) - getPlanRank(b));
+};
+
 export interface PlanRecommendationWidgetProps {
   className?: string;
   currentPlan?: Plan;
@@ -35,14 +52,41 @@ export function PlanRecommendationWidget({
 }: PlanRecommendationWidgetProps) {
   const [selectedPlan, setSelectedPlan] = useState<string | undefined>(currentPlan?.id);
   
+  // Sort plans by rank to ensure consistent ordering
+  const sortedPlans = sortPlansByRank(plans);
+  
   // Calculate usage percentages for a specific plan
   const getUsageForPlan = (plan: Plan) => {
     if (!usageData) return { api: 0, storage: 0, team: 0 };
     
-    // These are the limits for each plan
-    const apiLimit = plan.id === 'starter' ? 20000 : plan.id === 'pro' ? 100000 : 1000000;
-    const storageLimit = plan.id === 'starter' ? 100 : plan.id === 'pro' ? 1000 : 10000;
-    const teamLimit = plan.id === 'starter' ? 5 : plan.id === 'pro' ? 20 : 100;
+    // Extract plan limits from features or use defaults
+    // This is a more flexible approach than hardcoding plan IDs
+    let apiLimit = 1000000; // Default high limit
+    let storageLimit = 10000; // Default high limit
+    let teamLimit = 100; // Default high limit
+    
+    // Try to extract limits from plan features
+    for (const feature of plan.features) {
+      const featureText = feature.name.toLowerCase();
+      if (featureText.includes('api') || featureText.includes('calls')) {
+        const match = featureText.match(/(\d+(?:,\d+)*)\s*(?:api|calls)/i);
+        if (match) {
+          apiLimit = parseInt(match[1].replace(/,/g, '')) || apiLimit;
+        }
+      } else if (featureText.includes('storage')) {
+        const match = featureText.match(/(\d+)\s*(gb|tb)/i);
+        if (match) {
+          const value = parseInt(match[1]);
+          const unit = match[2].toLowerCase();
+          storageLimit = unit === 'tb' ? value * 1000 : value;
+        }
+      } else if (featureText.includes('team') || featureText.includes('members')) {
+        const match = featureText.match(/(\d+)\s*(?:team|members)/i);
+        if (match) {
+          teamLimit = parseInt(match[1]) || teamLimit;
+        }
+      }
+    }
     
     return {
       api: Math.min(100, (usageData.apiCalls / apiLimit) * 100),
@@ -53,12 +97,12 @@ export function PlanRecommendationWidget({
   
   // Get usage for current plan and selected plan
   const currentPlanUsage = currentPlan ? getUsageForPlan(currentPlan) : { api: 0, storage: 0, team: 0 };
-  const selectedPlanObj = plans.find(plan => plan.id === selectedPlan);
+  const selectedPlanObj = sortedPlans.find(plan => plan.id === selectedPlan);
   const selectedPlanUsage = selectedPlanObj ? getUsageForPlan(selectedPlanObj) : currentPlanUsage;
   
-  // Simple recommendation algorithm based on usage data
+  // Data-driven recommendation algorithm based on usage data
   const getRecommendedPlan = (): Plan | undefined => {
-    if (!usageData || plans.length === 0) return undefined;
+    if (!usageData || sortedPlans.length === 0) return undefined;
     
     // Check if current usage is approaching limits
     const needsUpgrade = currentPlanUsage.api > 80 || currentPlanUsage.storage > 80 || currentPlanUsage.team > 80;
@@ -67,13 +111,23 @@ export function PlanRecommendationWidget({
       return currentPlan; // Current plan is sufficient
     }
     
-    // Recommend based on team size and usage
-    if (usageData.teamSize <= 5 && currentPlanUsage.api < 50 && currentPlanUsage.storage < 50) {
-      return plans.find(plan => plan.id === 'starter') || plans[0];
-    } else if (usageData.teamSize <= 20) {
-      return plans.find(plan => plan.id === 'pro') || plans[1];
+    // Calculate usage score (0-100) based on all metrics
+    const usageScore = Math.max(
+      (usageData.apiCalls / 1000000) * 100, // Normalize against a high API limit
+      (usageData.storage / 10000) * 100, // Normalize against a high storage limit
+      (usageData.teamSize / 100) * 100 // Normalize against a large team size
+    );
+    
+    // Recommend plan based on usage score
+    if (usageScore < 20) {
+      // Low usage - recommend the lowest tier plan (with safe fallback)
+      return sortedPlans[0] || sortedPlans[sortedPlans.length - 1];
+    } else if (usageScore < 60) {
+      // Medium usage - recommend middle tier plan (with safe fallbacks)
+      return sortedPlans[1] || sortedPlans[Math.min(2, sortedPlans.length - 1)] || sortedPlans[0];
     } else {
-      return plans.find(plan => plan.id === 'enterprise') || plans[2];
+      // High usage - recommend the highest tier plan (with safe fallback)
+      return sortedPlans[sortedPlans.length - 1] || sortedPlans[0];
     }
   };
   
@@ -109,23 +163,6 @@ export function PlanRecommendationWidget({
       impactText,
       featureDifference
     };
-  };
-  
-  // Get recommendation reason
-  const getRecommendationReason = (plan: Plan): string => {
-    if (!usageData) return "Based on your usage patterns";
-    
-    if (currentPlanUsage.api > 80) {
-      return "Approaching API call limit";
-    } else if (currentPlanUsage.storage > 80) {
-      return "Approaching storage limit";
-    } else if (currentPlanUsage.team > 80) {
-      return "Approaching team limit";
-    } else if (usageData.teamSize > 10 && plan.id === 'pro') {
-      return "Optimal for your team size";
-    } else {
-      return "Best value for your usage";
-    }
   };
   
   return (
@@ -248,7 +285,7 @@ export function PlanRecommendationWidget({
           <div className="space-y-4">
             {/* Plan Selection */}
             <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="space-y-3">
-              {plans.slice(0, 3).map((plan) => {
+              {sortedPlans.map((plan) => {
                 const planImpact = calculatePlanImpact(plan);
                 const isRecommended = recommendedPlan?.id === plan.id;
                 const isCurrent = currentPlan?.id === plan.id;
@@ -332,7 +369,7 @@ export function PlanRecommendationWidget({
               : selectedPlan 
                 ? (recommendedPlan?.id === selectedPlan 
                     ? `Upgrade to ${recommendedPlan.title}` 
-                    : `Switch to ${plans.find(p => p.id === selectedPlan)?.title || 'Plan'}`)
+                    : `Switch to ${sortedPlans.find(p => p.id === selectedPlan)?.title || 'Plan'}`)
                 : 'Select a Plan'
             }
           </Button>
