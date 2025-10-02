@@ -247,8 +247,8 @@ export function PlanRecommendationWidget({
           {/* Right Column - Plan Selection */}
           <div className="space-y-4">
             {/* Plan Selection */}
-            <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="space-y-3">
-            <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="space-y-3">
+             <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="space-y-3">
+               {plans.map((plan) => {
               {plans.map((plan) => {
                 const planImpact = calculatePlanImpact(plan);
                 const isRecommended = recommendedPlan?.id === plan.id;
