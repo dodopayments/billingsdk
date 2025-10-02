@@ -257,9 +257,11 @@ export function PlanRecommendationWidget({
                 {/* Usage Warning */}
                 {(selectedPlanUsage.api > 80 || selectedPlanUsage.storage > 80 || selectedPlanUsage.team > 80) && (
                   <div className="text-xs text-red-500 bg-red-50 dark:bg-red-950/20 p-2 rounded">
-                    {selectedPlanUsage.api > 80 && "⚠️ API calls approaching limit\n"}
-                    {selectedPlanUsage.storage > 80 && "⚠️ Storage approaching limit\n"}
-                    {selectedPlanUsage.team > 80 && "⚠️ Team size approaching limit"}
+                  <div className="text-xs text-red-500 bg-red-50 dark:bg-red-950/20 p-2 rounded space-y-1">
+                    {selectedPlanUsage.api > 80 && <div>⚠️ API calls approaching limit</div>}
+                    {selectedPlanUsage.storage > 80 && <div>⚠️ Storage approaching limit</div>}
+                    {selectedPlanUsage.team > 80 && <div>⚠️ Team size approaching limit</div>}
+                  </div>
                   </div>
                 )}
                 
@@ -285,7 +287,7 @@ export function PlanRecommendationWidget({
           <div className="space-y-4">
             {/* Plan Selection */}
             <RadioGroup value={selectedPlan} onValueChange={setSelectedPlan} className="space-y-3">
-              {sortedPlans.map((plan) => {
+              {plans.map((plan) => {
                 const planImpact = calculatePlanImpact(plan);
                 const isRecommended = recommendedPlan?.id === plan.id;
                 const isCurrent = currentPlan?.id === plan.id;
@@ -299,7 +301,9 @@ export function PlanRecommendationWidget({
                         selectedPlan === plan.id
                           ? 'border-primary bg-primary/5'
                           : 'border-border hover:border-primary/50',
-                        isCurrent ? 'border-2 border-blue-500/50 bg-blue-50/50 dark:bg-blue-950/20' : ''
+                        isCurrent
+                          ? 'border-2 border-blue-500/50 bg-blue-50/50 dark:bg-blue-950/20'
+                          : ''
                       )}
                     >
                       {/* Plan Badges */}
@@ -316,17 +320,24 @@ export function PlanRecommendationWidget({
                       
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-2">
-                          <RadioGroupItem value={plan.id} id={plan.id} className="flex-shrink-0 mt-0.5" />
+                          <RadioGroupItem
+                            value={plan.id}
+                            id={plan.id}
+                            className="flex-shrink-0 mt-0.5"
+                          />
                           <div>
                             <Label htmlFor={plan.id} className="font-medium text-sm cursor-pointer">
                               {plan.title}
                             </Label>
-                            <p className="text-xs text-muted-foreground mt-0.5">{plan.description}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {plan.description}
+                            </p>
                           </div>
                         </div>
                         <div className="text-right">
                           <div className="text-sm font-bold">
-                            {plan.currency}{plan.monthlyPrice}
+                            {plan.currency}
+                            {plan.monthlyPrice}
                           </div>
                           <div className="text-xs text-muted-foreground">/month</div>
                         </div>
@@ -336,14 +347,16 @@ export function PlanRecommendationWidget({
                       {planImpact && !isCurrent && (
                         <div className="mt-2 flex items-center gap-1">
                           <ArrowUpDown className="h-3 w-3 text-muted-foreground" />
-                          <span className={cn(
-                            "text-xs font-medium",
-                            planImpact.monthlyChange > 0 
-                              ? "text-red-500" 
-                              : planImpact.monthlyChange < 0 
-                                ? "text-green-500" 
-                                : "text-muted-foreground"
-                          )}>
+                          <span
+                            className={cn(
+                              "text-xs font-medium",
+                              planImpact.monthlyChange > 0
+                                ? "text-red-500"
+                                : planImpact.monthlyChange < 0
+                                  ? "text-green-500"
+                                  : "text-muted-foreground"
+                            )}
+                          >
                             {planImpact.impactText}
                           </span>
                         </div>
