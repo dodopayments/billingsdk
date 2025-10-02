@@ -142,28 +142,39 @@ export function PlanRecommendationWidget({
   } | null => {
     if (!currentPlan || currentPlan.id === plan.id) return null;
     
-    const currentPrice = parseFloat(currentPlan.monthlyPrice) || 0;
-    const newPrice = parseFloat(plan.monthlyPrice) || 0;
-    
-    const priceDifference = newPrice - currentPrice;
+    const parsePrice = (p: string) => {
+      const n = Number.parseFloat(p);
+      return Number.isFinite(n) ? n : NaN;
+    };
+    const currentPrice = parsePrice(currentPlan.monthlyPrice);
+    const newPrice = parsePrice(plan.monthlyPrice);
+
     const featureDifference = plan.features.length - (currentPlan.features?.length || 0);
-    
-    let impactText = "";
-    if (priceDifference > 0) {
-      impactText = `+$${Math.abs(priceDifference).toFixed(0)}/month`;
-    } else if (priceDifference < 0) {
-      impactText = `Save $${Math.abs(priceDifference).toFixed(0)}/month`;
-    } else {
-      impactText = `${featureDifference > 0 ? '+' : ''}${featureDifference} features`;
+
+    // If either price is non-numeric (e.g., "Custom"), fall back to feature-based messaging.
+    if (!Number.isFinite(currentPrice) || !Number.isFinite(newPrice)) {
+      return {
+        monthlyChange: 0,
+        isUpgrade: featureDifference > 0,
+        impactText: `${featureDifference > 0 ? '+' : ''}${featureDifference} features`,
+        featureDifference
+      };
     }
-    
+
+    const priceDifference = newPrice - currentPrice;
+    const impactText =
+      priceDifference > 0
+        ? `+$${Math.abs(priceDifference).toFixed(0)}/month`
+        : priceDifference < 0
+          ? `Save $${Math.abs(priceDifference).toFixed(0)}/month`
+          : `${featureDifference > 0 ? '+' : ''}${featureDifference} features`;
+
     return {
       monthlyChange: priceDifference,
       isUpgrade: priceDifference > 0 || featureDifference > 0,
       impactText,
       featureDifference
     };
-  };
   
   return (
     <Card className={cn('w-full max-w-2xl mx-auto', className)}>
