@@ -65,7 +65,7 @@ export function PlanRecommendationWidgetDemo() {
     <PlanRecommendationWidget
       currentPlan={currentPlan}
       plans={demoPlans}
-      usageData={{ apiCalls: 5000, storage: 50, teamSize: 5 }}
+      usageData={{ apiCalls: 500000, storage: 5000, teamSize: 50 }}
       onPlanSelect={(planId) => console.log('Selected plan:', planId)}
     />
   );
