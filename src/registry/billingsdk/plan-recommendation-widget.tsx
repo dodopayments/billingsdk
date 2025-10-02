@@ -220,9 +220,11 @@ export function PlanRecommendationWidget({
                 {/* Usage Warning */}
                 {(selectedPlanUsage.api > 80 || selectedPlanUsage.storage > 80 || selectedPlanUsage.team > 80) && (
                   <div className="text-xs text-red-500 bg-red-50 dark:bg-red-950/20 p-2 rounded">
-                    {selectedPlanUsage.api > 80 && "⚠️ API calls approaching limit\n"}
-                    {selectedPlanUsage.storage > 80 && "⚠️ Storage approaching limit\n"}
-                    {selectedPlanUsage.team > 80 && "⚠️ Team size approaching limit"}
+                  <div className="text-xs text-red-500 bg-red-50 dark:bg-red-950/20 p-2 rounded space-y-1">
+                    {selectedPlanUsage.api > 80 && <div>⚠️ API calls approaching limit</div>}
+                    {selectedPlanUsage.storage > 80 && <div>⚠️ Storage approaching limit</div>}
+                    {selectedPlanUsage.team > 80 && <div>⚠️ Team size approaching limit</div>}
+                  </div>
                   </div>
                 )}
                 
