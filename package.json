@@ -42,6 +42,7 @@
     "ai": "^5.0.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "country-state-city": "^3.2.1",
     "dodopayments": "^1.51.2",
     "framer-motion": "^12.23.22",
     "fumadocs-core": "15.6.10",

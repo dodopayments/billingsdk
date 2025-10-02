@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Calendar, Shield, Check, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/contexts/theme-context"
 import { getThemeStyles } from "@/lib/themes"
+import { Country, State, City, IState, ICity } from "country-state-city";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 /**
  * Detects the card type based on the card number
@@ -73,23 +81,23 @@ const formatExpiryDate = (value: string): string => {
 const validateLuhn = (cardNumber: string): boolean => {
   const number = cardNumber.replace(/\s/g, "")
   if (!number || !/^\d+$/.test(number)) return false
-  
+
   let sum = 0
   let shouldDouble = false
-  
+
   // Loop through values starting from the rightmost digit
   for (let i = number.length - 1; i >= 0; i--) {
     let digit = parseInt(number.charAt(i))
-    
+
     if (shouldDouble) {
       digit *= 2
       if (digit > 9) digit -= 9
     }
-    
+
     sum += digit
     shouldDouble = !shouldDouble
   }
-  
+
   return sum % 10 === 0
 }
 
@@ -104,13 +112,13 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
   const cardType = detectCardType(data.cardNumber || "")
 
   if (!data.nameOnCard?.trim()) errors.nameOnCard = "Name is required"
-  
+
   // Card number validation with Luhn algorithm
   const strippedCardNumber = data.cardNumber?.replace(/\s/g, "") || ""
   if (!strippedCardNumber || strippedCardNumber.length < 13 || !validateLuhn(strippedCardNumber)) {
     errors.cardNumber = "Valid card number is required"
   }
-  
+
   // Expiry date validation
   if (!data.validTill || !/^\d{2}\/\d{2}$/.test(data.validTill)) {
     errors.validTill = "Valid expiry date is required (MM/YY)"
@@ -118,28 +126,28 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
     const [month, year] = data.validTill.split("/")
     const expiryMonth = parseInt(month)
     const expiryYear = 2000 + parseInt(year)
-    
+
     const currentDate = new Date()
-    
+
     if (expiryMonth < 1 || expiryMonth > 12) {
       errors.validTill = "Invalid expiry month"
     } else {
       // Create date for last day of expiry month
       const expiryDate = new Date(expiryYear, expiryMonth, 0) // Day 0 gives last day of previous month
       expiryDate.setHours(23, 59, 59, 999) // Set to last moment of the day
-      
+
       if (expiryDate < currentDate) {
         errors.validTill = "Card has expired"
       }
     }
   }
-  
+
   // CVV validation based on card type
   const requiredCvvLength = cardType === "amex" ? 4 : 3
   if (!data.cvv || data.cvv.length !== requiredCvvLength) {
     errors.cvv = `Valid ${requiredCvvLength}-digit CVV is required`
   }
-  
+
   if (!data.firstName?.trim()) errors.firstName = "First name is required"
   if (!data.middleLastName?.trim()) errors.middleLastName = "Last name is required"
   if (!data.billingAddress?.trim()) errors.billingAddress = "Billing address is required"
@@ -148,7 +156,7 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
   if (!data.pinCode || !pinCodePattern.test(data.pinCode)) {
     errors.pinCode = validators?.pinCodeErrorMessage || "Invalid postal code"
   }
-  
+
   // Contact number validation - configurable based on country
   const contactNumberPattern = validators?.contactNumber || /^\d{10}$/
   if (!data.contactNumber || !contactNumberPattern.test(data.contactNumber)) {
@@ -276,12 +284,6 @@ export interface PaymentFormProps {
   confirmationMessage?: string
   /** Callback when confirmation is closed */
   onConfirmationClose?: () => void
-  /** List of countries for dropdown */
-  countries?: string[]
-  /** List of states for dropdown */
-  states?: string[]
-  /** List of cities for dropdown */
-  cities?: string[]
 }
 
 /**
@@ -314,13 +316,10 @@ export function PaymentDetails({
   confirmationTitle = "Payment Details Saved!",
   confirmationMessage = "Your payment information has been securely saved and updated.",
   onConfirmationClose,
-  countries = ["India", "United States", "United Kingdom", "Canada", "Australia"],
-  states = ["Bihar", "Karnataka", "Maharashtra"],
-  cities = ["Patna", "Bangalore", "Mumbai"],
 }: PaymentFormProps) {
   const { currentTheme, previewDarkMode } = useTheme()
   const themeStyles = getThemeStyles(currentTheme, previewDarkMode)
-  
+
   // Initialize with empty strings, allowing initialData to override if provided
   const [formData, setFormData] = useState<PaymentFormData>({
     nameOnCard: "",
@@ -341,6 +340,9 @@ export function PaymentDetails({
   const [errors, setErrors] = useState<Partial<PaymentFormData>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [cardType, setCardType] = useState(detectCardType(formData.cardNumber || ""))
+  const [stateList, setStateList] = useState<IState[] | null>(null)
+  const [cityList, setCityList] = useState<ICity[] | null>(null)
+  const allCountries = Country.getAllCountries()
 
   const handleInputChange = (field: keyof PaymentFormData, value: string) => {
     let formattedValue = value
@@ -397,16 +399,36 @@ export function PaymentDetails({
     }
   }
 
+  useEffect(() => {
+    if (formData.country) {
+      const country = allCountries.find((country) => country.name === formData.country);
+      if (country) {
+        setStateList(State.getStatesOfCountry(country.isoCode));
+      }
+    }
+
+    if (formData.state && formData.country) {
+      const country = allCountries.find((c) => c.name === formData.country);
+      const state = stateList?.find((s) => s.name === formData.state);
+
+      if (country && state) {
+        setCityList(
+          City.getCitiesOfState(country.isoCode, state.isoCode)
+        );
+      }
+    }
+  }, [formData.country, formData.state]);
+
   return (
     <>
-      <div 
+      <div
         className={cn("w-full max-w-xl rounded-3xl p-6 shadow-sm relative", className)}
         style={themeStyles}
       >
         <div className="mb-6">
-        <h1 className="text-3xl font-bold text-foreground mb-2 font-sans">{title}</h1>
-        <p className="text-muted-foreground font-sans">{description}</p>
-      </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2 font-sans">{title}</h1>
+          <p className="text-muted-foreground font-sans">{description}</p>
+        </div>
         {/* Card Details Section */}
         <div className="mb-6 p-6 rounded-2xl border border-border bg-card/50">
           <h2 className="text-2xl font-semibold text-foreground mb-5 font-sans">Card Details</h2>
@@ -422,9 +444,8 @@ export function PaymentDetails({
                   type="text"
                   value={formData.nameOnCard || ""}
                   onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.nameOnCard ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.nameOnCard ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
                 {errors.nameOnCard && <p className="text-destructive text-sm mt-1">{errors.nameOnCard}</p>}
               </div>
@@ -439,9 +460,8 @@ export function PaymentDetails({
                     placeholder="MM/YY"
                     value={formData.validTill || ""}
                     onChange={(e) => handleInputChange("validTill", e.target.value)}
-                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.validTill ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.validTill ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
                 {errors.validTill && <p className="text-destructive text-sm mt-1">{errors.validTill}</p>}
@@ -463,9 +483,8 @@ export function PaymentDetails({
                     placeholder="1234 5678 9012 3456"
                     value={formData.cardNumber || ""}
                     onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                    className={`w-full pl-20 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.cardNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-20 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.cardNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
                 {errors.cardNumber && <p className="text-destructive text-sm mt-1">{errors.cardNumber}</p>}
@@ -481,9 +500,8 @@ export function PaymentDetails({
                     placeholder="123"
                     value={formData.cvv || ""}
                     onChange={(e) => handleInputChange("cvv", e.target.value)}
-                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.cvv ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.cvv ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
                 {errors.cvv && <p className="text-destructive text-sm mt-1">{errors.cvv}</p>}
@@ -510,9 +528,8 @@ export function PaymentDetails({
                   type="text"
                   value={formData.firstName || ""}
                   onChange={(e) => handleInputChange("firstName", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.firstName ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.firstName ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
                 {errors.firstName && <p className="text-destructive text-sm mt-1">{errors.firstName}</p>}
               </div>
@@ -524,9 +541,8 @@ export function PaymentDetails({
                   type="text"
                   value={formData.middleLastName || ""}
                   onChange={(e) => handleInputChange("middleLastName", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.middleLastName ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.middleLastName ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
                 {errors.middleLastName && <p className="text-destructive text-sm mt-1">{errors.middleLastName}</p>}
               </div>
@@ -536,45 +552,65 @@ export function PaymentDetails({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">Country</label>
-                <select
-                  value={formData.country || ""}
-                  onChange={(e) => handleInputChange("country", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                <Select
+                  value={formData.country}
+                  onValueChange={(e) => {
+                    setFormData((prev) => ({ ...prev, country: e }))
+                  }}
                 >
-                  {countries.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4! py-3! border border-border rounded-xl bg-background! text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">
+                    <SelectValue placeholder={formData.country} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allCountries.map((country) => (
+                      <SelectItem key={country.name} value={country.name}>
+                        {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">State</label>
-                <select
-                  value={formData.state || ""}
-                  onChange={(e) => handleInputChange("state", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                <Select
+                  value={formData.state}
+                  onValueChange={(e) => {
+                    setFormData((prev) => ({ ...prev, state: e }))
+                  }}
+                  disabled={!formData.country}
                 >
-                  {states.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4! py-3! border border-border rounded-xl bg-background! text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">
+                    <SelectValue placeholder={formData.state} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {stateList && stateList.map((state) => (
+                      <SelectItem key={state.name} value={state.name}>
+                        {state.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">City</label>
-                <select
-                  value={formData.city || ""}
-                  onChange={(e) => handleInputChange("city", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                <Select
+                  value={formData.city!}
+                  onValueChange={(e) => {
+                    setFormData((prev) => ({ ...prev, city: e }))
+                  }}
+                  disabled={!formData.state}
                 >
-                  {cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4! py-3! border border-border rounded-xl bg-background! text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">
+                    <SelectValue placeholder={formData.city} />
+                  </SelectTrigger>
+                  <SelectContent className="light">
+                    {cityList && cityList.map((city) => (
+                      <SelectItem key={city.name} value={city.name}>
+                        {city.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -587,9 +623,8 @@ export function PaymentDetails({
                 value={formData.billingAddress || ""}
                 onChange={(e) => handleInputChange("billingAddress", e.target.value)}
                 rows={3}
-                className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border resize-none font-sans ${
-                  errors.billingAddress ? "border-destructive focus:ring-destructive/20" : "border-border"
-                }`}
+                className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border resize-none font-sans ${errors.billingAddress ? "border-destructive focus:ring-destructive/20" : "border-border"
+                  }`}
               />
               {errors.billingAddress && <p className="text-destructive text-sm mt-1">{errors.billingAddress}</p>}
             </div>
@@ -605,9 +640,8 @@ export function PaymentDetails({
                   placeholder="123456"
                   value={formData.pinCode || ""}
                   onChange={(e) => handleInputChange("pinCode", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.pinCode ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.pinCode ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
                 {errors.pinCode && <p className="text-destructive text-sm mt-1">{errors.pinCode}</p>}
               </div>
@@ -620,9 +654,8 @@ export function PaymentDetails({
                   placeholder="9876543210"
                   value={formData.contactNumber || ""}
                   onChange={(e) => handleInputChange("contactNumber", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.contactNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.contactNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
                 {errors.contactNumber && <p className="text-destructive text-sm mt-1">{errors.contactNumber}</p>}
               </div>
@@ -636,10 +669,10 @@ export function PaymentDetails({
             {errors.general}
           </div>
         )}
-        
+
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
-          <button 
+          <button
             className="px-6 py-3 text-muted-foreground font-medium rounded-xl border border-border bg-background hover:bg-muted transition-all duration-200 hover:border-border/80 font-sans"
             onClick={onDiscard}
             disabled={isSubmitting || isLoading}
@@ -649,11 +682,10 @@ export function PaymentDetails({
           <button
             onClick={handleSubmit}
             disabled={isSubmitting || isLoading}
-            className={`px-6 py-3 font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-lg font-sans flex items-center gap-2 transform hover:scale-105 active:scale-95 ${
-              isSubmitting || isLoading 
-                ? "bg-primary text-primary-foreground cursor-not-allowed opacity-70" 
-                : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25"
-            }`}
+            className={`px-6 py-3 font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-lg font-sans flex items-center gap-2 transform hover:scale-105 active:scale-95 ${isSubmitting || isLoading
+              ? "bg-primary text-primary-foreground cursor-not-allowed opacity-70"
+              : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25"
+              }`}
           >
             {isSubmitting || isLoading ? (
               <>
@@ -676,7 +708,7 @@ export function PaymentDetails({
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2 font-sans">{confirmationTitle}</h3>
               <p className="text-muted-foreground font-sans">{confirmationMessage}</p>
-              <button 
+              <button
                 onClick={onConfirmationClose}
                 className="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-all duration-200 transform hover:scale-105 active:scale-95"
               >
