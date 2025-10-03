@@ -35,6 +35,7 @@ import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-de
 import { PricingTableFiveDemo } from '@/components/pricing-table-five-demo';
 import { PricingTableFiveDemoMinimal } from '@/components/pricing-table-five-minimal-demo';
 import { PaymentDetailsDemo } from '@/components/payment-details-demo';
+import { PaymentDetailsTwoDemo } from './components/payment-details-two-demo';
 import { ProrationPreviewDemo } from '@/components/proration-preview-demo';
 import { CouponDemo } from '@/components/coupon-demo';
 import { BillingSummaryCardDemo } from '@/components/billing-summary-card-demo';
@@ -46,6 +47,7 @@ import { DetailedUsageTableDemo } from '@/components/detailed-usage-table-demo';
 import { PricingTableSevenDemo } from '@/components/pricing-table-seven-demo';
 import { PricingTableEightDemo } from '@/components/pricing-table-eight-demo';
 import {PaymentCardDemo} from '@/components/payment-card-demo';
+
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -87,6 +89,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
     PaymentDetailsDemo,
+    PaymentDetailsTwoDemo,
     PaymentCardDemo,
     ProrationPreviewDemo,
     CouponDemo,

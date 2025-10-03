@@ -19,6 +19,7 @@ import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
 import { PricingTableEight } from "@/components/billingsdk/pricing-table-eight";
+import { PaymentDetailsTwo } from "../billingsdk/payment-details-two";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -2212,6 +2213,29 @@ export const componentRegistry: ComponentConfig[] = [
       selectedMethod: "card_1",
       onSelect: (id: string) => console.log("Selected:", id),
       onAddNew: () => console.log("Add new method"),
+    },
+  },
+  {
+    id: "payment-details-two",
+    name: "Payment Details Two",
+    description: "Payment details form with custom validation",
+    category: "ui",
+    component: PaymentDetailsTwo,
+    imports: ["@/components/billingsdk/payment-details-two"],
+    defaultCode: `<PaymentDetailsTwo
+    onSubmit={handleSubmit}
+    onDiscard={handleDiscard}
+  />`,
+    defaultProps: {
+      onSubmit: async (data: any) => {
+        return await new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("Handle Submit Function", data)
+            resolve('The promise is resolved')
+          }, 3000)
+        })
+      },
+      onDiscard: () => console.log("The Discard Function"),
     },
   },
   {

@@ -42,6 +42,7 @@
                 "@billingsdk/invoice-history",
                 "@billingsdk/usage-table",
                 "@billingsdk/payment-details",
+                "@billingsdk/payment-details-two",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-card",
@@ -683,34 +684,73 @@
                 "label",
                 "utils"
             ]
-          },
-          {
+        },
+        {
             "name": "payment-details",
             "type": "registry:block",
             "title": "Payment Details",
             "description": "A comprehensive payment details form component with card details, billing information, and country selection",
             "files": [
-              {
-                "path": "src/registry/billingsdk/payment-details.tsx",
-                "type": "registry:component",
-                "target": "components/billingsdk/payment-details.tsx"
-              },
-              {
-                "path": "src/registry/billingsdk/demo/payment-details-demo.tsx",
-                "type": "registry:component",
-                "target": "components/payment-details-demo.tsx"
-              }
+                {
+                    "path": "src/registry/billingsdk/payment-details.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-details.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-details-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-details-demo.tsx"
+                }
             ],
             "dependencies": [
-              "lucide-react"
+                "lucide-react"
             ],
             "registryDependencies": [
-              "button",
-              "card",
-              "input",
-              "label",
-              "utils"
-              ]
+                "button",
+                "card",
+                "input",
+                "label",
+                "utils"
+            ]
+        },
+        {
+            "name": "payment-details-two",
+            "type": "registry:block",
+            "title": "Payment Details Two",
+            "description": "A comprehensive payment details form component with card details, billing information, and country selection built using React Hook Form and custom validation",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/payment-details-two.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/payment-details-two.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/payment-details-two-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/payment-details-two-demo.tsx"
+                },
+                {
+                    "path": "src/utils/card-validation.ts",
+                    "type": "registry:component",
+                   "target": "utils/card-validation.ts"  
+                 }  
+                
+            ],
+            "dependencies": [
+                "lucide-react",
+                "react-hook-form",
+                "motion",
+                "country-state-city"
+            ],
+            "registryDependencies": [
+                "button",
+                "card",
+                "input",
+                "label",
+                "select",
+                "textarea",
+                "utils"
+            ]
         },
         {
             "name": "coupon",
@@ -905,14 +945,14 @@
                 }
             ],
             "dependencies": [
-             "lucide-react",
+                "lucide-react",
                 "motion"
             ],
             "registryDependencies": [
-             "button",
-              "card",
-              "utils"
-        ]
+                "button",
+                "card",
+                "utils"
+            ]
         }
     ]
 }

@@ -24,6 +24,7 @@
     "@billingsdk/invoice-history",
     "@billingsdk/usage-table",
     "@billingsdk/payment-details",
+    "@billingsdk/payment-details-two",
     "@billingsdk/payment-method-manager",
     "@billingsdk/payment-method-selector",
     "@billingsdk/payment-card",

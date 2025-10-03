@@ -230,7 +230,7 @@ export function CouponGenerator({
                     border border-border shadow-2xl 
                     ${className || ""} ${cardClassName || ""}`}
                 >
-                    <CardHeader className="pb-4">
+                    <CardHeader>
                         <CardTitle className="text-xl font-semibold text-center">
                             Create Coupon Code
                         </CardTitle>
@@ -263,7 +263,7 @@ export function CouponGenerator({
                                     Applicable to <span className="text-red-500">*</span>
                                 </Label>
                                 <Select value={selectedRule} onValueChange={setSelectedRule}>
-                                    <SelectTrigger className="bg-background border-border text-foreground">
+                                    <SelectTrigger className="bg-background border-border text-foreground w-full">
                                         <SelectValue placeholder="Select rule" />
                                     </SelectTrigger>
                                     <SelectContent>
