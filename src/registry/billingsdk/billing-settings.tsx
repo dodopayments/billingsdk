@@ -23,11 +23,11 @@ interface CardInfo {
 }
 
 interface BillingSettingsProps {
-  
+
   activeTab: string
   onTabChange: (tab: string) => void
 
-  
+
   emailNotifications: boolean
   onEmailNotificationsChange: (value: boolean) => void
 
@@ -37,16 +37,16 @@ interface BillingSettingsProps {
   invoiceReminders: boolean
   onInvoiceRemindersChange: (value: boolean) => void
 
-  
+
   cards: CardInfo[]
   onAddCard: () => void
 
-  
+
   invoiceFormat: "PDF" | "HTML"
   onInvoiceFormatChange: (format: "PDF" | "HTML") => void
   onEditBillingAddress: () => void
 
-  
+
   overageProtection: boolean
   onOverageProtectionChange: (value: boolean) => void
 
@@ -64,7 +64,7 @@ interface SettingItemProps {
 
 function SettingItem({ title, description, checked, onCheckedChange }: SettingItemProps) {
   const switchId = `switch-${title.toLowerCase().replace(/\s+/g, '-')}`;
-  
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start py-4 gap-3 sm:gap-4 w-full">
       <div className="space-y-1 min-w-0">
@@ -76,7 +76,7 @@ function SettingItem({ title, description, checked, onCheckedChange }: SettingIt
         </p>
       </div>
       <div className="sm:justify-self-end">
-        <Switch 
+        <Switch
           id={switchId}
           checked={checked}
           onCheckedChange={onCheckedChange}
@@ -102,11 +102,10 @@ function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
           onClick={() => {
             onTabChange(tab.id)
           }}
-          className={`w-full sm:flex-1 min-w-0 rounded-md px-1 py-2 sm:px-3 sm:py-2 text-[10px] sm:text-sm leading-tight tracking-tighter font-medium transition-colors cursor-pointer inline-flex items-center justify-center ${
-            activeTab === tab.id
-              ? "bg-background text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground hover:bg-background/50"
-          }`}
+          className={`w-full sm:flex-1 min-w-0 rounded-md px-1 py-2 sm:px-3 sm:py-2 text-[10px] sm:text-sm leading-tight tracking-tighter font-medium transition-colors cursor-pointer inline-flex items-center justify-center ${activeTab === tab.id
+            ? "bg-background text-foreground shadow-sm"
+            : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+            }`}
         >
           {tab.label}
         </button>
@@ -249,7 +248,7 @@ export function BillingSettings({
   }
 
   return (
-    <Card className={`mx-auto w-full max-w-2xl ${className || ''}`}>
+    <Card className={`mx-auto w-full max-w-2xl min-w-md ${className || ''}`}>
       <CardHeader className="space-y-4 px-4 sm:px-6">
         <CardTitle className="text-lg sm:text-xl">Billing settings</CardTitle>
         <TabNavigation activeTab={activeTab} onTabChange={onTabChange} />
