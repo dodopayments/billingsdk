@@ -30,9 +30,6 @@ export function PaymentDetailsDemo() {
         onDiscard={handleDiscard}
         showConfirmation={showConfirmation}
         onConfirmationClose={() => setShowConfirmation(false)}
-        countries={["India", "United States", "United Kingdom", "Canada", "Australia"]}
-        states={["Bihar", "Karnataka", "Maharashtra"]}
-        cities={["Patna", "Bangalore", "Mumbai"]}
       />
     </div>
   )

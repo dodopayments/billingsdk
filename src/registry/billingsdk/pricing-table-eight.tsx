@@ -15,7 +15,7 @@ const sectionVariants = cva("py-32", {
   variants: {
     size: {
       small: "py-6 md:py-12",
-      medium: "py-10 md:py-20", 
+      medium: "py-10 md:py-20",
       large: "py-16 md:py-32",
     },
     theme: {
@@ -87,10 +87,10 @@ const cardVariants = cva(
       {
         theme: "minimal",
         selected: true,
-        className: "border-indigo-600 shadow-lg ring-2 ring-indigo-600",
+        className: "border-primary shadow-lg ring-2 ring-primary",
       },
       {
-        theme: "minimal", 
+        theme: "minimal",
         selected: false,
         className: "hover:border-muted-foreground",
       },
@@ -130,7 +130,7 @@ const buttonVariants = cva(
       {
         theme: "minimal",
         selected: true,
-        className: "bg-indigo-600 hover:bg-indigo-700 text-white",
+        className: "bg-primary hover:bg-primary/90 text-primary-foreground",
       },
       {
         theme: "minimal",
@@ -140,7 +140,7 @@ const buttonVariants = cva(
       {
         theme: "classic",
         selected: true,
-        className: "bg-gradient-to-r from-indigo-600 to-indigo-700 text-white",
+        className: "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground",
       },
       {
         theme: "classic",
@@ -161,7 +161,7 @@ export interface PricingTableEightPlan {
   name: string;
   description: string;
   price: number;
-  users: number | string;
+  users: number;
   popular?: boolean;
 }
 
@@ -185,7 +185,7 @@ export interface PricingTableEightProps extends VariantProps<typeof sectionVaria
   className?: string;
 }
 
-export function PricingTableEight({ 
+export function PricingTableEight({
   className,
   plans,
   features,
@@ -197,12 +197,11 @@ export function PricingTableEight({
 }: PricingTableEightProps) {
   const [selectedPlan, setSelectedPlan] = useState(plans.find(p => p.popular)?.id || plans[0]?.id || "");
 
-  const currentPlan = plans.find((plan) => plan.id === selectedPlan) || plans[0];
-  const sliderValue = [typeof currentPlan?.users === "string" ? 25 : (currentPlan?.users || 1)];
+  const [sliderValue, setSliderValue] = useState<number[]>([plans.find(p => p.popular)?.users || 0])
 
   const renderFeatureValue = (value: boolean | string | undefined) => {
     if (typeof value === "boolean") {
-      return value ? <Check className="h-5 w-5 text-indigo-600" /> : <span className="text-muted-foreground">—</span>;
+      return value ? <Check className="h-5 w-5 text-primary" /> : <span className="text-muted-foreground">—</span>;
     }
     if (typeof value === "string") {
       return <span className="text-sm text-foreground">{value}</span>;
@@ -212,6 +211,10 @@ export function PricingTableEight({
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
+    const selected = plans.find(p => p.id === planId);
+    if (selected && typeof selected.users === "number") {
+      setSliderValue([selected.users]);
+    }
     onPlanSelect?.(planId);
   };
 
@@ -221,8 +224,8 @@ export function PricingTableEight({
       {theme === "classic" && (
         <>
           <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-600/5 rounded-full blur-3xl" />
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-indigo-600/5 rounded-full blur-2xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
         </>
       )}
 
@@ -240,9 +243,12 @@ export function PricingTableEight({
         {/* User Slider */}
         <div className="mx-auto mt-12 max-w-md px-4">
           <div className="relative">
-            <Slider value={sliderValue} max={25} min={1} step={1} className="w-full" disabled />
+            <Slider value={sliderValue} onValueChange={(e) => {
+              setSliderValue(e)
+              setSelectedPlan(plans.filter(plan => plan.users >= e[0])[0]?.id || plans.find(plan => plan.popular)?.id!)
+            }} max={25} min={1} step={1} className="w-full text-primary" />
             <div className="mt-2 text-center">
-              <span className="text-sm font-medium text-foreground">{currentPlan?.users} users</span>
+              <span className="text-sm font-medium text-foreground">{sliderValue[0]} users</span>
             </div>
           </div>
         </div>
@@ -259,10 +265,10 @@ export function PricingTableEight({
               >
                 <Card
                   className={cn(
-                    cardVariants({ 
-                      size, 
-                      theme, 
-                      selected: selectedPlan === plan.id 
+                    cardVariants({
+                      size,
+                      theme,
+                      selected: selectedPlan === plan.id
                     })
                   )}
                   onClick={() => handlePlanSelect(plan.id)}
@@ -271,9 +277,9 @@ export function PricingTableEight({
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
                       <Badge className={cn(
                         "px-4 py-1 text-sm font-medium rounded-md shadow-sm",
-                        theme === "classic" 
-                          ? "bg-gradient-to-r from-indigo-600 to-indigo-700 text-white border-indigo-600/20"
-                          : "bg-indigo-600 hover:bg-indigo-700 text-white"
+                        theme === "classic"
+                          ? "bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-primary/20"
+                          : "bg-primary hover:bg-primary/90 text-primary-foreground"
                       )}>
                         Most popular
                       </Badge>
@@ -285,7 +291,7 @@ export function PricingTableEight({
                     <div className="mt-4">
                       <span className={cn(
                         "text-4xl font-bold",
-                        theme === "classic" 
+                        theme === "classic"
                           ? "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
                           : "text-foreground"
                       )}>
@@ -309,7 +315,7 @@ export function PricingTableEight({
 
           {/* Feature Comparison Table */}
           <div className="overflow-x-auto overflow-hidden rounded-lg border bg-card">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {features.map((category, categoryIndex) => (
                 <motion.div
                   key={category.category}
@@ -350,7 +356,7 @@ export function PricingTableEight({
                           ))}
                         </div>
                       </div>
-                      
+
                       {/* Desktop Layout - Match pricing cards grid */}
                       <div className="hidden sm:grid sm:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:grid-cols-4 gap-4">
                         <div className="flex items-center space-x-2">

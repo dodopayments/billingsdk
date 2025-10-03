@@ -12,13 +12,13 @@
           "target": "lib/dodopayments.ts"
         },
         {
-          "path": "packages/templates/nextjs/hooks/useBilling.ts",
+          "path": "packages/templates/nextjs/hooks/dodopayments/useBilling.ts",
           "content": "useBilling hook for NextJS",
           "type": "template",
           "target": "hooks/useBilling.ts"
         },
         {
-          "path": "packages/templates/nextjs/api-routes/*",
+          "path": "packages/templates/nextjs/api-routes/(dodopayments)/*",
           "content": "DodoPayments API routes for NextJS",
           "type": "template",
           "target": "app/api/*"
@@ -31,6 +31,90 @@
         }
       ],
       "dependencies": ["dodopayments", "standardwebhooks", "zod"]
+    },
+    {
+      "name": "nextjs-stripe",
+      "description": "Stripe template for NextJS",
+      "framework": "nextjs",
+      "files": [
+        {
+          "path": "packages/templates/nextjs/lib/stripe.ts",
+          "content": "Stripe library for NextJS",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/nextjs/hooks/stripe/useBilling.ts",
+          "content": "useBilling hook for NextJS",
+          "type": "template",
+          "target": "hooks/useBilling.ts"
+        },
+        {
+          "path": "packages/templates/nextjs/api-routes/(stripe)/*",
+          "content": "Stripe API routes for NextJS",
+          "type": "template",
+          "target": "app/api/*"
+        },
+        {
+          "path": "packages/templates/nextjs/.env.example",
+          "content": "Stripe .env.example for NextJS",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["stripe", "standardwebhooks", "zod"]
+    },
+    {
+      "name": "react-dodopayments",
+      "description": "DodoPayments template for React.js",
+      "framework": "react",
+      "files": [
+        {
+          "path": "packages/templates/react/lib/dodopayments.ts",
+          "content": "DodoPayments library for React.js",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/react/hooks/dodopayments/useBilling.ts",
+          "content": "Custom React hook for managing DodoPayments billing flows",
+          "type": "template",
+          "target": "hooks/dodopayments/useBilling.ts"
+        },
+        {
+          "path": "packages/templates/react/.env.example",
+          "content": "DodoPayments .env.example for React.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["dodopayments", "react"]
+    },
+    {
+      "name": "react-stripe",
+      "description": "Stripe template for React.js",
+      "framework": "react",
+      "files": [
+        {
+          "path": "packages/templates/react/lib/stripe.ts",
+          "content": "Stripe library for React.js",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/react/hooks/stripe/useBilling.ts",
+          "content": "Custom React hook for managing Stripe billing flows",
+          "type": "template",
+          "target": "hooks/stripe/useBilling.ts"
+        },
+        {
+          "path": "packages/templates/react/.env.example",
+          "content": "Stripe .env.example for React.js",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": ["stripe", "react"]
     },
     {
       "name": "express-dodopayments",
@@ -162,32 +246,6 @@
         }
       ],
       "dependencies": ["stripe", "express", "zod", "@types/express"]
-    },
-    {
-      "name": "react-dodopayments",
-      "description": "DodoPayments template for React.js",
-      "framework": "react",
-      "files": [
-        {
-          "path": "packages/templates/react/lib/dodopayments.ts",
-          "content": "DodoPayments library for React.js",
-          "type": "template",
-          "target": "lib/dodopayments.ts"
-        },
-        {
-          "path": "packages/templates/react/hooks/dodopayments/useBilling.ts",
-          "content": "Custom React hook for managing DodoPayments billing flows",
-          "type": "template",
-          "target": "hooks/dodopayments/useBilling.ts"
-        },
-        {
-          "path": "packages/templates/react/.env.example",
-          "content": "DodoPayments .env.example for React.js",
-          "type": "template",
-          "target": ".env.example"
-        }
-      ],
-      "dependencies": ["dodopayments", "react"]
     },
     {
       "name": "fastify-dodopayments",
@@ -386,32 +444,6 @@
         "hono",
         "@hono/zod-validator"
       ]
-    },
-    {
-      "name": "react-stripe",
-      "description": "Stripe template for React.js",
-      "framework": "react",
-      "files": [
-        {
-          "path": "packages/templates/react/lib/stripe.ts",
-          "content": "Stripe library for React.js",
-          "type": "template",
-          "target": "lib/stripe.ts"
-        },
-        {
-          "path": "packages/templates/react/hooks/stripe/useBilling.ts",
-          "content": "Custom React hook for managing Stripe billing flows",
-          "type": "template",
-          "target": "hooks/stripe/useBilling.ts"
-        },
-        {
-          "path": "packages/templates/react/.env.example",
-          "content": "Stripe .env.example for React.js",
-          "type": "template",
-          "target": ".env.example"
-        }
-      ],
-      "dependencies": ["stripe", "react"]
     }
   ]
 }

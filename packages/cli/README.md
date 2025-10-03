@@ -30,6 +30,35 @@ This interactive command will:
 - Install all necessary dependencies
 - Generate configuration files and boilerplate code
 
+### Non-interactive flags
+
+```bash
+# fully non-interactive
+npx @billingsdk/cli init --framework nextjs --provider dodopayments --yes
+
+# point to local built templates
+BILLINGSDK_REGISTRY_BASE=file://$PWD/public/tr \
+  npx @billingsdk/cli init --framework express --provider dodopayments --yes --cwd /tmp/my-app
+
+# skip dependency installation
+npx @billingsdk/cli init --framework hono --provider stripe --yes --no-install
+
+# dry-run with verbose output and custom package manager
+npx @billingsdk/cli init --framework nextjs --provider dodopayments --yes --dry-run --verbose --package-manager pnpm
+```
+
+Flags:
+- `--framework <nextjs|express|react|fastify|hono>`
+- `--provider <dodopayments|stripe>` (Stripe valid for Express/Hono)
+- `--yes` skip prompts
+- `--no-install` skip dependency installation
+- `--registry-base <url>` override template base (env: `BILLINGSDK_REGISTRY_BASE`)
+- `--cwd <path>` operate in a different directory
+- `--force` overwrite files without prompt
+- `--dry-run` print actions without writing files or installing
+- `--verbose` show registry URL, placement, and actions
+- `--package-manager <npm|pnpm|yarn|bun>` choose installer
+
 ### Add Components
 
 ```bash
@@ -56,69 +85,6 @@ Initialize a new billing project with complete setup.
 - Automatic dependency installation
 - Template-based file generation
 
-**Generated Structures:**
-
-*Next.js (App Router):*
-```
-your-project/
-├── app/api/(dodopayments)/
-│   ├── checkout/route.ts
-│   ├── customer/route.ts
-│   ├── products/route.ts
-│   └── webhook/route.ts
-├── hooks/
-│   └── useBilling.ts
-├── lib/
-│   └── dodopayments.ts
-└── .env.example
-```
-
-*Express.js:*
-```
-your-project/
-├── src/
-│   ├── lib/
-│   │   └── dodopayments.ts
-│   └── routes/
-│       └── dodopayments/
-│           ├── checkout.ts
-│           ├── customer.ts
-│           ├── payments.ts
-│           ├── products.ts
-│           ├── subscriptions.ts
-│           └── webhook.ts
-├── .env.example
-└── package.json
-```
-
-*React (Client-side only):*
-```
-your-project/
-├── hooks/
-│   └── useBilling.ts
-├── lib/
-│   └── dodopayments.ts
-└── .env.example
-```
-
-*Hono:*
-```
-your-project/
-├── src/
-│   ├── lib/
-│   │   └── dodopayments.ts
-│   └── routes/
-│       ├── route.ts
-│       └── dodopayments/
-│           ├── checkout.ts
-│           ├── customer.ts
-│           ├── payments.ts
-│           ├── products.ts
-│           ├── subscriptions.ts
-│           └── webhook.ts
-├── .env.example
-└── package.json
-```
 
 ### `@billingsdk/cli add <component>`
 
@@ -130,29 +96,6 @@ npx @billingsdk/cli add pricing-table-one
 npx @billingsdk/cli add subscription-management
 npx @billingsdk/cli add usage-meter-circle
 ```
-
-
-## Configuration
-
-### Environment Variables
-
-After running `init`, configure your environment:
-
-```bash
-# Copy the generated .env.example to .env.local
-cp .env.example .env.local
-
-# Add your Dodo Payments credentials
-DODO_PAYMENTS_API_KEY=your_api_key_here
-DODO_PAYMENTS_WEBHOOK_SECRET=your_webhook_secret_here
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
-### Dependencies Installed
-
-The CLI installs dependencies based on your selections:
-- Dodo Payments: `dodopayments`, `standardwebhooks`, `zod` (plus framework libs)
-- Stripe (Express/Hono only): `stripe`, `standardwebhooks`, `zod` (plus framework libs)
 
 ## Supported Frameworks & Providers
 
@@ -167,6 +110,7 @@ The CLI automatically detects your framework based on your project dependencies 
 - ✅ **React** - Fully supported (hooks and utilities)
   - Detected by: `react` dependency
 - ✅ **Hono** - Fully supported
+- ✅ **Fastify** - Partially supported
 
 **Auto-Detection Process:**
 1. Scans your `package.json` for framework-specific dependencies
@@ -179,8 +123,33 @@ The CLI automatically detects your framework based on your project dependencies 
 - ✅ **Stripe** - Supported for Express.js and Hono (Next.js/React coming soon)
 - 🚧 **Additional providers** - Based on community demand
 
-## Development
+## Development / Local Setup / Testing
 
+### Build transport templates (for local testing)
+
+```bash
+cd packages/cli && npm run build
+```
+
+### Local linking workflow (optional)
+
+```bash
+# 1) Run the docs site locally (serves transports at `http://localhost:3000/tr`)
+
+npm run dev
+```
+
+```bash
+# 2) Build the CLI and link it for development
+
+cd packages/cli && npm run build && npm link
+```
+
+```bash
+# 3) In another project, run the linked CLI
+
+BILLINGSDK_REGISTRY_BASE=http://localhost:3000/tr npx @billingsdk/cli init --framework express --provider dodopayments --yes
+```
 ### Building the CLI
 
 ```bash
@@ -211,10 +180,11 @@ npx @billingsdk/cli --help
 chmod +x node_modules/.bin/@billingsdk/cli
 ```
 
-**Network issues**
+#### Transport not found
 ```bash
-# Check internet connection
-# CLI downloads templates from @billingsdk/cli.com
+# Build transports locally, then point CLI at file:// registry
+node packages/cli/dist/index.js build
+BILLINGSDK_REGISTRY_BASE=file://$PWD/public/tr node packages/cli/dist/index.js init --framework express --provider dodopayments --yes --cwd /tmp/app
 ```
 
 ### Getting Help
@@ -241,7 +211,7 @@ The CLI is part of the Billing SDK monorepo. See the main [CONTRIBUTING.md](../C
 
 1. Add component templates to `packages/templates/`
 2. Update the registry configuration
-3. Run `@billingsdk/cli build` to generate new registry files
+3. Run `@billingsdk/cli build` from project root to generate new registry files
 
 ## License
 

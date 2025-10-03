@@ -25,7 +25,7 @@ const plans = [
     description: "Best for large teams.",
     price: 40,
     popular: false,
-    users: "25+",
+    users: 25,
   },
 ];
 
