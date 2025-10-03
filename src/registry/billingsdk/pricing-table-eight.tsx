@@ -196,9 +196,21 @@ export function PricingTableEight({
   theme = "minimal"
 }: PricingTableEightProps) {
   const [selectedPlan, setSelectedPlan] = useState(plans.find(p => p.popular)?.id || plans[0]?.id || "");
+  const [userCount, setUserCount] = useState(5);
 
-  const currentPlan = plans.find((plan) => plan.id === selectedPlan) || plans[0];
-  const sliderValue = [typeof currentPlan?.users === "string" ? 25 : (currentPlan?.users || 1)];
+  const getUserTier = (users: number) => {
+    if (users <= 5) return 0; 
+    if (users <= 15) return 1;
+    return 2; 
+  };
+
+  const getCurrentPlanFromUsers = (users: number) => {
+    const tierIndex = getUserTier(users);
+    return plans[tierIndex] || plans[0];
+  };
+
+  const currentPlan = getCurrentPlanFromUsers(userCount);
+  const sliderValue = [userCount];
 
   const renderFeatureValue = (value: boolean | string | undefined) => {
     if (typeof value === "boolean") {
@@ -213,6 +225,15 @@ export function PricingTableEight({
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
     onPlanSelect?.(planId);
+  };
+
+  const handleUserCountChange = (values: number[]) => {
+    const newUserCount = values[0];
+    setUserCount(newUserCount);
+    
+    const newPlan = getCurrentPlanFromUsers(newUserCount);
+    setSelectedPlan(newPlan.id);
+    onPlanSelect?.(newPlan.id);
   };
 
   return (
@@ -240,9 +261,23 @@ export function PricingTableEight({
         {/* User Slider */}
         <div className="mx-auto mt-12 max-w-md px-4">
           <div className="relative">
-            <Slider value={sliderValue} max={25} min={1} step={1} className="w-full" disabled />
+            <Slider 
+              value={sliderValue} 
+              max={25} 
+              min={1} 
+              step={1} 
+              className="w-full" 
+              onValueChange={handleUserCountChange}
+            />
             <div className="mt-2 text-center">
-              <span className="text-sm font-medium text-foreground">{currentPlan?.users} users</span>
+              <span className="text-sm font-medium text-foreground">
+                {userCount === 25 ? "25+" : userCount} users
+              </span>
+            </div>
+            <div className="mt-1 text-center">
+              <span className="text-xs text-muted-foreground">
+                Recommended: {currentPlan?.name}
+              </span>
             </div>
           </div>
         </div>
@@ -265,7 +300,13 @@ export function PricingTableEight({
                       selected: selectedPlan === plan.id 
                     })
                   )}
-                  onClick={() => handlePlanSelect(plan.id)}
+                  onClick={() => {
+                    handlePlanSelect(plan.id);
+                    const planIndex = plans.findIndex(p => p.id === plan.id);
+                    if (planIndex === 0) setUserCount(5);      
+                    else if (planIndex === 1) setUserCount(15); 
+                    else setUserCount(25);                     
+                  }}
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
