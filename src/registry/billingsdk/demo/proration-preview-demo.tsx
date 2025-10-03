@@ -94,12 +94,14 @@ export function ProrationPreviewDemo() {
     <div className="space-y-8">
 
       <Tabs defaultValue="upgrade" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="upgrade">Upgrade</TabsTrigger>
-          <TabsTrigger value="downgrade">Downgrade</TabsTrigger>
-          <TabsTrigger value="cycle-change">Cycle Change</TabsTrigger>
-          <TabsTrigger value="next-cycle">Next Cycle</TabsTrigger>
-        </TabsList>
+        <div className="overflow-hidden">
+          <TabsList className="flex w-full overflow-x-auto gap-1 p-1 rounded-lg" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <TabsTrigger value="upgrade" className="text-sm px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground whitespace-nowrap flex-shrink-0">Upgrade</TabsTrigger>
+            <TabsTrigger value="downgrade" className="text-sm px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground whitespace-nowrap flex-shrink-0">Downgrade</TabsTrigger>
+            <TabsTrigger value="cycle-change" className="text-sm px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground whitespace-nowrap flex-shrink-0">Cycle Change</TabsTrigger>
+            <TabsTrigger value="next-cycle" className="text-sm px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground whitespace-nowrap flex-shrink-0">Next Cycle</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="upgrade" className="space-y-6">
           <Card>
