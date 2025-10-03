@@ -15,6 +15,7 @@ import { UsageTable } from "@/components/billingsdk/usage-table";
 import { InvoiceHistory } from "@/components/billingsdk/invoice-history";
 import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 import { PaymentCard } from "@/components/billingsdk/payment-card";
+import { PaymentCardTwo } from "@/components/billingsdk/payment-card-two";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
@@ -2279,5 +2280,33 @@ export const componentRegistry: ComponentConfig[] = [
         console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);
       },
     },
-  }
+  },
+  {
+    id: "payment-card-two",
+    name: "Payment Card Two",
+    description: "Compact payment card with single card-number input",
+    category: "ui",
+    component: PaymentCardTwo,
+    imports: ["@/components/billingsdk/payment-card-two"],
+    defaultCode: `   <PaymentCardTwo
+        title="Complete Payment"
+        brandName="Dodo payments"
+        item="Subscription"
+        itemAmount={146}
+        currency="$"
+        infoBottom="Make payment to activate subscription"
+        onPay={() => console.log('Pay now clicked')}
+        onBack={() => console.log('Back clicked')}
+      />`,
+    defaultProps: {
+      title: "Complete Payment",
+      brandName: "Dodo payments",
+      item: "Subscription",
+      itemAmount: 146,
+      currency: "$",
+      infoBottom: "Make payment to activate subscription",
+      onPay: () => console.log('Pay now clicked'),
+      onBack: () => console.log('Back clicked'),
+    },
+  },
 ];

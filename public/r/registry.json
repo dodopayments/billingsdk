@@ -46,6 +46,7 @@
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-card",
+                "@billingsdk/payment-card-two",
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
                 "@billingsdk/proration-preview",
@@ -923,6 +924,33 @@
                 "card",
                 "badge",
                 "utils"
+            ]
+        },
+        {
+            "name": "payment-card-two",
+            "type": "registry:block",
+            "title": "Payment Card Two",
+            "description": "Compact payment card with single input",
+            "files": [
+              {
+                "path": "src/registry/billingsdk/payment-card-two.tsx",
+                "type": "registry:component",
+                "target": "components/billingsdk/payment-card-two.tsx"
+              },
+              {
+                "path": "src/registry/billingsdk/demo/payment-card-two-demo.tsx",
+                "type": "registry:component",
+                "target": "components/payment-card-two-demo.tsx"
+              }
+            ],
+            "dependencies": [
+             "lucide-react"
+            ],
+            "registryDependencies": [
+             "button",
+             "card",
+             "input",
+             "utils"
             ]
         },
         {

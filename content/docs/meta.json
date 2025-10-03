@@ -47,6 +47,7 @@
 		"components/payment-method-selector/index",
 		"components/payment-method-manager/index",
 		"components/payment-card/index",
+		"components/payment-card-two/index",
 		"---Configuration---",
 		"interfaces",
 		"theming"
