@@ -43,9 +43,17 @@ export function PlanRecommendationWidget({
   };
   
   // Usage data with limits
-  const apiUsage = usageData ? getUsagePercentage(usageData.apiCalls, 1000000) : 0; // Unlimited
-  const storageUsage = usageData ? getUsagePercentage(usageData.storage, 1000) : 0; // 1TB = 1000GB
-  const teamUsage = usageData ? getUsagePercentage(usageData.teamSize, 200) : 0; // 200 members
+  // Extract limits from the current or recommended plan
+  const effectivePlan = currentPlan || recommendedPlan || plans[0];
+  const limits = {
+    apiCalls: effectivePlan.limits?.apiCalls || Infinity,
+    storage: effectivePlan.limits?.storage || Infinity,
+    teamSize: effectivePlan.limits?.teamSize || Infinity
+  };
+
+  const apiUsage = usageData ? getUsagePercentage(usageData.apiCalls, limits.apiCalls) : 0;
+  const storageUsage = usageData ? getUsagePercentage(usageData.storage, limits.storage) : 0;
+  const teamUsage = usageData ? getUsagePercentage(usageData.teamSize, limits.teamSize) : 0;
   
   // Animate usage bars on mount
   useEffect(() => {
