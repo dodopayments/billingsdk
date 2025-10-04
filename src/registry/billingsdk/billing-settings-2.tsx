@@ -13,7 +13,8 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import cc from 'currency-codes';
 
 // Define types for our props
 export interface FeatureToggle {
@@ -174,25 +175,28 @@ export function BillingSettings2({
 	onCancel = () => {},
 	saveButtonText = "Save Changes",
 	cancelButtonText = "Cancel",
-	currencyOptions = [
-		{ value: "usd", label: "USD - US Dollar" },
-		{ value: "inr", label: "INR - Indian Rupees" },
-		{ value: "eur", label: "EUR - Euro" },
-		{ value: "gbp", label: "GBP - British Pound" },
-		{ value: "jpy", label: "JPY - Japanese Yen" },
-		{ value: "aud", label: "AUD - Australian Dollar" },
-		{ value: "cad", label: "CAD - Canadian Dollar" },
-		{ value: "cny", label: "CNY - Chinese Yuan" },
-		{ value: "sgd", label: "SGD - Singapore Dollar" },
-		{ value: "chf", label: "CHF - Swiss Franc" },
-		{ value: "zar", label: "ZAR - South African Rand" },
-		{ value: "aed", label: "AED - UAE Dirham" },
-	],
+	currencyOptions,
 	defaultCurrency = "usd",
 	onCurrencyChange = () => {},
 	enableValidation = true,
 	currencyRequired = true,
 }: BillingSettings2Props) {
+	// Generate comprehensive currency options from the currency-codes library
+	const allCurrencyOptions = useMemo(() => {
+		if (currencyOptions) {
+			return currencyOptions;
+		}
+		
+		// Get all currency data from the library
+		const currencies = cc.data;
+		return currencies
+			.filter(currency => currency.code) // Filter out any invalid entries
+			.map(currency => ({
+				value: currency.code.toLowerCase(),
+				label: currency.code
+			}))
+			.sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically
+	}, [currencyOptions]);
 	const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
 	const [currencyError, setCurrencyError] = useState<string | null>(null);
 
@@ -318,7 +322,7 @@ export function BillingSettings2({
 								<SelectValue placeholder="Select currency" />
 							</SelectTrigger>
 							<SelectContent>
-								{currencyOptions.map((option) => (
+								{allCurrencyOptions.map((option) => (
 									<SelectItem key={option.value} value={option.value}>
 										{option.label}
 									</SelectItem>
