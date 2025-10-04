@@ -195,7 +195,12 @@ export function PlanRecommendationWidget({
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-lg font-bold text-primary">${proPlan?.monthlyPrice}</span>
+              {proPlan && (
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-bold text-primary">${proPlan.monthlyPrice}</span>
+                  <span className="text-sm text-muted-foreground">/month</span>
+                </div>
+              )}
                 <span className="text-sm text-muted-foreground">/month</span>
               </div>
               <div className="flex gap-2 pt-1">
