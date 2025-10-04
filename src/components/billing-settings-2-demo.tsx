@@ -126,11 +126,6 @@ export function BillingSettings2Demo() {
 						onToggle: (enabled) => handleFeatureToggle('promotionalEmails', enabled),
 					},
 				]}
-				currencyOptions={[
-					{ value: "usd", label: "USD - US Dollar" },
-					{ value: "eur", label: "EUR - Euro" },
-					{ value: "gbp", label: "GBP - British Pound" },
-				]}
 				defaultCurrency={selectedCurrency}
 				onCurrencyChange={createCurrencyChangeHandler(setSelectedCurrency)}
 				onSave={handleSave}

@@ -13,7 +13,17 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import cc from 'currency-codes';
+
+// Special currency codes excluded from billing options
+const NON_BILLING_CURRENCY_CODES: string[] = [
+	'XAU', 'XAG', 'XPT', 'XPD', // Precious metals
+	'XBA', 'XBB', 'XBC', 'XBD', // Bond market units
+	'XDR', 'XTS', 'XSU', 'XUA', // SDR and test codes
+	'XXX', // No currency
+	'CLF', 'COU', 'MXV', 'USN', 'UYI', 'UYW', 'CHE', 'CHW' // Other special codes
+];
 
 // Define types for our props
 export interface FeatureToggle {
@@ -174,25 +184,56 @@ export function BillingSettings2({
 	onCancel = () => {},
 	saveButtonText = "Save Changes",
 	cancelButtonText = "Cancel",
-	currencyOptions = [
-		{ value: "usd", label: "USD - US Dollar" },
-		{ value: "inr", label: "INR - Indian Rupees" },
-		{ value: "eur", label: "EUR - Euro" },
-		{ value: "gbp", label: "GBP - British Pound" },
-		{ value: "jpy", label: "JPY - Japanese Yen" },
-		{ value: "aud", label: "AUD - Australian Dollar" },
-		{ value: "cad", label: "CAD - Canadian Dollar" },
-		{ value: "cny", label: "CNY - Chinese Yuan" },
-		{ value: "sgd", label: "SGD - Singapore Dollar" },
-		{ value: "chf", label: "CHF - Swiss Franc" },
-		{ value: "zar", label: "ZAR - South African Rand" },
-		{ value: "aed", label: "AED - UAE Dirham" },
-	],
+	currencyOptions,
 	defaultCurrency = "usd",
 	onCurrencyChange = () => {},
 	enableValidation = true,
 	currencyRequired = true,
 }: BillingSettings2Props) {
+	// Generate comprehensive currency options from the currency-codes library
+	const allCurrencyOptions = useMemo(() => {
+		if (currencyOptions) {
+			return currencyOptions;
+		}
+		
+		// Get all currency data from the library
+		const currencies = cc.data;
+		
+		// Validate that cc.data exists and is an array
+		if (!currencies || !Array.isArray(currencies)) {
+			console.error('currency-codes data is not available or not an array');
+			return [];
+		}
+		
+		return currencies
+			.filter(currency => {
+				// Filter out invalid entries
+				if (!currency.code) return false;
+				
+				// Filter out special currency codes that are not typically used for billing
+				return !NON_BILLING_CURRENCY_CODES.includes(currency.code);
+			})
+			.map(currency => {
+				// Guard against missing currency name
+				if (!currency.currency) {
+					return {
+						value: currency.code.toLowerCase(),
+						label: currency.code
+					};
+				}
+				
+				// Truncate long currency names for better display
+				const currencyName = currency.currency.length > 50 
+					? currency.currency.substring(0, 50) + '...' 
+					: currency.currency;
+				
+				return {
+					value: currency.code.toLowerCase(),
+					label: `${currency.code} - ${currencyName}`
+				};
+			})
+			.sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically
+	}, [currencyOptions]);
 	const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
 	const [currencyError, setCurrencyError] = useState<string | null>(null);
 
@@ -318,7 +359,7 @@ export function BillingSettings2({
 								<SelectValue placeholder="Select currency" />
 							</SelectTrigger>
 							<SelectContent>
-								{currencyOptions.map((option) => (
+								{allCurrencyOptions.map((option) => (
 									<SelectItem key={option.value} value={option.value}>
 										{option.label}
 									</SelectItem>
