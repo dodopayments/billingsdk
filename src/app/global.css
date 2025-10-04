@@ -191,3 +191,16 @@ pre[class*="language-"]::-webkit-scrollbar {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+
+@media (min-width: 1276px) {
+
+  /* Hide collapse button on desktop */
+  button[aria-label="Collapse Sidebar"] {
+    display: none;
+  }
+
+  /* Hide floating search toggle on large screens */
+  [data-search] {
+    display: none;
+  }
+}
