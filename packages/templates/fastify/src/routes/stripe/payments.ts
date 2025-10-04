@@ -33,9 +33,15 @@ export default async function paymentsRoutes(fastify: FastifyInstance) {
     try {
       const { customer_id, limit, starting_after } = request.query as Record<string, any>
       const params: Stripe.PaymentIntentListParams = {}
-      
       if (typeof customer_id === 'string') params.customer = customer_id
-      if (typeof limit === 'string') params.limit = parseInt(limit)
+
+      if (typeof limit === 'string') {
+        const parsedLimit = Number.parseInt(limit, 10)
+        if (!Number.isFinite(parsedLimit) || parsedLimit < 1 || parsedLimit > 100) {
+          return reply.status(400).send({ error: 'limit must be an integer between 1 and 100' })
+        }
+        params.limit = parsedLimit
+      }
       if (typeof starting_after === 'string') params.starting_after = starting_after
 
       const paymentIntents = await stripe.paymentIntents.list(params)
@@ -99,9 +105,15 @@ export default async function paymentsRoutes(fastify: FastifyInstance) {
     try {
       const { charge_id, limit, starting_after } = request.query as Record<string, any>
       const params: Stripe.RefundListParams = {}
-      
       if (typeof charge_id === 'string') params.charge = charge_id
-      if (typeof limit === 'string') params.limit = parseInt(limit)
+
+      if (typeof limit === 'string') {
+        const parsedLimit = Number.parseInt(limit, 10)
+        if (!Number.isFinite(parsedLimit) || parsedLimit < 1 || parsedLimit > 100) {
+          return reply.status(400).send({ error: 'limit must be an integer between 1 and 100' })
+        }
+        params.limit = parsedLimit
+      }
       if (typeof starting_after === 'string') params.starting_after = starting_after
 
       const refunds = await stripe.refunds.list(params)

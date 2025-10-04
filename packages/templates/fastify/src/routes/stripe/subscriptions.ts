@@ -43,7 +43,13 @@ export default async function subscriptionsRoutes(fastify: FastifyInstance) {
       const params: Stripe.SubscriptionListParams = {}
       
       if (typeof customer_id === 'string') params.customer = customer_id
-      if (typeof limit === 'string') params.limit = parseInt(limit)
+      if (typeof limit === 'string') {
+        const parsedLimit = Number.parseInt(limit, 10)
+        if (!Number.isInteger(parsedLimit) || parsedLimit < 1 || parsedLimit > 100) {
+          return reply.status(400).send({ error: 'limit must be an integer between 1 and 100' })
+        }
+        params.limit = parsedLimit
+      }
       if (typeof starting_after === 'string') params.starting_after = starting_after
       if (typeof status === 'string') params.status = status as Stripe.Subscription.Status
 
