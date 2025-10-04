@@ -61,11 +61,19 @@ export function PlanRecommendationWidgetDemo() {
   // Using starter plan as current plan for demo
   const currentPlan = demoPlans.find(plan => plan.id === 'starter') || demoPlans[0];
   
+  // Define limits for the demo
+  const demoLimits = {
+    apiCalls: 1000000, // 1M API calls
+    storage: 1000, // 1TB storage in GB
+    teamSize: 200 // 200 team members
+  };
+  
   return (
     <div className="p-4">
       <PlanRecommendationWidget
         currentPlan={currentPlan}
         plans={demoPlans}
+        limits={demoLimits}
         usageData={{ apiCalls: 500000, storage: 5000, teamSize: 50 }}
         onPlanSelect={(planId) => console.log('Upgrade to plan:', planId)}
         onComparePlans={() => console.log('Compare plans clicked')}

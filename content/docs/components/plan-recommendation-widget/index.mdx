@@ -77,17 +77,22 @@ description: Modern SaaS dashboard widget with clean design and clear upgrade CT
 
 ## Usage
 
-```tsx
+``tsx
 import { PlanRecommendationWidget } from '@/components/billingsdk/plan-recommendation-widget';
 ```
 
-```tsx
+``tsx
 <PlanRecommendationWidget
   plans={plans}
   usageData={{
     apiCalls: 500000,
     storage: 5000,
     teamSize: 50
+  }}
+  limits={{
+    apiCalls: 1000000,
+    storage: 1000,
+    teamSize: 200
   }}
   onPlanSelect={(planId: string) => console.log('Upgrade to plan:', planId)}
   onComparePlans={() => console.log('Compare plans clicked')}
@@ -102,6 +107,7 @@ import { PlanRecommendationWidget } from '@/components/billingsdk/plan-recommend
 | `className`       | `string`                                | Additional CSS classes to apply to the widget    |
 | `currentPlan`     | `Plan`                                  | The user's current plan (optional)               |
 | `plans`           | `Plan[]`                                | Array of available plans                         |
+| `limits`          | `{ apiCalls?: number; storage?: number; teamSize?: number }` | Usage limits for calculating percentages (optional, defaults to Infinity for unlimited) |
 | `usageData`       | `{ apiCalls: number; storage: number; teamSize: number }` | Usage data to base recommendations on |
 | `onPlanSelect`    | `(planId: string) => void`              | Function called when upgrade is completed        |
 | `onComparePlans`  | `() => void`                            | Function called when "Compare Plans" is clicked  |
