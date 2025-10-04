@@ -3,7 +3,6 @@ import type { MDXComponents } from 'mdx/types';
 import * as TabsComponents from 'fumadocs-ui/components/tabs';
 import { PreviewComponents } from '@/components/preview/preview-components';
 import { CancelSubscriptionCardDemo } from '@/components/cancel-subscription-card-demo';
-import { CancelSubscriptionCardTwoDemo } from '@/components/cancel-subscription-card-two-demo';
 import { CancelSubscriptionDialogDemo } from '@/components/cancel-subscription-dialog-demo';
 import { PricingTableOneDemo } from '@/components/pricing-table-one-demo';
 import { PricingTableOneMinimalDemo } from '@/components/pricing-table-one-minimal-demo';
@@ -11,6 +10,7 @@ import { PricingTableTwoMinimalDemo } from '@/components/pricing-table-two-minim
 import { PricingTableTwoDemo } from '@/components/pricing-table-two-demo';
 import { PricingTableThreeDemo } from '@/components/pricing-table-three-demo';
 import { PricingTableFourDemo } from '@/components/pricing-table-four-demo';
+import { PricingTableFourMinimalDemo } from '@/components/pricing-table-four-minimal-demo';
 import { SubscriptionManagementDemo } from '@/components/subscription-management-demo';
 import { UpdatePlanDialogDemo } from '@/components/update-plan-dialog-demo';
 import { UpdatePlanCardDemo } from '@/components/update-plan-card-demo';
@@ -30,23 +30,20 @@ import CustomUsageMeterLinearDemo from '@/components/custom-usage-meter-linear-d
 import InvoiceHistoryDemo from '@/components/invoice-history-demo';
 import UsageTableDemo from '@/components/usage-table-demo';
 import { PaymentMethodSelectorDemo } from '@/components/payment-method-selector-demo';
-import { PaymentMethodManagerDemo } from '@/components/payment-method-manager-demo';
 import { PaymentSuccessDialogDemo } from '@/components/payment-success-dialog-demo';
 import { PricingTableFiveDemo } from '@/components/pricing-table-five-demo';
-import { PricingTableFiveDemoMinimal } from '@/components/pricing-table-five-minimal-demo';
+import { PricingTableFiveMinimalDemo } from '@/components/pricing-table-five-minimal-demo';
 import { PaymentDetailsDemo } from '@/components/payment-details-demo';
 import { PaymentDetailsTwoDemo } from './components/payment-details-two-demo';
 import { ProrationPreviewDemo } from '@/components/proration-preview-demo';
-import { CouponDemo } from '@/components/coupon-demo';
-import { BillingSummaryCardDemo } from '@/components/billing-summary-card-demo';
 import { UpcomingChargesDemo } from '@/components/upcoming-charges-demo';
 import { BillingSettings2Demo } from '@/components/billing-settings-2-demo';
 import { PricingTableSixDemo } from '@/components/pricing-table-six-demo';
 import { UsageBasedPricingDemo } from '@/components/usage-based-pricing-demo';
 import { DetailedUsageTableDemo } from '@/components/detailed-usage-table-demo';
 import { PricingTableSevenDemo } from '@/components/pricing-table-seven-demo';
-import { PricingTableEightDemo } from '@/components/pricing-table-eight-demo';
 import {PaymentCardDemo} from '@/components/payment-card-demo';
+import { PricingTableSevenMinimalDemo } from '@/components/pricing-table-seven-minimal-demo';
 
 
 // use this function to get MDX components, you will need it for rendering MDX
@@ -63,9 +60,9 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PricingTableThreeDemo,
     PricingTableFourDemo,
     PricingTableFiveDemo,
-    PricingTableFiveDemoMinimal,
+    PricingTableFiveMinimalDemo,
+    PricingTableFourMinimalDemo,
     CancelSubscriptionCardDemo,
-    CancelSubscriptionCardTwoDemo,
     CancelSubscriptionDialogDemo,
     SubscriptionManagementDemo,
     UpdatePlanDialogDemo,
@@ -86,19 +83,16 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     InvoiceHistoryDemo,
     UsageTableDemo,
     PaymentMethodSelectorDemo,
-    PaymentMethodManagerDemo,
     PaymentSuccessDialogDemo,
     PaymentDetailsDemo,
     PaymentDetailsTwoDemo,
     PaymentCardDemo,
     ProrationPreviewDemo,
-    CouponDemo,
-	  BillingSummaryCardDemo,
     UpcomingChargesDemo,
 	  PricingTableSixDemo,
     DetailedUsageTableDemo,
     PricingTableSevenDemo,
-    PricingTableEightDemo,
+    PricingTableSevenMinimalDemo,
 	  BillingSettings2Demo,
     UsageBasedPricingDemo
   };

@@ -1,7 +1,9 @@
 ---
 title: Pricing Table Seven
-description: The Pricing Table Seven component provides a Modern pricing design that balances clarity, usability and conversion-focused layout.
+description: The Pricing Table Seven component provides a feature-comparison pricing table with aligned cards and user slider for comprehensive plan comparison.
 ---
+
+## Classic Theme
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
   <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
@@ -13,58 +15,45 @@ description: The Pricing Table Seven component provides a Modern pricing design 
   <Tab value="Code" className="mt-3">
     <include cwd lang="tsx" meta='title="src/components/pricing-table-seven-demo.tsx"'>src/components/pricing-table-seven-demo.tsx</include>
   </Tab>
+
+</Tabs>
+
+## Minimal Theme
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="pricing-table-seven">
+      <PricingTableSevenMinimalDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/pricing-table-seven-minimal-demo.tsx"'>src/components/pricing-table-seven-minimal-demo.tsx</include>
+  </Tab>
 </Tabs>
 
 ## Installation
 
-<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
-  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
-      <Tab value="npx">
-        ```bash
-        npx shadcn@latest add @billingsdk/pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="pnpm">
-        ```bash
-        pnpm dlx shadcn@latest add @billingsdk/pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="yarn">
-        ```bash
-        yarn dlx shadcn@latest add @billingsdk/pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="bun">
-        ```bash
-        bunx shadcn@latest add @billingsdk/pricing-table-seven
-        ```
-      </Tab>
-    </Tabs>
+<Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+  <Tab value="npx">
+    ```bash
+    npx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
   </Tab>
-  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
-      <Tab value="npx">
-        ```bash
-        npx @billingsdk/cli add pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="pnpm">
-        ```bash
-        pnpm dlx @billingsdk/cli add pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="yarn">
-        ```bash
-        yarn dlx @billingsdk/cli add pricing-table-seven
-        ```
-      </Tab>
-      <Tab value="bun">
-        ```bash
-        bunx @billingsdk/cli add pricing-table-seven
-        ```
-      </Tab>
-    </Tabs>
+  <Tab value="pnpm">
+    ```bash
+    pnpm dlx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn dlx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bunx shadcn@latest add @billingsdk/pricing-table-seven
+    ```
   </Tab>
 </Tabs>
 
@@ -72,13 +61,66 @@ description: The Pricing Table Seven component provides a Modern pricing design 
 
 ```tsx
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
-import { plans } from "@/lib/billingsdk-config";
 
+const plans = [
+  {
+    id: "basic",
+    name: "Basic plan",
+    description: "Our most popular plan.",
+    price: 10,
+    popular: false,
+    users: 5,
+  },
+  {
+    id: "business",
+    name: "Business plan",
+    description: "Best for growing teams.",
+    price: 20,
+    popular: true,
+    users: 15,
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise plan",
+    description: "Best for large teams.",
+    price: 40,
+    popular: false,
+    users: 25,
+  },
+];
+
+const features = [
+  {
+    category: "Overview",
+    items: [
+      {
+        name: "Basic features",
+        tooltip: true,
+        basic: true,
+        business: true,
+        enterprise: true,
+      },
+      {
+        name: "Users",
+        tooltip: true,
+        basic: "10",
+        business: "20",
+        enterprise: "Unlimited",
+      },
+    ],
+  },
+];
+```
+
+```tsx
 <PricingTableSeven
   plans={plans}
-  title="The Perfect Plan For Your Needs"
-  description="Our transparent pricing makes it easy to find a plan that works within your financial constraints."
+  features={features}
+  title="Choose a plan that's right for you"
+  description="We believe Untitled should be accessible to all companies, no matter the size of your startup."
   onPlanSelect={(planId) => console.log('Selected plan:', planId)}
+  size="medium" // small, medium, large
+  theme="classic" // minimal or classic
 />
 ```
 
@@ -86,16 +128,70 @@ import { plans } from "@/lib/billingsdk-config";
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `plans` | `PlanProps[]` | Array of pricing plans |
+| `plans` | `PricingTableSevenPlan[]` | Array of pricing plans |
+| `features` | `FeatureCategory[]` | Array of feature categories with items |
+| `title` | `string` | Page title (default: "Choose a plan that's right for you") |
+| `description` | `string` | Page description |
 | `onPlanSelect` | `(planId: string) => void` | Callback when a plan is selected |
+| `size` | `"small" \| "medium" \| "large"` | Component size variant |
+| `theme` | `"minimal" \| "classic"` | Theme variant |
+| `className` | `string` | Additional CSS classes |
 
+## Data Types
+
+### PricingTableSevenPlan
+
+```tsx
+interface PricingTableSevenPlan {
+  id: string;                    // Unique identifier for the plan
+  name: string;                  // Display name of the plan
+  description: string;           // Plan description
+  price: number;                 // Price in dollars
+  users: number | string;        // Number of users (can be "25+" for unlimited)
+  popular?: boolean;             // Whether this plan is marked as popular
+}
+```
+
+### FeatureCategory
+
+```tsx
+interface FeatureCategory {
+  category: string;              // Category name (e.g., "Overview", "Reporting")
+  items: FeatureItemRecord[];    // Array of features in this category
+}
+```
+
+### FeatureItemRecord
+
+```tsx
+interface FeatureItemRecord {
+  name: string;                  // Feature name
+  tooltip?: boolean;             // Whether to show tooltip icon
+  [planId: string]: boolean | string | undefined;  // Feature value per plan
+}
+```
+
+## Features
+
+- **Dual Theme Support**: Choose between minimal and classic themes
+- **Interactive Plan Selection**: Users can click on pricing cards to select plans
+- **Feature Comparison Table**: Detailed feature comparison across all plans
+- **User Slider**: Interactive slider showing current plan's user count with real-time plan updates
+- **Responsive Design**: Mobile-first approach with responsive grid layouts
+- **Accessibility**: ARIA labels, keyboard navigation, and screen reader support
+- **Customizable Sizing**: Small, medium, and large size variants
+- **TypeScript Support**: Full type safety with comprehensive interfaces
+- **Smooth Animations**: Transitions and hover effects using Framer Motion
 
 ## Theming
 
-The pricing table component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
+The pricing table component supports two themes:
+
+- **Minimal**: Clean, simple design with subtle styling
+- **Classic**: Enhanced design with gradients and visual effects
+
+You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
 
 ## Example
-<include cwd lang="tsx" meta='title="src/components/pricing-table-seven-demo.tsx"'>src/components/pricing-table-seven-demo.tsx</include>
 
-### Credits
-- Created by [@rohanshrma26](https://x.com/rohanshrma26)
+<include cwd lang="tsx" meta='title="src/components/pricing-table-seven-demo.tsx"'>src/components/pricing-table-seven-demo.tsx</include>

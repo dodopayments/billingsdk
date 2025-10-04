@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react"
-import { motion, useMotionValueEvent, useSpring, useTransform } from "motion/react"
+import { motion, useSpring, useTransform, useMotionValueEvent } from "motion/react"
 import { cn } from "@/lib/utils"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export type UsageBasedPricingProps = {
   className?: string
@@ -51,18 +51,17 @@ export function UsageBasedPricing({
   const value = isControlled ? clamp(valueProp as number, min, max) : uncontrolled
   const trackRef = useRef<HTMLDivElement | null>(null)
   const [trackWidth, setTrackWidth] = useState(0)
-  // transient pointer position percentage for ultra-responsive visuals
   const [posPct, setPosPct] = useState(() => ((value - min) / (max - min)) * 100)
   const animRef = useRef<number | null>(null)
   const animStartRef = useRef<number>(0)
   const animFromPctRef = useRef<number>(0)
   const animToPctRef = useRef<number>(0)
-  const animDurationMs = 400
-  // drag state refs to distinguish click vs drag
+  const animDurationMs = 300
   const isPointerDownRef = useRef(false)
   const hasMovedRef = useRef(false)
   const suppressClickRef = useRef(false)
-  // measure track width for ticks and bubble clamping
+
+  // measure track width for ticks
   useLayoutEffect(() => {
     const el = trackRef.current
     if (!el) return
@@ -105,7 +104,6 @@ export function UsageBasedPricing({
   }, [value, min, max])
 
   const pct = posPct
-  // unified tick count used everywhere
   const tickCount = useMemo(() => Math.max(80, Math.floor((trackWidth || 1) / 6)), [trackWidth])
   const currentTickIndexFloat = useMemo(() => (posPct / 100) * (tickCount - 1), [posPct, tickCount])
 
@@ -211,8 +209,6 @@ export function UsageBasedPricing({
   // Positions for labels centered under first and last 1000-multiple dots
   const firstThousand = useMemo(() => Math.ceil(min / 1000) * 1000, [min])
   const lastThousand = useMemo(() => Math.floor(max / 1000) * 1000, [max])
-  const firstLeftPct = useMemo(() => `${((firstThousand - min) / (max - min)) * 100}%`, [firstThousand, min, max])
-  const lastLeftPct = useMemo(() => `${((lastThousand - min) / (max - min)) * 100}%`, [lastThousand, min, max])
   const startLabel = `${formatNumber(firstThousand)} credits`
   const endLabel = `${formatNumber(lastThousand)} credits`
 
@@ -247,31 +243,26 @@ export function UsageBasedPricing({
   }
 
   return (
-    <div className={cn("w-full text-center", className)}>
-      <div className="space-y-9 sm:space-y-10 max-w-[640px] mx-auto px-4">
-        <div className="space-y-4 sm:space-y-6">
-          <h2 className="tracking-tight text-2xl sm:text-3xl md:text-5xl">{title}</h2>
-          <p className="text-sm md:text-base text-muted-foreground">{subtitle}</p>
+    <Card className={cn("w-full max-w-3xl min-w-lg mx-auto", className)}>
+      <CardHeader className="text-left">
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{subtitle}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col items-center gap-2 mt-4">
+          <div className="flex items-baseline gap-1">
+            <span className="text-4xl font-bold tabular-nums">{currency}{priceText}</span>
+            <span className="text-muted-foreground text-sm">/mo</span>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {formatNumber(value)} credits per month
+          </p>
         </div>
 
-        <Card className="mx-auto max-w-md shadow-xl">
-          <CardContent className="py-4 sm:py-6">
-            <div className="mx-auto inline-flex items-center gap-1 sm:gap-2 rounded-2xl border border-border/60 bg-background px-4 sm:px-8 py-3 sm:py-5 shadow-inner">
-              <span className="text-muted-foreground text-3xl sm:text-4xl">{currency}</span>
-              <motion.span className="font-semibold leading-none tracking-tight text-4xl sm:text-5xl md:text-6xl tabular-nums" aria-live="polite" aria-atomic="true">
-                {priceText}
-              </motion.span>
-            </div>
-            <p className="mt-4 sm:mt-6 text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto px-2 sm:px-0">
-              This pricing scales as your automations do. No surprises – just usage. Use the slider to preview your monthly cost. Custom pricing available.
-            </p>
-          </CardContent>
-        </Card>
-
-        <div className="mx-auto w-full mt-6 sm:mt-8 md:mt-16">
-          <div className="mb-4 sm:mb-6 relative h-0">
-            <div className="absolute -top-8 sm:-top-10" style={{ left: `${pct}%` }}>
-              <div className="-translate-x-1/2 rounded-full border bg-background px-2 sm:px-3 py-1 text-xs shadow-sm">
+        <div className="space-y-6">
+          <div className="mb-6 relative h-0">
+            <div className="absolute -top-10" style={{ left: `${pct}%` }}>
+              <div className="-translate-x-1/2 rounded-md border bg-background px-3 py-1 text-xs shadow-sm">
                 {formatNumber(value)}
               </div>
             </div>
@@ -279,7 +270,7 @@ export function UsageBasedPricing({
 
           <div
             ref={trackRef}
-            className="relative h-12 sm:h-14 select-none"
+            className="relative h-12 select-none"
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -299,26 +290,20 @@ export function UsageBasedPricing({
               animateTo(target)
             }}
           >
-            {/* Ruler ticks with movable blue bars (smooth animated heights) */}
+            {/* Animated ruler ticks */}
             <div className="pointer-events-none absolute inset-0">
               {Array.from({ length: tickCount }).map((_, i) => {
                 const left = (i / (tickCount - 1)) * 100
                 const distFloat = Math.abs(currentTickIndexFloat - i)
-                // base and peak heights for smooth interpolation
                 const base = 10
-                const peak = 12 // so base + peak = 22 at the center
-                const spread = 2 // influence range (in ticks)
+                const peak = 12
+                const spread = 2
                 const factor = Math.max(0, 1 - distFloat / spread)
-                // extra boost for ticks that align with 1,000-credit multiples
-                const thousandBoost = 0
-                const height = base + peak * factor + thousandBoost
-                // color bands similar to before
+                const height = base + peak * factor
                 let color = 'bg-muted-foreground/40'
                 if (distFloat < 0.5) color = 'bg-primary'
                 else if (distFloat < 1.5) color = 'bg-primary/90'
                 else if (distFloat < 2.5) color = 'bg-primary/70'
-                // exactly three width variants:
-                // center (current) = 3px, neighbors within 3 ticks = 2px, others = 1px
                 const widthClass = distFloat < 0.5
                   ? 'w-[3px]'
                   : (distFloat < 3.5 ? 'w-[2px]' : 'w-px')
@@ -334,16 +319,14 @@ export function UsageBasedPricing({
               })}
             </div>
 
-            {/* Dots every 1000 credits under the baseline (clickable) */}
+            {/* Clickable dots every 1000 credits */}
             <div className="pointer-events-auto absolute inset-0">
               {(() => {
                 const first = Math.ceil(min / 1000) * 1000
                 const dots: ReactNode[] = []
                 for (let v = first; v <= max; v += 1000) {
-                  // position dot exactly at its proportional position (true 1000s only)
                   const t = (v - min) / (max - min)
                   const left = `${t * 100}%`
-                  // active only when value is exactly that 1000-multiple (after rounding)
                   const isActive = Math.round(value) === v
                   dots.push(
                     <div
@@ -384,16 +367,15 @@ export function UsageBasedPricing({
                 className="sr-only"
               />
             </div>
-
           </div>
 
-          <div className="mt-3 relative h-4 sm:h-5 text-xs text-muted-foreground">
-            <span className="absolute -translate-x-1/2 whitespace-nowrap text-[10px] sm:text-xs" style={{ left: firstLeftPct }}>{startLabel}</span>
-            <span className="absolute -translate-x-1/2 whitespace-nowrap text-[10px] sm:text-xs" style={{ left: lastLeftPct }}>{endLabel}</span>
+          <div className="flex justify-between text-xs text-muted-foreground px-1">
+            <span>{startLabel}</span>
+            <span>{endLabel}</span>
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 
