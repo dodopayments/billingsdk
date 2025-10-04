@@ -30,7 +30,7 @@ export interface PlanRecommendationWidgetProps {
 
 export function PlanRecommendationWidget({
   className,
-  currentPlan,
+  currentPlan: _currentPlan, // Renamed to _currentPlan to indicate it's intentionally unused
   plans,
   recommendedPlan,
   recommendedPlanId,

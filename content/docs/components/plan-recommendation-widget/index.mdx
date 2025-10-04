@@ -31,17 +31,17 @@ description: Modern SaaS dashboard widget with clean design and clear upgrade CT
 			<Tab value="npx">
 			```bash
 			npx shadcn@latest add @billingsdk/plan-recommendation-widget 
-			```
+			````
 			</Tab>
 			<Tab value="pnpm">
 			```bash
 			pnpm dlx shadcn@latest add @billingsdk/plan-recommendation-widget 
-			```
+			````
 			</Tab>
 			<Tab value="yarn">
 			```bash
 			yarn dlx shadcn@latest add @billingsdk/plan-recommendation-widget 
-			```
+			````
 			</Tab>
 		</Tabs>
 	</Tab>
@@ -54,22 +54,22 @@ description: Modern SaaS dashboard widget with clean design and clear upgrade CT
 			<Tab value="npx">
 				```bash 
 				npx @billingsdk/cli add plan-recommendation-widget 
-				```
+				````
 			</Tab>
 			<Tab value="pnpm">
 				```bash
 				pnpm dlx @billingsdk/cli add plan-recommendation-widget 
-				```
+				````
 			</Tab>
 			<Tab value="yarn">
 				```bash
 				yarn dlx @billingsdk/cli add plan-recommendation-widget 
-				```		
+				````		
 			</Tab>
 			<Tab value="bun">
 				```bash 
 				bunx @billingsdk/cli add plan-recommendation-widget 
-				```
+				````
 			</Tab>
 		</Tabs>
 	</Tab>
@@ -77,28 +77,19 @@ description: Modern SaaS dashboard widget with clean design and clear upgrade CT
 
 ## Usage
 
-``tsx
-import { PlanRecommendationWidget } from '@/components/billingsdk/plan-recommendation-widget';
+To use the Plan Recommendation Widget in your application, import the demo component:
+
+```tsx
+import { PlanRecommendationWidgetDemo } from '@/components/plan-recommendation-widget-demo';
 ```
 
-``tsx
-<PlanRecommendationWidget
-  plans={plans}
-  usageData={{
-    apiCalls: 500000,
-    storage: 5000,
-    teamSize: 50
-  }}
-  limits={{
-    apiCalls: 1000000,
-    storage: 1000,
-    teamSize: 200
-  }}
-  onPlanSelect={(planId: string) => console.log('Upgrade to plan:', planId)}
-  onComparePlans={() => console.log('Compare plans clicked')}
-  onLearnMore={() => console.log('Learn more clicked')}
-/>
+Then use it in your JSX:
+
+```tsx
+<PlanRecommendationWidgetDemo />
 ```
+
+For custom implementations, refer to the demo component source code which shows how to configure the widget with your own plans and usage data.
 
 ## Props
 
