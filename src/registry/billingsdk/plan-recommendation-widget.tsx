@@ -37,23 +37,20 @@ export function PlanRecommendationWidget({
   // Find the recommended plan (Pro plan in this case)
   const proPlan = plans.find(plan => plan.id === 'pro');
   
-  // Calculate usage percentages
+  // Calculate usage percentages with fixed limits since Plan interface doesn't have limits property
   const getUsagePercentage = (used: number, limit: number) => {
     return Math.min(100, (used / limit) * 100);
   };
   
-  // Usage data with limits
-  // Extract limits from the current or recommended plan
-  const effectivePlan = currentPlan || proPlan || plans[0];
-  const limits = {
-    apiCalls: effectivePlan.limits?.apiCalls || Infinity,
-    storage: effectivePlan.limits?.storage || Infinity,
-    teamSize: effectivePlan.limits?.teamSize || Infinity
-  };
+  // Usage data with fixed limits (since Plan interface doesn't have limits property)
+  // Using reasonable defaults for different plan types
+  const apiLimit = 1000000; // 1M API calls as default limit
+  const storageLimit = 1000; // 1TB storage in GB
+  const teamSizeLimit = 200; // 200 team members
 
-  const apiUsage = usageData ? getUsagePercentage(usageData.apiCalls, limits.apiCalls) : 0;
-  const storageUsage = usageData ? getUsagePercentage(usageData.storage, limits.storage) : 0;
-  const teamUsage = usageData ? getUsagePercentage(usageData.teamSize, limits.teamSize) : 0;
+  const apiUsage = usageData ? getUsagePercentage(usageData.apiCalls, apiLimit) : 0;
+  const storageUsage = usageData ? getUsagePercentage(usageData.storage, storageLimit) : 0;
+  const teamUsage = usageData ? getUsagePercentage(usageData.teamSize, teamSizeLimit) : 0;
   
   // Animate usage bars on mount
   useEffect(() => {
