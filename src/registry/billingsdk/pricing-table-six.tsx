@@ -36,13 +36,13 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
         {/* Header */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-16">
           <div>
-            <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-tight tracking-tight text-primary">
+            <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-tight tracking-tight text-foreground">
             Tailored plans for<span className="italic font-light">every stage</span>
             </h2>
           </div>
 
           <div className="lg:pt-4">
-            <p className="text-primary/70 text-base mb-6 leading-relaxed">
+            <p className="text-muted-foreground text-base mb-6 leading-relaxed">
             No matter where you are in your journey, find a plan that fits your goals and budget.
             </p>
 
@@ -52,8 +52,8 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
             <div className="relative inline-flex items-center bg-primary-foreground/70 rounded-full p-1.5 dark:!shadow-[inset_0_1.5px_0_color-mix(in_oklch,_var(--primary)_15%,_transparent)]">
               <button
                 onClick={() => setIsYearly(false)}
-                className={`relative z-10 text-primary px-4 py-2 rounded-full text-sm font-medium cursor-pointer ${
-                  !isYearly ? "text-primary border border-muted-foreground/10" : "text-primary/50 "
+                className={`relative z-10 text-foreground px-4 py-2 rounded-full text-sm font-medium cursor-pointer ${
+                  !isYearly ? "text-foreground border border-muted-foreground/10" : "text-muted-foreground "
                 }`}
                 aria-pressed={!isYearly}
               >
@@ -69,8 +69,8 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
               
               <button
                 onClick={() => setIsYearly(true)}
-                className={`relative z-10 text-primary px-4 py-2 rounded-full text-sm font-medium cursor-pointer ${
-                  isYearly ? "text-primary border border-muted-foreground/10" : "text-primary/50 "
+                className={`relative z-10 text-foreground px-4 py-2 rounded-full text-sm font-medium cursor-pointer ${
+                  isYearly ? "text-foreground border border-muted-foreground/10" : "text-muted-foreground "
                 }`}
                 aria-pressed={isYearly}
               >
@@ -99,7 +99,7 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
               {/* Most Popular Badge */}
               {plan.isFeatured && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-primary-foreground text-primary px-3 py-1 rounded-full text-xs font-medium ring-1 ring-muted-foreground/50 whitespace-nowrap">
+                  <div className="bg-primary-foreground text-foreground px-3 py-1 rounded-full text-xs font-medium ring-1 ring-muted-foreground/50 whitespace-nowrap">
                     Most popular
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
               {/* Title and Description */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-bold text-primary">{plan.title}</h3>
+                  <h3 className="text-xl font-bold text-foreground">{plan.title}</h3>
                   {isYearly && plan.monthlyPrice > 0 && plan.yearlyPrice < plan.monthlyPrice * 12 && (
                   <motion.div className=""
                     initial={{ opacity: 0, y: 10 }}
@@ -116,23 +116,23 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="inline-block bg-primary-foreground text-primary text-xs px-2 py-1 rounded-full shadow-sm shadow-muted-foreground/40 whitespace-nowrap">
+                    <span className="inline-block bg-primary-foreground text-foreground text-xs px-2 py-1 rounded-full shadow-sm shadow-muted-foreground/40 whitespace-nowrap">
                     Save {getDiscountPercent(plan)}%
                     </span>
                   </motion.div>
                 )}
                 </div>
-                <p className="text-sm text-primary/70">{plan.description}</p>
+                <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
 
               {/* Price */}
               <div className="mb-8">
                 <div className="flex items-baseline">
-                  <span className="text-base text-primary/70">$</span>
+                  <span className="text-base text-muted-foreground">$</span>
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                       key={isYearly ? "yearly-price" : "monthly-price"}
-                      className="text-5xl font-bold text-primary ml-1"
+                      className="text-5xl font-bold text-foreground ml-1"
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
@@ -144,7 +144,7 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                       key={isYearly ? "per-year" : "per-month"}
-                      className="text-sm text-primary/70 ml-2"
+                      className="text-sm text-muted-foreground ml-2"
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
@@ -172,14 +172,14 @@ export function PricingTableSix({  plans, onPlanSelect}: PricingTableSixProps) {
 
               {/* Features */}
               <div>
-                <h4 className="text-sm font-medium text-primary/70 mb-4">What's included:</h4>
+                <h4 className="text-sm font-medium text-muted-foreground mb-4">What's included:</h4>
                 <ul className="space-y-3">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <div className="flex-shrink-0 w-4 h-4 rounded-full bg-primary-foreground flex items-center justify-center mt-0.5 mr-3">
-                        <Check className="w-2.5 h-2.5 text-primary" />
+                        <Check className="w-2.5 h-2.5 text-foreground" />
                       </div>
-                      <span className="text-sm text-primary leading-relaxed">{feature}</span>
+                      <span className="text-sm text-foreground leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>

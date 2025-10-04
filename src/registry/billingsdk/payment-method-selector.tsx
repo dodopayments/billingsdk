@@ -3,11 +3,12 @@
 import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { X, CreditCard, QrCode, Wallet, Landmark } from "lucide-react"
+import { X, CreditCard, QrCode, Wallet, Landmark, ArrowRight } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Badge } from "@/components/ui/badge"
 
 type PaymentMethod = "cards" | "digital-wallets" | "upi" | "bnpl-services"
 
@@ -37,7 +38,7 @@ const paymentOptions: PaymentOption[] = [
     id: "cards",
     name: "Cards",
     description: "Visa, Mastercard, etc.",
-    icon: <CreditCard className="w-5 h-5" />,
+    icon: <CreditCard className="w-4 h-4 sm:w-5 sm:h-5" />,
     examples: ["Visa", "Mastercard", "American Express", "Discover"],
     details: "Secure card payments with fraud protection",
     features: ["Instant processing", "Worldwide acceptance", "Cashback rewards", "Purchase protection"],
@@ -45,8 +46,8 @@ const paymentOptions: PaymentOption[] = [
   {
     id: "digital-wallets",
     name: "Digital Wallets",
-    description: "Apple Pay, Cash App, etc.",
-    icon: <Wallet className="w-5 h-5" />,
+    description: "Apple Pay, Google Pay, etc.",
+    icon: <Wallet className="w-4 h-4 sm:w-5 sm:h-5" />,
     examples: ["Apple Pay", "Google Pay", "Cash App", "Venmo"],
     details: "Quick and secure mobile payments",
     features: ["Touch/Face ID security", "No card details shared", "Fast checkout", "Loyalty integration"],
@@ -54,17 +55,17 @@ const paymentOptions: PaymentOption[] = [
   {
     id: "upi",
     name: "UPI",
-    description: "Unified Payments Interface (India)",
-    icon: <QrCode className="w-5 h-5" />,
+    description: "Unified Payments Interface",
+    icon: <QrCode className="w-4 h-4 sm:w-5 sm:h-5" />,
     examples: ["PhonePe", "Google Pay", "Paytm", "BHIM"],
     details: "Real-time bank-to-bank transfers",
     features: ["24/7 availability", "No transaction fees", "QR code payments", "Bank account linking"],
   },
   {
     id: "bnpl-services",
-    name: "BNPL Services",
-    description: "Klarna, Affirm, and similar options",
-    icon: <Landmark className="w-5 h-5" />,
+    name: "Buy Now, Pay Later",
+    description: "Klarna, Affirm, Afterpay",
+    icon: <Landmark className="w-4 h-4 sm:w-5 sm:h-5" />,
     examples: ["Klarna", "Affirm", "Afterpay", "Sezzle"],
     details: "Buy now, pay later in installments",
     features: ["Split payments", "No interest options", "Flexible terms", "Credit building"],
@@ -76,7 +77,7 @@ export interface PaymentMethodSelectorProps {
   onProceed?: (method: PaymentMethod, data: FormData) => void
 }
 
-export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSelectorProps) {
+export function PaymentMethodSelector({ onProceed }: PaymentMethodSelectorProps) {
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod | null>(null)
   const [formData, setFormData] = useState<FormData>({})
 
@@ -105,45 +106,49 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
             className="space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <div className="col-span-2">
-                <Label htmlFor="cardNumber" className="text-xs font-medium">Card Number</Label>
+                <Label htmlFor="cardNumber" className="text-xs sm:text-sm font-medium text-foreground">Card Number</Label>
                 <Input
                   id="cardNumber"
                   type="text"
                   placeholder="1234 5678 9012 3456"
                   value={formData.cardNumber || ""}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("cardNumber", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
               <div>
-                <Label htmlFor="expiryDate" className="text-xs font-medium">Expiry Date</Label>
+                <Label htmlFor="expiryDate" className="text-xs sm:text-sm font-medium text-foreground">Expiry Date</Label>
                 <Input
                   id="expiryDate"
                   type="text"
                   placeholder="MM/YY"
                   value={formData.expiryDate || ""}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("expiryDate", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
               <div>
-                <Label htmlFor="cvv" className="text-xs font-medium">CVV</Label>
+                <Label htmlFor="cvv" className="text-xs sm:text-sm font-medium text-foreground">CVV</Label>
                 <Input
                   id="cvv"
                   type="text"
                   placeholder="123"
                   value={formData.cvv || ""}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("cvv", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
               <div className="col-span-2">
-                <Label htmlFor="cardholderName" className="text-xs font-medium">Cardholder Name</Label>
+                <Label htmlFor="cardholderName" className="text-xs sm:text-sm font-medium text-foreground">Cardholder Name</Label>
                 <Input
                   id="cardholderName"
                   type="text"
                   placeholder="John Doe"
                   value={formData.cardholderName || ""}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("cardholderName", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
                 />
               </div>
             </div>
@@ -159,28 +164,32 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
             className="space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div>
-              <Label htmlFor="email" className="text-xs font-medium">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="john@example.com"
-                value={formData.email || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("email", e.target.value)}
-              />
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-foreground">Email Address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={formData.email || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("email", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone" className="text-xs sm:text-sm font-medium text-foreground">Phone Number</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+1 (555) 123-4567"
+                  value={formData.phone || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("phone", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
+                />
+              </div>
             </div>
-            <div>
-              <Label htmlFor="phone" className="text-xs font-medium">Phone Number</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="+1 (555) 123-4567"
-                value={formData.phone || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("phone", e.target.value)}
-              />
-            </div>
-            <div className="p-3 bg-muted/50 rounded-lg border">
-              <p className="text-xs text-muted-foreground">
+            <div className="p-3 bg-muted/20 rounded-lg border border-border/30">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 You'll be redirected to your selected wallet app to complete the payment securely.
               </p>
             </div>
@@ -197,18 +206,19 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
             onClick={(e) => e.stopPropagation()}
           >
             <div>
-              <Label htmlFor="upiId" className="text-xs font-medium">UPI ID</Label>
+              <Label htmlFor="upiId" className="text-xs sm:text-sm font-medium text-foreground">UPI ID</Label>
               <Input
                 id="upiId"
                 type="text"
                 placeholder="yourname@paytm"
                 value={formData.upiId || ""}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("upiId", e.target.value)}
+                className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
               />
             </div>
-            <div className="p-3 bg-muted/50 rounded-lg border">
-              <p className="text-xs text-muted-foreground">
-                Enter your UPI ID to receive a payment request. You can complete the payment in your UPI app.
+            <div className="p-3 bg-muted/20 rounded-lg border border-border/30">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                Enter your UPI ID to receive a payment request. Complete the payment in your UPI app.
               </p>
             </div>
           </motion.div>
@@ -223,38 +233,46 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
             className="space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div>
-              <Label htmlFor="bnplEmail" className="text-xs font-medium">Email Address</Label>
-              <Input
-                id="bnplEmail"
-                type="email"
-                placeholder="john@example.com"
-                value={formData.email || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("email", e.target.value)}
-              />
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="bnplEmail" className="text-xs sm:text-sm font-medium text-foreground">Email Address</Label>
+                <Input
+                  id="bnplEmail"
+                  type="email"
+                  placeholder="john@example.com"
+                  value={formData.email || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("email", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
+                />
+              </div>
+              <div>
+                <Label htmlFor="bnplPhone" className="text-xs sm:text-sm font-medium text-foreground">Phone Number</Label>
+                <Input
+                  id="bnplPhone"
+                  type="tel"
+                  placeholder="+1 (555) 123-4567"
+                  value={formData.phone || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("phone", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
+                />
+              </div>
+              <div>
+                <Label htmlFor="income" className="text-xs sm:text-sm font-medium text-foreground">
+                  Annual Income 
+                  <Badge variant="secondary" className="text-[10px] px-1.5 py-0.5">Optional</Badge>
+                </Label>
+                <Input
+                  id="income"
+                  type="text"
+                  placeholder="$50,000"
+                  value={formData.income || ""}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("income", e.target.value)}
+                  className="mt-1.5 border-border/50 focus:border-primary/50 transition-colors"
+                />
+              </div>
             </div>
-            <div>
-              <Label htmlFor="bnplPhone" className="text-xs font-medium">Phone Number</Label>
-              <Input
-                id="bnplPhone"
-                type="tel"
-                placeholder="+1 (555) 123-4567"
-                value={formData.phone || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("phone", e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="income" className="text-xs font-medium">Annual Income (Optional)</Label>
-              <Input
-                id="income"
-                type="text"
-                placeholder="$50,000"
-                value={formData.income || ""}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange("income", e.target.value)}
-              />
-            </div>
-            <div className="p-3 bg-muted/50 rounded-lg border">
-              <p className="text-xs text-muted-foreground">
+            <div className="p-3 bg-muted/20 rounded-lg border border-border/30">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 You'll be redirected to complete a quick eligibility check and set up your payment plan.
               </p>
             </div>
@@ -267,167 +285,87 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
   }
 
   return (
-    <motion.div
-      className={"w-full max-w-md mx-auto ".concat(className || "")}
-      initial={{ scale: 0.96, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-    >
-      <Card className="backdrop-blur-sm shadow-2xl overflow-hidden">
-        <CardHeader>
-          <motion.div
-            initial={{ y: -8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            <CardTitle className="text-center text-xl">Payment Methods</CardTitle>
-          </motion.div>
-        </CardHeader>
-        <CardContent>
+    <Card className="max-w-lg mx-auto text-left overflow-hidden shadow-lg w-full">
+      <CardHeader className="px-4 sm:px-6 pb-2">
+        <CardTitle className="text-base font-semibold">
+          Payment Methods
+        </CardTitle>
+        <p className="text-sm text-muted-foreground">
+          Choose your preferred payment method to continue
+        </p>
+      </CardHeader>
 
-        <div className="space-y-2 relative">
-          <AnimatePresence>
-            {paymentOptions.map((option, index) => {
-              const isSelected = selectedMethod === option.id
-              const selectedIndex = paymentOptions.findIndex((p) => p.id === selectedMethod)
-              const isAboveSelected = selectedMethod && index < selectedIndex
-              const isBelowSelected = selectedMethod && index > selectedIndex
+      <CardContent className="px-4 sm:px-6 space-y-3">
+        <AnimatePresence mode="wait">
+          {paymentOptions.map((option) => {
+            const isSelected = selectedMethod === option.id
 
-              const shouldShow = !selectedMethod || isSelected
-
-              return (
-                <motion.div
-                  key={option.id}
-                  initial={{ x: -15, opacity: 0, scale: 0.97 }}
-                  animate={
-                    shouldShow
-                      ? { x: 0, opacity: 1, scale: 1, y: 0 }
-                      : {
-                          x: 0,
-                          opacity: 0,
-                          scale: 0.97,
-                          y: isAboveSelected ? -40 : isBelowSelected ? 40 : 0,
-                        }
-                  }
-                  exit={{
-                    opacity: 0,
-                    scale: 0.97,
-                    y: isAboveSelected ? -40 : isBelowSelected ? 40 : 0,
-                    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
-                  }}
-                  transition={{
-                    delay: shouldShow ? index * 0.06 : 0,
-                    duration: 0.5,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                  }}
-                  className="relative"
-                  style={{
-                    position: shouldShow ? "relative" : "absolute",
-                    width: shouldShow ? "auto" : "100%",
-                    zIndex: isSelected ? 10 : 1,
-                  }}
-                >
-                  <motion.div
-                    whileHover={
-                      !isSelected
-                        ? {
-                            scale: 1.005,
-                            y: -0.5,
-                            transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
-                          }
-                        : {}
-                    }
-                    whileTap={{ scale: 0.995, transition: { duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] } }}
+            return (
+              <motion.div
+                key={option.id}
+                onClick={() => handleMethodSelect(option.id)}
+                className={`p-4 rounded-lg border transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer ${
+                  isSelected
+                    ? "border-primary shadow-md"
+                    : "border-border hover:border-primary/50"
+                }`}
+              >
+                {isSelected && (
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleClose()
+                    }}
+                    className="absolute top-3 right-3 p-1.5 rounded-full bg-background/80 hover:bg-background border border-border/50 shadow-sm hover:shadow-md transition-all duration-200 z-20"
+                    initial={{ scale: 0, rotate: -45 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
+                    <X className="w-3 h-3 text-muted-foreground" />
+                  </motion.button>
+                )}
+
+                <div className="flex items-center space-x-4">
+                  <div className={`p-2.5 sm:p-3 rounded-lg border shadow-sm transition-all duration-300 ${
+                    isSelected 
+                      ? "bg-background border-primary/30" 
+                      : "bg-background border-border/50 hover:border-primary/30 hover:shadow-md"
+                  }`}>
+                    {option.icon}
+                  </div>
+                  <div className="flex-1 text-left">
+                    <h3 className={`font-medium transition-colors ${
+                      isSelected ? "text-primary" : "text-foreground hover:text-primary"
+                    }`}>
+                      {option.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {option.description}
+                    </p>
+                  </div>
+                </div>
+
+                <AnimatePresence>
+                  {isSelected && (
                     <motion.div
-                      role="button"
-                      tabIndex={0}
-                      onClick={() => handleMethodSelect(option.id)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          handleMethodSelect(option.id)
-                        }
-                      }}
-                      className={`w-full p-4 rounded-lg transition-all duration-300 group cursor-pointer hover:bg-muted/30 ${
-                        isSelected
-                          ? "bg-muted/10 shadow-lg shadow-black/5"
-                          : "hover:shadow-md"
-                      }`}
+                      initial={{ opacity: 0, height: 0, y: -10 }}
+                      animate={{ opacity: 1, height: "auto", y: 0 }}
+                      exit={{ opacity: 0, height: 0, y: -10 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="overflow-hidden"
                     >
-                        <div className="relative">
-                          {isSelected && (
-                            <motion.div
-                              role="button"
-                              tabIndex={0}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                handleClose()
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault()
-                                  e.stopPropagation()
-                                  handleClose()
-                                }
-                              }}
-                              className="absolute top-2 right-2 p-1 rounded-full bg-muted hover:bg-muted/80 transition-colors z-10"
-                              initial={{ scale: 0, rotate: -45 }}
-                              animate={{ scale: 1, rotate: 0 }}
-                              transition={{ delay: 0.15, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                              whileHover={{ scale: 1.03 }}
-                              whileTap={{ scale: 0.97 }}
-                            >
-                              <X className="w-4 h-4 text-muted-foreground" />
-                            </motion.div>
-                          )}
-
-                          <div className="flex items-center space-x-4">
-                            <motion.div
-                              className="p-3 rounded-lg bg-background border shadow-sm group-hover:shadow-md transition-all duration-300"
-                              whileHover={!isSelected ? { rotate: [0, -1, 1, 0], scale: 1.02 } : {}}
-                              transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                            >
-                              {option.icon}
-                            </motion.div>
-                            <div className="flex-1 text-left">
-                              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                                {option.name}
-                              </h3>
-                              <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors">
-                                {option.description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <AnimatePresence>
-                          {isSelected && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0, y: -10 }}
-                              animate={{ height: "auto", opacity: 1, y: 0 }}
-                              exit={{ height: 0, opacity: 0, y: -10 }}
-                              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                              className="overflow-hidden"
-                            >
-                              <motion.div
-                                initial={{ y: -8 }}
-                                animate={{ y: 0 }}
-                                transition={{ delay: 0.1, duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                                className="pt-4 mt-4"
-                              >
-                                <div className="space-y-4 text-left">{renderForm(option.id)}</div>
-                              </motion.div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                      <div className="mt-4">
+                        {renderForm(option.id)}
+                      </div>
                     </motion.div>
-                  </motion.div>
-                </motion.div>
-              )
-            })}
-          </AnimatePresence>
-        </div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
+        </AnimatePresence>
 
         <AnimatePresence>
           {!selectedMethod && (
@@ -436,12 +374,8 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 8, opacity: 0 }}
               transition={{ delay: 0.4, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              whileHover={{ scale: 1.005 }}
-              whileTap={{ scale: 0.995 }}
             >
-              <Button
-                className="w-full mt-6"
-              >
+              <Button disabled className="w-full mt-4">
                 <span>Select Payment Method</span>
                 <span>→</span>
               </Button>
@@ -453,24 +387,21 @@ export function PaymentMethodSelector({ className, onProceed }: PaymentMethodSel
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 8, opacity: 0 }}
               transition={{ delay: 0.4, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              whileHover={{ scale: 1.005 }}
-              whileTap={{ scale: 0.995 }}
             >
               <Button
-                className="w-full mt-6"
+                className="w-full mt-4"
                 onClick={() => {
                   if (onProceed) onProceed(selectedMethod, formData)
                 }}
               >
                 <span>Proceed with Payment</span>
-                <span>→</span>
+                <ArrowRight className="w-4 h-4" />
               </Button>
             </motion.div>
           )}
         </AnimatePresence>
-        </CardContent>
-      </Card>
-    </motion.div>
+      </CardContent>
+    </Card>
   )
 }
 

@@ -1,0 +1,278 @@
+---
+title: Payment Details Two
+description: A comprehensive payment details form component with card details, billing information, and country selection for secure payment processing.
+---
+
+
+
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-details-two">
+      <PaymentDetailsTwoDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/payment-details-two-demo.tsx"'>src/components/payment-details-two-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+Choose your preferred installation method:
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/payment-details-two
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/payment-details-two
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/payment-details-two
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add payment-details-two
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add payment-details-two
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add payment-details-two
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+
+
+## Usage
+
+### Basic Import
+
+```tsx
+import { PaymentDetailsTwo , type PaymentFormData} from "@/components/billingsdk/payment-details-two";
+```
+
+
+### Basic Implementation
+
+```tsx
+"use client"
+
+import { PaymentDetailsTwo , type PaymentFormData} from "@/components/billingsdk/payment-details-two";
+
+
+export function PaymentDetailsTwoDemo() {
+
+//Function that handles onSubmit in the Form
+const handleSubmit = async (_data: PaymentFormData) => {
+  // _data contains all the form values entered by the user:
+  // e.g., _data.cardNumber, _data.nameOnCard, _data.validTill, _data.cvv, _data.firstName, etc.
+  // You can use this object to make an API call to your backend, for example:
+  // await fetch('/api/payment', { method: 'POST', body: JSON.stringify(_data) })
+  
+  return await new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Handle Submit Function")
+      resolve('The promise is resolved')
+    }, 3000)
+  })
+}
+
+
+//Function that handles onCancel in the Form
+  const handleDiscard = ()=>{
+    console.log("The Discard Function")
+  }
+
+  return (
+    <PaymentDetailsTwo
+      onSubmit={handleSubmit}
+      onDiscard={handleDiscard}
+    />
+  )
+}
+```
+
+
+## Props
+
+The PaymentDetails component accepts the following props:
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `className` | `string` | ❌ | Additional CSS classes for styling |
+| `onSubmit` | `(data: PaymentFormData) => void \| Promise<void>` | ❌ | Callback when form is submitted |
+| `onDiscard` | `() => void` | ❌ | Callback when discard button is clicked |
+| `countries` | `{name: string, isoCode: string}[]` | ❌ | List of countries for dropdown |
+| `states` | `{name: string, isoCode: string}[]` | ❌ | List of states for dropdown |
+| `cities` | `{name: string}[]` | ❌ | List of cities for dropdown |
+
+
+
+## Pass custom countries, states and cities
+
+You can provide custom countries, states, and cities by passing them as arrays of objects in the following format:
+```tsx
+<PaymentDetailsTwo
+  onSubmit={handleSubmit}
+  onDiscard={handleDiscard}
+  countries={[
+  { name: "India", isoCode: "IN" },
+  { name: "United States", isoCode: "US" },
+  { name: "United Kingdom", isoCode: "GB" },
+  { name: "Canada", isoCode: "CA" },
+  { name: "Australia", isoCode: "AU" },
+  ]}
+  states={[
+    { name: "Bihar", isoCode: "BR" },
+    { name: "Karnataka", isoCode: "KA" },
+    { name: "Maharashtra", isoCode: "MH" },
+  ]}
+  cities={[
+    { name: "Patna", },
+    { name: "Bangalore",},
+    { name: "Mumbai",},
+  ]}
+/>
+```
+**Important**: If you choose to override with custom data, you must provide all three props (countries, states, and cities) together to ensure the dropdowns work correctly. If not provided, the component will fall back to the default data from country-state-city.
+
+
+
+## PaymentFormData Interface
+
+The form data structure for the PaymentDetails component:
+
+```ts
+interface PaymentFormData {
+  nameOnCard?: string;
+  cardNumber?: string;
+  validTill?: string;
+  cvv?: string;
+  firstName?: string;
+  middleLastName?: string;
+  country?: string;
+  state?: string;
+  city?: string;
+  billingAddress?: string;
+  pinCode?: string;
+  contactNumber?: string;
+  general? : string
+
+}
+```
+
+
+## Features
+
+The PaymentDetails component comes with a comprehensive set of features:
+
+### Core Functionality
+- **Card Type Detection**: Automatically detects and displays card type (Visa, Mastercard, Amex, RuPay, Diners)
+- **Input Formatting**: Automatically formats card numbers, expiry dates, and other fields
+- **Validation**: Built-in form validation with error messages
+- **Country Selection**: Dropdown for country selection with customizable options
+
+### Design & UX
+- **Responsive Design**: Mobile-friendly layout with responsive grid
+- **Dark Mode Support**: Full dark mode compatibility with theme-aware styling
+- **Hover Animations**: Smooth hover effects and transitions for better UX
+- **Accessibility**: Proper labels, ARIA attributes, and keyboard navigation
+
+### Customization
+- **Customizable**: Extensive props for customization and theming
+- **Confirmation Modal**: Optional success confirmation with customizable messages
+
+## Supported Card Types
+
+The component automatically detects and displays the appropriate card type:
+
+| Card Type | Pattern | Description |
+|-----------|---------|-------------|
+| **Visa** | Starting with 4 | Most common international card |
+| **Mastercard** | Starting with 5 or 2 | Global payment network |
+| **American Express** | Starting with 34 or 37 | Premium card with unique format |
+| **RuPay** | Starting with 6 | Indian domestic payment system |
+| **Diners Club** | Starting with 30, 36, or 38 | International charge card |
+
+## Validation Rules
+
+The component includes comprehensive client-side validation:
+
+### Field Requirements
+- **Card Number**: Maximum 16 digits
+- **Expiry Date**: MM/YY format (e.g., 12/25)
+- **CVV**: 3-4 digits depending on card type
+- **PIN Code**: Exactly 6 digits
+- **Contact Number**: Exactly 10 digits
+
+### Required vs Optional Fields
+- **Required**: All fields except country, state, and city
+- **Optional**: Country, state, and city selections
+
+## Theming & Customization
+
+The PaymentDetails component supports comprehensive theming and customization options.
+
+### Dark Mode Support
+
+The component automatically adapts to dark mode using theme-aware CSS classes:
+
+- **Background**: Uses `bg-background` and `bg-card` for proper dark mode support
+- **Text Colors**: Uses `text-foreground` and `text-muted-foreground` for theme-aware text
+- **Borders**: Uses `border-border` for consistent theming
+- **Focus States**: Uses `focus:ring-ring` for theme-aware focus indicators
+- **Error States**: Uses `text-destructive` and `border-destructive` for consistent error styling
+
+### Theme Integration
+
+The component integrates seamlessly with the BillingSDK theme system:
+
+```tsx
+import { useTheme } from '@/contexts/theme-context'
+import { getThemeStyles } from '@/lib/themes'
+
+// The component automatically applies theme styles
+<PaymentDetails 
+  // Theme styles are applied automatically
+  // ... other props
+/>
+```
+
+### Custom Styling
+
+You can customize the appearance by passing custom className:
+
+```tsx
+<PaymentDetails 
+  className="max-w-2xl mx-auto" 
+  // ... other props
+/>
+```
+
+## Example Implementation
+
+Here's a complete example of how to implement the PaymentDetails component:
+
+<include cwd lang="tsx" meta='title="src/components/payment-details-two-demo.tsx"'>src/components/payment-details-two-demo.tsx</include>

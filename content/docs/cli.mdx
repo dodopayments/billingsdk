@@ -54,10 +54,10 @@ npx @billingsdk/cli add <component-name>
 
 | Framework  | Dodo Payments | Stripe        |
 |------------|---------------|---------------|
-| Next.js    | Yes           | Coming soon   |
+| Next.js    | Yes           | Yes           |
 | Express.js | Yes           | Yes           |
 | Hono       | Yes           | Yes           |
-| React      | Yes           | Coming soon   |
+| React      | Yes           | Yes           |
 | Fastify    | Yes           | Coming soon   |
 
 ## Supported Payment Providers
@@ -67,9 +67,9 @@ npx @billingsdk/cli add <component-name>
 - 📚 **Integration**: Next.js, Express.js, React.js, Hono, Fastify
 
 ### Stripe
-- ✅ **Status**: Supported for Express.js and Hono
-- 📚 **Integration**: Express.js, Hono
-- 🚧 **Adding Soon**: Next.js, React.js, Fastify
+- ✅ **Status**: Supported for Next.js, React.js, Express.js, and Hono
+- 📚 **Integration**: Next.js, React.js, Express.js, Hono
+- 🚧 **Adding Soon**: Fastify
 
 ## `@billingsdk/cli init`
 
@@ -105,7 +105,7 @@ You'll be prompted to select:
 
 After running `init` with Dodo Payments, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Hono + Dodo Payments', 'Fastify + Dodo Payments', "Nextjs+ Stripe", "Express + Stripe"]}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Hono + Dodo Payments', 'Fastify + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -128,83 +128,63 @@ After running `init` with Dodo Payments, you'll get:
   <Tab value="Express.js + Dodo Payments">
     ```
     your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── dodopayments.ts
-    │   └── routes/
-    │       └── dodopayments/
-    │           ├── route.ts
-    │           ├── checkout.ts
-    │           ├── customer.ts
-    │           ├── payments.ts
-    │           ├── products.ts
-    │           ├── subscriptions.ts
-    │           └── webhook.ts
-    └── .env.example
+    ├── lib/
+    │   └── dodopayments.ts
+    └── routes/
+        └── dodopayments/
+            ├── route.ts
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
     ```
   </Tab>
   <Tab value="React.js + Dodo Payments">
     ```
     your-project/
-    ├── src/
-    │   ├── hooks/
-    │   │   └── useBilling.ts
-    │   └── lib/
-    │       └── dodopayments.ts
-    └── .env.example
+    ├── hooks/
+    │   └── dodopayments/
+    │       └── useBilling.ts
+    ├── lib/
+    │   └── dodopayments.ts
+    .env.example
     ```
   </Tab>
   <Tab value="Hono + Dodo Payments">
     ```
     your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── dodopayments.ts
-    │   └── routes/
-    │       ├── route.ts
-    │       └── dodopayments/
-    │           ├── checkout.ts
-    │           ├── customer.ts
-    │           ├── payments.ts
-    │           ├── products.ts
-    │           ├── subscriptions.ts
-    │           └── webhook.ts
-    └── .env.example
+    ├── lib/
+    │   └── dodopayments.ts
+    └── routes/
+        ├── route.ts
+        └── dodopayments/
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
     ```
   </Tab>
   <Tab value="Fastify + Dodo Payments">
     ```
     your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── dodopayments.ts
-    │   └── routes/
-    │       └── dodopayments/
-    │           ├── route.ts
-    │           ├── checkout.ts
-    │           ├── customer.ts
-    │           ├── payments.ts
-    │           ├── products.ts
-    │           ├── subscriptions.ts
-    │           └── webhook.ts
-    └── .env.example
-    ```
-  </Tab>
-  <Tab value="Nextjs + Stripe">
-    ```
-    your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── stripe.ts
-    │   └── api-routes/
-    │       └── (stripe)/
-    │           ├── checkout
-    │           ├── customer
-    │           ├── payments
-    │           ├── products
-    │           ├── subscriptions
-    │           └── webhook
-    └── .env.example
+    ├── lib/
+    │   └── dodopayments.ts
+    └── routes/
+        └── dodopayments/
+            ├── route.ts
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
     ```
   </Tab>
 </Tabs>
@@ -213,41 +193,68 @@ After running `init` with Dodo Payments, you'll get:
 
 After running `init` with Stripe, you'll get:
 
-<Tabs items={['Express.js + Stripe', 'Hono + Stripe']}>
+<Tabs items={['Next.js + Stripe', 'React.js + Stripe', 'Express.js + Stripe', 'Hono + Stripe']}>
+  <Tab value="Next.js + Stripe">
+    ```
+    your-project/
+    ├── app/api/
+    │   └── (stripe)/
+    │       ├── checkout
+    │       ├── customer
+    │       ├── payments
+    │       ├── products
+    │       ├── subscriptions
+    │       └── webhook
+    ├── hooks/
+    │   └── useBilling.ts
+    ├── lib/
+    │   └── stripe.ts
+    .env.example
+    ```
+  </Tab>
+  <Tab value="React.js + Stripe">
+    ```
+    your-project/
+    ├── hooks/
+    │   └── stripe/
+    │       └── useBilling.ts
+    ├── lib/
+    │   └── stripe.ts
+    .env.example
+    ```
+  </Tab>
   <Tab value="Express.js + Stripe">
     ```
     your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── stripe.ts
-    │   └── routes/
-    │       └── stripe/
-    │           ├── route.ts
-    │           ├── checkout.ts
-    │           ├── customer.ts
-    │           ├── payments.ts
-    │           ├── products.ts
-    │           ├── subscriptions.ts
-    │           └── webhook.ts
-    └── .env.example
+    ├── lib/
+    │   └── stripe.ts
+    └── routes/
+        └── stripe/
+            ├── route.ts
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
     ```
   </Tab>
   <Tab value="Hono + Stripe">
     ```
     your-project/
-    ├── src/
-    │   ├── lib/
-    │   │   └── stripe.ts
-    │   └── routes/
-    │       ├── route.ts
-    │       └── stripe/
-    │           ├── checkout.ts
-    │           ├── customer.ts
-    │           ├── payments.ts
-    │           ├── products.ts
-    │           ├── subscriptions.ts
-    │           └── webhook.ts
-    └── .env.example
+    ├── lib/
+    │   └── stripe.ts
+    └── routes/
+        ├── route.ts
+        └── stripe/
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
     ```
   </Tab>
 </Tabs>

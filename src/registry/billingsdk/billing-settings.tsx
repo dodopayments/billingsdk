@@ -66,24 +66,21 @@ function SettingItem({ title, description, checked, onCheckedChange }: SettingIt
   const switchId = `switch-${title.toLowerCase().replace(/\s+/g, '-')}`;
   
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start py-4 gap-3 sm:gap-4 w-full">
-      <div className="space-y-1 min-w-0">
-        <h3 id={switchId} className="font-medium text-foreground break-words hyphens-auto">
+    <div className="flex items-center justify-between py-4 gap-4">
+      <div className="space-y-0.5 flex-1 min-w-0">
+        <label htmlFor={switchId} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
           {title}
-        </h3>
-        <p className="text-sm text-muted-foreground break-words hyphens-auto">
+        </label>
+        <p className="text-sm text-muted-foreground">
           {description}
         </p>
       </div>
-      <div className="sm:justify-self-end">
-        <Switch 
-          id={switchId}
-          checked={checked}
-          onCheckedChange={onCheckedChange}
-          className="flex-shrink-0"
-          aria-labelledby={`${switchId}-label`}
-        />
-      </div>
+      <Switch 
+        id={switchId}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
+        className="shrink-0"
+      />
     </div>
   )
 }
@@ -95,17 +92,15 @@ interface TabNavigationProps {
 
 function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="grid grid-cols-4 sm:flex sm:flex-wrap gap-0.5 sm:gap-1 rounded-lg bg-muted p-0.5 sm:p-1">
+    <div className="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-full gap-1">
       {tabs.map((tab) => (
         <button
           key={tab.id}
-          onClick={() => {
-            onTabChange(tab.id)
-          }}
-          className={`w-full sm:flex-1 min-w-0 rounded-md px-1 py-2 sm:px-3 sm:py-2 text-[10px] sm:text-sm leading-tight tracking-tighter font-medium transition-colors cursor-pointer inline-flex items-center justify-center ${
+          onClick={() => onTabChange(tab.id)}
+          className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex-1 ${
             activeTab === tab.id
-              ? "bg-background text-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+              ? "bg-background text-foreground shadow"
+              : "hover:bg-background/50 hover:text-foreground"
           }`}
         >
           {tab.label}
@@ -161,39 +156,38 @@ export function BillingSettings({
   const renderPaymentContent = () => (
     <div className="space-y-4">
       {cards.map((card) => (
-        <div key={card.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
-          <div className="flex items-center space-x-2 sm:space-x-3 min-w-0 flex-1">
-            <CreditCard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground flex-shrink-0" />
+        <div key={card.id} className="flex flex-col sm:flex-row sm:items-center justify-between rounded-lg border p-3 sm:p-4 gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <CreditCard className="h-5 w-5 text-muted-foreground shrink-0" />
             <div className="min-w-0 flex-1">
-              <div className="flex items-center space-x-2">
-                <span className="font-mono text-xs sm:text-sm truncate">•••• •••• •••• {card.last4}</span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-mono text-sm">•••• {card.last4}</span>
+                {card.primary && <Badge variant="secondary">Primary</Badge>}
               </div>
-              <p className="text-xs sm:text-sm text-muted-foreground truncate">
+              <p className="text-sm text-muted-foreground">
                 {card.brand} • Expires {card.expiry}
               </p>
             </div>
           </div>
-          {card.primary && <Badge variant="secondary" className="flex-shrink-0 text-xs self-start sm:self-auto">Primary</Badge>}
         </div>
       ))}
-      <Button variant="outline" className="w-full bg-transparent" onClick={onAddCard}>
+      <Button variant="outline" className="w-full" onClick={onAddCard}>
         <Plus className="mr-2 h-4 w-4" />
-        <span className="hidden sm:inline">Add new card</span>
-        <span className="sm:hidden">Add card</span>
+        Add new card
       </Button>
     </div>
   )
 
   const renderInvoicesContent = () => (
-    <div className="space-y-4 sm:space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-        <div className="space-y-1 min-w-0 flex-1">
-          <h3 className="font-medium text-foreground">Invoice format</h3>
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="space-y-0.5 flex-1">
+          <h3 className="text-sm font-medium">Invoice format</h3>
           <p className="text-sm text-muted-foreground">Choose PDF or HTML format</p>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="w-full sm:w-20 bg-transparent">
+            <Button variant="outline" size="sm" className="w-full sm:w-auto">
               {invoiceFormat}
               <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
@@ -204,12 +198,12 @@ export function BillingSettings({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-        <div className="space-y-1 min-w-0 flex-1">
-          <h3 className="font-medium text-foreground">Billing address</h3>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="space-y-0.5 flex-1">
+          <h3 className="text-sm font-medium">Billing address</h3>
           <p className="text-sm text-muted-foreground">Update your billing address</p>
         </div>
-        <Button variant="outline" onClick={onEditBillingAddress} className="w-full sm:w-auto">
+        <Button variant="outline" size="sm" className="w-full sm:w-auto" onClick={onEditBillingAddress}>
           Edit
         </Button>
       </div>
@@ -249,16 +243,16 @@ export function BillingSettings({
   }
 
   return (
-    <Card className={`mx-auto w-full max-w-2xl ${className || ''}`}>
-      <CardHeader className="space-y-4 px-4 sm:px-6">
-        <CardTitle className="text-lg sm:text-xl">Billing settings</CardTitle>
-        <TabNavigation activeTab={activeTab} onTabChange={onTabChange} />
-      </CardHeader>
-      <CardContent className="px-4 sm:px-6">
-        <div className="w-full">
+    <div className={`w-full px-4 sm:px-0 ${className || ''}`}>
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardHeader className="px-4 sm:px-6">
+          <CardTitle>Billing Settings</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6 px-4 sm:px-6">
+          <TabNavigation activeTab={activeTab} onTabChange={onTabChange} />
           {renderTabContent()}
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   )
 }

@@ -1,7 +1,9 @@
 ---
 title: Pricing Table Four
-description: The Pricing Table Four component provides a modern gradient design for displaying pricing plans. This component features beautiful gradients, smooth animations, and a contemporary card-based layout.
+description: The Pricing Table Four component provides a modern icon-based design for displaying pricing plans. This component features clean layouts, smooth animations, and support for both minimal and classic themes.
 ---
+
+## Classic Theme
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
   <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
@@ -12,6 +14,21 @@ description: The Pricing Table Four component provides a modern gradient design 
 
   <Tab value="Code" className="mt-3">
     <include cwd lang="tsx" meta='title="src/components/pricing-table-four-demo.tsx"'>src/components/pricing-table-four-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Minimal Theme
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="pricing-table-four">
+      <PricingTableFourMinimalDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/pricing-table-four-minimal-demo.tsx"'>src/components/pricing-table-four-minimal-demo.tsx</include>
   </Tab>
 </Tabs>
 
@@ -73,13 +90,17 @@ description: The Pricing Table Four component provides a modern gradient design 
 ```tsx
 import { PricingTableFour } from "@/components/billingsdk/pricing-table-four";
 import { plans } from "@/lib/billingsdk-config";
+```
 
+```tsx
 <PricingTableFour 
   plans={plans}
-  title="Choose Your Plan"
-  description="Select the perfect plan for your needs. Upgrade or downgrade anytime."
+  title="Choose Your Perfect Plan"
+  description="Transform your project with our comprehensive pricing options designed for every need."
+  subtitle="Simple Pricing"
   onPlanSelect={(planId) => console.log('Selected plan:', planId)}
-  size="medium"
+  size="medium" // small, medium, large
+  theme="classic" // minimal or classic
 />
 ```
 
@@ -90,16 +111,23 @@ import { plans } from "@/lib/billingsdk-config";
 | `plans` | `Plan[]` | Array of pricing plans (see [Plan interface](/docs/interfaces#plan-interface)) |
 | `title` | `string` | Main title for the pricing section |
 | `description` | `string` | Subtitle description |
+| `subtitle` | `string` | Optional subtitle text (displayed above title) |
 | `onPlanSelect` | `(planId: string) => void` | Callback when a plan is selected |
 | `size` | `"small" \| "medium" \|  "large"` | Size variant of the pricing table |
+| `theme` | `"minimal" \| "classic"` | Theme variant of the pricing table |
+| `showBillingToggle` | `boolean` | Show/hide the monthly/yearly toggle (default: true) |
+| `billingToggleLabels` | `{ monthly: string; yearly: string }` | Custom labels for billing toggle |
 
 ## Features
 
+- **Dual Theme Support**: Choose between minimal and classic themes
+- **Icon-Based Design**: Each plan includes customizable icons for visual distinction
 - **Responsive Layout**: Grid-based layout that adapts to different screen sizes
 - **Interactive Elements**: Hover effects and smooth transitions
 - **Billing Toggle**: Monthly/yearly billing toggle with discount display
-- **Highlight Support**: Special styling for featured/popular plans
+- **Highlight Support**: Special styling for featured/popular plans with badges
 - **Customizable Sizing**: Small, medium, and large size variants
+- **Smooth Animations**: Animated price transitions and feature list reveals
 
 ## Theming
 
@@ -107,6 +135,3 @@ The pricing table component is styled using the `shadcn/ui` library. You can cus
 
 ## Example
 <include cwd lang="tsx" meta='title="src/components/pricing-table-four-demo.tsx"'>src/components/pricing-table-four-demo.tsx</include>
-
-### Credits
-- Created by [@KissuChaudhary](https://github.com/KissuChaudhary)

@@ -29,7 +29,7 @@ export const addCommand = new Command()
         process.exit(1);
       }
 
-      const templateRegistry = `@billingsdk/${component}.json`;
+      const templateRegistry = `@billingsdk/${component}`;
       const runner = getPackageManagerRunner();
       execSync(`${runner} shadcn@latest add ${templateRegistry}`, { stdio: "inherit" });
     } catch {

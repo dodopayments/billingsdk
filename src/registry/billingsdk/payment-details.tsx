@@ -5,7 +5,7 @@ import { Calendar, Shield, Check, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/contexts/theme-context"
 import { getThemeStyles } from "@/lib/themes"
-
+import {Country, State, City, IState, ICity} from 'country-state-city'
 /**
  * Detects the card type based on the card number
  * @param cardNumber - The card number to analyze
@@ -276,12 +276,6 @@ export interface PaymentFormProps {
   confirmationMessage?: string
   /** Callback when confirmation is closed */
   onConfirmationClose?: () => void
-  /** List of countries for dropdown */
-  countries?: string[]
-  /** List of states for dropdown */
-  states?: string[]
-  /** List of cities for dropdown */
-  cities?: string[]
 }
 
 /**
@@ -314,12 +308,15 @@ export function PaymentDetails({
   confirmationTitle = "Payment Details Saved!",
   confirmationMessage = "Your payment information has been securely saved and updated.",
   onConfirmationClose,
-  countries = ["India", "United States", "United Kingdom", "Canada", "Australia"],
-  states = ["Bihar", "Karnataka", "Maharashtra"],
-  cities = ["Patna", "Bangalore", "Mumbai"],
 }: PaymentFormProps) {
   const { currentTheme, previewDarkMode } = useTheme()
   const themeStyles = getThemeStyles(currentTheme, previewDarkMode)
+  const [selectedCountryCode, setSelectedCountryCode] = useState("")
+  const [selectedStateCode, setSelectedStateCode] = useState("")
+  const [availableStates, setAvailableStates] = useState<IState[]>([])
+  const [availableCities, setAvailableCities] = useState<ICity[]>([])
+
+  const allCountries = Country.getAllCountries()
   
   // Initialize with empty strings, allowing initialData to override if provided
   const [formData, setFormData] = useState<PaymentFormData>({
@@ -345,14 +342,12 @@ export function PaymentDetails({
   const handleInputChange = (field: keyof PaymentFormData, value: string) => {
     let formattedValue = value
 
-    // Type guard function to check if a field is a specific key
     const isField = <K extends keyof PaymentFormData>(f: keyof PaymentFormData, k: K): f is K => f === k
 
     if (isField(field, "cardNumber")) {
       formattedValue = formatCardNumber(value)
       setCardType(detectCardType(formattedValue))
     } else if (isField(field, "cvv")) {
-      // Limit CVV length based on card type
       const maxLength = cardType === "amex" ? 4 : 3
       formattedValue = value.slice(0, maxLength)
     } else if (isField(field, "validTill")) {
@@ -363,9 +358,34 @@ export function PaymentDetails({
       formattedValue = value.replace(/\D/g, "").substring(0, 10)
     }
 
+    // Handle country change - load states and reset state/city
+    if (isField(field, "country")) {
+      const selectedCountry = allCountries.find(c => c.name === value)
+      if (selectedCountry) {
+        setSelectedCountryCode(selectedCountry.isoCode)
+        const states = State.getStatesOfCountry(selectedCountry.isoCode)
+        setAvailableStates(states)
+        setAvailableCities([])
+        setFormData(prev => ({ ...prev, country: value, state: "", city: "" }))
+        setSelectedStateCode("")
+      }
+      return
+    }
+
+    // Handle state change - load cities and reset city
+    if (isField(field, "state")) {
+      const selectedState = availableStates.find(s => s.name === value)
+      if (selectedState) {
+        setSelectedStateCode(selectedState.isoCode)
+        const cities = City.getCitiesOfState(selectedCountryCode, selectedState.isoCode)
+        setAvailableCities(cities)
+        setFormData(prev => ({ ...prev, state: value, city: "" }))
+      }
+      return
+    }
+
     setFormData((prev) => ({ ...prev, [field]: formattedValue }))
 
-    // Clear error when user starts typing
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
@@ -541,9 +561,10 @@ export function PaymentDetails({
                   onChange={(e) => handleInputChange("country", e.target.value)}
                   className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
                 >
-                  {countries.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
+                  <option value="">Country</option>
+                  {allCountries.map((country) => (
+                    <option key={country.isoCode} value={country.name}>
+                      {country.name}
                     </option>
                   ))}
                 </select>
@@ -553,11 +574,13 @@ export function PaymentDetails({
                 <select
                   value={formData.state || ""}
                   onChange={(e) => handleInputChange("state", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                  disabled={!selectedCountryCode || availableStates.length === 0}
+                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {states.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
+                  <option value="">State</option>
+                  {availableStates.map((state) => (
+                    <option key={state.isoCode} value={state.name}>
+                      {state.name}
                     </option>
                   ))}
                 </select>
@@ -567,11 +590,13 @@ export function PaymentDetails({
                 <select
                   value={formData.city || ""}
                   onChange={(e) => handleInputChange("city", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                  disabled={!selectedStateCode || availableCities.length === 0}
+                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {cities.map((city) => (
-                    <option key={city} value={city}>
-                      {city}
+                  <option value="">City</option>
+                  {availableCities.map((city) => (
+                    <option key={city.name} value={city.name}>
+                      {city.name}
                     </option>
                   ))}
                 </select>
