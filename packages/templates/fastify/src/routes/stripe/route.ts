@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { FastifyInstance } from 'fastify'
 import checkoutRoutes from './checkout'
 import customerRoutes from './customer'

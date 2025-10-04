@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type Stripe from 'stripe'

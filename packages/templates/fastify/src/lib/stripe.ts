@@ -113,13 +113,18 @@ export async function checkout(opts: {
 }): Promise<{ checkout_url: string }> {
   try {
     const stripe = getStripe();
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: 'subscription',
       line_items: [{ price: opts.price_id, quantity: 1 }],
-      customer: opts.customer_id ?? '',
       success_url: opts.success_url,
       cancel_url: opts.cancel_url,
-    });
+    };
+    
+    if (opts.customer_id) {
+      sessionParams.customer = opts.customer_id;
+    }
+    
+    const session = await stripe.checkout.sessions.create(sessionParams);
     return { checkout_url: session.url! };
   } catch (error) {
     console.error('Error creating checkout session', error);

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
 import type Stripe from 'stripe'
@@ -94,9 +93,21 @@ export default async function customerRoutes(fastify: FastifyInstance) {
         return reply.status(400).send({ error: 'customer_id is required' })
       }
 
+      // Validate limit parameter
+      let limitValue = 10; // default
+      if (typeof limit === 'string') {
+        const parsed = parseInt(limit);
+        if (isNaN(parsed) || !Number.isInteger(parsed) || parsed < 1 || parsed > 100) {
+          return reply.status(400).send({ 
+            error: 'Invalid limit parameter. Must be an integer between 1 and 100.' 
+          });
+        }
+        limitValue = parsed;
+      }
+
       const params: Stripe.SubscriptionListParams = {
         customer: customer_id,
-        limit: typeof limit === 'string' ? parseInt(limit) : 10,
+        limit: limitValue,
       }
       
       if (typeof starting_after === 'string') {
@@ -119,9 +130,21 @@ export default async function customerRoutes(fastify: FastifyInstance) {
         return reply.status(400).send({ error: 'customer_id is required' })
       }
 
+      // Validate limit parameter
+      let limitValue = 10; // default
+      if (typeof limit === 'string') {
+        const parsed = parseInt(limit);
+        if (isNaN(parsed) || !Number.isInteger(parsed) || parsed < 1 || parsed > 100) {
+          return reply.status(400).send({ 
+            error: 'Invalid limit parameter. Must be an integer between 1 and 100.' 
+          });
+        }
+        limitValue = parsed;
+      }
+
       const params: Stripe.PaymentIntentListParams = {
         customer: customer_id,
-        limit: typeof limit === 'string' ? parseInt(limit) : 10,
+        limit: limitValue,
       }
       
       if (typeof starting_after === 'string') {
