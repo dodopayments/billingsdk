@@ -8,39 +8,30 @@ const stripe = getStripe();
 
 export default async function checkoutRoutes(fastify: FastifyInstance) {
   const productCartItemSchema = z.object({
-    product_id: z.string().min(1, 'Product ID is required'),
-    quantity: z.number().int().min(1, 'Quantity must be at least 1'),
-    amount: z.number().int().min(0).optional(),
-  })
+    price_id: z.string().min(1, "Price ID is required"),
+    quantity: z.number().int().min(1, "Quantity must be at least 1"),
+  });
 
   const attachExistingCustomerSchema = z.object({
-    customer_id: z.string().min(1, 'Customer ID is required'),
-  })
+    customer_id: z.string().min(1, "Customer ID is required"),
+  });
 
   const newCustomerSchema = z.object({
-    email: z.string().email('Invalid email format'),
-    name: z.string().min(1, 'Name is required'),
+    email: z.string().email("Invalid email format"),
+    name: z.string().min(1, "Name is required"),
     phone_number: z.string().optional().nullable(),
     create_new_customer: z.boolean().optional(),
-  })
+  });
 
-  const customerSchema = z.union([attachExistingCustomerSchema, newCustomerSchema])
-
-  const billingAddressSchema = z.object({
-    city: z.string().min(1, 'City is required'),
-    country: z.string().regex(/^[A-Z]{2}$/, 'Country must be a 2-letter uppercase ISO code'),
-    state: z.string().min(1, 'State is required'),
-    street: z.string().min(1, 'Street address is required'),
-    zipcode: z.string().min(1, 'Zipcode is required'),
-  })
+  const customerSchema = z.union([attachExistingCustomerSchema, newCustomerSchema]);
 
   const checkoutSessionSchema = z.object({
-    productCart: z.array(productCartItemSchema).min(1, 'At least one product is required'),
-    customer: customerSchema,
-    billing_address: billingAddressSchema,
-    return_url: z.string().url('Return URL must be a valid URL'),
-    customMetadata: z.record(z.string(), z.string()).optional(),
-  })
+    productCart: z.array(productCartItemSchema).min(1, "At least one product is required"),
+    customer: customerSchema.optional(),
+    success_url: z.string().url("Success URL must be a valid URL"),
+    cancel_url: z.string().url("Cancel URL must be a valid URL"),
+    metadata: z.record(z.string(), z.string()).optional(),
+  });
 
   fastify.post('/', async (request, reply) => {
     try {
@@ -69,7 +60,6 @@ export default async function checkoutRoutes(fastify: FastifyInstance) {
         customerId = customer.customer_id;
       }
 
-
       const sessionParams: Stripe.Checkout.SessionCreateParams = {
         payment_method_types: ["card"],
         line_items: productCart.map(item => ({
@@ -82,7 +72,6 @@ export default async function checkoutRoutes(fastify: FastifyInstance) {
 
         ...(metadata ? { metadata } : {}),
       };
-
 
       if (customerId) {
         sessionParams.customer = customerId;

@@ -7,7 +7,7 @@ import productsRoutes from './products'
 import subscriptionsRoutes from './subscriptions'
 import webhookRoutes from './webhook'
 
-export default async function dodopaymentsRoutes(fastify: FastifyInstance) {
+export default async function stripeRoutes(fastify: FastifyInstance) {
   await fastify.register(checkoutRoutes, { prefix: '/checkout' })
   await fastify.register(customerRoutes, { prefix: '/customer' })
   await fastify.register(paymentsRoutes, { prefix: '/payments' })

@@ -44,6 +44,7 @@
     "clsx": "^2.1.1",
     "country-state-city": "^3.2.1",
     "dodopayments": "^1.51.2",
+    "fastify": "^5.6.1",
     "framer-motion": "^12.23.22",
     "fumadocs-core": "15.6.10",
     "fumadocs-mdx": "11.7.5",
@@ -64,6 +65,7 @@
     "remark-rehype": "^11.1.2",
     "sonner": "^2.0.7",
     "standardwebhooks": "^1.0.0",
+    "stripe": "^19.0.0",
     "tailwind-merge": "^3.3.1",
     "zod": "^3.25.76"
   },
