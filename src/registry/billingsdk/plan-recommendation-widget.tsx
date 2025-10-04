@@ -187,7 +187,7 @@ export function PlanRecommendationWidget({
             <div className="mt-0.5 p-2 rounded-lg bg-primary/10">
               <Zap className="h-4 w-4 text-primary" />
             </div>
-            <div className="space-y-2 flex-1">
+            <div className="space-y-3 flex-1">
               <div>
                 <h3 className="font-bold text-foreground">Pro Plan Recommended</h3>
                 <p className="text-sm text-muted-foreground mt-1">
@@ -197,6 +197,24 @@ export function PlanRecommendationWidget({
               <div className="flex items-center gap-2">
                 <span className="text-lg font-bold text-primary">${proPlan?.monthlyPrice}</span>
                 <span className="text-sm text-muted-foreground">/month</span>
+              </div>
+              <div className="flex gap-2 pt-1">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-8 text-xs"
+                  onClick={onLearnMore}
+                >
+                  Learn More
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-8 text-xs"
+                  onClick={onComparePlans}
+                >
+                  Compare Plans
+                </Button>
               </div>
             </div>
           </div>
