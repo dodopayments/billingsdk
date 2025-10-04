@@ -1,6 +1,6 @@
 ---
 title: Plan Recommendation Widget
-description: Adaptive component that helps users select the most suitable subscription plan based on usage data and team size.
+description: Modern SaaS dashboard widget with clean design and clear upgrade CTAs.
 ---
 
 <Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
@@ -85,25 +85,27 @@ import { PlanRecommendationWidget } from '@/components/billingsdk/plan-recommend
 <PlanRecommendationWidget
   plans={plans}
   usageData={{
-    apiCalls: 15000,
-    storage: 50,
-    teamSize: 12
+    apiCalls: 500000,
+    storage: 5000,
+    teamSize: 50
   }}
-  onPlanSelect={(planId: string) => console.log('Selected plan:', planId)}
+  onPlanSelect={(planId: string) => console.log('Upgrade to plan:', planId)}
+  onComparePlans={() => console.log('Compare plans clicked')}
+  onLearnMore={() => console.log('Learn more clicked')}
 />
 ```
 
 ## Props
 
-| Prop           | Type                                                                 | Description                                                   |
-| -------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
-| `className`    | `string`                                                             | Additional CSS classes to apply to the widget                 |
-| `currentPlan`  | `Plan`                                                               | The user's current plan (optional)                            |
-| `plans`        | `Plan[]`                                                             | Array of available plans                                      |
-| `usageData`    | `{ apiCalls: number; storage: number; teamSize: number }`            | Usage data to base recommendations on                         |
-| `onPlanSelect` | `(planId: string) => void`                                           | Function called when a plan is selected                       |
-| `title`        | `string`                                                             | Title for the widget (default: "Plan Recommendation")         |
-| `description`  | `string`                                                             | Description for the widget (default: "Based on your usage...")|
+| Prop              | Type                                    | Description                                      |
+| ----------------- | --------------------------------------- | ------------------------------------------------ |
+| `className`       | `string`                                | Additional CSS classes to apply to the widget    |
+| `currentPlan`     | `Plan`                                  | The user's current plan (optional)               |
+| `plans`           | `Plan[]`                                | Array of available plans                         |
+| `usageData`       | `{ apiCalls: number; storage: number; teamSize: number }` | Usage data to base recommendations on |
+| `onPlanSelect`    | `(planId: string) => void`              | Function called when upgrade is completed        |
+| `onComparePlans`  | `() => void`                            | Function called when "Compare Plans" is clicked  |
+| `onLearnMore`     | `() => void`                            | Function called when "Learn More" is clicked     |
 
 ### Plan Object
 
@@ -125,6 +127,64 @@ import { PlanRecommendationWidget } from '@/components/billingsdk/plan-recommend
 | `storage`   | `number` | Amount of storage used (in GB)           |
 | `teamSize`  | `number` | Number of team members                   |
 
+## Design
+
+The Plan Recommendation Widget is a clean, modern SaaS dashboard component featuring:
+
+- **Clean Design**: 
+  - Minimal styling without backgrounds
+  - Clear visual hierarchy
+  - Consistent spacing and typography
+
+- **Usage Stats Section**:
+  - Gradient progress bars with color-coded statuses
+  - Detailed metrics with contextual information
+  - Critical warning indicators for high usage
+
+- **Smart Recommendation Panel**:
+  - Clear value proposition
+  - Prominent pricing display
+  - Gradient background for visual interest
+
+- **Clear CTA Button**:
+  - Prominent "Upgrade to Pro Plan" button
+  - Full-width for emphasis
+  - Standard button styling
+
+- **Secondary CTAs**:
+  - Minimal outlined "Compare Plans" button
+  - Subtle "Learn More" text link
+
+### Visual Features
+
+- **Progress Visualization**: 
+  - Animated progress bars load in sequence
+  - Color changes based on usage levels
+  - Critical warnings for high usage (90%+)
+
+- **Modern Aesthetics**:
+  - Clean, minimal design
+  - Consistent iconography
+  - Harmonious color palette
+  - Proper spacing and alignment
+
+- **Responsive Design**:
+  - Adapts to all screen sizes
+  - Properly sized elements for mobile
+
+### Interaction Design
+
+1. **Progress Visualization**: 
+   - Animated progress bars with staggered loading
+   - Color-coded status indicators
+   - Critical warning badges with pulse animation
+
+2. **Clear CTAs**:
+   - Prominent primary button
+   - Secondary actions for comparison
+   - Text link for additional information
+
 ### Credits
 
 - Created by [@sapatmohit](https://github.com/sapatmohit)
+- Redesigned by Qoder AI Assistant

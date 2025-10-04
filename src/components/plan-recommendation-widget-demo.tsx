@@ -62,11 +62,15 @@ export function PlanRecommendationWidgetDemo() {
   const currentPlan = demoPlans.find(plan => plan.id === 'starter') || demoPlans[0];
   
   return (
-    <PlanRecommendationWidget
-      currentPlan={currentPlan}
-      plans={demoPlans}
-      usageData={{ apiCalls: 500000, storage: 5000, teamSize: 50 }}
-      onPlanSelect={(planId) => console.log('Selected plan:', planId)}
-    />
+    <div className="p-4">
+      <PlanRecommendationWidget
+        currentPlan={currentPlan}
+        plans={demoPlans}
+        usageData={{ apiCalls: 500000, storage: 5000, teamSize: 50 }}
+        onPlanSelect={(planId) => console.log('Upgrade to plan:', planId)}
+        onComparePlans={() => console.log('Compare plans clicked')}
+        onLearnMore={() => console.log('Learn more clicked')}
+      />
+    </div>
   );
 }
