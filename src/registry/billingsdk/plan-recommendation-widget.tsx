@@ -44,7 +44,7 @@ export function PlanRecommendationWidget({
   
   // Usage data with limits
   // Extract limits from the current or recommended plan
-  const effectivePlan = currentPlan || recommendedPlan || plans[0];
+  const effectivePlan = currentPlan || proPlan || plans[0];
   const limits = {
     apiCalls: effectivePlan.limits?.apiCalls || Infinity,
     storage: effectivePlan.limits?.storage || Infinity,
