@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Toaster, toast } from "sonner"
 import { BillingSettings } from "@/components/billingsdk/billing-settings"
+import { CreditCard } from "lucide-react"
 
 type InvoiceFormat = "PDF" | "HTML"
 
@@ -163,51 +164,78 @@ export default function BillingSettingsDemo() {
         onUsageLimitAlertsChange={handleToggleUsageLimitAlerts}
       />
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Add New Card</DialogTitle>
+            <DialogTitle>Add Payment Card</DialogTitle>
+            <DialogDescription>
+              Enter your card details to add a new payment method
+            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <div>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
               <Label htmlFor="number">Card Number</Label>
-              <Input
-                id="number"
-                value={formatCardNumber(newCard.number)}
-                onChange={(e) => {
-                  const rawValue = e.target.value.replace(/\s/g, '');
-                  setNewCard({ ...newCard, number: rawValue });
-                }}
-                placeholder="4111 1111 1111 1111"
-              />
+              <div className="relative">
+                <Input
+                  id="number"
+                  value={formatCardNumber(newCard.number)}
+                  onChange={(e) => {
+                    const rawValue = e.target.value.replace(/\s/g, '');
+                    if (rawValue.length <= 19) {
+                      setNewCard({ ...newCard, number: rawValue });
+                    }
+                  }}
+                  placeholder="1234 5678 9012 3456"
+                  className="pr-10"
+                  maxLength={19}
+                />
+                <CreditCard className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="expiry">Expiry</Label>
+              <div className="space-y-2">
+                <Label htmlFor="expiry">Expiry Date</Label>
                 <Input
                   id="expiry"
                   value={newCard.expiry}
-                  onChange={(e) =>
-                    setNewCard({ ...newCard, expiry: e.target.value })
-                  }
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 2) {
+                      value = value.slice(0, 2) + '/' + value.slice(2, 4);
+                    }
+                    if (value.length <= 5) {
+                      setNewCard({ ...newCard, expiry: value });
+                    }
+                  }}
                   placeholder="MM/YY"
+                  maxLength={5}
                 />
               </div>
-              <div>
+              <div className="space-y-2">
                 <Label htmlFor="cvc">CVC</Label>
                 <Input
                   id="cvc"
+                  type="password"
                   value={newCard.cvc}
-                  onChange={(e) =>
-                    setNewCard({ ...newCard, cvc: e.target.value })
-                  }
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, '');
+                    if (value.length <= 4) {
+                      setNewCard({ ...newCard, cvc: value });
+                    }
+                  }}
                   placeholder="123"
+                  maxLength={4}
                 />
               </div>
             </div>
-            <Button onClick={handleAddCard} className="w-full">
-              Save Card
-            </Button>
           </div>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAddCard}>
+              Add Card
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
       <Toaster />

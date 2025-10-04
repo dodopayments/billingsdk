@@ -1,6 +1,6 @@
 "use client";
 
-import { PricingTableEight } from "@/components/billingsdk/pricing-table-eight";
+import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
 
 const plans = [
   {
@@ -173,17 +173,18 @@ const features = [
   },
 ];
 
-export function PricingTableEightDemo() {
+export function PricingTableSevenMinimalDemo() {
   return (
-    <PricingTableEight
+    <PricingTableSeven
       plans={plans}
       features={features}
       title="Choose a plan that's right for you"
       description="We believe Untitled should be accessible to all companies, no matter the size of your startup."
-      onPlanSelect={(planId) => console.log("Selected plan:", planId)}
+      onPlanSelect={(planId: string) => console.log("Selected plan:", planId)}
       size="medium"
       theme="minimal"
       className="w-full"
     />
   );
 }
+
