@@ -190,11 +190,29 @@ export function BillingSettings2({
 		// Get all currency data from the library
 		const currencies = cc.data;
 		return currencies
-			.filter(currency => currency.code) // Filter out any invalid entries
-			.map(currency => ({
-				value: currency.code.toLowerCase(),
-				label: currency.code
-			}))
+			.filter(currency => {
+				// Filter out invalid entries
+				if (!currency.code) return false;
+				
+				// Filter out special currency codes that are not typically used for billing:
+				// - Precious metals (XAU, XAG, XPT, XPD)
+				// - Bond market units (XBA, XBB, XBC, XBD)
+				// - Special drawing rights and test codes (XDR, XTS, XSU, XUA)
+				// - No currency codes (XXX)
+				const specialCodes = ['XAU', 'XAG', 'XPT', 'XPD', 'XBA', 'XBB', 'XBC', 'XBD', 'XDR', 'XTS', 'XSU', 'XUA', 'XXX', 'CLF', 'COU', 'MXV', 'USN', 'UYI', 'UYW', 'CHE', 'CHW'];
+				return !specialCodes.includes(currency.code);
+			})
+			.map(currency => {
+				// Truncate long currency names for better display
+				const currencyName = currency.currency.length > 50 
+					? currency.currency.substring(0, 50) + '...' 
+					: currency.currency;
+				
+				return {
+					value: currency.code.toLowerCase(),
+					label: `${currency.code} - ${currencyName}`
+				};
+			})
 			.sort((a, b) => a.label.localeCompare(b.label)); // Sort alphabetically
 	}, [currencyOptions]);
 	const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
