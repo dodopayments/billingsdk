@@ -1,5 +1,6 @@
 "use client";
 
+import CopyButton from '../CopyButton'; 
 import { CustomCodeBlock } from '@/components/code';
 
 interface Code {
@@ -83,7 +84,7 @@ export const plans: Plan[] = [{
                 iconColor: 'text-zinc-500'
             }],
     }]
-];
+};
 `,
   language: "ts",
 },
@@ -161,23 +162,20 @@ export function CodeSection() {
               {feature.description}
             </p>
           </div>
-
-          <div className="shadow-lg border-x border-t border-border absolute bottom-0 left-0 right-0 mx-8 mt-8 h-96 overflow-hidden">
-            {/* Window chrome */}
+          <div className="shadow-lg border-x border-t border-border absolute bottom-0 left-0 right-0 mx-8 mt-8 h-96 overflow-hidden relative">
+            <CopyButton 
+                contentToCopy={feature.code}
+                className="absolute top-2 right-4 z-10 text-xs" 
+            />
             <div className="py-2 px-4 border-b border-border bg-transparent border-l-foreground">
               <div className="flex items-center gap-1">
                 <div className="size-2 outline rounded-full outline-border"></div>
                 <div className="size-2 outline rounded-full outline-accent"></div>
               </div>
             </div>
-
-            {/* Code block */}
             <CustomCodeBlock code={feature.code} language={feature.language} maxHeight="400px" />
           </div>
         </div>
       ))}
     </div>
-  );
-}
-
-
+  );}
