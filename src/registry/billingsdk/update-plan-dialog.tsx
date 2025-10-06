@@ -224,7 +224,7 @@ export function UpdatePlanDialog({ currentPlan, plans, onPlanChange, className, 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             onPlanChange(plan.id);
-                                                            setIsOpen(false);
+                                                            handleOpenChange(false);
                                                         }}
                                                     >
                                                         {selectedPlan === currentPlan.id ? "Current Plan" : "Upgrade"}
