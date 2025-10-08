@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
+import CopyButton from './CopyButton'; 
 
 export interface CodeBlockTheme {
   name: string;
@@ -212,7 +213,12 @@ export function CustomCodeBlock({
   const currentStyle = isDark ? selectedTheme.dark : selectedTheme.light;
 
   return (
-    <div className={cn("relative h-full", className)}>
+    <div className={cn("relative h-full", className)}> 
+            <CopyButton 
+        contentToCopy={code}
+        className="absolute top-2 right-2 z-20" 
+      />
+
       {title && (
         <div className="flex items-center px-4 py-2 bg-background text-foreground">
           <span className="text-sm font-medium">{title}</span>
@@ -225,20 +231,20 @@ export function CustomCodeBlock({
           style={currentStyle}
           showLineNumbers={false}
           wrapLines={wrapLines}
-                  customStyle={{
-          margin: 0,
-          borderRadius: 0,
-          ...(maxHeight !== 'none' && { maxHeight }),
-          overflowY: 'auto',
-          overflowX: 'auto',
-          fontSize: '0.75rem',
-          lineHeight: '1.5',
-          whiteSpace: 'pre-wrap',
-          wordWrap: 'break-word',
-          overflowWrap: 'anywhere',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
+          customStyle={{
+            margin: 0,
+            borderRadius: 0,
+            ...(maxHeight !== 'none' && { maxHeight }),
+            overflowY: 'auto',
+            overflowX: 'auto',
+            fontSize: '0.75rem',
+            lineHeight: '1.5',
+            whiteSpace: 'pre-wrap',
+            wordWrap: 'break-word',
+            overflowWrap: 'anywhere',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
         >
           {code}
         </SyntaxHighlighter>
