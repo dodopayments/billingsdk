@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Card, CardHeader } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 /**
  * Detects the card type based on the card number
  * @param cardNumber - The card number to analyze
