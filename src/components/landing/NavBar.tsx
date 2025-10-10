@@ -61,7 +61,6 @@ const NavBar = () => {
     setIsHydrated(true);
   }, []);
 
-  console.log(isScrolled);
   return (
     <nav
       className={cn(
