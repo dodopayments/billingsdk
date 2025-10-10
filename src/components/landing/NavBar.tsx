@@ -12,23 +12,21 @@ import { CornerDownLeft } from "lucide-react";
 
 export const Logo = () => {
   return (
-    <Link href="/" className="cursor-pointer">
-      <div className="flex items-center justify-center gap-2">
-        <Image
-          src="/logo/logo-dodo.svg"
-          alt="Billing SDK"
-          width={28}
-          height={28}
-        />
-        <span className="text-3xl font-display">/</span>
-        <Image
-          src="/logo/Logo.svg"
-          alt="Billing SDK"
-          width={120}
-          height={120}
-        />
-      </div>
-    </Link>
+    <div className="flex items-center justify-center gap-2">
+      <Image
+        src="/logo/logo-dodo.svg"
+        alt="Billing SDK"
+        width={28}
+        height={28}
+      />
+      <span className="text-3xl font-display">/</span>
+      <Image
+        src="/logo/Logo.svg"
+        alt="Billing SDK"
+        width={120}
+        height={120}
+      />
+    </div>
   );
 };
 
