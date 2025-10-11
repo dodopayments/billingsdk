@@ -19,6 +19,7 @@
     "components/manage-subscription/usage-based-pricing",
     "components/invoice-history/index",
     "components/usage-table/index",
+    "components/limited-offer-dialog/index",
     "---Update Plan---",
     "components/update-plan/update-plan-card",
     "components/update-plan/update-plan-dialog",

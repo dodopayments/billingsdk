@@ -48,6 +48,9 @@
                 "@billingsdk/billing-settings",
                 "@billingsdk/proration-preview",
                 "@billingsdk/proration-preview",
+                "@billingsdk/upcoming-charges",
+                "@billingsdk/coupon",
+                "@billingsdk/limited-offer-dialog",
                 "@billingsdk/upcoming-charges"
             ]
         },
@@ -905,6 +908,35 @@
                 "motion"
             ],
             "registryDependencies": [
+             "button",
+              "card",
+              "utils"
+        ]
+        },
+        {
+            "name": "limited-offer-dialog",
+            "type": "registry:block",
+            "title": "Limited Offer Dialog",
+            "description": "A dialog component for displaying limited-time offers with customizable content and actions",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/limited-offer-dialog.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/limited-offer-dialog.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/limited-offer-dialog-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/limited-offer-dialog-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react"
+            ],
+            "registryDependencies": [
+                "dialog",
+                "button",
+                "badge",
                 "button",
                 "card",
                 "utils"

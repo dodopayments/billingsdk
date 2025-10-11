@@ -43,6 +43,7 @@ import { UsageBasedPricingDemo } from '@/components/usage-based-pricing-demo';
 import { DetailedUsageTableDemo } from '@/components/detailed-usage-table-demo';
 import { PricingTableSevenDemo } from '@/components/pricing-table-seven-demo';
 import {PaymentCardDemo} from '@/components/payment-card-demo';
+import { LimitedOfferDialogDemo } from '@/components/limited-offer-dialog-demo';
 import { PricingTableSevenMinimalDemo } from '@/components/pricing-table-seven-minimal-demo';
 
 
@@ -94,6 +95,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     PricingTableSevenDemo,
     PricingTableSevenMinimalDemo,
 	  BillingSettings2Demo,
-    UsageBasedPricingDemo
+    UsageBasedPricingDemo,
+    LimitedOfferDialogDemo
   };
 }
