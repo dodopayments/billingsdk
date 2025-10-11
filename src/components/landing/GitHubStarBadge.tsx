@@ -23,6 +23,7 @@ export default function GitHubStarBadge() {
     text: string;
   } | null>(null);
   const [metrics, setMetrics] = useState<StarResponse | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   function toFixedTrim(value: number, digits: number) {
     const s = value.toFixed(digits);
@@ -48,6 +49,9 @@ export default function GitHubStarBadge() {
   }
 
   useEffect(() => {
+    // Mark as hydrated on client side
+    setIsHydrated(true);
+
     let cancelled = false;
     let controller: AbortController | null = null;
 
@@ -121,8 +125,8 @@ export default function GitHubStarBadge() {
       </span>
       {/* Middle: number */}
       <span className="flex items-center h-full px-1 w-10 justify-center border-l  pl-2 text-sm font-normal">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {display && (
+        {isHydrated && display ? (
+          <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={`${display.kind}-${display.text}`}
               initial={{ y: 4, opacity: 0 }}
@@ -137,13 +141,15 @@ export default function GitHubStarBadge() {
             >
               {display.text}
             </motion.span>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        ) : (
+          <span className="text-sm font-normal">--</span>
+        )}
       </span>
       {/* Right: cycling icon with left border */}
       <span className="flex items-center h-full pl-1 pr-2">
-        <AnimatePresence mode="popLayout" initial={false}>
-          {display && (
+        {isHydrated && display ? (
+          <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={display.kind}
               initial={{ rotate: -12, scale: 0.95, opacity: 0 }}
@@ -165,8 +171,10 @@ export default function GitHubStarBadge() {
                 <FaCodePullRequest className="h-3.5 w-3.5" />
               )}
             </motion.span>
-          )}
-        </AnimatePresence>
+          </AnimatePresence>
+        ) : (
+          <FiStar className="h-3.5 w-3.5" />
+        )}
       </span>
     </Link>
   );
