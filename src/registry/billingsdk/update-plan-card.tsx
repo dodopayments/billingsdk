@@ -19,12 +19,7 @@ export interface UpdatePlanCardProps {
     title?: string
 }
 
-const spring = {
-    type: "spring" as const,
-    stiffness: 400,
-    damping: 30,
-    mass: 0.8
-}
+const easing = [0.4, 0, 0.2, 1] as const
 
 export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, title }: UpdatePlanCardProps) {
     const [isYearly, setIsYearly] = useState(false)
@@ -72,9 +67,9 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ 
-                                    layout: spring,
-                                    opacity: { delay: index * 0.05, duration: 0.3 },
-                                    y: { delay: index * 0.05, ...spring }
+                                    layout: { duration: 0.3, ease: easing },
+                                    opacity: { delay: index * 0.05, duration: 0.3, ease: easing },
+                                    y: { delay: index * 0.05, duration: 0.3, ease: easing }
                                 }}
                                 onClick={() => handlePlanChange(plan.id)}
                                 onKeyDown={(e) => {
@@ -88,10 +83,10 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                                 aria-pressed={selectedPlan === plan.id}
                                 className={cn(
                                     "relative rounded-lg sm:rounded-xl border cursor-pointer overflow-hidden transition-all duration-200",
-                                    "active:scale-[0.98] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+                                    "touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                                     selectedPlan === plan.id
                                         ? "border-primary bg-gradient-to-br from-muted/60 to-muted/30 shadow-sm"
-                                        : "border-border hover:border-primary/50 active:border-primary/70"
+                                        : "border-border hover:border-primary/50"
                                 )}
                             >
                                 <motion.div 
@@ -164,16 +159,16 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                                                 height: "auto",
                                                 opacity: 1,
                                                 transition: {
-                                                    height: spring,
-                                                    opacity: { duration: 0.25, delay: 0.05 }
+                                                    height: { duration: 0.3, ease: easing },
+                                                    opacity: { duration: 0.25, delay: 0.05, ease: easing }
                                                 }
                                             }}
                                             exit={{ 
                                                 height: 0,
                                                 opacity: 0,
                                                 transition: {
-                                                    height: { ...spring, damping: 35 },
-                                                    opacity: { duration: 0.15 }
+                                                    height: { duration: 0.25, ease: easing },
+                                                    opacity: { duration: 0.15, ease: easing }
                                                 }
                                             }}
                                             className="overflow-hidden"
@@ -182,7 +177,7 @@ export function UpdatePlanCard({ currentPlan, plans, onPlanChange, className, ti
                                                 initial={{ y: -8 }}
                                                 animate={{ 
                                                     y: 0,
-                                                    transition: { ...spring, delay: 0.05 }
+                                                    transition: { duration: 0.25, delay: 0.05, ease: easing }
                                                 }}
                                                 exit={{ y: -8 }}
                                                 className="px-3 sm:px-4 pb-3 sm:pb-4"
