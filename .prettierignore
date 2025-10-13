@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.out
+
+# Next.js
+.next
+.nuxt
+.vercel
+
+# Logs
+*.log
+
+# Environment files
+.env*.local
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp
+temp
+
+# Coverage reports
+coverage
+
+# Lock files (if using other formatters)
+pnpm-lock.yaml

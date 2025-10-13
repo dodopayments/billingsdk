@@ -23,6 +23,21 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./packages/cli/package-lock.json
 
+      - name: Set version from release tag
+        working-directory: ./packages/cli
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          TAG="${RELEASE_TAG:-${GITHUB_REF#refs/tags/}}"
+          VERSION="${TAG#v}"
+          echo "Setting package version to ${VERSION} from tag ${TAG}"
+          CURRENT=$(node -p "require('./package.json').version")
+          if [ "$CURRENT" = "$VERSION" ]; then
+            echo "package.json already at ${VERSION}, skipping version bump"
+          else
+            npm version "${VERSION}" --no-git-tag-version
+          fi
+
       - name: Install dependencies
         run: npm ci
         working-directory: ./packages/cli
