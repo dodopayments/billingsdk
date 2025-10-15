@@ -45,9 +45,7 @@
                 "@billingsdk/payment-method-manager",
                 "@billingsdk/payment-method-selector",
                 "@billingsdk/payment-card",
-                "@billingsdk/payment-method-manager",
                 "@billingsdk/billing-settings",
-                "@billingsdk/proration-preview",
                 "@billingsdk/proration-preview",
                 "@billingsdk/upcoming-charges",
                 "@billingsdk/coupon"
