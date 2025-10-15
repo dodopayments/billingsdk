@@ -34,11 +34,11 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
     const [isYearly, setIsYearly] = useState(false)
 
     return (
-        <section className="py-18 px-2 sm:px-4 lg:px-6">
+        <section className="py-16 px-2 sm:px-4 lg:px-6">
             <div className="mx-auto max-w-6xl">
                 <div className="flex flex-col items-start mb-14">
-                    <h2 className="text-4xl sm:text-5xl  font-semibold tracking-tight text-primary">Proffesional plans for <br />
-                        <span className="font-light tracking-wide italic">{" "}every business growth !!</span>
+                    <h2 className="text-4xl sm:text-5xl  font-semibold tracking-tight text-primary">Professional plans for <br />
+                        <span className="font-light tracking-wide italic">every business's growth.</span>
                     </h2>
                     <p className="text-primary/60 text-[1.1rem] mt-4 mb-4 ">Start today for free. Pay when your workflow gets bigger.</p>
 
@@ -56,10 +56,10 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 />
                             )}
-                            <span className="relative z-5">Monthly</span>
+                            <span className="relative z-10">Monthly</span>
                         </button>
                         <button
-                            className={`relative z-5 px-6 py-2 text-primary rounded-full text-sm font-medium cursor-pointer ${isYearly ? "text-primary border border-muted-foreground/5" : "text-primary/50"}`}
+                            className={`relative z-10 px-6 py-2 text-primary rounded-full text-sm font-medium cursor-pointer ${isYearly ? "text-primary border border-muted-foreground/5" : "text-primary/50"}`}
                             aria-pressed={isYearly}
                             onClick={() => setIsYearly(true)}
                         >
@@ -70,7 +70,7 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
                                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                                 />
                             )}
-                            <span className="relative z-5">Yearly</span>
+                            <span className="relative z-10">Yearly</span>
                         </button>
                     </div>
                 </div>
