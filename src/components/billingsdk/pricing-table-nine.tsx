@@ -132,7 +132,7 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
 
                             <button 
                                 onClick={() => onPlanSelect?.(plan.id)}
-                                className={`w-35 py-4 px-4 text-sm font-medium transition-colors mb-6 bg-primary/90 text-primary-foreground hover:bg-primary/80 border-primary
+                                className={`w-40 py-4 px-4 text-sm font-medium transition-colors mb-6 bg-primary/90 text-primary-foreground hover:bg-primary/80 border-primary
                                 `}
                             >
                                 {plan.isCustom ? "Contact Sales" : "Get Started"}
