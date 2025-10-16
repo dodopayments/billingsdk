@@ -233,8 +233,8 @@ export function PricingTableFive({
 
       <div className="container max-w-7xl mx-auto relative">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className={cn(titleVariants({ size, theme }))}>{title}</h2>
+        <div className="text-center mb-12 pb-1">
+          <h2 className={cn(titleVariants({ size, theme }), "leading-[1.12]")}>{title}</h2>
           <p className={cn(descriptionVariants({ size }))}>{description}</p>
 
           {/* Billing Toggle */}
