@@ -18,6 +18,7 @@ import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
 import { PaymentDetailsTwo } from "../billingsdk/payment-details-two";
+import { TrialExpiryCard } from "@/components/billingsdk/trial-expiry-card";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -1961,5 +1962,37 @@ export const componentRegistry: ComponentConfig[] = [
         console.log(`Payment Processed! ${cardNumber}, exp ${expiry}, cvc ${cvc}`);
       },
     },
-  }
+  },
+  {
+    id: "trial-expiry-card",
+    name: "Trial Expiry Card",
+    description: "Card component with live countdown timer showing days, hours, minutes, and seconds remaining",
+    category: "subscription",
+    component: TrialExpiryCard,
+    imports: ["@/components/billingsdk/trial-expiry-card"],
+    defaultCode: `<TrialExpiryCard
+  trialEndDate={Date.now() + 5 * 24 * 60 * 60 * 1000}
+  onUpgrade={() => console.log("Upgrade clicked")}
+  title="Trial Period"
+  description="Unlock all premium features with a paid plan."
+  features={[
+    "Unlimited projects",
+    "Priority support",
+    "Advanced analytics",
+    "Custom integrations",
+  ]}
+/>`,
+    defaultProps: {
+      trialEndDate: Date.now() + 5 * 24 * 60 * 60 * 1000,
+      onUpgrade: () => console.log("Upgrade clicked"),
+      title: "Trial Period",
+      description: "Unlock all premium features with a paid plan.",
+      features: [
+        "Unlimited projects",
+        "Priority support",
+        "Advanced analytics",
+        "Custom integrations",
+      ],
+    },
+  },
 ];
