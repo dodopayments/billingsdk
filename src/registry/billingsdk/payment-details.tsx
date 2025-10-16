@@ -562,7 +562,7 @@ export function PaymentDetails({
                   value={formData.country || "Country"}
                   onValueChange={(e) => handleInputChange("country", e)}
                 >
-                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">{formData.country || "Country"}</SelectTrigger>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.country || "Country"}</SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {allCountries.map((country) => (
@@ -581,7 +581,7 @@ export function PaymentDetails({
                   onValueChange={(e) => handleInputChange("state", e)}
                   disabled={!selectedCountryCode || availableStates.length === 0}
                 >
-                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">{formData.state || "State"}</SelectTrigger>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.state || "State"}</SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {availableStates.map((state) => (
@@ -600,7 +600,7 @@ export function PaymentDetails({
                   onValueChange={(e) => handleInputChange("city", e)}
                   disabled={!selectedStateCode || availableCities.length === 0}
                 >
-                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans">{formData.state || "City"}</SelectTrigger>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.city || "City"}</SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {availableCities.map((city) => (
