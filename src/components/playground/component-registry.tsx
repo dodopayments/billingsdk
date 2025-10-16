@@ -17,6 +17,7 @@ import { PaymentCard } from "@/components/billingsdk/payment-card";
 import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
 import { PricingTableSix } from "@/components/billingsdk/pricing-table-six";
 import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
+import { LimitedOfferDialog } from "@/components/billingsdk/limited-offer-dialog";
 import { PaymentDetailsTwo } from "../billingsdk/payment-details-two";
 import { TrialExpiryCard } from "@/components/billingsdk/trial-expiry-card";
 
@@ -1964,6 +1965,78 @@ export const componentRegistry: ComponentConfig[] = [
     },
   },
   {
+    id: "limited-offer-dialog",
+    name: "Limited Offer Dialog",
+    description: "A dialog component for displaying limited-time offers with customizable content and actions",
+    category: "subscription",
+    component: LimitedOfferDialog,
+    imports: ["@/components/billingsdk/limited-offer-dialog"],
+    defaultCode: `<LimitedOfferDialog
+  title="🔥 Limited Time Offer!"
+  description="Grab this deal before it's gone"
+  offer={{
+    id: "limited-offer-dialog",
+    title: "Special Offer",
+    description: "Limited time deal",
+    discount: "50% OFF",
+    features: [
+      { name: "50% off your first month" },
+      { name: "Valid until December 31, 2024" },
+      { name: "First 100 users only" }
+    ]
+  }}
+  triggerButtonText="Open Offer Dialog"
+  warningTitle="Don't miss out!"
+  warningText="This exclusive offer won't last long. Claim it now before it's gone forever."
+  claimButtonText="👉 Claim Offer Now"
+  declineButtonText="No thanks, I'll pay full price"
+  onClaimOffer={async (offerId) => {
+    console.log("Claiming offer:", offerId);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    alert("Offer claimed successfully!");
+  }}
+  onDeclineOffer={async (offerId) => {
+    console.log("Declining offer:", offerId);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    alert("Offer declined. You can always come back later!");
+  }}
+  onDialogClose={() => console.log("Dialog closed")}
+  className="w-auto"
+/>`,
+    defaultProps: {
+      title: "🔥 Limited Time Offer!",
+      description: "Grab this deal before it's gone",
+      offer: {
+        id: "limited-offer-dialog",
+        title: "Special Offer",
+        description: "Limited time deal",
+        discount: "50% OFF",
+        features: [
+          { name: "50% off your first month" },
+          { name: "Valid until December 31, 2024" },
+          { name: "First 100 users only" }
+        ]
+      },
+      triggerButtonText: "Open Offer Dialog",
+      warningTitle: "Don't miss out!",
+      warningText: "This exclusive offer won't last long. Claim it now before it's gone forever.",
+      claimButtonText: "👉 Claim Offer Now",
+      declineButtonText: "No thanks, I'll pay full price",
+      onClaimOffer: async (offerId: string) => {
+        console.log("Claiming offer:", offerId);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        alert("Offer claimed successfully!");
+      },
+      onDeclineOffer: async (offerId: string) => {
+        console.log("Declining offer:", offerId);
+        await new Promise(resolve => setTimeout(resolve, 500));
+        alert("Offer declined. You can always come back later!");
+      },
+      onDialogClose: () => console.log("Dialog closed"),
+      className: "w-auto"
+    },
+  },
+  {
     id: "trial-expiry-card",
     name: "Trial Expiry Card",
     description: "Card component with live countdown timer showing days, hours, minutes, and seconds remaining",
@@ -1971,27 +2044,23 @@ export const componentRegistry: ComponentConfig[] = [
     component: TrialExpiryCard,
     imports: ["@/components/billingsdk/trial-expiry-card"],
     defaultCode: `<TrialExpiryCard
-  trialEndDate={Date.now() + 5 * 24 * 60 * 60 * 1000}
+  trialEndDate={new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)}
   onUpgrade={() => console.log("Upgrade clicked")}
-  title="Trial Period"
-  description="Unlock all premium features with a paid plan."
   features={[
-    "Unlimited projects",
-    "Priority support",
-    "Advanced analytics",
-    "Custom integrations",
+    "Unlimited API requests",
+    "Advanced analytics dashboard",
+    "Priority email support",
+    "Custom domain integration",
   ]}
 />`,
     defaultProps: {
-      trialEndDate: Date.now() + 5 * 24 * 60 * 60 * 1000,
+      trialEndDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
       onUpgrade: () => console.log("Upgrade clicked"),
-      title: "Trial Period",
-      description: "Unlock all premium features with a paid plan.",
       features: [
-        "Unlimited projects",
-        "Priority support",
-        "Advanced analytics",
-        "Custom integrations",
+        "Unlimited API requests",
+        "Advanced analytics dashboard",
+        "Priority email support",
+        "Custom domain integration",
       ],
     },
   },

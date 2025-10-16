@@ -49,7 +49,7 @@ export function ComponentsSection() {
       id: "banner",
       label: "Banner Notifications",
       icon: BsBell,
-      href: "/components/banner",
+      href: "/docs/components/banner",
     },
     {
       id: "usage",
