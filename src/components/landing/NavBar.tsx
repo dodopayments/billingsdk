@@ -4,47 +4,51 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import GitHubStarBadge from "./GitHubStarBadge";
 import { Badge } from "../ui/badge";
 import { CornerDownLeft } from "lucide-react";
 
+const LogoVisual = () => (
+  <div className="flex items-center justify-center gap-2">
+    <Image src="/logo/logo-dodo.svg" alt="Billing SDK" width={28} height={28} />
+    <span className="text-3xl font-display">/</span>
+    <Image src="/logo/Logo.svg" alt="Billing SDK" width={120} height={120} />
+  </div>
+);
+
 export const Logo = () => {
   return (
     <Link href="/" className="cursor-pointer">
-      <div className="flex items-center justify-center gap-2">
-        <Image
-          src="/logo/logo-dodo.svg"
-          alt="Billing SDK"
-          width={28}
-          height={28}
-        />
-        <span className="text-3xl font-display">/</span>
-        <Image
-          src="/logo/Logo.svg"
-          alt="Billing SDK"
-          width={120}
-          height={120}
-        />
-      </div>
+      <LogoVisual />
     </Link>
   );
 };
 
+// Logo without Link wrapper for use in Fumadocs layout
+export const LogoContent = () => {
+  return <LogoVisual />;
+};
+
 const NavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
   const { scrollY } = useScroll();
+
   useMotionValueEvent(scrollY, "change", (current) =>
     setIsScrolled(current >= 10)
   );
 
-  console.log(isScrolled);
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   return (
     <nav
       className={cn(
         `fixed  left-0 right-0 max-w-7xl mx-auto z-55 flex justify-center ${
-          isScrolled ? "px-2 md:px-20 top-4" : "top-2 px-6 py-4"
+          isHydrated && isScrolled ? "px-2 md:px-20 top-4" : "top-2 px-6 py-4"
         } transition-all duration-300`
       )}
     >
@@ -52,14 +56,13 @@ const NavBar = () => {
         <div
           className={cn(
             `flex items-center w-full justify-between px-2 md:px-4 py-3 transition-all duration-300 ${
+              isHydrated &&
               isScrolled &&
               "bg-accent/30 backdrop-blur-lg inset-shadow-sm inset-shadow-white/20 rounded-2xl px-4"
             }`
           )}
         >
-          <Link href="/" className="cursor-pointer">
-            <Logo />
-          </Link>
+          <Logo />
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">

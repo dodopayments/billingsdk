@@ -1,4 +1,4 @@
-import { Logo } from "@/components/landing/NavBar";
+import { LogoContent } from "@/components/landing/NavBar";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 
 /**
@@ -11,7 +11,7 @@ import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 export const baseOptions: BaseLayoutProps = {
   nav: {
     transparentMode: "top",
-    title: <Logo />,
+    title: <LogoContent />,
   },
   // see https://fumadocs.dev/docs/ui/navigation/links
   links: [],
