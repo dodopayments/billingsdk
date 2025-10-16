@@ -36,16 +36,16 @@ export function PricingTableNine({ plans, onPlanSelect }: PricingTableNineProps)
     return (
         <section className="py-16 px-2 sm:px-4 lg:px-6">
             <div className="mx-auto max-w-6xl">
-                <div className="flex flex-col items-start mb-14">
-                    <h2 className="text-4xl sm:text-5xl  font-semibold tracking-tight text-primary">Professional plans for <br />
-                        <span className="font-light tracking-wide italic">every business's growth.</span>
+                <div className="flex flex-col items-center mb-14">
+                    <h2 className="text-4xl sm:text-5xl text-center font-semibold tracking-tight text-primary">Professional pricings plans for <br />
+                        <span className="font-light tracking-wide  text-center">every business's growth.</span>
                     </h2>
                     <p className="text-primary/60 text-[1.1rem] mt-4 mb-4 ">Start today for free. Pay when your workflow gets bigger.</p>
 
                     {/* Toggle */}
-                    <div className="relative inline-flex items-center bg-primary-foreground/70 rounded-full p-2 dark:!shadow-[inset_0_2.5px_0_color-mix(in_oklch,_var(--primary)_15%,_transparent)]  ">
+                    <div className="relative inline-flex items-center bg-primary-foreground/70 rounded-md p-2 dark:!shadow-[inset_0_2.5px_0_color-mix(in_oklch,_var(--primary)_15%,_transparent)]  ">
                         <button
-                            className={`relative z-5 px-6 py-2 text-primary rounded-full text-sm font-medium cursor-pointer ${!isYearly ? "text-primary border border-muted-foreground/5" : "text-primary/50"}`}
+                            className={`relative z-5 px-6 py-1 text-primary text-sm font-medium cursor-pointer rounded-md ${!isYearly ? "text-primary border border-muted-foreground/5" : "text-primary/50"}`}
                             aria-pressed={!isYearly}
                             onClick={() => setIsYearly(false)}
                         >
