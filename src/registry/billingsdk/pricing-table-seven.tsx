@@ -231,8 +231,8 @@ export function PricingTableSeven({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center">
-          <h1 className={cn(titleVariants({ size, theme }))}>
+        <div className="text-center pb-1">
+          <h1 className={cn(titleVariants({ size, theme }), "leading-[1.12]")}>
             {title}
           </h1>
           <p className={cn(descriptionVariants({ size, theme }), "mt-6")}>
