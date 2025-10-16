@@ -129,7 +129,13 @@ export function TrialExpiryCard({
       <CardContent className="space-y-6">
         {/* Countdown Timer */}
         {trialEndDate && daysRemaining > 0 && (
-          <div className="rounded-lg border bg-muted/30 p-4">
+          <div 
+            className="rounded-lg border bg-muted/30 p-4"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label={`Trial time remaining: ${timeRemaining.days} days, ${timeRemaining.hours} hours, ${timeRemaining.minutes} minutes, ${timeRemaining.seconds} seconds`}
+          >
             <div className="flex items-center justify-center gap-2 sm:gap-4">
               <TimeUnit value={timeRemaining.days} label="Days" />
               <span className="text-muted-foreground">:</span>

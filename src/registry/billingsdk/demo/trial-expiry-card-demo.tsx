@@ -1,6 +1,6 @@
 "use client";
 
-import { TrialExpiryCard } from "@/registry/billingsdk/trial-expiry-card";
+import { TrialExpiryCard } from "@/components/billingsdk/trial-expiry-card";
 
 export default function TrialExpiryCardDemo() {
   // Set trial to expire in 5 days
