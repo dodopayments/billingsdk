@@ -6,8 +6,7 @@ import { PlaygroundHeader } from "./playground-header";
 import { CodePanel } from "./code-panel";
 import { PreviewPanel } from "./preview-panel";
 import { PlaygroundProvider, usePlayground } from "./playground-context";
-import { componentRegistry } from "./component-registry";
-import type { ComponentConfig } from "./types";
+import { discoverComponent } from "./auto-discovery";
 
 import { Button } from "@/components/ui/button";
 import { PanelLeft, PanelRight } from "lucide-react";
@@ -49,72 +48,24 @@ function PlaygroundContent() {
   // Handle component parameter from URL for direct-deep linking from docs
   useEffect(() => {
     const param = searchParams.get('component');
+    
     const trySelect = async (raw: string) => {
       const componentParam = decodeURIComponent(raw).trim();
-      const byRegistry = componentRegistry.find((comp) =>
-        comp.name === componentParam ||
-        comp.id === componentParam.toLowerCase() ||
-        comp.name.toLowerCase() === componentParam.toLowerCase()
-      );
-      if (byRegistry) {
-        setSelectedComponent(byRegistry);
-        return;
-      }
-
-      // Global fallback: dynamically load billingsdk component by slug
+      
+      // Extract slug from path (e.g., "pricing-table/pricing-table-four" -> "pricing-table-four")
       const slug = componentParam
         .toLowerCase()
         .replaceAll(' ', '-')
         .split('/')
         .filter(Boolean)
         .pop();
+      
       if (!slug) return;
 
-      const pascal = slug
-        .split('-')
-        .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-        .join('');
-      const exportName = pascal; // e.g., PricingTableFour
-      const importPath = `@/components/billingsdk/${slug}`;
-
-      try {
-        const mod: any = await import(/* @vite-ignore */ importPath);
-        const Comp = mod[exportName] || mod.default;
-        if (!Comp) return;
-
-        // Default fallback snippet
-        let inferredCode = `<${exportName} />`;
-
-        // Try to fetch usage snippet from public runtime registry (no code edits required)
-        try {
-          const res = await fetch(`/r/${slug}.json`);
-          if (res.ok) {
-            const text = await res.text();
-            const tag = exportName;
-            const selfClosing = new RegExp(`<${tag}[^>]*?/>`, 's');
-            const wrapped = new RegExp(`<${tag}[^>]*?>[\n\s\S]*?<\/${tag}>`, 's');
-            const match = text.match(selfClosing) || text.match(wrapped);
-            if (match) {
-              inferredCode = match[0];
-            }
-          }
-        } catch {
-          // ignore fetch failures, keep fallback
-        }
-
-        const dynamicConfig: ComponentConfig = {
-          id: slug,
-          name: exportName.replace(/([A-Z])/g, ' $1').trim(),
-          description: "Dynamically loaded component",
-          category: "dynamic",
-          component: Comp,
-          imports: [importPath],
-          defaultCode: inferredCode,
-          defaultProps: {},
-        };
-        setSelectedComponent(dynamicConfig);
-      } catch {
-        // ignore if dynamic import fails
+      // Use auto-discovery to load the component
+      const component = await discoverComponent(slug);
+      if (component) {
+        setSelectedComponent(component);
       }
     };
 
