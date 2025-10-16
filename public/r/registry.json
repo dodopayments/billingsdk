@@ -48,7 +48,8 @@
                 "@billingsdk/billing-settings",
                 "@billingsdk/proration-preview",
                 "@billingsdk/proration-preview",
-                "@billingsdk/upcoming-charges"
+                "@billingsdk/upcoming-charges",
+                "@billingsdk/trial-expiry-card"
             ]
         },
         {
@@ -907,6 +908,34 @@
             "registryDependencies": [
                 "button",
                 "card",
+                "utils"
+            ]
+        },
+        {
+            "name": "trial-expiry-card",
+            "type": "registry:block",
+            "title": "Trial Expiry Card",
+            "description": "A card component that displays trial expiration countdown with progress indicator and feature list",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/trial-expiry-card.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/trial-expiry-card.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/trial-expiry-card-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/trial-expiry-card-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+                "button",
+                "card",
+                "badge",
                 "utils"
             ]
         }

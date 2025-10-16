@@ -1,0 +1,205 @@
+---
+title: Trial Expiry Card
+description: A card component that displays a real-time trial expiration countdown with feature highlights.
+---
+
+The Trial Expiry Card is a compact component designed for dashboards and sidebars. It shows a live countdown timer (days, hours, minutes, seconds) and a list of premium features to encourage upgrades.
+
+## Default Card
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="trial-expiry-card">
+      <TrialExpiryCardDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+  <include cwd lang="tsx" meta='title="src/components/trial-expiry-card-demo.tsx"'>src/components/trial-expiry-card-demo.tsx</include>
+  </Tab>
+
+</Tabs>
+
+## Installation
+
+<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
+  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/trial-expiry-card
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
+    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add trial-expiry-card
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add trial-expiry-card
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { TrialExpiryCard } from "@/components/billingsdk/trial-expiry-card";
+```
+
+### Basic Example with Live Countdown
+
+```tsx
+// Using trialEndDate for real-time countdown
+const trialEndDate = new Date("2025-10-15T23:59:59");
+
+<TrialExpiryCard
+  trialEndDate={trialEndDate}
+  onUpgrade={() => {
+    // Handle upgrade action
+    console.log("User wants to upgrade");
+  }}
+/>
+```
+
+### Using Days Remaining Only
+
+```tsx
+// No live countdown, just days remaining
+<TrialExpiryCard
+  daysRemaining={5}
+  onUpgrade={() => {
+    // Handle upgrade action
+  }}
+  upgradeButtonText="Go Premium"
+/>
+```
+
+### With Custom Features
+
+```tsx
+<TrialExpiryCard
+  trialEndDate="2025-10-20T23:59:59"
+  features={[
+    "Unlimited API requests",
+    "Advanced analytics dashboard",
+    "Priority email support",
+    "Custom domain integration",
+  ]}
+  onUpgrade={() => {
+    // Handle upgrade action
+  }}
+/>
+```
+
+### Custom Title and Description
+
+```tsx
+<TrialExpiryCard
+  trialEndDate="2025-10-20"
+  title="Premium Trial"
+  description="Experience all premium features"
+  upgradeButtonText="Subscribe Now"
+  onUpgrade={() => {
+    router.push("/upgrade");
+  }}
+/>
+```
+
+## Live Countdown Timer
+
+When using `trialEndDate`, the card displays a real-time countdown showing:
+- **Days** remaining
+- **Hours** remaining
+- **Minutes** remaining
+- **Seconds** remaining
+
+The timer automatically updates every second until the trial expires.
+
+## Status Badges
+
+The card displays automatic status badges based on days remaining:
+
+### Expired (0 days)
+- **Red "Expired" badge**
+- Timer shows all zeros
+
+### Critical (1-2 days)
+- **Red "Expiring Soon" badge**
+- Urgent visual emphasis
+
+### Warning (3-6 days)
+- **Gray "Active" badge**
+- Moderate visual emphasis
+
+### Info (7+ days)
+- **Blue "Active" badge**
+- Calm visual emphasis
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `trialEndDate` | `Date \| string` | ❌ | The trial end date (ISO string or Date object). Enables live countdown. |
+| `daysRemaining` | `number` | ❌ | Direct number of days remaining (alternative to trialEndDate). No live countdown. |
+| `onUpgrade` | `() => void \| Promise<void>` | ❌ | Callback function when upgrade button is clicked |
+| `className` | `string` | ❌ | Additional CSS classes for styling |
+| `title` | `string` | ❌ | Card title (default: "Trial Period") |
+| `description` | `string` | ❌ | Card description text |
+| `upgradeButtonText` | `string` | ❌ | Custom text for upgrade button (default: "Upgrade Now") |
+| `features` | `string[]` | ❌ | List of premium features to display (max 4 shown) |
+
+## Features
+
+- **Real-Time Countdown**: Live updating timer when using `trialEndDate`
+- **Flexible Display**: Use `trialEndDate` for live countdown or `daysRemaining` for static days
+- **Feature Highlights**: Display up to 4 premium features with checkmark icons
+- **Status Badges**: Automatic badge colors based on urgency
+- **Responsive Design**: Adapts to different container widths
+- **Dark Mode Support**: Fully themed for light and dark modes
+- **Loading States**: Built-in loading state for async upgrade actions
+
+## Notes
+
+- Either `trialEndDate` or `daysRemaining` must be provided
+- If both are provided, `daysRemaining` takes precedence
+- The countdown timer only appears when using `trialEndDate` and days > 0
+- Maximum of 4 features displayed (first 4 from array)
+- Timer updates every second using React's `useEffect` and `setInterval`
+- Fully supports dark mode theming
+
+## Example
+<include cwd lang="tsx" meta='title="src/components/trial-expiry-card-demo.tsx"'>src/components/trial-expiry-card-demo.tsx</include>
+
