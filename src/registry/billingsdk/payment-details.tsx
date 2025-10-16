@@ -5,7 +5,12 @@ import { Calendar, Shield, Check, CreditCard } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/contexts/theme-context"
 import { getThemeStyles } from "@/lib/themes"
-import {Country, State, City, IState, ICity} from 'country-state-city'
+import { Country, State, City, IState, ICity } from 'country-state-city'
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 /**
  * Detects the card type based on the card number
  * @param cardNumber - The card number to analyze
@@ -73,23 +78,23 @@ const formatExpiryDate = (value: string): string => {
 const validateLuhn = (cardNumber: string): boolean => {
   const number = cardNumber.replace(/\s/g, "")
   if (!number || !/^\d+$/.test(number)) return false
-  
+
   let sum = 0
   let shouldDouble = false
-  
+
   // Loop through values starting from the rightmost digit
   for (let i = number.length - 1; i >= 0; i--) {
     let digit = parseInt(number.charAt(i))
-    
+
     if (shouldDouble) {
       digit *= 2
       if (digit > 9) digit -= 9
     }
-    
+
     sum += digit
     shouldDouble = !shouldDouble
   }
-  
+
   return sum % 10 === 0
 }
 
@@ -104,13 +109,13 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
   const cardType = detectCardType(data.cardNumber || "")
 
   if (!data.nameOnCard?.trim()) errors.nameOnCard = "Name is required"
-  
+
   // Card number validation with Luhn algorithm
   const strippedCardNumber = data.cardNumber?.replace(/\s/g, "") || ""
   if (!strippedCardNumber || strippedCardNumber.length < 13 || !validateLuhn(strippedCardNumber)) {
     errors.cardNumber = "Valid card number is required"
   }
-  
+
   // Expiry date validation
   if (!data.validTill || !/^\d{2}\/\d{2}$/.test(data.validTill)) {
     errors.validTill = "Valid expiry date is required (MM/YY)"
@@ -118,28 +123,28 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
     const [month, year] = data.validTill.split("/")
     const expiryMonth = parseInt(month)
     const expiryYear = 2000 + parseInt(year)
-    
+
     const currentDate = new Date()
-    
+
     if (expiryMonth < 1 || expiryMonth > 12) {
       errors.validTill = "Invalid expiry month"
     } else {
       // Create date for last day of expiry month
       const expiryDate = new Date(expiryYear, expiryMonth, 0) // Day 0 gives last day of previous month
       expiryDate.setHours(23, 59, 59, 999) // Set to last moment of the day
-      
+
       if (expiryDate < currentDate) {
         errors.validTill = "Card has expired"
       }
     }
   }
-  
+
   // CVV validation based on card type
   const requiredCvvLength = cardType === "amex" ? 4 : 3
   if (!data.cvv || data.cvv.length !== requiredCvvLength) {
     errors.cvv = `Valid ${requiredCvvLength}-digit CVV is required`
   }
-  
+
   if (!data.firstName?.trim()) errors.firstName = "First name is required"
   if (!data.middleLastName?.trim()) errors.middleLastName = "Last name is required"
   if (!data.billingAddress?.trim()) errors.billingAddress = "Billing address is required"
@@ -148,7 +153,7 @@ const validateForm = (data: PaymentFormData, validators?: ValidationConfig): Par
   if (!data.pinCode || !pinCodePattern.test(data.pinCode)) {
     errors.pinCode = validators?.pinCodeErrorMessage || "Invalid postal code"
   }
-  
+
   // Contact number validation - configurable based on country
   const contactNumberPattern = validators?.contactNumber || /^\d{10}$/
   if (!data.contactNumber || !contactNumberPattern.test(data.contactNumber)) {
@@ -162,37 +167,37 @@ const CardLogo = ({ type }: { type: string }) => {
   switch (type) {
     case "visa":
       return (
-        <div className="flex items-center justify-center w-10 h-6 bg-blue-600 rounded text-white text-xs font-bold">
+        <div className="flex items-center justify-center w-8 h-4 bg-blue-600 rounded text-white text-[8px] font-bold select-none -ml-1">
           VISA
         </div>
       )
     case "mastercard":
       return (
         <div className="flex items-center">
-          <div className="w-5 h-5 bg-red-500 rounded-full"></div>
-          <div className="w-5 h-5 bg-orange-400 rounded-full -ml-2"></div>
+          <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+          <div className="w-4 h-4 bg-orange-400 rounded-full -ml-2"></div>
         </div>
       )
     case "amex":
       return (
-        <div className="flex items-center justify-center w-10 h-6 bg-blue-500 rounded text-white text-xs font-bold">
+        <div className="flex items-center justify-center w-8 h-4 bg-blue-500 rounded text-white text-[8px] font-bold select-none -ml-1">
           AMEX
         </div>
       )
     case "rupay":
       return (
-        <div className="flex items-center justify-center w-10 h-6 bg-green-600 rounded text-white text-xs font-bold">
+        <div className="flex items-center justify-center w-8 h-4 bg-green-600 rounded text-white text-[8px] font-bold select-none -ml-1">
           RuPay
         </div>
       )
     case "discover":
       return (
-        <div className="flex items-center justify-center w-10 h-6 bg-orange-600 rounded text-white text-xs font-bold">
+        <div className="flex items-center justify-center w-8 h-4 bg-orange-600 rounded text-white text-[8px] font-bold select-none -ml-1">
           DISC
         </div>
       )
     default:
-      return <CreditCard className="w-5 h-5 text-muted-foreground" />
+      return <CreditCard className="w-4 h-4 text-muted-foreground" />
   }
 }
 
@@ -317,7 +322,7 @@ export function PaymentDetails({
   const [availableCities, setAvailableCities] = useState<ICity[]>([])
 
   const allCountries = Country.getAllCountries()
-  
+
   // Initialize with empty strings, allowing initialData to override if provided
   const [formData, setFormData] = useState<PaymentFormData>({
     nameOnCard: "",
@@ -419,17 +424,17 @@ export function PaymentDetails({
 
   return (
     <>
-      <div 
-        className={cn("w-full max-w-xl rounded-3xl p-6 shadow-sm relative", className)}
+      <div
+        className={cn("w-full max-w-xl rounded-2xl border border-border p-7 shadow-sm relative", className)}
         style={themeStyles}
       >
         <div className="mb-6">
-        <h1 className="text-3xl font-bold text-foreground mb-2 font-sans">{title}</h1>
-        <p className="text-muted-foreground font-sans">{description}</p>
-      </div>
+          <h1 className="text-3xl font-bold text-foreground mb-2 font-sans">{title}</h1>
+          <p className="text-muted-foreground font-sans">{description}</p>
+        </div>
         {/* Card Details Section */}
-        <div className="mb-6 p-6 rounded-2xl border border-border bg-card/50">
-          <h2 className="text-2xl font-semibold text-foreground mb-5 font-sans">Card Details</h2>
+        <Card className="mb-6 p-6 rounded-2xl border bg-gradient-to-b from-accent to-card/50">
+          <h2 className="text-2xl font-semibold text-foreground mb-3 font-sans">Card Details</h2>
 
           <div className="space-y-4">
             {/* Name on Card and Valid Till */}
@@ -438,33 +443,32 @@ export function PaymentDetails({
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Name On Card <span className="text-destructive">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.nameOnCard || ""}
                   onChange={(e) => handleInputChange("nameOnCard", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.nameOnCard ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.nameOnCard ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
+                  placeholder="John Doe"
                 />
-                {errors.nameOnCard && <p className="text-destructive text-sm mt-1">{errors.nameOnCard}</p>}
+                {errors.nameOnCard && <p className="text-destructive text-xs mt-1">{errors.nameOnCard}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Valid Till <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-                  <input
+                  <Calendar className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
                     type="text"
                     placeholder="MM/YY"
                     value={formData.validTill || ""}
                     onChange={(e) => handleInputChange("validTill", e.target.value)}
-                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.validTill ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.validTill ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
-                {errors.validTill && <p className="text-destructive text-sm mt-1">{errors.validTill}</p>}
+                {errors.validTill && <p className="text-destructive text-xs mt-1">{errors.validTill}</p>}
               </div>
             </div>
 
@@ -478,46 +482,44 @@ export function PaymentDetails({
                   <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center">
                     <CardLogo type={cardType} />
                   </div>
-                  <input
+                  <Input
                     type="text"
                     placeholder="1234 5678 9012 3456"
                     value={formData.cardNumber || ""}
                     onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                    className={`w-full pl-20 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.cardNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-12 pr-5 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.cardNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
-                {errors.cardNumber && <p className="text-destructive text-sm mt-1">{errors.cardNumber}</p>}
+                {errors.cardNumber && <p className="text-destructive text-xs mt-1">{errors.cardNumber}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   CVV <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <Shield className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-                  <input
+                  <Shield className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
                     type="password"
                     placeholder="123"
                     value={formData.cvv || ""}
                     onChange={(e) => handleInputChange("cvv", e.target.value)}
-                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                      errors.cvv ? "border-destructive focus:ring-destructive/20" : "border-border"
-                    }`}
+                    className={`w-full pl-12 pr-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.cvv ? "border-destructive focus:ring-destructive/20" : "border-border"
+                      }`}
                   />
                 </div>
-                {errors.cvv && <p className="text-destructive text-sm mt-1">{errors.cvv}</p>}
+                {errors.cvv && <p className="text-destructive text-xs mt-1">{errors.cvv}</p>}
               </div>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Divider between sections */}
         <div className="border-t border-border my-6"></div>
 
         {/* Billing Details Section */}
-        <div className="mb-6 p-6 rounded-2xl border border-border bg-card/50">
-          <h2 className="text-2xl font-semibold text-foreground mb-5 font-sans">Billing Details</h2>
+        <Card className="mb-6 p-6 rounded-2xl border bg-gradient-to-b from-accent to-card/50">
+          <h2 className="text-2xl font-semibold text-foreground mb-3 font-sans">Billing Details</h2>
 
           <div className="space-y-4">
             {/* First Name and Middle & Last Name */}
@@ -526,29 +528,29 @@ export function PaymentDetails({
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   First Name <span className="text-destructive">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.firstName || ""}
                   onChange={(e) => handleInputChange("firstName", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.firstName ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.firstName ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
+                  placeholder="John"
                 />
-                {errors.firstName && <p className="text-destructive text-sm mt-1">{errors.firstName}</p>}
+                {errors.firstName && <p className="text-destructive text-xs mt-1">{errors.firstName}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Middle & Last Name <span className="text-destructive">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   value={formData.middleLastName || ""}
                   onChange={(e) => handleInputChange("middleLastName", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.middleLastName ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.middleLastName ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
+                  placeholder="Doe"
                 />
-                {errors.middleLastName && <p className="text-destructive text-sm mt-1">{errors.middleLastName}</p>}
+                {errors.middleLastName && <p className="text-destructive text-xs mt-1">{errors.middleLastName}</p>}
               </div>
             </div>
 
@@ -556,50 +558,59 @@ export function PaymentDetails({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">Country</label>
-                <select
-                  value={formData.country || ""}
-                  onChange={(e) => handleInputChange("country", e.target.value)}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans"
+                <Select
+                  value={formData.country || "Country"}
+                  onValueChange={(e) => handleInputChange("country", e)}
                 >
-                  <option value="">Country</option>
-                  {allCountries.map((country) => (
-                    <option key={country.isoCode} value={country.name}>
-                      {country.name}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.country || "Country"}</SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {allCountries.map((country) => (
+                        <SelectItem key={country.isoCode} value={country.name}>
+                          {country.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">State</label>
-                <select
-                  value={formData.state || ""}
-                  onChange={(e) => handleInputChange("state", e.target.value)}
+                <Select
+                  value={formData.state || "State"}
+                  onValueChange={(e) => handleInputChange("state", e)}
                   disabled={!selectedCountryCode || availableStates.length === 0}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <option value="">State</option>
-                  {availableStates.map((state) => (
-                    <option key={state.isoCode} value={state.name}>
-                      {state.name}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.state || "State"}</SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {availableStates.map((state) => (
+                        <SelectItem key={state.isoCode} value={state.name}>
+                          {state.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">City</label>
-                <select
-                  value={formData.city || ""}
-                  onChange={(e) => handleInputChange("city", e.target.value)}
+                <Select
+                  value={formData.city || "State"}
+                  onValueChange={(e) => handleInputChange("city", e)}
                   disabled={!selectedStateCode || availableCities.length === 0}
-                  className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <option value="">City</option>
-                  {availableCities.map((city) => (
-                    <option key={city.name} value={city.name}>
-                      {city.name}
-                    </option>
-                  ))}
-                </select>
+                  <SelectTrigger className="w-full px-4 py-3 border border-border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border custom-select appearance-none font-sans truncate">{formData.city || "City"}</SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {availableCities.map((city) => (
+                        <SelectItem key={city.name} value={city.name}>
+                          {city.name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -608,15 +619,15 @@ export function PaymentDetails({
               <label className="block text-sm font-medium text-muted-foreground mb-2">
                 Billing Address <span className="text-destructive">*</span>
               </label>
-              <textarea
+              <Textarea
                 value={formData.billingAddress || ""}
                 onChange={(e) => handleInputChange("billingAddress", e.target.value)}
                 rows={3}
-                className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border resize-none font-sans ${
-                  errors.billingAddress ? "border-destructive focus:ring-destructive/20" : "border-border"
-                }`}
+                className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border resize-none font-sans ${errors.billingAddress ? "border-destructive focus:ring-destructive/20" : "border-border"
+                  }`}
+                placeholder="B 56 James St"
               />
-              {errors.billingAddress && <p className="text-destructive text-sm mt-1">{errors.billingAddress}</p>}
+              {errors.billingAddress && <p className="text-destructive text-xs mt-1">{errors.billingAddress}</p>}
             </div>
 
             {/* Pin Code and Contact Number */}
@@ -625,35 +636,33 @@ export function PaymentDetails({
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Pin Code <span className="text-destructive">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   placeholder="123456"
                   value={formData.pinCode || ""}
                   onChange={(e) => handleInputChange("pinCode", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.pinCode ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.pinCode ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
-                {errors.pinCode && <p className="text-destructive text-sm mt-1">{errors.pinCode}</p>}
+                {errors.pinCode && <p className="text-destructive text-xs mt-1">{errors.pinCode}</p>}
               </div>
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-2">
                   Phone Number <span className="text-destructive">*</span>
                 </label>
-                <input
+                <Input
                   type="text"
                   placeholder="9876543210"
                   value={formData.contactNumber || ""}
                   onChange={(e) => handleInputChange("contactNumber", e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${
-                    errors.contactNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
-                  }`}
+                  className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground font-medium focus:ring-2 focus:ring-ring focus:border-ring transition-all duration-200 hover:border-border font-sans ${errors.contactNumber ? "border-destructive focus:ring-destructive/20" : "border-border"
+                    }`}
                 />
-                {errors.contactNumber && <p className="text-destructive text-sm mt-1">{errors.contactNumber}</p>}
+                {errors.contactNumber && <p className="text-destructive text-xs mt-1">{errors.contactNumber}</p>}
               </div>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Display general error message */}
         {errors.general && (
@@ -661,24 +670,25 @@ export function PaymentDetails({
             {errors.general}
           </div>
         )}
-        
+
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
-          <button 
+          <Button
             className="px-6 py-3 text-muted-foreground font-medium rounded-xl border border-border bg-background hover:bg-muted transition-all duration-200 hover:border-border/80 font-sans"
             onClick={onDiscard}
+            variant={"outline"}
             disabled={isSubmitting || isLoading}
           >
             {discardButtonText}
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={handleSubmit}
+            variant={"default"}
             disabled={isSubmitting || isLoading}
-            className={`px-6 py-3 font-medium rounded-xl transition-all duration-300 shadow-sm hover:shadow-lg font-sans flex items-center gap-2 transform hover:scale-105 active:scale-95 ${
-              isSubmitting || isLoading 
-                ? "bg-primary text-primary-foreground cursor-not-allowed opacity-70" 
-                : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25"
-            }`}
+            className={`px-6 py-3 font-medium rounded-xl transition-all duration-300 font-sans flex items-center gap-2 transform ${isSubmitting || isLoading
+              ? "bg-primary text-primary-foreground cursor-not-allowed opacity-70"
+              : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25"
+              }`}
           >
             {isSubmitting || isLoading ? (
               <>
@@ -688,9 +698,9 @@ export function PaymentDetails({
             ) : (
               submitButtonText
             )}
-          </button>
+          </Button>
         </div>
-      </div>
+      </div >
 
       {showConfirmation && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-in fade-in duration-300">
@@ -701,7 +711,7 @@ export function PaymentDetails({
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2 font-sans">{confirmationTitle}</h3>
               <p className="text-muted-foreground font-sans">{confirmationMessage}</p>
-              <button 
+              <button
                 onClick={onConfirmationClose}
                 className="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-all duration-200 transform hover:scale-105 active:scale-95"
               >
@@ -710,7 +720,8 @@ export function PaymentDetails({
             </div>
           </div>
         </div>
-      )}
+      )
+      }
     </>
   )
 }
