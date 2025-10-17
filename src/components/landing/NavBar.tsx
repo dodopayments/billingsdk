@@ -57,9 +57,8 @@ const NavBar = () => {
             }`
           )}
         >
-          <Link href="/" className="cursor-pointer">
+          {/* Logo */}
             <Logo />
-          </Link>
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
