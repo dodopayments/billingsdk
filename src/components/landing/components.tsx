@@ -225,10 +225,10 @@ export function ComponentsSection() {
                 />
               </TabsList>
 
-              <div className="grid md:grid-cols-3 xl:grid-cols-4 mt-4 w-full gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mt-4 w-full gap-2">
                 <Button
                   variant={"default"}
-                  className="w-full col-span-1 xl:col-span-4 text-sm py-2"
+                  className="w-full col-span-2 md:col-span-1 xl:col-span-4 text-sm py-2"
                   onClick={handleViewComponent}
                 >
                   View Component

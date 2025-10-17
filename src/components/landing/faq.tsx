@@ -32,10 +32,10 @@ export const faqData = [
 
 export const Faq = () => {
   return (
-    <div className="min-h-[30rem] flex items-center justify-center flex-col my-24 w-full gap-10 md:gap-0 max-h-fit p-4 ">
-      <div className="flex gap-2 mb-8 h-fit  items-center justify-center flex-col w-full md:w-3/4 ">
+    <div className="min-h-[30rem] flex items-center justify-center flex-col my-24 w-full gap-8 md:gap-0 max-h-fit p-4">
+      <div className="flex gap-2 md:mb-8 h-fit  items-center justify-center flex-col w-full md:w-3/4 ">
         <ShineButton Icon={CircleQuestionMarkIcon} className="" label="FAQs" />
-        <h2 className="text-3xl sm:text-3xl font-display md:text-5xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <h2 className="text-3xl sm:text-3xl font-display md:text-5xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000 text-center">
           You got questions? We got answers
         </h2>
       </div>

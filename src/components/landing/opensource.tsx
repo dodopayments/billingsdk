@@ -28,7 +28,7 @@ export function OpenSource() {
       <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary text-center mb-4">
         Join our community
       </h2>
-      <p className="text-sm mt-2 text-muted-foreground max-w-2xl mx-auto tracking-tight text-center mb-8">
+      <p className="text-sm mt-2 text-muted-foreground max-w-2xl mx-auto tracking-tight text-center mb-8 px-8 xl:px-0">
         Connect with other developers, get help, and contribute to the project
       </p>
       <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
