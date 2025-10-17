@@ -57,9 +57,8 @@ const NavBar = () => {
             }`
           )}
         >
-          <>
+          {/* Logo */}
             <Logo />
-          </>
 
           {/* Right side actions */}
           <div className="flex items-center gap-2">
