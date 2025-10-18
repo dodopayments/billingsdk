@@ -31,7 +31,9 @@
     "@billingsdk/proration-preview",
     "@billingsdk/proration-preview",
     "@billingsdk/upcoming-charges",
-    "@billingsdk/trial-expiry-card"
+    "@billingsdk/coupon",
+    "@billingsdk/limited-offer-dialog",
+    "@billingsdk/upcoming-charges"
   ],
   "files": []
 }
