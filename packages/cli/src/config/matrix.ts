@@ -17,7 +17,7 @@ export const supportedProviders: SupportedProvider[] = [
 // Matrix of valid framework/provider combinations
 const VALID_COMBINATIONS: Record<SupportedProvider, SupportedFramework[]> = {
   dodopayments: ["nextjs", "express", "react", "fastify", "hono"],
-  stripe: ["nextjs", "express", "react", "hono"]
+  stripe: ["nextjs", "express", "react", "hono", "fastify"]
 };
 
 export const isValidCombination = (framework: SupportedFramework, provider: SupportedProvider): boolean => {
