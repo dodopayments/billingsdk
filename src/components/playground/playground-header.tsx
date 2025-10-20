@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import { Upload } from "lucide-react";
 import { usePlayground } from "./playground-context";
-import { componentRegistry } from "./component-registry";
+import { getComponentList, discoverComponent, type ComponentListItem } from "./auto-discovery";
 import { PlaygroundLogo } from "./playground-logo";
 
 import Link from "next/link";
@@ -14,22 +14,58 @@ import Link from "next/link";
 export function PlaygroundHeader() {
   const { state, setSelectedComponent, updateCode, updateStyles } = usePlayground();
   const [selectedCategory] = useState<string>("all");
+  const [componentList, setComponentList] = useState<ComponentListItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingComponent, setIsLoadingComponent] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Load lightweight component list on mount (no actual imports)
+  useEffect(() => {
+    async function loadComponentList() {
+      setIsLoading(true);
+      const list = await getComponentList();
+      setComponentList(list);
+      setIsLoading(false);
+    }
+    loadComponentList();
+  }, []);
 
   const categories = [
     { id: "pricing", label: "Pricing Tables" },
     { id: "subscription", label: "Subscription" },
+    { id: "payment", label: "Payment" },
     { id: "usage", label: "Usage & Billing" },
     { id: "ui", label: "UI Components" },
   ];
 
   const filteredComponents = selectedCategory === "all" 
-    ? componentRegistry 
-    : componentRegistry.filter(comp => comp.category === selectedCategory);
+    ? componentList 
+    : componentList.filter((comp: ComponentListItem) => comp.category === selectedCategory);
 
-  const handleComponentChange = (componentId: string) => {
-    const component = componentRegistry.find(comp => comp.id === componentId);
-    if (component) {
-      setSelectedComponent(component);
+  const handleComponentChange = async (componentId: string) => {
+    setIsLoadingComponent(true);
+    setLoadError(null);
+    
+    console.log(`[PlaygroundHeader] Loading component: ${componentId}`);
+    
+    try {
+      const fullComponent = await discoverComponent(componentId);
+      if (fullComponent) {
+        console.log(`[PlaygroundHeader] Component loaded successfully:`, componentId);
+        setSelectedComponent(fullComponent);
+        setLoadError(null);
+        setIsLoadingComponent(false);
+      } else {
+        const errorMsg = `Failed to load component: ${componentId}`;
+        console.error(`[PlaygroundHeader] ${errorMsg}`);
+        setLoadError(errorMsg);
+        setIsLoadingComponent(false);
+      }
+    } catch (error) {
+      const errorMsg = `Error loading component ${componentId}: ${error}`;
+      console.error(`[PlaygroundHeader]`, errorMsg, error);
+      setLoadError(errorMsg);
+      setIsLoadingComponent(false);
     }
   };
 
@@ -86,10 +122,18 @@ export function PlaygroundHeader() {
           </Link>
 
           {/* Component Selector */}
-          <Select value={state.selectedComponent?.id || ""} onValueChange={handleComponentChange}>
+          <Select 
+            value={state.selectedComponent?.id || ""} 
+            onValueChange={handleComponentChange} 
+            disabled={isLoading || isLoadingComponent}
+          >
             <SelectTrigger className="w-64">
-              <SelectValue placeholder="Select a component">
-                {state.selectedComponent?.name || "Select a component"}
+              <SelectValue placeholder={isLoading ? "Loading components..." : "Select a component"}>
+                {loadError 
+                  ? "Error loading component" 
+                  : isLoadingComponent 
+                    ? "Loading component..." 
+                    : state.selectedComponent?.name || (isLoading ? "Loading..." : "Select a component")}
               </SelectValue>
             </SelectTrigger>
             <SelectContent className="w-64 min-w-64 max-h-96 overflow-y-auto">
@@ -99,8 +143,8 @@ export function PlaygroundHeader() {
                     {category.label}
                   </div>
                   {filteredComponents
-                    .filter(comp => comp.category === category.id || category.id === "all")
-                    .map(component => (
+                    .filter((comp: ComponentListItem) => comp.category === category.id || category.id === "all")
+                    .map((component: ComponentListItem) => (
                       <SelectItem 
                         key={component.id} 
                         value={component.id}

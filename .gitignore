@@ -30,4 +30,6 @@ next-env.d.ts
 
 # sitemap files
 public/sitemap*.xml
+public/sitemap-0.xml
 public/robots.txt
+sitemap.xml
