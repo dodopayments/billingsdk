@@ -57,6 +57,7 @@ npx @billingsdk/cli add <component-name>
 | Next.js    | Yes           | Yes           |
 | Express.js | Yes           | Yes           |
 | Hono       | Yes           | Yes           |
+| NestJS     | Yes           | Yes           |
 | React      | Yes           | Yes           |
 | Fastify    | Yes           | Coming soon   |
 
@@ -83,7 +84,7 @@ npx @billingsdk/cli init
 
 ### What it does
 
-1. **Framework Selection**: Choose your preferred framework (Next.js, Express.js, Hono, Fastify)
+1. **Framework Selection**: Choose your preferred framework (Next.js, Express.js, Hono, NestJS, Fastify)
 2. **Provider Selection**: Select your payment provider (currently Dodo Payments)
 3. **Template Installation**: Downloads and installs framework-specific templates
 4. **Dependency Management**: Automatically installs required dependencies
@@ -98,14 +99,14 @@ npx @billingsdk/cli init
 ```
 
 You'll be prompted to select:
-- **Framework**: Next.js (with App Router), Express.js (Node.js web framework), Hono (lightweight web framework for edge runtimes), Fastify (fast and low overhead web framework)
+- **Framework**: Next.js (with App Router), Express.js (Node.js web framework), Hono (lightweight web framework for edge runtimes), NestJS (progressive Node.js framework), Fastify (fast and low overhead web framework)
 - **Payment Provider**: Dodo Payments or Stripe (Stripe currently supported for Express.js and Hono)
 
 ### Generated Files (Dodo Payments)
 
 After running `init` with Dodo Payments, you'll get:
 
-<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Hono + Dodo Payments', 'Fastify + Dodo Payments']}>
+<Tabs items={['Next.js + Dodo Payments', 'Express.js + Dodo Payments', 'React.js + Dodo Payments', 'Hono + Dodo Payments', 'NestJS + Dodo Payments', 'Fastify + Dodo Payments']}>
   <Tab value="Next.js + Dodo Payments">
     ```
     your-project/
@@ -170,6 +171,23 @@ After running `init` with Dodo Payments, you'll get:
     .env.example
     ```
   </Tab>
+  <Tab value="NestJS + Dodo Payments">
+    ```
+    your-project/
+    ├── lib/
+    │   └── dodopayments.ts
+    └── modules/
+        └── dodopayments/
+            ├── checkout.controller.ts
+            ├── customer.controller.ts
+            ├── dodopayments.module.ts
+            ├── payments.controller.ts
+            ├── products.controller.ts
+            ├── subscriptions.controller.ts
+            └── webhook.controller.ts
+    .env.example
+    ```
+  </Tab>
   <Tab value="Fastify + Dodo Payments">
     ```
     your-project/
@@ -189,6 +207,562 @@ After running `init` with Dodo Payments, you'll get:
   </Tab>
 </Tabs>
 
+### Generated Files (Stripe)
+
+After running `init` with Stripe, you'll get:
+
+<Tabs items={['Next.js + Stripe', 'React.js + Stripe', 'Express.js + Stripe', 'Hono + Stripe', 'NestJS + Stripe']}>
+  <Tab value="Next.js + Stripe">
+    ```
+    your-project/
+    ├── app/api/
+    │   └── (stripe)/
+    │       ├── checkout
+    │       ├── customer
+    │       ├── payments
+    │       ├── products
+    │       ├── subscriptions
+    │       └── webhook
+    ├── hooks/
+    │   └── useBilling.ts
+    ├── lib/
+    │   └── stripe.ts
+    .env.example
+    ```
+  </Tab>
+  <Tab value="React.js + Stripe">
+    ```
+    your-project/
+    ├── hooks/
+    │   └── stripe/
+    │       └── useBilling.ts
+    ├── lib/
+    │   └── stripe.ts
+    .env.example
+    ```
+  </Tab>
+  <Tab value="Express.js + Stripe">
+    ```
+    your-project/
+    ├── lib/
+    │   └── stripe.ts
+    └── routes/
+        └── stripe/
+            ├── route.ts
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
+    ```
+  </Tab>
+  <Tab value="Hono + Stripe">
+    ```
+    your-project/
+    ├── lib/
+    │   └── stripe.ts
+    └── routes/
+        ├── route.ts
+        └── stripe/
+            ├── checkout.ts
+            ├── customer.ts
+            ├── payments.ts
+            ├── products.ts
+            ├── subscriptions.ts
+            └── webhook.ts
+    .env.example
+    ```
+  </Tab>
+  <Tab value="NestJS + Stripe">
+    ```
+    your-project/
+    ├── lib/
+    │   └── stripe.ts
+    └── modules/
+        └── stripe/
+            ├── checkout.controller.ts
+            ├── customer.controller.ts
+            ├── payments.controller.ts
+            ├── products.controller.ts
+            ├── stripe.module.ts
+            ├── subscriptions.controller.ts
+            └── webhook.controller.ts
+    .env.example
+    ```
+  </Tab>
+</Tabs>
+
+### API Routes Included
+
+The init command sets up comprehensive API routes for:
+
+- **Checkout**: Payment processing and order creation
+- **Customer Management**: Customer data and subscription handling
+- **Product Management**: Product catalog and pricing
+- **Webhook Handling**: Payment provider webhook integration
+
+
+### Setup Instructions
+
+<details>
+<summary><strong>Next.js Setup Instructions</strong></summary>
+
+### Basic Next.js Integration
+
+After running `@billingsdk/cli init` and selecting Next.js, the CLI scaffolds API routes under `app/api/(dodopayments)/*` and adds `lib/dodopayments.ts` and `hooks/useBilling.ts`.
+
+- Routes are auto-registered by the App Router. No extra wiring is required.
+- Client components can call the API directly or use `hooks/useBilling.ts`.
+
+#### Environment Configuration
+
+Copy `.env.example` to `.env.local` in the project root and set:
+
+```bash
+# DodoPayments
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# App URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+#### Using the billing hook (optional)
+
+```tsx
+// app/(or any client component)
+"use client"
+import { useEffect } from 'react'
+import { useBilling } from "@/app/hooks/useBilling"
+
+export default function BillingExample() {
+  const { fetchProducts } = useBilling()
+
+  useEffect(() => {
+    fetchProducts().catch(console.error)
+  }, [fetchProducts])
+
+  return null
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Express.js Setup Instructions</strong></summary>
+
+### Basic Express.js Integration
+
+After running `@billingsdk/cli init` and selecting Express.js, you'll need to integrate the generated routes into your Express application:
+
+```javascript
+// app.js or server.js
+const express = require('express');
+const { dodopaymentsRouter } = require('./src/routes/dodopayments/route');
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Mount DodoPayments routes
+app.use('/api/dodopayments', dodopaymentsRouter);
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+#### Environment Configuration
+
+Create a `.env` file in your project root:
+
+```bash
+# DodoPayments Configuration
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+```
+
+#### TypeScript Support
+
+The template includes full TypeScript support. To use with TypeScript:
+
+```bash
+npm install -D typescript @types/node ts-node nodemon
+```
+
+Create a `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Update your `package.json` scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>Hono Setup Instructions</strong></summary>
+
+### Basic Hono Integration
+
+After running `@billingsdk/cli init` and selecting Hono, you'll need to integrate the generated routes into your Hono application:
+
+```typescript
+// src/index.ts
+import { Hono } from 'hono'
+import { dodopaymentsRouter } from './routes/route'
+
+const app = new Hono()
+
+// Mount DodoPayments routes
+app.route('/api/dodopayments', dodopaymentsRouter)
+
+// Start server
+export default app
+```
+
+#### Environment Configuration
+
+Create a `.env` file in your project root:
+
+```bash
+# DodoPayments Configuration
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# Server Configuration
+PORT=3000
+```
+
+#### Running with Bun
+
+Hono works great with Bun. To run your application:
+
+
+Add this to your `package.json` scripts:
+
+```json
+{
+  "scripts": {
+    "dev": "bun run --hot src/routes/route.ts"
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>NestJS Setup Instructions</strong></summary>
+
+### Basic NestJS Integration
+
+After running `@billingsdk/cli init` and selecting NestJS, you'll need to integrate the generated modules into your NestJS application:
+
+```typescript
+// src/app.module.ts
+import { Module } from '@nestjs/common';
+import { DodoPaymentsModule } from './modules/dodopayments/dodopayments.module';
+import { StripeModule } from './modules/stripe/stripe.module';
+
+@Module({
+  imports: [DodoPaymentsModule, StripeModule],
+})
+export class AppModule {}
+```
+
+#### Environment Configuration
+
+Create a `.env` file in your project root:
+
+```bash
+# DodoPayments Configuration
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# Stripe Configuration
+STRIPE_API_KEY=your_api_key_here
+STRIPE_WEBHOOK_SECRET=your_webhook_secret_here
+
+# Server Configuration
+PORT=3000
+```
+
+</details>
+
+<details>
+<summary><strong>React.js Setup Instructions</strong></summary>
+
+### Basic React.js Integration
+
+After running `@billingsdk/cli init` and selecting **React.js**, the CLI generates a `lib/dodopayments.ts` and a `hooks/useBilling.ts` file for your project.
+
+You can use the `useBilling` hook directly in your components to interact with the backend API:
+
+```tsx
+// src/App.tsx or any component
+import React, { useEffect } from 'react'
+import { useBilling } from './hooks/useBilling'
+
+function App() {
+  const { fetchProducts, loading, error } = useBilling()
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const products = await fetchProducts()
+        console.log('Products:', products)
+      } catch (err) {
+        console.error('Failed to fetch products:', err)
+      }
+    }
+    loadProducts()
+  }, [fetchProducts])
+
+  if (loading) return <p>Loading...</p>
+  if (error) return <p style={{ color: 'red' }}>{error}</p>
+
+  return <h1>Welcome to DodoPayments + React</h1>
+}
+
+export default App
+```
+
+#### Environment Configuration
+
+Create a `.env` (or `.env.local` if using Vite) in your project root:
+
+```bash
+# Backend API URL (Express.js server or Next.js API routes)
+VITE_BASE_URL=http://localhost:3000
+```
+
+</details>
+
+<details>
+<summary><strong>Fastify Setup Instructions</strong></summary>
+
+### Basic Fastify Integration
+
+After running `@billingsdk/cli init` and selecting Fastify, integrate the generated routes into your Fastify application.
+
+```ts
+// src/index.ts
+import Fastify from 'fastify'
+import cors from '@fastify/cors'
+import helmet from '@fastify/helmet'
+import { dodopaymentsRoutes } from './routes/dodopayments/route'
+
+const app = Fastify({ logger: true })
+
+// Plugins (optional but recommended)
+await app.register(cors)
+await app.register(helmet)
+
+// Mount DodoPayments routes
+app.register(dodopaymentsRoutes, { prefix: '/api/dodopayments' })
+
+const start = async () => {
+  try {
+    const port = Number(process.env.PORT) || 3000
+    await app.listen({ port, host: '0.0.0.0' })
+    app.log.info(`Server running on port ${port}`)
+  } catch (err) {
+    app.log.error(err)
+    process.exit(1)
+  }
+}
+
+start()
+```
+
+#### Environment Configuration
+
+Create a `.env` file in your project root:
+
+```bash
+# DodoPayments Configuration
+DODO_PAYMENTS_API_KEY=your_api_key_here
+DODO_PAYMENTS_ENVIRONMENT=test_mode
+DODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here
+
+# Server Configuration
+PORT=3000
+```
+
+#### Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  }
+}
+```
+
+</details>
+
+
+
+### Dependencies Installed (Dodo Payments)
+
+<Tabs items={['Next.js', 'Express.js', 'React.js', 'Hono', 'NestJS', 'Fastify']}>
+  <Tab value="Next.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Express.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "express": "latest",
+        "@types/express": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="React.js">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Hono">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "hono": "latest",
+        "@types/bun": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="NestJS">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "@nestjs/common": "latest",
+        "@nestjs/core": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Fastify">
+    ```json
+    {
+      "dependencies": {
+        "dodopayments": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "fastify": "latest",
+        "fastify-raw-body": "latest"
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Dependencies Installed (Stripe)
+
+<Tabs items={['Express.js', 'Hono', 'NestJS']}>
+  <Tab value="Express.js">
+    ```json
+    {
+      "dependencies": {
+        "stripe": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "express": "latest",
+        "@types/express": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="Hono">
+    ```json
+    {
+      "dependencies": {
+        "stripe": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "hono": "latest",
+        "@types/bun": "latest"
+      }
+    }
+    ```
+  </Tab>
+  <Tab value="NestJS">
+    ```json
+    {
+      "dependencies": {
+        "stripe": "latest",
+        "standardwebhooks": "latest",
+        "zod": "latest",
+        "@nestjs/common": "latest",
+        "@nestjs/core": "latest"
+      }
+    }
+    ```
+  </Tab>
+</Tabs> 
 ### Generated Files (Stripe)
 
 After running `init` with Stripe, you'll get:
@@ -363,7 +937,8 @@ NODE_ENV=development
 The template includes full TypeScript support. To use with TypeScript:
 
 ```bash
-npm install -D typescript @types/node ts-node nodemon
+
+
 ```
 
 Create a `tsconfig.json`:

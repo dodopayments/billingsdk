@@ -444,6 +444,167 @@
         "hono",
         "@hono/zod-validator"
       ]
+    },
+    {
+      "name": "nestjs-dodopayments",
+      "description": "DodoPayments template for NestJS",
+      "framework": "nestjs",
+      "files": [
+        {
+          "path": "packages/templates/nestjs/tsconfig.json",
+          "content": "TypeScript configuration for NestJS",
+          "type": "template",
+          "target": "tsconfig.json"
+        },
+        {
+          "path": "packages/templates/nestjs/src/lib/dodopayments.ts",
+          "content": "DodoPayments library for NestJS",
+          "type": "template",
+          "target": "lib/dodopayments.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/dodopayments.module.ts",
+          "content": "Main DodoPayments module for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/dodopayments.module.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/checkout.controller.ts",
+          "content": "Checkout controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/checkout.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/customer.controller.ts",
+          "content": "Customer management controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/customer.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/payments.controller.ts",
+          "content": "Payment controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/payments.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/products.controller.ts",
+          "content": "Product management controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/products.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/subscriptions.controller.ts",
+          "content": "Subscription management controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/subscriptions.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/dodopayments/webhook.controller.ts",
+          "content": "Webhook handling controller for NestJS",
+          "type": "template",
+          "target": "modules/dodopayments/webhook.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/.env.example",
+          "content": "DodoPayments .env.example for NestJS",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "dodopayments",
+        "standardwebhooks",
+        "zod",
+        "@nestjs/common",
+        "@nestjs/core",
+        "@nestjs/platform-express",
+        "reflect-metadata",
+        "rxjs",
+        "@types/express",
+        "@nestjs/cli",
+        "typescript",
+        "ts-node"
+      ]
+    },
+    {
+      "name": "nestjs-stripe",
+      "description": "Stripe template for NestJS",
+      "framework": "nestjs",
+      "files": [
+        {
+          "path": "packages/templates/nestjs/tsconfig.json",
+          "content": "TypeScript configuration for NestJS",
+          "type": "template",
+          "target": "tsconfig.json"
+        },
+        {
+          "path": "packages/templates/nestjs/src/lib/stripe.ts",
+          "content": "Stripe client setup for NestJS",
+          "type": "template",
+          "target": "lib/stripe.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/stripe.module.ts",
+          "content": "Main Stripe module for NestJS",
+          "type": "template",
+          "target": "modules/stripe/stripe.module.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/checkout.controller.ts",
+          "content": "Stripe checkout controller",
+          "type": "template",
+          "target": "modules/stripe/checkout.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/customer.controller.ts",
+          "content": "Stripe customer controller",
+          "type": "template",
+          "target": "modules/stripe/customer.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/payments.controller.ts",
+          "content": "Stripe payments controller",
+          "type": "template",
+          "target": "modules/stripe/payments.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/products.controller.ts",
+          "content": "Stripe product controller",
+          "type": "template",
+          "target": "modules/stripe/products.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/subscriptions.controller.ts",
+          "content": "Stripe subscription controller",
+          "type": "template",
+          "target": "modules/stripe/subscriptions.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/src/modules/stripe/webhook.controller.ts",
+          "content": "Webhook handling controller for NestJS",
+          "type": "template",
+          "target": "modules/stripe/webhook.controller.ts"
+        },
+        {
+          "path": "packages/templates/nestjs/.env.example",
+          "content": "Stripe .env.example for NestJS",
+          "type": "template",
+          "target": ".env.example"
+        }
+      ],
+      "dependencies": [
+        "stripe",
+        "zod",
+        "@nestjs/common",
+        "@nestjs/core",
+        "@nestjs/platform-express",
+        "reflect-metadata",
+        "rxjs",
+        "@types/express",
+        "@nestjs/cli",
+        "typescript",
+        "ts-node"
+      ]
     }
   ]
 }

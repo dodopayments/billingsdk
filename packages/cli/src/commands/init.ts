@@ -11,7 +11,8 @@ const getFrameworkLabel = (fw: SupportedFramework, isDetected: boolean = false) 
     express: "Express.js", 
     react: "React.js",
     hono: "Hono.js",
-    fastify: "Fastify.js"
+    fastify: "Fastify.js",
+    nestjs: "NestJS"
   };
   const suffix = isDetected ? " (detected)" : "";
   return frameworkNames[fw] + suffix;

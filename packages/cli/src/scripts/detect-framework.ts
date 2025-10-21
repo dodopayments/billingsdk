@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { findUpSync } from "find-up"; // find a file path by walking up parent directories
 
-export const detectFramework = (): "nextjs" | "express" | "react" | "hono" | "fastify" | null => {
+export const detectFramework = (): "nextjs" | "express" | "react" | "hono" | "fastify" | "nestjs" | null => {
     try {
 
         const pkgPath = findUpSync("package.json");
@@ -35,6 +35,20 @@ export const detectFramework = (): "nextjs" | "express" | "react" | "hono" | "fa
         //  express detection
         if (deps.express) {
             return "express";
+        }
+        //  nestjs detection
+        if (
+            deps["@nestjs/core"] ||
+            deps["@nestjs/common"] ||
+            deps["@nestjs/platform-express"] ||
+            hasFile("nest-cli.json") ||
+            hasFile("tsconfig.json") && pkg.scripts && (
+                pkg.scripts.start?.includes("nest") ||
+                pkg.scripts.build?.includes("nest") ||
+                pkg.scripts.dev?.includes("nest")
+            )
+        ) {
+            return "nestjs";
         }
         //  reactjs detection
         if (deps.react) {
