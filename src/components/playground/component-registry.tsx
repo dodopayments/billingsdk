@@ -20,6 +20,7 @@ import { PricingTableSeven } from "@/components/billingsdk/pricing-table-seven";
 import { LimitedOfferDialog } from "@/components/billingsdk/limited-offer-dialog";
 import { PaymentDetailsTwo } from "../billingsdk/payment-details-two";
 import { TrialExpiryCard } from "@/components/billingsdk/trial-expiry-card";
+import { BillingScreen } from "@/components/billingsdk/billing-screen";
 
 export const componentRegistry: ComponentConfig[] = [
   {
@@ -2062,6 +2063,50 @@ export const componentRegistry: ComponentConfig[] = [
         "Priority email support",
         "Custom domain integration",
       ],
+    },
+  },
+  {
+    id: "billing-screen",
+    name: "Billing Screen",
+    description: "Complete billing dashboard with credit balance, plan details, and interactive credit card visual",
+    category: "billing",
+    component: BillingScreen,
+    imports: ["@/components/billingsdk/billing-screen"],
+    defaultCode: `<BillingScreen
+  planName="Premium Plan"
+  planPrice="$20/mo"
+  renewalDate="Oct 7, 2025"
+  totalBalance="$6.59"
+  username="rajoninternet"
+  giftedCredits="$1.73"
+  monthlyCredits="$3.13"
+  monthlyCreditsLimit="$20.00"
+  purchasedCredits="$0.00"
+  resetDays={4}
+  autoRechargeEnabled={false}
+  onViewPlans={() => console.log("View Plans clicked")}
+  onCancelPlan={() => console.log("Cancel Plan clicked")}
+  onBuyCredits={() => console.log("Buy Credits clicked")}
+  onEnableAutoRecharge={() => console.log("Enable Auto-recharge clicked")}
+  className="w-full"
+/>`,
+    defaultProps: {
+      planName: "Premium Plan",
+      planPrice: "$20/mo",
+      renewalDate: "Oct 7, 2025",
+      totalBalance: "$6.59",
+      username: "rajoninternet",
+      giftedCredits: "$1.73",
+      monthlyCredits: "$3.13",
+      monthlyCreditsLimit: "$20.00",
+      purchasedCredits: "$0.00",
+      resetDays: 4,
+      autoRechargeEnabled: false,
+      onViewPlans: () => console.log("View Plans clicked"),
+      onCancelPlan: () => console.log("Cancel Plan clicked"),
+      onBuyCredits: () => console.log("Buy Credits clicked"),
+      onEnableAutoRecharge: () => console.log("Enable Auto-recharge clicked"),
+      className: "w-full",
     },
   },
 ];

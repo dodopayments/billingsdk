@@ -27,6 +27,7 @@
     "components/cancel-subscription/cancel-subscription-card",
     "components/cancel-subscription/cancel-subscription-dialog",
     "---Billing & Usage Analytics---",
+    "components/billing-screen/index",
     "components/billing-setting/index",
   		"components/billing-settings-2/index",
     "components/usage-meter/usage-meter-circle",

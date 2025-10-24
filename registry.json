@@ -51,7 +51,7 @@
                 "@billingsdk/upcoming-charges",
                 "@billingsdk/coupon",
                 "@billingsdk/limited-offer-dialog",
-                "@billingsdk/upcoming-charges"
+                "@billingsdk/billing-screen"
             ]
         },
         {
@@ -967,6 +967,32 @@
                 "button",
                 "card",
                 "badge",
+                "utils"
+            ]
+        },
+        {
+            "name": "billing-screen",
+            "type": "registry:block",
+            "title": "Billing Screen",
+            "description": "Complete billing dashboard with credit balance, plan details, and interactive credit card visual",
+            "files": [
+                {
+                    "path": "src/registry/billingsdk/billing-screen.tsx",
+                    "type": "registry:component",
+                    "target": "components/billingsdk/billing-screen.tsx"
+                },
+                {
+                    "path": "src/registry/billingsdk/demo/billing-screen-demo.tsx",
+                    "type": "registry:component",
+                    "target": "components/billing-screen-demo.tsx"
+                }
+            ],
+            "dependencies": [
+                "lucide-react",
+                "motion"
+            ],
+            "registryDependencies": [
+                "button",
                 "utils"
             ]
         }

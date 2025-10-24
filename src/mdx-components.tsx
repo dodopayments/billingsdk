@@ -46,6 +46,7 @@ import {PaymentCardDemo} from '@/components/payment-card-demo';
 import { LimitedOfferDialogDemo } from '@/components/limited-offer-dialog-demo';
 import { PricingTableSevenMinimalDemo } from '@/components/pricing-table-seven-minimal-demo';
 import TrialExpiryCardDemo from '@/components/trial-expiry-card-demo';
+import { BillingScreenDemo } from '@/components/billing-screen-demo';
 
 
 // use this function to get MDX components, you will need it for rendering MDX
@@ -98,6 +99,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 	  BillingSettings2Demo,
     UsageBasedPricingDemo,
     LimitedOfferDialogDemo,
-    TrialExpiryCardDemo
+    TrialExpiryCardDemo,
+    BillingScreenDemo
   };
 }
