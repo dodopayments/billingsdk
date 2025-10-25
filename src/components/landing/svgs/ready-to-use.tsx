@@ -1,4 +1,4 @@
-import { BadgeCheck, Circle } from "lucide-react";
+import { BadgeCheck } from "lucide-react";
 import { ShineButton } from "../shine-button";
 
 export const ReadyToUse = () => {
@@ -40,9 +40,9 @@ export const ReadyToUse = () => {
         <div className="transition-all duration-500 ease-out delay-300 group-hover:-translate-y-0.5 group-hover:scale-[1.02]">
           <ShineButton
             containerClassName="px-2 text-xs"
-            Icon={Circle}
+            Icon={BadgeCheck}
             className=""
-            label="Billing Settings"
+            label="Customer Portal"
           />
         </div>
       </div>
