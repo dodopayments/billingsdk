@@ -93,7 +93,7 @@ const Hero = () => {
                 ></span>
 
                 {/* Inner container like button */}
-               <div className="relative flex items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
+                <div className="relative items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
                   <div className="text-white text-lg whitespace-nowrap">
                     Fully Open Source
                   </div>
@@ -226,7 +226,7 @@ const Hero = () => {
                     ></span>
 
                     {/* Inner container */}
-                    <div className="relative flex items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
+                    <div className="relative items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
                       <div className=" text-white text-sm whitespace-nowrap">
                         Easy to Use Components
                       </div>
