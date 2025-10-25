@@ -196,3 +196,109 @@ pre[class*="language-"]::-webkit-scrollbar {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+
+/* Accessibility keyboard click animations */
+@keyframes click-space {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  8% {
+    transform: translateY(6px) scale(0.98);
+    background-color: rgba(168, 213, 186, 0.4);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1),
+                inset 0 -2px 4px 0 rgba(0, 0, 0, 0.3);
+    border-color: rgba(168, 213, 186, 0.5);
+  }
+  12% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(168, 213, 186, 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(168, 213, 186, 0.3);
+  }
+}
+
+@keyframes click-shift {
+  0%, 33.3%, 100% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  41.3% {
+    transform: translateY(6px) scale(0.98);
+    background-color: rgba(217, 212, 229, 0.4);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1),
+                inset 0 -2px 4px 0 rgba(0, 0, 0, 0.3);
+    border-color: rgba(217, 212, 229, 0.5);
+  }
+  45.3% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(217, 212, 229, 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(217, 212, 229, 0.3);
+  }
+}
+
+@keyframes click-tab {
+  0%, 66.6%, 100% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  74.6% {
+    transform: translateY(6px) scale(0.98);
+    background-color: rgba(229, 221, 212, 0.4);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1),
+                inset 0 -2px 4px 0 rgba(0, 0, 0, 0.3);
+    border-color: rgba(229, 221, 212, 0.5);
+  }
+  78.6% {
+    transform: translateY(0) scale(1);
+    background-color: rgba(229, 221, 212, 0.2);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(229, 221, 212, 0.3);
+  }
+}
+
+@keyframes cursor-move {
+  0%, 12% {
+    right: 1rem;
+    bottom: -1rem;
+    rotate: -8deg;
+  }
+  33.3% {
+    right: 11.5rem;
+    bottom: 5.5rem;
+    rotate: 5deg;
+  }
+  41.3%, 45.3% {
+    right: 11.5rem;
+    bottom: 5rem;
+    rotate: 5deg;
+  }
+  66.6% {
+    right: 5rem;
+    bottom: 5.5rem;
+    rotate: -5deg;
+  }
+  74.6%, 78.6% {
+    right: 5rem;
+    bottom: 5rem;
+    rotate: -5deg;
+  }
+  100% {
+    right: 1rem;
+    bottom: -1rem;
+    rotate: -8deg;
+  }
+}

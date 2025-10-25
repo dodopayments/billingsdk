@@ -12,7 +12,7 @@ export const Speedometer = ({ className }: SpeedometerProps) => {
       height="3918"
       viewBox="0 0 3918 3918"
       fill="none"
-      className={cn("size-20", className)}
+      className={cn("size-20 group", className)}
     >
       <mask
         id="mask0_199_2"
@@ -35,12 +35,18 @@ export const Speedometer = ({ className }: SpeedometerProps) => {
             fill="#1E1E1E"
           />
         </g>
-        <path
-          d="M1081.68 3204.02C1413.52 3435.71 1823.81 3526.08 2222.28 3455.25C2620.76 3384.43 2974.78 3158.21 3206.46 2826.37C3438.15 2494.52 3528.52 2084.23 3457.7 1685.76C3386.87 1287.28 3160.65 933.264 2828.81 701.58L2507.78 1161.4C2717.67 1307.94 2860.75 1531.86 2905.55 1783.9C2950.35 2035.93 2893.19 2295.44 2746.65 2505.34C2600.1 2715.23 2376.19 2858.31 2124.15 2903.11C1872.11 2947.91 1612.6 2890.75 1402.71 2744.21L1081.68 3204.02Z"
-          fill="#E7E7E7"
-        />
+        <g className="origin-[1960px_1950px] rotate-[-90deg] transition-transform duration-700 ease-out group-hover:rotate-[0deg]">
+          <path
+            d="M1081.68 3204.02C1413.52 3435.71 1823.81 3526.08 2222.28 3455.25C2620.76 3384.43 2974.78 3158.21 3206.46 2826.37C3438.15 2494.52 3528.52 2084.23 3457.7 1685.76C3386.87 1287.28 3160.65 933.264 2828.81 701.58L2507.78 1161.4C2717.67 1307.94 2860.75 1531.86 2905.55 1783.9C2950.35 2035.93 2893.19 2295.44 2746.65 2505.34C2600.1 2715.23 2376.19 2858.31 2124.15 2903.11C1872.11 2947.91 1612.6 2890.75 1402.71 2744.21L1081.68 3204.02Z"
+            fill="#E7E7E7"
+            className="transition-all duration-700 ease-out group-hover:fill-[#C6FE1E]"
+          />
+        </g>
       </g>
-      <g filter="url(#filter1_d_199_2)">
+      <g 
+        filter="url(#filter1_d_199_2)"
+        className="origin-[2006px_1877px] rotate-[-93.5deg] transition-transform duration-700 ease-out group-hover:rotate-[0deg]"
+      >
         <path
           d="M2826.29 689.029L2087.72 1917.75C2061.25 1961.8 2003.1 1974.39 1960.78 1945.23V1945.23C1918.46 1916.07 1909.51 1857.25 1941.23 1816.82L2826.29 689.029Z"
           fill="#1E1E1E"
