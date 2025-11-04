@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { motion, useSpring, useMotionValue, useTransform } from "motion/react"
 import { useEffect } from "react"
+import type React from "react"
 
 export interface Usage {
     name: string
@@ -26,6 +27,124 @@ export interface UsageMeterProps {
     title?: string
     description?: string
     progressColor?: "default" | "usage"
+}
+
+function CircleUsageItem({ 
+    item, 
+    config, 
+    radius, 
+    circumference, 
+    progressColor,
+    getUsageClasses,
+    getStatus
+}: {
+    item: Usage
+    config: { circle: number; stroke: number; text: string; label: string }
+    radius: number
+    circumference: number
+    progressColor: "default" | "usage"
+    getUsageClasses: (percentage: number, variant: "circle" | "linear") => string[]
+    getStatus: (percentage: number) => React.ReactNode
+}) {
+    const percentage = Math.min((item.usage / item.limit) * 100, 100)
+    const remaining = Math.max(item.limit - item.usage, 0)
+
+    const motionValue = useMotionValue(0)
+    const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 })
+    const display = useTransform(springValue, (latest) => `${Math.round(latest)}%`)
+
+    useEffect(() => {
+        motionValue.set(percentage)
+    }, [percentage, motionValue])
+
+    return (
+        <div
+            className="space-y-3 p-4 bg-muted/20 rounded-xl flex flex-col items-center text-center"
+        >
+            <span className="text-sm font-medium truncate w-full">{item.name}</span>
+            <div className="relative">
+                <svg width={config.circle} height={config.circle} className="-rotate-90">
+                    <circle
+                        cx={config.circle / 2}
+                        cy={config.circle / 2}
+                        r={radius}
+                        strokeWidth={config.stroke}
+                        className="text-muted stroke-current"
+                        fill="transparent"
+                    />
+                    <motion.circle
+                        cx={config.circle / 2}
+                        cy={config.circle / 2}
+                        r={radius}
+                        strokeWidth={config.stroke}
+                        fill="transparent"
+                        strokeDasharray={circumference}
+                        strokeLinecap="round"
+                        className={cn("stroke-current", progressColor === "usage" ? getUsageClasses(percentage, "circle") : "text-primary")}
+                        initial={{ strokeDashoffset: circumference }}
+                        animate={{ strokeDashoffset: circumference - (percentage / 100) * circumference }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                    />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <motion.span className={cn("font-semibold", config.text)}>{display}</motion.span>
+                    <span className={cn("text-muted-foreground", config.label)}>used</span>
+                </div>
+            </div>
+            <span className="text-xs text-muted-foreground">
+                {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
+            </span>
+            {getStatus(percentage)}
+        </div>
+    )
+}
+
+function LinearUsageItem({ 
+    item,
+    config,
+    progressColor,
+    getUsageClasses,
+    getStatus
+}: {
+    item: Usage
+    config: { bar: string; text: string }
+    progressColor: "default" | "usage"
+    getUsageClasses: (percentage: number, variant: "circle" | "linear") => string[]
+    getStatus: (percentage: number) => React.ReactNode
+}) {
+    const percentage = Math.min((item.usage / item.limit) * 100, 100)
+    const remaining = Math.max(item.limit - item.usage, 0)
+
+    const motionValue = useMotionValue(0)
+    const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 })
+    const display = useTransform(springValue, (latest) => `${Math.round(latest)}%`)
+
+    useEffect(() => {
+        motionValue.set(percentage)
+    }, [percentage, motionValue])
+
+    return (
+        <div className="space-y-2 p-4 bg-muted/20 rounded-xl">
+            <div className="flex items-center justify-between">
+                <span className="text-sm font-medium truncate">{item.name}</span>
+                <motion.span className="text-xs text-muted-foreground">{display}</motion.span>
+            </div>
+            <div className={cn("w-full bg-muted rounded-full overflow-hidden", config.bar)}>
+                <motion.div
+                    className={cn("bg-gradient-to-r rounded-full", config.bar, progressColor === "usage" ? getUsageClasses(percentage, "linear") : "from-primary to-primary/70")}
+                    initial={{ width: 0 }}
+                    animate={{ width: `${percentage}%` }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                />
+            </div>
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>
+                    {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
+                </span>
+                {getStatus(percentage)}
+            </div>
+        </div>
+    )
 }
 
 export function UsageMeter({
@@ -92,60 +211,18 @@ export function UsageMeter({
                 <CardContent
                     className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"}
                 >
-                    {usage.map((item, i) => {
-                        const percentage = Math.min((item.usage / item.limit) * 100, 100)
-                        const remaining = Math.max(item.limit - item.usage, 0)
-
-                        const motionValue = useMotionValue(0)
-                        const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 })
-                        const display = useTransform(springValue, (latest) => `${Math.round(latest)}%`)
-
-                        useEffect(() => {
-                            motionValue.set(percentage)
-                        }, [percentage, motionValue])
-
-                        return (
-                            <div
-                                key={item.name || i}
-                                className="space-y-3 p-4 bg-muted/20 rounded-xl flex flex-col items-center text-center"
-                            >
-                                <span className="text-sm font-medium truncate w-full">{item.name}</span>
-                                <div className="relative">
-                                    <svg width={config.circle} height={config.circle} className="-rotate-90">
-                                        <circle
-                                            cx={config.circle / 2}
-                                            cy={config.circle / 2}
-                                            r={radius}
-                                            strokeWidth={config.stroke}
-                                            className="text-muted stroke-current"
-                                            fill="transparent"
-                                        />
-                                        <motion.circle
-                                            cx={config.circle / 2}
-                                            cy={config.circle / 2}
-                                            r={radius}
-                                            strokeWidth={config.stroke}
-                                            fill="transparent"
-                                            strokeDasharray={circumference}
-                                            strokeLinecap="round"
-                                            className={cn("stroke-current", progressColor === "usage" ? getUsageClasses(percentage, "circle") : "text-primary")}
-                                            initial={{ strokeDashoffset: circumference }}
-                                            animate={{ strokeDashoffset: circumference - (percentage / 100) * circumference }}
-                                            transition={{ duration: 0.5, ease: "easeOut" }}
-                                        />
-                                    </svg>
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                        <motion.span className={cn("font-semibold", config.text)}>{display}</motion.span>
-                                        <span className={cn("text-muted-foreground", config.label)}>used</span>
-                                    </div>
-                                </div>
-                                <span className="text-xs text-muted-foreground">
-                                    {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
-                                </span>
-                                {getStatus(percentage)}
-                            </div>
-                        )
-                    })}
+                    {usage.map((item, i) => (
+                        <CircleUsageItem
+                            key={item.name || i}
+                            item={item}
+                            config={config}
+                            radius={radius}
+                            circumference={circumference}
+                            progressColor={progressColor}
+                            getUsageClasses={getUsageClasses}
+                            getStatus={getStatus}
+                        />
+                    ))}
                 </CardContent>
             </Card>
         )
@@ -180,41 +257,16 @@ export function UsageMeter({
             <CardContent
                 className={"grid grid-cols-1 gap-4"}
             >
-                {usage.map((item, i) => {
-                    const percentage = Math.min((item.usage / item.limit) * 100, 100)
-                    const remaining = Math.max(item.limit - item.usage, 0)
-
-                    const motionValue = useMotionValue(0)
-                    const springValue = useSpring(motionValue, { stiffness: 100, damping: 20 })
-                    const display = useTransform(springValue, (latest) => `${Math.round(latest)}%`)
-
-                    useEffect(() => {
-                        motionValue.set(percentage)
-                    }, [percentage, motionValue])
-
-                    return (
-                        <div key={item.name || i} className="space-y-2 p-4 bg-muted/20 rounded-xl">
-                            <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium truncate">{item.name}</span>
-                                <motion.span className="text-xs text-muted-foreground">{display}</motion.span>
-                            </div>
-                            <div className={cn("w-full bg-muted rounded-full overflow-hidden", config.bar)}>
-                                <motion.div
-                                    className={cn("bg-gradient-to-r rounded-full", config.bar, progressColor === "usage" ? getUsageClasses(percentage, "linear") : "from-primary to-primary/70")}
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${percentage}%` }}
-                                    transition={{ duration: 0.5, ease: "easeOut" }}
-                                />
-                            </div>
-                            <div className="flex items-center justify-between text-xs text-muted-foreground">
-                                <span>
-                                    {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
-                                </span>
-                                {getStatus(percentage)}
-                            </div>
-                        </div>
-                    )
-                })}
+                {usage.map((item, i) => (
+                    <LinearUsageItem
+                        key={item.name || i}
+                        item={item}
+                        config={config}
+                        progressColor={progressColor}
+                        getUsageClasses={getUsageClasses}
+                        getStatus={getStatus}
+                    />
+                ))}
             </CardContent>
         </Card>
     )
