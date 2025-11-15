@@ -2,9 +2,10 @@
 // @ts-nocheck
 import { FastifyInstance } from 'fastify'
 import { Webhook } from 'standardwebhooks'
+import { validatedEnv } from '../../lib/dodopayments'
 
 export default async function webhookRoutes(fastify: FastifyInstance) {
-  const webhook = new Webhook(process.env.DODO_PAYMENTS_WEBHOOK_KEY!)
+  const webhook = new Webhook(validatedEnv.DODO_PAYMENTS_WEBHOOK_KEY)
 
   fastify.post('/', {
     // Note: To get the raw body reliably, register `fastify-raw-body` in your Fastify app:

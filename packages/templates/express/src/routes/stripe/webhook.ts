@@ -1,6 +1,6 @@
 import express from 'express';
 import Stripe from 'stripe';
-import { getStripe } from '../../lib/stripe';
+import { getStripe, validatedEnv } from '../../lib/stripe';
 
 const router = express.Router();
 const stripe = getStripe();
@@ -12,7 +12,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
     return res.status(400).json({ error: 'Missing Stripe signature' });
   }
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+  const webhookSecret = validatedEnv.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
 
   try {
