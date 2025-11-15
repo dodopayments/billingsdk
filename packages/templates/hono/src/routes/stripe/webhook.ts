@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import Stripe from "stripe";
-import { getStripe } from "../../lib/stripe";
+import { getStripe, validatedEnv } from "../../lib/stripe";
 
 const stripe = getStripe();
 
@@ -12,7 +12,7 @@ const router = new Hono().post("/", async (c) => {
     return c.json({ error: "Missing Stripe signature" }, 400);
   }
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+  const webhookSecret = validatedEnv.STRIPE_WEBHOOK_SECRET;
   let event: Stripe.Event;
 
   try {
