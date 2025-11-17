@@ -11,7 +11,7 @@ export function OpenSource() {
       description: "View our open source code and contribute to the project",
     },
     {
-      name: "X/ Twitter",
+      name: "X (Twitter)",
       icon: BsTwitterX,
       href: "https://x.com/dodopayments",
       description: "Follow us for updates and announcements on our products",

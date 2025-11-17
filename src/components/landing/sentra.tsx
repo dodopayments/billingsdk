@@ -86,7 +86,7 @@ export function Sentra() {
 
                 {/* Right Sentra Image */}
                 <div className="flex items-center justify-center md:w-1/2 mt-8 md:mt-0">
-                    <div className="relative p-4 rounded-xl bg-muted/20 relative rounded-xl overflow-x-scroll md:overflow-auto border border-muted/80">
+                    <div className="relative p-4 rounded-xl bg-muted/20 overflow-x-scroll md:overflow-auto border border-muted/80">
                         <Image
                             src="/landing/SENTRA.png"
                             alt="Sentra"
