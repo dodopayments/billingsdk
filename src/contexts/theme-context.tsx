@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { themes, Theme } from '@/lib/themes';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { themes, Theme } from "@/lib/themes";
 
 interface ThemeContextType {
   currentTheme: Theme;
@@ -19,37 +19,37 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = (theme: Theme) => {
     setCurrentTheme(theme);
-    
+
     // Store theme preference in localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('selected-theme', theme.name);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selected-theme", theme.name);
     }
   };
 
   const handleSetPreviewDarkMode = (isDark: boolean) => {
     setPreviewDarkMode(isDark);
-    
+
     // Store preview dark mode preference in localStorage
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('preview-dark-mode', isDark.toString());
+    if (typeof window !== "undefined") {
+      localStorage.setItem("preview-dark-mode", isDark.toString());
     }
   };
 
   // Load preferences from localStorage on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('selected-theme');
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("selected-theme");
       if (savedTheme) {
-        const theme = themes.find(t => t.name === savedTheme);
+        const theme = themes.find((t) => t.name === savedTheme);
         if (theme) {
           setCurrentTheme(theme);
         }
       }
-      
-      const savedDarkMode = localStorage.getItem('preview-dark-mode');
+
+      const savedDarkMode = localStorage.getItem("preview-dark-mode");
       if (savedDarkMode) {
         // If user has previously set a preference, use it
-        setPreviewDarkMode(savedDarkMode === 'true');
+        setPreviewDarkMode(savedDarkMode === "true");
       } else {
         // If no preference saved, default to light mode for preview
         setPreviewDarkMode(false);
@@ -58,13 +58,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <ThemeContext.Provider value={{ 
-      currentTheme, 
-      setTheme, 
-      themes, 
-      previewDarkMode, 
-      setPreviewDarkMode: handleSetPreviewDarkMode 
-    }}>
+    <ThemeContext.Provider
+      value={{
+        currentTheme,
+        setTheme,
+        themes,
+        previewDarkMode,
+        setPreviewDarkMode: handleSetPreviewDarkMode,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
@@ -73,7 +75,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
 }

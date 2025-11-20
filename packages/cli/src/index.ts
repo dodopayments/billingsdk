@@ -15,15 +15,15 @@ program
   .description("Billing SDK CLI for managing billing components")
   .version("1.0.0");
 
-  render(
-    React.createElement(BigTextBanner, {
-      text: "Billing\nSDK",
-      font: "block",
-      colors: ["white"],
-      align: "left",
-      showSubtitle: false
-    })
-  );
+render(
+  React.createElement(BigTextBanner, {
+    text: "Billing\nSDK",
+    font: "block",
+    colors: ["white"],
+    align: "left",
+    showSubtitle: false,
+  }),
+);
 
 // Register commands
 program.addCommand(initCommand);

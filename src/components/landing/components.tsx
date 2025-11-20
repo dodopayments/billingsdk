@@ -76,7 +76,7 @@ export function ComponentsSection() {
 
     const tabsList = tabsListRef.current;
     const activeTab = tabsList.querySelector(
-      `[data-state="active"]`
+      `[data-state="active"]`,
     ) as HTMLElement;
 
     if (activeTab) {
@@ -154,25 +154,25 @@ export function ComponentsSection() {
   };
 
   return (
-    <div className=" relative overflow-hidden w-full mx-auto">
+    <div className="relative mx-auto w-full overflow-hidden">
       <Tabs
         value={active}
         onValueChange={handleComponentClick}
         className="w-full"
       >
-        <div className="flex gap-8 xl:flex-row flex-col w-full items-start">
+        <div className="flex w-full flex-col items-start gap-8 xl:flex-row">
           {/* Left Side - Title, Description & Tab List */}
-          <div className="flex flex-col w-full xl:w-80 items-start flex-shrink-0">
+          <div className="flex w-full flex-shrink-0 flex-col items-start xl:w-80">
             <ShineButton
               Icon={Blocks}
-              className="shadow-xl w-fit shadow-white/5"
+              className="w-fit shadow-xl shadow-white/5"
               label="Components"
             />
             <div className="text-left">
-              <h2 className="text-3xl mt-4 sm:text-3xl font-display md:text-4xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 mt-4 text-3xl font-medium duration-1000 sm:text-3xl md:text-4xl">
                 Explore Interactive Billing Components
               </h2>
-              <p className="text-sm md:text-base text-balance mt-4 text-muted-foreground mb-8 tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+              <p className="text-muted-foreground animate-in fade-in slide-in-from-bottom-4 mt-4 mb-8 text-sm tracking-tight text-balance delay-200 duration-1000 md:text-base">
                 Interact with real-time UI elements designed to streamline your
                 billing workflows.
               </p>
@@ -182,7 +182,7 @@ export function ComponentsSection() {
             <div className="w-full">
               <TabsList
                 ref={tabsListRef}
-                className="flex flex-col gap-2 h-auto bg-background rounded-lg  relative p-2 w-full"
+                className="bg-background relative flex h-auto w-full flex-col gap-2 rounded-lg p-2"
               >
                 {components.map((item) => {
                   const IconComponent = item.icon;
@@ -191,14 +191,14 @@ export function ComponentsSection() {
                       key={item.id}
                       value={item.id}
                       className={cn(
-                        "flex flex-row gap-3 h-auto transition-all duration-200 p-3 w-full",
-                        "text-sm font-medium border-0 rounded-md",
-                        "hover:bg-muted/50 justify-start cursor-pointer",
-                        "data-[state=active]:bg-muted data-[state=active]:text-foreground"
+                        "flex h-auto w-full flex-row gap-3 p-3 transition-all duration-200",
+                        "rounded-md border-0 text-sm font-medium",
+                        "hover:bg-muted/50 cursor-pointer justify-start",
+                        "data-[state=active]:bg-muted data-[state=active]:text-foreground",
                       )}
                     >
                       <IconComponent className="h-5 w-5 flex-shrink-0" />
-                      <span className="text-sm leading-tight text-left">
+                      <span className="text-left text-sm leading-tight">
                         {item.label}
                       </span>
                     </TabsTrigger>
@@ -207,7 +207,7 @@ export function ComponentsSection() {
 
                 {/* Animated border indicator */}
                 <motion.div
-                  className="absolute bg-primary rounded-sm"
+                  className="bg-primary absolute rounded-sm"
                   animate={{
                     left: borderPosition.left,
                     top: borderPosition.top,
@@ -225,17 +225,17 @@ export function ComponentsSection() {
                 />
               </TabsList>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mt-4 w-full gap-2">
+              <div className="mt-4 grid w-full grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-4">
                 <Button
                   variant={"default"}
-                  className="w-full col-span-2 md:col-span-1 xl:col-span-4 text-sm py-2"
+                  className="col-span-2 w-full py-2 text-sm md:col-span-1 xl:col-span-4"
                   onClick={handleViewComponent}
                 >
                   View Component
                 </Button>
                 <Button
                   variant={"secondary"}
-                  className="w-full col-span-1 xl:col-span-2 flex items-center justify-center py-2"
+                  className="col-span-1 flex w-full items-center justify-center py-2 xl:col-span-2"
                   onClick={handlePrevious}
                   title="Previous Component"
                 >
@@ -243,7 +243,7 @@ export function ComponentsSection() {
                 </Button>
                 <Button
                   variant={"secondary"}
-                  className="w-full col-span-1 xl:col-span-2 flex items-center justify-center py-2"
+                  className="col-span-1 flex w-full items-center justify-center py-2 xl:col-span-2"
                   onClick={handleNext}
                   title="Next Component"
                 >
@@ -254,10 +254,8 @@ export function ComponentsSection() {
           </div>
 
           {/* Right Side - Tab Content */}
-          <div className="flex-1 w-full xl:w-auto">
-            <ComponentsShowcase
-              setIsHovered={setIsHovered}
-            />
+          <div className="w-full flex-1 xl:w-auto">
+            <ComponentsShowcase setIsHovered={setIsHovered} />
           </div>
         </div>
       </Tabs>
@@ -269,13 +267,13 @@ function ComponentsShowcase({ setIsHovered }: any) {
   return (
     <div id="components-showcase" className="w-full">
       <div
-        className="flex flex-col border border-fd-primary/10 bg-background rounded-lg shadow-lg w-full items-center justify-center"
+        className="border-fd-primary/10 bg-background flex w-full flex-col items-center justify-center rounded-lg border shadow-lg"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="w-full h-full transition-all duration-300 ease-in-out">
+        <div className="h-full w-full transition-all duration-300 ease-in-out">
           <TabsContent value="pricing" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in max-w-none w-full h-full border-none bg-background min-h-[500px] md:min-h-[700px] py-4 px-0">
+            <PreviewComponents className="animate-in fade-in bg-background h-full min-h-[500px] w-full max-w-none border-none px-0 py-4 duration-300 md:min-h-[700px]">
               <PricingTableOne
                 className="w-full"
                 plans={plans}
@@ -289,7 +287,7 @@ function ComponentsShowcase({ setIsHovered }: any) {
           </TabsContent>
 
           <TabsContent value="banner" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[700px] px-0">
+            <PreviewComponents className="animate-in fade-in border-fd-primary/10 bg-background min-h-[500px] w-full max-w-none rounded-lg border-none px-0 text-sm duration-300 md:min-h-[700px]">
               <Banner
                 title="🎉 Start your free trial today!"
                 description="Get 30 days free access to all premium features"
@@ -307,7 +305,7 @@ function ComponentsShowcase({ setIsHovered }: any) {
           </TabsContent>
 
           <TabsContent value="usage" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[700px] px-0">
+            <PreviewComponents className="animate-in fade-in border-fd-primary/10 bg-background min-h-[500px] w-full max-w-none rounded-lg border-none px-0 text-sm duration-300 md:min-h-[700px]">
               <UsageMeter
                 usage={[
                   {
@@ -336,7 +334,7 @@ function ComponentsShowcase({ setIsHovered }: any) {
           </TabsContent>
 
           <TabsContent value="subscription" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[700px] px-0">
+            <PreviewComponents className="animate-in fade-in border-fd-primary/10 bg-background min-h-[500px] w-full max-w-none rounded-lg border border-none px-0 text-sm duration-300 md:min-h-[700px]">
               <div className="mt-4">
                 <SubscriptionManagementDemo />
               </div>
@@ -344,7 +342,7 @@ function ComponentsShowcase({ setIsHovered }: any) {
           </TabsContent>
 
           <TabsContent value="updates" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[700px] px-0">
+            <PreviewComponents className="animate-in fade-in border-fd-primary/10 bg-background min-h-[500px] w-full max-w-none rounded-lg border border-none px-0 text-sm duration-300 md:min-h-[700px]">
               <div className="mt-4 w-full">
                 <UpdatePlanCardDemo />
               </div>
@@ -352,8 +350,8 @@ function ComponentsShowcase({ setIsHovered }: any) {
           </TabsContent>
 
           <TabsContent value="cancellation" className="mt-0">
-            <PreviewComponents className="duration-300 animate-in fade-in text-sm max-w-none w-full border-none border rounded-lg border-fd-primary/10 bg-background min-h-[500px] md:min-h-[700px] px-0">
-              <div className="flex items-center justify-center w-full">
+            <PreviewComponents className="animate-in fade-in border-fd-primary/10 bg-background min-h-[500px] w-full max-w-none rounded-lg border border-none px-0 text-sm duration-300 md:min-h-[700px]">
+              <div className="flex w-full items-center justify-center">
                 <CancelSubscriptionCard
                   title="We're sorry to see you go..."
                   description={`Before you cancel, we hope you'll consider upgrading to a ${plans[1].title} plan again.`}

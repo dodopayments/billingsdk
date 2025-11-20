@@ -113,15 +113,15 @@ export default function GitHubStarBadge() {
       href="https://github.com/dodopayments/billingsdk"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center h-9 bg-background rounded-md border text-white text-xs font-normal shadow-sm backdrop-blur-md  transition-colors leading-none"
+      className="bg-background inline-flex h-9 items-center rounded-md border text-xs leading-none font-normal text-white shadow-sm backdrop-blur-md transition-colors"
       aria-label="View GitHub repository and star"
     >
       {/* Left: GitHub icon */}
-      <span className="flex rounded-l-md items-center h-full px-1.5">
+      <span className="flex h-full items-center rounded-l-md px-1.5">
         <FaGithub className="h-5 w-5" />
       </span>
       {/* Middle: number */}
-      <span className="flex items-center h-full px-1 w-10 justify-center border-l  pl-2 text-sm font-normal">
+      <span className="flex h-full w-10 items-center justify-center border-l px-1 pl-2 text-sm font-normal">
         <AnimatePresence mode="popLayout" initial={false}>
           {display && (
             <motion.span
@@ -142,7 +142,7 @@ export default function GitHubStarBadge() {
         </AnimatePresence>
       </span>
       {/* Right: cycling icon with left border */}
-      <span className="flex items-center h-full pl-1 pr-2">
+      <span className="flex h-full items-center pr-2 pl-1">
         <AnimatePresence mode="popLayout" initial={false}>
           {display && (
             <motion.span

@@ -4,9 +4,7 @@
   "type": "registry:block",
   "title": "Subscription Management",
   "description": "A subscription management component",
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "registryDependencies": [
     "button",
     "card",

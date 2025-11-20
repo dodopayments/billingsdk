@@ -19,8 +19,5 @@
       "content": "VITE_BASE_URL=\"YOUR API URL\""
     }
   ],
-  "dependencies": [
-    "dodopayments",
-    "react"
-  ]
+  "dependencies": ["dodopayments", "react"]
 }

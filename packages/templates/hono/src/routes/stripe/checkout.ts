@@ -1,8 +1,8 @@
-import { z } from 'zod';
-import { Hono } from 'hono';
-import type Stripe from 'stripe';
-import { getStripe } from '../../lib/stripe';
-import { zValidator } from '@hono/zod-validator';
+import { z } from "zod";
+import { Hono } from "hono";
+import type Stripe from "stripe";
+import { getStripe } from "../../lib/stripe";
+import { zValidator } from "@hono/zod-validator";
 
 const stripe = getStripe();
 
@@ -22,66 +22,79 @@ const newCustomerSchema = z.object({
   create_new_customer: z.boolean().optional(),
 });
 
-const customerSchema = z.union([attachExistingCustomerSchema, newCustomerSchema]);
+const customerSchema = z.union([
+  attachExistingCustomerSchema,
+  newCustomerSchema,
+]);
 
 const checkoutSessionSchema = z.object({
-  productCart: z.array(productCartItemSchema).min(1, "At least one product is required"),
+  productCart: z
+    .array(productCartItemSchema)
+    .min(1, "At least one product is required"),
   customer: customerSchema.optional(),
   success_url: z.url("Success URL must be a valid URL"),
   cancel_url: z.url("Cancel URL must be a valid URL"),
   metadata: z.record(z.string(), z.string()).optional(),
 });
 
-const router = new Hono().post('/', zValidator('json', checkoutSessionSchema, (result, c) => {
-  if (!result.success) {
-    return c.json({
-      error: "Validation failed",
-      details: result.error.issues.map(issue => ({
-        field: issue.path.join('.'),
-        message: issue.message,
-      })),
-    }, 400)
-  }
-}), async (c) => {
-  try {
-    const { productCart, customer, success_url, cancel_url, metadata } = c.req.valid('json');
-    let customerId: string | undefined;
-
-    if (customer && 'email' in customer) {
-      const stripeCustomer = await stripe.customers.create({
-        email: customer.email ?? "",
-        name: customer.name ?? "",
-        phone: customer.phone_number ?? "",
-      });
-      customerId = stripeCustomer.id;
-    } else if (customer && 'customer_id' in customer) {
-      customerId = customer.customer_id;
+const router = new Hono().post(
+  "/",
+  zValidator("json", checkoutSessionSchema, (result, c) => {
+    if (!result.success) {
+      return c.json(
+        {
+          error: "Validation failed",
+          details: result.error.issues.map((issue) => ({
+            field: issue.path.join("."),
+            message: issue.message,
+          })),
+        },
+        400,
+      );
     }
+  }),
+  async (c) => {
+    try {
+      const { productCart, customer, success_url, cancel_url, metadata } =
+        c.req.valid("json");
+      let customerId: string | undefined;
 
-    const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      payment_method_types: ["card"],
-      line_items: productCart.map(item => ({
-        price: item.price_id,
-        quantity: item.quantity,
-      })),
-      mode: "payment",
-      success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: cancel_url,
+      if (customer && "email" in customer) {
+        const stripeCustomer = await stripe.customers.create({
+          email: customer.email ?? "",
+          name: customer.name ?? "",
+          phone: customer.phone_number ?? "",
+        });
+        customerId = stripeCustomer.id;
+      } else if (customer && "customer_id" in customer) {
+        customerId = customer.customer_id;
+      }
 
-      ...(metadata ? { metadata } : {}),
-    };
+      const sessionParams: Stripe.Checkout.SessionCreateParams = {
+        payment_method_types: ["card"],
+        line_items: productCart.map((item) => ({
+          price: item.price_id,
+          quantity: item.quantity,
+        })),
+        mode: "payment",
+        success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: cancel_url,
 
-    if (customerId) {
-      sessionParams.customer = customerId;
+        ...(metadata ? { metadata } : {}),
+      };
+
+      if (customerId) {
+        sessionParams.customer = customerId;
+      }
+
+      const session = await stripe.checkout.sessions.create(sessionParams);
+
+      return c.json({ url: session.url });
+    } catch (error) {
+      console.error("Stripe checkout error:", error);
+      return c.json({ error: "Internal server error" }, 500);
     }
-
-    const session = await stripe.checkout.sessions.create(sessionParams);
-
-    return c.json({ url: session.url });
-  } catch (error) {
-    console.error('Stripe checkout error:', error);
-    return c.json({ error: 'Internal server error' }, 500);
-  }
-})
+  },
+);
 
 export { router as checkoutRouter };

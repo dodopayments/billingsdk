@@ -11,13 +11,8 @@ export function PlaygroundLogo() {
         width={20}
         height={20}
       />
-      <span className="text-lg font-display text-foreground">/</span>
-      <Image 
-        src="/logo/Logo.svg" 
-        alt="Billing SDK" 
-        width={80} 
-        height={80} 
-      />
+      <span className="font-display text-foreground text-lg">/</span>
+      <Image src="/logo/Logo.svg" alt="Billing SDK" width={80} height={80} />
     </div>
   );
 }

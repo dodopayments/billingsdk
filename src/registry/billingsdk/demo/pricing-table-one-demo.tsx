@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { PricingTableOne } from "@/components/billingsdk/pricing-table-one"
-import { plans } from "@/lib/billingsdk-config"
+import { PricingTableOne } from "@/components/billingsdk/pricing-table-one";
+import { plans } from "@/lib/billingsdk-config";
 
 export function PricingTableOneDemo() {
   return (
@@ -14,5 +14,5 @@ export function PricingTableOneDemo() {
       theme="classic" // minimal or classic
       className="w-full"
     />
-  )
+  );
 }

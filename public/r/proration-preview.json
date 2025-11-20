@@ -4,11 +4,7 @@
   "type": "registry:block",
   "title": "Proration Preview",
   "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "motion"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
   "registryDependencies": [
     "button",
     "card",

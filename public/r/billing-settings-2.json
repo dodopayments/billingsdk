@@ -4,9 +4,7 @@
   "type": "registry:block",
   "title": "Billing Settings 2",
   "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
-  "dependencies": [
-    "currency-codes"
-  ],
+  "dependencies": ["currency-codes"],
   "registryDependencies": [
     "button",
     "card",

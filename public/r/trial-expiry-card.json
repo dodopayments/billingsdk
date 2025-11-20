@@ -4,16 +4,8 @@
   "type": "registry:block",
   "title": "Trial Expiry Card",
   "description": "A card component that displays trial expiration countdown with progress indicator and feature list",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "card",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "card", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/trial-expiry-card.tsx",

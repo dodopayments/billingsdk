@@ -7,14 +7,14 @@ import { Footer } from "./footer";
 
 export function Footer2() {
   return (
-    <footer className="bg-muted/10 rounded-3xl border border-input p-2 w-full">
+    <footer className="bg-muted/10 border-input w-full rounded-3xl border p-2">
       <Footer />
-      <div className="pt-12 pb-2 md:pb-12 px-4">
-        <div className="max-w-6xl mx-auto">
+      <div className="px-4 pt-12 pb-2 md:pb-12">
+        <div className="mx-auto max-w-6xl">
           {/* Top Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-1">
-              <div className="flex items-center mb-4">
+              <div className="mb-4 flex items-center">
                 <div className="flex items-center justify-center">
                   <Image
                     src="/logo/Logo.svg"
@@ -25,7 +25,7 @@ export function Footer2() {
                   />
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-muted-foreground mb-4 text-sm">
                 Open-source React components for modern billing and subscription
                 management.
               </p>
@@ -67,7 +67,7 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Components</h4>
+              <h4 className="text-foreground mb-4 font-semibold">Components</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
@@ -105,7 +105,7 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Resources</h4>
+              <h4 className="text-foreground mb-4 font-semibold">Resources</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
@@ -143,7 +143,7 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="font-semibold text-foreground mb-4">Community</h4>
+              <h4 className="text-foreground mb-4 font-semibold">Community</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
@@ -182,12 +182,12 @@ export function Footer2() {
           </div>
 
           {/* Bottom Section */}
-          <div className="border-t border-border/50 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
-                <p className="text-sm text-muted-foreground">
+          <div className="border-border/50 border-t pt-8">
+            <div className="flex flex-col items-center justify-between md:flex-row">
+              <div className="mb-4 flex flex-col items-center gap-4 md:mb-0 md:flex-row">
+                <p className="text-muted-foreground text-sm">
                   © {new Date().getFullYear()} BillingSDK. Made with{" "}
-                  <FaHeart className="inline h-3 w-3 text-red-500 fill-current" />{" "}
+                  <FaHeart className="inline h-3 w-3 fill-current text-red-500" />{" "}
                   by developers at Dodo Payments, for developers.
                 </p>
               </div>

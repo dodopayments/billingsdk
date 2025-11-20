@@ -1,7 +1,13 @@
 "use client";
 
 import { ProrationPreview } from "@/components/billingsdk/proration-preview";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const currentPlan = {
@@ -28,7 +34,7 @@ const currentPlan = {
 const yearlyCurrentPlan = {
   plan: {
     id: "pro-yearly",
-    title: "Pro", 
+    title: "Pro",
     description: "Best for small teams",
     monthlyPrice: "29.99",
     yearlyPrice: "299.99",
@@ -51,7 +57,7 @@ const basicPlan = {
   title: "Basic",
   description: "Perfect for getting started",
   monthlyPrice: "9.99",
-  yearlyPrice: "99.99", 
+  yearlyPrice: "99.99",
   currency: "$",
   buttonText: "Downgrade",
   features: [
@@ -92,7 +98,6 @@ const customPlan = {
 export function ProrationPreviewDemo() {
   return (
     <div className="space-y-8">
-
       <Tabs defaultValue="upgrade" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="upgrade">Upgrade</TabsTrigger>
@@ -106,7 +111,8 @@ export function ProrationPreviewDemo() {
             <CardHeader>
               <CardTitle>Monthly to Enterprise Upgrade</CardTitle>
               <CardDescription>
-                Upgrading from Pro monthly to Enterprise monthly with 15 days remaining
+                Upgrading from Pro monthly to Enterprise monthly with 15 days
+                remaining
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -122,7 +128,6 @@ export function ProrationPreviewDemo() {
               />
             </CardContent>
           </Card>
-
         </TabsContent>
 
         <TabsContent value="downgrade" className="space-y-6">
@@ -204,7 +209,8 @@ export function ProrationPreviewDemo() {
             <CardHeader>
               <CardTitle>Next Cycle Change</CardTitle>
               <CardDescription>
-                Plan change effective at the next billing cycle with no immediate charge
+                Plan change effective at the next billing cycle with no
+                immediate charge
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -225,7 +231,8 @@ export function ProrationPreviewDemo() {
             <CardHeader>
               <CardTitle>Custom Pricing Scenario</CardTitle>
               <CardDescription>
-                Handling custom/enterprise pricing that doesn't follow standard rates
+                Handling custom/enterprise pricing that doesn't follow standard
+                rates
               </CardDescription>
             </CardHeader>
             <CardContent>

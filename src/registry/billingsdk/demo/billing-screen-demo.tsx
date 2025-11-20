@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { BillingScreen } from "@/components/billingsdk/billing-screen"
+import { BillingScreen } from "@/components/billingsdk/billing-screen";
 
 export function BillingScreenDemo() {
   return (
@@ -23,5 +23,5 @@ export function BillingScreenDemo() {
         onEnableAutoRecharge={() => console.log("Enable Auto-recharge clicked")}
       />
     </div>
-  )
+  );
 }

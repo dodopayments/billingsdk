@@ -4,16 +4,8 @@
   "type": "registry:block",
   "title": "Payment Success Dialog",
   "description": "A success confirmation dialog after payment with confetti",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "card",
-    "dialog",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "card", "dialog", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/payment-success-dialog.tsx",

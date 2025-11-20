@@ -4,15 +4,8 @@
   "type": "registry:block",
   "title": "Cancel Subscription Dialog",
   "description": "A cancel subscription dialog component",
-  "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "button",
-    "badge",
-    "dialog",
-    "utils"
-  ],
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["button", "badge", "dialog", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/cancel-subscription-dialog.tsx",

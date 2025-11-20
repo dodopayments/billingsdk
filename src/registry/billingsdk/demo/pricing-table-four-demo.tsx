@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { PricingTableFour } from "@/components/billingsdk/pricing-table-four"
-import { plans } from "@/lib/billingsdk-config"
+import { PricingTableFour } from "@/components/billingsdk/pricing-table-four";
+import { plans } from "@/lib/billingsdk-config";
 
 export function PricingTableFourDemo() {
   return (
@@ -11,7 +11,7 @@ export function PricingTableFourDemo() {
       theme="classic"
       description="Transform your project with our comprehensive pricing options designed for every need."
       subtitle="Simple Pricing"
-      onPlanSelect={(planId: string) => console.log('Selected plan:', planId)}
+      onPlanSelect={(planId: string) => console.log("Selected plan:", planId)}
       size="medium"
       className="w-full"
       showBillingToggle={true}
@@ -20,5 +20,5 @@ export function PricingTableFourDemo() {
         yearly: "Yearly",
       }}
     />
-  )
+  );
 }

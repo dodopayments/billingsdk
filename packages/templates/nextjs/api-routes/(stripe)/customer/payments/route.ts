@@ -2,7 +2,6 @@ import { getStripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-
 const stripe = getStripe();
 
 const paymentQuerySchema = z.object({
@@ -18,16 +17,15 @@ export async function GET(request: Request) {
     if (!validationResult.success) {
       return NextResponse.json(
         { error: validationResult.error.issues[0].message },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const validatedParams = validationResult.data;
 
-    
     const paymentIntents = await stripe.paymentIntents.list({
       customer: validatedParams.customer_id,
-      limit: 10
+      limit: 10,
     });
 
     return NextResponse.json(paymentIntents.data);
@@ -35,7 +33,7 @@ export async function GET(request: Request) {
     console.error("Error fetching customer payments:", error);
     return NextResponse.json(
       { error: "Failed to fetch customer payments" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

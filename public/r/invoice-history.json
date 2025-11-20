@@ -4,16 +4,8 @@
   "type": "registry:block",
   "title": "Invoice History",
   "description": "A read-only invoice history table",
-  "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "card",
-    "button",
-    "table",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["card", "button", "table", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/invoice-history.tsx",

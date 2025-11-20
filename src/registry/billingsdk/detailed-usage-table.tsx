@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Card,
@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -15,22 +15,22 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { cn } from "@/lib/utils"
+} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
 
 export interface UsageResource {
-  name: string
-  used: number
-  limit: number
-  percentage?: number
-  unit?: string
+  name: string;
+  used: number;
+  limit: number;
+  percentage?: number;
+  unit?: string;
 }
 
 export interface DetailedUsageTableProps {
-  className?: string
-  title?: string
-  description?: string
-  resources: UsageResource[]
+  className?: string;
+  title?: string;
+  description?: string;
+  resources: UsageResource[];
 }
 
 export function DetailedUsageTable({
@@ -40,26 +40,28 @@ export function DetailedUsageTable({
   resources,
 }: DetailedUsageTableProps) {
   const formatNumber = (num: number) => {
-    return new Intl.NumberFormat().format(num)
-  }
+    return new Intl.NumberFormat().format(num);
+  };
 
   const getPercentageBar = (percentage: number) => {
-    let bgColor = "bg-emerald-500"
-    if (percentage >= 90) bgColor = "bg-destructive"
-    else if (percentage >= 75) bgColor = "bg-orange-500"
+    let bgColor = "bg-emerald-500";
+    if (percentage >= 90) bgColor = "bg-destructive";
+    else if (percentage >= 75) bgColor = "bg-orange-500";
 
     return (
-      <div className="flex items-center gap-2 min-w-[120px]">
-        <div className="h-2 flex-1 rounded-full bg-secondary">
+      <div className="flex min-w-[120px] items-center gap-2">
+        <div className="bg-secondary h-2 flex-1 rounded-full">
           <div
             className={cn("h-2 rounded-full transition-all", bgColor)}
             style={{ width: `${Math.max(0, Math.min(percentage, 100))}%` }}
           />
         </div>
-        <span className="text-xs font-medium tabular-nums w-10 text-right">{Math.round(percentage)}%</span>
+        <span className="w-10 text-right text-xs font-medium tabular-nums">
+          {Math.round(percentage)}%
+        </span>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <Card className={cn("w-full", className)}>
@@ -68,7 +70,7 @@ export function DetailedUsageTable({
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <CardContent>
-        <div className="rounded-md border overflow-x-auto">
+        <div className="overflow-x-auto rounded-md border">
           <Table>
             <TableCaption className="sr-only">
               Detailed usage of resources
@@ -78,7 +80,9 @@ export function DetailedUsageTable({
                 <TableHead className="w-[180px]">Resource</TableHead>
                 <TableHead className="text-right">Used</TableHead>
                 <TableHead className="text-right">Limit</TableHead>
-                <TableHead className="text-right min-w-[160px]">Usage</TableHead>
+                <TableHead className="min-w-[160px] text-right">
+                  Usage
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -86,7 +90,7 @@ export function DetailedUsageTable({
                 <TableRow>
                   <TableCell
                     colSpan={4}
-                    className="h-24 text-center text-muted-foreground"
+                    className="text-muted-foreground h-24 text-center"
                   >
                     No resources found
                   </TableCell>
@@ -97,9 +101,9 @@ export function DetailedUsageTable({
                     resource.percentage ??
                     (resource.limit > 0
                       ? (resource.used / resource.limit) * 100
-                      : 0)
+                      : 0);
 
-                  const unit = resource.unit ? ` ${resource.unit}` : ""
+                  const unit = resource.unit ? ` ${resource.unit}` : "";
 
                   return (
                     <TableRow key={resource.name || index}>
@@ -110,7 +114,7 @@ export function DetailedUsageTable({
                         {formatNumber(resource.used)}
                         {unit}
                       </TableCell>
-                      <TableCell className="text-right tabular-nums text-muted-foreground">
+                      <TableCell className="text-muted-foreground text-right tabular-nums">
                         {formatNumber(resource.limit)}
                         {unit}
                       </TableCell>
@@ -118,7 +122,7 @@ export function DetailedUsageTable({
                         {getPercentageBar(percentage)}
                       </TableCell>
                     </TableRow>
-                  )
+                  );
                 })
               )}
             </TableBody>
@@ -126,5 +130,5 @@ export function DetailedUsageTable({
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

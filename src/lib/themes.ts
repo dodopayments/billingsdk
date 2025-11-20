@@ -37,7 +37,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.922 0 0)",
         "--input": "oklch(0.922 0 0)",
         "--ring": "oklch(0.708 0 0)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.145 0 0)",
@@ -57,9 +57,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.704 0.191 22.216)",
         "--border": "oklch(1 0 0 / 10%)",
         "--input": "oklch(1 0 0 / 15%)",
-        "--ring": "oklch(0.556 0 0)"
-      }
-    }
+        "--ring": "oklch(0.556 0 0)",
+      },
+    },
   },
   {
     name: "blue",
@@ -84,7 +84,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.922 0.01 253)",
         "--input": "oklch(0.922 0.01 253)",
         "--ring": "oklch(0.6 0.25 253)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.145 0.01 253)",
@@ -104,9 +104,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.704 0.191 22.216)",
         "--border": "oklch(1 0 0 / 10%)",
         "--input": "oklch(1 0 0 / 15%)",
-        "--ring": "oklch(0.7 0.2 253)"
-      }
-    }
+        "--ring": "oklch(0.7 0.2 253)",
+      },
+    },
   },
   {
     name: "green",
@@ -131,7 +131,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.922 0.01 142)",
         "--input": "oklch(0.922 0.01 142)",
         "--ring": "oklch(0.5 0.2 142)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.145 0.01 142)",
@@ -151,9 +151,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.704 0.191 22.216)",
         "--border": "oklch(1 0 0 / 10%)",
         "--input": "oklch(1 0 0 / 15%)",
-        "--ring": "oklch(0.65 0.15 142)"
-      }
-    }
+        "--ring": "oklch(0.65 0.15 142)",
+      },
+    },
   },
   {
     name: "orange",
@@ -178,7 +178,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.922 0.01 42)",
         "--input": "oklch(0.922 0.01 42)",
         "--ring": "oklch(0.6 0.2 42)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.145 0.01 42)",
@@ -198,9 +198,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.704 0.191 22.216)",
         "--border": "oklch(1 0 0 / 10%)",
         "--input": "oklch(1 0 0 / 15%)",
-        "--ring": "oklch(0.7 0.15 42)"
-      }
-    }
+        "--ring": "oklch(0.7 0.15 42)",
+      },
+    },
   },
   {
     name: "red",
@@ -225,7 +225,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.922 0.01 12)",
         "--input": "oklch(0.922 0.01 12)",
         "--ring": "oklch(0.55 0.25 12)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.145 0.01 12)",
@@ -245,53 +245,54 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.704 0.191 22.216)",
         "--border": "oklch(1 0 0 / 10%)",
         "--input": "oklch(1 0 0 / 15%)",
-        "--ring": "oklch(0.7 0.2 12)"
-      }
-    }
+        "--ring": "oklch(0.7 0.2 12)",
+      },
+    },
   },
   {
-    "name": "cyberpunk",
-    "label": "Cyberpunk",
-    "fonts": {
-      "primary": "'Orbitron', monospace",
-      "secondary": "'JetBrains Mono', monospace",
-      "mono": "'JetBrains Mono', monospace",
-      "fontUrl": "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap"
+    name: "cyberpunk",
+    label: "Cyberpunk",
+    fonts: {
+      primary: "'Orbitron', monospace",
+      secondary: "'JetBrains Mono', monospace",
+      mono: "'JetBrains Mono', monospace",
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&display=swap",
     },
-    "cssVars": {
-      "light": {
+    cssVars: {
+      light: {
         /* Core surface colours — high-key, almost white */
         "--background": "oklch(0.96 0.01 260)",
         "--foreground": "oklch(0.22 0.03 280)",
-  
+
         /* Cards & popovers — subtle glass-morph tint */
         "--card": "oklch(0.98 0.02 260 / 0.8)",
         "--card-foreground": "oklch(0.25 0.04 280)",
         "--popover": "oklch(0.98 0.02 260 / 0.9)",
         "--popover-foreground": "oklch(0.25 0.04 280)",
-  
+
         /* Neon magentas & cyans */
         "--primary": "oklch(0.75 0.32 325)",
         "--primary-foreground": "oklch(0.98 0.01 260)",
         "--secondary": "oklch(0.92 0.1 190)",
         "--secondary-foreground": "oklch(0.2 0.05 260)",
-  
+
         /* Muted greys with a cool hue */
         "--muted": "oklch(0.9 0.02 260)",
         "--muted-foreground": "oklch(0.55 0.03 260)",
-  
+
         /* Accent — electric cyan */
         "--accent": "oklch(0.7 0.28 190)",
         "--accent-foreground": "oklch(0.98 0.01 260)",
-  
+
         /* Destructive — hot red */
         "--destructive": "oklch(0.7 0.3 25)",
         "--border": "oklch(0.85 0.05 260)",
         "--input": "oklch(0.94 0.02 260)",
         "--ring": "oklch(0.75 0.32 325)",
-        "--radius": "0.25rem"
+        "--radius": "0.25rem",
       },
-      "dark": {
+      dark: {
         /* unchanged – already solid */
         "--background": "oklch(0.02 0.01 270)",
         "--foreground": "oklch(0.95 0.2 320)",
@@ -310,9 +311,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.7 0.35 15)",
         "--border": "oklch(0.15 0.04 270)",
         "--input": "oklch(0.1 0.03 270)",
-        "--ring": "oklch(0.8 0.35 320)"
-      }
-    }
+        "--ring": "oklch(0.8 0.35 320)",
+      },
+    },
   },
   {
     name: "elegant",
@@ -321,7 +322,8 @@ export const themes: Theme[] = [
       primary: "'Playfair Display', serif",
       secondary: "'Crimson Text', serif",
       mono: "'JetBrains Mono', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
     },
     cssVars: {
       light: {
@@ -343,7 +345,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.88 0.015 60)",
         "--input": "oklch(0.9 0.012 60)",
         "--ring": "oklch(0.35 0.1 30)",
-        "--radius": "0.75rem"
+        "--radius": "0.75rem",
       },
       dark: {
         "--background": "oklch(0.08 0.01 30)",
@@ -363,9 +365,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.18 15)",
         "--border": "oklch(0.2 0.025 30)",
         "--input": "oklch(0.16 0.02 30)",
-        "--ring": "oklch(0.8 0.015 60)"
-      }
-    }
+        "--ring": "oklch(0.8 0.015 60)",
+      },
+    },
   },
   {
     name: "retro",
@@ -374,7 +376,8 @@ export const themes: Theme[] = [
       primary: "'Fredoka', cursive",
       secondary: "'Space Grotesk', sans-serif",
       mono: "'JetBrains Mono', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
     },
     cssVars: {
       light: {
@@ -396,7 +399,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.82 0.06 45)",
         "--input": "oklch(0.85 0.05 45)",
         "--ring": "oklch(0.6 0.2 25)",
-        "--radius": "1rem"
+        "--radius": "1rem",
       },
       dark: {
         "--background": "oklch(0.12 0.03 20)",
@@ -416,9 +419,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.2 15)",
         "--border": "oklch(0.25 0.05 20)",
         "--input": "oklch(0.2 0.04 20)",
-        "--ring": "oklch(0.7 0.22 25)"
-      }
-    }
+        "--ring": "oklch(0.7 0.22 25)",
+      },
+    },
   },
   {
     name: "minimal",
@@ -426,7 +429,7 @@ export const themes: Theme[] = [
     fonts: {
       primary: "system-ui, -apple-system, sans-serif",
       secondary: "ui-monospace, monospace",
-      mono: "ui-monospace, monospace"
+      mono: "ui-monospace, monospace",
     },
     cssVars: {
       light: {
@@ -448,7 +451,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.9 0 0)",
         "--input": "oklch(0.95 0 0)",
         "--ring": "oklch(0 0 0)",
-        "--radius": "0rem"
+        "--radius": "0rem",
       },
       dark: {
         "--background": "oklch(0 0 0)",
@@ -468,9 +471,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.8 0 0)",
         "--border": "oklch(0.2 0 0)",
         "--input": "oklch(0.1 0 0)",
-        "--ring": "oklch(1 0 0)"
-      }
-    }
+        "--ring": "oklch(1 0 0)",
+      },
+    },
   },
   {
     name: "neon",
@@ -479,7 +482,8 @@ export const themes: Theme[] = [
       primary: "'Space Grotesk', sans-serif",
       secondary: "'JetBrains Mono', monospace",
       mono: "'JetBrains Mono', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap",
     },
     cssVars: {
       light: {
@@ -501,7 +505,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.25 0.05 270)",
         "--input": "oklch(0.2 0.03 270)",
         "--ring": "oklch(0.75 0.35 300)",
-        "--radius": "0.5rem"
+        "--radius": "0.5rem",
       },
       dark: {
         "--background": "oklch(0.04 0.005 270)",
@@ -521,9 +525,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.75 0.4 15)",
         "--border": "oklch(0.2 0.03 270)",
         "--input": "oklch(0.15 0.02 270)",
-        "--ring": "oklch(0.8 0.4 300)"
-      }
-    }
+        "--ring": "oklch(0.8 0.4 300)",
+      },
+    },
   },
   {
     name: "sunset",
@@ -532,7 +536,8 @@ export const themes: Theme[] = [
       primary: "'Inter', sans-serif",
       secondary: "'Fira Code', monospace",
       mono: "'Fira Code', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&display=swap",
     },
     cssVars: {
       light: {
@@ -554,7 +559,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.88 0.05 40)",
         "--input": "oklch(0.9 0.04 40)",
         "--ring": "oklch(0.65 0.25 25)",
-        "--radius": "0.75rem"
+        "--radius": "0.75rem",
       },
       dark: {
         "--background": "oklch(0.15 0.03 15)",
@@ -574,9 +579,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.7 0.25 15)",
         "--border": "oklch(0.3 0.06 15)",
         "--input": "oklch(0.22 0.04 15)",
-        "--ring": "oklch(0.75 0.3 25)"
-      }
-    }
+        "--ring": "oklch(0.75 0.3 25)",
+      },
+    },
   },
   {
     name: "ocean",
@@ -585,7 +590,8 @@ export const themes: Theme[] = [
       primary: "'Poppins', sans-serif",
       secondary: "'Source Code Pro', monospace",
       mono: "'Source Code Pro', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@300;400;500;600;700&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Source+Code+Pro:wght@300;400;500;600;700&display=swap",
     },
     cssVars: {
       light: {
@@ -607,7 +613,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.88 0.02 220)",
         "--input": "oklch(0.9 0.015 220)",
         "--ring": "oklch(0.55 0.2 210)",
-        "--radius": "0.5rem"
+        "--radius": "0.5rem",
       },
       dark: {
         "--background": "oklch(0.1 0.02 200)",
@@ -627,9 +633,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.2 15)",
         "--border": "oklch(0.25 0.04 200)",
         "--input": "oklch(0.18 0.03 200)",
-        "--ring": "oklch(0.7 0.25 210)"
-      }
-    }
+        "--ring": "oklch(0.7 0.25 210)",
+      },
+    },
   },
   {
     name: "forest",
@@ -638,7 +644,8 @@ export const themes: Theme[] = [
       primary: "'Merriweather', serif",
       secondary: "'Roboto Mono', monospace",
       mono: "'Roboto Mono', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Roboto+Mono:wght@300;400;500;600;700&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Roboto+Mono:wght@300;400;500;600;700&display=swap",
     },
     cssVars: {
       light: {
@@ -660,7 +667,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.85 0.03 120)",
         "--input": "oklch(0.88 0.025 120)",
         "--ring": "oklch(0.4 0.15 130)",
-        "--radius": "0.625rem"
+        "--radius": "0.625rem",
       },
       dark: {
         "--background": "oklch(0.12 0.02 90)",
@@ -680,9 +687,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.2 15)",
         "--border": "oklch(0.28 0.04 90)",
         "--input": "oklch(0.2 0.03 90)",
-        "--ring": "oklch(0.65 0.2 130)"
-      }
-    }
+        "--ring": "oklch(0.65 0.2 130)",
+      },
+    },
   },
   {
     name: "lavender",
@@ -691,7 +698,8 @@ export const themes: Theme[] = [
       primary: "'Nunito', sans-serif",
       secondary: "'Cascadia Code', monospace",
       mono: "'Cascadia Code', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap",
     },
     cssVars: {
       light: {
@@ -713,7 +721,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.88 0.02 280)",
         "--input": "oklch(0.9 0.015 280)",
         "--ring": "oklch(0.6 0.18 280)",
-        "--radius": "0.875rem"
+        "--radius": "0.875rem",
       },
       dark: {
         "--background": "oklch(0.1 0.015 260)",
@@ -733,9 +741,9 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.2 15)",
         "--border": "oklch(0.25 0.03 260)",
         "--input": "oklch(0.18 0.025 260)",
-        "--ring": "oklch(0.75 0.22 280)"
-      }
-    }
+        "--ring": "oklch(0.75 0.22 280)",
+      },
+    },
   },
   {
     name: "midnight",
@@ -744,7 +752,8 @@ export const themes: Theme[] = [
       primary: "'IBM Plex Sans', sans-serif",
       secondary: "'IBM Plex Mono', monospace",
       mono: "'IBM Plex Mono', monospace",
-      fontUrl: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap"
+      fontUrl:
+        "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap",
     },
     cssVars: {
       light: {
@@ -766,7 +775,7 @@ export const themes: Theme[] = [
         "--border": "oklch(0.85 0.01 240)",
         "--input": "oklch(0.87 0.008 240)",
         "--ring": "oklch(0.25 0.05 240)",
-        "--radius": "0.375rem"
+        "--radius": "0.375rem",
       },
       dark: {
         "--background": "oklch(0.08 0.008 220)",
@@ -786,15 +795,19 @@ export const themes: Theme[] = [
         "--destructive": "oklch(0.65 0.18 15)",
         "--border": "oklch(0.22 0.02 220)",
         "--input": "oklch(0.16 0.012 220)",
-        "--ring": "oklch(0.8 0.08 240)"
-      }
-    }
-  }
+        "--ring": "oklch(0.8 0.08 240)",
+      },
+    },
+  },
 ];
 
-export function applyScopedTheme(element: HTMLElement, theme: Theme, isDark: boolean) {
+export function applyScopedTheme(
+  element: HTMLElement,
+  theme: Theme,
+  isDark: boolean,
+) {
   const vars = isDark ? theme.cssVars.dark : theme.cssVars.light;
-  
+
   Object.entries(vars).forEach(([key, value]) => {
     element.style.setProperty(key, value);
   });
@@ -805,13 +818,13 @@ export function applyScopedTheme(element: HTMLElement, theme: Theme, isDark: boo
     if (theme.fonts.fontUrl) {
       loadFont(theme.fonts.fontUrl);
     }
-    
+
     if (theme.fonts.primary) {
-      element.style.setProperty('--font-family', theme.fonts.primary);
+      element.style.setProperty("--font-family", theme.fonts.primary);
       element.style.fontFamily = theme.fonts.primary;
     }
     if (theme.fonts.mono) {
-      element.style.setProperty('--font-mono', theme.fonts.mono);
+      element.style.setProperty("--font-mono", theme.fonts.mono);
     }
   }
 }
@@ -822,15 +835,18 @@ function loadFont(url: string) {
   if (existingLink) return;
 
   // Create and append font link
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
   link.href = url;
   document.head.appendChild(link);
 }
 
-export function getThemeStyles(theme: Theme, isDark: boolean): React.CSSProperties {
+export function getThemeStyles(
+  theme: Theme,
+  isDark: boolean,
+): React.CSSProperties {
   const vars = isDark ? theme.cssVars.dark : theme.cssVars.light;
-  
+
   const styles: Record<string, string> = {};
   Object.entries(vars).forEach(([key, value]) => {
     styles[key] = value;
@@ -839,18 +855,18 @@ export function getThemeStyles(theme: Theme, isDark: boolean): React.CSSProperti
   // Add font families if defined
   if (theme.fonts) {
     // Load font if URL is provided (client-side only)
-    if (typeof window !== 'undefined' && theme.fonts.fontUrl) {
+    if (typeof window !== "undefined" && theme.fonts.fontUrl) {
       loadFont(theme.fonts.fontUrl);
     }
-    
+
     if (theme.fonts.primary) {
-      styles['--font-family'] = theme.fonts.primary;
+      styles["--font-family"] = theme.fonts.primary;
       styles.fontFamily = theme.fonts.primary;
     }
     if (theme.fonts.mono) {
-      styles['--font-mono'] = theme.fonts.mono;
+      styles["--font-mono"] = theme.fonts.mono;
     }
   }
-  
+
   return styles as React.CSSProperties;
 }

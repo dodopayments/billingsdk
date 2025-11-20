@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { PricingTableFive } from '@/components/billingsdk/pricing-table-five';
-import { plans } from '@/lib/billingsdk-config';
+import { PricingTableFive } from "@/components/billingsdk/pricing-table-five";
+import { plans } from "@/lib/billingsdk-config";
 
 export function PricingTableFiveMinimalDemo() {
-    return (
-        <PricingTableFive
-            plans={plans}
-            theme="minimal"
-            onPlanSelect={(planId: string) => console.log('Selected plan:', planId)}
-            title="Budget-friendly pricing alternatives"
-            description="Get started free or upgrade to share your impact for all completed tasks with multiple people"
-        />
-    );
+  return (
+    <PricingTableFive
+      plans={plans}
+      theme="minimal"
+      onPlanSelect={(planId: string) => console.log("Selected plan:", planId)}
+      title="Budget-friendly pricing alternatives"
+      description="Get started free or upgrade to share your impact for all completed tasks with multiple people"
+    />
+  );
 }

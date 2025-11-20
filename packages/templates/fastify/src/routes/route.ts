@@ -1,4 +1,4 @@
-import dodopaymentsRoutes from './dodopayments/route'
-import stripeRoutes from './stripe/route'
+import dodopaymentsRoutes from "./dodopayments/route";
+import stripeRoutes from "./stripe/route";
 
-export { dodopaymentsRoutes, stripeRoutes }
+export { dodopaymentsRoutes, stripeRoutes };

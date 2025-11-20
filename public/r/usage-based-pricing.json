@@ -4,13 +4,8 @@
   "type": "registry:block",
   "title": "Usage Based Pricing",
   "description": "A usage based pricing component",
-  "dependencies": [
-    "motion"
-  ],
-  "registryDependencies": [
-    "card",
-    "utils"
-  ],
+  "dependencies": ["motion"],
+  "registryDependencies": ["card", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/usage-based-pricing.tsx",

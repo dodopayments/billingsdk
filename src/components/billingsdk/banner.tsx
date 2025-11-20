@@ -1,2 +1,2 @@
 "use client";
-export { Banner, type BannerProps } from "@/registry/billingsdk/banner"
+export { Banner, type BannerProps } from "@/registry/billingsdk/banner";

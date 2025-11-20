@@ -375,12 +375,7 @@
           "target": "routes/route.ts"
         }
       ],
-      "dependencies": [
-        "stripe",
-        "zod",
-        "fastify",
-        "fastify-raw-body"
-      ]
+      "dependencies": ["stripe", "zod", "fastify", "fastify-raw-body"]
     },
     {
       "name": "hono-dodopayments",
@@ -589,11 +584,7 @@
         "rxjs",
         "@types/express"
       ],
-      "devDependencies": [
-        "@nestjs/cli",
-        "typescript",
-        "ts-node"
-      ]
+      "devDependencies": ["@nestjs/cli", "typescript", "ts-node"]
     },
     {
       "name": "nestjs-stripe",
@@ -671,11 +662,7 @@
         "rxjs",
         "@types/express"
       ],
-      "devDependencies": [
-        "@nestjs/cli",
-        "typescript",
-        "ts-node"
-      ]
+      "devDependencies": ["@nestjs/cli", "typescript", "ts-node"]
     }
   ]
 }

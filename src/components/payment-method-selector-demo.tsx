@@ -1,17 +1,15 @@
-"use client"
+"use client";
 
-import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector"
+import { PaymentMethodSelector } from "@/components/billingsdk/payment-method-selector";
 
 export function PaymentMethodSelectorDemo() {
-    return (
-        <div className="w-full max-w-md mx-auto min-h-[600px] flex items-center justify-center">
-            <PaymentMethodSelector
-                onProceed={(method, data) => {
-                    console.log("Demo: Proceed with:", method, data)
-                }}
-            />
-        </div>
-    )
+  return (
+    <div className="mx-auto flex min-h-[600px] w-full max-w-md items-center justify-center">
+      <PaymentMethodSelector
+        onProceed={(method, data) => {
+          console.log("Demo: Proceed with:", method, data);
+        }}
+      />
+    </div>
+  );
 }
-
-

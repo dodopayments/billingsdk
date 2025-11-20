@@ -4,5 +4,5 @@ export {
   type PricingTableSevenProps,
   type PricingTableSevenPlan,
   type FeatureCategory,
-  type FeatureItemRecord
+  type FeatureItemRecord,
 } from "@/registry/billingsdk/pricing-table-seven";

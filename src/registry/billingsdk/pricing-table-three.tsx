@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Check } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { type Plan } from "@/lib/billingsdk-config"
-import { useState } from "react"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { cva, type VariantProps } from "class-variance-authority"
-import { AnimatePresence, motion } from "motion/react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Check } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { type Plan } from "@/lib/billingsdk-config";
+import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { cva, type VariantProps } from "class-variance-authority";
+import { AnimatePresence, motion } from "motion/react";
 
 const sectionVariants = cva("mt-10 max-w-7xl mx-auto", {
   variants: {
@@ -23,7 +23,7 @@ const sectionVariants = cva("mt-10 max-w-7xl mx-auto", {
   defaultVariants: {
     variant: "small",
   },
-})
+});
 
 const toggleContainerVariants = cva(
   "bg-muted flex h-11 w-fit shrink-0 items-center rounded-md p-1 text-lg",
@@ -38,8 +38,8 @@ const toggleContainerVariants = cva(
     defaultVariants: {
       variant: "large",
     },
-  }
-)
+  },
+);
 
 const labelPaddingVariants = cva("px-7", {
   variants: {
@@ -52,7 +52,7 @@ const labelPaddingVariants = cva("px-7", {
   defaultVariants: {
     variant: "large",
   },
-})
+});
 
 const cardTitleVariants = cva("text-xl", {
   variants: {
@@ -65,7 +65,7 @@ const cardTitleVariants = cva("text-xl", {
   defaultVariants: {
     variant: "large",
   },
-})
+});
 
 const cardDescriptionVariants = cva("text-sm", {
   variants: {
@@ -78,7 +78,7 @@ const cardDescriptionVariants = cva("text-sm", {
   defaultVariants: {
     variant: "large",
   },
-})
+});
 
 const priceTextVariants = cva("text-4xl font-medium", {
   variants: {
@@ -91,7 +91,7 @@ const priceTextVariants = cva("text-4xl font-medium", {
   defaultVariants: {
     variant: "large",
   },
-})
+});
 
 const featureIconVariants = cva("w-4 h-4", {
   variants: {
@@ -104,7 +104,7 @@ const featureIconVariants = cva("w-4 h-4", {
   defaultVariants: {
     variant: "large",
   },
-})
+});
 
 const footerWrapperVariants = cva(
   "flex items-center justify-between bg-muted/50 p-6 border-t border-border",
@@ -119,36 +119,52 @@ const footerWrapperVariants = cva(
     defaultVariants: {
       variant: "large",
     },
-  }
-)
+  },
+);
 
-const footerTextVariants = cva("text-lg font-medium text-card-foreground text-left w-full my-auto", {
-  variants: {
-    variant: {
-      small: "text-base",
-      medium: "text-lg",
-      large: "text-lg",
+const footerTextVariants = cva(
+  "text-lg font-medium text-card-foreground text-left w-full my-auto",
+  {
+    variants: {
+      variant: {
+        small: "text-base",
+        medium: "text-lg",
+        large: "text-lg",
+      },
+    },
+    defaultVariants: {
+      variant: "large",
     },
   },
-  defaultVariants: {
-    variant: "large",
-  },
-})
+);
 
-export interface PricingTableProps extends VariantProps<typeof sectionVariants> {
-  className?: string
-  plans: Plan[]
-  onPlanSelect?: (planId: string) => void
-  showFooter?: boolean
-  footerText?: string
-  footerButtonText?: string
-  onFooterButtonClick?: () => void
+export interface PricingTableProps
+  extends VariantProps<typeof sectionVariants> {
+  className?: string;
+  plans: Plan[];
+  onPlanSelect?: (planId: string) => void;
+  showFooter?: boolean;
+  footerText?: string;
+  footerButtonText?: string;
+  onFooterButtonClick?: () => void;
 }
 
-export function PricingTableThree({ className, plans, onPlanSelect, showFooter, footerText, footerButtonText, onFooterButtonClick, variant }: PricingTableProps) {
+export function PricingTableThree({
+  className,
+  plans,
+  onPlanSelect,
+  showFooter,
+  footerText,
+  footerButtonText,
+  onFooterButtonClick,
+  variant,
+}: PricingTableProps) {
   const [isAnnually, setIsAnnually] = useState(false);
 
-  function calculateDiscount(monthlyPrice: string, yearlyPrice: string): number {
+  function calculateDiscount(
+    monthlyPrice: string,
+    yearlyPrice: string,
+  ): number {
     const monthly = parseFloat(monthlyPrice);
     const yearly = parseFloat(yearlyPrice);
 
@@ -168,16 +184,16 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
 
   const yearlyPriceDiscount = plans.length
     ? Math.max(
-      ...plans.map((plan) =>
-        calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)
+        ...plans.map((plan) =>
+          calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
+        ),
       )
-    )
     : 0;
 
   return (
     <div className={cn(sectionVariants({ variant }), className)}>
       {/* Header Section with Toggle */}
-      <div className="flex flex-col justify-between md:gap-10 gap-4 md:flex-row mb-8 items-center md:items-start">
+      <div className="mb-8 flex flex-col items-center justify-between gap-4 md:flex-row md:items-start md:gap-10">
         <div className={cn(toggleContainerVariants({ variant }))}>
           <RadioGroup
             defaultValue="monthly"
@@ -196,7 +212,7 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
                 htmlFor="monthly"
                 className={cn(
                   "text-muted-foreground peer-data-[state=checked]:text-primary flex h-full cursor-pointer items-center justify-center font-semibold",
-                  labelPaddingVariants({ variant })
+                  labelPaddingVariants({ variant }),
                 )}
               >
                 Monthly
@@ -212,7 +228,7 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
                 htmlFor="annually"
                 className={cn(
                   "text-muted-foreground peer-data-[state=checked]:text-primary flex h-full cursor-pointer items-center justify-center gap-1 font-semibold",
-                  labelPaddingVariants({ variant })
+                  labelPaddingVariants({ variant }),
                 )}
               >
                 Yearly
@@ -222,37 +238,57 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
         </div>
         <div className="flex justify-center">
           {yearlyPriceDiscount > 0 && (
-            <span className="text-xs mt-2 text-muted-foreground">
+            <span className="text-muted-foreground mt-2 text-xs">
               Save upto {yearlyPriceDiscount}% with yearly plan
             </span>
           )}
         </div>
       </div>
 
-      <div className={cn(
-        "grid gap-4 md:gap-0",
-        plans.length === 1 && "grid-cols-1 max-w-md mx-auto",
-        plans.length === 2 && "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto",
-        plans.length === 3 && "grid-cols-1 md:grid-cols-3",
-        plans.length === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
-        plans.length >= 5 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-      )}>
+      <div
+        className={cn(
+          "grid gap-4 md:gap-0",
+          plans.length === 1 && "mx-auto max-w-md grid-cols-1",
+          plans.length === 2 && "mx-auto max-w-4xl grid-cols-1 md:grid-cols-2",
+          plans.length === 3 && "grid-cols-1 md:grid-cols-3",
+          plans.length === 4 && "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+          plans.length >= 5 &&
+            "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+        )}
+      >
         {plans.map((plan) => (
-          <Card key={plan.id} className={cn(
-            "border rounded-xl md:border-none md:rounded-none text-card-foreground flex flex-col relative transition-all duration-200 shadow-sm md:shadow-none",
-            plan.highlight === true
-              ? "bg-muted/30 md:-mt-8 shadow-lg z-10 md:border-t md:rounded-md border-border"
-              : "bg-card"
-          )}>
+          <Card
+            key={plan.id}
+            className={cn(
+              "text-card-foreground relative flex flex-col rounded-xl border shadow-sm transition-all duration-200 md:rounded-none md:border-none md:shadow-none",
+              plan.highlight === true
+                ? "bg-muted/30 border-border z-10 shadow-lg md:-mt-8 md:rounded-md md:border-t"
+                : "bg-card",
+            )}
+          >
             {plan.badge && (
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-secondary text-secondary-foreground px-3 py-1 text-xs">
+              <Badge className="bg-secondary text-secondary-foreground absolute -top-3 left-1/2 -translate-x-1/2 transform px-3 py-1 text-xs">
                 {plan.badge}
               </Badge>
             )}
             <CardHeader className="pb-4">
               <div className="space-y-2">
-                <h3 className={cn(cardTitleVariants({ variant }), "font-semibold text-left")}>{plan.title}</h3>
-                <p className={cn(cardDescriptionVariants({ variant }), "w-full text-left text-muted-foreground")}>{plan.description}</p>
+                <h3
+                  className={cn(
+                    cardTitleVariants({ variant }),
+                    "text-left font-semibold",
+                  )}
+                >
+                  {plan.title}
+                </h3>
+                <p
+                  className={cn(
+                    cardDescriptionVariants({ variant }),
+                    "text-muted-foreground w-full text-left",
+                  )}
+                >
+                  {plan.description}
+                </p>
               </div>
               <div className="space-y-1 text-left">
                 <AnimatePresence mode="wait">
@@ -264,16 +300,26 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <span className={cn(priceTextVariants({ variant }), "text-left")}>
+                      <span
+                        className={cn(
+                          priceTextVariants({ variant }),
+                          "text-left",
+                        )}
+                      >
                         {parseFloat(plan.yearlyPrice) >= 0 && (
-                          <>
-                            {plan.currency}
-                          </>
+                          <>{plan.currency}</>
                         )}
                         {plan.yearlyPrice}
-                        {calculateDiscount(plan.monthlyPrice, plan.yearlyPrice) > 0 && (
-                          <span className="text-xs ml-2 underline">
-                            {calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)}% off
+                        {calculateDiscount(
+                          plan.monthlyPrice,
+                          plan.yearlyPrice,
+                        ) > 0 && (
+                          <span className="ml-2 text-xs underline">
+                            {calculateDiscount(
+                              plan.monthlyPrice,
+                              plan.yearlyPrice,
+                            )}
+                            % off
                           </span>
                         )}
                       </span>
@@ -287,11 +333,14 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <span className={cn(priceTextVariants({ variant }), "text-left")}>
+                      <span
+                        className={cn(
+                          priceTextVariants({ variant }),
+                          "text-left",
+                        )}
+                      >
                         {parseFloat(plan.monthlyPrice) >= 0 && (
-                          <>
-                            {plan.currency}
-                          </>
+                          <>{plan.currency}</>
                         )}
                         {plan.monthlyPrice}
                       </span>
@@ -301,29 +350,38 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
                 </AnimatePresence>
               </div>
             </CardHeader>
-            <CardContent className="space-y-6 flex-1 flex flex-col">
-              <div className="space-y-4 flex-1">
+            <CardContent className="flex flex-1 flex-col space-y-6">
+              <div className="flex-1 space-y-4">
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     {feature.icon === "check" ? (
-                      <div className="w-2 h-2 bg-primary rounded-sm"></div>
+                      <div className="bg-primary h-2 w-2 rounded-sm"></div>
                     ) : (
-                      <div className={cn(featureIconVariants({ variant }), feature.iconColor || "text-muted-foreground")}>
-                        <Check className={cn(featureIconVariants({ variant }))} />
+                      <div
+                        className={cn(
+                          featureIconVariants({ variant }),
+                          feature.iconColor || "text-muted-foreground",
+                        )}
+                      >
+                        <Check
+                          className={cn(featureIconVariants({ variant }))}
+                        />
                       </div>
                     )}
                     <span className="text-sm">{feature.name}</span>
-                    <span className="ml-auto text-sm text-muted-foreground">Included</span>
+                    <span className="text-muted-foreground ml-auto text-sm">
+                      Included
+                    </span>
                   </div>
                 ))}
               </div>
 
               <Button
                 className={cn(
-                  "w-full mt-auto hover:cursor-pointer",
+                  "mt-auto w-full hover:cursor-pointer",
                   plan.highlight === true
-                    ? "gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-9 py-2 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex w-full items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay"
-                    : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
+                    ? "focus-visible:ring-ring hover:bg-primary/90 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-md px-3 py-2 text-left text-sm font-medium whitespace-nowrap shadow ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                    : "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
                 )}
                 onClick={() => onPlanSelect?.(plan.id)}
               >
@@ -336,14 +394,18 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
 
       {/* Footer Section */}
       {showFooter !== false && (
-        <div className={cn(
-          footerWrapperVariants({ variant }),
-          plans.length === 1 && "max-w-md mx-auto",
-          plans.length === 2 && "max-w-4xl mx-auto"
-        )}>
-          <div className="flex flex-col md:flex-row gap-4 justify-between w-full">
-
-              <p className={cn(footerTextVariants({ variant }))}>{footerText || "Pre-negotiated discounts are available to early-stage startups and nonprofits."}</p>
+        <div
+          className={cn(
+            footerWrapperVariants({ variant }),
+            plans.length === 1 && "mx-auto max-w-md",
+            plans.length === 2 && "mx-auto max-w-4xl",
+          )}
+        >
+          <div className="flex w-full flex-col justify-between gap-4 md:flex-row">
+            <p className={cn(footerTextVariants({ variant }))}>
+              {footerText ||
+                "Pre-negotiated discounts are available to early-stage startups and nonprofits."}
+            </p>
             <Button
               className="bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6"
               onClick={onFooterButtonClick}
@@ -354,5 +416,5 @@ export function PricingTableThree({ className, plans, onPlanSelect, showFooter, 
         </div>
       )}
     </div>
-  )
+  );
 }

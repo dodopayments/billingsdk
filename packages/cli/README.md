@@ -11,6 +11,7 @@ npx @billingsdk/cli --help
 ```
 
 This command provides two setup options:
+
 - **UI Components**: Sets up shadcn/ui components
 - **Framework Setup**: Configures your framework (Next.js, Express.js, React, or Hono) with Dodo Payments (and Stripe for Express/Hono)
 
@@ -23,6 +24,7 @@ npx @billingsdk/cli init
 ```
 
 This interactive command will:
+
 - Automatically detect your framework (Next.js, Express.js, React, or Hono) from your project dependencies
 - Guide you through framework selection if auto-detection fails or you prefer manual selection
 - Help you choose a payment provider: Dodo Payments (all frameworks) or Stripe (Express/Hono only)
@@ -48,6 +50,7 @@ npx @billingsdk/cli init --framework nextjs --provider dodopayments --yes --dry-
 ```
 
 Flags:
+
 - `--framework <nextjs|express|react|fastify|hono>`
 - `--provider <dodopayments|stripe>` (Stripe valid for Express/Hono)
 - `--yes` skip prompts
@@ -79,18 +82,19 @@ npx @billingsdk/cli add usage-meter-circle
 Initialize a new billing project with complete setup.
 
 **Options:**
+
 - Automatic framework detection (Next.js, Express.js, React, Hono) from project dependencies
 - Interactive framework selection as fallback or when preferred
 - Payment provider configuration (Stripe offered for Express/Hono; Dodo for all)
 - Automatic dependency installation
 - Template-based file generation
 
-
 ### `@billingsdk/cli add <component>`
 
 Add individual billing components to your existing project.
 
 **Examples:**
+
 ```bash
 npx @billingsdk/cli add pricing-table-one
 npx @billingsdk/cli add subscription-management
@@ -113,12 +117,14 @@ The CLI automatically detects your framework based on your project dependencies 
 - ✅ **Fastify** - Partially supported
 
 **Auto-Detection Process:**
+
 1. Scans your `package.json` for framework-specific dependencies
 2. Checks for framework configuration files in your project root
 3. Presents detected framework as the default option during setup
 4. Falls back to manual selection if no framework is detected
 
 ### Payment Providers
+
 - ✅ **Dodo Payments** - Fully supported
 - ✅ **Stripe** - Supported for Express.js and Hono (Next.js/React coming soon)
 - 🚧 **Additional providers** - Based on community demand
@@ -150,6 +156,7 @@ cd packages/cli && npm run build && npm link
 
 BILLINGSDK_REGISTRY_BASE=http://localhost:3000/tr npx @billingsdk/cli init --framework express --provider dodopayments --yes
 ```
+
 ### Building the CLI
 
 ```bash
@@ -169,18 +176,21 @@ npm run dev
 ### Common Issues
 
 **Command not found**
+
 ```bash
 # Ensure you're using npx correctly
 npx @billingsdk/cli --help
 ```
 
 **Permission errors**
+
 ```bash
 # On Unix systems
 chmod +x node_modules/.bin/@billingsdk/cli
 ```
 
 #### Transport not found
+
 ```bash
 # Build transports locally, then point CLI at file:// registry
 node packages/cli/dist/index.js build

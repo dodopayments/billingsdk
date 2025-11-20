@@ -40,7 +40,7 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
   const handleAsyncOperation = useCallback(
     async <T>(
       operation: () => Promise<T>,
-      operationName: string
+      operationName: string,
     ): Promise<T> => {
       try {
         setLoading(true);
@@ -56,7 +56,7 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
         setLoading(false);
       }
     },
-    [setLoading, setError]
+    [setLoading, setError],
   );
 
   const fetchProducts = useCallback(async (): Promise<
@@ -64,7 +64,7 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
   > => {
     const result = await handleAsyncOperation(
       () => getProducts({ baseUrl: resolvedBaseUrl }),
-      "fetch products"
+      "fetch products",
     );
     setProducts(result);
     return result;
@@ -74,66 +74,66 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
     async (product_id: string): Promise<DodoPayments.Product> => {
       return handleAsyncOperation(
         () => getProduct({ baseUrl: resolvedBaseUrl, product_id }),
-        "fetch product"
+        "fetch product",
       );
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const fetchCustomer = useCallback(
     async (customer_id: string): Promise<DodoPayments.Customers.Customer> => {
       const result = await handleAsyncOperation(
         () => getCustomer({ baseUrl: resolvedBaseUrl, customer_id }),
-        "fetch customer"
+        "fetch customer",
       );
       setCustomer(result);
       return result;
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const fetchCustomerSubscriptions = useCallback(
     async (
-      customer_id: string
+      customer_id: string,
     ): Promise<DodoPayments.Subscriptions.Subscription[]> => {
       return handleAsyncOperation(
         () =>
           getCustomerSubscriptions({ baseUrl: resolvedBaseUrl, customer_id }),
-        "fetch customer subscriptions"
+        "fetch customer subscriptions",
       );
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const fetchCustomerPayments = useCallback(
     async (customer_id: string): Promise<DodoPayments.Payments.Payment[]> => {
       return handleAsyncOperation(
         () => getCustomerPayments({ baseUrl: resolvedBaseUrl, customer_id }),
-        "fetch customer payments"
+        "fetch customer payments",
       );
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const createNewCustomer = useCallback(
     async (
-      newCustomer: DodoPayments.Customers.CustomerCreateParams
+      newCustomer: DodoPayments.Customers.CustomerCreateParams,
     ): Promise<DodoPayments.Customers.Customer> => {
       const result = await handleAsyncOperation(
         () =>
           createCustomer({ baseUrl: resolvedBaseUrl, customer: newCustomer }),
-        "create customer"
+        "create customer",
       );
       setCustomer(result);
       return result;
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const updateExistingCustomer = useCallback(
     async (
       customer_id: string,
-      updatedCustomer: DodoPayments.Customers.CustomerUpdateParams
+      updatedCustomer: DodoPayments.Customers.CustomerUpdateParams,
     ): Promise<DodoPayments.Customers.Customer> => {
       const result = await handleAsyncOperation(
         () =>
@@ -142,12 +142,12 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
             customer_id,
             customer: updatedCustomer,
           }),
-        "update customer"
+        "update customer",
       );
       setCustomer(result);
       return result;
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const createCheckout = useCallback(
@@ -160,7 +160,7 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
       customer: DodoPayments.Payments.CustomerRequest,
       billing_address: DodoPayments.Payments.BillingAddress,
       return_url: string,
-      customMetadata?: Record<string, string>
+      customMetadata?: Record<string, string>,
     ) => {
       return handleAsyncOperation(
         () =>
@@ -172,10 +172,10 @@ export function useBilling({ baseUrl }: { baseUrl?: string } = {}) {
             return_url,
             customMetadata,
           }),
-        "create checkout"
+        "create checkout",
       );
     },
-    [handleAsyncOperation, resolvedBaseUrl]
+    [handleAsyncOperation, resolvedBaseUrl],
   );
 
   const clearError = useCallback(() => {

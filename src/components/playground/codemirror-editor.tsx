@@ -21,16 +21,24 @@ export function CodeMirrorEditor({
   height = "100%",
   readOnly = false,
 }: CodeMirrorEditorProps) {
-
   const extensions = useMemo(() => {
     const exts = [];
-    
-    if (language === "tsx" || language === "typescript" || language === "javascript") {
-      exts.push(javascript({ jsx: true, typescript: language === "tsx" || language === "typescript" }));
+
+    if (
+      language === "tsx" ||
+      language === "typescript" ||
+      language === "javascript"
+    ) {
+      exts.push(
+        javascript({
+          jsx: true,
+          typescript: language === "tsx" || language === "typescript",
+        }),
+      );
     } else if (language === "css") {
       exts.push(css());
     }
-    
+
     return exts;
   }, [language]);
 
@@ -60,7 +68,8 @@ export function CodeMirrorEditor({
         }}
         style={{
           fontSize: "14px",
-          fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace",
+          fontFamily:
+            "'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace",
           lineHeight: "1.6",
         }}
       />

@@ -7,25 +7,31 @@ import "./hero.css";
 
 export default function Hero() {
   return (
-    <section className="max-h-[30rem] bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_37.41%,rgba(74,0,224,0.44)_69.27%,rgba(0,234,255,0.5)_100%)] dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_37.41%,#4a00e070_69.27%,#ff_100%)] border-dashed relative w-full flex md:items-center md:justify-center antialiased overflow-hidden md:min-h-[30rem]">
-      <div className="overflow-hidden px-2 bg-transparent dark:-mb-32 dark:mt-[-4.75rem] dark:pb-32 dark:pt-[4.75rem] md:w-10/12 mx-auto">
-        <div className="mx-auto grid lg:max-w-8xl xl:max-w-full grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:gap-x-16 xl:px-0">
-          <div className="relative z-10 text-left mt-0 sm:mt-2 md:mt-8 lg:mt-0 md:text-center lg:text-left">
+    <section className="relative flex max-h-[30rem] w-full overflow-hidden border-dashed bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_37.41%,rgba(74,0,224,0.44)_69.27%,rgba(0,234,255,0.5)_100%)] antialiased md:min-h-[30rem] md:items-center md:justify-center dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_37.41%,#4a00e070_69.27%,#ff_100%)]">
+      <div className="mx-auto overflow-hidden bg-transparent px-2 md:w-10/12 dark:mt-[-4.75rem] dark:-mb-32 dark:pt-[4.75rem] dark:pb-32">
+        <div className="lg:max-w-8xl mx-auto grid grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 lg:grid-cols-2 lg:px-8 lg:py-4 xl:max-w-full xl:gap-x-16 xl:px-0">
+          <div className="relative z-10 mt-0 text-left sm:mt-2 md:mt-8 md:text-center lg:mt-0 lg:text-left">
             <div className="relative">
-              <p className="text-zinc-800 dark:text-zinc-300 mt-3 tracking-tight text-2xl md:text-3xl font-heading">
+              <p className="font-heading mt-3 text-2xl tracking-tight text-zinc-800 md:text-3xl dark:text-zinc-300">
                 Ready to use billing components and blocks for your next
                 project.
               </p>
-              <p className="text-sm pt-2 text-muted-foreground">
-                Free Billing components and blocks built with React,
-                Typescript, Tailwind CSS, and Motion. Perfect companion for
-                shadcn/ui.
+              <p className="text-muted-foreground pt-2 text-sm">
+                Free Billing components and blocks built with React, Typescript,
+                Tailwind CSS, and Motion. Perfect companion for shadcn/ui.
               </p>
-              <div className="flex py-4 gap-2">
-                <Button asChild className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer">
+              <div className="flex gap-2 py-4">
+                <Button
+                  asChild
+                  className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
+                >
                   <Link href="/docs">Get Started</Link>
                 </Button>
-                <Button variant="secondary" asChild className="bg-secondary text-secondary-foreground ring-secondary before:from-secondary-foreground/20 after:from-secondary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer">
+                <Button
+                  variant="secondary"
+                  asChild
+                  className="bg-secondary text-secondary-foreground ring-secondary before:from-secondary-foreground/20 after:from-secondary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
+                >
                   <Link href="/docs">Browse Components</Link>
                 </Button>
               </div>
@@ -70,7 +76,7 @@ const HeroCircles = () => {
       {/* Center content */}
       <div className="hero__center absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <div className="text-foreground font-semibold text-lg animate-pulse-slow">
+          <div className="text-foreground animate-pulse-slow text-lg font-semibold">
             billing sdk
           </div>
 
@@ -78,7 +84,7 @@ const HeroCircles = () => {
             viewBox="0 0 14 14"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="hero__center__plus animate-bounce-slow w-4 h-4"
+            className="hero__center__plus animate-bounce-slow h-4 w-4"
           >
             <path
               fillRule="evenodd"
@@ -88,7 +94,7 @@ const HeroCircles = () => {
             />
           </svg>
 
-          <div className="text-foreground font-semibold text-lg animate-pulse-slow">
+          <div className="text-foreground animate-pulse-slow text-lg font-semibold">
             shadcn
           </div>
         </div>

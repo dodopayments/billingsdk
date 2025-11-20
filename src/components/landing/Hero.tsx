@@ -49,14 +49,14 @@ const Hero = () => {
   }, [router]);
 
   return (
-    <div className="rounded-4xl border border-muted min-h-[45rem] pt-30 max-h-fit overflow-hidden relative">
+    <div className="border-muted relative max-h-fit min-h-[45rem] overflow-hidden rounded-4xl border pt-30">
       {/* Background Image */}
       <Image
         src="/landing/FractalMaze.jpg"
         alt="Moon background"
         width={1920}
         height={1080}
-        className="absolute inset-0 w-full h-full opacity-40 blur-[1px] md:blur-[2px] object-cover"
+        className="absolute inset-0 h-full w-full object-cover opacity-40 blur-[1px] md:blur-[2px]"
       />
       {/* Content */}
       <motion.div
@@ -64,11 +64,11 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
       >
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="mx-auto w-full max-w-7xl">
           {/* Main Hero Section */}
-          <div className="text-center mb-8 space-y-4 sm:mb-12 md:mb-16 relative">
+          <div className="relative mb-8 space-y-4 text-center sm:mb-12 md:mb-16">
             <motion.h1
-              className="text-5xl text-balance max-w-xl mx-auto md:text-6xl lg:text-7xl font-semibold font-display text-white mb-3 leading-10 xl:leading-16 relative"
+              className="font-display relative mx-auto mb-3 max-w-xl text-5xl leading-10 font-semibold text-balance text-white md:text-6xl lg:text-7xl xl:leading-16"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -77,28 +77,22 @@ const Hero = () => {
             >
               Launch Billing UIs at <span>warp speed</span>
               <motion.div
-                className="hidden lg:flex absolute rotate-12 top-[100px] -right-[145px] rounded-full p-px 
-             text-xs font-semibold leading-6 h-12 text-white group"
+                className="group absolute top-[100px] -right-[145px] hidden h-12 rotate-12 rounded-full p-px text-xs leading-6 font-semibold text-white lg:flex"
                 variants={{
                   hidden: { opacity: 0, y: -20 },
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
               >
-                <span
-                  className="absolute -top-0 left-[1.125rem] h-px 
-                   w-[calc(100%-2.25rem)] 
-                   bg-gradient-to-r from-emerald-400/0 via-primary/40 
-                   transition-opacity duration-500 group-hover:opacity-40"
-                ></span>
+                <span className="via-primary/40 absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
 
                 {/* Inner container like button */}
-                <div className="relative items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
-                  <div className="text-white text-lg whitespace-nowrap">
+                <div className="relative z-10 hidden items-center gap-2 rounded-full px-4 py-0.5 ring-1 ring-white/10">
+                  <div className="text-lg whitespace-nowrap text-white">
                     Fully Open Source
                   </div>
                   <svg
-                    className="absolute -top-12 right-1/2 transform translate-x-1/2 -rotate-12 text-white"
+                    className="absolute -top-12 right-1/2 translate-x-1/2 -rotate-12 transform text-white"
                     width="80"
                     height="40"
                     viewBox="0 0 40 30"
@@ -123,17 +117,12 @@ const Hero = () => {
                 </div>
 
                 {/* Underline effect like Tailwind Connect */}
-                <span
-                  className="absolute -bottom-0 left-[1.125rem] h-px 
-                   w-[calc(100%-2.25rem)] 
-                   bg-gradient-to-r from-emerald-400/0 via-primary/90  
-                   transition-opacity duration-500 group-hover:opacity-40"
-                ></span>
+                <span className="via-primary/90 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
               </motion.div>
             </motion.h1>
 
             <motion.p
-              className="text-neutral-100/80 md:text-balance text-base sm:text-lg w-full md:max-w-2xl mx-auto mt-8 tracking-tight"
+              className="mx-auto mt-8 w-full text-base tracking-tight text-neutral-100/80 sm:text-lg md:max-w-2xl md:text-balance"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -147,7 +136,7 @@ const Hero = () => {
 
             {/* Email Signup */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center my-8 md:max-w-md mx-auto"
+              className="mx-auto my-8 flex flex-col items-center justify-center gap-4 sm:flex-row md:max-w-md"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -155,26 +144,26 @@ const Hero = () => {
               transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
             >
               <Button
-                className="gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-300"
+                className="focus-visible:ring-ring gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                 asChild
               >
-                <Link className="flex group items-center gap-2" href="/docs">
+                <Link className="group flex items-center gap-2" href="/docs">
                   <span>Get Started</span>
-                  <Badge className="bg-accent p-1 text-foreground transition-all duration-200 ease-in-out group-hover:shadow-xl shadow-background/70">
+                  <Badge className="bg-accent text-foreground shadow-background/70 p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl">
                     <CornerDownLeft className="size-4" />
                   </Badge>
                 </Link>
               </Button>
               <Button
                 variant="secondary"
-                className="gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 transition-all duration-300"
+                className="focus-visible:ring-ring gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
               >
                 <Link
-                  className="flex group items-center gap-2"
+                  className="group flex items-center gap-2"
                   href="/docs/components"
                 >
                   <span>Browse Components</span>
-                  <Badge className="bg-accent text-foreground transition-all duration-200 group-hover:shadow-xl shadow-white/70">
+                  <Badge className="bg-accent text-foreground shadow-white/70 transition-all duration-200 group-hover:shadow-xl">
                     B
                   </Badge>
                 </Link>
@@ -184,7 +173,7 @@ const Hero = () => {
 
           {/* Demo Section */}
           <motion.div
-            className="flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12 relative"
+            className="relative flex flex-col items-center justify-center gap-6 sm:gap-8 lg:flex-row lg:gap-12"
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 },
@@ -192,16 +181,16 @@ const Hero = () => {
             transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
           >
             <motion.div
-              className="shadow-lg mx-4 bg-gradient-to-r from-white/5 to-white/10 px-2 rounded-t-xl backdrop-blur-md pt-2 sm:mx-6 md:mx-8 mt-4 h-64 sm:h-72 lg:h-80  w-full max-w-2xl relative"
+              className="relative mx-4 mt-4 h-64 w-full max-w-2xl rounded-t-xl bg-gradient-to-r from-white/5 to-white/10 px-2 pt-2 shadow-lg backdrop-blur-md sm:mx-6 sm:h-72 md:mx-8 lg:h-80"
               variants={{
                 hidden: { opacity: 0, scale: 0.95 },
                 visible: { opacity: 1, scale: 1 },
               }}
               transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
             >
-              <div className="bg-transparent border-l-foreground relative">
+              <div className="border-l-foreground relative bg-transparent">
                 <motion.div
-                  className="hidden lg:block absolute -top-[60px] -left-[180px]"
+                  className="absolute -top-[60px] -left-[180px] hidden lg:block"
                   variants={{
                     hidden: { opacity: 0, x: -20 },
                     visible: { opacity: 1, x: 0 },
@@ -209,8 +198,7 @@ const Hero = () => {
                   transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
                 >
                   <motion.div
-                    className="hidden lg:flex -rotate-12 rounded-full p-px 
-             text-xs font-semibold leading-6 h-12 text-white group"
+                    className="group hidden h-12 -rotate-12 rounded-full p-px text-xs leading-6 font-semibold text-white lg:flex"
                     variants={{
                       hidden: { opacity: 0, y: -20 },
                       visible: { opacity: 1, y: 0 },
@@ -218,22 +206,17 @@ const Hero = () => {
                     transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
                   >
                     {/* Top gradient line like Fully Open Source */}
-                    <span
-                      className="absolute -top-0 left-[1.125rem] h-px 
-       w-[calc(100%-2.25rem)] 
-       bg-gradient-to-r from-emerald-400/0 via-primary/40 
-       transition-opacity duration-500 group-hover:opacity-40"
-                    ></span>
+                    <span className="via-primary/40 absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
 
                     {/* Inner container */}
-                    <div className="relative items-center gap-2 z-10 rounded-full py-0.5 px-4 ring-1 ring-white/10 hidden">
-                      <div className=" text-white text-sm whitespace-nowrap">
+                    <div className="relative z-10 hidden items-center gap-2 rounded-full px-4 py-0.5 ring-1 ring-white/10">
+                      <div className="text-sm whitespace-nowrap text-white">
                         Easy to Use Components
                       </div>
 
                       {/* Original Easy to Use SVG (persisted as-is) */}
                       <svg
-                        className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 rotate-12 text-white"
+                        className="absolute -bottom-10 left-1/2 -translate-x-1/2 rotate-12 transform text-white"
                         width="40"
                         height="30"
                         viewBox="0 0 40 30"
@@ -258,18 +241,13 @@ const Hero = () => {
                     </div>
 
                     {/* Bottom underline like Fully Open Source */}
-                    <span
-                      className="absolute -bottom-0 left-[1.125rem] h-px 
-       w-[calc(100%-2.25rem)] 
-       bg-gradient-to-r from-emerald-400/0 via-primary/90  
-       transition-opacity duration-500 group-hover:opacity-40"
-                    ></span>
+                    <span className="via-primary/90 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
                   </motion.div>
                 </motion.div>
               </div>
 
               <CodeBlock
-                className="border-none h-full rounded-b-none bg-black/70 backdrop-blur-lg"
+                className="h-full rounded-b-none border-none bg-black/70 backdrop-blur-lg"
                 code={feature.code}
                 language="jsx"
               >

@@ -1,16 +1,18 @@
-import { Controller, Post, Req, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Controller, Post, Req, Res } from "@nestjs/common";
+import { Request, Response } from "express";
 import { Webhook } from "standardwebhooks";
-import { getDodoPaymentsClient } from '../../lib/dodopayments';
+import { getDodoPaymentsClient } from "../../lib/dodopayments";
 
-@Controller('webhook')
+@Controller("webhook")
 export class WebhookController {
   private webhook: Webhook;
 
   constructor() {
     const webhookKey = process.env.DODO_PAYMENTS_WEBHOOK_KEY;
     if (!webhookKey) {
-      throw new Error('DODO_PAYMENTS_WEBHOOK_KEY is required for DodoPayments webhook');
+      throw new Error(
+        "DODO_PAYMENTS_WEBHOOK_KEY is required for DodoPayments webhook",
+      );
     }
     this.webhook = new Webhook(webhookKey);
   }
@@ -21,9 +23,9 @@ export class WebhookController {
     const rawBody: Buffer | string = (req as any).rawBody || req.body;
 
     const webhookHeaders = {
-      "webhook-id": req.headers["webhook-id"] as string || "",
-      "webhook-signature": req.headers["webhook-signature"] as string || "",
-      "webhook-timestamp": req.headers["webhook-timestamp"] as string || "",
+      "webhook-id": (req.headers["webhook-id"] as string) || "",
+      "webhook-signature": (req.headers["webhook-signature"] as string) || "",
+      "webhook-timestamp": (req.headers["webhook-timestamp"] as string) || "",
     };
 
     // Verify webhook signature first
@@ -38,7 +40,9 @@ export class WebhookController {
     // Parse payload after successful verification
     let payload: any;
     try {
-      payload = JSON.parse(typeof rawBody === 'string' ? rawBody : rawBody.toString());
+      payload = JSON.parse(
+        typeof rawBody === "string" ? rawBody : rawBody.toString(),
+      );
     } catch (error) {
       console.error("Failed to parse webhook payload:", error);
       res.status(400).json({ error: "Invalid webhook payload" });
@@ -50,17 +54,23 @@ export class WebhookController {
       if (payload.data.payload_type === "Subscription") {
         switch (payload.type) {
           case "subscription.active": {
-            const subscription = await getDodoPaymentsClient().subscriptions.retrieve(payload.data.subscription_id);
-            console.log("-------SUBSCRIPTION DATA START ---------")
-            console.log(subscription)
-            console.log("-------SUBSCRIPTION DATA END ---------")
+            const subscription =
+              await getDodoPaymentsClient().subscriptions.retrieve(
+                payload.data.subscription_id,
+              );
+            console.log("-------SUBSCRIPTION DATA START ---------");
+            console.log(subscription);
+            console.log("-------SUBSCRIPTION DATA END ---------");
             break;
           }
           case "subscription.failed":
             console.log("Subscription failed:", payload.data.subscription_id);
             break;
           case "subscription.cancelled":
-            console.log("Subscription cancelled:", payload.data.subscription_id);
+            console.log(
+              "Subscription cancelled:",
+              payload.data.subscription_id,
+            );
             break;
           case "subscription.renewed":
             console.log("Subscription renewed:", payload.data.subscription_id);
@@ -75,10 +85,13 @@ export class WebhookController {
       } else if (payload.data.payload_type === "Payment") {
         switch (payload.type) {
           case "payment.succeeded": {
-            const paymentDataResp = await getDodoPaymentsClient().payments.retrieve(payload.data.payment_id)
-            console.log("-------PAYMENT DATA START ---------")
-            console.log(paymentDataResp)
-            console.log("-------PAYMENT DATA END ---------")
+            const paymentDataResp =
+              await getDodoPaymentsClient().payments.retrieve(
+                payload.data.payment_id,
+              );
+            console.log("-------PAYMENT DATA START ---------");
+            console.log(paymentDataResp);
+            console.log("-------PAYMENT DATA END ---------");
             break;
           }
           case "payment.failed":

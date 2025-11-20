@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomCodeBlock } from '@/components/code';
+import { CustomCodeBlock } from "@/components/code";
 
 interface Code {
   title: string;
@@ -9,10 +9,12 @@ interface Code {
   language: string;
 }
 
-const features: Code[] = [{
-  title: "Single Config for all..",
-  description: "All components are configured with a single config object. No need to pass props to each component.",
-  code: `export interface Plan {
+const features: Code[] = [
+  {
+    title: "Single Config for all..",
+    description:
+      "All components are configured with a single config object. No need to pass props to each component.",
+    code: `export interface Plan {
     id: string
     title: string
     description: string
@@ -85,13 +87,13 @@ export const plans: Plan[] = [{
     }]
 ];
 `,
-  language: "ts",
-},
+    language: "ts",
+  },
 
-{
-  title: "Drop-in Pricing Table",
-  description: "Just 5 lines of code. Seriously. That's it!",
-  code: `"use client"
+  {
+    title: "Drop-in Pricing Table",
+    description: "Just 5 lines of code. Seriously. That's it!",
+    code: `"use client"
 
 import { PricingTableOne } from "@/components/billingsdk/pricing-table-one"
 import { plans } from "@/lib/billingsdk-config"
@@ -104,12 +106,13 @@ export default function App() {
     />
   )
 }`,
-  language: "tsx",
-},
-{
-  title: "Cancel Flow? Easy Peasy!",
-  description: "Complete cancellation flow with confirmation - just pass a plan!",
-  code: `"use client"
+    language: "tsx",
+  },
+  {
+    title: "Cancel Flow? Easy Peasy!",
+    description:
+      "Complete cancellation flow with confirmation - just pass a plan!",
+    code: `"use client"
 
 import { CancelSubscriptionCard } from "@/components/billingsdk/cancel-subscription-card"
 import { plans } from "@/lib/billingsdk-config"
@@ -122,12 +125,12 @@ export default function App() {
     />
   )
 }`,
-  language: "tsx",
-},
-{
-  title: "Plan Upgrades in Seconds",
-  description: "Beautiful plan upgrade interface - copy, paste, done!",
-  code: `"use client"
+    language: "tsx",
+  },
+  {
+    title: "Plan Upgrades in Seconds",
+    description: "Beautiful plan upgrade interface - copy, paste, done!",
+    code: `"use client"
 
 import { UpdatePlanCard } from "@/components/billingsdk/update-plan-card"
 import { plans } from "@/lib/billingsdk-config"
@@ -141,43 +144,45 @@ export default function App() {
     />
   )
 }`,
-  language: "tsx",
-},
+    language: "tsx",
+  },
 ];
 
 export function CodeSection() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-accent-900 list-none border-none border-border w-full auto-rows-fr max-w-7xl mx-auto">
+    <div className="divide-accent-900 border-border mx-auto grid w-full max-w-7xl list-none auto-rows-fr grid-cols-1 divide-y border-none md:grid-cols-2 md:divide-x md:divide-y-0">
       {features.map((feature, index) => (
         <div
           key={index}
-          className="min-h-160 bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,rgba(74,0,224,0.25)_75%,rgba(0,234,255,0.3)_100%)] dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,#4a00e040_75%,#00eaff60_100%)] border-t border-card p-8 pt-24 pb-0 relative"
+          className="border-card relative min-h-160 border-t bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,rgba(74,0,224,0.25)_75%,rgba(0,234,255,0.3)_100%)] p-8 pt-24 pb-0 dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,#4a00e040_75%,#00eaff60_100%)]"
         >
           <div className="text-center">
-            <h2 className="text-3xl sm:text-3xl md:text-4xl font-medium text-zinc-800 dark:text-zinc-300 font-display">
+            <h2 className="font-display text-3xl font-medium text-zinc-800 sm:text-3xl md:text-4xl dark:text-zinc-300">
               {feature.title}
             </h2>
-            <p className="text-sm mt-4 text-muted-foreground max-w-md mx-auto tracking-tight">
+            <p className="text-muted-foreground mx-auto mt-4 max-w-md text-sm tracking-tight">
               {feature.description}
             </p>
           </div>
 
-          <div className="shadow-lg border-x border-t border-border absolute bottom-0 left-0 right-0 mx-8 mt-8 h-96 overflow-hidden">
+          <div className="border-border absolute right-0 bottom-0 left-0 mx-8 mt-8 h-96 overflow-hidden border-x border-t shadow-lg">
             {/* Window chrome */}
-            <div className="py-2 px-4 border-b border-border bg-transparent border-l-foreground">
+            <div className="border-border border-l-foreground border-b bg-transparent px-4 py-2">
               <div className="flex items-center gap-1">
-                <div className="size-2 outline rounded-full outline-border"></div>
-                <div className="size-2 outline rounded-full outline-accent"></div>
+                <div className="outline-border size-2 rounded-full outline"></div>
+                <div className="outline-accent size-2 rounded-full outline"></div>
               </div>
             </div>
 
             {/* Code block */}
-            <CustomCodeBlock code={feature.code} language={feature.language} maxHeight="400px" />
+            <CustomCodeBlock
+              code={feature.code}
+              language={feature.language}
+              maxHeight="400px"
+            />
           </div>
         </div>
       ))}
     </div>
   );
 }
-
-

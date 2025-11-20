@@ -13,7 +13,7 @@ export const getProducts = async ({
   const response = await fetch(`${baseUrl}/products`);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch products: ${response.status} ${response.statusText}`
+      `Failed to fetch products: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -29,7 +29,7 @@ export const getProduct = async ({
   const response = await fetch(`${baseUrl}/product?product_id=${product_id}`);
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch product: ${response.status} ${response.statusText}`
+      `Failed to fetch product: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -43,11 +43,11 @@ export const getCustomer = async ({
   customer_id: string;
 }): Promise<Customer> => {
   const response = await fetch(
-    `${baseUrl}/customer?customer_id=${customer_id}`
+    `${baseUrl}/customer?customer_id=${customer_id}`,
   );
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch customer: ${response.status} ${response.statusText}`
+      `Failed to fetch customer: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -61,11 +61,11 @@ export const getCustomerSubscriptions = async ({
   customer_id: string;
 }): Promise<Subscription[]> => {
   const response = await fetch(
-    `${baseUrl}/customer/subscriptions?customer_id=${customer_id}`
+    `${baseUrl}/customer/subscriptions?customer_id=${customer_id}`,
   );
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch subscriptions: ${response.status} ${response.statusText}`
+      `Failed to fetch subscriptions: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -79,11 +79,11 @@ export const getCustomerPayments = async ({
   customer_id: string;
 }): Promise<PaymentIntent[]> => {
   const response = await fetch(
-    `${baseUrl}/customer/payments?customer_id=${customer_id}`
+    `${baseUrl}/customer/payments?customer_id=${customer_id}`,
   );
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch payments: ${response.status} ${response.statusText}`
+      `Failed to fetch payments: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -103,7 +103,7 @@ export const createCustomer = async ({
   });
   if (!response.ok) {
     throw new Error(
-      `Failed to create customer: ${response.status} ${response.statusText}`
+      `Failed to create customer: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -124,11 +124,11 @@ export const updateCustomer = async ({
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(customer),
-    }
+    },
   );
   if (!response.ok) {
     throw new Error(
-      `Failed to update customer: ${response.status} ${response.statusText}`
+      `Failed to update customer: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();
@@ -154,7 +154,7 @@ export const checkout = async ({
   });
   if (!response.ok) {
     throw new Error(
-      `Failed to checkout: ${response.status} ${response.statusText}`
+      `Failed to checkout: ${response.status} ${response.statusText}`,
     );
   }
   return response.json();

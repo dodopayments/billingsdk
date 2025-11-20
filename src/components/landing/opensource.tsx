@@ -24,32 +24,32 @@ export function OpenSource() {
     },
   ];
   return (
-    <div className="flex flex-col mb-40 w-full max-w-4xl mx-auto">
-      <h2 className="text-3xl sm:text-3xl font-display md:text-4xl font-medium text-primary text-center mb-4">
+    <div className="mx-auto mb-40 flex w-full max-w-4xl flex-col">
+      <h2 className="font-display text-primary mb-4 text-center text-3xl font-medium sm:text-3xl md:text-4xl">
         Join our community
       </h2>
-      <p className="text-sm mt-2 text-muted-foreground max-w-2xl mx-auto tracking-tight text-center mb-8 px-8 xl:px-0">
+      <p className="text-muted-foreground mx-auto mt-2 mb-8 max-w-2xl px-8 text-center text-sm tracking-tight xl:px-0">
         Connect with other developers, get help, and contribute to the project
       </p>
-      <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center">
+      <div className="flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
         {socials.map((social) => (
           <Card
             key={social.name}
-            className="w-full max-w-[280px] md:max-w-xs h-48 cursor-pointer flex flex-col bg-card/50 hover:bg-card/80 transition-all duration-300"
+            className="bg-card/50 hover:bg-card/80 flex h-48 w-full max-w-[280px] cursor-pointer flex-col transition-all duration-300 md:max-w-xs"
           >
             <Link
               href={social.href}
               target="_blank"
-              className="flex flex-col h-full"
+              className="flex h-full flex-col"
             >
-              <CardContent className="flex flex-col gap-2 items-center justify-center p-6 flex-1">
-                <social.icon className="text-3xl md:text-4xl text-foreground" />
-                <p className="text-base font-medium text-foreground">
+              <CardContent className="flex flex-1 flex-col items-center justify-center gap-2 p-6">
+                <social.icon className="text-foreground text-3xl md:text-4xl" />
+                <p className="text-foreground text-base font-medium">
                   {social.name}
                 </p>
               </CardContent>
-              <CardFooter className="px-4 pb-4 mt-auto">
-                <p className="text-xs text-muted-foreground text-center leading-relaxed">
+              <CardFooter className="mt-auto px-4 pb-4">
+                <p className="text-muted-foreground text-center text-xs leading-relaxed">
                   {social.description}
                 </p>
               </CardFooter>

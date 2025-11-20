@@ -19,8 +19,5 @@
       "content": "VITE_BASE_URL=\"YOUR API URL\""
     }
   ],
-  "dependencies": [
-    "stripe",
-    "react"
-  ]
+  "dependencies": ["stripe", "react"]
 }

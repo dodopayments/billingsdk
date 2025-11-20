@@ -2,8 +2,8 @@ import { LogoMark } from "./logo-mark";
 
 export const OpenSource = () => {
   return (
-    <div className="flex h-full bg-muted/20 items-center relative overflow-hidden pt-8 justify-around p-4 group">
-      <div className="flex items-center bg-muted border-accent border drop-shadow-2xl drop-shadow-white/20 group-hover:drop-shadow-white/40 transition-all duration-300 ease-in-out p-4 rounded-4xl justify-center z-[20]">
+    <div className="bg-muted/20 group relative flex h-full items-center justify-around overflow-hidden p-4 pt-8">
+      <div className="bg-muted border-accent z-[20] flex items-center justify-center rounded-4xl border p-4 drop-shadow-2xl drop-shadow-white/20 transition-all duration-300 ease-in-out group-hover:drop-shadow-white/40">
         <svg
           viewBox="0 0 1024 1024"
           className="size-20"
@@ -17,20 +17,20 @@ export const OpenSource = () => {
           <g className="origin-[35%_35%] transition-transform duration-500 ease-in-out group-hover:rotate-[-12deg]">
             <path d="M340 260c-25-35-40-75-42-118 0-8 6-14 14-14 43 2 83 17 118 42l-90 90z" />
           </g>
-          
+
           {/* Right ear - waves */}
           <g className="origin-[65%_35%] transition-transform duration-500 ease-in-out group-hover:rotate-[12deg]">
             <path d="M684 260c25-35 40-75 42-118 0-8-6-14-14-14-43 2-83 17-118 42l90 90z" />
           </g>
-          
+
           {/* Tail - waves */}
           <g className="origin-[25%_75%] transition-transform duration-700 ease-in-out group-hover:rotate-[-12deg]">
             <path d="M210 650c-45 15-85 42-115 77-6 6-6 16 0 22 35 35 75 62 120 77 8 3 16-3 16-11v-154c0-8-8-14-16-11z" />
           </g>
         </svg>
       </div>
-      <div className="[mask-image:linear-gradient(to_top,transparent,white_70%)] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-80">
-        <LogoMark className=" size-[17rem] text-muted" />
+      <div className="absolute top-1/2 left-1/2 z-[10] -translate-x-1/2 -translate-y-1/2 [mask-image:linear-gradient(to_top,transparent,white_70%)] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-80">
+        <LogoMark className="text-muted size-[17rem]" />
       </div>
     </div>
   );

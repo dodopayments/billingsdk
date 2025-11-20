@@ -66,23 +66,23 @@ export const features = [
 
 export default function Features() {
   return (
-    <div className="flex relative flex-col my-24 mt-32 items-center justify-center max-w-7xl mx-auto">
+    <div className="relative mx-auto my-24 mt-32 flex max-w-7xl flex-col items-center justify-center">
       <ShineButton
         Icon={Crown}
         className="shadow-xl shadow-white/5"
         label="Features"
       />
-      <h2 className="text-3xl mt-4 sm:text-3xl font-display md:text-5xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000">
+      <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 mt-4 text-3xl font-medium duration-1000 sm:text-3xl md:text-5xl">
         Why choose BillingSDK?
       </h2>
-      <p className="text-sm md:text-base text-balance mt-4 text-muted-foreground mb-12 max-w-3xl mx-auto tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200 text-center">
+      <p className="text-muted-foreground animate-in fade-in slide-in-from-bottom-4 mx-auto mt-4 mb-12 max-w-3xl text-center text-sm tracking-tight text-balance delay-200 duration-1000 md:text-base">
         Beautiful, customizable billing components that save you development
         time and effort.
       </p>
 
-      <div className="relative w-full rounded-none -pr-2  ">
+      <div className="-pr-2 relative w-full rounded-none">
         <div className="w-full">
-          <div className="grid grid-cols-1 gap-4 w-full relative sm:grid-cols-2 lg:grid-cols-10">
+          <div className="relative grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-10">
             {features.map((item, index) => {
               return <FeatureCard key={item.title} item={item} index={index} />;
             })}

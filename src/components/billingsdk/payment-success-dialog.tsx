@@ -1,4 +1,5 @@
-'use client';
-export { PaymentSuccessDialog, type PaymentSuccessDialogProps } from "@/registry/billingsdk/payment-success-dialog";
-
-
+"use client";
+export {
+  PaymentSuccessDialog,
+  type PaymentSuccessDialogProps,
+} from "@/registry/billingsdk/payment-success-dialog";

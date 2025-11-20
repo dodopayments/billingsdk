@@ -1,33 +1,29 @@
-import Stripe from 'stripe';
+import Stripe from "stripe";
 
 let _stripe: Stripe | null = null;
 export const getStripe = (): Stripe => {
   const key = process.env.STRIPE_SECRET_KEY;
-  if(!key){
-    throw new Error("STRIPE_SECRET_KEY is not set")
+  if (!key) {
+    throw new Error("STRIPE_SECRET_KEY is not set");
   }
   if (!_stripe) {
-    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-      
-    });
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {});
   }
   return _stripe;
 };
-
 
 export type Product = Stripe.Product;
 export type Customer = Stripe.Customer;
 export type Subscription = Stripe.Subscription;
 export type PaymentIntent = Stripe.PaymentIntent;
 
-
 export async function getProducts(): Promise<Product[]> {
   try {
     const { data } = await getStripe().products.list({ limit: 100 });
     return data;
   } catch (error) {
-    console.error('Error fetching products', error);
-    throw new Error('Failed to fetch products');
+    console.error("Error fetching products", error);
+    throw new Error("Failed to fetch products");
   }
 }
 
@@ -35,77 +31,89 @@ export async function getProduct(product_id: string): Promise<Product> {
   try {
     return await getStripe().products.retrieve(product_id);
   } catch (error) {
-    console.error('Error fetching product', error);
-    throw new Error('Failed to fetch product');
+    console.error("Error fetching product", error);
+    throw new Error("Failed to fetch product");
   }
 }
 
-
-export async function getCustomer(customer_id: string): Promise<Customer | Stripe.DeletedCustomer> {
+export async function getCustomer(
+  customer_id: string,
+): Promise<Customer | Stripe.DeletedCustomer> {
   try {
     const customer = await getStripe().customers.retrieve(customer_id);
-    
+
     if ((customer as Stripe.DeletedCustomer).deleted) {
       return customer as Stripe.DeletedCustomer;
     }
     return customer as Customer;
   } catch (error) {
-    console.error('Error fetching customer', error);
-    throw new Error('Failed to fetch customer');
+    console.error("Error fetching customer", error);
+    throw new Error("Failed to fetch customer");
   }
 }
 
-export async function createCustomer(params: Stripe.CustomerCreateParams): Promise<Customer> {
+export async function createCustomer(
+  params: Stripe.CustomerCreateParams,
+): Promise<Customer> {
   try {
     return await getStripe().customers.create(params);
   } catch (error) {
-    console.error('Error creating customer', error);
-    throw new Error('Failed to create customer');
+    console.error("Error creating customer", error);
+    throw new Error("Failed to create customer");
   }
 }
 
-export async function updateCustomer(customer_id: string, params: Stripe.CustomerUpdateParams): Promise<Customer> {
+export async function updateCustomer(
+  customer_id: string,
+  params: Stripe.CustomerUpdateParams,
+): Promise<Customer> {
   try {
     return await getStripe().customers.update(customer_id, params);
   } catch (error) {
-    console.error('Error updating customer', error);
-    throw new Error('Failed to update customer');
+    console.error("Error updating customer", error);
+    throw new Error("Failed to update customer");
   }
 }
 
-
-export async function getCustomerSubscriptions(customer_id: string): Promise<Subscription[]> {
+export async function getCustomerSubscriptions(
+  customer_id: string,
+): Promise<Subscription[]> {
   try {
-    const { data } = await getStripe().subscriptions.list({ customer: customer_id });
+    const { data } = await getStripe().subscriptions.list({
+      customer: customer_id,
+    });
     return data;
   } catch (error) {
-    console.error('Error fetching subscriptions', error);
-    throw new Error('Failed to fetch subscriptions');
+    console.error("Error fetching subscriptions", error);
+    throw new Error("Failed to fetch subscriptions");
   }
 }
 
-
-export async function getCustomerPayments(customer_id: string): Promise<PaymentIntent[]> {
+export async function getCustomerPayments(
+  customer_id: string,
+): Promise<PaymentIntent[]> {
   try {
-    const { data } = await getStripe().paymentIntents.list({ customer: customer_id, limit: 100 });
+    const { data } = await getStripe().paymentIntents.list({
+      customer: customer_id,
+      limit: 100,
+    });
     return data;
   } catch (error) {
-    console.error('Error fetching payments', error);
-    throw new Error('Failed to fetch payments');
+    console.error("Error fetching payments", error);
+    throw new Error("Failed to fetch payments");
   }
 }
-
 
 export async function checkout(opts: {
   price_id: string;
   customer_id?: string;
   success_url: string;
   cancel_url: string;
-  mode?: 'payment' | 'subscription' | 'setup';
+  mode?: "payment" | "subscription" | "setup";
 }): Promise<{ checkout_url: string }> {
   try {
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      mode: opts.mode ?? 'subscription',
+      mode: opts.mode ?? "subscription",
       line_items: [{ price: opts.price_id, quantity: 1 }],
       success_url: opts.success_url,
       cancel_url: opts.cancel_url,
@@ -118,11 +126,11 @@ export async function checkout(opts: {
     const session = await getStripe().checkout.sessions.create(sessionParams);
 
     if (!session.url) {
-      throw new Error('Checkout session created but URL is missing');
+      throw new Error("Checkout session created but URL is missing");
     }
     return { checkout_url: session.url };
   } catch (error) {
-    console.error('Error creating checkout session', error);
-    throw new Error('Failed to create checkout session');
+    console.error("Error creating checkout session", error);
+    throw new Error("Failed to create checkout session");
   }
 }

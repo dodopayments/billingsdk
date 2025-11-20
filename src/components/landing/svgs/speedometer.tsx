@@ -12,7 +12,7 @@ export const Speedometer = ({ className }: SpeedometerProps) => {
       height="3918"
       viewBox="0 0 3918 3918"
       fill="none"
-      className={cn("size-20 group", className)}
+      className={cn("group size-20", className)}
     >
       <mask
         id="mask0_199_2"
@@ -43,7 +43,7 @@ export const Speedometer = ({ className }: SpeedometerProps) => {
           />
         </g>
       </g>
-      <g 
+      <g
         filter="url(#filter1_d_199_2)"
         className="origin-[2006px_1877px] rotate-[-93.5deg] transition-transform duration-700 ease-out group-hover:rotate-[0deg]"
       >

@@ -4,18 +4,8 @@
   "type": "registry:block",
   "title": "Pricing Table Four",
   "description": "A modern pricing table component with gradient design",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "label",
-    "radio-group",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
+  "registryDependencies": ["button", "label", "radio-group", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/pricing-table-four.tsx",

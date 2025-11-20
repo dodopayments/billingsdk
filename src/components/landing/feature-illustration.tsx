@@ -21,20 +21,20 @@ export function FeatureIllustration({ label }: { label: string }) {
       return <Accessiblilty />;
     case "fast-dev":
       return (
-        <div className="flex bg-muted/20 h-full flex-col items-center justify-center gap-0 w-full">
+        <div className="bg-muted/20 flex h-full w-full flex-col items-center justify-center gap-0">
           <Badge
             variant={"secondary"}
-            className="h-9 text-sm px-4 -translate-y-18"
+            className="h-9 -translate-y-18 px-4 text-sm"
           >
             10x Faster
           </Badge>
-          <Speedometer className="size-[18rem] absolute left-1/2 -translate-x-1/2 -bottom-28 " />
+          <Speedometer className="absolute -bottom-28 left-1/2 size-[18rem] -translate-x-1/2" />
         </div>
       );
     case "customizable":
       return (
-        <div className="flex bg-muted/20 flex-col h-full items-center justify-center gap-0 w-full">
-          <CustomisedUI className="size-48 " />
+        <div className="bg-muted/20 flex h-full w-full flex-col items-center justify-center gap-0">
+          <CustomisedUI className="size-48" />
         </div>
       );
     default:

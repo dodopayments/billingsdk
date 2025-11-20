@@ -14,29 +14,28 @@ export const FeatureCard = ({
     <div
       className={cn(
         // base classes first
-        "border h-[23rem] group max-h-fit group p-1 bg-muted/50 col-span-1 lg:col-span-3 rounded-xl w-full",
+        "group group bg-muted/50 col-span-1 h-[23rem] max-h-fit w-full rounded-xl border p-1 lg:col-span-3",
         // conditional overrides appended AFTER the base so they take precedence
-        (index === 1 || index === 5) && "lg:col-span-4"
+        (index === 1 || index === 5) && "lg:col-span-4",
       )}
     >
-      <div className="border h-full flex flex-col bg-background/80 rounded-lg relative overflow-hidden group">
+      <div className="bg-background/80 group relative flex h-full flex-col overflow-hidden rounded-lg border">
         <Image
           src="/landing/gradient2.png"
           alt="Gradient background"
           fill
-          className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-20 object-cover blur-md transition-opacity duration-500 ease-out"
+          className="absolute top-0 left-0 h-full w-full object-cover opacity-0 blur-md transition-opacity duration-500 ease-out group-hover:opacity-20"
         />
-        <div className="relative overflow-hidden rounded-lg h-full w-full z-10">
-         
+        <div className="relative z-10 h-full w-full overflow-hidden rounded-lg">
           <FeatureIllustration label={item.label} />
         </div>
-        <div className="p-4 min-h-[35%] max-h-fit">
-          <h3 className="h-fit mb-2 text-lg font-semibold">{item.title}</h3>
+        <div className="max-h-fit min-h-[35%] p-4">
+          <h3 className="mb-2 h-fit text-lg font-semibold">{item.title}</h3>
           <p
             className={cn(
               index === 1 && "lg:max-w-lg",
               index === 5 && "lg:max-w-lg",
-              "text-sm  text-muted-foreground"
+              "text-muted-foreground text-sm",
             )}
           >
             {item.description}

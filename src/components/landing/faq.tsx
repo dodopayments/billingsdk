@@ -32,25 +32,25 @@ export const faqData = [
 
 export const Faq = () => {
   return (
-    <div className="min-h-[30rem] flex items-center justify-center flex-col my-24 w-full gap-8 md:gap-0 max-h-fit p-4">
-      <div className="flex gap-2 md:mb-8 h-fit  items-center justify-center flex-col w-full md:w-3/4 ">
+    <div className="my-24 flex max-h-fit min-h-[30rem] w-full flex-col items-center justify-center gap-8 p-4 md:gap-0">
+      <div className="flex h-fit w-full flex-col items-center justify-center gap-2 md:mb-8 md:w-3/4">
         <ShineButton Icon={CircleQuestionMarkIcon} className="" label="FAQs" />
-        <h2 className="text-3xl sm:text-3xl font-display md:text-5xl font-medium text-primary animate-in fade-in slide-in-from-bottom-4 duration-1000 text-center">
+        <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 text-center text-3xl font-medium duration-1000 sm:text-3xl md:text-5xl">
           You got questions? We got answers
         </h2>
       </div>
-      <div className="md:w-2/3 p-4 rounded-2xl">
+      <div className="rounded-2xl p-4 md:w-2/3">
         <Accordion type="single" collapsible className="">
           {faqData.map((faq) => (
             <AccordionItem
               key={faq.question}
               value={faq.question}
-              className="border bg-muted/20 mb-3 rounded-2xl"
+              className="bg-muted/20 mb-3 rounded-2xl border"
             >
-              <AccordionTrigger className="hover:no-underline px-4 cursor-pointer text-left">
+              <AccordionTrigger className="cursor-pointer px-4 text-left hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="bg-muted/60 px-4 rounded-b-xl py-4">
+              <AccordionContent className="bg-muted/60 rounded-b-xl px-4 py-4">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

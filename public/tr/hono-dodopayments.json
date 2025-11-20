@@ -49,10 +49,5 @@
       "content": "# DodoPayments Configurations\nDODO_PAYMENTS_API_KEY=your_api_key\nDODO_PAYMENTS_ENVIRONMENT=test_mode\nDODO_PAYMENTS_WEBHOOK_KEY=your_webhook_key_here\n\n# server configurations\nPORT=3000\nBUN_ENV=development\n\nSTRIPE_SECRET_KEY=sk_test_12345...\nSTRIPE_WEBHOOK_SECRET=whsec_12345\n"
     }
   ],
-  "dependencies": [
-    "dodopayments",
-    "standardwebhooks",
-    "zod",
-    "hono"
-  ]
+  "dependencies": ["dodopayments", "standardwebhooks", "zod", "hono"]
 }

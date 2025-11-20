@@ -4,15 +4,8 @@
   "type": "registry:block",
   "title": "Usage Meter Circle",
   "description": "A usage meter circle component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "card",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["card", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/usage-meter.tsx",

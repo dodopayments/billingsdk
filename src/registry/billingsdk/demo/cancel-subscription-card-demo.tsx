@@ -4,9 +4,8 @@ import { CancelSubscriptionCard } from "@/components/billingsdk/cancel-subscript
 import { plans } from "@/lib/billingsdk-config";
 
 export function CancelSubscriptionCardDemo() {
-    return(
-
-      <div className="flex flex-col w-full">
+  return (
+    <div className="flex w-full flex-col">
       <CancelSubscriptionCard
         title="We're sorry to see you go..."
         description={`Before you cancel, we hope you'll consider upgrading to a ${plans[1].title} plan again.`}
@@ -22,7 +21,7 @@ export function CancelSubscriptionCardDemo() {
         goBackButtonText="Wait, Go Back"
         confirmButtonText="Yes, Cancel My Subscription"
         onCancel={async (planId) => {
-          console.log('Cancelling subscription for plan:', planId);
+          console.log("Cancelling subscription for plan:", planId);
           return new Promise((resolve) => {
             setTimeout(() => {
               resolve(void 0);
@@ -30,10 +29,10 @@ export function CancelSubscriptionCardDemo() {
           });
         }}
         onKeepSubscription={async (planId) => {
-          console.log('Keeping subscription for plan:', planId);
+          console.log("Keeping subscription for plan:", planId);
         }}
         className="max-w-4xl"
       />
     </div>
-    )
+  );
 }

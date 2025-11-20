@@ -1,5 +1,5 @@
-'use client';
-import { useMemo, useState } from 'react';
+"use client";
+import { useMemo, useState } from "react";
 import {
   Check,
   ChevronDown,
@@ -7,17 +7,17 @@ import {
   ExternalLinkIcon,
   MessageCircleIcon,
   Play,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
-import { buttonVariants } from './ui/button';
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useCopyButton } from "fumadocs-ui/utils/use-copy-button";
+import { buttonVariants } from "./ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from 'fumadocs-ui/components/ui/popover';
+} from "fumadocs-ui/components/ui/popover";
 
-import { cva } from 'class-variance-authority';
+import { cva } from "class-variance-authority";
 
 const cache = new Map<string, string>();
 
@@ -39,7 +39,7 @@ export function LLMCopyButton({
     try {
       await navigator.clipboard.write([
         new ClipboardItem({
-          'text/plain': fetch(markdownUrl).then(async (res) => {
+          "text/plain": fetch(markdownUrl).then(async (res) => {
             if (!res.ok) {
               throw new Error(`Failed to fetch: ${res.status}`);
             }
@@ -60,9 +60,9 @@ export function LLMCopyButton({
       disabled={isLoading}
       className={cn(
         buttonVariants({
-          variant: 'secondary',
+          variant: "secondary",
           // size: 'sm',
-          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground',
+          className: "[&_svg]:text-fd-muted-foreground gap-2 [&_svg]:size-3.5",
         }),
       )}
       onClick={onClick}
@@ -74,7 +74,7 @@ export function LLMCopyButton({
 }
 
 const optionVariants = cva(
-  'text-sm p-2 rounded-lg inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent [&_svg]:size-4',
+  "text-sm p-2 rounded-lg inline-flex items-center gap-2 hover:text-fd-accent-foreground hover:bg-fd-accent [&_svg]:size-4",
 );
 
 export function ViewOptions({
@@ -93,55 +93,57 @@ export function ViewOptions({
 }) {
   const items = useMemo(() => {
     const fullMarkdownUrl =
-      typeof window !== 'undefined'
+      typeof window !== "undefined"
         ? new URL(markdownUrl, window.location.origin)
-        : 'loading';
+        : "loading";
     const q = `Read ${fullMarkdownUrl}, I want to ask questions about it.`;
 
     return [
       {
-        title: 'View as Markdown',
+        title: "View as Markdown",
         href: markdownUrl,
-        icon: <svg
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4 shrink-0"
-      >
-        <path
-          d="M15.25 3.75H2.75C1.64543 3.75 0.75 4.64543 0.75 5.75V12.25C0.75 13.3546 1.64543 14.25 2.75 14.25H15.25C16.3546 14.25 17.25 13.3546 17.25 12.25V5.75C17.25 4.64543 16.3546 3.75 15.25 3.75Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M8.75 11.25V6.75H8.356L6.25 9.5L4.144 6.75H3.75V11.25"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M11.5 9.5L13.25 11.25L15 9.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M13.25 11.25V6.75"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+        icon: (
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 shrink-0"
+          >
+            <path
+              d="M15.25 3.75H2.75C1.64543 3.75 0.75 4.64543 0.75 5.75V12.25C0.75 13.3546 1.64543 14.25 2.75 14.25H15.25C16.3546 14.25 17.25 13.3546 17.25 12.25V5.75C17.25 4.64543 16.3546 3.75 15.25 3.75Z"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8.75 11.25V6.75H8.356L6.25 9.5L4.144 6.75H3.75V11.25"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M11.5 9.5L13.25 11.25L15 9.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M13.25 11.25V6.75"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ),
       },
       {
-        title: 'Open in GitHub',
+        title: "Open in GitHub",
         href: githubUrl,
         icon: (
           <svg fill="currentColor" role="img" viewBox="0 0 24 24">
@@ -151,7 +153,7 @@ export function ViewOptions({
         ),
       },
       {
-        title: 'Open in Scira AI',
+        title: "Open in Scira AI",
         href: `https://scira.ai/?${new URLSearchParams({
           q,
         })}`,
@@ -214,9 +216,9 @@ export function ViewOptions({
         ),
       },
       {
-        title: 'Open in ChatGPT',
+        title: "Open in ChatGPT",
         href: `https://chatgpt.com/?${new URLSearchParams({
-          hints: 'search',
+          hints: "search",
           q,
         })}`,
         icon: (
@@ -232,7 +234,7 @@ export function ViewOptions({
         ),
       },
       {
-        title: 'Open in Claude',
+        title: "Open in Claude",
         href: `https://claude.ai/new?${new URLSearchParams({
           q,
         })}`,
@@ -249,7 +251,7 @@ export function ViewOptions({
         ),
       },
       {
-        title: 'Open in Grok',
+        title: "Open in Grok",
         href: `https://grok.com/?${new URLSearchParams({
           q,
         })}`,
@@ -261,12 +263,12 @@ export function ViewOptions({
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>Grok</title>
-            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608"/>
+            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608" />
           </svg>
         ),
       },
       {
-        title: 'Open in T3 Chat',
+        title: "Open in T3 Chat",
         href: `https://t3.chat/new?${new URLSearchParams({
           q,
         })}`,
@@ -280,13 +282,13 @@ export function ViewOptions({
       <PopoverTrigger
         className={cn(
           buttonVariants({
-            variant: 'secondary',
+            variant: "secondary",
             // size: 'sm',
-            className: 'gap-2',
+            className: "gap-2",
           }),
         )}
       >
-        <ChevronDown className="size-3.5 text-fd-muted-foreground" />
+        <ChevronDown className="text-fd-muted-foreground size-3.5" />
       </PopoverTrigger>
       <PopoverContent className="flex flex-col overflow-auto">
         {items.map((item) => (
@@ -299,7 +301,7 @@ export function ViewOptions({
           >
             {item.icon}
             {item.title}
-            <ExternalLinkIcon className="text-fd-muted-foreground size-3.5 ms-auto" />
+            <ExternalLinkIcon className="text-fd-muted-foreground ms-auto size-3.5" />
           </a>
         ))}
       </PopoverContent>
@@ -307,39 +309,36 @@ export function ViewOptions({
   );
 }
 
-function PlaygroundButton({
-  componentName,
-}: {
-  componentName?: string;
-}) {
+function PlaygroundButton({ componentName }: { componentName?: string }) {
   return (
     <a
       href={
         componentName
           ? `/playground?component=${encodeURIComponent(componentName)}`
-          : '/playground'
+          : "/playground"
       }
       target="_blank"
       rel="noopener"
       className={cn(
         buttonVariants({
-          variant: 'secondary',
-          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-md',
+          variant: "secondary",
+          className:
+            "[&_svg]:text-fd-muted-foreground gap-2 rounded-md [&_svg]:size-3.5",
         }),
       )}
       onClick={(e) => {
         if (componentName) return; // normal navigation with param
         try {
           const path = window.location.pathname;
-          const marker = '/docs/components/';
+          const marker = "/docs/components/";
           const idx = path.indexOf(marker);
           if (idx !== -1) {
             const after = path.slice(idx + marker.length);
-            const last = after.split('/').filter(Boolean).pop();
+            const last = after.split("/").filter(Boolean).pop();
             if (last) {
               e.preventDefault();
               const url = `/playground?component=${encodeURIComponent(last)}`;
-              window.open(url, '_blank', 'noopener');
+              window.open(url, "_blank", "noopener");
             }
           }
         } catch {
@@ -372,7 +371,7 @@ export function CombinedAIButton({
     try {
       await navigator.clipboard.write([
         new ClipboardItem({
-          'text/plain': fetch(markdownUrl).then(async (res) => {
+          "text/plain": fetch(markdownUrl).then(async (res) => {
             if (!res.ok) {
               throw new Error(`Failed to fetch: ${res.status}`);
             }
@@ -390,55 +389,57 @@ export function CombinedAIButton({
 
   const items = useMemo(() => {
     const fullMarkdownUrl =
-      typeof window !== 'undefined'
+      typeof window !== "undefined"
         ? new URL(markdownUrl, window.location.origin)
-        : 'loading';
+        : "loading";
     const q = `Read ${fullMarkdownUrl}, I want to ask questions about it.`;
 
     return [
       {
-        title: 'View as Markdown',
+        title: "View as Markdown",
         href: markdownUrl,
-        icon: <svg
-        width="18"
-        height="18"
-        viewBox="0 0 18 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4 shrink-0"
-      >
-        <path
-          d="M15.25 3.75H2.75C1.64543 3.75 0.75 4.64543 0.75 5.75V12.25C0.75 13.3546 1.64543 14.25 2.75 14.25H15.25C16.3546 14.25 17.25 13.3546 17.25 12.25V5.75C17.25 4.64543 16.3546 3.75 15.25 3.75Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M8.75 11.25V6.75H8.356L6.25 9.5L4.144 6.75H3.75V11.25"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M11.5 9.5L13.25 11.25L15 9.5"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M13.25 11.25V6.75"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+        icon: (
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-4 w-4 shrink-0"
+          >
+            <path
+              d="M15.25 3.75H2.75C1.64543 3.75 0.75 4.64543 0.75 5.75V12.25C0.75 13.3546 1.64543 14.25 2.75 14.25H15.25C16.3546 14.25 17.25 13.3546 17.25 12.25V5.75C17.25 4.64543 16.3546 3.75 15.25 3.75Z"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M8.75 11.25V6.75H8.356L6.25 9.5L4.144 6.75H3.75V11.25"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M11.5 9.5L13.25 11.25L15 9.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M13.25 11.25V6.75"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ),
       },
       {
-        title: 'Open in GitHub',
+        title: "Open in GitHub",
         href: githubUrl,
         icon: (
           <svg fill="currentColor" role="img" viewBox="0 0 24 24">
@@ -448,9 +449,9 @@ export function CombinedAIButton({
         ),
       },
       {
-        title: 'Open in ChatGPT',
+        title: "Open in ChatGPT",
         href: `https://chatgpt.com/?${new URLSearchParams({
-          hints: 'search',
+          hints: "search",
           q,
         })}`,
         icon: (
@@ -466,7 +467,7 @@ export function CombinedAIButton({
         ),
       },
       {
-        title: 'Open in Claude',
+        title: "Open in Claude",
         href: `https://claude.ai/new?${new URLSearchParams({
           q,
         })}`,
@@ -483,7 +484,7 @@ export function CombinedAIButton({
         ),
       },
       {
-        title: 'Open in Grok',
+        title: "Open in Grok",
         href: `https://grok.com/?${new URLSearchParams({
           q,
         })}`,
@@ -495,12 +496,12 @@ export function CombinedAIButton({
             xmlns="http://www.w3.org/2000/svg"
           >
             <title>Grok</title>
-            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608"/>
+            <path d="M18.542 30.532l15.956-11.776c.783-.576 1.902-.354 2.274.545 1.962 4.728 1.084 10.411-2.819 14.315-3.903 3.901-9.333 4.756-14.299 2.808l-5.423 2.511c7.778 5.315 17.224 4 23.125-1.903 4.682-4.679 6.131-11.058 4.775-16.812l.011.011c-1.966-8.452.482-11.829 5.501-18.735C47.759 1.332 47.88 1.166 48 1l-6.602 6.599V7.577l-22.86 22.958M15.248 33.392c-5.582-5.329-4.619-13.579.142-18.339 3.521-3.522 9.294-4.958 14.331-2.847l5.412-2.497c-.974-.704-2.224-1.46-3.659-1.994-6.478-2.666-14.238-1.34-19.505 3.922C6.904 16.701 5.31 24.488 8.045 31.133c2.044 4.965-1.307 8.48-4.682 12.023C2.164 44.411.967 45.67 0 47l15.241-13.608" />
           </svg>
         ),
       },
       {
-        title: 'Open in T3 Chat',
+        title: "Open in T3 Chat",
         href: `https://t3.chat/new?${new URLSearchParams({
           q,
         })}`,
@@ -517,8 +518,9 @@ export function CombinedAIButton({
           disabled={isLoading}
           className={cn(
             buttonVariants({
-              variant: 'secondary',
-              className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground rounded-none rounded-l-md',
+              variant: "secondary",
+              className:
+                "[&_svg]:text-fd-muted-foreground gap-2 rounded-none rounded-l-md [&_svg]:size-3.5",
             }),
           )}
           onClick={onClick}
@@ -530,14 +532,14 @@ export function CombinedAIButton({
           <PopoverTrigger
             className={cn(
               buttonVariants({
-                variant: 'secondary',
-                className: 'gap-2 rounded-none rounded-r-md -ml-px px-2',
+                variant: "secondary",
+                className: "-ml-px gap-2 rounded-none rounded-r-md px-2",
               }),
             )}
           >
-            <ChevronDown className="size-3.5 text-fd-muted-foreground" />
+            <ChevronDown className="text-fd-muted-foreground size-3.5" />
           </PopoverTrigger>
-          <PopoverContent className="flex flex-col overflow-auto w-56">
+          <PopoverContent className="flex w-56 flex-col overflow-auto">
             {items.map((item) => (
               <a
                 key={item.href}
@@ -548,7 +550,7 @@ export function CombinedAIButton({
               >
                 {item.icon}
                 {item.title}
-                <ExternalLinkIcon className="text-fd-muted-foreground size-3.5 ms-auto" />
+                <ExternalLinkIcon className="text-fd-muted-foreground ms-auto size-3.5" />
               </a>
             ))}
           </PopoverContent>

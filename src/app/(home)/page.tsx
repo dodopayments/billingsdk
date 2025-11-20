@@ -12,7 +12,7 @@ import { Sentra } from "@/components/landing/sentra";
 
 const Page = () => {
   return (
-    <main className="w-full container mx-auto relative overflow-hidden p-4">
+    <main className="relative container mx-auto w-full overflow-hidden p-4">
       <Hero />
       <Features />
       <ComponentsSection />

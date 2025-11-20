@@ -8,7 +8,7 @@ export default function TrialExpiryCardDemo() {
   trialEndDate.setDate(trialEndDate.getDate() + 5);
 
   return (
-    <div className="w-full h-full flex items-center justify-center min-h-[500px] rounded-lg bg-background border-2 p-6">
+    <div className="bg-background flex h-full min-h-[500px] w-full items-center justify-center rounded-lg border-2 p-6">
       <TrialExpiryCard
         trialEndDate={trialEndDate}
         onUpgrade={() => {
@@ -20,9 +20,8 @@ export default function TrialExpiryCardDemo() {
           "Priority email support",
           "Custom domain integration",
         ]}
-        className="max-w-md w-full"
+        className="w-full max-w-md"
       />
     </div>
   );
 }
-

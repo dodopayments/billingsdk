@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Circle } from "lucide-react";
@@ -43,8 +48,8 @@ const defaultOffer: Offer = {
   features: [
     { name: "50% off your first month" },
     { name: "Valid until December 31, 2024" },
-    { name: "First 100 users only" }
-  ]
+    { name: "First 100 users only" },
+  ],
 };
 
 export function LimitedOfferDialog({
@@ -65,7 +70,7 @@ export function LimitedOfferDialog({
   const [isOpen, setIsOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  
+
   // Theme integration
   const { currentTheme, previewDarkMode } = useTheme();
   const themeStyles = getThemeStyles(currentTheme, previewDarkMode);
@@ -147,7 +152,13 @@ export function LimitedOfferDialog({
           {triggerButtonText}
         </Button>
       </DialogTrigger>
-      <DialogContent className={cn("max-w-[calc(100vw-2rem)] sm:max-w-lg p-0 gap-0", className)} style={themeStyles}>
+      <DialogContent
+        className={cn(
+          "max-w-[calc(100vw-2rem)] gap-0 p-0 sm:max-w-lg",
+          className,
+        )}
+        style={themeStyles}
+      >
         <div className="space-y-6 p-6">
           {/* Dialog Title for accessibility */}
           <DialogTitle className="sr-only">
@@ -155,27 +166,24 @@ export function LimitedOfferDialog({
           </DialogTitle>
 
           {/* Header */}
-          <div className="text-center space-y-2">
-            <h2 className="text-xl font-semibold text-foreground">
-              {title}
-            </h2>
-            <p className="text-muted-foreground text-sm">
-              {description}
-            </p>
+          <div className="space-y-2 text-center">
+            <h2 className="text-foreground text-xl font-semibold">{title}</h2>
+            <p className="text-muted-foreground text-sm">{description}</p>
           </div>
 
           {/* Offer Card */}
-          <div className="bg-muted rounded-lg p-4 space-y-4">
-            <div className="flex justify-between items-start">
+          <div className="bg-muted space-y-4 rounded-lg p-4">
+            <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <h3 className="font-semibold text-foreground">
-                  {offer.title}
-                </h3>
-                <p className="text-xs text-muted-foreground">
+                <h3 className="text-foreground font-semibold">{offer.title}</h3>
+                <p className="text-muted-foreground text-xs">
                   {offer.description}
                 </p>
               </div>
-              <Badge variant="secondary" className="font-semibold text-foreground">
+              <Badge
+                variant="secondary"
+                className="text-foreground font-semibold"
+              >
                 {offer.discount}
               </Badge>
             </div>
@@ -183,8 +191,8 @@ export function LimitedOfferDialog({
             <div className="space-y-3">
               {offer.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <Circle className="w-2 h-2 fill-current text-foreground" />
-                  <span className="text-sm text-foreground">
+                  <Circle className="text-foreground h-2 w-2 fill-current" />
+                  <span className="text-foreground text-sm">
                     {feature.name}
                   </span>
                 </div>
@@ -193,30 +201,24 @@ export function LimitedOfferDialog({
           </div>
 
           {/* Warning Section */}
-          <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 space-y-2">
-            <h4 className="font-medium text-destructive">
-              {warningTitle}
-            </h4>
-            <p className="text-sm text-destructive/80">
-              {warningText}
-            </p>
+          <div className="bg-destructive/10 border-destructive/20 space-y-2 rounded-lg border p-4">
+            <h4 className="text-destructive font-medium">{warningTitle}</h4>
+            <p className="text-destructive/80 text-sm">{warningText}</p>
           </div>
 
           {/* Error Display */}
           {error && (
-            <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3">
-              <p className="text-sm text-destructive">
-                {error}
-              </p>
+            <div className="bg-destructive/10 border-destructive/20 rounded-lg border p-3">
+              <p className="text-destructive text-sm">{error}</p>
             </div>
           )}
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <Button
               onClick={handleClaimOffer}
               disabled={isLoading}
-              className="flex-1 bg-foreground hover:bg-foreground/90 text-background"
+              className="bg-foreground hover:bg-foreground/90 text-background flex-1"
             >
               {isLoading ? "Processing..." : claimButtonText}
             </Button>
@@ -224,7 +226,7 @@ export function LimitedOfferDialog({
               onClick={handleDeclineOffer}
               disabled={isLoading}
               variant="outline"
-              className="flex-1 border-border text-foreground hover:bg-muted"
+              className="border-border text-foreground hover:bg-muted flex-1"
             >
               {declineButtonText}
             </Button>

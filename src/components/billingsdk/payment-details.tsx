@@ -1,1 +1,4 @@
-export {PaymentDetails, type PaymentFormData} from '@/registry/billingsdk/payment-details'
+export {
+  PaymentDetails,
+  type PaymentFormData,
+} from "@/registry/billingsdk/payment-details";

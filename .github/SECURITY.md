@@ -65,5 +65,3 @@ We will not pursue or support legal action against researchers who:
 - Give us reasonable time to remediate before public disclosure
 
 Thank you for helping keep the ecosystem secure.
-
-

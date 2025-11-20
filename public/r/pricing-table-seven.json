@@ -4,17 +4,8 @@
   "type": "registry:block",
   "title": "Pricing Table Seven",
   "description": "A modern pricing table component with contact us plan",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "card",
-    "badge",
-    "slider",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "card", "badge", "slider", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/pricing-table-seven.tsx",

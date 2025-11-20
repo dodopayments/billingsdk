@@ -4,14 +4,8 @@
   "type": "registry:block",
   "title": "Upcoming Charges",
   "description": "A component that displays information about upcoming billing cycles, including the next billing date, total amount, and a breakdown of individual charges",
-  "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "card",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["card", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/upcoming-charges.tsx",

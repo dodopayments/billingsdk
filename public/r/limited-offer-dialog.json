@@ -4,9 +4,7 @@
   "type": "registry:block",
   "title": "Limited Offer Dialog",
   "description": "A dialog component for displaying limited-time offers with customizable content and actions",
-  "dependencies": [
-    "lucide-react"
-  ],
+  "dependencies": ["lucide-react"],
   "registryDependencies": [
     "dialog",
     "button",

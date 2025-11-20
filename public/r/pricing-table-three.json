@@ -4,11 +4,7 @@
   "type": "registry:block",
   "title": "Pricing Table Three",
   "description": "A pricing table component with a feature table",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "motion"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
   "registryDependencies": [
     "button",
     "card",

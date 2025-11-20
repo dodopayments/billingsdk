@@ -5,7 +5,7 @@
     "quick-start",
     "cli",
     "shadcn-cli-3",
-    "contribution-open-source", 
+    "contribution-open-source",
     "---Pricing Tables---",
     "components/pricing-table/pricing-table-one",
     "components/pricing-table/pricing-table-two",
@@ -30,7 +30,7 @@
     "---Billing & Usage Analytics---",
     "components/billing-screen/index",
     "components/billing-setting/index",
-  		"components/billing-settings-2/index",
+    "components/billing-settings-2/index",
     "components/usage-meter/usage-meter-circle",
     "components/usage-meter/usage-meter-linear",
     "components/detailed-usage-table/index",
@@ -39,14 +39,14 @@
     "components/banner/index",
     "---Trial Management---",
     "components/trial-expiry-card/index",
-		"---Payment Processing---",
+    "---Payment Processing---",
     "components/payment-details/index",
     "components/payment-details-two/index",
-		"components/payment-success-dialog/index",
-		"components/payment-method-selector/index",
-		"components/payment-card/index",
-		"---Configuration---",
-		"interfaces",
-		"theming"
-	]
+    "components/payment-success-dialog/index",
+    "components/payment-method-selector/index",
+    "components/payment-card/index",
+    "---Configuration---",
+    "interfaces",
+    "theming"
+  ]
 }

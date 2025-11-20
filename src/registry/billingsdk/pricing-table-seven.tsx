@@ -4,7 +4,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Check, Info } from "lucide-react";
@@ -20,7 +26,8 @@ const sectionVariants = cva("py-32", {
     },
     theme: {
       minimal: "",
-      classic: "bg-gradient-to-b from-background to-muted/20 relative overflow-hidden",
+      classic:
+        "bg-gradient-to-b from-background to-muted/20 relative overflow-hidden",
     },
   },
   defaultVariants: {
@@ -38,7 +45,8 @@ const titleVariants = cva("text-pretty text-center font-bold", {
     },
     theme: {
       minimal: "",
-      classic: "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent",
+      classic:
+        "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent",
     },
   },
   defaultVariants: {
@@ -47,23 +55,26 @@ const titleVariants = cva("text-pretty text-center font-bold", {
   },
 });
 
-const descriptionVariants = cva("text-muted-foreground max-w-2xl mx-auto text-center", {
-  variants: {
-    size: {
-      small: "text-base lg:text-lg",
-      medium: "text-lg lg:text-xl",
-      large: "lg:text-xl",
+const descriptionVariants = cva(
+  "text-muted-foreground max-w-2xl mx-auto text-center",
+  {
+    variants: {
+      size: {
+        small: "text-base lg:text-lg",
+        medium: "text-lg lg:text-xl",
+        large: "lg:text-xl",
+      },
+      theme: {
+        minimal: "",
+        classic: "",
+      },
     },
-    theme: {
-      minimal: "",
-      classic: "",
+    defaultVariants: {
+      size: "large",
+      theme: "minimal",
     },
   },
-  defaultVariants: {
-    size: "large",
-    theme: "minimal",
-  },
-});
+);
 
 const cardVariants = cva(
   "relative cursor-pointer transition-all duration-300 hover:shadow-lg",
@@ -76,7 +87,8 @@ const cardVariants = cva(
       },
       theme: {
         minimal: "bg-card border-border",
-        classic: "bg-card border-border/50 hover:shadow-xl backdrop-blur-sm shadow-md",
+        classic:
+          "bg-card border-border/50 hover:shadow-xl backdrop-blur-sm shadow-md",
       },
       selected: {
         true: "",
@@ -97,7 +109,8 @@ const cardVariants = cva(
       {
         theme: "classic",
         selected: true,
-        className: "border-primary/30 shadow-xl ring-1 ring-primary/20 bg-gradient-to-b from-primary/5 to-card",
+        className:
+          "border-primary/30 shadow-xl ring-1 ring-primary/20 bg-gradient-to-b from-primary/5 to-card",
       },
       {
         theme: "classic",
@@ -110,7 +123,7 @@ const cardVariants = cva(
       theme: "minimal",
       selected: false,
     },
-  }
+  },
 );
 
 const buttonVariants = cva(
@@ -130,29 +143,33 @@ const buttonVariants = cva(
       {
         theme: "minimal",
         selected: true,
-        className: "shadow hover:bg-primary/90 h-9 py-2 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex w-full items-center justify-center overflow-hidden rounded-md px-3 text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay",
+        className:
+          "shadow hover:bg-primary/90 h-9 py-2 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex w-full items-center justify-center overflow-hidden rounded-md px-3 text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay",
       },
       {
         theme: "minimal",
         selected: false,
-        className: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
+        className:
+          "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
       },
       {
         theme: "classic",
         selected: true,
-        className: "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold hover:shadow-xl active:scale-95 border border-primary/20",
+        className:
+          "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold hover:shadow-xl active:scale-95 border border-primary/20",
       },
       {
         theme: "classic",
         selected: false,
-        className: "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
+        className:
+          "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
       },
     ],
     defaultVariants: {
       theme: "minimal",
       selected: false,
     },
-  }
+  },
 );
 
 // TypeScript interfaces
@@ -176,7 +193,8 @@ export interface FeatureCategory {
   items: FeatureItemRecord[];
 }
 
-export interface PricingTableSevenProps extends VariantProps<typeof sectionVariants> {
+export interface PricingTableSevenProps
+  extends VariantProps<typeof sectionVariants> {
   plans: PricingTableSevenPlan[];
   features: FeatureCategory[];
   title?: string;
@@ -193,25 +211,33 @@ export function PricingTableSeven({
   description = "We believe Untitled should be accessible to all companies, no matter the size of your startup.",
   onPlanSelect,
   size,
-  theme = "minimal"
+  theme = "minimal",
 }: PricingTableSevenProps) {
-  const [selectedPlan, setSelectedPlan] = useState(plans.find(p => p.popular)?.id || plans[0]?.id || "");
+  const [selectedPlan, setSelectedPlan] = useState(
+    plans.find((p) => p.popular)?.id || plans[0]?.id || "",
+  );
 
-  const [sliderValue, setSliderValue] = useState<number[]>([plans.find(p => p.popular)?.users || 0])
+  const [sliderValue, setSliderValue] = useState<number[]>([
+    plans.find((p) => p.popular)?.users || 0,
+  ]);
 
   const renderFeatureValue = (value: boolean | string | undefined) => {
     if (typeof value === "boolean") {
-      return value ? <Check className="h-5 w-5 text-primary" /> : <span className="text-muted-foreground">—</span>;
+      return value ? (
+        <Check className="text-primary h-5 w-5" />
+      ) : (
+        <span className="text-muted-foreground">—</span>
+      );
     }
     if (typeof value === "string") {
-      return <span className="text-sm text-foreground">{value}</span>;
+      return <span className="text-foreground text-sm">{value}</span>;
     }
     return <span className="text-muted-foreground">—</span>;
   };
 
   const handlePlanSelect = (planId: string) => {
     setSelectedPlan(planId);
-    const selected = plans.find(p => p.id === planId);
+    const selected = plans.find((p) => p.id === planId);
     if (selected && typeof selected.users === "number") {
       setSliderValue([selected.users]);
     }
@@ -223,15 +249,15 @@ export function PricingTableSeven({
       {/* Classic theme background elements */}
       {theme === "classic" && (
         <>
-          <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-2xl" />
+          <div className="bg-grid-pattern absolute inset-0 opacity-5" />
+          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
         </>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
-        <div className="text-center pb-1">
+        <div className="pb-1 text-center">
           <h1 className={cn(titleVariants({ size, theme }), "leading-[1.12]")}>
             {title}
           </h1>
@@ -243,19 +269,31 @@ export function PricingTableSeven({
         {/* User Slider */}
         <div className="mx-auto mt-12 max-w-md px-4">
           <div className="relative">
-            <Slider value={sliderValue} onValueChange={(e) => {
-              setSliderValue(e)
-              setSelectedPlan(plans.filter(plan => plan.users >= e[0])[0]?.id || plans.find(plan => plan.popular)?.id!)
-            }} max={25} min={1} step={1} className="w-full text-primary" />
+            <Slider
+              value={sliderValue}
+              onValueChange={(e) => {
+                setSliderValue(e);
+                setSelectedPlan(
+                  plans.filter((plan) => plan.users >= e[0])[0]?.id ||
+                    plans.find((plan) => plan.popular)?.id!,
+                );
+              }}
+              max={25}
+              min={1}
+              step={1}
+              className="text-primary w-full"
+            />
             <div className="mt-2 text-center">
-              <span className="text-sm font-medium text-foreground">{sliderValue[0]} users</span>
+              <span className="text-foreground text-sm font-medium">
+                {sliderValue[0]} users
+              </span>
             </div>
           </div>
         </div>
 
         {/* Pricing Cards */}
         <div className="mt-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {plans.map((plan) => (
               <motion.div
                 key={plan.id}
@@ -268,31 +306,39 @@ export function PricingTableSeven({
                     cardVariants({
                       size,
                       theme,
-                      selected: selectedPlan === plan.id
-                    })
+                      selected: selectedPlan === plan.id,
+                    }),
                   )}
                   onClick={() => handlePlanSelect(plan.id)}
                 >
                   {plan.popular && (
-                    <Badge className={cn(
-                      "absolute -top-3 left-1/2 -translate-x-1/2 z-10 px-4 py-1 text-sm font-medium shadow-lg",
-                      theme === "classic"
-                        ? "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-primary/20"
-                        : "bg-primary text-primary-foreground"
-                    )}>
+                    <Badge
+                      className={cn(
+                        "absolute -top-3 left-1/2 z-10 -translate-x-1/2 px-4 py-1 text-sm font-medium shadow-lg",
+                        theme === "classic"
+                          ? "from-primary to-primary/80 text-primary-foreground border-primary/20 bg-gradient-to-r"
+                          : "bg-primary text-primary-foreground",
+                      )}
+                    >
                       Most popular
                     </Badge>
                   )}
                   <CardHeader className="text-center">
-                    <CardTitle className="text-lg font-semibold">{plan.name}</CardTitle>
-                    <CardDescription className="text-sm text-muted-foreground">{plan.description}</CardDescription>
+                    <CardTitle className="text-lg font-semibold">
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription className="text-muted-foreground text-sm">
+                      {plan.description}
+                    </CardDescription>
                     <div className="mt-4">
-                      <span className={cn(
-                        "text-4xl font-bold",
-                        theme === "classic"
-                          ? "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent"
-                          : "text-foreground"
-                      )}>
+                      <span
+                        className={cn(
+                          "text-4xl font-bold",
+                          theme === "classic"
+                            ? "from-foreground to-muted-foreground bg-gradient-to-r bg-clip-text text-transparent"
+                            : "text-foreground",
+                        )}
+                      >
                         ${plan.price}
                       </span>
                     </div>
@@ -300,7 +346,10 @@ export function PricingTableSeven({
                   <CardContent>
                     <Button
                       className={cn(
-                        buttonVariants({ theme, selected: selectedPlan === plan.id })
+                        buttonVariants({
+                          theme,
+                          selected: selectedPlan === plan.id,
+                        }),
                       )}
                     >
                       Get started
@@ -312,10 +361,14 @@ export function PricingTableSeven({
           </div>
 
           {/* Feature Comparison Table */}
-          <div className={cn(
-            "overflow-x-auto overflow-hidden rounded-lg border",
-            theme === "classic" ? "bg-card/50 backdrop-blur-sm border-border/50 shadow-md" : "bg-card"
-          )}>
+          <div
+            className={cn(
+              "overflow-hidden overflow-x-auto rounded-lg border",
+              theme === "classic"
+                ? "bg-card/50 border-border/50 shadow-md backdrop-blur-sm"
+                : "bg-card",
+            )}
+          >
             <AnimatePresence>
               {features.map((category, categoryIndex) => (
                 <motion.div
@@ -327,11 +380,15 @@ export function PricingTableSeven({
                   {categoryIndex > 0 && <div className="border-t" />}
 
                   {/* Category Header */}
-                  <div className={cn(
-                    "px-4 sm:px-6 py-4",
-                    theme === "classic" ? "bg-muted/30" : "bg-muted/50"
-                  )}>
-                    <h3 className="text-sm font-semibold text-foreground">{category.category}</h3>
+                  <div
+                    className={cn(
+                      "px-4 py-4 sm:px-6",
+                      theme === "classic" ? "bg-muted/30" : "bg-muted/50",
+                    )}
+                  >
+                    <h3 className="text-foreground text-sm font-semibold">
+                      {category.category}
+                    </h3>
                   </div>
 
                   {/* Feature Rows */}
@@ -339,20 +396,29 @@ export function PricingTableSeven({
                     <div
                       key={feature.name}
                       className={cn(
-                        "px-4 sm:px-6 py-4",
-                        featureIndex > 0 && "border-t border-border/50",
+                        "px-4 py-4 sm:px-6",
+                        featureIndex > 0 && "border-border/50 border-t",
                       )}
                     >
                       {/* Mobile Layout */}
                       <div className="block sm:hidden">
-                        <div className="flex items-center space-x-2 mb-3">
-                          <span className="text-sm text-foreground font-medium">{feature.name}</span>
-                          {feature.tooltip && <Info className="h-4 w-4 text-muted-foreground" />}
+                        <div className="mb-3 flex items-center space-x-2">
+                          <span className="text-foreground text-sm font-medium">
+                            {feature.name}
+                          </span>
+                          {feature.tooltip && (
+                            <Info className="text-muted-foreground h-4 w-4" />
+                          )}
                         </div>
                         <div className="space-y-2">
                           {plans.map((plan) => (
-                            <div key={plan.id} className="flex items-center justify-between">
-                              <span className="text-sm text-muted-foreground">{plan.name}</span>
+                            <div
+                              key={plan.id}
+                              className="flex items-center justify-between"
+                            >
+                              <span className="text-muted-foreground text-sm">
+                                {plan.name}
+                              </span>
                               <div className="flex items-center">
                                 {renderFeatureValue(feature[plan.id])}
                               </div>
@@ -362,13 +428,20 @@ export function PricingTableSeven({
                       </div>
 
                       {/* Desktop Layout - Match pricing cards grid */}
-                      <div className="hidden sm:grid sm:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:grid-cols-4 gap-4">
+                      <div className="hidden gap-4 sm:grid sm:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:grid-cols-4">
                         <div className="flex items-center space-x-2">
-                          <span className="text-sm text-foreground font-medium">{feature.name}</span>
-                          {feature.tooltip && <Info className="h-4 w-4 text-muted-foreground" />}
+                          <span className="text-foreground text-sm font-medium">
+                            {feature.name}
+                          </span>
+                          {feature.tooltip && (
+                            <Info className="text-muted-foreground h-4 w-4" />
+                          )}
                         </div>
                         {plans.map((plan) => (
-                          <div key={plan.id} className="flex items-center justify-center">
+                          <div
+                            key={plan.id}
+                            className="flex items-center justify-center"
+                          >
                             {renderFeatureValue(feature[plan.id])}
                           </div>
                         ))}
@@ -381,12 +454,12 @@ export function PricingTableSeven({
           </div>
 
           {/* Bottom CTA Buttons */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {plans.map((plan) => (
               <Button
                 key={plan.id}
                 className={cn(
-                  buttonVariants({ theme, selected: selectedPlan === plan.id })
+                  buttonVariants({ theme, selected: selectedPlan === plan.id }),
                 )}
                 onClick={() => handlePlanSelect(plan.id)}
               >
@@ -399,4 +472,3 @@ export function PricingTableSeven({
     </section>
   );
 }
-

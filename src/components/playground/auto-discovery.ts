@@ -17,19 +17,21 @@ interface RegistryManifest {
 }
 
 function isValidRegistryBlock(item: RegistryItem): boolean {
-  return item.type === 'registry:block' && 
-    item.name !== 'index' && 
-    item.name !== 'all' &&
-    item.name !== 'hello-world';
+  return (
+    item.type === "registry:block" &&
+    item.name !== "index" &&
+    item.name !== "all" &&
+    item.name !== "hello-world"
+  );
 }
 
 async function fetchRegistryManifest(): Promise<RegistryManifest | null> {
   try {
-    const response = await fetch('/r/registry.json');
+    const response = await fetch("/r/registry.json");
     if (!response.ok) return null;
     return await response.json();
   } catch (error) {
-    console.error('Failed to fetch registry manifest:', error);
+    console.error("Failed to fetch registry manifest:", error);
     return null;
   }
 }
@@ -47,29 +49,47 @@ async function fetchComponentMetadata(componentName: string): Promise<any> {
 
 function toPascalCase(str: string): string {
   return str
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
 }
 
 function categorizeComponent(name: string): string {
-  if (name.includes('pricing-table')) return 'pricing';
-  if (name.includes('subscription') || name.includes('plan') || name.includes('cancel') || name.includes('update')) return 'subscription';
-  if (name.includes('payment') || name.includes('invoice') || name.includes('billing')) return 'payment';
-  if (name.includes('usage') || name.includes('meter') || name.includes('proration') || name.includes('upcoming-charges') || name.includes('detailed-usage')) return 'usage';
-  return 'ui';
+  if (name.includes("pricing-table")) return "pricing";
+  if (
+    name.includes("subscription") ||
+    name.includes("plan") ||
+    name.includes("cancel") ||
+    name.includes("update")
+  )
+    return "subscription";
+  if (
+    name.includes("payment") ||
+    name.includes("invoice") ||
+    name.includes("billing")
+  )
+    return "payment";
+  if (
+    name.includes("usage") ||
+    name.includes("meter") ||
+    name.includes("proration") ||
+    name.includes("upcoming-charges") ||
+    name.includes("detailed-usage")
+  )
+    return "usage";
+  return "ui";
 }
 
 function regexEscape(str: string): string {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function extractUsageSnippet(metadata: any, componentName: string): string {
   const pascalName = toPascalCase(componentName);
-  const demoFile = metadata?.files?.find((f: any) => 
-    f.path?.includes('demo') && f.content
+  const demoFile = metadata?.files?.find(
+    (f: any) => f.path?.includes("demo") && f.content,
   );
-  
+
   if (demoFile?.content) {
     try {
       const MAX_CONTENT_SIZE = 50 * 1024;
@@ -77,15 +97,15 @@ function extractUsageSnippet(metadata: any, componentName: string): string {
       const escapedName = regexEscape(pascalName);
       const componentPattern = new RegExp(
         `<${escapedName}[^>]{0,500}(?:>|\\/>)(?:[^<]{0,2000}|(?:<(?!\\/${escapedName}>)[^>]{0,100}>){0,50})*?(?:<\\/${escapedName}>|(?=\\n\\s*\\)))`,
-        'i'
+        "i",
       );
       const match = safeContent.match(componentPattern);
       if (match) {
         return match[0].trim();
       }
       const anyComponentPattern = new RegExp(
-        '<[A-Z][a-zA-Z]{0,50}[^>]{0,500}(?:>|\\/>)(?:[^<]{0,2000}|(?:<(?!\\/[A-Z])[^>]{0,100}>){0,50})*?(?:<\\/[A-Z][a-zA-Z]{0,50}>|(?=\\n\\s*\\)))',
-        'i'
+        "<[A-Z][a-zA-Z]{0,50}[^>]{0,500}(?:>|\\/>)(?:[^<]{0,2000}|(?:<(?!\\/[A-Z])[^>]{0,100}>){0,50})*?(?:<\\/[A-Z][a-zA-Z]{0,50}>|(?=\\n\\s*\\)))",
+        "i",
       );
       const anyComponentMatch = safeContent.match(anyComponentPattern);
       if (anyComponentMatch) {
@@ -101,41 +121,57 @@ function extractUsageSnippet(metadata: any, componentName: string): string {
 async function importComponent(componentName: string): Promise<any> {
   const pascalName = toPascalCase(componentName);
   try {
-    console.log(`[Import] Attempting: @/components/billingsdk/${componentName}`);
+    console.log(
+      `[Import] Attempting: @/components/billingsdk/${componentName}`,
+    );
     const module = await import(`@/components/billingsdk/${componentName}`);
-    const component = module[pascalName] || module.default || module[componentName];
-    
+    const component =
+      module[pascalName] || module.default || module[componentName];
+
     if (component) {
-      console.log(`[Import] ✓ Success from /components/billingsdk/${componentName}`);
+      console.log(
+        `[Import] ✓ Success from /components/billingsdk/${componentName}`,
+      );
       return component;
     }
-    
-    console.warn(`[Import] Module loaded but component not found. Exports:`, Object.keys(module));
+
+    console.warn(
+      `[Import] Module loaded but component not found. Exports:`,
+      Object.keys(module),
+    );
   } catch (error) {
     console.warn(`[Import] Failed from /components/billingsdk:`, error);
   }
   try {
     console.log(`[Import] Attempting: @/registry/billingsdk/${componentName}`);
     const module = await import(`@/registry/billingsdk/${componentName}`);
-    const component = module[pascalName] || module.default || module[componentName];
-    
+    const component =
+      module[pascalName] || module.default || module[componentName];
+
     if (component) {
-      console.log(`[Import] ✓ Success from /registry/billingsdk/${componentName}`);
+      console.log(
+        `[Import] ✓ Success from /registry/billingsdk/${componentName}`,
+      );
       return component;
     }
-    
-    console.warn(`[Import] Module loaded but component not found. Exports:`, Object.keys(module));
+
+    console.warn(
+      `[Import] Module loaded but component not found. Exports:`,
+      Object.keys(module),
+    );
   } catch (error) {
     console.warn(`[Import] Failed from /registry/billingsdk:`, error);
   }
-  console.error(`[Import] ✗ All import strategies failed for ${componentName} (${pascalName})`);
+  console.error(
+    `[Import] ✗ All import strategies failed for ${componentName} (${pascalName})`,
+  );
   return null;
 }
 
 export async function discoverComponents(): Promise<ComponentConfig[]> {
   const manifest = await fetchRegistryManifest();
   if (!manifest) {
-    console.warn('Failed to fetch registry manifest');
+    console.warn("Failed to fetch registry manifest");
     return [];
   }
 
@@ -148,7 +184,7 @@ export async function discoverComponents(): Promise<ComponentConfig[]> {
       try {
         const metadata = await fetchComponentMetadata(item.name);
         const Component = await importComponent(item.name);
-        
+
         if (!Component) {
           console.warn(`Skipping ${item.name}: Component not found`);
           return null;
@@ -170,13 +206,16 @@ export async function discoverComponents(): Promise<ComponentConfig[]> {
         console.error(`Failed to process component ${item.name}:`, error);
         return null;
       }
-    })
+    }),
   );
   results.forEach((result, index) => {
-    if (result.status === 'fulfilled' && result.value) {
+    if (result.status === "fulfilled" && result.value) {
       components.push(result.value);
-    } else if (result.status === 'rejected') {
-      console.error(`Component ${componentItems[index].name} failed:`, result.reason);
+    } else if (result.status === "rejected") {
+      console.error(
+        `Component ${componentItems[index].name} failed:`,
+        result.reason,
+      );
     }
   });
   console.log(`Successfully discovered ${components.length} components`);
@@ -185,22 +224,26 @@ export async function discoverComponents(): Promise<ComponentConfig[]> {
 
 function normalizeComponentName(name: string): string {
   return name
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .replace(/([a-zA-Z])([0-9])/g, "$1-$2")
     .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
-export async function discoverComponent(componentName: string): Promise<ComponentConfig | null> {
+export async function discoverComponent(
+  componentName: string,
+): Promise<ComponentConfig | null> {
   try {
     const normalizedName = normalizeComponentName(componentName);
     console.log(`Discovering component: ${componentName} → ${normalizedName}`);
     const metadata = await fetchComponentMetadata(normalizedName);
     if (!metadata) {
-      console.warn(`No metadata found for ${normalizedName} — proceeding with defaults`);
+      console.warn(
+        `No metadata found for ${normalizedName} — proceeding with defaults`,
+      );
     }
     const Component = await importComponent(normalizedName);
     if (!Component) {
@@ -210,7 +253,8 @@ export async function discoverComponent(componentName: string): Promise<Componen
     const config: ComponentConfig = {
       id: normalizedName,
       name: metadata?.title || toPascalCase(normalizedName),
-      description: metadata?.description || `${toPascalCase(normalizedName)} component`,
+      description:
+        metadata?.description || `${toPascalCase(normalizedName)} component`,
       category: categorizeComponent(normalizedName),
       component: Component,
       imports: [`@/components/billingsdk/${normalizedName}`],
@@ -235,13 +279,13 @@ export interface ComponentListItem {
 export async function getComponentList(): Promise<ComponentListItem[]> {
   const manifest = await fetchRegistryManifest();
   if (!manifest) {
-    console.warn('Failed to fetch registry manifest');
+    console.warn("Failed to fetch registry manifest");
     return [];
   }
 
   const componentItems = manifest.items.filter(isValidRegistryBlock);
 
-  return componentItems.map(item => ({
+  return componentItems.map((item) => ({
     id: item.name,
     name: item.title,
     description: item.description,
@@ -253,7 +297,5 @@ export async function getComponentNames(): Promise<string[]> {
   const manifest = await fetchRegistryManifest();
   if (!manifest) return [];
 
-  return manifest.items
-    .filter(isValidRegistryBlock)
-    .map(item => item.name);
+  return manifest.items.filter(isValidRegistryBlock).map((item) => item.name);
 }

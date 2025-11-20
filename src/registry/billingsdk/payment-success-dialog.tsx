@@ -1,6 +1,12 @@
-'use client';
+"use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,20 +51,26 @@ type ConfettiPiece = {
   colorVar: string; // CSS var name like --primary, --accent
 };
 
-export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentSuccessDialogProps>(function PaymentSuccessDialog({
-  title = "Congratulations!",
-  subtitle = "Your payment was successful.",
-  currencySymbol = "$",
-  price,
-  productName,
-  proceedButtonText = "Proceed",
-  backButtonText = "Back",
-  onProceed,
-  onBack,
-  className,
-  open,
-  onOpenChange,
-}, ref) {
+export const PaymentSuccessDialog = forwardRef<
+  PaymentSuccessDialogRef,
+  PaymentSuccessDialogProps
+>(function PaymentSuccessDialog(
+  {
+    title = "Congratulations!",
+    subtitle = "Your payment was successful.",
+    currencySymbol = "$",
+    price,
+    productName,
+    proceedButtonText = "Proceed",
+    backButtonText = "Back",
+    onProceed,
+    onBack,
+    className,
+    open,
+    onOpenChange,
+  },
+  ref,
+) {
   const isControlled = open !== undefined;
   const [internalOpen, setInternalOpen] = useState(false);
   const openState = isControlled ? (open as boolean) : internalOpen;
@@ -69,10 +81,14 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
       setInternalOpen(value);
     }
   };
-  useImperativeHandle(ref, () => ({
-    open: () => setOpenState(true),
-    close: () => setOpenState(false),
-  }), [isControlled, onOpenChange]);
+  useImperativeHandle(
+    ref,
+    () => ({
+      open: () => setOpenState(true),
+      close: () => setOpenState(false),
+    }),
+    [isControlled, onOpenChange],
+  );
   const [confettiActive, setConfettiActive] = useState(false);
   const { currentTheme, previewDarkMode } = useTheme();
   const themeStyles = getThemeStyles(currentTheme, previewDarkMode);
@@ -109,13 +125,13 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
     <Dialog open={openState} onOpenChange={setOpenState}>
       <DialogContent
         className={cn(
-          "w-[95%] sm:max-w-[560px] p-0 overflow-hidden text-foreground",
-          className
+          "text-foreground w-[95%] overflow-hidden p-0 sm:max-w-[560px]",
+          className,
         )}
         style={themeStyles}
       >
         <div className="relative">
-          <div className="p-7 flex flex-col items-center text-center gap-5">
+          <div className="flex flex-col items-center gap-5 p-7 text-center">
             <div className="relative">
               <motion.div
                 className="absolute inset-0 -z-10 mx-auto size-20 rounded-full blur-xl"
@@ -125,20 +141,29 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
                 transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <div className="relative">
-                <div className="size-16 rounded-full bg-primary/10 flex items-center justify-center border border-primary/30 shadow-sm">
-                  <CheckCircle2 className="size-10 text-primary" />
+                <div className="bg-primary/10 border-primary/30 flex size-16 items-center justify-center rounded-full border shadow-sm">
+                  <CheckCircle2 className="text-primary size-10" />
                 </div>
                 <motion.span
-                  className="absolute inset-0 rounded-full border-2 border-primary/30"
+                  className="border-primary/30 absolute inset-0 rounded-full border-2"
                   initial={{ scale: 0.9, opacity: 0.5 }}
                   animate={{ scale: 1.25, opacity: 0 }}
-                  transition={{ duration: 1.2, repeat: Infinity, ease: "easeOut" }}
+                  transition={{
+                    duration: 1.2,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                  }}
                 />
                 <motion.span
-                  className="absolute inset-0 rounded-full border-2 border-accent/30"
+                  className="border-accent/30 absolute inset-0 rounded-full border-2"
                   initial={{ scale: 0.9, opacity: 0.5 }}
                   animate={{ scale: 1.6, opacity: 0 }}
-                  transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut", delay: 0.2 }}
+                  transition={{
+                    duration: 1.6,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    delay: 0.2,
+                  }}
                 />
               </div>
             </div>
@@ -148,7 +173,9 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
                 {title}
               </DialogTitle>
             </DialogHeader>
-            <p className="text-sm text-muted-foreground max-w-[38ch]">{subtitle}</p>
+            <p className="text-muted-foreground max-w-[38ch] text-sm">
+              {subtitle}
+            </p>
 
             <div className="flex flex-col items-center gap-1">
               <motion.div
@@ -160,10 +187,12 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
                 {currencySymbol}
                 {price}
               </motion.div>
-              <div className="text-xs text-muted-foreground">Paid for {productName}</div>
+              <div className="text-muted-foreground text-xs">
+                Paid for {productName}
+              </div>
             </div>
 
-            <DialogFooter className="w-full flex-col sm:flex-col gap-3 mt-1">
+            <DialogFooter className="mt-1 w-full flex-col gap-3 sm:flex-col">
               <Button
                 variant="outline"
                 className="w-full"
@@ -206,8 +235,16 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
                       backgroundColor: `var(${c.colorVar})`,
                     }}
                     initial={{ y: -20, rotate: c.rotation }}
-                    animate={{ y: 360 + Math.random() * 80, x: `${c.xEnd}%`, rotate: c.rotation + 720 }}
-                    transition={{ duration: 1.8 + Math.random() * 0.8, delay: c.delay, ease: "easeOut" }}
+                    animate={{
+                      y: 360 + Math.random() * 80,
+                      x: `${c.xEnd}%`,
+                      rotate: c.rotation + 720,
+                    }}
+                    transition={{
+                      duration: 1.8 + Math.random() * 0.8,
+                      delay: c.delay,
+                      ease: "easeOut",
+                    }}
                   />
                 ))}
               </motion.div>
@@ -218,5 +255,3 @@ export const PaymentSuccessDialog = forwardRef<PaymentSuccessDialogRef, PaymentS
     </Dialog>
   );
 });
-
-

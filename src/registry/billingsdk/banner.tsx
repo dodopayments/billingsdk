@@ -9,7 +9,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 export interface BannerProps {
-  variant?: "default" | "minimal" | "popup" | "destructive" | "warning" | "success" | "info" | "announcement";
+  variant?:
+    | "default"
+    | "minimal"
+    | "popup"
+    | "destructive"
+    | "warning"
+    | "success"
+    | "info"
+    | "announcement";
   title: string;
   description?: string;
   buttonText?: string;
@@ -64,7 +72,8 @@ export function Banner({
             "flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2",
           title: "text-sm font-medium text-card-foreground leading-tight",
           description: "text-xs text-muted-foreground sm:ml-2",
-          actions: "flex items-center justify-center md:justify-start gap-2 sm:self-auto",
+          actions:
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto",
         };
       case "popup":
         return {
@@ -178,7 +187,7 @@ export function Banner({
           wrapper:
             "relative container mx-auto flex flex-col sm:flex-row md:items-start items-center justify-between px-3 sm:px-4 py-2 sm:py-3 gap-2 sm:gap-4",
           content:
-             "flex flex-col text-center sm:text-left sm:flex-row md:items-start items-center gap-2 w-full",
+            "flex flex-col text-center sm:text-left sm:flex-row md:items-start items-center gap-2 w-full",
           title: hasGradient
             ? "text-sm font-medium text-foreground leading-tight"
             : "text-sm font-medium text-primary-foreground leading-tight",
@@ -186,7 +195,7 @@ export function Banner({
             ? "text-xs text-foreground/80"
             : "text-xs text-primary-foreground/80",
           actions:
-           "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
+            "flex items-center justify-center md:justify-start gap-2 sm:self-auto pr-12",
         };
     }
   };
@@ -262,7 +271,7 @@ export function Banner({
               <div
                 className={
                   variant === "minimal"
-                    ? "flex flex-col md:flex-row gap-0.5 md:gap-2"
+                    ? "flex flex-col gap-0.5 md:flex-row md:gap-2"
                     : ""
                 }
               >
@@ -283,7 +292,7 @@ export function Banner({
                   className={"h-8"}
                 >
                   {buttonIcon && (
-                    <div className="flex-shrink-0 mr-1">{buttonIcon}</div>
+                    <div className="mr-1 flex-shrink-0">{buttonIcon}</div>
                   )}
                   {buttonText}
                 </Button>
@@ -297,7 +306,7 @@ export function Banner({
                 size="icon"
                 onClick={handleDismiss}
                 className={cn(
-                  "absolute right-1 sm:right-2 top-2 sm:top-1/2 sm:-translate-y-1/2 h-8 w-8",
+                  "absolute top-2 right-1 h-8 w-8 sm:top-1/2 sm:right-2 sm:-translate-y-1/2",
                   gradientColors && gradientColors.length > 0
                     ? "hover:bg-foreground/20 text-foreground"
                     : variant === "default" &&
@@ -310,16 +319,16 @@ export function Banner({
                     "hover:bg-accent text-card-foreground",
                   variant === "warning" &&
                     !gradientColors &&
-                    "hover:bg-yellow-200 dark:hover:bg-yellow-800 text-yellow-800 dark:text-yellow-200",
+                    "text-yellow-800 hover:bg-yellow-200 dark:text-yellow-200 dark:hover:bg-yellow-800",
                   variant === "success" &&
                     !gradientColors &&
-                    "hover:bg-green-200 dark:hover:bg-green-800 text-green-800 dark:text-green-200",
+                    "text-green-800 hover:bg-green-200 dark:text-green-200 dark:hover:bg-green-800",
                   variant === "info" &&
                     !gradientColors &&
-                    "hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-800 dark:text-blue-200",
+                    "text-blue-800 hover:bg-blue-200 dark:text-blue-200 dark:hover:bg-blue-800",
                   variant === "announcement" &&
                     !gradientColors &&
-                    "hover:bg-purple-200 dark:hover:bg-purple-800 text-purple-800 dark:text-purple-200"
+                    "text-purple-800 hover:bg-purple-200 dark:text-purple-200 dark:hover:bg-purple-800",
                 )}
               >
                 <X className="h-4 w-4" />

@@ -4,15 +4,8 @@
   "type": "registry:block",
   "title": "Cancel Subscription Card",
   "description": "A cancel subscription card component",
-  "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "button",
-    "badge",
-    "card",
-    "utils"
-  ],
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["button", "badge", "card", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/cancel-subscription-card.tsx",

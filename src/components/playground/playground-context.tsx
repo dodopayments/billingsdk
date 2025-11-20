@@ -1,8 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
 import { ComponentConfig, PlaygroundState } from "./types";
-
 
 function parseJSXProps(code: string): Record<string, any> {
   try {
@@ -11,28 +16,28 @@ function parseJSXProps(code: string): Record<string, any> {
 
     const propsString = jsxMatch[2];
     const props: Record<string, any> = {};
-    
+
     let currentIndex = 0;
     while (currentIndex < propsString.length) {
       const propMatch = propsString.slice(currentIndex).match(/^\s*(\w+)=/);
       if (!propMatch) break;
-      
+
       const propName = propMatch[1];
       currentIndex += propMatch[0].length;
-      
+
       if (currentIndex >= propsString.length) break;
-      
+
       const nextChar = propsString[currentIndex];
       let propValue: any;
-      
-      if (nextChar === '{') {
+
+      if (nextChar === "{") {
         let braceCount = 0;
         let valueStart = currentIndex + 1;
         let valueEnd = valueStart;
-        
+
         for (let i = currentIndex; i < propsString.length; i++) {
-          if (propsString[i] === '{') braceCount++;
-          else if (propsString[i] === '}') {
+          if (propsString[i] === "{") braceCount++;
+          else if (propsString[i] === "}") {
             braceCount--;
             if (braceCount === 0) {
               valueEnd = i;
@@ -41,33 +46,33 @@ function parseJSXProps(code: string): Record<string, any> {
             }
           }
         }
-        
+
         let innerValue = propsString.slice(valueStart, valueEnd).trim();
         // Normalize trailing commas that would break JSON.parse for objects/arrays
         innerValue = innerValue
-          .replace(/,\s*([}\]])/g, '$1')
-          .replace(/([\{\[])(\s*),/g, '$1');
-        
+          .replace(/,\s*([}\]])/g, "$1")
+          .replace(/([\{\[])(\s*),/g, "$1");
+
         try {
-          if (innerValue.includes('=>') || innerValue.includes('function')) {
+          if (innerValue.includes("=>") || innerValue.includes("function")) {
             props[propName] = () => console.log(`${propName} called`);
-          } else if (innerValue === '' || innerValue === '{}') {
+          } else if (innerValue === "" || innerValue === "{}") {
             props[propName] = {};
-          } else if (innerValue === '[]') {
+          } else if (innerValue === "[]") {
             props[propName] = [];
           } else {
             const sanitizedValue = innerValue
               .replace(/(\w+):/g, '"$1":')
               .replace(/'/g, '"')
-              .replace(/undefined/g, 'null')
-              .replace(/\s+/g, ' ')
+              .replace(/undefined/g, "null")
+              .replace(/\s+/g, " ")
               .trim();
-            
+
             try {
               props[propName] = JSON.parse(sanitizedValue);
             } catch {
               // Fallback to evaluating as an expression (arrays/objects/functions)
-              const safeEval = new Function('return (' + innerValue + ')');
+              const safeEval = new Function("return (" + innerValue + ")");
               props[propName] = safeEval();
             }
           }
@@ -78,28 +83,32 @@ function parseJSXProps(code: string): Record<string, any> {
         const quote = nextChar;
         let valueStart = currentIndex + 1;
         let valueEnd = propsString.indexOf(quote, valueStart);
-        
+
         if (valueEnd === -1) valueEnd = propsString.length;
-        
+
         propValue = propsString.slice(valueStart, valueEnd);
         currentIndex = valueEnd + 1;
-        
-        if (propValue === 'true') props[propName] = true;
-        else if (propValue === 'false') props[propName] = false;
+
+        if (propValue === "true") props[propName] = true;
+        else if (propValue === "false") props[propName] = false;
         else if (!isNaN(Number(propValue))) props[propName] = Number(propValue);
         else props[propName] = propValue;
       } else {
-        const nextSpace = propsString.indexOf(' ', currentIndex);
-        const nextProp = propsString.indexOf('=', currentIndex + 1);
-        let valueEnd = nextSpace !== -1 ? Math.min(nextSpace, nextProp !== -1 ? nextProp : Infinity) : nextProp;
-        
-        if (valueEnd === -1 || valueEnd === Infinity) valueEnd = propsString.length;
-        
+        const nextSpace = propsString.indexOf(" ", currentIndex);
+        const nextProp = propsString.indexOf("=", currentIndex + 1);
+        let valueEnd =
+          nextSpace !== -1
+            ? Math.min(nextSpace, nextProp !== -1 ? nextProp : Infinity)
+            : nextProp;
+
+        if (valueEnd === -1 || valueEnd === Infinity)
+          valueEnd = propsString.length;
+
         propValue = propsString.slice(currentIndex, valueEnd).trim();
         currentIndex = valueEnd;
-        
-        if (propValue === 'true') props[propName] = true;
-        else if (propValue === 'false') props[propName] = false;
+
+        if (propValue === "true") props[propName] = true;
+        else if (propValue === "false") props[propName] = false;
         else if (!isNaN(Number(propValue))) props[propName] = Number(propValue);
         else props[propName] = propValue;
       }
@@ -152,7 +161,9 @@ interface PlaygroundContextType {
   updateStyles: (styles: string) => void;
 }
 
-const PlaygroundContext = createContext<PlaygroundContextType | undefined>(undefined);
+const PlaygroundContext = createContext<PlaygroundContextType | undefined>(
+  undefined,
+);
 
 export function PlaygroundProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<PlaygroundState>({
@@ -178,7 +189,7 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
     setState((prev: PlaygroundState) => {
       try {
         const parsedProps = parseJSXProps(code);
-        
+
         // If parsing fails or returns empty, keep existing props but update code
         if (!parsedProps || Object.keys(parsedProps).length === 0) {
           return { ...prev, code };
@@ -200,11 +211,13 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateProps = useCallback((props: Record<string, any>) => {
-
     const filteredProps = Object.fromEntries(
-      Object.entries(props).filter(([_, value]) => value !== undefined)
+      Object.entries(props).filter(([_, value]) => value !== undefined),
     );
-    setState((prev: PlaygroundState) => ({ ...prev, props: { ...prev.props, ...filteredProps } }));
+    setState((prev: PlaygroundState) => ({
+      ...prev,
+      props: { ...prev.props, ...filteredProps },
+    }));
   }, []);
 
   const resetToDefault = useCallback(() => {
@@ -233,8 +246,6 @@ export function PlaygroundProvider({ children }: { children: ReactNode }) {
   const updateStyles = useCallback((styles: string) => {
     setState((prev: PlaygroundState) => ({ ...prev, styles }));
   }, []);
-
-
 
   const value: PlaygroundContextType = {
     state,

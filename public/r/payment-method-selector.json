@@ -4,10 +4,7 @@
   "type": "registry:block",
   "title": "Payment Method Selector",
   "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
+  "dependencies": ["lucide-react", "motion"],
   "registryDependencies": [
     "button",
     "dialog",

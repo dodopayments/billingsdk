@@ -13,14 +13,17 @@ export function AdvancedCodeEditor() {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState("");
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const debouncedUpdateCode = useCallback((code: string) => {
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-    debounceTimeoutRef.current = setTimeout(() => {
-      updateCode(code);
-    }, 300); 
-  }, [updateCode]);
+  const debouncedUpdateCode = useCallback(
+    (code: string) => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      debounceTimeoutRef.current = setTimeout(() => {
+        updateCode(code);
+      }, 300);
+    },
+    [updateCode],
+  );
 
   const tabs: FileTab[] = [
     {
@@ -37,7 +40,8 @@ export function AdvancedCodeEditor() {
     },
   ];
 
-  const activeTabContent = tabs.find(tab => tab.id === activeTab)?.content || "";
+  const activeTabContent =
+    tabs.find((tab) => tab.id === activeTab)?.content || "";
 
   // Handle component changes and tab switches
   useEffect(() => {
@@ -81,7 +85,7 @@ export function AdvancedCodeEditor() {
 
   const handleEditorChange = (newValue: string) => {
     setEditValue(newValue);
-    
+
     // Auto-save for styles.css, debounce for page.tsx
     if (activeTab === "styles.css") {
       updateStyles(newValue);
@@ -115,7 +119,7 @@ export function AdvancedCodeEditor() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${state.selectedComponent?.name || "component"}.${activeTab.split('.').pop()}`;
+    a.download = `${state.selectedComponent?.name || "component"}.${activeTab.split(".").pop()}`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -130,9 +134,9 @@ export function AdvancedCodeEditor() {
 
   if (!state.selectedComponent) {
     return (
-      <div className="h-full flex items-center justify-center bg-background text-muted-foreground">
+      <div className="bg-background text-muted-foreground flex h-full items-center justify-center">
         <div className="text-center">
-          <h3 className="text-lg font-semibold mb-2 text-foreground">CODE</h3>
+          <h3 className="text-foreground mb-2 text-lg font-semibold">CODE</h3>
           <p className="text-sm">Select a component to view its code</p>
         </div>
       </div>
@@ -140,7 +144,10 @@ export function AdvancedCodeEditor() {
   }
 
   return (
-    <div className="h-full flex flex-col bg-background" style={{ height: 'calc(100vh - 120px)' }}>
+    <div
+      className="bg-background flex h-full flex-col"
+      style={{ height: "calc(100vh - 120px)" }}
+    >
       {/* File Tabs */}
       <FileTabs
         tabs={tabs}
@@ -150,36 +157,66 @@ export function AdvancedCodeEditor() {
       />
 
       {/* Editor Header */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/50">
+      <div className="border-border bg-muted/50 flex items-center justify-between border-b px-4 py-2">
         <div className="flex items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-muted-foreground text-sm">
             {activeTab === "page.tsx" ? "React Component" : "CSS Styles"}
           </span>
         </div>
-        
+
         <div className="flex items-center gap-1">
           {isEditing ? (
             <>
-              <Button size="sm" onClick={handleSave} variant="default" className="h-7 px-2">
-                <Save className="h-3 w-3 mr-1" />
+              <Button
+                size="sm"
+                onClick={handleSave}
+                variant="default"
+                className="h-7 px-2"
+              >
+                <Save className="mr-1 h-3 w-3" />
                 Save
               </Button>
-              <Button size="sm" onClick={handleCancel} variant="outline" className="h-7 px-2">
+              <Button
+                size="sm"
+                onClick={handleCancel}
+                variant="outline"
+                className="h-7 px-2"
+              >
                 Cancel
               </Button>
             </>
           ) : (
             <>
-              <Button size="sm" onClick={handleEdit} variant="outline" className="h-7 px-2">
+              <Button
+                size="sm"
+                onClick={handleEdit}
+                variant="outline"
+                className="h-7 px-2"
+              >
                 Edit
               </Button>
-              <Button size="sm" onClick={handleReset} variant="outline" className="h-7 px-2">
+              <Button
+                size="sm"
+                onClick={handleReset}
+                variant="outline"
+                className="h-7 px-2"
+              >
                 <RotateCcw className="h-3 w-3" />
               </Button>
-              <Button size="sm" onClick={handleCopy} variant="outline" className="h-7 px-2">
+              <Button
+                size="sm"
+                onClick={handleCopy}
+                variant="outline"
+                className="h-7 px-2"
+              >
                 <Copy className="h-3 w-3" />
               </Button>
-              <Button size="sm" onClick={handleExport} variant="outline" className="h-7 px-2">
+              <Button
+                size="sm"
+                onClick={handleExport}
+                variant="outline"
+                className="h-7 px-2"
+              >
                 <Download className="h-3 w-3" />
               </Button>
             </>
@@ -188,7 +225,10 @@ export function AdvancedCodeEditor() {
       </div>
 
       {/* Code Content */}
-      <div className="flex-1 overflow-auto" style={{ height: 'calc(100vh - 200px)' }}>
+      <div
+        className="flex-1 overflow-auto"
+        style={{ height: "calc(100vh - 200px)" }}
+      >
         <CodeMirrorEditor
           value={isEditing ? editValue : activeTabContent}
           onChange={isEditing ? handleEditorChange : undefined}

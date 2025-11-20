@@ -4,14 +4,8 @@
   "type": "registry:block",
   "title": "Top Banner",
   "description": "A banner component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/banner.tsx",

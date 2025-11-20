@@ -4,11 +4,7 @@
   "type": "registry:block",
   "title": "Pricing Table Five",
   "description": "A modern pricing table component with contact us plan",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "motion"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
   "registryDependencies": [
     "button",
     "card",

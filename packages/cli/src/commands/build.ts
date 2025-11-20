@@ -11,7 +11,7 @@ export const buildCommand = new Command()
       await buildRegistry();
       console.log("Registry built successfully!");
     } catch {
-    //   console.error("Failed to build registry");
+      //   console.error("Failed to build registry");
       process.exit(1);
     }
   });

@@ -27,7 +27,8 @@ const sectionVariants = cva("py-32", {
     },
     theme: {
       minimal: "",
-      classic: "bg-gradient-to-b from-background to-muted/20 relative overflow-hidden",
+      classic:
+        "bg-gradient-to-b from-background to-muted/20 relative overflow-hidden",
     },
   },
   defaultVariants: {
@@ -45,7 +46,8 @@ const titleVariants = cva("mb-2 font-semibold", {
     },
     theme: {
       minimal: "",
-      classic: "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent font-bold",
+      classic:
+        "bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent font-bold",
     },
   },
   defaultVariants: {
@@ -166,7 +168,8 @@ const cardVariants = cva(
       {
         theme: "classic",
         highlight: true,
-        className: "bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden shadow-2xl",
+        className:
+          "bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden shadow-2xl",
       },
       {
         theme: "minimal",
@@ -179,7 +182,7 @@ const cardVariants = cva(
       theme: "minimal",
       highlight: false,
     },
-  }
+  },
 );
 
 const priceTextVariants = cva("font-bold", {
@@ -191,7 +194,8 @@ const priceTextVariants = cva("font-bold", {
     },
     theme: {
       minimal: "",
-      classic: "text-6xl font-extrabold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent",
+      classic:
+        "text-6xl font-extrabold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent",
     },
   },
   defaultVariants: {
@@ -227,7 +231,8 @@ const tableWrapperVariants = cva("relative w-full overflow-x-auto", {
     },
     theme: {
       minimal: "",
-      classic: "mt-16 bg-card/30 backdrop-blur-sm rounded-xl border border-border/50 shadow-sm",
+      classic:
+        "mt-16 bg-card/30 backdrop-blur-sm rounded-xl border border-border/50 shadow-sm",
     },
   },
   defaultVariants: {
@@ -267,19 +272,23 @@ const firstColWidthVariants = cva("", {
   },
 });
 
-const buttonVariants = cva("w-full hover:cursor-pointer transition-all duration-300", {
-  variants: {
-    theme: {
-      minimal: "",
-      classic: "hover:shadow-xl active:scale-95",
+const buttonVariants = cva(
+  "w-full hover:cursor-pointer transition-all duration-300",
+  {
+    variants: {
+      theme: {
+        minimal: "",
+        classic: "hover:shadow-xl active:scale-95",
+      },
+    },
+    defaultVariants: {
+      theme: "minimal",
     },
   },
-  defaultVariants: {
-    theme: "minimal",
-  },
-});
+);
 
-export interface PricingTableTwoProps extends VariantProps<typeof sectionVariants> {
+export interface PricingTableTwoProps
+  extends VariantProps<typeof sectionVariants> {
   className?: string;
   plans: Plan[];
   title?: string;
@@ -294,11 +303,14 @@ export function PricingTableTwo({
   description,
   onPlanSelect,
   size,
-  theme = "minimal"
+  theme = "minimal",
 }: PricingTableTwoProps) {
   const [isAnnually, setIsAnnually] = useState(false);
 
-  function calculateDiscount(monthlyPrice: string, yearlyPrice: string): number {
+  function calculateDiscount(
+    monthlyPrice: string,
+    yearlyPrice: string,
+  ): number {
     const monthly = parseFloat(monthlyPrice);
     const yearly = parseFloat(yearlyPrice);
 
@@ -318,10 +330,10 @@ export function PricingTableTwo({
 
   const yearlyPriceDiscount = plans.length
     ? Math.max(
-      ...plans.map((plan) =>
-        calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)
+        ...plans.map((plan) =>
+          calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
+        ),
       )
-    )
     : 0;
 
   return (
@@ -329,17 +341,17 @@ export function PricingTableTwo({
       {/* Classic theme background elements */}
       {theme === "classic" && (
         <>
-          <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-secondary/5 rounded-full blur-2xl" />
+          <div className="bg-grid-pattern absolute inset-0 opacity-5" />
+          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
         </>
       )}
 
-      <div className="container max-w-5xl relative">
+      <div className="relative container max-w-5xl">
         <motion.div
           className={cn(
             "flex flex-col items-center gap-4",
-            theme === "classic" ? "text-center" : ""
+            theme === "classic" ? "text-center" : "",
           )}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -351,16 +363,19 @@ export function PricingTableTwo({
           </h2>
 
           <p className={cn(descriptionVariants({ size, theme }))}>
-            {description || "Lorem ipsum dolor sit amet consectetur adipisicing."}
+            {description ||
+              "Lorem ipsum dolor sit amet consectetur adipisicing."}
           </p>
         </motion.div>
 
         {/* Monthly/Yearly Toggle */}
         <div className={cn(toggleWrapperVariants({ size, theme }))}>
-          <span className={cn(
-            toggleLabelVariants({ size, theme }),
-            !isAnnually ? "text-foreground" : "text-muted-foreground"
-          )}>
+          <span
+            className={cn(
+              toggleLabelVariants({ size, theme }),
+              !isAnnually ? "text-foreground" : "text-muted-foreground",
+            )}
+          >
             Monthly
           </span>
           <Switch
@@ -368,10 +383,12 @@ export function PricingTableTwo({
             onCheckedChange={setIsAnnually}
             className={cn(switchScaleVariants({ size, theme }))}
           />
-          <span className={cn(
-            toggleLabelVariants({ size, theme }),
-            isAnnually ? "text-foreground" : "text-muted-foreground"
-          )}>
+          <span
+            className={cn(
+              toggleLabelVariants({ size, theme }),
+              isAnnually ? "text-foreground" : "text-muted-foreground",
+            )}
+          >
             Yearly
           </span>
         </div>
@@ -380,8 +397,8 @@ export function PricingTableTwo({
           {yearlyPriceDiscount > 0 && (
             <motion.span
               className={cn(
-                "text-xs mt-2 text-muted-foreground",
-                theme === "classic" && "text-emerald-500 font-medium"
+                "text-muted-foreground mt-2 text-xs",
+                theme === "classic" && "font-medium text-emerald-500",
               )}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -393,13 +410,15 @@ export function PricingTableTwo({
           )}
         </div>
 
-        <div className={cn(
-          plansWrapperVariants({ size, theme }),
-          "gap-4 md:gap-0",
-          plans.length === 1 && "flex-col max-w-md mx-auto",
-          plans.length === 2 && "flex-col md:flex-row max-w-4xl mx-auto",
-          plans.length >= 3 && "flex-col lg:flex-row max-w-7xl mx-auto"
-        )}>
+        <div
+          className={cn(
+            plansWrapperVariants({ size, theme }),
+            "gap-4 md:gap-0",
+            plans.length === 1 && "mx-auto max-w-md flex-col",
+            plans.length === 2 && "mx-auto max-w-4xl flex-col md:flex-row",
+            plans.length >= 3 && "mx-auto max-w-7xl flex-col lg:flex-row",
+          )}
+        >
           {plans.map((plan: Plan, index: number) => (
             <motion.div
               key={plan.id}
@@ -407,31 +426,41 @@ export function PricingTableTwo({
                 cardVariants({
                   size,
                   theme,
-                  highlight: plan.highlight
+                  highlight: plan.highlight,
                 }),
                 index === 0 && "md:rounded-l-xl md:border-r-0",
                 index === plans.length - 1 && "md:rounded-r-xl md:border-l-0",
-                index > 0 && index < plans.length - 1 && "md:border-l-0 md:border-r-0",
-                plans.length === 1 && "rounded-xl"
+                index > 0 &&
+                  index < plans.length - 1 &&
+                  "md:border-r-0 md:border-l-0",
+                plans.length === 1 && "rounded-xl",
               )}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.15 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: index * 0.15,
+              }}
             >
               <div className="grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6">
-                <div className="flex items-center gap-2 justify-center">
-                  <div className={cn(
-                    "leading-none font-semibold",
-                    theme === "classic" && "text-lg font-bold"
-                  )}>
+                <div className="flex items-center justify-center gap-2">
+                  <div
+                    className={cn(
+                      "leading-none font-semibold",
+                      theme === "classic" && "text-lg font-bold",
+                    )}
+                  >
                     {plan.title}
                   </div>
                 </div>
-                <p className={cn(
-                  "text-muted-foreground text-center",
-                  theme === "classic" && "text-foreground/80"
-                )}>
+                <p
+                  className={cn(
+                    "text-muted-foreground text-center",
+                    theme === "classic" && "text-foreground/80",
+                  )}
+                >
                   {plan.description}
                 </p>
               </div>
@@ -451,16 +480,29 @@ export function PricingTableTwo({
                           <>{plan.currency}</>
                         )}
                         {plan.yearlyPrice}
-                        {calculateDiscount(plan.monthlyPrice, plan.yearlyPrice) > 0 && (
-                          <span className={cn(
-                            "text-xs ml-2",
-                            theme === "classic" ? "text-emerald-500 font-semibold" : "underline"
-                          )}>
-                            {calculateDiscount(plan.monthlyPrice, plan.yearlyPrice)}% off
+                        {calculateDiscount(
+                          plan.monthlyPrice,
+                          plan.yearlyPrice,
+                        ) > 0 && (
+                          <span
+                            className={cn(
+                              "ml-2 text-xs",
+                              theme === "classic"
+                                ? "font-semibold text-emerald-500"
+                                : "underline",
+                            )}
+                          >
+                            {calculateDiscount(
+                              plan.monthlyPrice,
+                              plan.yearlyPrice,
+                            )}
+                            % off
                           </span>
                         )}
                       </span>
-                      <p className={cn(priceSubTextVariants({ size, theme }))}>per year</p>
+                      <p className={cn(priceSubTextVariants({ size, theme }))}>
+                        per year
+                      </p>
                     </motion.div>
                   ) : (
                     <motion.div
@@ -476,7 +518,9 @@ export function PricingTableTwo({
                         )}
                         {plan.monthlyPrice}
                       </span>
-                      <p className={cn(priceSubTextVariants({ size, theme }))}>per month</p>
+                      <p className={cn(priceSubTextVariants({ size, theme }))}>
+                        per month
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -486,18 +530,22 @@ export function PricingTableTwo({
                 <Button
                   className={cn(
                     buttonVariants({ theme }),
-                    plan.highlight && theme === "minimal" && "gap-2 whitespace-nowrap focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow hover:bg-primary/90 h-9 py-2 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex w-full items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay",
-                    plan.highlight && theme === "classic" && "relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold py-3 px-6 rounded-lg border border-primary/20"
+                    plan.highlight &&
+                      theme === "minimal" &&
+                      "focus-visible:ring-ring hover:bg-primary/90 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-md px-3 py-2 text-left text-sm font-medium whitespace-nowrap shadow ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+                    plan.highlight &&
+                      theme === "classic" &&
+                      "from-primary to-primary/80 text-primary-foreground border-primary/20 relative overflow-hidden rounded-lg border bg-gradient-to-r px-6 py-3 font-semibold",
                   )}
                   variant={plan.highlight ? "default" : "secondary"}
                   onClick={() => onPlanSelect?.(plan.id)}
                 >
                   {theme === "classic" && plan.highlight && (
-                    <Zap className="w-4 h-4 mr-1" />
+                    <Zap className="mr-1 h-4 w-4" />
                   )}
                   {plan.buttonText}
                   {theme === "classic" && plan.highlight && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-700" />
+                    <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-white/0 via-white/10 to-white/0 transition-transform duration-700 hover:translate-x-[100%]" />
                   )}
                 </Button>
               </div>
@@ -514,13 +562,20 @@ export function PricingTableTwo({
         >
           <Table className={cn(theme === "classic" && "bg-transparent")}>
             <TableHeader>
-              <TableRow className={cn(theme === "classic" && "border-border/30")}>
-                <TableHead className={firstColWidthVariants({ size })}></TableHead>
+              <TableRow
+                className={cn(theme === "classic" && "border-border/30")}
+              >
+                <TableHead
+                  className={firstColWidthVariants({ size })}
+                ></TableHead>
                 {plans.map((plan: Plan) => (
-                  <TableHead key={plan.id} className={cn(
-                    "text-center font-bold text-primary",
-                    theme === "classic" && "text-lg"
-                  )}>
+                  <TableHead
+                    key={plan.id}
+                    className={cn(
+                      "text-primary text-center font-bold",
+                      theme === "classic" && "text-lg",
+                    )}
+                  >
                     {plan.title}
                   </TableHead>
                 ))}
@@ -529,46 +584,72 @@ export function PricingTableTwo({
             <TableBody>
               {(() => {
                 const allFeatures = new Set<string>();
-                plans.forEach(plan => {
-                  plan.features.forEach(feature => {
+                plans.forEach((plan) => {
+                  plan.features.forEach((feature) => {
                     allFeatures.add(feature.name);
                   });
                 });
-                return Array.from(allFeatures).map((featureName, featureIndex) => (
-                  <TableRow key={featureIndex} className={cn(
-                    theme === "classic" && "border-border/20 hover:bg-muted/30"
-                  )}>
-                    <TableCell className={cn(
-                      "font-medium text-left",
-                      theme === "classic" && "font-semibold text-foreground/90"
-                    )}>
-                      {featureName}
-                    </TableCell>
-                    {plans.map((plan: Plan) => {
-                      const feature = plan.features.find(f => f.name === featureName);
-                      return (
-                        <TableCell key={plan.id} className="text-center">
-                          {feature ? (
-                            feature.icon === "check" ? (
-                              <Check className={cn(featureIconVariants({ size, theme }))} />
-                            ) : feature.icon === "minus" ? (
-                              <Minus className={cn(featureIconVariants({ size, theme }))} />
+                return Array.from(allFeatures).map(
+                  (featureName, featureIndex) => (
+                    <TableRow
+                      key={featureIndex}
+                      className={cn(
+                        theme === "classic" &&
+                          "border-border/20 hover:bg-muted/30",
+                      )}
+                    >
+                      <TableCell
+                        className={cn(
+                          "text-left font-medium",
+                          theme === "classic" &&
+                            "text-foreground/90 font-semibold",
+                        )}
+                      >
+                        {featureName}
+                      </TableCell>
+                      {plans.map((plan: Plan) => {
+                        const feature = plan.features.find(
+                          (f) => f.name === featureName,
+                        );
+                        return (
+                          <TableCell key={plan.id} className="text-center">
+                            {feature ? (
+                              feature.icon === "check" ? (
+                                <Check
+                                  className={cn(
+                                    featureIconVariants({ size, theme }),
+                                  )}
+                                />
+                              ) : feature.icon === "minus" ? (
+                                <Minus
+                                  className={cn(
+                                    featureIconVariants({ size, theme }),
+                                  )}
+                                />
+                              ) : (
+                                <span
+                                  className={cn(
+                                    "text-muted-foreground text-sm",
+                                    theme === "classic" &&
+                                      "text-foreground/70 font-medium",
+                                  )}
+                                >
+                                  {feature.name}
+                                </span>
+                              )
                             ) : (
-                              <span className={cn(
-                                "text-sm text-muted-foreground",
-                                theme === "classic" && "font-medium text-foreground/70"
-                              )}>
-                                {feature.name}
-                              </span>
-                            )
-                          ) : (
-                            <Minus className={cn(featureIconVariants({ size, theme }))} />
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                ));
+                              <Minus
+                                className={cn(
+                                  featureIconVariants({ size, theme }),
+                                )}
+                              />
+                            )}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  ),
+                );
               })()}
             </TableBody>
           </Table>

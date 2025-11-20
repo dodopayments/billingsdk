@@ -4,14 +4,14 @@ import { VsCode } from "./vscode";
 
 export const CopyPaste = () => {
   return (
-    <div className="flex h-full bg-muted/20 items-center pt-8 justify-around p-4 group">
-      <div className="border size-24 flex items-center justify-center -rotate-12 bg-muted/80 border-accent p-3 rounded-2xl transition-all duration-500 ease-out group-hover:rotate-0 group-hover:translate-x-2">
+    <div className="bg-muted/20 group flex h-full items-center justify-around p-4 pt-8">
+      <div className="bg-muted/80 border-accent flex size-24 -rotate-12 items-center justify-center rounded-2xl border p-3 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:rotate-0">
         <LogoMark className="size-16" />
       </div>
-      <div className="border-2 size-20 flex items-center justify-center border-dashed -translate-y-8 border-accent p-3 rounded-2xl transition-all duration-500 ease-out group-hover:border-solid group-hover:bg-accent/10 group-hover:scale-110">
+      <div className="border-accent group-hover:bg-accent/10 flex size-20 -translate-y-8 items-center justify-center rounded-2xl border-2 border-dashed p-3 transition-all duration-500 ease-out group-hover:scale-110 group-hover:border-solid">
         <FileCode2 className="size-8 transition-all duration-500 group-hover:scale-90" />
       </div>
-      <div className="border size-24 flex items-center justify-center rotate-12 bg-muted/80 border-accent p-3 rounded-2xl transition-all duration-500 ease-out group-hover:rotate-0 group-hover:-translate-x-2">
+      <div className="bg-muted/80 border-accent flex size-24 rotate-12 items-center justify-center rounded-2xl border p-3 transition-all duration-500 ease-out group-hover:-translate-x-2 group-hover:rotate-0">
         <VsCode className="size-16" />
       </div>
     </div>

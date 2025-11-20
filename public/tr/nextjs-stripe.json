@@ -54,9 +54,5 @@
       "content": "DODO_PAYMENTS_API_KEY=your-api-key\nDODO_PAYMENTS_WEBHOOK_KEY=your-webhook-secret\nDODO_PAYMENTS_RETURN_URL=https://yourdomain.com/checkout/success\nDODO_PAYMENTS_ENVIRONMENT=\"test\"or\"live\"\n\nSTRIPE_SECRET_KEY=your=stripe-secret-key"
     }
   ],
-  "dependencies": [
-    "stripe",
-    "standardwebhooks",
-    "zod"
-  ]
+  "dependencies": ["stripe", "standardwebhooks", "zod"]
 }

@@ -4,16 +4,8 @@
   "type": "registry:block",
   "title": "Pricing Table Six",
   "description": "A modern pricing table component with contact us plan",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "framer-motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "card",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "framer-motion"],
+  "registryDependencies": ["button", "card", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/pricing-table-six.tsx",
