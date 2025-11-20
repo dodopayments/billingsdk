@@ -5,9 +5,9 @@ permissions:
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -29,9 +29,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Lint
         run: npm run lint
+
+      - name: Format
+        run: npm run format
 
       - name: Type check
         run: npm run typecheck
@@ -39,3 +42,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Commit and push changes
+        if: always()
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-format code with prettier and lint"
+          file_pattern: "*.ts *.tsx *.md"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
