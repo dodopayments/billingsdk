@@ -55,6 +55,7 @@ export default async function Page(props: {
 
   return (
     <DocsPage
+      toc={page.data.toc}
       full={page.data.full}
       breadcrumb={{
         includePage: true,
