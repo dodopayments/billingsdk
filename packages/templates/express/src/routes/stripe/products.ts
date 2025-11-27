@@ -23,12 +23,10 @@ router.get("/", async (req, res) => {
     res.json(products.data); // this returns only product array
   } catch (error) {
     console.error("Error fetching products:", error);
-    res
-      .status(500)
-      .json({
-        error: "Internal server error",
-        details: (error as Error).message,
-      });
+    res.status(500).json({
+      error: "Internal server error",
+      details: (error as Error).message,
+    });
   }
 });
 
@@ -44,12 +42,10 @@ router.get("/product", async (req, res) => {
     res.json(product);
   } catch (error) {
     console.error("Error fetching product:", error);
-    res
-      .status(500)
-      .json({
-        error: "Internal server error",
-        details: (error as Error).message,
-      });
+    res.status(500).json({
+      error: "Internal server error",
+      details: (error as Error).message,
+    });
   }
 });
 

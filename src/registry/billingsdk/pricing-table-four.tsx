@@ -240,10 +240,10 @@ export function PricingTableFour({
 
   const yearlyPriceDiscount = plans.length
     ? Math.max(
-      ...plans.map((plan) =>
-        calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
-      ),
-    )
+        ...plans.map((plan) =>
+          calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
+        ),
+      )
     : 0;
 
   const handlePlanSelect = (planId: string) => {
@@ -337,10 +337,10 @@ export function PricingTableFour({
             "grid gap-6",
             plans.length === 1 && "mx-auto max-w-md grid-cols-1",
             plans.length === 2 &&
-            "mx-auto max-w-4xl grid-cols-1 md:grid-cols-2",
+              "mx-auto max-w-4xl grid-cols-1 md:grid-cols-2",
             plans.length === 3 && "grid-cols-1 md:grid-cols-3",
             plans.length >= 4 &&
-            "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+              "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
           )}
         >
           {plans.map((plan, index) => (
@@ -440,21 +440,21 @@ export function PricingTableFour({
                               plan.monthlyPrice,
                               plan.yearlyPrice,
                             ) > 0 && (
-                                <span
-                                  className={cn(
-                                    "ml-2 text-xs",
-                                    theme === "classic"
-                                      ? "font-semibold text-emerald-500"
-                                      : "text-primary font-medium",
-                                  )}
-                                >
-                                  {calculateDiscount(
-                                    plan.monthlyPrice,
-                                    plan.yearlyPrice,
-                                  )}
-                                  % off
-                                </span>
-                              )}
+                              <span
+                                className={cn(
+                                  "ml-2 text-xs",
+                                  theme === "classic"
+                                    ? "font-semibold text-emerald-500"
+                                    : "text-primary font-medium",
+                                )}
+                              >
+                                {calculateDiscount(
+                                  plan.monthlyPrice,
+                                  plan.yearlyPrice,
+                                )}
+                                % off
+                              </span>
+                            )}
                           </div>
                         ) : (
                           <div className="flex items-baseline gap-1">
@@ -463,7 +463,7 @@ export function PricingTableFour({
                             >
                               {parseFloat(plan.monthlyPrice) >= 0 &&
                                 plan.monthlyPrice.toLowerCase() !==
-                                "custom" && <>{plan.currency}</>}
+                                  "custom" && <>{plan.currency}</>}
                               {plan.monthlyPrice}
                             </span>
                             <span className="text-muted-foreground text-sm">
@@ -482,8 +482,8 @@ export function PricingTableFour({
                       className={cn(
                         buttonVariants({ theme }),
                         !plan.highlight &&
-                        theme === "minimal" &&
-                        "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
+                          theme === "minimal" &&
+                          "bg-secondary hover:bg-secondary/80 text-secondary-foreground",
                       )}
                       variant={plan.highlight ? "default" : "secondary"}
                     >

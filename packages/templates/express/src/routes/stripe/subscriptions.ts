@@ -17,12 +17,10 @@ router.get("/", async (req, res) => {
     res.json(subscription);
   } catch (error) {
     console.error("Error fetching subscription:", error);
-    res
-      .status(500)
-      .json({
-        error: "Internal server error",
-        details: (error as Error).message,
-      });
+    res.status(500).json({
+      error: "Internal server error",
+      details: (error as Error).message,
+    });
   }
 });
 
@@ -51,12 +49,10 @@ router.get("/list", async (req, res) => {
     res.json(subscriptions.data); // return only the subscriptions array
   } catch (error) {
     console.error("Error fetching subscriptions list:", error);
-    res
-      .status(500)
-      .json({
-        error: "Internal server error",
-        details: (error as Error).message,
-      });
+    res.status(500).json({
+      error: "Internal server error",
+      details: (error as Error).message,
+    });
   }
 });
 
