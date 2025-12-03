@@ -19,57 +19,54 @@ description: The Manage Subscription component provides a comprehensive interfac
 ### Related
 
 - See also: [Invoice History](/docs/components/invoice-history)
-- See also: [Payment Success Dialog](/docs/components/payment-processing/payment-success-dialog)
-
+- See also: [Payment Success Dialog](/docs/components/payment-success-dialog)
 
 ## Installation
 
-<Tabs items={['shadcn', 'billingSDK']} defaultValue="shadcn" className="bg-transparent border-none">
-  <Tab value="shadcn" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="installation-tabs">
+<Tabs
+  items={["shadcn", "billingSDK"]}
+  defaultValue="shadcn"
+  className="border-none bg-transparent"
+>
+  <Tab value="shadcn" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="installation-tabs"
+    >
       <Tab value="npx">
-        ```bash
-        npx shadcn@latest add @billingsdk/subscription-management
-        ```
+        ```bash npx shadcn@latest add @billingsdk/subscription-management ```
       </Tab>
       <Tab value="pnpm">
-        ```bash
-        pnpm dlx shadcn@latest add @billingsdk/subscription-management
+        ```bash pnpm dlx shadcn@latest add @billingsdk/subscription-management
         ```
       </Tab>
       <Tab value="yarn">
-        ```bash
-        yarn dlx shadcn@latest add @billingsdk/subscription-management
+        ```bash yarn dlx shadcn@latest add @billingsdk/subscription-management
         ```
       </Tab>
       <Tab value="bun">
-        ```bash
-        bunx shadcn@latest add @billingsdk/subscription-management
-        ```
+        ```bash bunx shadcn@latest add @billingsdk/subscription-management ```
       </Tab>
     </Tabs>
   </Tab>
-  <Tab value="billingSDK" className="border-none bg-transparent p-0 mt-3">
-    <Tabs items={['npx', 'pnpm', 'yarn', 'bun']} defaultValue="npx" groupId="billingsdk-cli-tabs">
+  <Tab value="billingSDK" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="billingsdk-cli-tabs"
+    >
       <Tab value="npx">
-        ```bash
-        npx @billingsdk/cli add subscription-management
-        ```
+        ```bash npx @billingsdk/cli add subscription-management ```
       </Tab>
       <Tab value="pnpm">
-        ```bash
-        pnpm dlx @billingsdk/cli add subscription-management
-        ```
+        ```bash pnpm dlx @billingsdk/cli add subscription-management ```
       </Tab>
       <Tab value="yarn">
-        ```bash
-        yarn dlx @billingsdk/cli add subscription-management
-        ```
+        ```bash yarn dlx @billingsdk/cli add subscription-management ```
       </Tab>
       <Tab value="bun">
-        ```bash
-        bunx @billingsdk/cli add subscription-management
-        ```
+        ```bash bunx @billingsdk/cli add subscription-management ```
       </Tab>
     </Tabs>
   </Tab>
@@ -85,27 +82,29 @@ import { type CurrentPlan, plans } from "@/lib/billingsdk-config";
 ```tsx
 const currentPlan: CurrentPlan = {
   plan: plans[1],
-  type: 'monthly',
-  price: '$121',
-  nextBillingDate: 'January 15, 2025',
-  paymentMethod: 'Credit Card',
-  status: 'active'
+  type: "monthly",
+  price: "$121",
+  nextBillingDate: "January 15, 2025",
+  paymentMethod: "Credit Card",
+  status: "active",
 };
 ```
 
 ```tsx
 <SubscriptionManagement
-  className="max-w-2xl mx-auto"
+  className="mx-auto max-w-2xl"
   currentPlan={currentPlan}
   updatePlan={{
     currentPlan: currentPlan.plan,
     plans: plans,
-    onPlanChange: (planId) => { console.log('update plan', planId) },
-    triggerText: 'Update Plan'
+    onPlanChange: (planId) => {
+      console.log("update plan", planId);
+    },
+    triggerText: "Update Plan",
   }}
   cancelSubscription={{
-    title: 'Cancel Subscription',
-    description: 'Are you sure you want to cancel your subscription?',
+    title: "Cancel Subscription",
+    description: "Are you sure you want to cancel your subscription?",
     plan: currentPlan.plan,
     onCancel: async (planId) => {
       // Handle cancellation
@@ -117,24 +116,25 @@ const currentPlan: CurrentPlan = {
 
 ## Props
 
-| Prop | Type | Required | Description |
-|------|------|----------|-------------|
-| `className` | `string` | ❌ | Additional CSS classes for styling |
-| `currentPlan` | `CurrentPlan` | ✅ | Object containing current subscription details |
-| `cancelSubscription` | `CancelSubscriptionDialogProps` | ✅ | Props for the cancel subscription dialog |
-| `updatePlan` | `UpdatePlanDialogProps` | ✅ | Props for the update plan dialog |
+| Prop                 | Type                            | Required | Description                                    |
+| -------------------- | ------------------------------- | -------- | ---------------------------------------------- |
+| `className`          | `string`                        | ❌       | Additional CSS classes for styling             |
+| `currentPlan`        | `CurrentPlan`                   | ✅       | Object containing current subscription details |
+| `cancelSubscription` | `CancelSubscriptionDialogProps` | ✅       | Props for the cancel subscription dialog       |
+| `updatePlan`         | `UpdatePlanDialogProps`         | ✅       | Props for the update plan dialog               |
 
 ## CurrentPlan Interface
+
 Refer to the [CurrentPlan Interface](/docs/interfaces#currentplan-interface) for more details.
 
 ```tsx
 interface CurrentPlan {
   plan: Plan;
-  type: 'monthly' | 'yearly' | 'custom';
+  type: "monthly" | "yearly" | "custom";
   price: string;
   nextBillingDate: string;
   paymentMethod: string;
-  status: 'active' | 'inactive' | 'cancelled' | 'past_due';
+  status: "active" | "inactive" | "cancelled" | "past_due";
 }
 ```
 
@@ -143,4 +143,11 @@ interface CurrentPlan {
 The subscription management component is styled using the `shadcn/ui` library. You can customize the colors and fonts by overriding the CSS variables. You can also get the theme from the [Theming](/docs/theming) page.
 
 ## Example
-<include cwd lang="tsx" meta='title="src/components/subscription-management-demo.tsx"'>src/components/subscription-management-demo.tsx</include>
+
+<include
+  cwd
+  lang="tsx"
+  meta='title="src/components/subscription-management-demo.tsx"'
+>
+  src/components/subscription-management-demo.tsx
+</include>
