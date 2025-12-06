@@ -1,0 +1,135 @@
+---
+title: Payment Failure
+description: A payment failure card that explains why a payment could not be processed, with actions to retry, go home, or contact support.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-failure">
+      <PaymentFailureDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/payment-failure-demo.tsx"'>
+      src/components/payment-failure-demo.tsx
+    </include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs
+  items={["shadcn", "billingSDK"]}
+  defaultValue="shadcn"
+  className="border-none bg-transparent"
+>
+  <Tab value="shadcn" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="installation-tabs"
+    >
+      <Tab value="npx">
+        ```bash npx shadcn@latest add @billingsdk/payment-failure ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash pnpm dlx shadcn@latest add @billingsdk/payment-failure ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash yarn dlx shadcn@latest add @billingsdk/payment-failure ```
+      </Tab>
+      <Tab value="bun">
+        ```bash bunx shadcn@latest add @billingsdk/payment-failure ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="billingsdk-cli-tabs"
+    >
+      <Tab value="npx">```bash npx @billingsdk/cli add payment-failure ```</Tab>
+      <Tab value="pnpm">
+        ```bash pnpm dlx @billingsdk/cli add payment-failure ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash yarn dlx @billingsdk/cli add payment-failure ```
+      </Tab>
+      <Tab value="bun">
+        ```bash bunx @billingsdk/cli add payment-failure ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentFailure } from "@/components/billingsdk/payment-failure";
+```
+
+```tsx
+// Controlled usage (recommended)
+const [isRetrying, setIsRetrying] = useState(false);
+
+async function handleRetry() {
+  setIsRetrying(true);
+
+  // Add your retry logic here (e.g., redirect to checkout or re-initiate payment)
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+
+  setIsRetrying(false);
+}
+
+<PaymentFailure
+  isRetrying={isRetrying}
+  onRetry={handleRetry}
+  onSecondary={() => router.push("/")}
+  onTertiary={() => router.push("/support")}
+/>;
+```
+
+## Customizing text
+
+```tsx
+<PaymentFailure
+  title="Transaction Declined"
+  subtitle="Your bank rejected the payment."
+  message="Please try again or use a different payment method."
+  retryButtonText="Retry Payment"
+  secondaryButtonText="Go Home"
+  tertiaryButtonText="Contact Support"
+  onRetry={() => console.log("retry")}
+  onSecondary={() => router.push("/")}
+  onTertiary={() => router.push("/support")}
+/>
+```
+
+## Props
+
+| Prop                  | Type         | Required | Description                                                                  |
+| --------------------- | ------------ | -------- | ---------------------------------------------------------------------------- |
+| `title`               | `string`     | ❌       | Optional heading (default: `"Payment Failed"`)                               |
+| `subtitle`            | `string`     | ❌       | Optional subtext (default: `"We couldn't process your payment."`)            |
+| `message`             | `string`     | ❌       | Additional explanatory message displayed under the reasons list              |
+| `reasons`             | `string[]`   | ❌       | List of possible failure reasons (defaults to common payment failure causes) |
+| `isRetrying`          | `boolean`    | ❌       | Shows loading state and disables retry button                                |
+| `retryButtonText`     | `string`     | ❌       | Primary action label (default: `"Try Again"`)                                |
+| `secondaryButtonText` | `string`     | ❌       | Secondary button label (default: `"Home"`)                                   |
+| `tertiaryButtonText`  | `string`     | ❌       | Tertiary button label (default: `"Support"`)                                 |
+| `onRetry`             | `() => void` | ❌       | Callback fired when user presses retry                                       |
+| `onSecondary`         | `() => void` | ❌       | Callback fired when user presses the secondary action                        |
+| `onTertiary`          | `() => void` | ❌       | Callback fired when user presses tertiary action                             |
+| `className`           | `string`     | ❌       | Additional classes for styling / layout                                      |
+
+## Theming
+
+This dialog inherits BillingSDK theme tokens via `getThemeStyles`, remaining consistent with other components. Colors adapt to light/dark modes and active theme.
+
+## Example
+
+<include cwd lang="tsx" meta='title="src/components/payment-failure-demo.tsx"'>
+  src/components/payment-failure-demo.tsx
+</include>
