@@ -18,7 +18,7 @@ jobs:
         run: npm ci
 
       - name: Generate registry JSON (public/r)
-        run: npx shadcn@3.5.1 build
+        run: npm run build:shadcn
 
       - name: Format with Prettier
         run: npm run format
