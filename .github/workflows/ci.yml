@@ -30,9 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate registry JSON (public/r)
-        run: npx shadcn@3.5.1 build
-
       - name: Lint
         run: npm run lint
 
