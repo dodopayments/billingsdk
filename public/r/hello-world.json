@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "src/registry/billingsdk/hello-world.tsx",
-      "content": "export default function HelloWorld() {\n    return (\n        <div className=\"flex flex-col\">\n            <h1 className=\"text-2xl font-bold dark:text-white\">Hello World</h1>\n            <p className=\"text-sm text-gray-500 dark:text-gray-400\">This is a test</p>\n        </div>\n    )\n}",
+      "content": "export default function HelloWorld() {\n  return (\n    <div className=\"flex flex-col\">\n      <h1 className=\"text-2xl font-bold dark:text-white\">Hello World</h1>\n      <p className=\"text-sm text-gray-500 dark:text-gray-400\">This is a test</p>\n    </div>\n  );\n}\n",
       "type": "registry:component",
       "target": "components/billingsdk/hello-world.tsx"
     }

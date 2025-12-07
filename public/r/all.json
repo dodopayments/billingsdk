@@ -33,7 +33,7 @@
     "@billingsdk/upcoming-charges",
     "@billingsdk/coupon",
     "@billingsdk/limited-offer-dialog",
-    "@billingsdk/upcoming-charges"
+    "@billingsdk/billing-screen"
   ],
   "files": []
 }
