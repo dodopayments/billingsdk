@@ -48,6 +48,7 @@ import { PricingTableSevenMinimalDemo } from "@/components/pricing-table-seven-m
 import { PricingTableEightDemo } from "@/registry/billingsdk/demo/pricing-table-eight-demo";
 import TrialExpiryCardDemo from "@/components/trial-expiry-card-demo";
 import { BillingScreenDemo } from "@/components/billing-screen-demo";
+import { PaymentFailureDemo } from "./components/payment-failure-demo";
 
 // use this function to get MDX components, you will need it for rendering MDX
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
@@ -102,5 +103,6 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     LimitedOfferDialogDemo,
     TrialExpiryCardDemo,
     BillingScreenDemo,
+    PaymentFailureDemo,
   };
 }
