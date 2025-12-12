@@ -60,15 +60,15 @@ export function LLMCopyButton({
       disabled={isLoading}
       className={cn(
         buttonVariants({
-          variant: "secondary",
-          // size: 'sm',
+          variant: "outline",
+          size: "sm",
           className: "[&_svg]:text-fd-muted-foreground gap-2 [&_svg]:size-3.5",
         }),
       )}
       onClick={onClick}
     >
       {checked ? <Check /> : <Copy />}
-      Copy Page
+      Copy
     </button>
   );
 }
@@ -282,8 +282,8 @@ export function ViewOptions({
       <PopoverTrigger
         className={cn(
           buttonVariants({
-            variant: "secondary",
-            // size: 'sm',
+            variant: "outline",
+            size: "sm",
             className: "gap-2",
           }),
         )}
@@ -321,7 +321,8 @@ function PlaygroundButton({ componentName }: { componentName?: string }) {
       rel="noopener"
       className={cn(
         buttonVariants({
-          variant: "secondary",
+          variant: "outline",
+          size: "sm",
           className:
             "[&_svg]:text-fd-muted-foreground gap-2 rounded-md [&_svg]:size-3.5",
         }),
@@ -518,21 +519,23 @@ export function CombinedAIButton({
           disabled={isLoading}
           className={cn(
             buttonVariants({
-              variant: "secondary",
+              variant: "outline",
+              size: "sm",
               className:
-                "[&_svg]:text-fd-muted-foreground gap-2 rounded-none rounded-l-md [&_svg]:size-3.5",
+                "[&_svg]:text-fd-muted-foreground gap-2 rounded-none rounded-l-md [&_svg]:size-3.5 border-r-0",
             }),
           )}
           onClick={onClick}
         >
           {checked ? <Check /> : <Copy />}
-          Copy Page
+          Copy
         </button>
         <Popover>
           <PopoverTrigger
             className={cn(
               buttonVariants({
-                variant: "secondary",
+                variant: "outline",
+                size: "sm",
                 className: "-ml-px gap-2 rounded-none rounded-r-md px-2",
               }),
             )}
