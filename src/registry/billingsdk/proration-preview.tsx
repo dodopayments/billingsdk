@@ -59,8 +59,9 @@ const cardVariants = cva("transition-all duration-300", {
  * - `daysRemaining` and `effectiveDate` influence credit/charge math
  * - `onConfirm`/`onCancel` wire user actions
  */
-export interface ProrationPreviewProps
-  extends VariantProps<typeof prorationPreviewVariants> {
+export interface ProrationPreviewProps extends VariantProps<
+  typeof prorationPreviewVariants
+> {
   className?: string;
   currentPlan: CurrentPlan;
   newPlan: Plan;

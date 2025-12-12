@@ -180,8 +180,9 @@ const featureIconVariants = cva("flex-none", {
   },
 });
 
-export interface PricingTableFiveProps
-  extends VariantProps<typeof sectionVariants> {
+export interface PricingTableFiveProps extends VariantProps<
+  typeof sectionVariants
+> {
   plans: Plan[];
   title?: string;
   description?: string;
