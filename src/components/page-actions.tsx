@@ -522,7 +522,7 @@ export function CombinedAIButton({
               variant: "outline",
               size: "sm",
               className:
-                "[&_svg]:text-fd-muted-foreground gap-2 rounded-none rounded-l-md [&_svg]:size-3.5 border-r-0",
+                "[&_svg]:text-fd-muted-foreground gap-2 rounded-none rounded-l-md border-r-0 [&_svg]:size-3.5",
             }),
           )}
           onClick={onClick}
