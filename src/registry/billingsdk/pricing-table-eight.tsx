@@ -177,8 +177,9 @@ const featureIconVariants = cva("flex-none h-[1lh]", {
   },
 });
 
-export interface PricingTableEightProps
-  extends VariantProps<typeof sectionVariants> {
+export interface PricingTableEightProps extends VariantProps<
+  typeof sectionVariants
+> {
   plans: Plan[];
   title?: string;
   description?: string;

@@ -193,8 +193,9 @@ export interface FeatureCategory {
   items: FeatureItemRecord[];
 }
 
-export interface PricingTableSevenProps
-  extends VariantProps<typeof sectionVariants> {
+export interface PricingTableSevenProps extends VariantProps<
+  typeof sectionVariants
+> {
   plans: PricingTableSevenPlan[];
   features: FeatureCategory[];
   title?: string;

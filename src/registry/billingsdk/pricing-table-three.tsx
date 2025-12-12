@@ -138,8 +138,9 @@ const footerTextVariants = cva(
   },
 );
 
-export interface PricingTableProps
-  extends VariantProps<typeof sectionVariants> {
+export interface PricingTableProps extends VariantProps<
+  typeof sectionVariants
+> {
   className?: string;
   plans: Plan[];
   onPlanSelect?: (planId: string) => void;

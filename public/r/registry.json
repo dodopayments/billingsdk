@@ -47,10 +47,10 @@
         "@billingsdk/payment-card",
         "@billingsdk/billing-settings",
         "@billingsdk/proration-preview",
-        "@billingsdk/proration-preview",
         "@billingsdk/upcoming-charges",
         "@billingsdk/coupon",
         "@billingsdk/limited-offer-dialog",
+        "@billingsdk/payment-failure",
         "@billingsdk/billing-screen"
       ]
     },
@@ -860,6 +860,26 @@
       ],
       "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["button", "card", "badge", "utils"]
+    },
+    {
+      "name": "payment-failure",
+      "type": "registry:block",
+      "title": "Payment Failure",
+      "description": "A payment failure card component with retry, home, and support actions.",
+      "files": [
+        {
+          "path": "src/registry/billingsdk/payment-failure.tsx",
+          "type": "registry:component",
+          "target": "components/billingsdk/payment-failure.tsx"
+        },
+        {
+          "path": "src/registry/billingsdk/demo/payment-failure-demo.tsx",
+          "type": "registry:component",
+          "target": "components/payment-failure-demo.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "card", "utils"]
     },
     {
       "name": "billing-screen",

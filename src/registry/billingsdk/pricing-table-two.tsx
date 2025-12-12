@@ -287,8 +287,9 @@ const buttonVariants = cva(
   },
 );
 
-export interface PricingTableTwoProps
-  extends VariantProps<typeof sectionVariants> {
+export interface PricingTableTwoProps extends VariantProps<
+  typeof sectionVariants
+> {
   className?: string;
   plans: Plan[];
   title?: string;
