@@ -9,9 +9,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     <DocsLayout
       {...baseOptions}
       tree={source.pageTree}
-      sidebar={{
-        defaultOpenLevel: 0,
-      }}
       links={[
         ...(baseOptions.links || []),
         {
