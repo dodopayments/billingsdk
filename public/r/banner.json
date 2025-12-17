@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "banner",
-  "type": "registry:block",
   "title": "Top Banner",
   "description": "A banner component",
   "dependencies": ["lucide-react", "motion"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/banner-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

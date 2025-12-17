@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "update-plan-dialog",
-  "type": "registry:block",
   "title": "Update Plan Dialog",
   "description": "A update plan dialog component",
   "dependencies": ["lucide-react", "motion"],
@@ -33,5 +32,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

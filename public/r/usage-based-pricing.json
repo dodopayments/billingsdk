@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "usage-based-pricing",
-  "type": "registry:block",
   "title": "Usage Based Pricing",
   "description": "A usage based pricing component",
   "dependencies": ["motion"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/usage-based-pricing-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

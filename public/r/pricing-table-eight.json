@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pricing-table-eight",
-  "type": "registry:block",
   "title": "Pricing Table Eight",
   "description": "A modern pricing table component with a clean design.",
   "dependencies": ["lucide-react", "class-variance-authority", "framer-motion"],
@@ -32,5 +31,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

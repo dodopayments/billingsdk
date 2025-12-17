@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "billing-settings",
-  "type": "registry:block",
   "title": "Billing Settings",
   "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
   "dependencies": ["lucide-react", "sonner"],
@@ -29,5 +28,6 @@
       "type": "registry:component",
       "target": "components/billing-settings-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

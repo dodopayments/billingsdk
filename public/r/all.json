@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "all",
-  "type": "registry:block",
   "title": "All Components",
   "description": "All components in the BillingSDK",
   "registryDependencies": [
@@ -35,5 +34,6 @@
     "@billingsdk/payment-failure",
     "@billingsdk/billing-screen"
   ],
-  "files": []
+  "files": [],
+  "type": "registry:block"
 }

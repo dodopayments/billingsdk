@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "cancel-subscription-dialog",
-  "type": "registry:block",
   "title": "Cancel Subscription Dialog",
   "description": "A cancel subscription dialog component",
   "dependencies": ["lucide-react"],
@@ -25,5 +24,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

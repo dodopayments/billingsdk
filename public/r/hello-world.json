@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "hello-world",
-  "type": "registry:block",
   "title": "Hello World Component",
   "description": "A simple hello world component",
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:component",
       "target": "components/billingsdk/hello-world.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

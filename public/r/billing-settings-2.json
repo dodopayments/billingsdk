@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "billing-settings-2",
-  "type": "registry:block",
   "title": "Billing Settings 2",
   "description": "A comprehensive billing settings component with tabs for general, payment methods, invoices, and usage limits",
   "dependencies": ["currency-codes"],
@@ -27,5 +26,6 @@
       "type": "registry:component",
       "target": "components/billing-settings-2-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "index",
-  "type": "registry:lib",
   "title": "BillingSDK Config",
   "description": "Config for BillingSDK components",
   "files": [
@@ -11,5 +10,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:lib"
 }
