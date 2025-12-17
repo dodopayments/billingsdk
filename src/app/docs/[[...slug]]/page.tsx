@@ -17,7 +17,8 @@ export default async function Page(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  const MDXContent = page.data.body;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const MDXContent = (page.data as any).body;
 
   // Extract component name from the path for playground integration
   const getComponentName = (slug?: string[]): string | undefined => {
@@ -55,7 +56,6 @@ export default async function Page(props: {
 
   return (
     <DocsPage
-      full={page.data.full}
       breadcrumb={{
         includePage: true,
         includeSeparator: true,
