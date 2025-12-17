@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "proration-preview",
-  "type": "registry:block",
   "title": "Proration Preview",
   "description": "Interactive component that shows billing adjustments when users change subscription plans, featuring cost breakdowns, credits, and prorated charges",
   "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -32,5 +31,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

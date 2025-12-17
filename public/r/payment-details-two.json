@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "payment-details-two",
-  "type": "registry:block",
   "title": "Payment Details Two",
   "description": "A comprehensive payment details form component with card details, billing information, and country selection built using React Hook Form and custom validation",
   "dependencies": [
@@ -38,5 +37,6 @@
       "type": "registry:component",
       "target": "utils/card-validation.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

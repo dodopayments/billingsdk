@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pricing-table-one",
-  "type": "registry:block",
   "title": "Pricing Table One",
   "description": "A pricing table component",
   "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -34,5 +33,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

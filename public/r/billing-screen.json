@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "billing-screen",
-  "type": "registry:block",
   "title": "Billing Screen",
   "description": "Complete billing dashboard with credit balance, plan details, and interactive credit card visual",
   "dependencies": ["lucide-react", "motion"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/billing-screen-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "usage-table",
-  "type": "registry:block",
   "title": "Usage Table",
   "description": "A usage table component with resource consumption breakdown",
   "registryDependencies": ["table", "card", "utils"],
@@ -18,5 +17,6 @@
       "type": "registry:component",
       "target": "components/usage-table-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

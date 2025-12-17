@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "limited-offer-dialog",
-  "type": "registry:block",
   "title": "Limited Offer Dialog",
   "description": "A dialog component for displaying limited-time offers with customizable content and actions",
   "dependencies": ["lucide-react"],
@@ -26,5 +25,6 @@
       "type": "registry:component",
       "target": "components/limited-offer-dialog-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }
