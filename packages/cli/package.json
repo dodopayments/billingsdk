@@ -19,16 +19,16 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
-    "commander": "^14.0.0",
+    "commander": "^14.0.2",
     "find-up": "^7.0.0",
-    "ink": "^6.2.3",
+    "ink": "^6.5.1",
     "ink-big-text": "^2.0.0",
-    "react": "^19.1.1",
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
+    "react": "^19.2.3",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/node": "^24.3.0",
-    "@types/react": "^19.1.12"
+    "@types/node": "^24.10.4",
+    "@types/react": "^19.2.7"
   }
 }
