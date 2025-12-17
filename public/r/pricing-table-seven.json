@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pricing-table-seven",
-  "type": "registry:block",
   "title": "Pricing Table Seven",
   "description": "A modern pricing table component with contact us plan",
   "dependencies": ["lucide-react", "motion"],
@@ -25,5 +24,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

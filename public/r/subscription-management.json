@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "subscription-management",
-  "type": "registry:block",
   "title": "Subscription Management",
   "description": "A subscription management component",
   "dependencies": ["lucide-react"],
@@ -33,5 +32,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

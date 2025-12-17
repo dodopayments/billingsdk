@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "pricing-table-four",
-  "type": "registry:block",
   "title": "Pricing Table Four",
   "description": "A modern pricing table component with gradient design",
   "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -25,5 +24,6 @@
       "type": "registry:lib",
       "target": "lib/billingsdk-config.ts"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

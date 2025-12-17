@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "usage-meter-linear",
-  "type": "registry:block",
   "title": "Usage Meter Linear",
   "description": "A usage meter linear component",
   "dependencies": ["lucide-react", "motion"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/usage-meter-linear-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

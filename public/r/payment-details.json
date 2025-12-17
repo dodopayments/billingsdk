@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "payment-details",
-  "type": "registry:block",
   "title": "Payment Details",
   "description": "A comprehensive payment details form component with card details, billing information, and country selection",
   "dependencies": ["lucide-react"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/payment-details-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

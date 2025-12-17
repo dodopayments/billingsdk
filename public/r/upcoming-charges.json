@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "upcoming-charges",
-  "type": "registry:block",
   "title": "Upcoming Charges",
   "description": "A component that displays information about upcoming billing cycles, including the next billing date, total amount, and a breakdown of individual charges",
   "dependencies": ["lucide-react"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/upcoming-charges-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

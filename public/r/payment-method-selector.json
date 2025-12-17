@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "payment-method-selector",
-  "type": "registry:block",
   "title": "Payment Method Selector",
   "description": "A payment method selector component with support for cards, digital wallets, UPI, and BNPL services",
   "dependencies": ["lucide-react", "motion"],
@@ -27,5 +26,6 @@
       "type": "registry:component",
       "target": "components/payment-method-selector-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }

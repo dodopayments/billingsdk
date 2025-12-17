@@ -1,7 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "invoice-history",
-  "type": "registry:block",
   "title": "Invoice History",
   "description": "A read-only invoice history table",
   "dependencies": ["lucide-react"],
@@ -19,5 +18,6 @@
       "type": "registry:component",
       "target": "components/invoice-history-demo.tsx"
     }
-  ]
+  ],
+  "type": "registry:block"
 }
