@@ -55,7 +55,7 @@ export default async function Page(props: {
 
   return (
     <DocsPage
-    full
+      full
       breadcrumb={{
         includePage: true,
         includeSeparator: true,
