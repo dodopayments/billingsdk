@@ -17,7 +17,6 @@ export default async function Page(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-   
   const MDXContent = (page.data as any).body;
 
   // Extract component name from the path for playground integration
