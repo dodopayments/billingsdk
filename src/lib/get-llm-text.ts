@@ -12,11 +12,11 @@ const processor = remark()
   .use(remarkGfm);
 
 export async function getLLMText(page: InferPageType<typeof source>) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const pageData = page.data as any;
   const processed = await processor.process({
     path: pageData.info?.fullPath ?? page.path,
-    value: await pageData.getText?.("raw") ?? "",
+    value: (await pageData.getText?.("raw")) ?? "",
   });
 
   return `# ${page.data.title}

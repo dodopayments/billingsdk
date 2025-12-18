@@ -17,7 +17,7 @@ export default async function Page(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const MDXContent = (page.data as any).body;
 
   // Extract component name from the path for playground integration
