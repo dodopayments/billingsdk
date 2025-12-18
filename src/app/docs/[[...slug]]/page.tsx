@@ -17,7 +17,7 @@ export default async function Page(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
-  const MDXContent = (page.data as any).body;
+  const MDXContent = page.data.body;
 
   // Extract component name from the path for playground integration
   const getComponentName = (slug?: string[]): string | undefined => {
@@ -55,12 +55,13 @@ export default async function Page(props: {
 
   return (
     <DocsPage
+    full
       breadcrumb={{
         includePage: true,
         includeSeparator: true,
       }}
     >
-      <DocsTitle className="mt-2 flex flex-row justify-between">
+      <DocsTitle className="flex flex-row justify-between">
         {page.data.title}
         <div className="hidden md:block">
           <CombinedAIButton
