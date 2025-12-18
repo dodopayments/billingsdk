@@ -25,7 +25,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           url: "https://github.com/dodopayments/billingsdk",
         },
       ]}
-      disableThemeSwitch={true}
+      themeSwitch={{
+        enabled: false,
+      }}
     >
       {children}
     </DocsLayout>

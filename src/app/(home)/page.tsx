@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Hero from "@/components/landing/Hero";
 import { ComponentsSection } from "@/components/landing/components";
 import Features from "@/components/landing/Features";

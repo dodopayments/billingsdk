@@ -13,8 +13,8 @@ const processor = remark()
 
 export async function getLLMText(page: InferPageType<typeof source>) {
   const processed = await processor.process({
-    path: page.data._file.absolutePath,
-    value: page.data.content,
+    path: page.path,
+    value: (await page.data.getText?.("raw")) ?? "",
   });
 
   return `# ${page.data.title}
