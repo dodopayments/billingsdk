@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     try {
       reqJson = await req.json();
     } catch (error) {
-      // ✅ 400 = Client sent bad JSON
+      // 400 = Client sent bad JSON
       return Response.json(
         { error: { message: "Invalid JSON in request body" } },
         { status: 400 }
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
     // Validate messages array
     if (!Array.isArray(reqJson.messages) || reqJson.messages.length === 0) {
-      // ✅ 400 = Client sent invalid data
+      // 400 = Client sent invalid data
       return Response.json(
         { error: { message: "messages array is required" } },
         { status: 400 }
@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
-    // ✅ Distinguish between error types
+    // Distinguish between error types
     console.error("Chat API Error:", error);
 
     // If it's a known error type, return appropriate status
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
 
     // For all other errors (AI SDK, Inkeep API, network, etc.)
     // These are SERVER errors, not CLIENT errors
-    // ✅ Return 500 for unexpected server-side failures
+    //  Return 500 for unexpected server-side failures
     return Response.json(
       {
         error: {
@@ -77,7 +77,7 @@ export async function POST(req: Request) {
           code: "INTERNAL_SERVER_ERROR",
         },
       },
-      { status: 500 }  // ✅ 500 = Server error (Inkeep down, timeout, etc.)
+      { status: 500 }  // 500 = Server error (Inkeep down, timeout, etc.)
     );
   }
 }
