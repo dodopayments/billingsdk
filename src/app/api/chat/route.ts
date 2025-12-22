@@ -19,9 +19,18 @@ export async function POST(req: Request) {
   }
 
   try {
-    const reqJson = await req.json();
+    // Safe JSON parsing
+    let reqJson;
+    try {
+      reqJson = await req.json();
+    } catch {
+      return Response.json(
+        { error: { message: "Invalid JSON in request body" } },
+        { status: 400 }
+      );
+    }
 
-    /
+    // Validate messages array
     if (!Array.isArray(reqJson.messages) || reqJson.messages.length === 0) {
       return Response.json(
         { error: { message: "messages array is required" } },
@@ -44,6 +53,7 @@ export async function POST(req: Request) {
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
+    // Catch unexpected errors
     console.error("Chat API Error:", error);
     return Response.json(
       { error: { message: "Invalid request" } },
