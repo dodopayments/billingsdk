@@ -112,31 +112,49 @@ function PlaygroundContent() {
 
       {/* Panel Controls */}
       <div className="border-border bg-muted/50 flex items-center justify-between border-b px-4 py-2">
-        <div className="flex items-center gap-2 justify-center w-full">
-          <Button size="sm" variant="ghost" onClick={() => togglePanel('code')}
+        <div className="flex w-full items-center justify-center gap-2">
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => togglePanel("code")}
             style={{ boxShadow: "inset 0 2px 4px rgba(202, 199, 199, 0.41)" }}
             className={cn(
               "text-muted-foreground hover:!bg-accent",
-              showCodePanel && "text-foreground bg-accent-foreground dark:bg-accent/50",
+              showCodePanel &&
+                "text-foreground bg-accent-foreground dark:bg-accent/50",
             )}
           >
             <PanelLeft className="mr-1 h-4 w-4" />
             Code
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => togglePanel('both')}
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => togglePanel("both")}
             style={{ boxShadow: "inset 0 2px 4px rgba(202, 199, 199, 0.41)" }}
             className={cn(
               "text-muted-foreground hover:!bg-accent",
-              showCodePanel && showPreviewPanel && "text-foreground bg-accent-foreground dark:bg-accent/50",
+              showCodePanel &&
+                showPreviewPanel &&
+                "text-foreground bg-accent-foreground dark:bg-accent/50",
             )}
           >
-            <Link className={cn("rotate-45", showCodePanel && showPreviewPanel && "text-foreground")} />
+            <Link
+              className={cn(
+                "rotate-45",
+                showCodePanel && showPreviewPanel && "text-foreground",
+              )}
+            />
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => togglePanel('preview')}
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => togglePanel("preview")}
             style={{ boxShadow: "inset 0 2px 4px rgba(202, 199, 199, 0.41)" }}
             className={cn(
               "text-muted-foreground hover:!bg-accent",
-              showPreviewPanel && "text-foreground bg-accent-foreground dark:bg-accent/50"
+              showPreviewPanel &&
+                "text-foreground bg-accent-foreground dark:bg-accent/50",
             )}
           >
             <PanelRight className="mr-1 h-4 w-4" />

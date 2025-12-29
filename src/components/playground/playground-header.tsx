@@ -69,7 +69,9 @@ export function PlaygroundHeader() {
 
       // Default selection (pricing first item)
       if (!state.selectedComponent) {
-        const pricingComponent = list.find((comp) => comp.category === "pricing");
+        const pricingComponent = list.find(
+          (comp) => comp.category === "pricing",
+        );
         if (pricingComponent) {
           await handleComponentChange(pricingComponent.id);
         }
@@ -92,8 +94,8 @@ export function PlaygroundHeader() {
     selectedCategory === "all"
       ? componentList
       : componentList.filter(
-        (comp: ComponentListItem) => comp.category === selectedCategory,
-      );
+          (comp: ComponentListItem) => comp.category === selectedCategory,
+        );
 
   const handleImportComponent = () => {
     // Create a file input element
@@ -166,13 +168,13 @@ export function PlaygroundHeader() {
                   : isLoadingComponent
                     ? "Loading component..."
                     : state.selectedComponent?.name ||
-                    (isLoading ? "Loading..." : "Select a component")}
+                      (isLoading ? "Loading..." : "Select a component")}
               </SelectValue>
             </SelectTrigger>
             <SelectContent className="max-h-96 w-64 min-w-64 overflow-y-auto">
               {categories.map((category) => (
                 <div key={category.id} className="flex flex-col gap-2 py-2">
-                  <div className="text-muted-foreground px-3 rounded-md w-fit text-xs font-semibold">
+                  <div className="text-muted-foreground w-fit rounded-md px-3 text-xs font-semibold">
                     {category.label}
                   </div>
                   {filteredComponents
