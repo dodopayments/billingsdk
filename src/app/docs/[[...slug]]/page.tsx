@@ -55,13 +55,13 @@ export default async function Page(props: {
 
   return (
     <DocsPage
-      full={page.data.full}
+      full
       breadcrumb={{
         includePage: true,
         includeSeparator: true,
       }}
     >
-      <DocsTitle className="mt-2 flex flex-row justify-between">
+      <DocsTitle className="flex flex-row justify-between">
         {page.data.title}
         <div className="hidden md:block">
           <CombinedAIButton

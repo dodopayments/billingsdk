@@ -46,7 +46,9 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+
 :root {
+  --fd-layout-width: 100vw;
   --background: oklch(1 0 0);
   --dodo-primary: oklch(0.9251 0.2258 124.46);
   --foreground: oklch(0.145 0 0);

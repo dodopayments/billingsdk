@@ -9,7 +9,6 @@ import {
   BellIcon,
   Crown,
 } from "lucide-react";
-import React from "react";
 import { ShineButton } from "./shine-button";
 import { FeatureCard } from "./feature-card";
 

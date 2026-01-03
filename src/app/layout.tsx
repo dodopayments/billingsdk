@@ -1,5 +1,5 @@
 import "@/app/global.css";
-import { RootProvider } from "fumadocs-ui/provider";
+import { RootProvider } from "fumadocs-ui/provider/next";
 import { ThemeProvider } from "@/contexts/theme-context";
 import { Darker_Grotesque, Inter, Kalam } from "next/font/google";
 import type { ReactNode } from "react";
