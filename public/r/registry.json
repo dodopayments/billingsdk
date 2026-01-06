@@ -48,6 +48,7 @@
         "@billingsdk/billing-settings",
         "@billingsdk/proration-preview",
         "@billingsdk/upcoming-charges",
+        "@billingsdk/payment-processing",
         "@billingsdk/coupon",
         "@billingsdk/limited-offer-dialog",
         "@billingsdk/payment-failure",
@@ -900,6 +901,26 @@
       ],
       "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["button", "utils"]
+    },
+    {
+      "name": "payment-processing",
+      "type": "registry:block",
+      "title": "Payment Processing",
+      "description": "A payment processing state card with spinner and security messaging.",
+      "files": [
+        {
+          "path": "src/registry/billingsdk/payment-processing.tsx",
+          "type": "registry:component",
+          "target": "components/billingsdk/payment-processing.tsx"
+        },
+        {
+          "path": "src/registry/billingsdk/demo/payment-processing-demo.tsx",
+          "type": "registry:component",
+          "target": "components/payment-processing-demo.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card", "separator", "utils"]
     }
   ]
 }

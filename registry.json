@@ -85,16 +85,8 @@
           "target": "components/invoice-history-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "card",
-        "button",
-        "table",
-        "badge",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card", "button", "table", "badge", "utils"]
     },
     {
       "name": "pricing-table-one",
@@ -118,11 +110,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
       "registryDependencies": [
         "button",
         "card",
@@ -156,17 +144,8 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "table",
-        "switch",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
+      "registryDependencies": ["button", "table", "switch", "utils"]
     },
     {
       "name": "pricing-table-three",
@@ -190,11 +169,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
       "registryDependencies": [
         "button",
         "card",
@@ -226,11 +201,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
       "registryDependencies": [
         "button",
         "label",
@@ -261,11 +232,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
       "registryDependencies": [
         "button",
         "card",
@@ -302,11 +269,7 @@
         "class-variance-authority",
         "framer-motion"
       ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "utils"
-      ]
+      "registryDependencies": ["button", "card", "utils"]
     },
     {
       "name": "pricing-table-seven",
@@ -330,17 +293,8 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "badge",
-        "slider",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "badge", "slider", "utils"]
     },
     {
       "name": "pricing-table-eight",
@@ -400,15 +354,8 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "button",
-        "badge",
-        "dialog",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "badge", "dialog", "utils"]
     },
     {
       "name": "cancel-subscription-card",
@@ -432,15 +379,8 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "button",
-        "badge",
-        "card",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "badge", "card", "utils"]
     },
     {
       "name": "usage-based-pricing",
@@ -459,13 +399,8 @@
           "target": "components/usage-based-pricing-demo.tsx"
         }
       ],
-      "dependencies": [
-        "motion"
-      ],
-      "registryDependencies": [
-        "card",
-        "utils"
-      ]
+      "dependencies": ["motion"],
+      "registryDependencies": ["card", "utils"]
     },
     {
       "name": "update-plan-dialog",
@@ -489,10 +424,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "motion"],
       "registryDependencies": [
         "button",
         "badge",
@@ -525,10 +457,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "motion"],
       "registryDependencies": [
         "button",
         "badge",
@@ -561,9 +490,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
+      "dependencies": ["lucide-react"],
       "registryDependencies": [
         "button",
         "card",
@@ -591,15 +518,8 @@
           "target": "components/usage-meter-linear-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "card",
-        "badge",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["card", "badge", "utils"]
     },
     {
       "name": "usage-meter-circle",
@@ -618,15 +538,8 @@
           "target": "components/usage-meter-circle-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "card",
-        "badge",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["card", "badge", "utils"]
     },
     {
       "name": "banner",
@@ -645,14 +558,8 @@
           "target": "components/banner-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "utils"]
     },
     {
       "name": "payment-method-selector",
@@ -671,10 +578,7 @@
           "target": "components/payment-method-selector-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "motion"],
       "registryDependencies": [
         "button",
         "dialog",
@@ -702,16 +606,8 @@
           "target": "components/payment-details-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "input",
-        "label",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "card", "input", "label", "utils"]
     },
     {
       "name": "payment-details-two",
@@ -768,10 +664,7 @@
           "target": "components/billing-settings-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "sonner"
-      ],
+      "dependencies": ["lucide-react", "sonner"],
       "registryDependencies": [
         "button",
         "card",
@@ -801,9 +694,7 @@
           "target": "components/billing-settings-2-demo.tsx"
         }
       ],
-      "dependencies": [
-        "currency-codes"
-      ],
+      "dependencies": ["currency-codes"],
       "registryDependencies": [
         "button",
         "card",
@@ -836,11 +727,7 @@
           "target": "lib/billingsdk-config.ts"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "class-variance-authority",
-        "motion"
-      ],
+      "dependencies": ["lucide-react", "class-variance-authority", "motion"],
       "registryDependencies": [
         "button",
         "card",
@@ -867,12 +754,7 @@
           "target": "components/detailed-usage-table-demo.tsx"
         }
       ],
-      "registryDependencies": [
-        "table",
-        "card",
-        "badge",
-        "utils"
-      ]
+      "registryDependencies": ["table", "card", "badge", "utils"]
     },
     {
       "name": "usage-table",
@@ -891,11 +773,7 @@
           "target": "components/usage-table-demo.tsx"
         }
       ],
-      "registryDependencies": [
-        "table",
-        "card",
-        "utils"
-      ]
+      "registryDependencies": ["table", "card", "utils"]
     },
     {
       "name": "upcoming-charges",
@@ -914,14 +792,8 @@
           "target": "components/upcoming-charges-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "card",
-        "badge",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card", "badge", "utils"]
     },
     {
       "name": "payment-card",
@@ -940,15 +812,8 @@
           "target": "components/payment-card-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "utils"]
     },
     {
       "name": "limited-offer-dialog",
@@ -967,9 +832,7 @@
           "target": "components/limited-offer-dialog-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
+      "dependencies": ["lucide-react"],
       "registryDependencies": [
         "dialog",
         "button",
@@ -996,16 +859,8 @@
           "target": "components/trial-expiry-card-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "badge",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "badge", "utils"]
     },
     {
       "name": "payment-failure",
@@ -1024,14 +879,8 @@
           "target": "components/payment-failure-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "button",
-        "card",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button", "card", "utils"]
     },
     {
       "name": "billing-screen",
@@ -1050,14 +899,8 @@
           "target": "components/billing-screen-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react",
-        "motion"
-      ],
-      "registryDependencies": [
-        "button",
-        "utils"
-      ]
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "utils"]
     },
     {
       "name": "payment-processing",
@@ -1076,14 +919,8 @@
           "target": "components/payment-processing-demo.tsx"
         }
       ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "card",
-        "separator",
-        "utils"
-      ]
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["card", "separator", "utils"]
     }
   ]
 }

@@ -29,6 +29,7 @@
     "@billingsdk/billing-settings",
     "@billingsdk/proration-preview",
     "@billingsdk/upcoming-charges",
+    "@billingsdk/payment-processing",
     "@billingsdk/coupon",
     "@billingsdk/limited-offer-dialog",
     "@billingsdk/payment-failure",
