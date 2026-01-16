@@ -304,11 +304,11 @@ function DefaultCheckoutButton({
       className={cn(
         buttonVariants({ theme }),
         plan.highlight &&
-        theme === "minimal" &&
-        "focus-visible:ring-ring hover:bg-primary/90 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-md px-3 py-2 text-left text-sm font-medium whitespace-nowrap shadow ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+          theme === "minimal" &&
+          "focus-visible:ring-ring hover:bg-primary/90 group bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-md px-3 py-2 text-left text-sm font-medium whitespace-nowrap shadow ring-1 transition duration-300 ease-[cubic-bezier(0.4,0.36,0,1)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         plan.highlight &&
-        theme === "classic" &&
-        "from-primary to-primary/80 text-primary-foreground border-primary/20 relative overflow-hidden rounded-lg border bg-gradient-to-r px-6 py-3 font-semibold",
+          theme === "classic" &&
+          "from-primary to-primary/80 text-primary-foreground border-primary/20 relative overflow-hidden rounded-lg border bg-gradient-to-r px-6 py-3 font-semibold",
       )}
       variant={plan.highlight ? "default" : "secondary"}
       onClick={() => onPlanSelect?.(plan.id)}
@@ -368,10 +368,10 @@ export function PricingTableTwo({
 
   const yearlyPriceDiscount = plans.length
     ? Math.max(
-      ...plans.map((plan) =>
-        calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
-      ),
-    )
+        ...plans.map((plan) =>
+          calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
+        ),
+      )
     : 0;
 
   return (
@@ -469,8 +469,8 @@ export function PricingTableTwo({
                 index === 0 && "md:rounded-l-xl md:border-r-0",
                 index === plans.length - 1 && "md:rounded-r-xl md:border-l-0",
                 index > 0 &&
-                index < plans.length - 1 &&
-                "md:border-r-0 md:border-l-0",
+                  index < plans.length - 1 &&
+                  "md:border-r-0 md:border-l-0",
                 plans.length === 1 && "rounded-xl",
               )}
               initial={{ opacity: 0 }}
@@ -522,21 +522,21 @@ export function PricingTableTwo({
                           plan.monthlyPrice,
                           plan.yearlyPrice,
                         ) > 0 && (
-                            <span
-                              className={cn(
-                                "ml-2 text-xs",
-                                theme === "classic"
-                                  ? "font-semibold text-emerald-500"
-                                  : "underline",
-                              )}
-                            >
-                              {calculateDiscount(
-                                plan.monthlyPrice,
-                                plan.yearlyPrice,
-                              )}
-                              % off
-                            </span>
-                          )}
+                          <span
+                            className={cn(
+                              "ml-2 text-xs",
+                              theme === "classic"
+                                ? "font-semibold text-emerald-500"
+                                : "underline",
+                            )}
+                          >
+                            {calculateDiscount(
+                              plan.monthlyPrice,
+                              plan.yearlyPrice,
+                            )}
+                            % off
+                          </span>
+                        )}
                       </span>
                       <p className={cn(priceSubTextVariants({ size, theme }))}>
                         per year
@@ -617,14 +617,14 @@ export function PricingTableTwo({
                       key={featureIndex}
                       className={cn(
                         theme === "classic" &&
-                        "border-border/20 hover:bg-muted/30",
+                          "border-border/20 hover:bg-muted/30",
                       )}
                     >
                       <TableCell
                         className={cn(
                           "text-left font-medium",
                           theme === "classic" &&
-                          "text-foreground/90 font-semibold",
+                            "text-foreground/90 font-semibold",
                         )}
                       >
                         {featureName}
@@ -653,7 +653,7 @@ export function PricingTableTwo({
                                   className={cn(
                                     "text-muted-foreground text-sm",
                                     theme === "classic" &&
-                                    "text-foreground/70 font-medium",
+                                      "text-foreground/70 font-medium",
                                   )}
                                 >
                                   {feature.name}
