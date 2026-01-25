@@ -12,21 +12,21 @@ import { CornerDownLeft } from "lucide-react";
 
 export const Logo = () => {
   return (
-    <div className="flex items-center justify-center gap-1 sm:gap-2">
+    <div className="flex items-center justify-center gap-1.5 sm:gap-2">
       <Image
         src="/logo/logo-dodo.svg"
         alt="Billing SDK"
-        width={24}
-        height={24}
-        className="w-5 h-5 sm:w-7 sm:h-7"
+        width={32}
+        height={32}
+        className="w-7 h-7 sm:w-8 sm:h-8"
       />
-      <span className="font-display text-xl sm:text-3xl hidden sm:inline-block">/</span>
+      <span className="font-display text-2xl sm:text-3xl hidden sm:inline-block">/</span>
       <Image
         src="/logo/Logo.svg"
         alt="Billing SDK"
         width={120}
         height={120}
-        className="w-14 h-4 sm:w-[120px] sm:h-[120px] object-contain"
+        className="w-[84px] h-6 sm:w-[120px] sm:h-[120px] object-contain"
       />
     </div>
   );
@@ -85,9 +85,8 @@ const NavBar = () => {
               asChild
             >
               <Link className="group flex items-center gap-1 sm:gap-2" href="/docs">
-                <span className="hidden sm:inline-block">Get Started</span>
-                <span className="sm:hidden">Start</span>
-                <Badge className="bg-accent text-foreground shadow-background/70 hidden p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl sm:inline-flex">
+                <span>Get Started</span>
+                <Badge className="bg-accent text-foreground shadow-background/70 p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl">
                   <CornerDownLeft className="size-3 sm:size-4" />
                 </Badge>
               </Link>
