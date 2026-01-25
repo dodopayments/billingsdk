@@ -12,15 +12,22 @@ import { CornerDownLeft } from "lucide-react";
 
 export const Logo = () => {
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-1 sm:gap-2">
       <Image
         src="/logo/logo-dodo.svg"
         alt="Billing SDK"
-        width={28}
-        height={28}
+        width={24}
+        height={24}
+        className="w-5 h-5 sm:w-7 sm:h-7"
       />
-      <span className="font-display text-3xl">/</span>
-      <Image src="/logo/Logo.svg" alt="Billing SDK" width={120} height={120} />
+      <span className="font-display text-xl sm:text-3xl hidden sm:inline-block">/</span>
+      <Image
+        src="/logo/Logo.svg"
+        alt="Billing SDK"
+        width={120}
+        height={120}
+        className="w-14 h-4 sm:w-[120px] sm:h-[120px] object-contain"
+      />
     </div>
   );
 };
@@ -36,17 +43,17 @@ const NavBar = () => {
   return (
     <nav
       className={cn(
-        `fixed right-0 left-0 z-55 mx-auto flex max-w-7xl justify-center ${
-          isScrolled ? "top-4 px-2 md:px-20" : "top-2 px-6 py-4"
+        `fixed right-0 left-0 z-55 mx-auto flex max-w-7xl justify-center px-2 sm:px-4 ${
+          isScrolled ? "top-4" : "top-2 py-2 sm:py-4"
         } transition-all duration-300`,
       )}
     >
       <div className="w-full">
         <div
           className={cn(
-            `flex w-full items-center justify-between px-2 py-3 transition-all duration-300 md:px-4 ${
+            `flex w-full items-center justify-between px-1 py-2.5 transition-all duration-300 sm:px-3 sm:py-3 md:px-4 ${
               isScrolled &&
-              "bg-accent/30 rounded-2xl px-4 inset-shadow-sm inset-shadow-white/20 backdrop-blur-lg"
+              "bg-accent/30 rounded-xl sm:rounded-2xl px-2 sm:px-4 inset-shadow-sm inset-shadow-white/20 backdrop-blur-lg"
             }`,
           )}
         >
@@ -55,14 +62,14 @@ const NavBar = () => {
           </Link>
 
           {/* Right side actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Show full star badge on sm+ screens */}
             <div className="hidden sm:block">
               <GitHubStarBadge />
             </div>
             {/* Keep compact icon on very small screens */}
             <div className="sm:hidden">
-              <Button variant="ghost" size="sm" asChild>
+              <Button variant="ghost" size="icon" asChild className="h-7 w-7">
                 <Link
                   href="https://github.com/dodopayments/billingsdk"
                   target="_blank"
@@ -74,13 +81,14 @@ const NavBar = () => {
             </div>
             <Button
               size="sm"
-              className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-7 items-center justify-center overflow-hidden rounded-md px-2 text-left text-xs font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer sm:h-8 sm:px-3 sm:text-sm"
+              className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-7 items-center justify-center overflow-hidden rounded-md px-1.5 text-left text-xs font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer sm:px-2.5 sm:h-8 sm:px-3 sm:text-sm"
               asChild
             >
-              <Link className="group flex items-center gap-2" href="/docs">
-                <span>Get Started</span>
-                <Badge className="bg-accent text-foreground shadow-background/70 p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl">
-                  <CornerDownLeft className="size-4" />
+              <Link className="group flex items-center gap-1 sm:gap-2" href="/docs">
+                <span className="hidden sm:inline-block">Get Started</span>
+                <span className="sm:hidden">Start</span>
+                <Badge className="bg-accent text-foreground shadow-background/70 hidden p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl sm:inline-flex">
+                  <CornerDownLeft className="size-3 sm:size-4" />
                 </Badge>
               </Link>
             </Button>
