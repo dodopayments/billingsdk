@@ -20,13 +20,9 @@ export const Logo = () => {
         height={32}
         className="w-7 h-7 sm:w-8 sm:h-8"
       />
-      <span className="font-display text-2xl sm:text-3xl hidden sm:inline-block">/</span>
-      <Image
-        src="/logo/Logo.svg"
-        alt="Billing SDK"
-        width={120}
-        height={120}
-        className="w-[84px] h-6 sm:w-[120px] sm:h-[120px] object-contain"
+         <span className="font-display text-3xl">/</span>
+      <Image src="/logo/Logo.svg" alt="Billing SDK" width={120} height={120} 
+      className="w-[64px] h-6 sm:w-[120px]"
       />
     </div>
   );
@@ -43,9 +39,9 @@ const NavBar = () => {
   return (
     <nav
       className={cn(
-        `fixed right-0 left-0 z-55 mx-auto flex max-w-7xl justify-center px-2 sm:px-4 ${
-          isScrolled ? "top-4" : "top-2 py-2 sm:py-4"
-        } transition-all duration-300`,
+        `fixed right-0 left-0 z-55 mx-auto flex max-w-7xl justify-center ${
+          isScrolled ? "top-4 px-2 md:px-20" : "top-2 px-6 py-4"
+            } transition-all duration-300`,
       )}
     >
       <div className="w-full">
