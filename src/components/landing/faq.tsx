@@ -32,14 +32,15 @@ export const faqData = [
 
 export const Faq = () => {
   return (
-    <div className="my-24 flex max-h-fit min-h-[30rem] w-full flex-col items-center justify-center gap-8 p-4 md:gap-0">
+    <div className="my-24 flex max-h-fit min-h-[30rem] w-full flex-col items-center justify-center gap-8 md:gap-0">
       <div className="flex h-fit w-full flex-col items-center justify-center gap-2 md:mb-8 md:w-3/4">
         <ShineButton Icon={CircleQuestionMarkIcon} className="" label="FAQs" />
-        <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 text-center text-3xl font-medium duration-1000 sm:text-3xl md:text-5xl">
-          You got questions? We got answers
+        <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 text-center text-4xl font-medium duration-1000">
+          Got Questions? <br className="md:block" />
+          We’ve Got Answers
         </h2>
       </div>
-      <div className="rounded-2xl p-4 md:w-2/3">
+      <div className="w-full max-w-4xl rounded-2xl md:py-4">
         <Accordion type="single" collapsible className="">
           {faqData.map((faq) => (
             <AccordionItem
