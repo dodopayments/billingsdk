@@ -1,0 +1,76 @@
+---
+title: i18n Provider
+description: Global currency conversion and localized formatting for billing components.
+---
+
+The `BillingProvider` is the core of the SDK's internationalization system. It manages global state for locales, currencies, and real-time exchange rates.
+
+## Features
+
+- **Real-time Conversion**: Fetches latest rates from the Frankfurter API and caches them.
+- **Static Fallbacks**: Includes a robust set of initial exchange rates to ensure functionality works offline or before the first fetch.
+- **Localized Formatting**: Leverages the native `Intl.NumberFormat` API for accurate currency symbols, grouping, and decimal placement.
+- **Auto-Conversion**: Components can automatically convert values from a base currency (e.g., USD) to the user's active currency.
+
+## Setup
+
+Wrap your application with the `BillingProvider` at the root level.
+
+```tsx title="app/layout.tsx"
+import { BillingProvider } from "@/lib/i18n-provider";
+
+export default function RootLayout({ children }) {
+  return (
+    <BillingProvider defaultCurrency="USD" defaultLocale="en-US">
+      {children}
+    </BillingProvider>
+  );
+}
+```
+
+## useBilling Hook
+
+Use the `useBilling` hook to access formatting utilities and currency state.
+
+### Properties
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `currency` | `string` | The currently active currency code (e.g., "EUR"). |
+| `locale` | `string` | The active locale (e.g., "de-DE"). |
+| `setCurrency` | `(c: string) => void` | Updates the active currency and triggers re-renders. |
+| `formatCurrency` | `(val, opts) => string` | Formats a number with currency symbols and local rules. |
+| `convert` | `(val, from, to) => number` | Low-level utility for converting numbers between currencies. |
+
+### Example: Manual Formatting
+
+```tsx
+import { useBilling } from "@/lib/i18n-provider";
+
+export function CustomPrice({ amount }) {
+  const { formatCurrency } = useBilling();
+
+  return (
+    <p>
+      Trial ends in: {formatCurrency(amount, { from: "USD" })}
+    </p>
+  );
+}
+```
+
+## Static Rates Fallback
+
+The provider ships with a `STATIC_RATES` map to ensure reliable performance. These rates are used as a fallback if the API is unreachable or while rates are being fetched.
+
+```json
+{
+  "AUD": 1.4312,
+  "BRL": 5.2372,
+  "CAD": 1.3666,
+  "EUR": 0.84789,
+  "GBP": 0.73588,
+  "INR": 90.66,
+  "JPY": 157.09,
+  ...
+}
+```
