@@ -39,7 +39,7 @@ export function OpenSource() {
             className="bg-card/50 hover:bg-card/80 relative flex h-48 w-full cursor-pointer flex-col overflow-hidden transition-all duration-300 md:max-w-xs"
           >
             <Spotlight
-              className='bg-neutral-400 blur-3xl'
+              className='bg-neutral-600 blur-3xl'
               size={80}
               springOptions={{
                 bounce: 0.3,
