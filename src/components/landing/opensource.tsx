@@ -1,5 +1,6 @@
 import { BsDiscord, BsGithub, BsTwitterX } from "react-icons/bs";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Spotlight } from "@/components/motion-primitives/spotlight";
 import Link from "next/link";
 
 export function OpenSource() {
@@ -35,12 +36,20 @@ export function OpenSource() {
         {socials.map((social) => (
           <Card
             key={social.name}
-            className="bg-card/50 hover:bg-card/80 flex h-48 w-full cursor-pointer flex-col transition-all duration-300 md:max-w-xs"
+            className="bg-card/50 hover:bg-card/80 relative flex h-48 w-full cursor-pointer flex-col overflow-hidden transition-all duration-300 md:max-w-xs"
           >
+            <Spotlight
+              className='bg-neutral-400 blur-3xl'
+              size={80}
+              springOptions={{
+                bounce: 0.3,
+                duration: 0.1,
+              }}
+            />
             <Link
               href={social.href}
               target="_blank"
-              className="flex h-full flex-col"
+              className="relative z-10 flex h-full flex-col"
             >
               <CardContent className="flex flex-1 flex-col items-center justify-center gap-2 p-6">
                 <social.icon className="text-foreground text-3xl md:text-4xl" />
