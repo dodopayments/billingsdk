@@ -35,7 +35,7 @@ export function OpenSource() {
         {socials.map((social) => (
           <Card
             key={social.name}
-            className="bg-card/50 hover:bg-card/80 flex h-48 w-full max-w-[280px] cursor-pointer flex-col transition-all duration-300 md:max-w-xs"
+            className="bg-card/50 hover:bg-card/80 flex h-48 w-full cursor-pointer flex-col transition-all duration-300 md:max-w-xs"
           >
             <Link
               href={social.href}
@@ -48,7 +48,7 @@ export function OpenSource() {
                   {social.name}
                 </p>
               </CardContent>
-              <CardFooter className="mt-auto px-4 pb-4">
+              <CardFooter className="mx-auto mt-auto max-w-[250px] px-4 pb-4 md:w-full">
                 <p className="text-muted-foreground text-center text-xs leading-relaxed">
                   {social.description}
                 </p>
