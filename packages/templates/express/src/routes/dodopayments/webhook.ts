@@ -1,10 +1,10 @@
 import express from "express";
 import { Webhook } from "standardwebhooks";
-import { getDodoPaymentsClient } from "../../lib/dodopayments";
+import { getDodoPaymentsClient, validatedEnv } from "../../lib/dodopayments";
 
 const router = express.Router();
 
-const webhook = new Webhook(process.env.DODO_PAYMENTS_WEBHOOK_KEY!);
+const webhook = new Webhook(validatedEnv.DODO_PAYMENTS_WEBHOOK_KEY);
 
 router.post(
   "/",

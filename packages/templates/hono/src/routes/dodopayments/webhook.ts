@@ -1,10 +1,10 @@
 import { Hono } from "hono";
 import { Webhook } from "standardwebhooks";
-import { getDodoPaymentsClient } from "../../lib/dodopayments";
+import { getDodoPaymentsClient, validatedEnv } from "../../lib/dodopayments";
 
 const app = new Hono();
 
-const webhook = new Webhook(process.env.DODO_PAYMENTS_WEBHOOK_KEY!);
+const webhook = new Webhook(validatedEnv.DODO_PAYMENTS_WEBHOOK_KEY);
 
 app.post("/", async (c) => {
   try {
