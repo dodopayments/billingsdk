@@ -1,6 +1,6 @@
 "use client";
 export {
-  UsageMeter,
-  type UsageMeterProps,
-  type Usage,
+    UsageMeter,
+    type Usage,
+    type UsageMeterProps,
 } from "@/registry/billingsdk/usage-meter";

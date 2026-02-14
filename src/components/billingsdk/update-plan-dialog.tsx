@@ -1,5 +1,5 @@
 "use client";
 export {
-  UpdatePlanDialog,
-  type UpdatePlanDialogProps,
+    UpdatePlanDialog,
+    type UpdatePlanDialogProps,
 } from "@/registry/billingsdk/update-plan-dialog";

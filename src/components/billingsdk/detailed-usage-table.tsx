@@ -1,6 +1,6 @@
 "use client";
 export {
-  DetailedUsageTable,
-  type DetailedUsageTableProps,
-  type UsageResource,
+    DetailedUsageTable,
+    type UsageResource,
+    type DetailedUsageTableProps,
 } from "@/registry/billingsdk/detailed-usage-table";

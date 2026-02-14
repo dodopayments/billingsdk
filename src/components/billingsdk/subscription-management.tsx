@@ -1,5 +1,2 @@
 "use client";
-export {
-  SubscriptionManagement,
-  type SubscriptionManagementProps,
-} from "@/registry/billingsdk/subscription-management";
+export { SubscriptionManagement } from "@/registry/billingsdk/subscription-management";

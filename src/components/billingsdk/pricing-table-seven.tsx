@@ -1,8 +1,8 @@
 "use client";
 export {
-  PricingTableSeven,
-  type PricingTableSevenProps,
-  type PricingTableSevenPlan,
-  type FeatureCategory,
-  type FeatureItemRecord,
+    PricingTableSeven,
+    type PricingTableSevenPlan,
+    type FeatureItemRecord,
+    type FeatureCategory,
+    type PricingTableSevenProps,
 } from "@/registry/billingsdk/pricing-table-seven";

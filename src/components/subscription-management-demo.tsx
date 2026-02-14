@@ -20,7 +20,7 @@ export function SubscriptionManagementDemo() {
         updatePlan={{
           currentPlan: currentPlan.plan,
           plans: plans,
-          onPlanChange: (planId) => {
+          onPlanChange: (planId: string) => {
             console.log("update plan", planId);
           },
           triggerText: "Update Plan",
@@ -34,7 +34,7 @@ export function SubscriptionManagementDemo() {
           warningTitle: "You will lose access to your account",
           warningText:
             "If you cancel your subscription, you will lose access to your account and all your data will be deleted.",
-          onCancel: async (planId) => {
+          onCancel: async (planId: string) => {
             console.log("cancel subscription", planId);
             return new Promise((resolve) => {
               setTimeout(() => {
@@ -42,7 +42,7 @@ export function SubscriptionManagementDemo() {
               }, 1000);
             });
           },
-          onKeepSubscription: async (planId) => {
+          onKeepSubscription: async (planId: string) => {
             console.log("keep subscription", planId);
           },
         }}
