@@ -1,5 +1,5 @@
 "use client";
 export {
-    PricingTableOne,
-    type PricingTableOneProps,
+  PricingTableOne,
+  type PricingTableOneProps,
 } from "@/registry/billingsdk/pricing-table-one";

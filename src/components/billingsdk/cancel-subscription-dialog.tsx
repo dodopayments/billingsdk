@@ -1,5 +1,5 @@
 "use client";
 export {
-    CancelSubscriptionDialog,
-    type CancelSubscriptionDialogProps,
+  CancelSubscriptionDialog,
+  type CancelSubscriptionDialogProps,
 } from "@/registry/billingsdk/cancel-subscription-dialog";

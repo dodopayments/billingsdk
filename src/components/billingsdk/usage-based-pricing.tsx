@@ -1,5 +1,5 @@
 "use client";
 export {
-    UsageBasedPricing,
-    type UsageBasedPricingProps,
+  UsageBasedPricing,
+  type UsageBasedPricingProps,
 } from "@/registry/billingsdk/usage-based-pricing";
