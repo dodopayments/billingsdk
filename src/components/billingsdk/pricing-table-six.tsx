@@ -1,5 +1,4 @@
 "use client";
-
 export {
   PricingTableSix,
   type PricingTableSixProps,

@@ -1,0 +1,46 @@
+
+> billingsdk@0.0.0 build
+> next build
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\srini\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\srini\Downloads\billingsdk\package-lock.json
+
+   Ôû▓ Next.js 16.0.10 (Turbopack)
+
+[MDX] generated files in 89.94050000000061ms
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ Ô£ô Compiled successfully in 63s
+   Running TypeScript ...
+   Collecting page data using 7 workers ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ÔÜá Using edge runtime on a page currently disables static generation for that page
+   Generating static pages using 7 workers (0/94) ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+Error occurred prerendering page "/llms.mdx/components/payment-details-two". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: ENOENT: no such file or directory, open 'C:\Users\srini\Downloads\billingsdk\contentdocs\components\payment-details-two\index.mdx'
+    at async Object.getText (C:\Users\srini\Downloads\billingsdk\.next\server\chunks\Downloads_billingsdk_e35021e6._.js:1:4375435)
+    at async l (C:\Users\srini\Downloads\billingsdk\.next\server\chunks\Downloads_billingsdk_f9402a61._.js:21:167137)
+    at async l (C:\Users\srini\Downloads\billingsdk\.next\server\chunks\Downloads_billingsdk_745e94af._.js:1:9951) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\srini\\Downloads\\billingsdk\\contentdocs\\components\\payment-details-two\\index.mdx'
+}
+Export encountered an error on /llms.mdx/[[...slug]]/route: /llms.mdx/components/payment-details-two, exiting the build.
+Error occurred prerendering page "/llms.mdx/cli". Read more: https://nextjs.org/docs/messages/prerender-error
+ Ô¿» Next.js build worker exited with code: 1 and signal: null

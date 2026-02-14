@@ -1,5 +1,2 @@
 "use client";
-export {
-  PaymentCard,
-  type PaymentCardProps,
-} from "@/registry/billingsdk/payment-card";
+export { PaymentCard } from "@/registry/billingsdk/payment-card";

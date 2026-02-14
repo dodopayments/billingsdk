@@ -1,6 +1,2 @@
 "use client";
-export {
-  UpcomingCharges,
-  type ChargeItem,
-  type UpcomingChargesProps,
-} from "@/registry/billingsdk/upcoming-charges";
+export { UpcomingCharges } from "@/registry/billingsdk/upcoming-charges";

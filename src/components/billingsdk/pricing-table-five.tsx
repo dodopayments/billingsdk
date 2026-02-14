@@ -1,3 +1,4 @@
+"use client";
 export {
   PricingTableFive,
   type PricingTableFiveProps,

@@ -1,5 +1,4 @@
 "use client";
-
 export {
   PaymentDetailsTwo,
   type PaymentFormData,
