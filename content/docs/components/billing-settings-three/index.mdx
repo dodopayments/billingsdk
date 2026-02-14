@@ -1,0 +1,101 @@
+---
+title: Billing Settings 3
+description: A user-centric billing dashboard featuring wallet balance, spend visualization, and liquid UI payment methods.
+---
+
+import { BillingSettingsThree } from "@/components/billingsdk/billing-settings-three";
+import BillingSettingsThreeDemo from "@/registry/billingsdk/demo/billing-settings-three-demo";
+
+A user-facing dashboard component `BillingSettingsThree` for managing billing, wallet balance, and payment methods.
+
+## Preview
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="billing-settings-3">
+      <BillingSettingsThreeDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/registry/billingsdk/demo/billing-settings-three-demo.tsx"'>src/registry/billingsdk/demo/billing-settings-three-demo.tsx</include>
+  </Tab>
+</Tabs>
+
+## Features
+
+- **Minimalist Metrics**: Clean, static display of wallet balances, spend amounts, and trend percentages for maximum stability and clarity.
+- **Trend Indicators**: Built-in support for displaying positive/negative trends with automatic color coding and icons.
+- **Liquid Payment Methods**: Smooth, animated "liquid" list for adding/removing payment methods with high-fidelity transitions.
+- **Smart Brand Recognition**: Automatically displays high-quality icons for Visa, Mastercard, AMEX, and Rupay, with a fallback to standard card icons if external assets fail to load.
+- **Flexible "Add New" Logic**: Support for both in-app modal callbacks (`onAddNew`) and direct external redirects (`addNewHref`).
+- **Minimalist Aesthetic**: Features a zero-animation `minimal` mode that removes background decorative elements for a clean dashboard look.
+
+## Usage
+
+```tsx
+import { BillingSettingsThree } from "@/components/billingsdk/billing-settings-three";
+import { BillingProvider } from "@/lib/i18n-provider";
+
+export default function BillingPage() {
+  const handleAddNew = () => {
+    console.log("Open payment method modal");
+  };
+
+  return (
+    <BillingProvider>
+        <BillingSettingsThree
+            balance={1250.00}
+            balanceTrend={15.4}
+            spend={432.50}
+            spendTrend={-5.2}
+            theme="classic"
+            onAddNew={handleAddNew}
+            // Or use addNewHref="/billing/payment-methods/new"
+        />
+    </BillingProvider>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `balance` | `number` | `1250.00` | The current wallet balance to display. |
+| `balanceTrend` | `number` | `12.5` | Percentage change in balance (e.g., `15.4` for +15.4%). |
+| `balanceTrendLabel` | `string` | `"from last month"` | Label shown next to the balance trend. |
+| `spend` | `number` | `432.50` | The total spend for the current period. |
+| `spendTrend` | `number` | `-2.4` | Percentage change in spend (e.g., `-5.2` for -5.2%). |
+| `spendTrendLabel` | `string` | `"Current billing cycle"` | Label shown next to the spend trend. |
+| `currency` | `string` | `"USD"` | The currency code (e.g., "USD", "EUR"). |
+| `theme` | `"minimal" \| "classic"` | `"minimal"` | The visual theme variant. |
+| `paymentMethods` | `PaymentMethod[]` | `[...]` | Array of payment objects: `{ id, type, last4, expiry, isDefault }`. |
+| `transactions` | `Transaction[]` | `[...]` | Array of transactions: `{ id, description, amount, date, status }`. |
+| `onAddNew` | `() => void` | `undefined` | Callback for "Add New" button (e.g., to open a modal). |
+| `addNewHref` | `string` | `undefined` | URL for "Add New" button redirect (fallback if `onAddNew` is not provided). |
+
+## Installation
+
+<Tabs defaultValue="manual">
+
+<TabsList>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+</TabsList>
+
+<TabsContent value="manual">
+
+Copy the code from `src/components/billingsdk/billing-settings-three.tsx` into your project.
+
+</TabsContent>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://billingsdk.com/r/billing-settings-3.json"
+```
+
+</TabsContent>
+
+</Tabs>
