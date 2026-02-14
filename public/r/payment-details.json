@@ -3,16 +3,8 @@
   "name": "payment-details",
   "title": "Payment Details",
   "description": "A comprehensive payment details form component with card details, billing information, and country selection",
-  "dependencies": [
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "button",
-    "card",
-    "input",
-    "label",
-    "utils"
-  ],
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["button", "card", "input", "label", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/payment-details.tsx",

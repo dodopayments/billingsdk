@@ -3,15 +3,8 @@
   "name": "usage-meter-linear",
   "title": "Usage Meter Linear",
   "description": "A usage meter linear component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "card",
-    "badge",
-    "utils"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["card", "badge", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/usage-meter.tsx",

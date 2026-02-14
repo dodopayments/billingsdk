@@ -3,11 +3,7 @@
   "name": "pricing-table-eight",
   "title": "Pricing Table Eight",
   "description": "A modern pricing table component with a clean design.",
-  "dependencies": [
-    "lucide-react",
-    "class-variance-authority",
-    "framer-motion"
-  ],
+  "dependencies": ["lucide-react", "class-variance-authority", "framer-motion"],
   "registryDependencies": [
     "button",
     "card",
