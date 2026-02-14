@@ -900,6 +900,46 @@
       ],
       "dependencies": ["lucide-react", "motion"],
       "registryDependencies": ["button", "utils"]
+    },
+    {
+      "name": "billing-settings-3",
+      "type": "registry:block",
+      "title": "Billing Settings 3",
+      "description": "Premium billing dashboard with wallet balance and liquid UI payment methods",
+      "files": [
+        {
+          "path": "src/registry/billingsdk/billing-settings-three.tsx",
+          "type": "registry:component",
+          "target": "components/billingsdk/billing-settings-three.tsx"
+        },
+        {
+          "path": "src/registry/billingsdk/demo/billing-settings-three-demo.tsx",
+          "type": "registry:component",
+          "target": "components/billing-settings-three-demo.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "utils"]
+    },
+    {
+      "name": "i18n-provider",
+      "type": "registry:block",
+      "title": "i18n Provider",
+      "description": "Global currency conversion and localized formatting provider",
+      "files": [
+        {
+          "path": "src/lib/i18n-provider.tsx",
+          "type": "registry:lib",
+          "target": "lib/i18n-provider.tsx"
+        },
+        {
+          "path": "src/registry/billingsdk/demo/i18n-demo.tsx",
+          "type": "registry:component",
+          "target": "components/i18n-demo.tsx"
+        }
+      ],
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "select", "utils"]
     }
   ]
 }
