@@ -3,7 +3,23 @@ title: i18n Provider
 description: Global currency conversion and localized formatting for billing components.
 ---
 
+import I18nDemo from "@/registry/billingsdk/demo/i18n-demo";
+
 The `BillingProvider` is the core of the SDK's internationalization system. It manages global state for locales, currencies, and real-time exchange rates.
+
+## Interactive Demo
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="i18n-provider">
+      <I18nDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/registry/billingsdk/demo/i18n-demo.tsx"'>src/registry/billingsdk/demo/i18n-demo.tsx</include>
+  </Tab>
+</Tabs>
 
 ## Features
 

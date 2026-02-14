@@ -22,73 +22,6 @@ import { useBilling } from "@/lib/i18n-provider";
 
 // --- Components ---
 
-interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
-    value: number
-    startValue?: number
-    direction?: "up" | "down"
-    delay?: number
-    decimalPlaces?: number
-}
-
-function NumberTicker({
-    value,
-    startValue = 0,
-    direction = "up",
-    delay = 0,
-    className,
-    decimalPlaces = 0,
-    ...props
-}: NumberTickerProps) {
-    const ref = useRef<HTMLSpanElement>(null)
-    const motionValue = useMotionValue(direction === "down" ? value : startValue)
-    const springValue = useSpring(motionValue, {
-        damping: 60,
-        stiffness: 100,
-    })
-    const isInView = useInView(ref, { once: true, margin: "0px" })
-
-    useEffect(() => {
-        if (isInView) {
-            const timer = setTimeout(() => {
-                motionValue.set(direction === "down" ? startValue : value)
-            }, delay * 1000)
-            return () => clearTimeout(timer)
-        }
-    }, [motionValue, isInView, delay, value, direction, startValue])
-
-    useEffect(() => {
-        if (ref.current) {
-            ref.current.textContent = Intl.NumberFormat("en-US", {
-                minimumFractionDigits: decimalPlaces,
-                maximumFractionDigits: decimalPlaces,
-            }).format(direction === "down" ? value : startValue)
-        }
-    }, [decimalPlaces, direction, startValue, value])
-
-    useEffect(
-        () =>
-            springValue.on("change", (latest) => {
-                if (ref.current) {
-                    ref.current.textContent = Intl.NumberFormat("en-US", {
-                        minimumFractionDigits: decimalPlaces,
-                        maximumFractionDigits: decimalPlaces,
-                    }).format(Number(latest.toFixed(decimalPlaces)))
-                }
-            }),
-        [springValue, decimalPlaces]
-    )
-
-    return (
-        <span
-            ref={ref}
-            className={cn(
-                "inline-block tracking-wider tabular-nums",
-                className
-            )}
-            {...props}
-        />
-    )
-}
 
 // --- Card Logo Helper ---
 
@@ -139,7 +72,7 @@ const containerVariants = cva("w-full max-w-4xl mx-auto space-y-8", {
 const cardVariants = cva("overflow-hidden transition-all duration-300", {
     variants: {
         theme: {
-            minimal: "bg-background border-border shadow-sm hover:shadow-md",
+            minimal: "bg-background border-border/60 shadow-none hover:shadow-sm",
             classic: "bg-card/50 backdrop-blur-sm border-border/50 shadow-md hover:shadow-xl",
         },
     },
@@ -248,9 +181,11 @@ export function BillingSettingsThree({
             {/* Top Cards: Balance & Spend */}
             <div className="grid gap-4 md:grid-cols-2">
                 <Card className={cn(cardVariants({ theme }), "relative overflow-hidden")}>
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <Wallet className="w-24 h-24" />
-                    </div>
+                    {theme === "classic" && (
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <Wallet className="w-24 h-24" />
+                        </div>
+                    )}
                     <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
                             <Wallet className="w-4 h-4" />
@@ -260,7 +195,7 @@ export function BillingSettingsThree({
                     <CardContent>
                         <div className="text-3xl font-bold flex items-baseline">
                             <span className="text-xl mr-1 opacity-70 font-medium">{getCurrencySymbol()}</span>
-                            <NumberTicker value={convertedBalance} decimalPlaces={2} />
+                            <span>{convertedBalance.toFixed(2)}</span>
                         </div>
                         <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                             <span className={cn(
@@ -273,7 +208,7 @@ export function BillingSettingsThree({
                                     <ArrowDownLeft className="w-3 h-3 mr-0.5" />
                                 )}
                                 {balanceTrend >= 0 ? "+" : ""}
-                                <NumberTicker value={Math.abs(balanceTrend)} decimalPlaces={1} />%
+                                {Math.abs(balanceTrend).toFixed(1)}%
                             </span>
                             {balanceTrendLabel}
                         </div>
@@ -281,9 +216,11 @@ export function BillingSettingsThree({
                 </Card>
 
                 <Card className={cn(cardVariants({ theme }), "relative overflow-hidden")}>
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <CreditCard className="w-24 h-24" />
-                    </div>
+                    {theme === "classic" && (
+                        <div className="absolute top-0 right-0 p-4 opacity-10">
+                            <CreditCard className="w-24 h-24" />
+                        </div>
+                    )}
                     <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
                             <ArrowDownLeft className="w-4 h-4" />
@@ -293,7 +230,7 @@ export function BillingSettingsThree({
                     <CardContent>
                         <div className="text-3xl font-bold flex items-baseline">
                             <span className="text-xl mr-1 opacity-70 font-medium">{getCurrencySymbol()}</span>
-                            <NumberTicker value={convertedSpend} decimalPlaces={2} />
+                            <span>{convertedSpend.toFixed(2)}</span>
                         </div>
                         <div className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                             <span className={cn(
@@ -306,7 +243,7 @@ export function BillingSettingsThree({
                                     <ArrowDownLeft className="w-3 h-3 mr-0.5" />
                                 )}
                                 {spendTrend >= 0 ? "+" : ""}
-                                <NumberTicker value={Math.abs(spendTrend)} decimalPlaces={1} />%
+                                {Math.abs(spendTrend).toFixed(1)}%
                             </span>
                             {spendTrendLabel}
                         </div>
