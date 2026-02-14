@@ -3,7 +3,10 @@
   "name": "update-plan-card",
   "title": "Update Plan Card",
   "description": "A update plan card component",
-  "dependencies": ["lucide-react", "motion"],
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
   "registryDependencies": [
     "button",
     "badge",

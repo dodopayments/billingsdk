@@ -3,7 +3,11 @@
   "name": "usage-table",
   "title": "Usage Table",
   "description": "A usage table component with resource consumption breakdown",
-  "registryDependencies": ["table", "card", "utils"],
+  "registryDependencies": [
+    "table",
+    "card",
+    "utils"
+  ],
   "files": [
     {
       "path": "src/registry/billingsdk/usage-table.tsx",

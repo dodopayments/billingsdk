@@ -3,8 +3,15 @@
   "name": "payment-card",
   "title": "Payment Card",
   "description": "A payment card component",
-  "dependencies": ["lucide-react", "motion"],
-  "registryDependencies": ["button", "card", "utils"],
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "utils"
+  ],
   "files": [
     {
       "path": "src/registry/billingsdk/payment-card.tsx",

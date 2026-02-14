@@ -3,7 +3,10 @@
   "name": "update-plan-dialog",
   "title": "Update Plan Dialog",
   "description": "A update plan dialog component",
-  "dependencies": ["lucide-react", "motion"],
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
   "registryDependencies": [
     "button",
     "badge",

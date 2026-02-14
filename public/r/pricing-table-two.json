@@ -3,8 +3,17 @@
   "name": "pricing-table-two",
   "title": "Pricing Table Two",
   "description": "A pricing table component with a feature table",
-  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
-  "registryDependencies": ["button", "table", "switch", "utils"],
+  "dependencies": [
+    "lucide-react",
+    "class-variance-authority",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "table",
+    "switch",
+    "utils"
+  ],
   "files": [
     {
       "path": "src/registry/billingsdk/pricing-table-two.tsx",

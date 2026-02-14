@@ -3,7 +3,11 @@
   "name": "pricing-table-one",
   "title": "Pricing Table One",
   "description": "A pricing table component",
-  "dependencies": ["lucide-react", "class-variance-authority", "motion"],
+  "dependencies": [
+    "lucide-react",
+    "class-variance-authority",
+    "motion"
+  ],
   "registryDependencies": [
     "button",
     "card",

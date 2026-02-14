@@ -3,8 +3,14 @@
   "name": "billing-screen",
   "title": "Billing Screen",
   "description": "Complete billing dashboard with credit balance, plan details, and interactive credit card visual",
-  "dependencies": ["lucide-react", "motion"],
-  "registryDependencies": ["button", "utils"],
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "button",
+    "utils"
+  ],
   "files": [
     {
       "path": "src/registry/billingsdk/billing-screen.tsx",

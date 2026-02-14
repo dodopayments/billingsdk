@@ -3,8 +3,14 @@
   "name": "payment-failure",
   "title": "Payment Failure",
   "description": "A payment failure card component with retry, home, and support actions.",
-  "dependencies": ["lucide-react"],
-  "registryDependencies": ["button", "card", "utils"],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "card",
+    "utils"
+  ],
   "files": [
     {
       "path": "src/registry/billingsdk/payment-failure.tsx",
