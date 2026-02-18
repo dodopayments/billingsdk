@@ -134,7 +134,9 @@ const CodeExample = ({
               className="max-w-full bg-black/20 backdrop-blur-lg md:max-w-md"
               code={example.commands.npm}
               language={example.language}
-            ></CodeBlock>
+            >
+              <CodeBlockCopyButton />
+            </CodeBlock>
           </CodeBlockTab>
 
           <CodeBlockTab value="pnpm" className="w-full p-2">
@@ -142,7 +144,9 @@ const CodeExample = ({
               className="max-w-full bg-black/20 backdrop-blur-lg md:max-w-md"
               code={example.commands.pnpm}
               language={example.language}
-            ></CodeBlock>
+            >
+              <CodeBlockCopyButton />
+            </CodeBlock>
           </CodeBlockTab>
 
           <CodeBlockTab value="bun" className="w-full p-2">
@@ -150,7 +154,9 @@ const CodeExample = ({
               className="max-w-full bg-black/20 backdrop-blur-lg md:max-w-md"
               code={example.commands.bun}
               language={example.language}
-            ></CodeBlock>
+            >
+              <CodeBlockCopyButton />
+            </CodeBlock>
           </CodeBlockTab>
         </CodeBlockTabs>
       </div>
