@@ -457,7 +457,7 @@ export function PricingTableFive({
                 <Button
                   onClick={() => onPlanSelect?.(contactUsPlan.id)}
                   variant="outline"
-                  className="hover:bg-primary hover:text-primary-foreground w-full transition-colors"
+                  className="hover:bg-primary w-full transition-colors"
                 >
                   {contactUsPlan.buttonText}
                 </Button>
