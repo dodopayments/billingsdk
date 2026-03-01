@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import PaymentProcessing from "@/registry/billingsdk/payment-processing";
+import { PaymentProcessing } from "@/components/billingsdk/payment-processing";
 import { Button } from "@/components/ui/button";
 
 export function PaymentProcessingDemo() {

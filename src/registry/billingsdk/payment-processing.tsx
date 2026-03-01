@@ -1,16 +1,18 @@
+"use client";
+
 import { Loader2, Shield, LucideIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
-type PaymentProcessingTypes = {
+export interface PaymentProcessingTypes {
   status?: boolean;
   title?: string;
   description?: string;
   icon?: LucideIcon;
   processLabel?: string;
   warning?: string;
-};
+}
 
-export default function PaymentProcessing({
+export function PaymentProcessing({
   status = true,
   title = "Processing Payment",
   description = "This may take a few moments",

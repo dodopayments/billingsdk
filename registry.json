@@ -920,7 +920,7 @@
         }
       ],
       "dependencies": ["lucide-react"],
-      "registryDependencies": ["card", "separator", "utils"]
+      "registryDependencies": ["separator", "utils"]
     }
   ]
 }
