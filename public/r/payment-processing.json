@@ -4,7 +4,7 @@
   "title": "Payment Processing",
   "description": "A payment processing state card with spinner and security messaging.",
   "dependencies": ["lucide-react"],
-  "registryDependencies": ["card", "separator", "utils"],
+  "registryDependencies": ["separator", "utils"],
   "files": [
     {
       "path": "src/registry/billingsdk/payment-processing.tsx",
