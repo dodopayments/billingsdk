@@ -8,7 +8,6 @@ import { Speedometer } from "./svgs/speedometer";
 
 export function FeatureIllustration({ label }: { label: string }) {
   const normalizedLabel = label.toLowerCase();
-  console.log(normalizedLabel);
 
   switch (normalizedLabel) {
     case "copy-paste":
