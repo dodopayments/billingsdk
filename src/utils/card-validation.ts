@@ -1,19 +1,22 @@
+export const CARD_TYPES = {
+  VISA: "visa",
+  MASTERCARD: "mastercard",
+  AMEX: "amex",
+  RUPAY: "rupay",
+  DINERS: "diners",
+  DISCOVER: "discover",
+  UNKNOWN: "unknown",
+} as const;
+
+export type CardType = (typeof CARD_TYPES)[keyof typeof CARD_TYPES];
+
 // Detect card type
-export const detectCardType = (
-  cardNumber: string,
-):
-  | "visa"
-  | "mastercard"
-  | "amex"
-  | "rupay"
-  | "diners"
-  | "discover"
-  | "unknown" => {
+export const detectCardType = (cardNumber: string): CardType => {
   const number = cardNumber.replace(/\s/g, "");
 
-  if (/^4/.test(number)) return "visa";
-  if (/^3[47]/.test(number)) return "amex";
-  if (/^3(?:0[0-5]|09|095|6|8)/.test(number)) return "diners";
+  if (/^4/.test(number)) return CARD_TYPES.VISA;
+  if (/^3[47]/.test(number)) return CARD_TYPES.AMEX;
+  if (/^3(?:0[0-5]|09|095|6|8)/.test(number)) return CARD_TYPES.DINERS;
   if (
     /^5[1-5]/.test(number) ||
     /^222[1-9]/.test(number) ||
@@ -22,23 +25,23 @@ export const detectCardType = (
     /^27[0-1]\d/.test(number) ||
     /^2720/.test(number)
   )
-    return "mastercard";
+    return CARD_TYPES.MASTERCARD;
   if (
     /^6011/.test(number) ||
     /^65/.test(number) ||
     /^64[4-9]/.test(number) ||
     /^622(?:12[6-9]|1[3-9]\d|[2-8]\d{2}|9[0-1]\d|92[0-5])/.test(number)
   )
-    return "discover";
+    return CARD_TYPES.DISCOVER;
   if (
     /^60/.test(number) ||
     /^81/.test(number) ||
     /^82/.test(number) ||
     /^508/.test(number)
   )
-    return "rupay";
+    return CARD_TYPES.RUPAY;
 
-  return "unknown";
+  return CARD_TYPES.UNKNOWN;
 };
 
 // Luhn algorithm
