@@ -380,8 +380,8 @@ export function PricingTableTwo({
       {theme === "classic" && (
         <>
           <div className="bg-grid-pattern absolute inset-0 opacity-5" />
-          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
+          <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-secondary/5 blur-2xl" />
         </>
       )}
 

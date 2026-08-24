@@ -288,7 +288,7 @@ export function ViewOptions({
           }),
         )}
       >
-        <ChevronDown className="text-fd-muted-foreground size-3.5" />
+        <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="flex flex-col overflow-auto">
         {items.map((item) => (
@@ -301,7 +301,7 @@ export function ViewOptions({
           >
             {item.icon}
             {item.title}
-            <ExternalLinkIcon className="text-fd-muted-foreground ms-auto size-3.5" />
+            <ExternalLinkIcon className="ms-auto size-3.5 text-fd-muted-foreground" />
           </a>
         ))}
       </PopoverContent>
@@ -537,7 +537,7 @@ export function CombinedAIButton({
               }),
             )}
           >
-            <ChevronDown className="text-fd-muted-foreground size-3.5" />
+            <ChevronDown className="size-3.5 text-fd-muted-foreground" />
           </PopoverTrigger>
           <PopoverContent className="flex w-56 flex-col overflow-auto">
             {items.map((item) => (
@@ -550,7 +550,7 @@ export function CombinedAIButton({
               >
                 {item.icon}
                 {item.title}
-                <ExternalLinkIcon className="text-fd-muted-foreground ms-auto size-3.5" />
+                <ExternalLinkIcon className="ms-auto size-3.5 text-fd-muted-foreground" />
               </a>
             ))}
           </PopoverContent>

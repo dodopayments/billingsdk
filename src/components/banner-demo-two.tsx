@@ -15,10 +15,10 @@ export default function FreeTrialBannerDemo() {
           Discover the best places to visit in the world
         </h1>
         <div className="flex flex-col gap-2">
-          <p className="text-muted-foreground max-w-md">
+          <p className="max-w-md text-muted-foreground">
             Explore the best places to visit in the world
           </p>
-          <a className="hover:text-primary underline underline-offset-4 transition">
+          <a className="underline underline-offset-4 transition hover:text-primary">
             Get Started →
           </a>
         </div>

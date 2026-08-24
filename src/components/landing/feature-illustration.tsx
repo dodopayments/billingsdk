@@ -21,7 +21,7 @@ export function FeatureIllustration({ label }: { label: string }) {
       return <Accessiblilty />;
     case "fast-dev":
       return (
-        <div className="bg-muted/20 flex h-full w-full flex-col items-center justify-center gap-0">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-0 bg-muted/20">
           <Badge
             variant={"secondary"}
             className="h-9 -translate-y-18 px-4 text-sm"
@@ -33,7 +33,7 @@ export function FeatureIllustration({ label }: { label: string }) {
       );
     case "customizable":
       return (
-        <div className="bg-muted/20 flex h-full w-full flex-col items-center justify-center gap-0">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-0 bg-muted/20">
           <CustomisedUI className="size-48" />
         </div>
       );

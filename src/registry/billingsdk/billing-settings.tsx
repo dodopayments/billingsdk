@@ -79,7 +79,7 @@ function SettingItem({
         >
           {title}
         </label>
-        <p className="text-muted-foreground text-sm">{description}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
       <Switch
         id={switchId}
@@ -98,12 +98,12 @@ interface TabNavigationProps {
 
 function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="bg-muted text-muted-foreground inline-flex h-9 w-full items-center justify-center gap-1 rounded-lg p-1">
+    <div className="inline-flex h-9 w-full items-center justify-center gap-1 rounded-lg bg-muted p-1 text-muted-foreground">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`ring-offset-background focus-visible:ring-ring inline-flex flex-1 items-center justify-center rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 sm:px-3 sm:text-sm ${
+          className={`inline-flex flex-1 items-center justify-center rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap ring-offset-background transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 sm:px-3 sm:text-sm ${
             activeTab === tab.id
               ? "bg-background text-foreground shadow"
               : "hover:bg-background/50 hover:text-foreground"
@@ -137,7 +137,7 @@ export function BillingSettings({
   className,
 }: BillingSettingsProps) {
   const renderGeneralContent = () => (
-    <div className="divide-border space-y-0 divide-y">
+    <div className="space-y-0 divide-y divide-border">
       <SettingItem
         title="Email notifications"
         description="Receive billing updates via email"
@@ -167,13 +167,13 @@ export function BillingSettings({
           className="flex flex-col justify-between gap-3 rounded-lg border p-3 sm:flex-row sm:items-center sm:p-4"
         >
           <div className="flex min-w-0 items-center gap-3">
-            <CreditCard className="text-muted-foreground h-5 w-5 shrink-0" />
+            <CreditCard className="h-5 w-5 shrink-0 text-muted-foreground" />
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-sm">•••• {card.last4}</span>
                 {card.primary && <Badge variant="secondary">Primary</Badge>}
               </div>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 {card.brand} • Expires {card.expiry}
               </p>
             </div>
@@ -192,7 +192,7 @@ export function BillingSettings({
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div className="flex-1 space-y-0.5">
           <h3 className="text-sm font-medium">Invoice format</h3>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Choose PDF or HTML format
           </p>
         </div>
@@ -216,7 +216,7 @@ export function BillingSettings({
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div className="flex-1 space-y-0.5">
           <h3 className="text-sm font-medium">Billing address</h3>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Update your billing address
           </p>
         </div>
@@ -233,7 +233,7 @@ export function BillingSettings({
   );
 
   const renderLimitsContent = () => (
-    <div className="divide-border space-y-0 divide-y">
+    <div className="space-y-0 divide-y divide-border">
       <SettingItem
         title="Overage protection"
         description="Prevent accidental overages"

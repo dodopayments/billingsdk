@@ -210,7 +210,7 @@ export function PreviewComponents({
                     onClick={() => setTheme(theme)}
                   >
                     <div className="flex items-center gap-2">
-                      <div className="border-border h-4 w-4 overflow-clip rounded-full border-1">
+                      <div className="h-4 w-4 overflow-clip rounded-full border-1 border-border">
                         <div
                           className="size-4"
                           style={{

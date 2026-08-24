@@ -128,7 +128,7 @@ export function UpdatePlanCard({
                             </Badge>
                           )}
                         </div>
-                        <p className="text-muted-foreground mt-1 text-[11px] leading-relaxed sm:text-xs">
+                        <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
                           {plan.description}
                         </p>
                         {plan.features.length > 0 && (
@@ -137,10 +137,10 @@ export function UpdatePlanCard({
                               {plan.features.map((feature, featureIndex) => (
                                 <div
                                   key={featureIndex}
-                                  className="bg-muted/20 border-border/30 flex flex-shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 sm:gap-2 sm:rounded-lg"
+                                  className="flex flex-shrink-0 items-center gap-1.5 rounded-md border border-border/30 bg-muted/20 px-2 py-1 sm:gap-2 sm:rounded-lg"
                                 >
-                                  <div className="bg-primary h-1 w-1 flex-shrink-0 rounded-full sm:h-1.5 sm:w-1.5" />
-                                  <span className="text-muted-foreground text-[10px] leading-none whitespace-nowrap sm:text-xs">
+                                  <div className="h-1 w-1 flex-shrink-0 rounded-full bg-primary sm:h-1.5 sm:w-1.5" />
+                                  <span className="text-[10px] leading-none whitespace-nowrap text-muted-foreground sm:text-xs">
                                     {feature.name}
                                   </span>
                                 </div>
@@ -156,7 +156,7 @@ export function UpdatePlanCard({
                           ? `${plan.currency}${getCurrentPrice(plan)}`
                           : getCurrentPrice(plan)}
                       </div>
-                      <div className="text-muted-foreground mt-0.5 text-[10px] sm:text-xs">
+                      <div className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">
                         /{isYearly ? "year" : "month"}
                       </div>
                     </div>

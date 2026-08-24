@@ -2,14 +2,20 @@
 
 /* Blue gradient glow in the center */
 .hero-visual::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 30%, rgba(59, 130, 246, 0.1) 60%, transparent 100%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.4) 0%,
+    rgba(59, 130, 246, 0.2) 30%,
+    rgba(59, 130, 246, 0.1) 60%,
+    transparent 100%
+  );
   border-radius: 50%;
   filter: blur(20px);
   pointer-events: none;

@@ -11,7 +11,7 @@ export function PaymentSuccessDialogDemo() {
   return (
     <Card className="border-muted/40">
       <CardContent className="flex flex-col gap-4 p-6">
-        <div className="text-muted-foreground text-sm">
+        <div className="text-sm text-muted-foreground">
           Click the button to preview the success dialog.
         </div>
         <button

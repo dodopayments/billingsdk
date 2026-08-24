@@ -182,9 +182,9 @@ function PreviewPanelContent() {
 
   if (!state.selectedComponent) {
     return (
-      <div className="bg-background text-muted-foreground dark flex h-full items-center justify-center">
+      <div className="dark flex h-full items-center justify-center bg-background text-muted-foreground">
         <div className="text-center">
-          <h3 className="text-foreground mb-2 text-lg font-semibold">
+          <h3 className="mb-2 text-lg font-semibold text-foreground">
             PREVIEW
           </h3>
           <p className="text-sm">Select a component to see it in action</p>
@@ -200,16 +200,16 @@ function PreviewPanelContent() {
         isFullscreen && "fixed inset-0 z-50",
       )}
     >
-      <div className="border-border bg-muted/50 flex flex-shrink-0 items-center justify-between border-b px-4 py-2">
+      <div className="flex flex-shrink-0 items-center justify-between border-b border-border bg-muted/50 px-4 py-2">
         <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-sm">Live Preview</span>
+          <span className="text-sm text-muted-foreground">Live Preview</span>
           <div className="ml-2 flex items-center gap-1">
             {viewportSize === "mobile" ? (
-              <Smartphone className="text-muted-foreground h-3 w-3" />
+              <Smartphone className="h-3 w-3 text-muted-foreground" />
             ) : (
-              <Monitor className="text-muted-foreground h-3 w-3" />
+              <Monitor className="h-3 w-3 text-muted-foreground" />
             )}
-            <span className="text-muted-foreground text-xs capitalize">
+            <span className="text-xs text-muted-foreground capitalize">
               {viewportSize}
             </span>
           </div>
@@ -269,7 +269,7 @@ function PreviewPanelContent() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
-                <div className="text-muted-foreground px-2 py-1.5 text-sm font-semibold">
+                <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground">
                   Themes
                 </div>
                 <DropdownMenuSeparator />
@@ -283,7 +283,7 @@ function PreviewPanelContent() {
                       <span>{theme.label}</span>
                     </div>
                     {currentTheme.name === theme.name && (
-                      <div className="bg-primary h-2 w-2 rounded-full" />
+                      <div className="h-2 w-2 rounded-full bg-primary" />
                     )}
                   </DropdownMenuItem>
                 ))}
@@ -296,7 +296,7 @@ function PreviewPanelContent() {
             variant="ghost"
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="text-muted-foreground hover:text-foreground h-7 px-2 disabled:opacity-50"
+            className="h-7 px-2 text-muted-foreground hover:text-foreground disabled:opacity-50"
           >
             <RefreshCw
               className={cn("h-3 w-3", isRefreshing && "animate-spin")}
@@ -307,7 +307,7 @@ function PreviewPanelContent() {
             size="sm"
             variant="ghost"
             onClick={() => setIsFullscreen(!isFullscreen)}
-            className="text-muted-foreground hover:text-foreground h-7 px-2"
+            className="h-7 px-2 text-muted-foreground hover:text-foreground"
           >
             {isFullscreen ? (
               <Minimize2 className="h-3 w-3" />
@@ -323,10 +323,10 @@ function PreviewPanelContent() {
           <div className="flex min-h-full items-center justify-center p-4">
             {error ? (
               <div className="p-8 text-center">
-                <div className="text-destructive mb-2 text-lg font-semibold">
+                <div className="mb-2 text-lg font-semibold text-destructive">
                   Component Error
                 </div>
-                <div className="text-muted-foreground mb-4">{error}</div>
+                <div className="mb-4 text-muted-foreground">{error}</div>
                 <Button onClick={handleRefresh} variant="outline" size="sm">
                   Try Again
                 </Button>
@@ -358,8 +358,8 @@ function PreviewPanelContent() {
                 </ErrorBoundary>
               </div>
             ) : (
-              <div className="text-muted-foreground text-center">
-                <div className="border-primary mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2"></div>
+              <div className="text-center text-muted-foreground">
+                <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
                 <p>Loading component...</p>
               </div>
             )}
@@ -395,10 +395,10 @@ class ErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         <div className="p-8 text-center">
-          <div className="text-destructive mb-2 text-lg font-semibold">
+          <div className="mb-2 text-lg font-semibold text-destructive">
             Component Failed to Render
           </div>
-          <div className="text-muted-foreground mb-4">
+          <div className="mb-4 text-muted-foreground">
             {this.state.error ||
               "Check the code for syntax errors or invalid props"}
           </div>

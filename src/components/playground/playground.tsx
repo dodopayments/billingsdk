@@ -92,12 +92,12 @@ function PlaygroundContent() {
   }, [searchParams, setSelectedComponent]);
 
   return (
-    <div className="bg-background text-foreground flex h-screen flex-col">
+    <div className="flex h-screen flex-col bg-background text-foreground">
       {/* Header */}
       <PlaygroundHeader />
 
       {/* Panel Controls */}
-      <div className="border-border bg-muted/50 flex items-center justify-between border-b px-4 py-2">
+      <div className="flex items-center justify-between border-b border-border bg-muted/50 px-4 py-2">
         <div className="flex items-center gap-2">
           <Button
             size="sm"
@@ -165,7 +165,7 @@ function PlaygroundContent() {
               transform: "translateX(-50%)",
             }}
           >
-            <div className="bg-border hover:bg-primary mx-auto h-full w-px" />
+            <div className="mx-auto h-full w-px bg-border hover:bg-primary" />
           </div>
         )}
       </div>

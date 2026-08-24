@@ -17,10 +17,10 @@ export default function BannerAnnouncementDemo() {
           Advanced Analytics
         </h1>
         <div className="flex flex-col gap-2">
-          <p className="text-muted-foreground max-w-md">
+          <p className="max-w-md text-muted-foreground">
             Powerful insights to grow your business
           </p>
-          <a className="hover:text-primary underline underline-offset-4 transition">
+          <a className="underline underline-offset-4 transition hover:text-primary">
             Get Started →
           </a>
         </div>

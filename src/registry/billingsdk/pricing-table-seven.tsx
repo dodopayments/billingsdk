@@ -225,13 +225,13 @@ export function PricingTableSeven({
   const renderFeatureValue = (value: boolean | string | undefined) => {
     if (typeof value === "boolean") {
       return value ? (
-        <Check className="text-primary h-5 w-5" />
+        <Check className="h-5 w-5 text-primary" />
       ) : (
         <span className="text-muted-foreground">—</span>
       );
     }
     if (typeof value === "string") {
-      return <span className="text-foreground text-sm">{value}</span>;
+      return <span className="text-sm text-foreground">{value}</span>;
     }
     return <span className="text-muted-foreground">—</span>;
   };
@@ -251,8 +251,8 @@ export function PricingTableSeven({
       {theme === "classic" && (
         <>
           <div className="bg-grid-pattern absolute inset-0 opacity-5" />
-          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
+          <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-secondary/5 blur-2xl" />
         </>
       )}
 
@@ -282,10 +282,10 @@ export function PricingTableSeven({
               max={25}
               min={1}
               step={1}
-              className="text-primary w-full"
+              className="w-full text-primary"
             />
             <div className="mt-2 text-center">
-              <span className="text-foreground text-sm font-medium">
+              <span className="text-sm font-medium text-foreground">
                 {sliderValue[0]} users
               </span>
             </div>
@@ -328,7 +328,7 @@ export function PricingTableSeven({
                     <CardTitle className="text-lg font-semibold">
                       {plan.name}
                     </CardTitle>
-                    <CardDescription className="text-muted-foreground text-sm">
+                    <CardDescription className="text-sm text-muted-foreground">
                       {plan.description}
                     </CardDescription>
                     <div className="mt-4">
@@ -387,7 +387,7 @@ export function PricingTableSeven({
                       theme === "classic" ? "bg-muted/30" : "bg-muted/50",
                     )}
                   >
-                    <h3 className="text-foreground text-sm font-semibold">
+                    <h3 className="text-sm font-semibold text-foreground">
                       {category.category}
                     </h3>
                   </div>
@@ -404,11 +404,11 @@ export function PricingTableSeven({
                       {/* Mobile Layout */}
                       <div className="block sm:hidden">
                         <div className="mb-3 flex items-center space-x-2">
-                          <span className="text-foreground text-sm font-medium">
+                          <span className="text-sm font-medium text-foreground">
                             {feature.name}
                           </span>
                           {feature.tooltip && (
-                            <Info className="text-muted-foreground h-4 w-4" />
+                            <Info className="h-4 w-4 text-muted-foreground" />
                           )}
                         </div>
                         <div className="space-y-2">
@@ -417,7 +417,7 @@ export function PricingTableSeven({
                               key={plan.id}
                               className="flex items-center justify-between"
                             >
-                              <span className="text-muted-foreground text-sm">
+                              <span className="text-sm text-muted-foreground">
                                 {plan.name}
                               </span>
                               <div className="flex items-center">
@@ -431,11 +431,11 @@ export function PricingTableSeven({
                       {/* Desktop Layout - Match pricing cards grid */}
                       <div className="hidden gap-4 sm:grid sm:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:grid-cols-4">
                         <div className="flex items-center space-x-2">
-                          <span className="text-foreground text-sm font-medium">
+                          <span className="text-sm font-medium text-foreground">
                             {feature.name}
                           </span>
                           {feature.tooltip && (
-                            <Info className="text-muted-foreground h-4 w-4" />
+                            <Info className="h-4 w-4 text-muted-foreground" />
                           )}
                         </div>
                         {plans.map((plan) => (

@@ -242,7 +242,7 @@ export function UsageTable({
                 <TableRow>
                   <TableCell
                     colSpan={8}
-                    className="text-muted-foreground h-24 text-center"
+                    className="h-24 text-center text-muted-foreground"
                   >
                     No usage data available
                   </TableCell>

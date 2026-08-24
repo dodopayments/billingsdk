@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "sortTailwindcss": {
+    "stylesheet": "./src/app/global.css"
+  },
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    "build",
+    ".out",
+    ".next",
+    ".nuxt",
+    ".vercel",
+    "*.log",
+    ".env*.local",
+    ".vscode",
+    ".idea",
+    "*.swp",
+    "*.swo",
+    ".DS_Store",
+    "Thumbs.db",
+    "tmp",
+    "temp",
+    "coverage",
+    "pnpm-lock.yaml"
+  ]
+}

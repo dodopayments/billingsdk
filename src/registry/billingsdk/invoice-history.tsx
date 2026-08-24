@@ -70,12 +70,12 @@ export function InvoiceHistory({
         <CardHeader className="space-y-1">
           {title && (
             <CardTitle className="flex items-center gap-2 truncate text-base text-lg leading-tight font-medium sm:gap-3 sm:text-xl">
-              <ReceiptText className="text-primary h-4 w-4" />
+              <ReceiptText className="h-4 w-4 text-primary" />
               {title}
             </CardTitle>
           )}
           {description && (
-            <CardDescription className="text-muted-foreground text-sm">
+            <CardDescription className="text-sm text-muted-foreground">
               {description}
             </CardDescription>
           )}
@@ -101,7 +101,7 @@ export function InvoiceHistory({
               <TableRow>
                 <TableCell
                   colSpan={5}
-                  className="text-muted-foreground h-24 text-center"
+                  className="h-24 text-center text-muted-foreground"
                 >
                   No invoices yet
                 </TableCell>

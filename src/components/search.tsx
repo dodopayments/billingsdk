@@ -119,7 +119,7 @@ function SearchAIInput(props: ComponentProps<"form">) {
           )}
           onClick={stop}
         >
-          <Loader2 className="text-fd-muted-foreground size-4 animate-spin" />
+          <Loader2 className="size-4 animate-spin text-fd-muted-foreground" />
           Abort Answer
         </button>
       ) : (
@@ -247,7 +247,7 @@ function Message({
             <Link
               key={i}
               href={item.url}
-              className="hover:bg-fd-accent hover:text-fd-accent-foreground block rounded-lg border p-3 text-xs"
+              className="block rounded-lg border p-3 text-xs hover:bg-fd-accent hover:text-fd-accent-foreground"
             >
               <p className="font-medium">{item.title}</p>
               <p className="text-fd-muted-foreground">Reference {item.label}</p>
@@ -273,21 +273,21 @@ export default function AISearch(props: DialogProps) {
     <Dialog {...props}>
       {props.children}
       <DialogPortal>
-        <DialogOverlay className="data-[state=closed]:animate-fd-fade-out data-[state=open]:animate-fd-fade-in fixed inset-0 z-50 backdrop-blur-xs" />
+        <DialogOverlay className="fixed inset-0 z-50 backdrop-blur-xs data-[state=closed]:animate-fd-fade-out data-[state=open]:animate-fd-fade-in" />
         <DialogContent
           onOpenAutoFocus={(e) => {
             document.getElementById("nd-ai-input")?.focus();
             e.preventDefault();
           }}
           aria-describedby={undefined}
-          className="bg-fd-popover/80 data-[state=open]:animate-fd-dialog-in data-[state=closed]:animate-fd-dialog-out fixed left-1/2 z-50 flex w-[calc(100%-1rem)] max-w-screen-sm -translate-x-1/2 flex-col rounded-2xl border p-1 shadow-2xl backdrop-blur-xl focus-visible:outline-none max-md:top-12 md:bottom-12"
+          className="fixed left-1/2 z-50 flex w-[calc(100%-1rem)] max-w-screen-sm -translate-x-1/2 flex-col rounded-2xl border bg-fd-popover/80 p-1 shadow-2xl backdrop-blur-xl focus-visible:outline-none data-[state=closed]:animate-fd-dialog-out data-[state=open]:animate-fd-dialog-in max-md:top-12 md:bottom-12"
         >
           <ChatContext value={chat}>
             <div className="px-3 py-2">
               <DialogTitle className="text-sm font-medium">
                 Inkeep AI
               </DialogTitle>
-              <DialogDescription className="text-fd-muted-foreground text-xs">
+              <DialogDescription className="text-xs text-fd-muted-foreground">
                 AI can be inaccurate, please verify the information.
               </DialogDescription>
             </div>
@@ -319,7 +319,7 @@ export default function AISearch(props: DialogProps) {
                 </div>
               </List>
             )}
-            <div className="border-fd-foreground/20 text-fd-popover-foreground overflow-hidden rounded-xl border">
+            <div className="overflow-hidden rounded-xl border border-fd-foreground/20 text-fd-popover-foreground">
               <SearchAIInput />
               <SearchAIActions className="flex flex-row items-center gap-1.5 p-1 empty:hidden" />
             </div>
