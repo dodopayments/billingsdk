@@ -23,6 +23,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./packages/cli/package-lock.json
 
+
+      # npm Trusted Publishing (OIDC) needs npm >= 11.5.1; the Node
+      # version above ships an older npm. Pin 11.6.2 for reproducible runs
+      # (11.5.2 fixed an OIDC/provenance ordering bug, 11.6.2 resolves
+      # trusted-publishing failures seen in the wild).
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@11.6.2
       - name: Set version from release tag
         working-directory: ./packages/cli
         env:
@@ -53,5 +60,3 @@ jobs:
       - name: Publish to NPM
         run: npm publish --access public --provenance
         working-directory: ./packages/cli
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
