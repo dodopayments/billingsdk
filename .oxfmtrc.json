@@ -24,6 +24,7 @@
     "tmp",
     "temp",
     "coverage",
-    "pnpm-lock.yaml"
+    "pnpm-lock.yaml",
+    "**/*.mdx"
   ]
 }

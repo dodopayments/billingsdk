@@ -13,7 +13,8 @@
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "typecheck": "tsc --noEmit",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^1.0.29",
@@ -95,6 +96,7 @@
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.0.10",
     "eslint-plugin-unused-imports": "^4.1.7",
+    "lefthook": "^2.1.10",
     "lightningcss": "^1.30.2",
     "next-sitemap": "^4.2.3",
     "nodemon": "^3.1.11",
