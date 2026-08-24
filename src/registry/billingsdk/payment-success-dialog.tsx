@@ -141,11 +141,11 @@ export const PaymentSuccessDialog = forwardRef<
                 transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <div className="relative">
-                <div className="bg-primary/10 border-primary/30 flex size-16 items-center justify-center rounded-full border shadow-sm">
-                  <CheckCircle2 className="text-primary size-10" />
+                <div className="flex size-16 items-center justify-center rounded-full border border-primary/30 bg-primary/10 shadow-sm">
+                  <CheckCircle2 className="size-10 text-primary" />
                 </div>
                 <motion.span
-                  className="border-primary/30 absolute inset-0 rounded-full border-2"
+                  className="absolute inset-0 rounded-full border-2 border-primary/30"
                   initial={{ scale: 0.9, opacity: 0.5 }}
                   animate={{ scale: 1.25, opacity: 0 }}
                   transition={{
@@ -155,7 +155,7 @@ export const PaymentSuccessDialog = forwardRef<
                   }}
                 />
                 <motion.span
-                  className="border-accent/30 absolute inset-0 rounded-full border-2"
+                  className="absolute inset-0 rounded-full border-2 border-accent/30"
                   initial={{ scale: 0.9, opacity: 0.5 }}
                   animate={{ scale: 1.6, opacity: 0 }}
                   transition={{
@@ -173,7 +173,7 @@ export const PaymentSuccessDialog = forwardRef<
                 {title}
               </DialogTitle>
             </DialogHeader>
-            <p className="text-muted-foreground max-w-[38ch] text-sm">
+            <p className="max-w-[38ch] text-sm text-muted-foreground">
               {subtitle}
             </p>
 
@@ -187,7 +187,7 @@ export const PaymentSuccessDialog = forwardRef<
                 {currencySymbol}
                 {price}
               </motion.div>
-              <div className="text-muted-foreground text-xs">
+              <div className="text-xs text-muted-foreground">
                 Paid for {productName}
               </div>
             </div>

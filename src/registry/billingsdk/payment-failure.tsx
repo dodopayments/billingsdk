@@ -107,8 +107,8 @@ export const PaymentFailure = React.forwardRef<
       <Card ref={ref} className={cn("w-full max-w-md", className)} {...props}>
         <CardHeader className="space-y-4 text-center">
           <div className="flex justify-center">
-            <div className="bg-destructive/10 rounded-full p-3">
-              <XCircle className="text-destructive h-16 w-16" />
+            <div className="rounded-full bg-destructive/10 p-3">
+              <XCircle className="h-16 w-16 text-destructive" />
             </div>
           </div>
           <div>
@@ -121,11 +121,11 @@ export const PaymentFailure = React.forwardRef<
 
         <CardContent className="space-y-4">
           {reasons.length > 0 && (
-            <div className="bg-muted space-y-2 rounded-lg p-4">
+            <div className="space-y-2 rounded-lg bg-muted p-4">
               <h3 className="text-sm font-semibold">
                 Common reasons for payment failure:
               </h3>
-              <ul className="text-muted-foreground list-inside list-disc space-y-1 text-sm">
+              <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
                 {reasons.map((reason) => (
                   <li key={reason}>{reason}</li>
                 ))}
@@ -134,7 +134,7 @@ export const PaymentFailure = React.forwardRef<
           )}
 
           {message && (
-            <p className="text-muted-foreground text-center text-sm">
+            <p className="text-center text-sm text-muted-foreground">
               {message}
             </p>
           )}

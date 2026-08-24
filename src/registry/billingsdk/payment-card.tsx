@@ -144,12 +144,12 @@ export function PaymentCard({
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex gap-3">
-                    <Check className="text-primary mt-0.5 h-4 w-4 shrink-0" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <div className="space-y-1">
                       <p className="text-sm leading-none font-medium">
                         {feature || "Payment & Invoice"}
                       </p>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-sm text-muted-foreground">
                         {featuredescription ||
                           "Automated billing and detailed transaction records"}
                       </p>
@@ -157,12 +157,12 @@ export function PaymentCard({
                   </div>
 
                   <div className="flex gap-3">
-                    <Check className="text-primary mt-0.5 h-4 w-4 shrink-0" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <div className="space-y-1">
                       <p className="text-sm leading-none font-medium">
                         {feature2 || "Priority Support"}
                       </p>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-sm text-muted-foreground">
                         {feature2description ||
                           "Faster response times and technical support"}
                       </p>
@@ -219,7 +219,7 @@ export function PaymentCard({
                 />
               </div>
               {errors.card && (
-                <p className="text-destructive text-sm">{errors.card}</p>
+                <p className="text-sm text-destructive">{errors.card}</p>
               )}
             </div>
 
@@ -236,7 +236,7 @@ export function PaymentCard({
                   maxLength={5}
                 />
                 {errors.expiry && (
-                  <p className="text-destructive text-sm">{errors.expiry}</p>
+                  <p className="text-sm text-destructive">{errors.expiry}</p>
                 )}
               </div>
               <div className="space-y-2">
@@ -251,7 +251,7 @@ export function PaymentCard({
                   maxLength={4}
                 />
                 {errors.cvc && (
-                  <p className="text-destructive text-sm">{errors.cvc}</p>
+                  <p className="text-sm text-destructive">{errors.cvc}</p>
                 )}
               </div>
             </div>

@@ -113,7 +113,7 @@ export default function GitHubStarBadge() {
       href="https://github.com/dodopayments/billingsdk"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-background inline-flex h-9 items-center rounded-md border text-xs leading-none font-normal text-white shadow-sm backdrop-blur-md transition-colors"
+      className="inline-flex h-9 items-center rounded-md border bg-background text-xs leading-none font-normal text-white shadow-sm backdrop-blur-md transition-colors"
       aria-label="View GitHub repository and star"
     >
       {/* Left: GitHub icon */}

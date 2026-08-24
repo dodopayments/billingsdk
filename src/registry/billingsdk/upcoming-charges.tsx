@@ -56,19 +56,19 @@ export function UpcomingCharges({
         {description && <CardDescription>{description}</CardDescription>}
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="bg-muted/30 rounded-lg border p-4">
+        <div className="rounded-lg border bg-muted/30 p-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Calendar className="text-muted-foreground h-5 w-5" />
+              <Calendar className="h-5 w-5 text-muted-foreground" />
               <div>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   Next Billing Date
                 </p>
                 <p className="font-semibold">{nextBillingDate}</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-muted-foreground text-sm">Total</p>
+              <p className="text-sm text-muted-foreground">Total</p>
               <p className="text-2xl font-bold tabular-nums">{totalAmount}</p>
             </div>
           </div>
@@ -80,7 +80,7 @@ export function UpcomingCharges({
             {charges.map((charge) => (
               <div
                 key={charge.id}
-                className="hover:bg-muted/50 rounded-lg border p-3 transition-colors"
+                className="rounded-lg border p-3 transition-colors hover:bg-muted/50"
               >
                 <div className="mb-1.5 flex items-start justify-between gap-3">
                   <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -91,7 +91,7 @@ export function UpcomingCharges({
                     {charge.amount}
                   </span>
                 </div>
-                <p className="text-muted-foreground text-sm">{charge.date}</p>
+                <p className="text-sm text-muted-foreground">{charge.date}</p>
               </div>
             ))}
           </div>

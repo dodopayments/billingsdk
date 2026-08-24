@@ -265,8 +265,8 @@ export function PricingTableFour({
       {theme === "classic" && (
         <>
           <div className="bg-grid-pattern absolute inset-0 opacity-5" />
-          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
+          <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-secondary/5 blur-2xl" />
         </>
       )}
 
@@ -274,7 +274,7 @@ export function PricingTableFour({
         {/* Header */}
         <div className="mb-12 text-center">
           {subtitle && (
-            <p className="text-primary mb-3 text-sm font-medium tracking-wide uppercase">
+            <p className="mb-3 text-sm font-medium tracking-wide text-primary uppercase">
               {subtitle}
             </p>
           )}
@@ -297,7 +297,7 @@ export function PricingTableFour({
                   setIsAnnually(value === "annually");
                 }}
               >
-                <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+                <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
                   <RadioGroupItem
                     value="monthly"
                     id={`${uniqueId}-monthly`}
@@ -305,12 +305,12 @@ export function PricingTableFour({
                   />
                   <Label
                     htmlFor={`${uniqueId}-monthly`}
-                    className="text-muted-foreground peer-data-[state=checked]:text-primary hover:text-foreground flex h-full cursor-pointer items-center justify-center px-2 font-semibold transition-all md:px-7"
+                    className="flex h-full cursor-pointer items-center justify-center px-2 font-semibold text-muted-foreground transition-all peer-data-[state=checked]:text-primary hover:text-foreground md:px-7"
                   >
                     {billingToggleLabels.monthly}
                   </Label>
                 </div>
-                <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+                <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
                   <RadioGroupItem
                     value="annually"
                     id={`${uniqueId}-annually`}
@@ -318,11 +318,11 @@ export function PricingTableFour({
                   />
                   <Label
                     htmlFor={`${uniqueId}-annually`}
-                    className="text-muted-foreground peer-data-[state=checked]:text-primary hover:text-foreground flex h-full cursor-pointer items-center justify-center gap-1 px-2 font-semibold transition-all md:px-7"
+                    className="flex h-full cursor-pointer items-center justify-center gap-1 px-2 font-semibold text-muted-foreground transition-all peer-data-[state=checked]:text-primary hover:text-foreground md:px-7"
                   >
                     {billingToggleLabels.yearly}
                     {yearlyPriceDiscount > 0 && (
-                      <span className="bg-primary/10 text-primary border-primary/20 ml-1 rounded border px-2 py-0.5 text-xs font-medium">
+                      <span className="ml-1 rounded border border-primary/20 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                         Save {yearlyPriceDiscount}%
                       </span>
                     )}
@@ -372,7 +372,7 @@ export function PricingTableFour({
 
               {/* Classic theme highlight effect */}
               {theme === "classic" && plan.highlight && (
-                <div className="via-primary absolute -top-px left-1/2 h-px w-32 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent" />
+                <div className="absolute -top-px left-1/2 h-px w-32 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary to-transparent" />
               )}
 
               <div
@@ -434,7 +434,7 @@ export function PricingTableFour({
                                 )}
                               {plan.yearlyPrice}
                             </span>
-                            <span className="text-muted-foreground text-sm">
+                            <span className="text-sm text-muted-foreground">
                               /year
                             </span>
                             {calculateDiscount(
@@ -467,7 +467,7 @@ export function PricingTableFour({
                                   "custom" && <>{plan.currency}</>}
                               {plan.monthlyPrice}
                             </span>
-                            <span className="text-muted-foreground text-sm">
+                            <span className="text-sm text-muted-foreground">
                               /month
                             </span>
                           </div>

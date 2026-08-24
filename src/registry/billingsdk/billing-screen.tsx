@@ -218,14 +218,14 @@ export function BillingScreen({
 
         {/* Current Plan Section */}
         <section className="space-y-4">
-          <h2 className="text-muted-foreground text-lg">Current Plan</h2>
-          <div className="border-border flex flex-col gap-4 rounded-xl border p-6 md:flex-row md:items-center md:justify-between">
+          <h2 className="text-lg text-muted-foreground">Current Plan</h2>
+          <div className="flex flex-col gap-4 rounded-xl border border-border p-6 md:flex-row md:items-center md:justify-between">
             <div>
               <div className="mb-1 flex items-baseline gap-2">
                 <span className="text-xl font-semibold">{planName}</span>
                 <span className="text-muted-foreground">{planPrice}</span>
               </div>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 Renews on {renewalDate}
               </p>
             </div>
@@ -243,16 +243,16 @@ export function BillingScreen({
         {/* Credit Balance Section */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-muted-foreground text-lg">Credit Balance</h2>
+            <h2 className="text-lg text-muted-foreground">Credit Balance</h2>
             <Button onClick={onBuyCredits}>Buy Credits</Button>
           </div>
 
-          <div className="border-border overflow-hidden rounded-xl border">
+          <div className="overflow-hidden rounded-xl border border-border">
             {/* Credit info header */}
-            <div className="border-border border-b p-6">
-              <p className="text-muted-foreground text-sm">
+            <div className="border-b border-border p-6">
+              <p className="text-sm text-muted-foreground">
                 Your monthly credits reset in{" "}
-                <span className="text-foreground font-semibold">
+                <span className="font-semibold text-foreground">
                   {resetDays} days
                 </span>
                 . Credits are used in the following order: gifted, monthly,
@@ -282,7 +282,7 @@ export function BillingScreen({
                       <span className="text-muted-foreground">
                         Monthly Credits
                       </span>
-                      <InfoIcon className="text-muted-foreground h-4 w-4" />
+                      <InfoIcon className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <span className="font-mono">
                       {monthlyCredits} / {monthlyCreditsLimit}
@@ -294,12 +294,12 @@ export function BillingScreen({
                       <span className="text-muted-foreground">
                         Purchased Credits
                       </span>
-                      <InfoIcon className="text-muted-foreground h-4 w-4" />
+                      <InfoIcon className="h-4 w-4 text-muted-foreground" />
                     </div>
                     <span className="font-mono">{purchasedCredits}</span>
                   </div>
 
-                  <div className="border-border mt-2 flex items-center justify-between border-t py-3">
+                  <div className="mt-2 flex items-center justify-between border-t border-border py-3">
                     <span className="font-semibold">
                       Total Available Credits
                     </span>
@@ -312,16 +312,16 @@ export function BillingScreen({
             </div>
 
             {/* Auto-recharge notice */}
-            <div className="bg-muted/30 border-border border-t p-6">
+            <div className="border-t border-border bg-muted/30 p-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-start gap-3">
-                  <InfoIcon className="text-muted-foreground mt-0.5 h-5 w-5 flex-shrink-0" />
+                  <InfoIcon className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground" />
                   <div>
                     <p className="font-medium">
                       Auto-recharge is{" "}
                       {autoRechargeEnabled ? "enabled" : "not enabled"}.
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-sm text-muted-foreground">
                       {autoRechargeEnabled
                         ? "Credits will be automatically added when your balance is low."
                         : "Enable to automatically add credits when your balance is low."}

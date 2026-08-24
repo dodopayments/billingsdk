@@ -25,7 +25,7 @@ export const ShineButton = ({
       }}
       transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
     >
-      <span className="via-primary/40 absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+      <span className="absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/40 transition-opacity duration-500 group-hover:opacity-40"></span>
       {/* Inner container like button */}
       <div
         className={cn(
@@ -33,13 +33,13 @@ export const ShineButton = ({
           containerClassName,
         )}
       >
-        {Icon && <Icon className="text-primary size-3" />}
+        {Icon && <Icon className="size-3 text-primary" />}
         <div className="text-sm font-normal whitespace-nowrap text-white">
           {label}
         </div>
       </div>
       {/* Underline effect like Tailwind Connect */}
-      <span className="via-primary/90 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+      <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/90 transition-opacity duration-500 group-hover:opacity-40"></span>
     </motion.div>
   );
 };

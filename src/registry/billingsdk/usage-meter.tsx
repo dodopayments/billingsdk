@@ -64,7 +64,7 @@ function CircleUsageItem({
   }, [percentage, motionValue]);
 
   return (
-    <div className="bg-muted/20 flex flex-col items-center space-y-3 rounded-xl p-4 text-center">
+    <div className="flex flex-col items-center space-y-3 rounded-xl bg-muted/20 p-4 text-center">
       <span className="w-full truncate text-sm font-medium">{item.name}</span>
       <div className="relative">
         <svg
@@ -77,7 +77,7 @@ function CircleUsageItem({
             cy={config.circle / 2}
             r={radius}
             strokeWidth={config.stroke}
-            className="text-muted stroke-current"
+            className="stroke-current text-muted"
             fill="transparent"
           />
           <motion.circle
@@ -111,7 +111,7 @@ function CircleUsageItem({
           </span>
         </div>
       </div>
-      <span className="text-muted-foreground text-xs">
+      <span className="text-xs text-muted-foreground">
         {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
       </span>
       {getStatus(percentage)}
@@ -150,10 +150,10 @@ function LinearUsageItem({
   }, [percentage, motionValue]);
 
   return (
-    <div className="bg-muted/20 space-y-2 rounded-xl p-4">
+    <div className="space-y-2 rounded-xl bg-muted/20 p-4">
       <div className="flex items-center justify-between">
         <span className="truncate text-sm font-medium">{item.name}</span>
-        <motion.span className="text-muted-foreground text-xs">
+        <motion.span className="text-xs text-muted-foreground">
           {display}
         </motion.span>
       </div>
@@ -176,7 +176,7 @@ function LinearUsageItem({
           transition={{ duration: 0.5, ease: "easeOut" }}
         />
       </div>
-      <div className="text-muted-foreground flex items-center justify-between text-xs">
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>
           {remaining.toLocaleString()} / {item.limit.toLocaleString()} left
         </span>
@@ -265,7 +265,7 @@ export function UsageMeter({
               </CardTitle>
             )}
             {description && (
-              <CardDescription className="text-muted-foreground text-sm">
+              <CardDescription className="text-sm text-muted-foreground">
                 {description}
               </CardDescription>
             )}
@@ -310,7 +310,7 @@ export function UsageMeter({
             </CardTitle>
           )}
           {description && (
-            <CardDescription className="text-muted-foreground text-sm">
+            <CardDescription className="text-sm text-muted-foreground">
               {description}
             </CardDescription>
           )}

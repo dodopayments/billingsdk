@@ -49,7 +49,7 @@ const Hero = () => {
   }, [router]);
 
   return (
-    <div className="border-muted relative max-h-fit min-h-[45rem] overflow-hidden rounded-4xl border pt-30">
+    <div className="relative max-h-fit min-h-[45rem] overflow-hidden rounded-4xl border border-muted pt-30">
       {/* Background Image */}
       <Image
         src="/landing/FractalMaze.jpg"
@@ -68,7 +68,7 @@ const Hero = () => {
           {/* Main Hero Section */}
           <div className="relative mb-8 space-y-4 text-center sm:mb-12 md:mb-16">
             <motion.h1
-              className="font-display relative mx-auto mb-3 max-w-xl text-5xl leading-10 font-semibold text-balance text-white md:text-6xl lg:text-7xl xl:leading-16"
+              className="relative mx-auto mb-3 max-w-xl font-display text-5xl leading-10 font-semibold text-balance text-white md:text-6xl lg:text-7xl xl:leading-16"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
@@ -84,7 +84,7 @@ const Hero = () => {
                 }}
                 transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
               >
-                <span className="via-primary/40 absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                <span className="absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/40 transition-opacity duration-500 group-hover:opacity-40"></span>
 
                 {/* Inner container like button */}
                 <div className="relative z-10 hidden items-center gap-2 rounded-full px-4 py-0.5 ring-1 ring-white/10">
@@ -117,7 +117,7 @@ const Hero = () => {
                 </div>
 
                 {/* Underline effect like Tailwind Connect */}
-                <span className="via-primary/90 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/90 transition-opacity duration-500 group-hover:opacity-40"></span>
               </motion.div>
             </motion.h1>
 
@@ -144,19 +144,19 @@ const Hero = () => {
               transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
             >
               <Button
-                className="focus-visible:ring-ring gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                className="gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
                 asChild
               >
                 <Link className="group flex items-center gap-2" href="/docs">
                   <span>Get Started</span>
-                  <Badge className="bg-accent text-foreground shadow-background/70 p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl">
+                  <Badge className="bg-accent p-1 text-foreground shadow-background/70 transition-all duration-200 ease-in-out group-hover:shadow-xl">
                     <CornerDownLeft className="size-4" />
                   </Badge>
                 </Link>
               </Button>
               <Button
                 variant="secondary"
-                className="focus-visible:ring-ring gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                className="gap-2 whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
               >
                 <Link
                   className="group flex items-center gap-2"
@@ -188,7 +188,7 @@ const Hero = () => {
               }}
               transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
             >
-              <div className="border-l-foreground relative bg-transparent">
+              <div className="relative border-l-foreground bg-transparent">
                 <motion.div
                   className="absolute -top-[60px] -left-[180px] hidden lg:block"
                   variants={{
@@ -206,7 +206,7 @@ const Hero = () => {
                     transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
                   >
                     {/* Top gradient line like Fully Open Source */}
-                    <span className="via-primary/40 absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                    <span className="absolute -top-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/40 transition-opacity duration-500 group-hover:opacity-40"></span>
 
                     {/* Inner container */}
                     <div className="relative z-10 hidden items-center gap-2 rounded-full px-4 py-0.5 ring-1 ring-white/10">
@@ -241,7 +241,7 @@ const Hero = () => {
                     </div>
 
                     {/* Bottom underline like Fully Open Source */}
-                    <span className="via-primary/90 absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/90 transition-opacity duration-500 group-hover:opacity-40"></span>
                   </motion.div>
                 </motion.div>
               </div>

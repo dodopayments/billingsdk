@@ -19,7 +19,7 @@ export const FeatureCard = ({
         (index === 1 || index === 5) && "lg:col-span-4",
       )}
     >
-      <div className="bg-background/80 group relative flex h-full flex-col overflow-hidden rounded-lg border">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-lg border bg-background/80">
         <Image
           src="/landing/gradient2.png"
           alt="Gradient background"

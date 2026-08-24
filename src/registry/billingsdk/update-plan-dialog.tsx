@@ -100,7 +100,7 @@ export function UpdatePlanDialog({
           </div>
         </DialogHeader>
         <div
-          className="[&::-webkit-scrollbar-thumb]:bg-muted hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/20 -mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto px-4 sm:-mx-6 sm:px-6 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-track]:bg-transparent"
+          className="-mx-4 min-h-0 flex-1 overflow-x-hidden overflow-y-auto px-4 sm:-mx-6 sm:px-6 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-muted hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/20 [&::-webkit-scrollbar-track]:bg-transparent"
           style={{
             scrollbarWidth: "thin",
             scrollbarColor: "hsl(var(--muted)) transparent",
@@ -108,7 +108,7 @@ export function UpdatePlanDialog({
         >
           {plans.length === 0 ? (
             <div className="flex items-center justify-center py-12 text-center">
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 No plans available
               </p>
             </div>
@@ -173,7 +173,7 @@ export function UpdatePlanDialog({
                                 </Badge>
                               )}
                             </div>
-                            <p className="text-muted-foreground mt-1 text-[11px] leading-relaxed sm:text-xs">
+                            <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground sm:text-xs">
                               {plan.description}
                             </p>
                             {plan.features.length > 0 && (
@@ -183,10 +183,10 @@ export function UpdatePlanDialog({
                                     (feature, featureIndex) => (
                                       <div
                                         key={featureIndex}
-                                        className="bg-muted/20 border-border/30 flex flex-shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 sm:gap-2 sm:rounded-lg"
+                                        className="flex flex-shrink-0 items-center gap-1.5 rounded-md border border-border/30 bg-muted/20 px-2 py-1 sm:gap-2 sm:rounded-lg"
                                       >
-                                        <div className="bg-primary h-1 w-1 flex-shrink-0 rounded-full sm:h-1.5 sm:w-1.5" />
-                                        <span className="text-muted-foreground text-[10px] leading-none whitespace-nowrap sm:text-xs">
+                                        <div className="h-1 w-1 flex-shrink-0 rounded-full bg-primary sm:h-1.5 sm:w-1.5" />
+                                        <span className="text-[10px] leading-none whitespace-nowrap text-muted-foreground sm:text-xs">
                                           {feature.name}
                                         </span>
                                       </div>
@@ -203,7 +203,7 @@ export function UpdatePlanDialog({
                               ? `${plan.currency}${getCurrentPrice(plan)}`
                               : getCurrentPrice(plan)}
                           </div>
-                          <div className="text-muted-foreground mt-0.5 text-[10px] sm:text-xs">
+                          <div className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">
                             /{isYearly ? "year" : "month"}
                           </div>
                         </div>

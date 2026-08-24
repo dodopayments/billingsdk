@@ -8,7 +8,7 @@ export default function TrialExpiryCardDemo() {
   trialEndDate.setDate(trialEndDate.getDate() + 5);
 
   return (
-    <div className="bg-background flex h-full min-h-[500px] w-full items-center justify-center rounded-lg border-2 p-6">
+    <div className="flex h-full min-h-[500px] w-full items-center justify-center rounded-lg border-2 bg-background p-6">
       <TrialExpiryCard
         trialEndDate={trialEndDate}
         onUpgrade={() => {

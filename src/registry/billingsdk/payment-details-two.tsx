@@ -88,7 +88,7 @@ const CardLogo = ({ type }: { type: string }) => {
         </div>
       );
     default:
-      return <CreditCard className="text-muted-foreground h-5 w-5" />;
+      return <CreditCard className="h-5 w-5 text-muted-foreground" />;
   }
 };
 
@@ -230,7 +230,7 @@ export function PaymentDetailsTwo({
             >
               1
             </div>
-            <div className="bg-border h-1 flex-1 rounded-full">
+            <div className="h-1 flex-1 rounded-full bg-border">
               <div
                 className={cn(
                   "bg-primary h-full rounded-full transition-all duration-300",
@@ -274,7 +274,7 @@ export function PaymentDetailsTwo({
                     })}
                   />
                   {errors.nameOnCard && (
-                    <p className="text-destructive text-sm">
+                    <p className="text-sm text-destructive">
                       {errors.nameOnCard.message}
                     </p>
                   )}
@@ -302,7 +302,7 @@ export function PaymentDetailsTwo({
                     />
                   </div>
                   {errors.cardNumber && (
-                    <p className="text-destructive text-sm">
+                    <p className="text-sm text-destructive">
                       {errors.cardNumber.message}
                     </p>
                   )}
@@ -336,7 +336,7 @@ export function PaymentDetailsTwo({
                       }
                     />
                     {errors.validTill && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.validTill.message}
                       </p>
                     )}
@@ -344,7 +344,7 @@ export function PaymentDetailsTwo({
                   <div className="space-y-2">
                     <Label htmlFor="cvv">CVV</Label>
                     <div className="relative">
-                      <Shield className="text-muted-foreground absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2" />
+                      <Shield className="absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <Input
                         id="cvv"
                         type="password"
@@ -363,7 +363,7 @@ export function PaymentDetailsTwo({
                       />
                     </div>
                     {errors.cvv && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.cvv.message}
                       </p>
                     )}
@@ -388,7 +388,7 @@ export function PaymentDetailsTwo({
                       {...register("firstName", { required: "Required" })}
                     />
                     {errors.firstName && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.firstName.message}
                       </p>
                     )}
@@ -401,7 +401,7 @@ export function PaymentDetailsTwo({
                       {...register("middleLastName", { required: "Required" })}
                     />
                     {errors.middleLastName && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.middleLastName.message}
                       </p>
                     )}
@@ -488,7 +488,7 @@ export function PaymentDetailsTwo({
                     {...register("billingAddress", { required: "Required" })}
                   />
                   {errors.billingAddress && (
-                    <p className="text-destructive text-sm">
+                    <p className="text-sm text-destructive">
                       {errors.billingAddress.message}
                     </p>
                   )}
@@ -509,7 +509,7 @@ export function PaymentDetailsTwo({
                       })}
                     />
                     {errors.pinCode && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.pinCode.message}
                       </p>
                     )}
@@ -529,7 +529,7 @@ export function PaymentDetailsTwo({
                       })}
                     />
                     {errors.contactNumber && (
-                      <p className="text-destructive text-sm">
+                      <p className="text-sm text-destructive">
                         {errors.contactNumber.message}
                       </p>
                     )}
@@ -540,7 +540,7 @@ export function PaymentDetailsTwo({
           </AnimatePresence>
         </CardContent>
 
-        <CardFooter className="bg-muted/30 flex justify-between border-t py-6">
+        <CardFooter className="flex justify-between border-t bg-muted/30 py-6">
           {step === 1 ? (
             <>
               <Button
@@ -579,7 +579,7 @@ export function PaymentDetailsTwo({
                       exit={{ opacity: 0 }}
                       className="flex items-center gap-2"
                     >
-                      <div className="border-background h-4 w-4 animate-spin rounded-full border-2 border-t-transparent" />
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-background border-t-transparent" />
                       <span>Saving...</span>
                     </motion.div>
                   ) : isSaved ? (

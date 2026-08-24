@@ -167,22 +167,22 @@ export function LimitedOfferDialog({
 
           {/* Header */}
           <div className="space-y-2 text-center">
-            <h2 className="text-foreground text-xl font-semibold">{title}</h2>
-            <p className="text-muted-foreground text-sm">{description}</p>
+            <h2 className="text-xl font-semibold text-foreground">{title}</h2>
+            <p className="text-sm text-muted-foreground">{description}</p>
           </div>
 
           {/* Offer Card */}
-          <div className="bg-muted space-y-4 rounded-lg p-4">
+          <div className="space-y-4 rounded-lg bg-muted p-4">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <h3 className="text-foreground font-semibold">{offer.title}</h3>
-                <p className="text-muted-foreground text-xs">
+                <h3 className="font-semibold text-foreground">{offer.title}</h3>
+                <p className="text-xs text-muted-foreground">
                   {offer.description}
                 </p>
               </div>
               <Badge
                 variant="secondary"
-                className="text-foreground font-semibold"
+                className="font-semibold text-foreground"
               >
                 {offer.discount}
               </Badge>
@@ -191,8 +191,8 @@ export function LimitedOfferDialog({
             <div className="space-y-3">
               {offer.features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <Circle className="text-foreground h-2 w-2 fill-current" />
-                  <span className="text-foreground text-sm">
+                  <Circle className="h-2 w-2 fill-current text-foreground" />
+                  <span className="text-sm text-foreground">
                     {feature.name}
                   </span>
                 </div>
@@ -201,15 +201,15 @@ export function LimitedOfferDialog({
           </div>
 
           {/* Warning Section */}
-          <div className="bg-destructive/10 border-destructive/20 space-y-2 rounded-lg border p-4">
-            <h4 className="text-destructive font-medium">{warningTitle}</h4>
-            <p className="text-destructive/80 text-sm">{warningText}</p>
+          <div className="space-y-2 rounded-lg border border-destructive/20 bg-destructive/10 p-4">
+            <h4 className="font-medium text-destructive">{warningTitle}</h4>
+            <p className="text-sm text-destructive/80">{warningText}</p>
           </div>
 
           {/* Error Display */}
           {error && (
-            <div className="bg-destructive/10 border-destructive/20 rounded-lg border p-3">
-              <p className="text-destructive text-sm">{error}</p>
+            <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-3">
+              <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
 
@@ -218,7 +218,7 @@ export function LimitedOfferDialog({
             <Button
               onClick={handleClaimOffer}
               disabled={isLoading}
-              className="bg-foreground hover:bg-foreground/90 text-background flex-1"
+              className="flex-1 bg-foreground text-background hover:bg-foreground/90"
             >
               {isLoading ? "Processing..." : claimButtonText}
             </Button>
@@ -226,7 +226,7 @@ export function LimitedOfferDialog({
               onClick={handleDeclineOffer}
               disabled={isLoading}
               variant="outline"
-              className="border-border text-foreground hover:bg-muted flex-1"
+              className="flex-1 border-border text-foreground hover:bg-muted"
             >
               {declineButtonText}
             </Button>
