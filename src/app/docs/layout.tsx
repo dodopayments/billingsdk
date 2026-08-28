@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { baseOptions } from "@/app/layout.config";
 import { source } from "@/lib/source";
 import { FaGithub, FaRegFileAlt } from "react-icons/fa";
+import { SidebarPersistence } from "@/components/docs/sidebar-persistence";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -29,6 +30,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         enabled: false,
       }}
     >
+      <SidebarPersistence />
       {children}
     </DocsLayout>
   );

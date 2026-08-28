@@ -32,7 +32,6 @@ export function BillingSettings2Demo() {
 
   const createCurrencyChangeHandler =
     (setCurrency: (value: string) => void) => (value: string) => {
-      console.log("Currency changed to:", value);
       setCurrency(value);
       // Add: updatePricing(value), savePreference(value), etc.
     };
