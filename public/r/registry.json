@@ -107,6 +107,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -141,6 +146,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -166,6 +176,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -198,6 +213,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -229,6 +249,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],
@@ -724,6 +749,11 @@
           "path": "src/registry/lib/billingsdk-config.ts",
           "type": "registry:lib",
           "target": "lib/billingsdk-config.ts"
+        },
+        {
+          "path": "src/utils/price-utils.ts",
+          "type": "registry:lib",
+          "target": "utils/price-utils.ts"
         }
       ],
       "dependencies": ["lucide-react", "class-variance-authority", "motion"],

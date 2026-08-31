@@ -12,6 +12,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { type Plan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
+import {
+  calculateDiscount as calcDiscount,
+  formatBillingPrice,
+} from "@/utils/price-utils";
 
 const sectionVariants = cva("py-32", {
   variants: {
@@ -213,31 +217,10 @@ export function PricingTableOne({
   const [isAnnually, setIsAnnually] = useState(false);
   const uniqueId = useId(); // Generate unique ID automatically
 
-  function calculateDiscount(
-    monthlyPrice: string,
-    yearlyPrice: string,
-  ): number {
-    const monthly = parseFloat(monthlyPrice);
-    const yearly = parseFloat(yearlyPrice);
-
-    if (
-      monthlyPrice.toLowerCase() === "custom" ||
-      yearlyPrice.toLowerCase() === "custom" ||
-      isNaN(monthly) ||
-      isNaN(yearly) ||
-      monthly === 0
-    ) {
-      return 0;
-    }
-
-    const discount = ((monthly * 12 - yearly) / (monthly * 12)) * 100;
-    return Math.round(discount);
-  }
-
   const yearlyPriceDiscount = plans.length
     ? Math.max(
         ...plans.map((plan) =>
-          calculateDiscount(plan.monthlyPrice, plan.yearlyPrice),
+          calcDiscount(plan.monthlyPrice, plan.yearlyPrice),
         ),
       )
     : 0;
@@ -380,14 +363,9 @@ export function PricingTableOne({
                             priceTextVariants({ size, theme }),
                           )}
                         >
-                          {parseFloat(plan.yearlyPrice) >= 0 && (
-                            <>{plan.currency}</>
-                          )}
-                          {plan.yearlyPrice}
-                          {calculateDiscount(
-                            plan.monthlyPrice,
-                            plan.yearlyPrice,
-                          ) > 0 && (
+                          {formatBillingPrice(plan.yearlyPrice, plan.currency)}
+                          {calcDiscount(plan.monthlyPrice, plan.yearlyPrice) >
+                            0 && (
                             <span
                               className={cn(
                                 "ml-2 text-xs",
@@ -396,7 +374,7 @@ export function PricingTableOne({
                                   : "underline",
                               )}
                             >
-                              {calculateDiscount(
+                              {calcDiscount(
                                 plan.monthlyPrice,
                                 plan.yearlyPrice,
                               )}
@@ -411,10 +389,7 @@ export function PricingTableOne({
                         <span
                           className={cn(priceTextVariants({ size, theme }))}
                         >
-                          {parseFloat(plan.monthlyPrice) >= 0 && (
-                            <>{plan.currency}</>
-                          )}
-                          {plan.monthlyPrice}
+                          {formatBillingPrice(plan.monthlyPrice, plan.currency)}
                         </span>
                         <p className="text-muted-foreground">per month</p>
                       </>

@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import { formatPrice } from "@/utils/price-utils";
 
 export interface UsageItem {
   model: string;
@@ -37,6 +38,7 @@ interface UsageTableProps {
   description?: string;
   usageHistory: UsageItem[];
   showTotal?: boolean;
+  currency?: string; // Symbols prefix as-is; ISO codes use Intl.NumberFormat.
 }
 
 export function UsageTable({
@@ -45,6 +47,7 @@ export function UsageTable({
   description,
   usageHistory,
   showTotal = true, // Default to true
+  currency = "$",
 }: UsageTableProps) {
   const totalRow = showTotal
     ? usageHistory.reduce(
@@ -74,7 +77,7 @@ export function UsageTable({
   };
 
   const formatCurrency = (amount: number) => {
-    return `$${amount.toFixed(2)}`;
+    return formatPrice(amount, currency);
   };
   const hasApiCost = usageHistory.some(
     (item) => item.apiCost !== undefined && item.apiCost !== null,
