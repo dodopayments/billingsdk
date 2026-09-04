@@ -71,7 +71,7 @@ export function UpdatePlanDialog({
         className={cn(
           "text-foreground flex max-h-[95vh] flex-col gap-3 sm:max-h-[90vh] sm:gap-4",
           "w-[calc(100vw-2rem)] max-w-2xl sm:w-full",
-          "p-4 sm:p-6",
+          "p-4 sm:p-6 sm:pt-10",
           className,
         )}
         style={themeStyles}
