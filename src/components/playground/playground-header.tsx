@@ -30,32 +30,6 @@ export function PlaygroundHeader() {
   const [isLoadingComponent, setIsLoadingComponent] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  // Load lightweight component list on mount (no actual imports)
-  useEffect(() => {
-    async function loadComponentList() {
-      setIsLoading(true);
-      const list = await getComponentList();
-      setComponentList(list);
-      setIsLoading(false);
-    }
-    loadComponentList();
-  }, []);
-
-  const categories = [
-    { id: "pricing", label: "Pricing Tables" },
-    { id: "subscription", label: "Subscription" },
-    { id: "payment", label: "Payment" },
-    { id: "usage", label: "Usage & Billing" },
-    { id: "ui", label: "UI Components" },
-  ];
-
-  const filteredComponents =
-    selectedCategory === "all"
-      ? componentList
-      : componentList.filter(
-          (comp: ComponentListItem) => comp.category === selectedCategory,
-        );
-
   const handleComponentChange = async (componentId: string) => {
     setIsLoadingComponent(true);
     setLoadError(null);
@@ -85,6 +59,43 @@ export function PlaygroundHeader() {
       setIsLoadingComponent(false);
     }
   };
+
+  // Load lightweight component list on mount (no actual imports)
+  useEffect(() => {
+    async function loadComponentList() {
+      setIsLoading(true);
+      const list = await getComponentList();
+      setComponentList(list);
+
+      // Default selection (pricing first item)
+      if (!state.selectedComponent) {
+        const pricingComponent = list.find(
+          (comp) => comp.category === "pricing",
+        );
+        if (pricingComponent) {
+          await handleComponentChange(pricingComponent.id);
+        }
+      }
+
+      setIsLoading(false);
+    }
+    loadComponentList();
+  }, []);
+
+  const categories = [
+    { id: "pricing", label: "Pricing Tables" },
+    { id: "subscription", label: "Subscription" },
+    { id: "payment", label: "Payment" },
+    { id: "usage", label: "Usage & Billing" },
+    { id: "ui", label: "UI Components" },
+  ];
+
+  const filteredComponents =
+    selectedCategory === "all"
+      ? componentList
+      : componentList.filter(
+          (comp: ComponentListItem) => comp.category === selectedCategory,
+        );
 
   const handleImportComponent = () => {
     // Create a file input element
@@ -162,8 +173,8 @@ export function PlaygroundHeader() {
             </SelectTrigger>
             <SelectContent className="max-h-96 w-64 min-w-64 overflow-y-auto">
               {categories.map((category) => (
-                <div key={category.id}>
-                  <div className="text-foreground bg-muted/50 border-border border-b px-3 py-2 text-sm font-semibold">
+                <div key={category.id} className="flex flex-col gap-2 py-2">
+                  <div className="text-muted-foreground w-fit rounded-md px-3 text-xs font-semibold">
                     {category.label}
                   </div>
                   {filteredComponents
@@ -175,7 +186,7 @@ export function PlaygroundHeader() {
                       <SelectItem
                         key={component.id}
                         value={component.id}
-                        className="px-3 py-2"
+                        className="ml-2 px-3 py-2"
                       >
                         <span className="text-sm font-medium">
                           {component.name}
