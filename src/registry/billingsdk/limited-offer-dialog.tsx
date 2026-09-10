@@ -159,7 +159,7 @@ export function LimitedOfferDialog({
         )}
         style={themeStyles}
       >
-        <div className="space-y-6 p-6">
+        <div className="space-y-6 p-6 pt-8">
           {/* Dialog Title for accessibility */}
           <DialogTitle className="sr-only">
             {title} - {description}
