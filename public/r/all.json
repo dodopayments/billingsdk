@@ -32,6 +32,7 @@
     "@billingsdk/coupon",
     "@billingsdk/limited-offer-dialog",
     "@billingsdk/payment-failure",
+    "@billingsdk/payment-processing",
     "@billingsdk/billing-screen"
   ],
   "files": [],

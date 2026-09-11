@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "payment-processing",
+  "title": "Payment Processing",
+  "description": "A payment processing card shown while a payment or subscription status is being confirmed.",
+  "dependencies": ["lucide-react"],
+  "registryDependencies": ["card", "separator", "utils"],
+  "files": [
+    {
+      "path": "src/registry/billingsdk/payment-processing.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Loader2, Shield, type LucideIcon } from \"lucide-react\";\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from \"@/components/ui/card\";\nimport { Separator } from \"@/components/ui/separator\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PaymentProcessingProps extends React.HTMLAttributes<HTMLDivElement> {\n  /**\n   * Heading at the top of the card.\n   * @default \"Processing Payment\"\n   */\n  title?: string;\n\n  /**\n   * Supporting line under the title.\n   * @default \"This may take a few moments\"\n   */\n  description?: string;\n\n  /**\n   * Trust marker rendered beside the process label.\n   * @default Shield\n   */\n  icon?: LucideIcon;\n\n  /**\n   * Short reassurance label beside the icon.\n   * @default \"Secure Transaction\"\n   */\n  processLabel?: string;\n\n  /**\n   * Warning shown in the footer.\n   * @default \"Please do not close this window\"\n   */\n  warning?: string;\n}\n\nexport const PaymentProcessing = React.forwardRef<\n  HTMLDivElement,\n  PaymentProcessingProps\n>(\n  (\n    {\n      className,\n      title = \"Processing Payment\",\n      description = \"This may take a few moments\",\n      icon: Icon = Shield,\n      processLabel = \"Secure Transaction\",\n      warning = \"Please do not close this window\",\n      ...props\n    },\n    ref,\n  ) => {\n    return (\n      <Card\n        ref={ref}\n        role=\"status\"\n        aria-live=\"polite\"\n        className={cn(\"w-full max-w-md text-center\", className)}\n        {...props}\n      >\n        <CardHeader className=\"space-y-4\">\n          <div className=\"flex justify-center\">\n            <Loader2 className=\"text-primary h-12 w-12 animate-spin motion-reduce:animate-none\" />\n          </div>\n          <div>\n            <CardTitle className=\"text-2xl font-semibold tracking-tight\">\n              {title}\n            </CardTitle>\n            <CardDescription className=\"mt-2 text-sm\">\n              {description}\n            </CardDescription>\n          </div>\n        </CardHeader>\n\n        <CardContent className=\"space-y-4\">\n          <Separator />\n          <div className=\"flex items-center justify-center gap-2 text-sm\">\n            <Icon className=\"text-muted-foreground h-4 w-4\" />\n            <span className=\"text-muted-foreground\">{processLabel}</span>\n          </div>\n          <Separator />\n        </CardContent>\n\n        <CardFooter>\n          <p className=\"text-muted-foreground w-full text-xs\">{warning}</p>\n        </CardFooter>\n      </Card>\n    );\n  },\n);\n\nPaymentProcessing.displayName = \"PaymentProcessing\";\n",
+      "type": "registry:component",
+      "target": "components/billingsdk/payment-processing.tsx"
+    },
+    {
+      "path": "src/registry/billingsdk/demo/payment-processing-demo.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { PaymentProcessing } from \"@/registry/billingsdk/payment-processing\";\nimport { Button } from \"@/components/ui/button\";\n\nexport function PaymentProcessingDemo() {\n  const [isProcessing, setIsProcessing] = useState(false);\n\n  const handlePay = async () => {\n    setIsProcessing(true);\n    try {\n      // Replace with your real payment confirmation call.\n      await new Promise((resolve) => setTimeout(resolve, 2000));\n    } finally {\n      setIsProcessing(false);\n    }\n  };\n\n  return (\n    // aria-busy belongs on the region being loaded, not on the status card.\n    <section\n      aria-busy={isProcessing}\n      className=\"flex min-h-[320px] w-full items-center justify-center p-4\"\n    >\n      {isProcessing ? (\n        <PaymentProcessing />\n      ) : (\n        <Button onClick={handlePay}>Pay now</Button>\n      )}\n    </section>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/payment-processing-demo.tsx"
+    }
+  ],
+  "type": "registry:block"
+}

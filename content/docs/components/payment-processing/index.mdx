@@ -1,0 +1,141 @@
+---
+title: Payment Processing
+description: A payment processing card shown while a payment or subscription status is being confirmed, with a spinner, trust marker, and a do-not-close warning.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-processing">
+      <PaymentProcessingDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/payment-processing-demo.tsx"'>
+      src/registry/billingsdk/demo/payment-processing-demo.tsx
+    </include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs
+  items={["shadcn", "billingSDK"]}
+  defaultValue="shadcn"
+  className="border-none bg-transparent"
+>
+  <Tab value="shadcn" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="installation-tabs"
+    >
+      <Tab value="npx">
+        ```bash npx shadcn@latest add @billingsdk/payment-processing ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash pnpm dlx shadcn@latest add @billingsdk/payment-processing ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash yarn dlx shadcn@latest add @billingsdk/payment-processing ```
+      </Tab>
+      <Tab value="bun">
+        ```bash bunx shadcn@latest add @billingsdk/payment-processing ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="billingsdk-cli-tabs"
+    >
+      <Tab value="npx">
+        ```bash npx @billingsdk/cli add payment-processing ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash pnpm dlx @billingsdk/cli add payment-processing ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash yarn dlx @billingsdk/cli add payment-processing ```
+      </Tab>
+      <Tab value="bun">
+        ```bash bunx @billingsdk/cli add payment-processing ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import { PaymentProcessing } from "@/components/billingsdk/payment-processing";
+```
+
+The component has no visibility prop. Render it while the payment is in
+flight and swap it out when the result arrives.
+
+```tsx
+const [isProcessing, setIsProcessing] = useState(false);
+
+async function handlePay() {
+  setIsProcessing(true);
+  try {
+    await confirmPayment();
+  } finally {
+    setIsProcessing(false);
+  }
+}
+
+// aria-busy goes on the region being loaded, not on the status card.
+<section aria-busy={isProcessing}>
+  {isProcessing ? <PaymentProcessing /> : <OrderSummary />}
+</section>;
+```
+
+## Full-screen overlay
+
+Positioning is left to you. For a full-page processing state, wrap it:
+
+```tsx
+<div className="flex min-h-screen items-center justify-center p-4">
+  <PaymentProcessing />
+</div>
+```
+
+## Customizing text
+
+```tsx
+<PaymentProcessing
+  title="Confirming your subscription"
+  description="We're checking with your bank."
+  icon={Lock}
+  processLabel="256-bit encrypted"
+  warning="Keep this tab open until we're done."
+/>
+```
+
+## Props
+
+| Prop           | Type         | Required | Description                                                                |
+| -------------- | ------------ | -------- | -------------------------------------------------------------------------- |
+| `title`        | `string`     | ❌       | Heading at the top of the card (default: `"Processing Payment"`)           |
+| `description`  | `string`     | ❌       | Supporting line under the title (default: `"This may take a few moments"`) |
+| `icon`         | `LucideIcon` | ❌       | Trust marker beside the process label (default: `Shield`)                  |
+| `processLabel` | `string`     | ❌       | Short reassurance label beside the icon (default: `"Secure Transaction"`)  |
+| `warning`      | `string`     | ❌       | Warning shown in the footer (default: `"Please do not close this window"`) |
+| `className`    | `string`     | ❌       | Merged onto the card. Use it to position or resize the card                |
+
+The component also accepts any `React.HTMLAttributes<HTMLDivElement>` and
+forwards its `ref` to the card element.
+
+## Accessibility
+
+- The card is a `role="status"` live region with `aria-live="polite"`, so
+  screen readers announce it without moving focus.
+- Put `aria-busy` on the region you are loading, not on this component. On a
+  status element `aria-busy="true"` tells assistive technology to withhold
+  the announcement the card exists to make.
+- The spinner stops under `prefers-reduced-motion: reduce`. The copy states
+  the status on its own, so nothing is lost when it does.
+- The component is not interactive and contains no focusable elements.
