@@ -76,7 +76,7 @@ export function UpdatePlanDialog({
         )}
         style={themeStyles}
       >
-        <DialogHeader className="flex flex-col gap-3 pb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-0">
+        <DialogHeader className="flex flex-col gap-3 pt-4 pb-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-0 sm:pr-4 sm:pb-0">
           <DialogTitle className="text-lg font-semibold sm:text-xl">
             {title || "Upgrade Plan"}
           </DialogTitle>

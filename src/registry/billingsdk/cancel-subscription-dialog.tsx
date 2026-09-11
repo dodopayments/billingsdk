@@ -175,7 +175,7 @@ export function CancelSubscriptionDialog({
         )}
         <div
           className={cn(
-            "flex flex-col gap-4 px-4 py-6",
+            "flex flex-col gap-4 px-4 py-6 pt-8",
             leftPanelImageUrl ? "w-full md:w-1/2" : "w-full",
           )}
         >
