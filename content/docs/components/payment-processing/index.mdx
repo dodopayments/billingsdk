@@ -1,0 +1,171 @@
+---
+title: Payment Processing
+description: A full-screen payment processing state component that displays a loading spinner with secure transaction indicators and customizable messaging.
+---
+
+<Tabs items={['Preview', 'Code']} className="bg-transparent border-none">
+  <Tab value="Preview" className="border-none bg-transparent p-0 mt-3">
+    <PreviewComponents registryName="payment-processing">
+      <PaymentProcessingDemo />
+    </PreviewComponents>
+  </Tab>
+
+  <Tab value="Code" className="mt-3">
+    <include cwd lang="tsx" meta='title="src/components/payment-processing-demo.tsx"'>
+      src/components/payment-processing-demo.tsx
+    </include>
+  </Tab>
+</Tabs>
+
+## Installation
+
+<Tabs
+  items={["shadcn", "billingSDK"]}
+  defaultValue="shadcn"
+  className="border-none bg-transparent"
+>
+  <Tab value="shadcn" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="installation-tabs"
+    >
+      <Tab value="npx">
+        ```bash
+        npx shadcn@latest add @billingsdk/payment-processing
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx shadcn@latest add @billingsdk/payment-processing
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx shadcn@latest add @billingsdk/payment-processing
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx shadcn@latest add @billingsdk/payment-processing
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+  <Tab value="billingSDK" className="mt-3 border-none bg-transparent p-0">
+    <Tabs
+      items={["npx", "pnpm", "yarn", "bun"]}
+      defaultValue="npx"
+      groupId="billingsdk-cli-tabs"
+    >
+      <Tab value="npx">
+        ```bash
+        npx @billingsdk/cli add payment-processing
+        ```
+      </Tab>
+      <Tab value="pnpm">
+        ```bash
+        pnpm dlx @billingsdk/cli add payment-processing
+        ```
+      </Tab>
+      <Tab value="yarn">
+        ```bash
+        yarn dlx @billingsdk/cli add payment-processing
+        ```
+      </Tab>
+      <Tab value="bun">
+        ```bash
+        bunx @billingsdk/cli add payment-processing
+        ```
+      </Tab>
+    </Tabs>
+  </Tab>
+</Tabs>
+
+## Usage
+
+```tsx
+import PaymentProcessing from "@/components/billingsdk/payment-processing";
+```
+
+```tsx
+// Basic usage with state control
+const [isProcessing, setIsProcessing] = useState(false);
+
+async function handlePayment() {
+  setIsProcessing(true);
+
+  try {
+    // Process payment
+    await processPaymentAPI();
+    // Navigate to success page
+  } catch (error) {
+    // Handle error
+  } finally {
+    setIsProcessing(false);
+  }
+}
+
+<PaymentProcessing status={isProcessing} />
+```
+
+## Customization
+
+```tsx
+import { CreditCard } from "lucide-react";
+
+<PaymentProcessing
+  status={true}
+  title="Processing Your Payment"
+  description="Securely connecting to payment gateway"
+  icon={CreditCard}
+  processLabel="256-bit Encryption Active"
+  warning="Do not refresh or close this tab"
+/>
+```
+
+## Props
+
+| Prop           | Type          | Required | Description                                                          |
+| -------------- | ------------- | -------- | -------------------------------------------------------------------- |
+| `status`       | `boolean`     | ❌       | Controls visibility of the processing screen (default: `true`)       |
+| `title`        | `string`      | ❌       | Main heading text (default: `"Processing Payment"`)                  |
+| `description`  | `string`      | ❌       | Subtitle text below the spinner (default: `"This may take a few moments"`) |
+| `icon`         | `LucideIcon`  | ❌       | Icon component to display with the process label (default: `Shield`) |
+| `processLabel` | `string`      | ❌       | Security/process indicator text (default: `"Secure Transaction"`)    |
+| `warning`      | `string`      | ❌       | Warning message at the bottom (default: `"Please do not close this window"`) |
+
+## Features
+
+- **Full-Screen Overlay**: Takes over the entire viewport to prevent user interaction during processing
+- **Animated Spinner**: Rotating loader provides visual feedback that processing is ongoing
+- **Security Indicators**: Displays trust signals like "Secure Transaction" with shield icon
+- **Customizable Text**: All text elements can be customized to match your brand and context
+- **Custom Icons**: Support for any Lucide React icon to match your payment provider or security messaging
+- **Responsive Design**: Adapts gracefully to all screen sizes with proper spacing and typography
+
+## Use Cases
+
+- **Payment Submission**: Display while processing credit card transactions
+- **Subscription Activation**: Show during subscription setup or plan changes
+- **Payment Method Verification**: Display while validating payment information
+- **Refund Processing**: Use when processing refund requests
+- **Checkout Flow**: Integrate as the final step after user confirms payment
+
+## Best Practices
+
+1. **Always Control State**: Use a state variable to control the `status` prop
+2. **Set Appropriate Timeouts**: Implement timeout handling for long-running processes
+3. **Error Handling**: Always have a fallback to hide the processing screen on errors
+4. **User Communication**: Update the description to reflect the current processing step
+5. **Accessibility**: Ensure the processing screen is announced to screen readers
+
+## Example
+
+<include cwd lang="tsx" meta='title="src/components/payment-processing-demo.tsx"'>
+  src/components/payment-processing-demo.tsx
+</include>
+
+## Theming
+
+The payment processing component uses standard shadcn/ui theming with CSS variables. It adapts automatically to your configured light/dark modes and respects your custom color schemes.
