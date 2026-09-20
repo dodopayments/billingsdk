@@ -5,14 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { type Plan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
-import { X, Circle } from "lucide-react";
+import { Circle } from "lucide-react";
 import { useTheme } from "@/contexts/theme-context";
 import { getThemeStyles } from "@/lib/themes";
 
@@ -154,13 +153,6 @@ export function CancelSubscriptionDialog({
         style={themeStyles}
       >
         <DialogTitle className="sr-only">{title}</DialogTitle>
-        <DialogClose
-          className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 z-10 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none"
-          onClick={handleDialogClose}
-        >
-          <X className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </DialogClose>
         {leftPanelImageUrl && (
           <div className="relative hidden min-h-[500px] w-full overflow-hidden md:block md:w-1/2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
