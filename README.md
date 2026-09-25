@@ -176,7 +176,7 @@ Thanks to all our amazing contributors for their support and code!
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dodopayments/billingsdk&type=Date)](https://star-history.com/#dodopayments/billingsdk&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=dodopayments/billingsdk&type=Date)](https://star-history.dera.page/#dodopayments/billingsdk&Date)
 
 ## License
 
