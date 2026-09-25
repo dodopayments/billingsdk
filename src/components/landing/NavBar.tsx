@@ -51,7 +51,7 @@ const NavBar = () => {
           className={cn(
             `flex w-full items-center justify-between px-1 py-2.5 transition-all duration-300 sm:px-3 sm:py-3 md:px-4 ${
               isScrolled &&
-              "bg-accent/30 rounded-xl px-2 inset-shadow-sm inset-shadow-white/20 backdrop-blur-lg sm:rounded-2xl sm:px-4"
+              "rounded-xl bg-accent/30 px-2 inset-shadow-sm inset-shadow-white/20 backdrop-blur-lg sm:rounded-2xl sm:px-4"
             }`,
           )}
         >
@@ -79,7 +79,7 @@ const NavBar = () => {
             </div>
             <Button
               size="sm"
-              className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-7 items-center justify-center overflow-hidden rounded-md px-1.5 text-left text-xs font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer sm:h-8 sm:px-2.5 sm:px-3 sm:text-sm"
+              className="relative isolate inline-flex h-7 items-center justify-center overflow-hidden rounded-md bg-primary px-1.5 text-left text-xs font-medium text-primary-foreground ring-1 ring-primary before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:from-primary-foreground/20 before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:from-primary-foreground/10 after:to-transparent after:mix-blend-overlay hover:cursor-pointer sm:h-8 sm:px-2.5 sm:px-3 sm:text-sm"
               asChild
             >
               <Link
@@ -87,7 +87,7 @@ const NavBar = () => {
                 href="/docs"
               >
                 <span>Get Started</span>
-                <Badge className="bg-accent text-foreground shadow-background/70 p-1 transition-all duration-200 ease-in-out group-hover:shadow-xl">
+                <Badge className="bg-accent p-1 text-foreground shadow-background/70 transition-all duration-200 ease-in-out group-hover:shadow-xl">
                   <CornerDownLeft className="size-3 sm:size-4" />
                 </Badge>
               </Link>

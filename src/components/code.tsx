@@ -220,12 +220,12 @@ export function CustomCodeBlock({
   return (
     <div className={cn("relative h-full", className)}>
       {title && (
-        <div className="bg-background text-foreground flex items-center px-4 py-2">
+        <div className="flex items-center bg-background px-4 py-2 text-foreground">
           <span className="text-sm font-medium">{title}</span>
         </div>
       )}
 
-      <div className="bg-background/95 hide-scrollbars h-full overflow-hidden">
+      <div className="hide-scrollbars h-full overflow-hidden bg-background/95">
         <SyntaxHighlighter
           language={language}
           style={currentStyle}

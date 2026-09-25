@@ -138,7 +138,7 @@ export function TrialExpiryCard({
         {/* Countdown Timer */}
         {trialEndDate && daysRemaining > 0 && (
           <div
-            className="bg-muted/30 rounded-lg border p-4"
+            className="rounded-lg border bg-muted/30 p-4"
             role="status"
             aria-live="polite"
             aria-atomic="true"
@@ -163,9 +163,9 @@ export function TrialExpiryCard({
             {features.slice(0, 4).map((feature, index) => (
               <div
                 key={index}
-                className="text-muted-foreground flex items-center gap-2 text-sm"
+                className="flex items-center gap-2 text-sm text-muted-foreground"
               >
-                <Check className="text-primary h-4 w-4" />
+                <Check className="h-4 w-4 text-primary" />
                 <span>{feature}</span>
               </div>
             ))}
@@ -194,7 +194,7 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
       <div className="text-2xl font-bold tabular-nums sm:text-3xl">
         {String(value).padStart(2, "0")}
       </div>
-      <div className="text-muted-foreground text-xs">{label}</div>
+      <div className="text-xs text-muted-foreground">{label}</div>
     </div>
   );
 }

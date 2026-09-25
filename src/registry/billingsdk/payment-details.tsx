@@ -231,7 +231,7 @@ const CardLogo = ({ type }: { type: string }) => {
         </div>
       );
     default:
-      return <CreditCard className="text-muted-foreground h-5 w-5" />;
+      return <CreditCard className="h-5 w-5 text-muted-foreground" />;
   }
 };
 
@@ -479,14 +479,14 @@ export function PaymentDetails({
         style={themeStyles}
       >
         <div className="mb-6">
-          <h1 className="text-foreground mb-2 font-sans text-3xl font-bold">
+          <h1 className="mb-2 font-sans text-3xl font-bold text-foreground">
             {title}
           </h1>
-          <p className="text-muted-foreground font-sans">{description}</p>
+          <p className="font-sans text-muted-foreground">{description}</p>
         </div>
         {/* Card Details Section */}
-        <div className="border-border bg-card/50 mb-6 rounded-2xl border p-6">
-          <h2 className="text-foreground mb-5 font-sans text-2xl font-semibold">
+        <div className="mb-6 rounded-2xl border border-border bg-card/50 p-6">
+          <h2 className="mb-5 font-sans text-2xl font-semibold text-foreground">
             Card Details
           </h2>
 
@@ -494,7 +494,7 @@ export function PaymentDetails({
             {/* Name on Card and Valid Till */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="md:col-span-2">
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Name On Card <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -503,24 +503,24 @@ export function PaymentDetails({
                   onChange={(e) =>
                     handleInputChange("nameOnCard", e.target.value)
                   }
-                  className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                  className={`w-full rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                     errors.nameOnCard
                       ? "border-destructive focus:ring-destructive/20"
                       : "border-border"
                   }`}
                 />
                 {errors.nameOnCard && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.nameOnCard}
                   </p>
                 )}
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Valid Till <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <Calendar className="text-muted-foreground absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform" />
+                  <Calendar className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-muted-foreground" />
                   <input
                     type="text"
                     placeholder="MM/YY"
@@ -528,7 +528,7 @@ export function PaymentDetails({
                     onChange={(e) =>
                       handleInputChange("validTill", e.target.value)
                     }
-                    className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border py-3 pr-4 pl-12 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                    className={`w-full rounded-xl border bg-background py-3 pr-4 pl-12 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                       errors.validTill
                         ? "border-destructive focus:ring-destructive/20"
                         : "border-border"
@@ -536,7 +536,7 @@ export function PaymentDetails({
                   />
                 </div>
                 {errors.validTill && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.validTill}
                   </p>
                 )}
@@ -546,7 +546,7 @@ export function PaymentDetails({
             {/* Card Number and CVV */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="md:col-span-2">
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Card Number <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
@@ -560,7 +560,7 @@ export function PaymentDetails({
                     onChange={(e) =>
                       handleInputChange("cardNumber", e.target.value)
                     }
-                    className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border py-3 pr-4 pl-20 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                    className={`w-full rounded-xl border bg-background py-3 pr-4 pl-20 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                       errors.cardNumber
                         ? "border-destructive focus:ring-destructive/20"
                         : "border-border"
@@ -568,23 +568,23 @@ export function PaymentDetails({
                   />
                 </div>
                 {errors.cardNumber && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.cardNumber}
                   </p>
                 )}
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   CVV <span className="text-destructive">*</span>
                 </label>
                 <div className="relative">
-                  <Shield className="text-muted-foreground absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform" />
+                  <Shield className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-muted-foreground" />
                   <input
                     type="password"
                     placeholder="123"
                     value={formData.cvv || ""}
                     onChange={(e) => handleInputChange("cvv", e.target.value)}
-                    className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border py-3 pr-4 pl-12 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                    className={`w-full rounded-xl border bg-background py-3 pr-4 pl-12 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                       errors.cvv
                         ? "border-destructive focus:ring-destructive/20"
                         : "border-border"
@@ -592,7 +592,7 @@ export function PaymentDetails({
                   />
                 </div>
                 {errors.cvv && (
-                  <p className="text-destructive mt-1 text-sm">{errors.cvv}</p>
+                  <p className="mt-1 text-sm text-destructive">{errors.cvv}</p>
                 )}
               </div>
             </div>
@@ -600,11 +600,11 @@ export function PaymentDetails({
         </div>
 
         {/* Divider between sections */}
-        <div className="border-border my-6 border-t"></div>
+        <div className="my-6 border-t border-border"></div>
 
         {/* Billing Details Section */}
-        <div className="border-border bg-card/50 mb-6 rounded-2xl border p-6">
-          <h2 className="text-foreground mb-5 font-sans text-2xl font-semibold">
+        <div className="mb-6 rounded-2xl border border-border bg-card/50 p-6">
+          <h2 className="mb-5 font-sans text-2xl font-semibold text-foreground">
             Billing Details
           </h2>
 
@@ -612,7 +612,7 @@ export function PaymentDetails({
             {/* First Name and Middle & Last Name */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   First Name <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -621,20 +621,20 @@ export function PaymentDetails({
                   onChange={(e) =>
                     handleInputChange("firstName", e.target.value)
                   }
-                  className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                  className={`w-full rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                     errors.firstName
                       ? "border-destructive focus:ring-destructive/20"
                       : "border-border"
                   }`}
                 />
                 {errors.firstName && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.firstName}
                   </p>
                 )}
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Middle & Last Name <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -643,14 +643,14 @@ export function PaymentDetails({
                   onChange={(e) =>
                     handleInputChange("middleLastName", e.target.value)
                   }
-                  className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                  className={`w-full rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                     errors.middleLastName
                       ? "border-destructive focus:ring-destructive/20"
                       : "border-border"
                   }`}
                 />
                 {errors.middleLastName && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.middleLastName}
                   </p>
                 )}
@@ -660,13 +660,13 @@ export function PaymentDetails({
             {/* Country, State and City */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Country
                 </label>
                 <select
                   value={formData.country || ""}
                   onChange={(e) => handleInputChange("country", e.target.value)}
-                  className="border-border bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border custom-select w-full appearance-none rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2"
+                  className="custom-select w-full appearance-none rounded-xl border border-border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring"
                 >
                   <option value="">Country</option>
                   {allCountries.map((country) => (
@@ -677,7 +677,7 @@ export function PaymentDetails({
                 </select>
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   State
                 </label>
                 <select
@@ -686,7 +686,7 @@ export function PaymentDetails({
                   disabled={
                     !selectedCountryCode || availableStates.length === 0
                   }
-                  className="border-border bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border custom-select w-full appearance-none rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="custom-select w-full appearance-none rounded-xl border border-border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="">State</option>
                   {availableStates.map((state) => (
@@ -697,14 +697,14 @@ export function PaymentDetails({
                 </select>
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   City
                 </label>
                 <select
                   value={formData.city || ""}
                   onChange={(e) => handleInputChange("city", e.target.value)}
                   disabled={!selectedStateCode || availableCities.length === 0}
-                  className="border-border bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border custom-select w-full appearance-none rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="custom-select w-full appearance-none rounded-xl border border-border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="">City</option>
                   {availableCities.map((city) => (
@@ -718,7 +718,7 @@ export function PaymentDetails({
 
             {/* Billing Address */}
             <div>
-              <label className="text-muted-foreground mb-2 block text-sm font-medium">
+              <label className="mb-2 block text-sm font-medium text-muted-foreground">
                 Billing Address <span className="text-destructive">*</span>
               </label>
               <textarea
@@ -727,14 +727,14 @@ export function PaymentDetails({
                   handleInputChange("billingAddress", e.target.value)
                 }
                 rows={3}
-                className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full resize-none rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                className={`w-full resize-none rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                   errors.billingAddress
                     ? "border-destructive focus:ring-destructive/20"
                     : "border-border"
                 }`}
               />
               {errors.billingAddress && (
-                <p className="text-destructive mt-1 text-sm">
+                <p className="mt-1 text-sm text-destructive">
                   {errors.billingAddress}
                 </p>
               )}
@@ -743,7 +743,7 @@ export function PaymentDetails({
             {/* Pin Code and Contact Number */}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Pin Code <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -751,20 +751,20 @@ export function PaymentDetails({
                   placeholder="123456"
                   value={formData.pinCode || ""}
                   onChange={(e) => handleInputChange("pinCode", e.target.value)}
-                  className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                  className={`w-full rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                     errors.pinCode
                       ? "border-destructive focus:ring-destructive/20"
                       : "border-border"
                   }`}
                 />
                 {errors.pinCode && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.pinCode}
                   </p>
                 )}
               </div>
               <div>
-                <label className="text-muted-foreground mb-2 block text-sm font-medium">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground">
                   Phone Number <span className="text-destructive">*</span>
                 </label>
                 <input
@@ -774,14 +774,14 @@ export function PaymentDetails({
                   onChange={(e) =>
                     handleInputChange("contactNumber", e.target.value)
                   }
-                  className={`bg-background text-foreground focus:ring-ring focus:border-ring hover:border-border w-full rounded-xl border px-4 py-3 font-sans font-medium transition-all duration-200 focus:ring-2 ${
+                  className={`w-full rounded-xl border bg-background px-4 py-3 font-sans font-medium text-foreground transition-all duration-200 hover:border-border focus:border-ring focus:ring-2 focus:ring-ring ${
                     errors.contactNumber
                       ? "border-destructive focus:ring-destructive/20"
                       : "border-border"
                   }`}
                 />
                 {errors.contactNumber && (
-                  <p className="text-destructive mt-1 text-sm">
+                  <p className="mt-1 text-sm text-destructive">
                     {errors.contactNumber}
                   </p>
                 )}
@@ -792,7 +792,7 @@ export function PaymentDetails({
 
         {/* Display general error message */}
         {errors.general && (
-          <div className="bg-destructive/10 border-destructive text-destructive mb-6 rounded-xl border p-4">
+          <div className="mb-6 rounded-xl border border-destructive bg-destructive/10 p-4 text-destructive">
             {errors.general}
           </div>
         )}
@@ -800,7 +800,7 @@ export function PaymentDetails({
         {/* Action Buttons */}
         <div className="flex justify-end gap-4">
           <button
-            className="text-muted-foreground border-border bg-background hover:bg-muted hover:border-border/80 rounded-xl border px-6 py-3 font-sans font-medium transition-all duration-200"
+            className="rounded-xl border border-border bg-background px-6 py-3 font-sans font-medium text-muted-foreground transition-all duration-200 hover:border-border/80 hover:bg-muted"
             onClick={onDiscard}
             disabled={isSubmitting || isLoading}
           >
@@ -811,13 +811,13 @@ export function PaymentDetails({
             disabled={isSubmitting || isLoading}
             className={`flex transform items-center gap-2 rounded-xl px-6 py-3 font-sans font-medium shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 ${
               isSubmitting || isLoading
-                ? "bg-primary text-primary-foreground cursor-not-allowed opacity-70"
+                ? "cursor-not-allowed bg-primary text-primary-foreground opacity-70"
                 : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-primary/25"
             }`}
           >
             {isSubmitting || isLoading ? (
               <>
-                <div className="border-primary-foreground h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"></div>
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
                 Saving...
               </>
             ) : (
@@ -828,21 +828,21 @@ export function PaymentDetails({
       </div>
 
       {showConfirmation && (
-        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/50 duration-300">
-          <div className="bg-background border-border animate-in zoom-in-95 mx-4 max-w-md rounded-2xl border p-8 shadow-lg duration-300">
+        <div className="fixed inset-0 z-50 flex animate-in items-center justify-center bg-black/50 duration-300 fade-in">
+          <div className="mx-4 max-w-md animate-in rounded-2xl border border-border bg-background p-8 shadow-lg duration-300 zoom-in-95">
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/20">
                 <Check className="h-8 w-8 text-green-600 dark:text-green-400" />
               </div>
-              <h3 className="text-foreground mb-2 font-sans text-xl font-semibold">
+              <h3 className="mb-2 font-sans text-xl font-semibold text-foreground">
                 {confirmationTitle}
               </h3>
-              <p className="text-muted-foreground font-sans">
+              <p className="font-sans text-muted-foreground">
                 {confirmationMessage}
               </p>
               <button
                 onClick={onConfirmationClose}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 mt-4 transform rounded-xl px-6 py-2 font-medium transition-all duration-200 hover:scale-105 active:scale-95"
+                className="mt-4 transform rounded-xl bg-primary px-6 py-2 font-medium text-primary-foreground transition-all duration-200 hover:scale-105 hover:bg-primary/90 active:scale-95"
               >
                 Close
               </button>

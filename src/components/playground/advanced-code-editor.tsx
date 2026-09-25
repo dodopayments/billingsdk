@@ -134,9 +134,9 @@ export function AdvancedCodeEditor() {
 
   if (!state.selectedComponent) {
     return (
-      <div className="bg-background text-muted-foreground flex h-full items-center justify-center">
+      <div className="flex h-full items-center justify-center bg-background text-muted-foreground">
         <div className="text-center">
-          <h3 className="text-foreground mb-2 text-lg font-semibold">CODE</h3>
+          <h3 className="mb-2 text-lg font-semibold text-foreground">CODE</h3>
           <p className="text-sm">Select a component to view its code</p>
         </div>
       </div>
@@ -145,7 +145,7 @@ export function AdvancedCodeEditor() {
 
   return (
     <div
-      className="bg-background flex h-full flex-col"
+      className="flex h-full flex-col bg-background"
       style={{ height: "calc(100vh - 120px)" }}
     >
       {/* File Tabs */}
@@ -157,9 +157,9 @@ export function AdvancedCodeEditor() {
       />
 
       {/* Editor Header */}
-      <div className="border-border bg-muted/50 flex items-center justify-between border-b px-4 py-2">
+      <div className="flex items-center justify-between border-b border-border bg-muted/50 px-4 py-2">
         <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-sm">
+          <span className="text-sm text-muted-foreground">
             {activeTab === "page.tsx" ? "React Component" : "CSS Styles"}
           </span>
         </div>

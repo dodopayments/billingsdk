@@ -194,19 +194,19 @@ export function ProrationPreview({
       {theme === "classic" && (
         <>
           <div className="bg-grid-pattern absolute inset-0 opacity-5" />
-          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
         </>
       )}
 
       <Card className={cn(cardVariants({ theme }))}>
         <CardHeader className="px-4 pb-3 sm:px-6 sm:pb-4">
           <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
-            <div className="bg-primary/10 ring-primary/20 rounded-lg p-2 ring-1">
-              <Calculator className="text-primary h-4 w-4 sm:h-5 sm:w-5" />
+            <div className="rounded-lg bg-primary/10 p-2 ring-1 ring-primary/20">
+              <Calculator className="h-4 w-4 text-primary sm:h-5 sm:w-5" />
             </div>
             Plan Change Preview
           </CardTitle>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             Review the charges and credits for your plan change
           </p>
         </CardHeader>
@@ -239,12 +239,12 @@ export function ProrationPreview({
               <h3 className="text-base font-semibold sm:text-lg">
                 {currentPlan.plan.title}
               </h3>
-              <p className="text-muted-foreground mb-3 text-xs sm:text-sm">
+              <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
                 {isCustomCurrent
                   ? "Custom"
                   : `${creditCurrency}${currentPrice}/${currentPlan.type}`}
               </p>
-              <div className="text-muted-foreground flex items-center gap-1 text-xs">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
                 {daysRemaining} days remaining
               </div>
@@ -292,12 +292,12 @@ export function ProrationPreview({
               <h3 className="text-base font-semibold sm:text-lg">
                 {newPlan.title}
               </h3>
-              <p className="text-muted-foreground mb-3 text-xs sm:text-sm">
+              <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
                 {isCustomNew
                   ? "Custom"
                   : `${chargeCurrency}${newPrice}/${billingCycle}`}
               </p>
-              <div className="text-muted-foreground flex items-center gap-1 text-xs">
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                 Effective {effectiveDate}
               </div>
@@ -384,9 +384,9 @@ export function ProrationPreview({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.6 }}
-            className="bg-muted/20 border-border/50 rounded-lg border p-3 text-center sm:p-4"
+            className="rounded-lg border border-border/50 bg-muted/20 p-3 text-center sm:p-4"
           >
-            <p className="text-muted-foreground text-xs sm:text-sm">
+            <p className="text-xs text-muted-foreground sm:text-sm">
               Your plan will change {effectiveDate}.
               {isNextCycle
                 ? " No immediate charge."

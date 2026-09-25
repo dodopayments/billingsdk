@@ -3,7 +3,7 @@ import { ShineButton } from "../shine-button";
 
 export const ReadyToUse = () => {
   return (
-    <div className="bg-muted/20 group flex h-full flex-col items-center justify-center gap-4 p-4">
+    <div className="group flex h-full flex-col items-center justify-center gap-4 bg-muted/20 p-4">
       <div className="flex flex-wrap items-center justify-center gap-2">
         <div className="transition-all duration-500 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.02]">
           <ShineButton

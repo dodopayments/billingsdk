@@ -21,7 +21,7 @@ export function PaymentFailureDemo() {
   };
 
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <PaymentFailure
         isRetrying={isRetrying}
         onRetry={handleRetry}

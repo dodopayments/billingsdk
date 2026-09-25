@@ -132,7 +132,7 @@ export function PlaygroundHeader() {
   };
 
   return (
-    <div className="border-border bg-background/95 supports-[backdrop-filter]:bg-background/60 border-b backdrop-blur">
+    <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex items-center justify-between px-4 py-3">
         {/* Left Section - Play Button, Logo, Component Selector */}
         <div className="flex items-center gap-4">
@@ -163,7 +163,7 @@ export function PlaygroundHeader() {
             <SelectContent className="max-h-96 w-64 min-w-64 overflow-y-auto">
               {categories.map((category) => (
                 <div key={category.id}>
-                  <div className="text-foreground bg-muted/50 border-border border-b px-3 py-2 text-sm font-semibold">
+                  <div className="border-b border-border bg-muted/50 px-3 py-2 text-sm font-semibold text-foreground">
                     {category.label}
                   </div>
                   {filteredComponents

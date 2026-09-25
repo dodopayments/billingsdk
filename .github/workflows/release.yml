@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write 
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,11 +18,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          cache: "npm"
           cache-dependency-path: ./packages/cli/package-lock.json
-
 
       # npm Trusted Publishing (OIDC) needs npm >= 11.5.1; the Node
       # version above ships an older npm. Pin 11.6.2 for reproducible runs

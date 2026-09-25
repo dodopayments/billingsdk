@@ -203,7 +203,7 @@ export function PricingTableThree({
               setIsAnnually(value === "annually");
             }}
           >
-            <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+            <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
               <RadioGroupItem
                 value="monthly"
                 id="monthly"
@@ -219,7 +219,7 @@ export function PricingTableThree({
                 Monthly
               </Label>
             </div>
-            <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+            <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
               <RadioGroupItem
                 value="annually"
                 id="annually"
@@ -239,7 +239,7 @@ export function PricingTableThree({
         </div>
         <div className="flex justify-center">
           {yearlyPriceDiscount > 0 && (
-            <span className="text-muted-foreground mt-2 text-xs">
+            <span className="mt-2 text-xs text-muted-foreground">
               Save upto {yearlyPriceDiscount}% with yearly plan
             </span>
           )}
@@ -268,7 +268,7 @@ export function PricingTableThree({
             )}
           >
             {plan.badge && (
-              <Badge className="bg-secondary text-secondary-foreground absolute -top-3 left-1/2 -translate-x-1/2 transform px-3 py-1 text-xs">
+              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 transform bg-secondary px-3 py-1 text-xs text-secondary-foreground">
                 {plan.badge}
               </Badge>
             )}
@@ -356,7 +356,7 @@ export function PricingTableThree({
                 {plan.features.map((feature, index) => (
                   <div key={index} className="flex items-center gap-3">
                     {feature.icon === "check" ? (
-                      <div className="bg-primary h-2 w-2 rounded-sm"></div>
+                      <div className="h-2 w-2 rounded-sm bg-primary"></div>
                     ) : (
                       <div
                         className={cn(
@@ -370,7 +370,7 @@ export function PricingTableThree({
                       </div>
                     )}
                     <span className="text-sm">{feature.name}</span>
-                    <span className="text-muted-foreground ml-auto text-sm">
+                    <span className="ml-auto text-sm text-muted-foreground">
                       Included
                     </span>
                   </div>
@@ -408,7 +408,7 @@ export function PricingTableThree({
                 "Pre-negotiated discounts are available to early-stage startups and nonprofits."}
             </p>
             <Button
-              className="bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6"
+              className="bg-secondary px-6 text-secondary-foreground hover:bg-secondary/80"
               onClick={onFooterButtonClick}
             >
               {footerButtonText || "Apply now"}

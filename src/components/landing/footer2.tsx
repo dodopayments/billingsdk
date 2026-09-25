@@ -7,7 +7,7 @@ import { Footer } from "./footer";
 
 export function Footer2() {
   return (
-    <footer className="bg-muted/10 border-input w-full rounded-3xl border p-2">
+    <footer className="w-full rounded-3xl border border-input bg-muted/10 p-2">
       <Footer />
       <div className="px-4 pt-12 pb-2 md:pb-12">
         <div className="mx-auto max-w-6xl">
@@ -25,7 +25,7 @@ export function Footer2() {
                   />
                 </div>
               </div>
-              <p className="text-muted-foreground mb-4 text-sm">
+              <p className="mb-4 text-sm text-muted-foreground">
                 Open-source React components for modern billing and subscription
                 management.
               </p>
@@ -67,12 +67,12 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="text-foreground mb-4 font-semibold">Components</h4>
+              <h4 className="mb-4 font-semibold text-foreground">Components</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
                     href="/docs/components/pricing-table/pricing-table-one"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Pricing Tables
                   </Link>
@@ -80,7 +80,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/components/usage-meter/usage-meter-linear"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Usage Meters
                   </Link>
@@ -88,7 +88,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/components/manage-subscription"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Subscription Management
                   </Link>
@@ -96,7 +96,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/components/banner"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Banners
                   </Link>
@@ -105,12 +105,12 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="text-foreground mb-4 font-semibold">Resources</h4>
+              <h4 className="mb-4 font-semibold text-foreground">Resources</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
                     href="/docs"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Documentation
                   </Link>
@@ -118,7 +118,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/quick-start"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Quick Start
                   </Link>
@@ -126,7 +126,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/theming"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Theming Guide
                   </Link>
@@ -134,7 +134,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/interfaces"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Interfaces
                   </Link>
@@ -143,12 +143,12 @@ export function Footer2() {
             </div>
 
             <div>
-              <h4 className="text-foreground mb-4 font-semibold">Community</h4>
+              <h4 className="mb-4 font-semibold text-foreground">Community</h4>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
                     href="https://github.com/dodopayments/billingsdk/issues"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     GitHub Issues
                   </Link>
@@ -156,7 +156,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="https://discord.com/invite/bYqAp4ayYh"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Discord Server
                   </Link>
@@ -164,7 +164,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="/docs/contribution-open-source"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Contributing
                   </Link>
@@ -172,7 +172,7 @@ export function Footer2() {
                 <li>
                   <Link
                     href="https://github.com/dodopayments"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Dodo Payments Github
                   </Link>
@@ -182,10 +182,10 @@ export function Footer2() {
           </div>
 
           {/* Bottom Section */}
-          <div className="border-border/50 border-t pt-8">
+          <div className="border-t border-border/50 pt-8">
             <div className="flex flex-col items-center justify-between md:flex-row">
               <div className="mb-4 flex flex-col items-center gap-4 md:mb-0 md:flex-row">
-                <p className="text-muted-foreground text-sm">
+                <p className="text-sm text-muted-foreground">
                   © {new Date().getFullYear()} BillingSDK. Made with{" "}
                   <FaHeart className="inline h-3 w-3 fill-current text-red-500" />{" "}
                   by developers at Dodo Payments, for developers.

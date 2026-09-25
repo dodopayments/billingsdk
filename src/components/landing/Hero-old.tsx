@@ -16,21 +16,21 @@ export default function Hero() {
                 Ready to use billing components and blocks for your next
                 project.
               </p>
-              <p className="text-muted-foreground pt-2 text-sm">
+              <p className="pt-2 text-sm text-muted-foreground">
                 Free Billing components and blocks built with React, Typescript,
                 Tailwind CSS, and Motion. Perfect companion for shadcn/ui.
               </p>
               <div className="flex gap-2 py-4">
                 <Button
                   asChild
-                  className="bg-primary text-primary-foreground ring-primary before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
+                  className="relative isolate inline-flex items-center justify-center overflow-hidden rounded-md bg-primary px-3 text-left text-sm font-medium text-primary-foreground ring-1 ring-primary before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:from-primary-foreground/20 before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:from-primary-foreground/10 after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
                 >
                   <Link href="/docs">Get Started</Link>
                 </Button>
                 <Button
                   variant="secondary"
                   asChild
-                  className="bg-secondary text-secondary-foreground ring-secondary before:from-secondary-foreground/20 after:from-secondary-foreground/10 relative isolate inline-flex items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium ring-1 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
+                  className="relative isolate inline-flex items-center justify-center overflow-hidden rounded-md bg-secondary px-3 text-left text-sm font-medium text-secondary-foreground ring-1 ring-secondary before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:from-secondary-foreground/20 before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:from-secondary-foreground/10 after:to-transparent after:mix-blend-overlay hover:cursor-pointer"
                 >
                   <Link href="/docs">Browse Components</Link>
                 </Button>
@@ -76,7 +76,7 @@ const HeroCircles = () => {
       {/* Center content */}
       <div className="hero__center absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <div className="text-foreground animate-pulse-slow text-lg font-semibold">
+          <div className="animate-pulse-slow text-lg font-semibold text-foreground">
             billing sdk
           </div>
 
@@ -94,7 +94,7 @@ const HeroCircles = () => {
             />
           </svg>
 
-          <div className="text-foreground animate-pulse-slow text-lg font-semibold">
+          <div className="animate-pulse-slow text-lg font-semibold text-foreground">
             shadcn
           </div>
         </div>

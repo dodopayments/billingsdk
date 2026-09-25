@@ -2,8 +2,8 @@ import { LogoMark } from "./logo-mark";
 
 export const OpenSource = () => {
   return (
-    <div className="bg-muted/20 group relative flex h-full items-center justify-around overflow-hidden p-4 pt-8">
-      <div className="bg-muted border-accent z-[20] flex items-center justify-center rounded-4xl border p-4 drop-shadow-2xl drop-shadow-white/20 transition-all duration-300 ease-in-out group-hover:drop-shadow-white/40">
+    <div className="group relative flex h-full items-center justify-around overflow-hidden bg-muted/20 p-4 pt-8">
+      <div className="z-[20] flex items-center justify-center rounded-4xl border border-accent bg-muted p-4 drop-shadow-2xl drop-shadow-white/20 transition-all duration-300 ease-in-out group-hover:drop-shadow-white/40">
         <svg
           viewBox="0 0 1024 1024"
           className="size-20"
@@ -30,7 +30,7 @@ export const OpenSource = () => {
         </svg>
       </div>
       <div className="absolute top-1/2 left-1/2 z-[10] -translate-x-1/2 -translate-y-1/2 [mask-image:linear-gradient(to_top,transparent,white_70%)] transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-80">
-        <LogoMark className="text-muted size-[17rem]" />
+        <LogoMark className="size-[17rem] text-muted" />
       </div>
     </div>
   );

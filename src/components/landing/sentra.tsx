@@ -31,7 +31,7 @@ export function Sentra() {
             className="mb-2 rounded-sm shadow-md shadow-white/5"
             label="Sentra"
           />
-          <p className="font-display mb-4 text-left text-2xl font-semibold tracking-tight text-white md:text-3xl">
+          <p className="mb-4 text-left font-display text-2xl font-semibold tracking-tight text-white md:text-3xl">
             Don't code,
             <br />
             just prompt & integrate.
@@ -51,7 +51,7 @@ export function Sentra() {
           >
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="text-primary-foreground before:from-primary-foreground/20 after:from-primary-foreground/10 relative isolate inline-flex h-12 w-44 items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:to-transparent after:mix-blend-overlay hover:cursor-pointer md:w-52">
+                <Button className="relative isolate inline-flex h-12 w-44 items-center justify-center overflow-hidden rounded-md px-3 text-left text-sm font-medium text-primary-foreground before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:from-primary-foreground/20 before:opacity-80 before:transition-opacity before:duration-300 before:ease-[cubic-bezier(0.4,0.36,0,1)] after:pointer-events-none after:absolute after:inset-0 after:-z-10 after:rounded-md after:bg-gradient-to-b after:from-primary-foreground/10 after:to-transparent after:mix-blend-overlay hover:cursor-pointer md:w-52">
                   <span className="group flex items-center gap-2">
                     <span>Get Alpha Access</span>
                     <CornerDownLeft className="size-4 transition-all duration-200 ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -99,7 +99,7 @@ export function Sentra() {
 
         {/* Right Sentra Image */}
         <div className="mt-8 flex items-center justify-center md:mt-0 md:w-1/2">
-          <div className="bg-muted/20 border-muted/80 relative overflow-x-scroll rounded-xl border p-4 md:overflow-auto">
+          <div className="relative overflow-x-scroll rounded-xl border border-muted/80 bg-muted/20 p-4 md:overflow-auto">
             <Image
               src="/landing/SENTRA.png"
               alt="Sentra"

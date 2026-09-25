@@ -315,7 +315,7 @@ export function BillingSettings2({
         <CardTitle className="text-lg">{title}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-sm text-muted-foreground">
           Manage your billing preferences and settings
         </p>
 
@@ -351,7 +351,7 @@ export function BillingSettings2({
                 ) : field.helperText ? (
                   <p
                     id={`${field.id}-help`}
-                    className="text-muted-foreground text-xs"
+                    className="text-xs text-muted-foreground"
                   >
                     {field.helperText}
                   </p>
@@ -414,7 +414,7 @@ export function BillingSettings2({
             >
               <div>
                 <div className="font-medium">{feature.label}</div>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-sm text-muted-foreground">
                   {feature.description}
                 </div>
               </div>

@@ -35,7 +35,7 @@ export const Faq = () => {
     <div className="my-24 flex max-h-fit min-h-[30rem] w-full flex-col items-center justify-center gap-8 md:gap-0">
       <div className="flex h-fit w-full flex-col items-center justify-center gap-2 md:mb-8 md:w-3/4">
         <ShineButton Icon={CircleQuestionMarkIcon} className="" label="FAQs" />
-        <h2 className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 text-center text-4xl font-medium duration-1000">
+        <h2 className="animate-in text-center font-display text-4xl font-medium text-primary duration-1000 fade-in slide-in-from-bottom-4">
           Got Questions? <br className="md:block" />
           We’ve Got Answers
         </h2>
@@ -46,12 +46,12 @@ export const Faq = () => {
             <AccordionItem
               key={faq.question}
               value={faq.question}
-              className="bg-muted/20 mb-3 rounded-2xl border"
+              className="mb-3 rounded-2xl border bg-muted/20"
             >
               <AccordionTrigger className="cursor-pointer px-4 text-left hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="bg-muted/60 rounded-b-xl px-4 py-4">
+              <AccordionContent className="rounded-b-xl bg-muted/60 px-4 py-4">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

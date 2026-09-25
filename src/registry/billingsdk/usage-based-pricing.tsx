@@ -296,9 +296,9 @@ export function UsageBasedPricing({
               {currency}
               {priceText}
             </span>
-            <span className="text-muted-foreground text-sm">/mo</span>
+            <span className="text-sm text-muted-foreground">/mo</span>
           </div>
-          <p className="text-muted-foreground text-xs">
+          <p className="text-xs text-muted-foreground">
             {formatNumber(value)} credits per month
           </p>
         </div>
@@ -306,7 +306,7 @@ export function UsageBasedPricing({
         <div className="space-y-6">
           <div className="relative mb-6 h-0">
             <div className="absolute -top-10" style={{ left: `${pct}%` }}>
-              <div className="bg-background -translate-x-1/2 rounded-md border px-3 py-1 text-xs shadow-sm">
+              <div className="-translate-x-1/2 rounded-md border bg-background px-3 py-1 text-xs shadow-sm">
                 {formatNumber(value)}
               </div>
             </div>
@@ -394,7 +394,7 @@ export function UsageBasedPricing({
                           animateTo(v);
                         }
                       }}
-                      className={`absolute rounded-full outline-none ${isActive ? "bg-primary" : "bg-muted-foreground/70"} focus:ring-primary/50 focus:ring-2`}
+                      className={`absolute rounded-full outline-none ${isActive ? "bg-primary" : "bg-muted-foreground/70"} focus:ring-2 focus:ring-primary/50`}
                       style={{
                         left,
                         top: "calc(50% + 14px)",
@@ -427,7 +427,7 @@ export function UsageBasedPricing({
             </div>
           </div>
 
-          <div className="text-muted-foreground flex justify-between px-1 text-xs">
+          <div className="flex justify-between px-1 text-xs text-muted-foreground">
             <span>{startLabel}</span>
             <span>{endLabel}</span>
           </div>

@@ -240,8 +240,8 @@ export function PricingTableFive({
       {theme === "classic" && (
         <>
           <div className="bg-grid-pattern absolute inset-0 opacity-5" />
-          <div className="bg-primary/5 absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
-          <div className="bg-secondary/5 absolute top-1/4 right-1/4 h-64 w-64 rounded-full blur-2xl" />
+          <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute top-1/4 right-1/4 h-64 w-64 rounded-full bg-secondary/5 blur-2xl" />
         </>
       )}
 
@@ -267,7 +267,7 @@ export function PricingTableFive({
                 setIsAnnually(value === "annually");
               }}
             >
-              <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+              <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
                 <RadioGroupItem
                   value="monthly"
                   id={`${uniqueId}-monthly`}
@@ -275,12 +275,12 @@ export function PricingTableFive({
                 />
                 <Label
                   htmlFor={`${uniqueId}-monthly`}
-                  className="text-muted-foreground peer-data-[state=checked]:text-primary hover:text-foreground flex h-full cursor-pointer items-center justify-center px-2 font-semibold transition-all md:px-7"
+                  className="flex h-full cursor-pointer items-center justify-center px-2 font-semibold text-muted-foreground transition-all peer-data-[state=checked]:text-primary hover:text-foreground md:px-7"
                 >
                   Monthly
                 </Label>
               </div>
-              <div className='has-[button[data-state="checked"]]:bg-background h-full rounded-md transition-all'>
+              <div className='h-full rounded-md transition-all has-[button[data-state="checked"]]:bg-background'>
                 <RadioGroupItem
                   value="annually"
                   id={`${uniqueId}-annually`}
@@ -288,11 +288,11 @@ export function PricingTableFive({
                 />
                 <Label
                   htmlFor={`${uniqueId}-annually`}
-                  className="text-muted-foreground peer-data-[state=checked]:text-primary hover:text-foreground flex h-full cursor-pointer items-center justify-center gap-1 px-2 font-semibold transition-all md:px-7"
+                  className="flex h-full cursor-pointer items-center justify-center gap-1 px-2 font-semibold text-muted-foreground transition-all peer-data-[state=checked]:text-primary hover:text-foreground md:px-7"
                 >
                   Annually
                   {yearlyPriceDiscount > 0 && (
-                    <span className="bg-primary/10 text-primary border-primary/20 ml-1 rounded border px-2 py-0.5 text-xs font-medium">
+                    <span className="ml-1 rounded border border-primary/20 bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                       Save {yearlyPriceDiscount}%
                     </span>
                   )}
@@ -336,7 +336,7 @@ export function PricingTableFive({
                   )}
 
                   {theme === "classic" && plan.highlight && (
-                    <div className="via-primary absolute -top-px left-1/2 h-px w-32 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent" />
+                    <div className="absolute -top-px left-1/2 h-px w-32 -translate-x-1/2 bg-gradient-to-r from-transparent via-primary to-transparent" />
                   )}
 
                   <CardContent className="flex flex-col gap-6 p-0 md:flex-row md:items-center md:justify-between">
@@ -366,7 +366,7 @@ export function PricingTableFive({
                             ) >= 0 && <>{plan.currency}</>}
                             {isAnnually ? plan.yearlyPrice : plan.monthlyPrice}
                           </span>
-                          <span className="text-muted-foreground text-sm">
+                          <span className="text-sm text-muted-foreground">
                             /{isAnnually ? "year" : "month"}
                           </span>
                         </motion.div>
@@ -435,8 +435,8 @@ export function PricingTableFive({
               className={cn(contactCardVariants({ size, theme }), "rounded-lg")}
             >
               <CardContent className="flex flex-col items-center space-y-6 p-0 text-center">
-                <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
-                  <Phone className="text-primary h-8 w-8" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Phone className="h-8 w-8 text-primary" />
                 </div>
 
                 <div>
@@ -449,7 +449,7 @@ export function PricingTableFive({
                   >
                     {contactUsPlan.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
                     {contactUsPlan.description}
                   </p>
                 </div>
@@ -457,12 +457,12 @@ export function PricingTableFive({
                 <Button
                   onClick={() => onPlanSelect?.(contactUsPlan.id)}
                   variant="outline"
-                  className="hover:bg-primary w-full transition-colors"
+                  className="w-full transition-colors hover:bg-primary"
                 >
                   {contactUsPlan.buttonText}
                 </Button>
 
-                <p className="text-muted-foreground text-xs">
+                <p className="text-xs text-muted-foreground">
                   Custom pricing and solutions available
                 </p>
               </CardContent>

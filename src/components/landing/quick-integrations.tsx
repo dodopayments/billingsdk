@@ -115,7 +115,7 @@ const CodeExample = ({
       <div className="">
         <Badge
           variant={"secondary"}
-          className="text-muted-foreground text-sm font-normal"
+          className="text-sm font-normal text-muted-foreground"
         >
           {example.title}
         </Badge>
@@ -167,7 +167,7 @@ const CodeExample = ({
     <div className="">
       <Badge
         variant={"secondary"}
-        className="text-muted-foreground mb-3 text-sm font-normal"
+        className="mb-3 text-sm font-normal text-muted-foreground"
       >
         {example.title}
       </Badge>
@@ -212,7 +212,7 @@ export function QuickIntegration() {
           delay: 0.2,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className="font-display text-primary animate-in fade-in slide-in-from-bottom-4 mt-4 max-w-2xl text-center text-3xl font-medium text-balance duration-1000 sm:text-3xl md:text-5xl"
+        className="mt-4 max-w-2xl animate-in text-center font-display text-3xl font-medium text-balance text-primary duration-1000 fade-in slide-in-from-bottom-4 sm:text-3xl md:text-5xl"
       >
         Get your billing system running in minutes
       </motion.h2>
@@ -235,7 +235,7 @@ export function QuickIntegration() {
               delay: 0.3 + index * 0.2,
               ease: "easeInOut",
             }}
-            className={`border-muted bg-muted/20 flex w-full flex-col items-start gap-8 rounded-3xl p-6 xl:flex-row`}
+            className={`flex w-full flex-col items-start gap-8 rounded-3xl border-muted bg-muted/20 p-6 xl:flex-row`}
           >
             <div className="h-fit w-full rounded-md p-4 xl:aspect-[3/2] xl:h-full xl:w-1/2">
               <div className="flex flex-col gap-4 xl:h-[calc(100%-25px)]">
@@ -251,21 +251,21 @@ export function QuickIntegration() {
                       {index + 1}. {item.heading}
                     </div>
                   </div>
-                  <div className="text-muted-foreground/80 text-sm leading-relaxed lg:text-base">
+                  <div className="text-sm leading-relaxed text-muted-foreground/80 lg:text-base">
                     {item.description}
                   </div>
                   <div className="mt-2 flex flex-col gap-2">
                     {item.subPoints.map((point, pointIndex) => (
                       <div
                         key={pointIndex}
-                        className="text-muted-foreground flex items-center gap-3 text-base"
+                        className="flex items-center gap-3 text-base text-muted-foreground"
                       >
                         <div
                           className={cn(
                             "rounded-full p-0.5 transition-colors duration-200",
                           )}
                         >
-                          <CheckIcon className="fill-primary text-primary-foreground size-5" />
+                          <CheckIcon className="size-5 fill-primary text-primary-foreground" />
                         </div>
                         {point}
                       </div>
@@ -281,7 +281,7 @@ export function QuickIntegration() {
               </Button>
             </div>
 
-            <div className="bg-muted/20 border-muted/80 relative hidden w-full overflow-x-scroll rounded-xl border px-6 py-10 transition-all duration-500 md:block md:overflow-auto xl:aspect-[3/2] xl:w-1/2 xl:py-0">
+            <div className="relative hidden w-full overflow-x-scroll rounded-xl border border-muted/80 bg-muted/20 px-6 py-10 transition-all duration-500 md:block md:overflow-auto xl:aspect-[3/2] xl:w-1/2 xl:py-0">
               <div className="mx-auto flex h-full max-w-full items-center md:max-w-1/2 md:justify-center">
                 <CodeExample example={item.codeExample} />
               </div>

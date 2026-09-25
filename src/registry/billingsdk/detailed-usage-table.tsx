@@ -50,7 +50,7 @@ export function DetailedUsageTable({
 
     return (
       <div className="flex min-w-[120px] items-center gap-2">
-        <div className="bg-secondary h-2 flex-1 rounded-full">
+        <div className="h-2 flex-1 rounded-full bg-secondary">
           <div
             className={cn("h-2 rounded-full transition-all", bgColor)}
             style={{ width: `${Math.max(0, Math.min(percentage, 100))}%` }}
@@ -90,7 +90,7 @@ export function DetailedUsageTable({
                 <TableRow>
                   <TableCell
                     colSpan={4}
-                    className="text-muted-foreground h-24 text-center"
+                    className="h-24 text-center text-muted-foreground"
                   >
                     No resources found
                   </TableCell>
@@ -114,7 +114,7 @@ export function DetailedUsageTable({
                         {formatNumber(resource.used)}
                         {unit}
                       </TableCell>
-                      <TableCell className="text-muted-foreground text-right tabular-nums">
+                      <TableCell className="text-right text-muted-foreground tabular-nums">
                         {formatNumber(resource.limit)}
                         {unit}
                       </TableCell>

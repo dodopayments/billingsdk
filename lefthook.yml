@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    format:
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,json5,css,scss,less,md,yaml,yml,html,graphql,gql}"
+      run: npx --no-install oxfmt {staged_files}
+      stage_fixed: true

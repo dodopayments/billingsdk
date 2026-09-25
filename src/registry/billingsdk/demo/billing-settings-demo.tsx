@@ -204,7 +204,7 @@ export default function BillingSettingsDemo() {
                   className="pr-10"
                   maxLength={19}
                 />
-                <CreditCard className="text-muted-foreground absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2" />
+                <CreditCard className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">

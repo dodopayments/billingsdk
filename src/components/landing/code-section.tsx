@@ -150,27 +150,27 @@ export default function App() {
 
 export function CodeSection() {
   return (
-    <div className="divide-accent-900 border-border mx-auto grid w-full max-w-7xl list-none auto-rows-fr grid-cols-1 divide-y border-none md:grid-cols-2 md:divide-x md:divide-y-0">
+    <div className="divide-accent-900 mx-auto grid w-full max-w-7xl list-none auto-rows-fr grid-cols-1 divide-y border-none border-border md:grid-cols-2 md:divide-x md:divide-y-0">
       {features.map((feature, index) => (
         <div
           key={index}
-          className="border-card relative min-h-160 border-t bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,rgba(74,0,224,0.25)_75%,rgba(0,234,255,0.3)_100%)] p-8 pt-24 pb-0 dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,#4a00e040_75%,#00eaff60_100%)]"
+          className="relative min-h-160 border-t border-card bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,rgba(74,0,224,0.25)_75%,rgba(0,234,255,0.3)_100%)] p-8 pt-24 pb-0 dark:bg-[radial-gradient(131.66%_109.77%_at_50%_97.75%,transparent_50%,#4a00e040_75%,#00eaff60_100%)]"
         >
           <div className="text-center">
             <h2 className="font-display text-3xl font-medium text-zinc-800 sm:text-3xl md:text-4xl dark:text-zinc-300">
               {feature.title}
             </h2>
-            <p className="text-muted-foreground mx-auto mt-4 max-w-md text-sm tracking-tight">
+            <p className="mx-auto mt-4 max-w-md text-sm tracking-tight text-muted-foreground">
               {feature.description}
             </p>
           </div>
 
-          <div className="border-border absolute right-0 bottom-0 left-0 mx-8 mt-8 h-96 overflow-hidden border-x border-t shadow-lg">
+          <div className="absolute right-0 bottom-0 left-0 mx-8 mt-8 h-96 overflow-hidden border-x border-t border-border shadow-lg">
             {/* Window chrome */}
-            <div className="border-border border-l-foreground border-b bg-transparent px-4 py-2">
+            <div className="border-b border-border border-l-foreground bg-transparent px-4 py-2">
               <div className="flex items-center gap-1">
-                <div className="outline-border size-2 rounded-full outline"></div>
-                <div className="outline-accent size-2 rounded-full outline"></div>
+                <div className="size-2 rounded-full outline outline-border"></div>
+                <div className="size-2 rounded-full outline outline-accent"></div>
               </div>
             </div>
 

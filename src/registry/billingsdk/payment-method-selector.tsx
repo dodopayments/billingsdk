@@ -145,7 +145,7 @@ export function PaymentMethodSelector({
               <div className="col-span-2">
                 <Label
                   htmlFor="cardNumber"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Card Number
                 </Label>
@@ -157,13 +157,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("cardNumber", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div>
                 <Label
                   htmlFor="expiryDate"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Expiry Date
                 </Label>
@@ -175,13 +175,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("expiryDate", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div>
                 <Label
                   htmlFor="cvv"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   CVV
                 </Label>
@@ -193,13 +193,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("cvv", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div className="col-span-2">
                 <Label
                   htmlFor="cardholderName"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Cardholder Name
                 </Label>
@@ -211,7 +211,7 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("cardholderName", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
             </div>
@@ -235,7 +235,7 @@ export function PaymentMethodSelector({
               <div>
                 <Label
                   htmlFor="email"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Email Address
                 </Label>
@@ -247,13 +247,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("email", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div>
                 <Label
                   htmlFor="phone"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Phone Number
                 </Label>
@@ -265,12 +265,12 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("phone", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
             </div>
-            <div className="bg-muted/20 border-border/30 rounded-lg border p-3">
-              <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
+            <div className="rounded-lg border border-border/30 bg-muted/20 p-3">
+              <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                 You'll be redirected to your selected wallet app to complete the
                 payment securely.
               </p>
@@ -294,7 +294,7 @@ export function PaymentMethodSelector({
             <div>
               <Label
                 htmlFor="upiId"
-                className="text-foreground text-xs font-medium sm:text-sm"
+                className="text-xs font-medium text-foreground sm:text-sm"
               >
                 UPI ID
               </Label>
@@ -306,11 +306,11 @@ export function PaymentMethodSelector({
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleInputChange("upiId", e.target.value)
                 }
-                className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
               />
             </div>
-            <div className="bg-muted/20 border-border/30 rounded-lg border p-3">
-              <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
+            <div className="rounded-lg border border-border/30 bg-muted/20 p-3">
+              <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                 Enter your UPI ID to receive a payment request. Complete the
                 payment in your UPI app.
               </p>
@@ -335,7 +335,7 @@ export function PaymentMethodSelector({
               <div>
                 <Label
                   htmlFor="bnplEmail"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Email Address
                 </Label>
@@ -347,13 +347,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("email", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div>
                 <Label
                   htmlFor="bnplPhone"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Phone Number
                 </Label>
@@ -365,13 +365,13 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("phone", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
               <div>
                 <Label
                   htmlFor="income"
-                  className="text-foreground text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium text-foreground sm:text-sm"
                 >
                   Annual Income
                   <Badge
@@ -389,12 +389,12 @@ export function PaymentMethodSelector({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleInputChange("income", e.target.value)
                   }
-                  className="border-border/50 focus:border-primary/50 mt-1.5 transition-colors"
+                  className="mt-1.5 border-border/50 transition-colors focus:border-primary/50"
                 />
               </div>
             </div>
-            <div className="bg-muted/20 border-border/30 rounded-lg border p-3">
-              <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
+            <div className="rounded-lg border border-border/30 bg-muted/20 p-3">
+              <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                 You'll be redirected to complete a quick eligibility check and
                 set up your payment plan.
               </p>
@@ -413,7 +413,7 @@ export function PaymentMethodSelector({
         <CardTitle className="text-base font-semibold">
           Payment Methods
         </CardTitle>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-sm text-muted-foreground">
           Choose your preferred payment method to continue
         </p>
       </CardHeader>
@@ -439,7 +439,7 @@ export function PaymentMethodSelector({
                       e.stopPropagation();
                       handleClose();
                     }}
-                    className="bg-background/80 hover:bg-background border-border/50 absolute top-3 right-3 z-20 rounded-full border p-1.5 shadow-sm transition-all duration-200 hover:shadow-md"
+                    className="absolute top-3 right-3 z-20 rounded-full border border-border/50 bg-background/80 p-1.5 shadow-sm transition-all duration-200 hover:bg-background hover:shadow-md"
                     initial={{ scale: 0, rotate: -45 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{
@@ -450,7 +450,7 @@ export function PaymentMethodSelector({
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <X className="text-muted-foreground h-3 w-3" />
+                    <X className="h-3 w-3 text-muted-foreground" />
                   </motion.button>
                 )}
 
@@ -458,8 +458,8 @@ export function PaymentMethodSelector({
                   <div
                     className={`rounded-lg border p-2.5 shadow-sm transition-all duration-300 sm:p-3 ${
                       isSelected
-                        ? "bg-background border-primary/30"
-                        : "bg-background border-border/50 hover:border-primary/30 hover:shadow-md"
+                        ? "border-primary/30 bg-background"
+                        : "border-border/50 bg-background hover:border-primary/30 hover:shadow-md"
                     }`}
                   >
                     {option.icon}
@@ -474,7 +474,7 @@ export function PaymentMethodSelector({
                     >
                       {option.name}
                     </h3>
-                    <p className="text-muted-foreground mt-1 text-xs">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       {option.description}
                     </p>
                   </div>

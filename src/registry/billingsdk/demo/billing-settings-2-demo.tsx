@@ -144,7 +144,7 @@ export function BillingSettings2Demo() {
         cancelButtonText="Discard Changes"
       />
 
-      {/* 
+      {/*
 			USAGE EXAMPLES:
 			- Specific: currencies={['USD', 'EUR']}
 			- Custom: currencyOptions={[{value: 'btc', label: 'Bitcoin'}]}
