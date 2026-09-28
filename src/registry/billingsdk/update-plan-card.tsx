@@ -10,6 +10,7 @@ import { Toggle } from "@/components/ui/toggle";
 import { Label } from "@/components/ui/label";
 import { type Plan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
+import { formatBillingPrice } from "@/utils/price-utils";
 
 export interface UpdatePlanCardProps {
   currentPlan: Plan;
@@ -34,7 +35,7 @@ export function UpdatePlanCard({
   );
 
   const getCurrentPrice = useCallback(
-    (plan: Plan) => (isYearly ? `${plan.yearlyPrice}` : `${plan.monthlyPrice}`),
+    (plan: Plan) => (isYearly ? plan.yearlyPrice : plan.monthlyPrice),
     [isYearly],
   );
 
@@ -152,9 +153,10 @@ export function UpdatePlanCard({
                     </div>
                     <div className="min-w-[60px] flex-shrink-0 text-right sm:min-w-[80px]">
                       <div className="text-base leading-tight font-bold sm:text-xl sm:font-semibold">
-                        {parseFloat(getCurrentPrice(plan)) >= 0
-                          ? `${plan.currency}${getCurrentPrice(plan)}`
-                          : getCurrentPrice(plan)}
+                        {formatBillingPrice(
+                          getCurrentPrice(plan),
+                          plan.currency,
+                        )}
                       </div>
                       <div className="text-muted-foreground mt-0.5 text-[10px] sm:text-xs">
                         /{isYearly ? "year" : "month"}

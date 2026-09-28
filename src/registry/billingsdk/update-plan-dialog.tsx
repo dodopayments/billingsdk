@@ -18,6 +18,7 @@ import {
 import { useState, useCallback } from "react";
 import { useTheme } from "@/contexts/theme-context";
 import { getThemeStyles } from "@/lib/themes";
+import { formatBillingPrice } from "@/utils/price-utils";
 
 export interface UpdatePlanDialogProps {
   currentPlan: Plan;
@@ -47,7 +48,7 @@ export function UpdatePlanDialog({
   const themeStyles = getThemeStyles(currentTheme, previewDarkMode);
 
   const getCurrentPrice = useCallback(
-    (plan: Plan) => (isYearly ? `${plan.yearlyPrice}` : `${plan.monthlyPrice}`),
+    (plan: Plan) => (isYearly ? plan.yearlyPrice : plan.monthlyPrice),
     [isYearly],
   );
 
@@ -199,9 +200,10 @@ export function UpdatePlanDialog({
                         </div>
                         <div className="min-w-[60px] flex-shrink-0 text-right sm:min-w-[80px]">
                           <div className="text-base leading-tight font-bold sm:text-xl sm:font-semibold">
-                            {parseFloat(getCurrentPrice(plan)) >= 0
-                              ? `${plan.currency}${getCurrentPrice(plan)}`
-                              : getCurrentPrice(plan)}
+                            {formatBillingPrice(
+                              getCurrentPrice(plan),
+                              plan.currency,
+                            )}
                           </div>
                           <div className="text-muted-foreground mt-0.5 text-[10px] sm:text-xs">
                             /{isYearly ? "year" : "month"}

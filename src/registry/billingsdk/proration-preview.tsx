@@ -15,6 +15,12 @@ import {
 import { type Plan, type CurrentPlan } from "@/lib/billingsdk-config";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import {
+  parsePrice,
+  isCustomPrice,
+  formatPrice,
+  formatBillingPrice,
+} from "@/utils/price-utils";
 
 const prorationPreviewVariants = cva("w-full max-w-3xl mx-auto", {
   variants: {
@@ -119,21 +125,12 @@ export function ProrationPreview({
   theme = "minimal",
   size = "medium",
 }: ProrationPreviewProps) {
-  // Prices & proration (robust) - Fixed CodeRabbit issues
+  // Prices & proration using shared robust utilities.
+  // This keeps behavior consistent across all billing components and avoids
+  // copy-paste bugs in parsing "Custom", weird strings from config, etc.
   const currentCycleDays = currentPlan.type === "yearly" ? 365 : 30;
   const newCycleDays = billingCycle === "yearly" ? 365 : 30;
-  const isNumericValue = (v?: string) => {
-    if (v == null) return false;
-    const s = String(v).replace(/[^\d.\-]/g, "");
-    const n = Number.parseFloat(s);
-    return Number.isFinite(n);
-  };
-  const toNumber = (v?: string) => {
-    if (v == null) return undefined;
-    const s = String(v).replace(/[^\d.\-]/g, "");
-    const n = Number.parseFloat(s);
-    return Number.isFinite(n) ? n : undefined;
-  };
+
   const currentRaw =
     currentPlan.type === "monthly"
       ? currentPlan.plan.monthlyPrice
@@ -142,12 +139,16 @@ export function ProrationPreview({
         : currentPlan.price;
   const newRaw =
     billingCycle === "monthly" ? newPlan.monthlyPrice : newPlan.yearlyPrice;
-  const currentPrice = toNumber(currentRaw);
-  const newPrice = toNumber(newRaw);
-  const isCustomCurrent = !isNumericValue(currentRaw);
-  const isCustomNew = !isNumericValue(newRaw);
+
+  const currentPrice = parsePrice(currentRaw);
+  const newPrice = parsePrice(newRaw);
+  const isCustomCurrent = isCustomPrice(currentRaw);
+  const isCustomNew = isCustomPrice(newRaw);
+
   const chargeCurrency = newPlan.currency ?? currentPlan.plan.currency ?? "$";
   const creditCurrency = currentPlan.plan.currency ?? newPlan.currency ?? "$";
+  const currentDisplayPrice = formatBillingPrice(currentRaw, creditCurrency);
+  const newDisplayPrice = formatBillingPrice(newRaw, chargeCurrency);
   const clampedUnusedDays = Math.max(
     0,
     Math.min(daysRemaining, currentCycleDays),
@@ -240,9 +241,9 @@ export function ProrationPreview({
                 {currentPlan.plan.title}
               </h3>
               <p className="text-muted-foreground mb-3 text-xs sm:text-sm">
-                {isCustomCurrent
-                  ? "Custom"
-                  : `${creditCurrency}${currentPrice}/${currentPlan.type}`}
+                {isCustomCurrent || currentPrice == null
+                  ? currentDisplayPrice
+                  : `${currentDisplayPrice}/${currentPlan.type}`}
               </p>
               <div className="text-muted-foreground flex items-center gap-1 text-xs">
                 <Clock className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -293,9 +294,9 @@ export function ProrationPreview({
                 {newPlan.title}
               </h3>
               <p className="text-muted-foreground mb-3 text-xs sm:text-sm">
-                {isCustomNew
-                  ? "Custom"
-                  : `${chargeCurrency}${newPrice}/${billingCycle}`}
+                {isCustomNew || newPrice == null
+                  ? newDisplayPrice
+                  : `${newDisplayPrice}/${billingCycle}`}
               </p>
               <div className="text-muted-foreground flex items-center gap-1 text-xs">
                 <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -335,8 +336,8 @@ export function ProrationPreview({
                 </span>
                 <span className="font-medium text-green-600">
                   {canCompute
-                    ? `-${creditCurrency}${Math.abs(creditAmount).toFixed(2)}`
-                    : "—"}
+                    ? `-${formatPrice(Math.abs(creditAmount), creditCurrency)}`
+                    : "--"}
                 </span>
               </div>
 
@@ -346,8 +347,8 @@ export function ProrationPreview({
                 </span>
                 <span className="font-medium">
                   {canCompute
-                    ? `+${chargeCurrency}${proratedCharge.toFixed(2)}`
-                    : "—"}
+                    ? `+${formatPrice(proratedCharge, chargeCurrency)}`
+                    : "--"}
                 </span>
               </div>
 
@@ -372,8 +373,8 @@ export function ProrationPreview({
                   )}
                 >
                   {canCompute
-                    ? `${netAmount >= 0 ? "+" : ""}${chargeCurrency}${netAmount.toFixed(2)}`
-                    : "—"}
+                    ? `${netAmount >= 0 ? "+" : "-"}${formatPrice(Math.abs(netAmount), chargeCurrency)}`
+                    : "--"}
                 </span>
               </div>
             </div>
@@ -392,8 +393,8 @@ export function ProrationPreview({
                 ? " No immediate charge."
                 : hasComparablePrices
                   ? netAmount >= 0
-                    ? ` You'll be charged ${chargeCurrency}${Math.abs(netAmount).toFixed(2)}.`
-                    : ` You'll receive a ${chargeCurrency}${Math.abs(netAmount).toFixed(2)} credit.`
+                    ? ` You'll be charged ${formatPrice(Math.abs(netAmount), chargeCurrency)}.`
+                    : ` You'll receive a ${formatPrice(Math.abs(netAmount), chargeCurrency)} credit.`
                   : " Amount will be finalized at checkout."}
             </p>
           </motion.div>
