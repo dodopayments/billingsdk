@@ -51,6 +51,7 @@
         "@billingsdk/coupon",
         "@billingsdk/limited-offer-dialog",
         "@billingsdk/payment-failure",
+        "@billingsdk/payment-success-dialog",
         "@billingsdk/billing-screen"
       ]
     },
@@ -880,6 +881,31 @@
       ],
       "dependencies": ["lucide-react"],
       "registryDependencies": ["button", "card", "utils"]
+    },
+    {
+      "name": "payment-success-dialog",
+      "type": "registry:block",
+      "title": "Payment Success Dialog",
+      "description": "A success confirmation dialog after payment with confetti",
+      "files": [
+        {
+          "path": "src/registry/billingsdk/payment-success-dialog.tsx",
+          "type": "registry:component",
+          "target": "components/billingsdk/payment-success-dialog.tsx"
+        },
+        {
+          "path": "src/registry/billingsdk/demo/payment-success-dialog-demo.tsx",
+          "type": "registry:component",
+          "target": "components/payment-success-dialog-demo.tsx"
+        },
+        {
+          "path": "src/registry/lib/billingsdk-config.ts",
+          "type": "registry:lib",
+          "target": "lib/billingsdk-config.ts"
+        }
+      ],
+      "dependencies": ["lucide-react", "motion"],
+      "registryDependencies": ["button", "card", "dialog", "utils"]
     },
     {
       "name": "billing-screen",
