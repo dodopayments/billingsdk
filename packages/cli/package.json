@@ -24,7 +24,7 @@
     "ink": "^6.5.1",
     "ink-big-text": "^2.0.0",
     "react": "^19.2.3",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
