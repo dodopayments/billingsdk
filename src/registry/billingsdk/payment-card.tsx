@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { validateLuhn } from "@/utils/card-validation";
 import {
   Card,
   CardContent,
@@ -61,9 +62,13 @@ export function PaymentCard({
   const validate = () => {
     const newErrors: typeof errors = {};
 
-    // Card number validation
-    if (!/^[0-9 ]{16,19}$/.test(cardNumber)) {
-      newErrors.card = "Card number must be 16 digits and only numbers.";
+    // Card number validation: count digits only (spaces are just formatting),
+    // enforce a valid card length, then run Luhn so mistyped numbers are caught.
+    const cardDigits = cardNumber.replace(/\D/g, "");
+    if (cardDigits.length < 13 || cardDigits.length > 19) {
+      newErrors.card = "Card number must be 13 to 19 digits.";
+    } else if (validateLuhn(cardDigits) !== true) {
+      newErrors.card = "Enter a valid card number.";
     }
 
     // Expiry validation
