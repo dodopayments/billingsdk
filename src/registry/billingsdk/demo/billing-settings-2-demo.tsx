@@ -32,7 +32,6 @@ export function BillingSettings2Demo() {
 
   const createCurrencyChangeHandler =
     (setCurrency: (value: string) => void) => (value: string) => {
-      console.log("Currency changed to:", value);
       setCurrency(value);
       // Add: updatePricing(value), savePreference(value), etc.
     };
@@ -47,9 +46,6 @@ export function BillingSettings2Demo() {
   const handleSave = () => {
     // Validation passed if we reach here
     alert("Settings saved successfully!");
-    console.log("Input values:", inputValues);
-    console.log("Feature toggles:", featureToggles);
-    console.log("Selected currency:", selectedCurrency);
   };
 
   const handleCancel = () => {
