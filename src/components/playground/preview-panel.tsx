@@ -20,6 +20,7 @@ import {
   Palette,
   Moon,
   Sun,
+  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { themes, applyScopedTheme } from "@/lib/themes";
@@ -277,14 +278,22 @@ function PreviewPanelContent() {
                   <DropdownMenuItem
                     key={theme.name}
                     onClick={() => handleThemeSelect(theme)}
-                    className="flex items-center justify-between"
+                    className="cursor-pointer"
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex w-full items-center gap-2">
+                      <div className="border-border h-4 w-4 shrink-0 overflow-clip rounded-full border">
+                        <div
+                          className="size-4"
+                          style={{
+                            backgroundImage: `linear-gradient(45deg, ${theme.cssVars.light["--primary"]}, ${theme.cssVars.light["--accent"]})`,
+                          }}
+                        />
+                      </div>
                       <span>{theme.label}</span>
+                      {currentTheme.name === theme.name && (
+                        <Check className="ml-auto h-4 w-4" />
+                      )}
                     </div>
-                    {currentTheme.name === theme.name && (
-                      <div className="bg-primary h-2 w-2 rounded-full" />
-                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
